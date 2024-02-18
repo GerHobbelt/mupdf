@@ -32,6 +32,32 @@
 
 #include "mupdf/helpers/system-header-files.h"
 
+
+// https://stackoverflow.com/questions/5966594/how-can-i-use-pragma-message-so-that-the-message-points-to-the-filelineno
+//
+// See also: http://www.highprogrammer.com/alan/windev/visualstudio.html
+//
+// Statements like:
+// 
+// #pragma message(FZ_REMINDER "Fix this problem!")
+// 
+// Which will cause messages like:
+// 
+// C:\Source\Project\main.cpp(47): REMINDER: Fix this problem!
+// 
+// to show up during compiles. Note that you can NOT use the
+// words "error" or "warning" in your reminders, since it will
+// make the IDE think it should abort execution. You can double
+// click on these messages and jump to the line in question.
+
+#define FZ_STRINGIZE(L)       #L 
+#define FZ_MAKESTRING(M, L)   M(L)
+#define $FZ_LINE FZ_MAKESTRING( FZ_STRINGIZE, __LINE__ )
+#define FZPM_REMINDER __FILE__ "(" $FZ_LINE ") : REMINDER: "
+#define FZPM_TODO     __FILE__ "(" $FZ_LINE ") : TODO: "
+#define FZPM_WARNING  __FILE__ "(" $FZ_LINE ") : WARNING: "
+
+
 /**
 	Include the standard libc headers.
 */

@@ -105,8 +105,11 @@ webp_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, 
 		if (drop)
 			fz_drop_pixmap(ctx, pix);
 		if (!cookie->d.ignore_minor_errors)
+		{
+			cookie->d.errors++;
 			fz_throw(ctx, FZ_ERROR_GENERIC, "content error: image dimensions are specified as (0 x 0)");
-#pragma message("TODO: throw exception in strict mode. Also check out 'ignore_errors' in mudraw tool and link this to that setting.")
+#pragma message(FZPM_TODO "throw exception in strict mode. Also check out 'ignore_errors' in mudraw tool and link this to that setting.")
+		}
 		return NULL;
 	}
 

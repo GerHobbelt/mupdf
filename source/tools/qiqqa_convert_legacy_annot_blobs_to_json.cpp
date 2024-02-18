@@ -6,8 +6,6 @@
 // conversion/import tool.
 //
 
-#pragma message("TODO: implement this tool")
-
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
@@ -25,6 +23,9 @@
 #include <unordered_set>
 #include <string>
 #include <functional>
+
+
+#pragma message(FZPM_TODO "implement this tool")
 
 
 static inline void memclr(void* ptr, size_t size)

@@ -2,8 +2,6 @@
 //
 //
 
-#pragma message("TODO: implement this tool")
-
 #include "mupdf/helpers/system-header-files.h"
 
 #include "mupdf/mutool.h"
@@ -32,6 +30,10 @@
 #if defined(_WIN32)
 #include <windows.h>
 #endif
+
+
+#pragma message(FZPM_TODO "implement this tool")
+
 
 using namespace std;
 using namespace cv;

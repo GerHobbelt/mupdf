@@ -62,8 +62,6 @@
 // > there, e.g. archive.org)
 //
 
-#pragma message("TODO: implement this tool")
-
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
@@ -76,6 +74,9 @@
 #include <stdarg.h>
 
 #include "qiqqa_monolithic_examples.h"
+
+
+#pragma message(FZPM_TODO "implement this tool")
 
 
 static inline void memclr(void* ptr, size_t size)

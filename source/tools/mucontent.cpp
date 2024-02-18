@@ -5,8 +5,6 @@
 // *Ideally*, tool should be able to overlay *any* PDF with (edited? modified?) content layer.
 //
 
-#pragma message("TODO: implement this tool")
-
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
@@ -20,6 +18,10 @@
 #if defined(_WIN32)
 #include <windows.h>
 #endif
+
+
+#pragma message(FZPM_TODO "implement this tool")
+
 
 static inline void memclr(void* ptr, size_t size)
 {
