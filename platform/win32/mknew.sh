@@ -85,7 +85,7 @@ Bi-Sent2Vec
 BitFunnel
 BlingFire
 BoxFort
-CHM-lib
+libCHM
 CImg
 CLBlast
 CLBlast-database
@@ -146,7 +146,7 @@ OpenEXR
 OpenFST
 OpenFST-utils
 OpenImageIO
-OptimizationTemplateLibrary
+
 PGM-index
 PaddlePaddle
 PhotonLibOS
@@ -184,7 +184,6 @@ Win32_read_directory_changes
 Win32_read_directory_changes_IOCP
 WinHttpPAL
 Windows10EtwEvents
-XMP-Toolkit-SDK
 Xoshiro-cpp
 YACLib
 ZLMediaKit
@@ -202,7 +201,6 @@ autodiff
 b2xtranslator
 basez
 bhtsne--Barnes-Hut-t-SNE
-bibtex-robust-decoder
 bibtool
 bibutils
 binlog
@@ -215,7 +213,7 @@ boost-url
 boringssl
 breakpad
 brotli
-c-blosc2
+libblosc
 caches
 caffe
 cairo
@@ -244,7 +242,7 @@ completesearch
 concurrencpp
 concurrentqueue
 coost
-cpp-btree
+
 cpp-httplib
 cpp-ipc
 cpp-netlib
@@ -263,7 +261,7 @@ crc32c
 createprocess-windows
 crfsuite
 crow
-cryptopp
+
 csv-parser
 csvquote
 csync2
@@ -274,7 +272,6 @@ curl
 curl-impersonate
 cxxopts
 cxxtest
-cxxtest_catch_2_gtest
 datamash
 date
 datetimepp
@@ -302,7 +299,6 @@ edit-distance
 efsw
 emphf-hash
 enca
-enkiTS-TaskScheduler
 ensmallen
 eventpp
 exiv2
@@ -358,9 +354,7 @@ gmic
 gmic-community
 gmt
 google-diff-match-patch
-google-marl
 googletest
-gperf-hash
 graph-coloring
 graphit
 groonga
@@ -413,7 +407,6 @@ jpeg-xl
 jpeginfo
 jq
 json
-json-jansson
 jsoncons
 jtc
 kahypar
@@ -427,7 +420,6 @@ lapack
 lcms2
 lda
 lda-3-variants
-lda-Familia
 lda-bigartm
 leptonica
 lerc
@@ -463,6 +455,7 @@ libboost-thread
 libboost-wave
 libboost_examples
 libboost_tools
+libbtree
 libcbor
 libchaos
 libchardet
@@ -597,9 +590,7 @@ magsac
 mammut
 manticore-columnar
 manticore-plugins
-manticoresearch
 marian
-math-atlas
 mathtoolbox
 matplotplusplus
 mcmc
@@ -611,7 +602,6 @@ mht-rip
 microsoft-performance-toolkit-sdk
 midas
 mimalloc
-mime-mega
 mimetic
 minifb
 mipp
@@ -649,7 +639,6 @@ nsync
 nuspell
 ocreval
 oidn-OpenImageDenoise
-oneTBB
 online-hnsw
 onnxruntime
 opencv
@@ -673,14 +662,12 @@ palanteer
 palmtree
 pango
 papis-zotero
-parallel-hashmap
 pcg-c-random
 pcg-cpp-random
 pcm
 pcre
 pdf2htmlEX
 pdfgrep
-pdfium
 pdiff
 pecos
 pelikan
@@ -699,17 +686,14 @@ pmdk
 pmdk-tests
 pmemkv
 pmemkv-bench
-pmt-png-tools
 podofo
 poisson_blend
 polatory
-poppler
 portable-memory-mapping
 portable-snippets
 portable_concurrency-std-future
 prio_queue
 probminhash
-promise-cpp
 promise-hpp
 protobuf
 proxygen
@@ -723,7 +707,6 @@ pthreadpool
 pybind11
 pyclustering
 pylene
-pytorch
 pytorch_cpp_demo
 qlever
 qs_parse
@@ -812,7 +795,6 @@ subprocess
 subprocess-cpp
 subprocess_h
 sumatrapdf
-svg-charter
 swig
 tabulate
 taglib
@@ -851,7 +833,6 @@ tlx
 tlx-btree
 tmap
 toml11
-tomlpp
 tracelogging-for-ETW
 transwarp
 tre
@@ -861,16 +842,13 @@ tvision
 twain_library
 txiki.js
 typesense
-uberlog
 uchardet
 ucto
 uctodata
 ucx
 ugrep
-uint128_t
 unblending
 unicode-cldr
-unicode-icu
 universal-numbers
 unixODBC
 unpaper
@@ -1056,6 +1034,39 @@ tray
 utf8proc
 wcwidth9
 
+cryptest
+cryptlib
+gperf
+libCHM
+libXMP-Toolkit
+libatlas
+libblosc
+libbtree
+libcxxtest_catch2_2_gtest
+libenkiTaskScheduler
+libfamilia
+libhashmapbtree
+libicu
+libicu_tests
+libicu_tools
+libjansson
+libmarl
+libmarl_tests
+libmegamime
+libpromise
+librobust-bibtex
+libsvgcharter
+libtbb
+libtoml
+libtorch
+libuint128
+libuint128_tests
+libupskirt
+manticore
+otl-ml
+png-pmt-tools-lib
+uberlogger
+
 EOT
 )
 
@@ -1082,7 +1093,6 @@ cpplocate
 ex-leptonica-freetype-harfbuzz
 filecopyex3
 fswatch
-gperf
 grok-jpeg2000
 horsejs
 jbig2enc
@@ -1109,6 +1119,11 @@ pikchr
 radamsa
 tray
 
+cryptest
+gperf
+manticore
+png-pmt-tools
+
 EOT
 )
 
@@ -1122,9 +1137,7 @@ curl-www
 everything-curl
 hunspell-dictionaries
 ipa-dict
-pdfium
 podofo
-poppler
 pyclustering
 tensorflow-docs
 
@@ -1184,6 +1197,8 @@ EOT
 deletelist=$(
 grep -v '#' <<EOT
 
+pdfium
+poppler
 CHM-lib
 OptimizationTemplateLibrary
 XMP-Toolkit-SDK
