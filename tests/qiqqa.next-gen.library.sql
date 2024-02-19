@@ -270,6 +270,33 @@ PRAGMA foreign_keys = ON;
 
 
 
+-- definition table for the `status` columns elsewhere. (An 'enum', in 'C' parlance.)
+CREATE TABLE status_type(
+	id INTEGER PRIMARY KEY,
+	                    -- so we encode for which status this MAY be used: preprint, published, retracted, ...
+	status TEXT NOT NULL
+						-- preprint, published, retracted, ...
+);
+
+
+
+-- definition table for the `type` columns elsewhere. (An 'enum', in 'C' parlance.)
+CREATE TABLE matadata_type(
+	id INTEGER PRIMARY KEY,
+	                    -- so we encode for which status this MAY be used: article, booklet, issue, journal, ...
+	descriptor TEXT NOT NULL
+						-- article, booklet, issue, journal, ...
+);
+
+
+
+
+
+
+
+
+
+
 --
 -- used to track edit history and publication history both:
 --
@@ -285,35 +312,47 @@ CREATE TABLE metadata_record(
 	root INTEGER REFERENCES metadata_root,					-- just a helper so we can filter/extract the revision history subgraph for the given document
 
 	key TEXT,                       -- semi-unique key used as document identifier in paper references, e.g. "Knuth69A". Can and will be regenerated; MAY NOT be unique when records have been imported from external sources.
-	type TEXT,                      -- article, masterthesis,book,techreport,... - See also the Putnam bibutils for an exhaustive list as we'll be using those tools to straighten up these records when incoming.
-	address TEXT,					-- see BibTeX format text further above...
+--	type TEXT,                      -- article, masterthesis,book,techreport,... - See also the Putnam bibutils for an exhaustive list as we'll be using those tools to straighten up these records when incoming.
+    type INTEGER REFERENCES metadata_type,
+--	address TEXT,					-- see BibTeX format text further above...
+--  ^^^^^^^--------------- obtained via party record for publisher/author/...
 	annote TEXT,					-- An annotation. see BibTeX format text further above...
-	author TEXT,					-- The name(s) of the author(s).   Flattened column; for the real set of authors, see the `authors4metarecord` relation table.
---	booktitle TEXT, <-- obtained via `grouping4metarecord` relation
+--	author TEXT,					-- The name(s) of the author(s).   Flattened column; for the real set of authors, see the `authors4metarecord` relation table.
+--  ^^^^--------------- obtained via `author4metarecord` relation, where purpose=author
+--	booktitle TEXT,   <-- obtained via `grouping4metarecord` relation
 	chapter TEXT,					-- TEXT format as chapter/section references CAN be alphanumeric, e.g. "(appendix) A1.3"
---	crossref TEXT,
-	edition TEXT,
-	editor TEXT,					-- Name(s) of editor(s).   Flattened column; for the real set of editors, see the `authors4metarecord` relation table.
-	howpublished TEXT,
-	institution TEXT,
-	journal TEXT,
+--	crossref TEXT,    <-- obtained via `crossref4metarecord` relation
+	edition TEXT,                   -- offical revision / edition number / identifier. This doesn't have to be a number, but can be anything, thus TEXT.
+--	editor TEXT,					-- Name(s) of editor(s).   Flattened column; for the real set of editors, see the `authors4metarecord` relation table.
+--  ^^^^--------------- obtained via `author4metarecord` relation, where purpose=editor
+--	institution TEXT,
+--  ^^^^^^^^^^^------------ see 'sponsor' below.
+--	journal TEXT,   <-- obtained via `grouping4metarecord` relation: parent=issue/journal; when parent=issue, then parent.parent=journal
 --	month INTEGER,					-- NULL or 1..12
+--  ^^^^--------------- obtained via the eternaltimestamp at 'timestamp'
 	note TEXT,						-- Any additional information that can help the reader.
 	number TEXT,					-- The number of a journal, magazine, technical report, or of a work in a series.
-	organization TEXT,
-	pages TEXT,						-- One or more page numbers or range of numbers, such as 42-111 or 7,41,73-97 or 43+. Used when this is part of a larger publication.
+--	organization TEXT,
+--  ^^^^^^^^^^^------------ see 'sponsor' below.
+--  pages TEXT,						-- One or more page numbers or range of numbers, such as 42-111 or 7,41,73-97 or 43+. Used when this is part of a larger publication.
+--  ^^^------------------ obtained via `pages4metarecord` relation
 	page_count INTEGER,             -- the page count according to public info / consensus or the actual page count of the electronic docunment we have in store. These would be stored in separate records
-	publisher TEXT,
-	school TEXT,
-	series TEXT,
+--	publisher TEXT,
+--  ^^^^--------------- obtained via `author4metarecord` relation, where purpose=publisher
+--	sponsor TEXT,
+--  ^^^^--------------- obtained via `author4metarecord` relation, where purpose=sponsor/organisation/institution/...
+--	school TEXT,
+--  ^^^^--------------- obtained via `author4metarecord` relation, where purpose=school
+--	series TEXT,   <-- obtained via `grouping4metarecord` relation:  parent=issue/volume-->parent.parent=series
 	title TEXT,
 	subtype TEXT,					-- The type of a technical report--for example, "Research Note".
-	volume TEXT,
-	year INTEGER,					-- The year of publication or, for an unpublished work, the year it was written. Generally it should consist of four numerals, such as 1984.
+--	volume TEXT,   <-- obtained via `grouping4metarecord` relation: parent=volume
+--	year INTEGER,					-- The year of publication or, for an unpublished work, the year it was written. Generally it should consist of four numerals, such as 1984.
+--  ^^^^--------------- obtained via the eternaltimestamp at 'timestamp'
 
 	abstract TEXT,
 	doi TEXT,
-	issue TEXT,
+--	issue TEXT,   <-- obtained via `grouping4metarecord` relation: parent=issue
 	language TEXT,
 
 	keywords TEXT,
@@ -323,8 +362,11 @@ CREATE TABLE metadata_record(
 
 	num_volumes INTEGER,			-- Number of Volumes
 	orig_publication BOOLEAN,		-- Is this the Original Publication, i.e. place where it got published first?
+--  ^^^^^^^^^^^^^^^^------------- shouldn't this be easily and positively derived from the metadata.url values ('original')?
 	reviewed BOOLEAN,				-- Reviewed Item
-	reprint_status TEXT,			-- Reprint Edition
+--  ^^^^^^^^--------------------- shouldn't this be discoverable via status ('reviewed') instead?
+--	reprint_status TEXT,			-- Reprint Edition
+--  ^^^^^^^^^^^^^^-------------- obtained via 'reprint' status; see status field below; a reprint would merit its own metadata record anyway, so no need for this 'reprint_status' field.
 	section TEXT,
 
 	isbn TEXT,						-- ISBN
@@ -334,18 +376,23 @@ CREATE TABLE metadata_record(
 	pmid TEXT,						-- PMID / PMC
 	lccn TEXT,
 
-	url TEXT,						-- list of URLs where this document has been found.   Flattened column; for the real set of URLs, see the `urls4metarecord` relation table.
+--	url TEXT,						-- list of URLs where this document has been found.   Flattened column; for the real set of URLs, see the `urls4metarecord` relation table.
+--  ^^^------------------- obtained via `author4metarecord` relation, where purpose={original,preprint,...}
 
 	short_title TEXT,
 	secondary_title TEXT,
 	tertiary_title TEXT,
 	translated_title TEXT,
 
-	conference TEXT,				-- Name(s) of conference.
-	status TEXT,					-- preprint, published, retracted, ...
+--	conference TEXT,				-- Name(s) of conference.
+--  ^^^^^^^^^^--------------- obtained via `author4metarecord` relation, where purpose=conference
+--	status TEXT,					-- preprint, published, retracted, ...
+	status INTEGER NOT NULL REFERENCES status_type,			
+
 	call_number TEXT,				-- call/case number (hearing)
 	refnum TEXT,
-	addressee TEXT,					-- addressed to ([private] communication)
+--	addressee TEXT,					-- addressed to ([private] communication)
+--  ^^^^--------------- obtained via `author4metarecord` relation, where purpose=addressee
 
 	preferred_key TEXT,             -- **suggested** semi-unique key used as document identifier (key); when not unique itself, this will be used, IFF possible, as the base for the (re)generated key.
 --	day INTEGER,					-- NULL or 1..31
@@ -366,6 +413,22 @@ CREATE TABLE metadata_record(
 
 
 
+--
+-- metadata record 'pages' field value set
+--
+-- single pages should be encoded as last=first, e.g. (n, 42, 42) for record n.pages: 42.
+-- Discontinuous sets of pages are encoded as multiple records referencing the same metadata_record,
+-- e.g. 7,13,16-32 --> (id,7,7),(id,13,13),(id,16,32)
+-- and 'onwards from here' page range specs such as 42+ --> (id,42,INT_MAX)
+--
+CREATE TABLE pages4metarecord (
+	metarecord INTEGER NOT NULL REFERENCES metadata_record,
+	                         -- metadata_record id
+	first INTEGER NOT NULL,	 -- first page
+    last INTEGER NOT NULL	 -- last page (inclusive)
+)
+WITHOUT ROWID,
+PRIMARY KEY(metarecord, first, last) ON CONFLICT IGNORE;
 
 
 
@@ -385,7 +448,7 @@ CREATE TABLE party(
 	email TEXT,
 	phone TEXT,
 
-	-- organization / corporation:
+	-- organization / corporation / event:
 
 	secondary_name TEXT,
 	country TEXT,
@@ -395,23 +458,37 @@ CREATE TABLE party(
 
 
 
+
 -- definition table for the `purpose` columns elsewhere. (An 'enum', in 'C' parlance.)
 CREATE TABLE purpose(
-	id INTEGER PRIMARY KEY,
-	category INTEGER,   -- so we encode for which relation this MAY be used: author, affiliation, revision/edit, ...
-	purpose TEXT
+	category INTEGER PRIMARY KEY,
+	                    -- so we encode for which relation this MAY be used: author, affiliation, revision/edit, ...
+	purpose TEXT NOT NULL
 						-- author, primary author, subsidiary author, sponsor, editor, conference editor, series editor, investigator, translator, ..., 
 						-- publisher, sponsor, conference organizer, *corporate author*, ...
  						-- employer, sponsor, ..., colleague, project lead, ...
+						-- addressee, ...
+						--
                         -- DB commit specific purposes: duplicate, (re)published, original, cleaned, decrypted, OCR-ed, edited, annotated, translated, sourced, ...
+						--
+                        -- URL.function commit specific purposes: original, preprint, ...
+						--
+						-- TABLE crossref4metarecord: citation, ...
+						--
+						-- TABLE grouping4metarecord:
+						-- child_function:    article, extract / excerpt, TOC, promo material, editorial, ...
+						-- group_function:    volume, book / magazine, conference syllabus, collection, ...
+						--
+						-- TABLE party
+						-- url.purpose:       homepage, curriculum vitae, ...
 );
 
 
 
 
 CREATE TABLE author4metarecord(
-	metarecord INTEGER REFERENCES metadata_record,
-	party INTEGER REFERENCES party,
+	metarecord INTEGER NOT NULL REFERENCES metadata_record,
+	party INTEGER NOT NULL REFERENCES party,
 	purpose INTEGER NOT NULL REFERENCES purpose,			
 						-- author, primary author, subsidiary author, sponsor, editor, conference editor, series editor, investigator, translator, ..., 
 						-- publisher, sponsor, conference organizer, *corporate author*, ...
@@ -422,41 +499,66 @@ CREATE TABLE author4metarecord(
 
 
 CREATE TABLE affiliation4author(
-	party INTEGER REFERENCES party,
-	affiliation INTEGER REFERENCES party,
+	party INTEGER NOT NULL REFERENCES party,
+	affiliation INTEGER NOT NULL REFERENCES party,
 	purpose INTEGER NOT NULL REFERENCES purpose,			
  						-- employer, sponsor, ..., colleague, project lead, ...
+)
+WITHOUT ROWID
+PRIMARY KEY(party, affiliation, purpose);
 
-	PRIMARY KEY(party, affiliation, purpose)
-)  WITHOUT ROWID;
 
 
-
-CREATE TABLE url4metarecord(
+CREATE TABLE url_record(
 	id INTEGER PRIMARY KEY,
-	metarecord INTEGER REFERENCES metadata_record,
-	url TEXT,
-	last_checked REAL,				-- timestamp when last accessed
-	function TEXT					-- original, preprint, ...
+	url TEXT NOT NULL,
+	last_checked REAL				-- timestamp when last accessed
 );
 
 
 
-CREATE TABLE cited_ref4metarecord(
-	metarecord INTEGER REFERENCES metadata_record,
-	cited_metarecord INTEGER REFERENCES metadata_record,
-	function TEXT,					-- citation, ...
+CREATE TABLE url4metarecord(
+	metarecord INTEGER NOT NULL REFERENCES metadata_record,
+	url_id INTEGER NOT NULL REFERENCES url_record,
+	purpose INTEGER NOT NULL REFERENCES purpose,			
+ 						-- original, preprint, ...
+)
+WITHOUT ROWID
+PRIMARY KEY(metarecord, url_id, purpose);
 
-	PRIMARY KEY(metarecord, cited_metarecord, function)
+
+
+CREATE TABLE url4party(
+	party INTEGER NOT NULL REFERENCES party,
+	url_id INTEGER NOT NULL REFERENCES url_record,
+	purpose INTEGER NOT NULL REFERENCES purpose,			
+ 						-- homepage, curriculum vitae, ...
+)
+WITHOUT ROWID
+PRIMARY KEY(party, url_id, purpose);
+
+
+
+CREATE TABLE crossref4metarecord(
+	metarecord INTEGER NOT NULL REFERENCES metadata_record,
+	cited_metarecord INTEGER NOT NULL REFERENCES metadata_record,
+	purpose INTEGER NOT NULL REFERENCES purpose,			
+	                      -- citation, ...
+
+	PRIMARY KEY(metarecord, cited_metarecord, purpose)
 ) WITHOUT ROWID;
 
 
 
 CREATE TABLE grouping4metarecord(
-	child_metarecord INTEGER REFERENCES metadata_record,		-- child element, e.g. paper (a.k.a. article)
-	group_metarecord INTEGER REFERENCES metadata_record,		-- parent element, e.g. volume / book / conference syllabus / book series
-	child_function TEXT,			-- article, extract / excerpt, TOC, promo material, editorial, ...
-	group_function TEXT,			-- volume, book / magazine, conference syllabus, collection, ...
+	child_metarecord INTEGER NOT NULL REFERENCES metadata_record,
+						-- child element, e.g. paper (a.k.a. article)
+	group_metarecord INTEGER NOT NULL REFERENCES metadata_record,
+						-- parent element, e.g. volume / book / conference syllabus / book series
+	child_function INTEGER NOT NULL REFERENCES purpose,			
+               			-- article, extract / excerpt, TOC, promo material, editorial, ...
+	group_function INTEGER NOT NULL REFERENCES purpose,			
+                 		-- volume, book / magazine, conference syllabus, collection, ...
 
 	PRIMARY KEY(child_metarecord, group_metarecord, child_function, group_function)
 ) WITHOUT ROWID;
@@ -474,7 +576,7 @@ CREATE TABLE revision4metarecord(
 	prev_A_metarecord INTEGER REFERENCES metadata_record,
 	prev_B_metarecord INTEGER REFERENCES metadata_record,	-- NULL, unless this is a merge revision (merging A + B -> current)
 
-	mark REAL,						 -- timestamp when observed / committed / TBD...
+	mark REAL NOT NULL,				 -- timestamp when observed / committed / TBD...
 	author INTEGER NOT NULL REFERENCES party, 
 	                                 -- the author of this revision record. MAY be an automaton, e.q. "Qiqqa Heuristics Robot #NNN", 
 	                                 -- where #NNN would identify the actual machine where this was inserted. 
