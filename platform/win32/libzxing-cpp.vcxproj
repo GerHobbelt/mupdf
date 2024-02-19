@@ -290,6 +290,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODCode39Writer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODCode93Reader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODCode93Writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODDXFilmEdgeReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODDataBarCommon.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODDataBarExpandedBitDecoder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODDataBarExpandedReader.cpp" />
@@ -332,6 +333,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/qrcode/QRReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/qrcode/QRVersion.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/qrcode/QRWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/zxing-c.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/example/ZXingOpenCV.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/example/ZXingQtCamReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/example/ZXingQtReader.cpp" />
@@ -400,10 +402,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/test/unit/qrcode/QRModeTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/test/unit/qrcode/QRVersionTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/test/unit/qrcode/QRWriterTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/android/zxingcpp/src/main/cpp/BarcodeReader.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/android/zxingcpp/src/main/cpp/JNIUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/test/unit/qrcode/RMQRDecoderTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/android/zxingcpp/src/main/cpp/ZXingCpp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/c/zxing-c-test.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/c/zxing-c.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/python/zxing.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/wasm/BarcodeReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/wasm/BarcodeWriter.cpp" />
@@ -448,6 +449,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/Range.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ReadBarcode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/Reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ReaderOptions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ReedSolomonDecoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ReedSolomonEncoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/RegressionLine.h" />
@@ -509,6 +511,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODCode39Writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODCode93Reader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODCode93Writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODDXFilmEdgeReader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODDataBarCommon.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODDataBarExpandedBitDecoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/oned/ODDataBarExpandedReader.h" />
@@ -558,6 +561,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/qrcode/QRReader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/qrcode/QRVersion.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/qrcode/QRWriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/zxing-c.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/example/ZXingOpenCV.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/example/ZXingQtReader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/test/blackbox/BlackboxTestRunner.h" />
@@ -565,17 +569,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/test/blackbox/ZXFilesystem.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/test/unit/BitArrayUtility.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/test/unit/PseudoRandom.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/android/zxingcpp/src/main/cpp/JNIUtils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/c/zxing-c.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/Reader/ZXIBarcodeReader.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/Reader/ZXIDecodeHints.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/Reader/ZXIGTIN.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/Reader/ZXIPoint.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/Reader/ZXIPosition+Helper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/Reader/ZXIPosition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/Reader/ZXIReaderOptions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/Reader/ZXIResult.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/UmbrellaHeader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/Writer/ZXIBarcodeWriter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/Writer/ZXIEncodeHints.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/Writer/ZXIWriterOptions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/ZXIErrors.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/ZXIFormat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/ios/Sources/Wrapper/ZXIFormatHelper.h" />
@@ -601,6 +604,7 @@
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/lorem-131x131.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/lorem-151x151.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/mixed-ecis-41x41.png" />
+    <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/padding_bs.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/partial-quiet-zone.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/readerinit-compact-15x15.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/readerinit-full-19x19.png" />
@@ -778,6 +782,9 @@
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/datamatrix-4/dm-e-d-c-edifice.jpg" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/datamatrix-4/dm-e-d-c-ultrakain.jpg" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/datamatrix-4/gs1-figure-4.15.1-2-44x20.png" />
+    <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/dxfilmedge-1/1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/dxfilmedge-1/2.png" />
+    <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/dxfilmedge-1/3.jpg" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean13-1/#526.jpg" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean13-1/1.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean13-1/10.png" />
@@ -890,6 +897,7 @@
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean8-1/6.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean8-1/7.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean8-1/8.png" />
+    <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean8-1/single-line.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/falsepositives-1/#245.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/falsepositives-1/#570.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/falsepositives-1/01.png" />
@@ -1227,6 +1235,9 @@
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/qrcode-7/01-02.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/qrcode-7/01-03.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/qrcode-7/01-04.png" />
+    <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rmqrcode-1/R17x139.png" />
+    <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rmqrcode-1/R7x43-H.png" />
+    <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rmqrcode-1/R7x43-H_inverted.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rss14-1/1.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rss14-1/2.png" />
     <Image Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rss14-1/3.png" />
@@ -1692,6 +1703,7 @@
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/lorem-131x131.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/lorem-151x151.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/mixed-ecis-41x41.bin" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/padding_bs.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/partial-quiet-zone.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/readerinit-compact-15x15.result.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/aztec-1/readerinit-compact-15x15.txt" />
@@ -1889,6 +1901,9 @@
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/datamatrix-4/dm-e-d-c-ultrakain.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/datamatrix-4/gs1-figure-4.15.1-2-44x20.result.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/datamatrix-4/gs1-figure-4.15.1-2-44x20.txt" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/dxfilmedge-1/1.txt" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/dxfilmedge-1/2.txt" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/dxfilmedge-1/3.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean13-1/#526.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean13-1/1.result.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean13-1/1.txt" />
@@ -2004,6 +2019,7 @@
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean8-1/6.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean8-1/7.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean8-1/8.txt" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/ean8-1/single-line.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/itf-1/#220.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/itf-1/1.result.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/itf-1/1.txt" />
@@ -2287,6 +2303,11 @@
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/qrcode-6/9.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/qrcode-7/01.result.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/qrcode-7/01.txt" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rmqrcode-1/R17x139.txt" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rmqrcode-1/R7x43-H.result.txt" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rmqrcode-1/R7x43-H.txt" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rmqrcode-1/R7x43-H_inverted.result.txt" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rmqrcode-1/R7x43-H_inverted.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rss14-1/1.result.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rss14-1/1.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/test/samples/rss14-1/2.txt" />
@@ -2746,6 +2767,14 @@
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/python/setup.py" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/python/test.py" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/python/zxing.cmake" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/rust/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/rust/README.md" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/rust/build.rs" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/rust/examples/demo.rs" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/rust/rustfmt.toml" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/rust/src/bindings.rs" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/rust/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/rust/src/tests.rs" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/wasm/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/wasm/README.md" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/wasm/demo_cam_reader.html" />
