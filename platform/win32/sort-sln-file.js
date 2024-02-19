@@ -4,6 +4,7 @@
 
 const fs = require('fs');
 const path = require('path');
+
 const debug = false;
 
 if (process.argv.length !== 3) {
@@ -14,7 +15,7 @@ if (process.argv.length !== 3) {
 const slnpath = process.argv[2];
 const scriptpath = path.dirname(process.argv[1]);
 
-if (debug) console.error({projname, scriptpath})
+if (debug) console.error({slnpath, scriptpath})
 
 let slnstr = fs.readFileSync(slnpath, 'utf8');
 if (debug) console.log({slnstr});

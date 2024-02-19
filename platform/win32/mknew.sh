@@ -820,7 +820,7 @@ thread-pool-cpp
 thrift
 thunderSVM
 ticpp
-tidy-html5
+libtidyhtml
 tink
 tinn
 tiny-process-library
@@ -1114,6 +1114,7 @@ visible-url-detector
 fontview
 vcpkg
 
+tidyhtml
 gnuplot
 pikchr
 radamsa
@@ -1225,6 +1226,7 @@ libgdiff
 libhdiff
 liboiio
 libquill
+tidy-html5
 manticoresearch
 math-atlas
 mime-mega
