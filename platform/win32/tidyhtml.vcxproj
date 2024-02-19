@@ -228,6 +228,14 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtidyhtml.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff919f18}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/tidy-html5/console/monolithic_main.c" />
     <ClInclude Include="../../thirdparty/owemdjee/tidy-html5/Headers/tidy-html5-Bridging-Header.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tidy-html5/Modules/tidy-html5.h" />
@@ -1636,6 +1644,7 @@
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/special-cases/README.txt" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/special-cases/case-evil.conf" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/special-cases/case-evil@1.html" />
+    <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/special-cases/poc tidy-html5.html" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/xml-cases/README.txt" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/xml-cases/case-1003994.conf" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/xml-cases/case-1004008.conf" />
@@ -1762,14 +1771,6 @@
     <Xml Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/xml-expects/case-616744.xml" />
     <Xml Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/xml-expects/case-640474.xml" />
     <Xml Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/xml-expects/case-646946.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="libsystem_override.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libtidyhtml.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff919f18}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
