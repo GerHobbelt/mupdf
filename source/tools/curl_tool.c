@@ -53,11 +53,12 @@ int main(int argc, const char** argv)
 #ifdef _MSC_VER
 int wmain(int argc, const wchar_t *wargv[])
 {
-	const char **argv = fz_argv_from_wargv(argc, wargv);
+	fz_context* ctx = fz_get_global_context();
+	const char **argv = fz_argv_from_wargv(ctx, argc, wargv);
 	if (!argv)
 		return EXIT_FAILURE;
 	int ret = main(argc, argv);
-	fz_free_argv(argc, argv);
+	fz_free_argv(ctx, argc, argv);
 	return ret;
 }
 #endif
