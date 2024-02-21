@@ -172,6 +172,7 @@ static fz_css_rule *fz_new_css_rule(fz_context *ctx, fz_pool *pool, fz_css_selec
 static fz_css_selector *fz_new_css_selector(fz_context *ctx, fz_pool *pool, const char *name)
 {
 	fz_css_selector *sel = fz_pool_alloc(ctx, pool, sizeof *sel);
+	// TODO: tolower for non-element?
 	sel->name = name ? fz_pool_strdup(ctx, pool, name) : NULL;
 	sel->combine = 0;
 	sel->cond = NULL;
@@ -185,6 +186,7 @@ static fz_css_condition *fz_new_css_condition(fz_context *ctx, fz_pool *pool, in
 {
 	fz_css_condition *cond = fz_pool_alloc(ctx, pool, sizeof *cond);
 	cond->type = type;
+	// TODO: tolower
 	cond->key = key ? fz_pool_strdup(ctx, pool, key) : NULL;
 	cond->val = val ? fz_pool_strdup(ctx, pool, val) : NULL;
 	cond->next = NULL;
@@ -692,6 +694,9 @@ static fz_css_property *parse_declaration(struct lexbuf *buf)
 
 	if (buf->lookahead != CSS_KEYWORD)
 		fz_css_error(buf, "expected keyword in property");
+
+	// TODO: lowercase buf->string
+
 	p = fz_new_css_property(buf->ctx, buf->pool, buf->string, NULL, 0);
 	next(buf);
 
@@ -756,6 +761,8 @@ static fz_css_property *parse_declaration_list(struct lexbuf *buf)
 static char *parse_attrib_value(struct lexbuf *buf)
 {
 	char *s;
+
+	// TODO: lowercase buf->string if KEYWORD
 
 	if (buf->lookahead == CSS_KEYWORD || buf->lookahead == CSS_STRING)
 	{
