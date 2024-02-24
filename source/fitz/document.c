@@ -257,7 +257,7 @@ fz_open_document_with_stream_and_dir(fz_context *ctx, const char *magic, fz_stre
 fz_document *
 fz_open_document_with_buffer(fz_context *ctx, const char *magic, fz_buffer *buffer)
 {
-	fz_document *doc;
+	fz_document *doc = NULL;
 	fz_stream *stream = fz_open_buffer(ctx, buffer);
 	fz_try(ctx)
 		doc = fz_open_document_with_stream(ctx, magic, stream);

@@ -493,7 +493,7 @@ fz_colorspace *fz_new_cal_gray_colorspace(fz_context *ctx, float wp[3], float bp
 {
 #if FZ_ENABLE_ICC
 	fz_buffer *buf = fz_new_icc_data_from_cal(ctx, wp, bp, &gamma, NULL, 1);
-	fz_colorspace *cs;
+	fz_colorspace *cs = NULL;
 	fz_try(ctx)
 		cs = fz_new_icc_colorspace(ctx, FZ_COLORSPACE_GRAY, 0, "CalGray", buf);
 	fz_always(ctx)
@@ -510,7 +510,7 @@ fz_colorspace *fz_new_cal_rgb_colorspace(fz_context *ctx, float wp[3], float bp[
 {
 #if FZ_ENABLE_ICC
 	fz_buffer *buf = fz_new_icc_data_from_cal(ctx, wp, bp, gamma, matrix, 3);
-	fz_colorspace *cs;
+	fz_colorspace *cs = NULL;
 	fz_try(ctx)
 		cs = fz_new_icc_colorspace(ctx, FZ_COLORSPACE_RGB, 0, "CalRGB", buf);
 	fz_always(ctx)
@@ -944,9 +944,12 @@ fz_init_process_color_converter(fz_context *ctx, fz_color_converter *cc, fz_colo
 	if (ss->type == FZ_COLORSPACE_SEPARATION)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "base colorspace must not be separation");
 
+
 #if FZ_ENABLE_ICC
 	if (ctx->icc_enabled)
 	{
+		cc->convert = NULL;
+
 		/* Handle identity case. */
 		if (ss == ds || (!memcmp(ss->u.icc.md5, ds->u.icc.md5, 16)))
 		{
@@ -976,6 +979,7 @@ fz_init_process_color_converter(fz_context *ctx, fz_color_converter *cc, fz_colo
 			fz_warn(ctx, "cannot create ICC link, falling back to fast color conversion");
 			cc->convert = fz_lookup_fast_color_converter(ctx, ss, ds);
 		}
+		assert(cc->convert != NULL);
 	}
 	else
 	{
@@ -1470,7 +1474,8 @@ memoize_nospots(fz_context *ctx, const fz_pixmap *src, fz_pixmap *dst, fz_colors
 	unsigned char *color;
 	unsigned char dummy = s[0] ^ 255;
 	unsigned char *sold = &dummy;
-	unsigned char *dold;
+	unsigned char *dold = NULL;
+	int firsttime = 1;
 	fz_color_converter cc;
 	int alpha = 255;
 
@@ -1484,13 +1489,14 @@ memoize_nospots(fz_context *ctx, const fz_pixmap *src, fz_pixmap *dst, fz_colors
 			size_t ww = w;
 			while (ww--)
 			{
-				if (*s == *sold && memcmp(sold, s, src_n) == 0)
+				if (!firsttime && *s == *sold && memcmp(sold, s, src_n) == 0)
 				{
 					sold = s;
 					memcpy(d, dold, dst_n);
 				}
 				else
 				{
+					firsttime = 0;
 					sold = s;
 					dold = d;
 					color = fz_hash_find(ctx, lookup, s);

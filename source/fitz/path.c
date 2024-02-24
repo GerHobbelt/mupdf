@@ -1010,7 +1010,7 @@ void
 fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 {
 	int i, k, n;
-	fz_point p, p1, p2, p3, s, q = { 0 };
+	fz_point p, p1, p2, p3, s = { 0 }, q = { 0 };
 
 	if (path->packed)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Cannot transform a packed path");
@@ -1547,6 +1547,7 @@ fz_clone_path(fz_context *ctx, fz_path *path)
 				new_path->coord_cap = ppath->coord_len;
 				data = (uint8_t *)&ppath[1];
 				new_path->coords = Memento_label(clone_block(ctx, data, sizeof(float)*path->coord_cap), "path_coords");
+				assert(new_path->coords != NULL);
 				data += sizeof(float) * path->coord_cap;
 				new_path->cmds = Memento_label(clone_block(ctx, data, path->cmd_cap), "path_cmds");
 				xy = new_path->coords;

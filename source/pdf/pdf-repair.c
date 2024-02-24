@@ -329,7 +329,7 @@ static int is_white(int c)
 void
 pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 {
-	pdf_obj *dict, *obj = NULL;
+	pdf_obj *dict = NULL, *obj = NULL;
 	pdf_obj *length;
 
 	pdf_obj *encrypt = NULL;
@@ -346,7 +346,7 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 	int gen = 0;
 	int64_t tmpofs, stm_ofs, numofs = 0, genofs = 0;
 	int64_t stm_len;
-	pdf_token tok;
+	pdf_token tok = PDF_TOK_EOF;
 	int next;
 	int i;
 	size_t j, n;
@@ -531,6 +531,7 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 					fz_report_error(ctx);
 					continue;
 				}
+				assert(dict != NULL);
 
 				fz_try(ctx)
 				{

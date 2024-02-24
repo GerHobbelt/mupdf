@@ -201,7 +201,7 @@ load_indexed(fz_context *ctx, pdf_obj *array, pdf_cycle_list *cycle_up)
 	pdf_obj *highobj = pdf_array_get(ctx, array, 2);
 	pdf_obj *lookupobj = pdf_array_get(ctx, array, 3);
 	fz_colorspace *base = NULL;
-	fz_colorspace *cs;
+	fz_colorspace *cs = NULL;
 	size_t i, n;
 	int high;
 	unsigned char *lookup = NULL;

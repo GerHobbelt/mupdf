@@ -189,7 +189,7 @@ bmp_decompress_huffman1d(fz_context *ctx, struct info *info, const unsigned char
 {
 	fz_stream *encstm, *decstm;
 	fz_buffer *buf;
-	unsigned char *decoded;
+	unsigned char *decoded = NULL;
 	size_t size;
 
 	encstm = fz_open_memory(ctx, p, *end - p);
@@ -253,6 +253,7 @@ bmp_decompress_rle24(fz_context *ctx, struct info *info, const unsigned char *p,
 		else if (sp[0] == 0 && sp[1] == 1)
 		{ /* end of bitmap */
 			sp += 2;
+			(void) sp;
 			break;
 		}
 		else if (sp[0] == 0 && sp[1] == 2)
@@ -370,6 +371,7 @@ bmp_decompress_rle8(fz_context *ctx, struct info *info, const unsigned char *p, 
 		else if (sp[0] == 0 && sp[1] == 1)
 		{ /* end of bitmap */
 			sp += 2;
+			(void) sp;
 			break;
 		}
 		else if (sp[0] == 0 && sp[1] == 2)
@@ -477,6 +479,7 @@ bmp_decompress_rle4(fz_context *ctx, struct info *info, const unsigned char *p, 
 		else if (sp[0] == 0 && sp[1] == 1)
 		{ /* end of bitmap */
 			sp += 2;
+			(void) sp;
 			break;
 		}
 		else if (sp[0] == 0 && sp[1] == 2)
@@ -566,7 +569,7 @@ static fz_pixmap *
 bmp_read_bitmap(fz_context *ctx, struct info *info, const unsigned char *begin, const unsigned char *end, const unsigned char *p)
 {
 	const unsigned int mults[] = { 0, 8191, 2730, 1170, 546, 264, 130, 64 };
-	fz_pixmap *pix;
+	fz_pixmap *pix = NULL;
 	const unsigned char *ssp;
 	unsigned char *ddp;
 	unsigned char *decompressed = NULL;
@@ -624,6 +627,9 @@ bmp_read_bitmap(fz_context *ctx, struct info *info, const unsigned char *begin, 
 		fz_free(ctx, decompressed);
 		fz_rethrow(ctx);
 	}
+
+	if (pix == NULL)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "pacify scan-build");
 
 	ddp = pix->samples;
 	dstride = pix->stride;
@@ -853,7 +859,7 @@ bmp_read_color_profile(fz_context *ctx, struct info *info, const unsigned char *
 	else if (info->colorspacetype == 0x4d424544)
 	{
 		fz_buffer *profile;
-		fz_colorspace *cs;
+		fz_colorspace *cs = NULL;
 
 		if ((uint32_t)(end - begin) <= info->profileoffset)
 		{
@@ -1485,6 +1491,7 @@ fz_load_bmp_subimage_count(fz_context *ctx, const unsigned char *buf, size_t len
 			/* read16(p+10) == suitable pelx dimensions */
 			/* read16(p+12) == suitable pely dimensions */
 			p += 14;
+			(void) p;
 		}
 		else if (is_bitmap(p))
 		{

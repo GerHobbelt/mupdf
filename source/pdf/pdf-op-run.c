@@ -662,6 +662,7 @@ pdf_show_image_imp(fz_context *ctx, pdf_run_processor *pr, fz_image *image, fz_m
 	{
 		fz_clip_image_mask(ctx, pr->dev, image, image_ctm, bbox);
 		gstate = pdf_show_pattern(ctx, pr, gstate->fill.pattern, gstate->fill.gstate_num, bbox, PDF_FILL);
+		(void) gstate;
 		fz_pop_clip(ctx, pr->dev);
 	}
 	else if (gstate->fill.kind == PDF_MAT_SHADE && gstate->fill.shade)
@@ -714,7 +715,7 @@ pdf_show_image(fz_context *ctx, pdf_run_processor *pr, fz_image *image)
 		softmask_save softmask = { NULL };
 		fz_try(ctx)
 		{
-			gstate = pdf_begin_group(ctx, pr, bbox, &softmask);
+			(void) pdf_begin_group(ctx, pr, bbox, &softmask);
 			pdf_show_image_imp(ctx, pr, image, image_ctm, bbox);
 			pdf_end_group(ctx, pr, &softmask);
 		}
@@ -1338,7 +1339,7 @@ pdf_copy_gstate(fz_context *ctx, pdf_gstate *dst, pdf_gstate *src)
 static void
 pdf_set_colorspace(fz_context *ctx, pdf_run_processor *pr, int what, fz_colorspace *colorspace)
 {
-	pdf_gstate *gstate = pr->gstate + pr->gtop;
+	pdf_gstate *gstate;
 	pdf_material *mat;
 	int n = fz_colorspace_n(ctx, colorspace);
 
@@ -1371,7 +1372,7 @@ pdf_set_colorspace(fz_context *ctx, pdf_run_processor *pr, int what, fz_colorspa
 static void
 pdf_set_color(fz_context *ctx, pdf_run_processor *pr, int what, float *v)
 {
-	pdf_gstate *gstate = pr->gstate + pr->gtop;
+	pdf_gstate *gstate;
 	pdf_material *mat;
 
 	gstate = pdf_flush_text(ctx, pr);

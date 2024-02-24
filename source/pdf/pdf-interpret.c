@@ -136,6 +136,7 @@ parse_inline_image(fz_context *ctx, pdf_csi *csi, fz_stream *stm, char *csname, 
 	fz_var(obj);
 	fz_var(img);
 
+	csname[0] = 0;
 	fz_try(ctx)
 	{
 		obj = pdf_parse_dict(ctx, doc, stm, &doc->lexbuf.base);

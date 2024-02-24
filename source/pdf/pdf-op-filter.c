@@ -748,7 +748,7 @@ mcid_char_imp(fz_context *ctx, pdf_sanitize_processor *p, tag_record *tr, int un
 static void
 mcid_char(fz_context *ctx, pdf_sanitize_processor *p, int uni, int remove)
 {
-	tag_record *tr  = p->pending_tags;
+	tag_record *tr;
 
 	for (tr = p->pending_tags; tr != NULL; tr = tr->prev)
 		mcid_char_imp(ctx, p, tr, uni, remove);

@@ -676,6 +676,7 @@ fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, int bal, const byte * FZ_R
 			scale = (512 * ba + ha) / (ha*2) - FZ_EXPAND(ba);
 
 			sa = haa;
+			(void) sa;
 
 			/* Calculate result_alpha - a combination of the
 			 * background alpha, and 'shape' */

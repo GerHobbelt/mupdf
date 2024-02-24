@@ -793,7 +793,7 @@ find_seps(fz_context *ctx, fz_separations **seps, pdf_obj *obj, pdf_mark_list *c
 	nameobj = pdf_array_get(ctx, obj, 0);
 	if (pdf_name_eq(ctx, nameobj, PDF_NAME(Separation)))
 	{
-		fz_colorspace *cs;
+		fz_colorspace *cs = NULL;
 		const char *name = pdf_array_get_name(ctx, obj, 1);
 
 		/* Skip 'special' colorants. */
@@ -821,6 +821,7 @@ find_seps(fz_context *ctx, fz_separations **seps, pdf_obj *obj, pdf_mark_list *c
 			fz_report_error(ctx);
 			return; /* ignore broken colorspace */
 		}
+		assert(cs != NULL);
 		fz_try(ctx)
 		{
 			if (!*seps)
@@ -868,7 +869,7 @@ find_devn(fz_context *ctx, fz_separations **seps, pdf_obj *obj, pdf_mark_list *c
 	m = pdf_array_len(ctx, arr);
 	for (j = 0; j < m; j++)
 	{
-		fz_colorspace *cs;
+		fz_colorspace *cs = NULL;
 		const char *name = pdf_array_get_name(ctx, arr, j);
 
 		/* Skip 'special' colorants. */
@@ -898,6 +899,7 @@ find_devn(fz_context *ctx, fz_separations **seps, pdf_obj *obj, pdf_mark_list *c
 				fz_report_error(ctx);
 				continue; /* ignore broken colorspace */
 			}
+			assert(cs != NULL);
 			fz_try(ctx)
 			{
 				if (!*seps)

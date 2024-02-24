@@ -516,7 +516,7 @@ pdf_outline_iterator_drop(fz_context *ctx, fz_outline_iterator *iter_)
 
 fz_outline_iterator *pdf_new_outline_iterator(fz_context *ctx, pdf_document *doc)
 {
-	pdf_obj *root, *obj, *first;
+	pdf_obj *root, *obj, *first = NULL;
 	pdf_mark_bits *marks;
 	pdf_outline_iterator *iter = NULL;
 	int fixed = 0;

@@ -227,8 +227,8 @@ pdf_page *pdf_annot_page(fz_context *ctx, pdf_annot *annot)
 fz_rect
 pdf_bound_annot(fz_context *ctx, pdf_annot *annot)
 {
-	fz_matrix page_ctm;
-	fz_rect rect;
+	fz_matrix page_ctm = fz_identity;
+	fz_rect rect = fz_infinite_rect;
 	int flags;
 
 	pdf_annot_push_local_xref(ctx, annot);
@@ -409,7 +409,7 @@ static int is_allowed_subtype(fz_context *ctx, pdf_annot *annot, pdf_obj *proper
 
 static int is_allowed_subtype_wrap(fz_context *ctx, pdf_annot *annot, pdf_obj *property, pdf_obj **allowed)
 {
-	int ret;
+	int ret = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -935,7 +935,7 @@ pdf_delete_annot(fz_context *ctx, pdf_page *page, pdf_annot *annot)
 enum pdf_annot_type
 pdf_annot_type(fz_context *ctx, pdf_annot *annot)
 {
-	enum pdf_annot_type ret;
+	enum pdf_annot_type ret = PDF_ANNOT_TEXT;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -955,7 +955,7 @@ pdf_annot_type(fz_context *ctx, pdf_annot *annot)
 int
 pdf_annot_flags(fz_context *ctx, pdf_annot *annot)
 {
-	int ret;
+	int ret = 0;
 	pdf_annot_push_local_xref(ctx, annot);
 
 	fz_try(ctx)
@@ -1017,8 +1017,8 @@ pdf_annot_has_rect(fz_context *ctx, pdf_annot *annot)
 fz_rect
 pdf_annot_rect(fz_context *ctx, pdf_annot *annot)
 {
-	fz_matrix page_ctm;
-	fz_rect annot_rect;
+	fz_matrix page_ctm = fz_identity;
+	fz_rect annot_rect = fz_empty_rect;
 
 	pdf_annot_push_local_xref(ctx, annot);
 	fz_try(ctx)
@@ -1088,7 +1088,7 @@ pdf_set_annot_contents(fz_context *ctx, pdf_annot *annot, const char *text)
 int
 pdf_annot_has_open(fz_context *ctx, pdf_annot *annot)
 {
-	int ret;
+	int ret = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -1175,7 +1175,7 @@ pdf_annot_has_icon_name(fz_context *ctx, pdf_annot *annot)
 const char *
 pdf_annot_icon_name(fz_context *ctx, pdf_annot *annot)
 {
-	const char *ret;
+	const char *ret = NULL;
 	pdf_obj *name;
 
 	pdf_annot_push_local_xref(ctx, annot);
@@ -1455,7 +1455,7 @@ enum pdf_border_style
 pdf_annot_border_style(fz_context *ctx, pdf_annot *annot)
 {
 	pdf_obj *bs, *s;
-	enum pdf_border_style style;
+	enum pdf_border_style style = PDF_BORDER_STYLE_SOLID;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -1527,7 +1527,7 @@ int
 pdf_annot_border_dash_count(fz_context *ctx, pdf_annot *annot)
 {
 	pdf_obj *bs, *d, *border;
-	int count;
+	int count = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -1554,7 +1554,7 @@ float
 pdf_annot_border_dash_item(fz_context *ctx, pdf_annot *annot, int i)
 {
 	pdf_obj *bs, *d, *border;
-	float length;
+	float length = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -1581,7 +1581,7 @@ enum pdf_border_effect
 pdf_annot_border_effect(fz_context *ctx, pdf_annot *annot)
 {
 	pdf_obj *be;
-	enum pdf_border_effect effect;
+	enum pdf_border_effect effect = PDF_BORDER_EFFECT_NONE;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -1606,7 +1606,7 @@ float
 pdf_annot_border_effect_intensity(fz_context *ctx, pdf_annot *annot)
 {
 	pdf_obj *be;
-	float intensity;
+	float intensity = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -1833,7 +1833,7 @@ void pdf_set_document_language(fz_context *ctx, pdf_document *doc, fz_text_langu
 fz_text_language
 pdf_annot_language(fz_context *ctx, pdf_annot *annot)
 {
-	fz_text_language ret;
+	fz_text_language ret = FZ_LANG_UNSET;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -1936,7 +1936,7 @@ pdf_set_annot_quadding(fz_context *ctx, pdf_annot *annot, int q)
 
 float pdf_annot_opacity(fz_context *ctx, pdf_annot *annot)
 {
-	float ret;
+	float ret = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -2112,7 +2112,7 @@ pdf_annot_MK_BG(fz_context *ctx, pdf_annot *annot, int *n, float color[4])
 int
 pdf_annot_MK_BG_rgb(fz_context *ctx, pdf_annot *annot, float rgb[3])
 {
-	int ret;
+	int ret = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -2148,7 +2148,7 @@ pdf_annot_MK_BC(fz_context *ctx, pdf_annot *annot, int *n, float color[4])
 int
 pdf_annot_MK_BC_rgb(fz_context *ctx, pdf_annot *annot, float rgb[3])
 {
-	int ret;
+	int ret = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -2319,7 +2319,7 @@ int
 pdf_annot_vertex_count(fz_context *ctx, pdf_annot *annot)
 {
 	pdf_obj *vertices;
-	int ret;
+	int ret = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -2341,8 +2341,8 @@ fz_point
 pdf_annot_vertex(fz_context *ctx, pdf_annot *annot, int i)
 {
 	pdf_obj *vertices;
-	fz_matrix page_ctm;
-	fz_point point;
+	fz_matrix page_ctm = fz_identity;
+	fz_point point = { 0 };
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -2501,7 +2501,7 @@ int
 pdf_annot_quad_point_count(fz_context *ctx, pdf_annot *annot)
 {
 	pdf_obj *quad_points;
-	int ret;
+	int ret = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -2524,7 +2524,7 @@ pdf_annot_quad_point(fz_context *ctx, pdf_annot *annot, int idx)
 {
 	pdf_obj *quad_points;
 	fz_matrix page_ctm;
-	float v[8];
+	float v[8] = { 0 };
 	int i;
 
 	pdf_annot_push_local_xref(ctx, annot);
@@ -2674,7 +2674,7 @@ pdf_annot_has_ink_list(fz_context *ctx, pdf_annot *annot)
 int
 pdf_annot_ink_list_count(fz_context *ctx, pdf_annot *annot)
 {
-	int ret;
+	int ret = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -2698,7 +2698,7 @@ pdf_annot_ink_list_stroke_count(fz_context *ctx, pdf_annot *annot, int i)
 {
 	pdf_obj *ink_list;
 	pdf_obj *stroke;
-	int ret;
+	int ret = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -2722,8 +2722,8 @@ pdf_annot_ink_list_stroke_vertex(fz_context *ctx, pdf_annot *annot, int i, int k
 {
 	pdf_obj *ink_list;
 	pdf_obj *stroke;
-	fz_matrix page_ctm;
-	fz_point point;
+	fz_matrix page_ctm = fz_identity;
+	fz_point point = { 0 };
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -2930,7 +2930,7 @@ static pdf_obj *markup_subtypes[] = {
 int64_t
 pdf_annot_modification_date(fz_context *ctx, pdf_annot *annot)
 {
-	int64_t ret;
+	int64_t ret = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -2952,7 +2952,7 @@ pdf_annot_modification_date(fz_context *ctx, pdf_annot *annot)
 int64_t
 pdf_annot_creation_date(fz_context *ctx, pdf_annot *annot)
 {
-	int64_t ret;
+	int64_t ret = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -3020,7 +3020,7 @@ pdf_annot_has_author(fz_context *ctx, pdf_annot *annot)
 const char *
 pdf_annot_author(fz_context *ctx, pdf_annot *annot)
 {
-	const char *ret;
+	const char *ret = NULL;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -3175,7 +3175,7 @@ pdf_set_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char *
 
 int pdf_annot_field_flags(fz_context *ctx, pdf_annot *annot)
 {
-	int ret;
+	int ret = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 
@@ -3191,7 +3191,7 @@ int pdf_annot_field_flags(fz_context *ctx, pdf_annot *annot)
 
 const char *pdf_annot_field_value(fz_context *ctx, pdf_annot *widget)
 {
-	const char *ret;
+	const char *ret = NULL;
 
 	pdf_annot_push_local_xref(ctx, widget);
 
@@ -3207,7 +3207,7 @@ const char *pdf_annot_field_value(fz_context *ctx, pdf_annot *widget)
 
 const char *pdf_annot_field_label(fz_context *ctx, pdf_annot *widget)
 {
-	const char *ret;
+	const char *ret = NULL;
 
 	pdf_annot_push_local_xref(ctx, widget);
 
@@ -3223,7 +3223,7 @@ const char *pdf_annot_field_label(fz_context *ctx, pdf_annot *widget)
 
 int pdf_set_annot_field_value(fz_context *ctx, pdf_document *doc, pdf_annot *annot, const char *text, int ignore_trigger_events)
 {
-	int ret;
+	int ret = 0;
 
 	begin_annot_op(ctx, annot, "Set field value");
 
@@ -3420,7 +3420,7 @@ pdf_annot_has_filespec(fz_context *ctx, pdf_annot *annot)
 pdf_obj *
 pdf_annot_filespec(fz_context *ctx, pdf_annot *annot)
 {
-	pdf_obj *filespec;
+	pdf_obj *filespec = NULL;
 
 	pdf_annot_push_local_xref(ctx, annot);
 

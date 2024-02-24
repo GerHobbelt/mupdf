@@ -1466,6 +1466,7 @@ pdf_load_font_descriptor(fz_context *ctx, pdf_document *doc, pdf_font_desc *font
 			else
 				pdf_load_system_font(ctx, fontdesc, fontname, collection);
 		}
+		assert(fontdesc->font != NULL);
 	}
 	else
 	{
@@ -1473,6 +1474,7 @@ pdf_load_font_descriptor(fz_context *ctx, pdf_document *doc, pdf_font_desc *font
 			pdf_load_builtin_font(ctx, fontdesc, fontname, 1);
 		else
 			pdf_load_system_font(ctx, fontdesc, fontname, collection);
+		assert(fontdesc->font != NULL);
 	}
 
 	/* Check for DynaLab fonts that must use hinting */

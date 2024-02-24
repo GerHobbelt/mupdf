@@ -303,7 +303,7 @@ fz_new_icc_link(fz_context *ctx,
 	cmsUInt32Number src_fmt, dst_fmt;
 	cmsUInt32Number flags;
 	cmsHTRANSFORM transform;
-	fz_icc_link *link;
+	fz_icc_link *link = NULL;
 
 	flags = cmsFLAGS_LOWRESPRECALC;
 

@@ -156,7 +156,7 @@ fz_mask_color_key(fz_context *ctx, fz_pixmap *pix, int n, int bpc, const int *co
 	int k, t;
 	int h = pix->h;
 	size_t stride = pix->stride - pix->w * (size_t)pix->n;
-	int colorkey[FZ_MAX_COLORS * 2];
+	int colorkey[FZ_MAX_COLORS * 2] = { 0 };
 	int scale, shift, max;
 
 	if (pix->w == 0)
@@ -768,7 +768,7 @@ compressed_image_get_pixmap(fz_context *ctx, fz_image *image_, fz_irect *subarea
 	int native_l2factor;
 	fz_stream *stm;
 	int indexed;
-	fz_pixmap *tile;
+	fz_pixmap *tile = NULL;
 	int can_sub = 0;
 	int local_l2factor;
 
@@ -1201,7 +1201,7 @@ fz_new_image_from_compressed_buffer(fz_context *ctx, int w, int h,
 	int xres, int yres, int interpolate, int imagemask, const float *decode,
 	const int *colorkey, fz_compressed_buffer *buffer, fz_image *mask)
 {
-	fz_compressed_image *image;
+	fz_compressed_image *image = NULL;
 
 	fz_try(ctx)
 	{

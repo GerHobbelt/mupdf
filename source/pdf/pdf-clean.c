@@ -577,6 +577,7 @@ pdf_redact_image_imp(fz_context *ctx, fz_matrix ctm, fz_image *image, fz_pixmap 
 			fz_drop_pixmap(ctx, original);
 		fz_catch(ctx)
 			fz_rethrow(ctx);
+		assert(pixmap != NULL);
 		pixmap_cloned = 1;
 	}
 
@@ -599,6 +600,7 @@ pdf_redact_image_imp(fz_context *ctx, fz_matrix ctm, fz_image *image, fz_pixmap 
 				fz_drop_pixmap(ctx, pixmap);
 			fz_rethrow(ctx);
 		}
+		assert(mask != NULL);
 	}
 
 	/* If we have a 1x1 image, to which a mask is being applied

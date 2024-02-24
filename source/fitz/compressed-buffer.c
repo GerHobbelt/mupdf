@@ -56,7 +56,8 @@ fz_new_compressed_buffer(fz_context *ctx)
 fz_stream *
 fz_open_image_decomp_stream_from_buffer(fz_context *ctx, fz_compressed_buffer *buffer, int *l2factor)
 {
-	fz_stream *head, *tail;
+	fz_stream *head = NULL;
+	fz_stream *tail;
 
 	tail = fz_open_buffer(ctx, buffer->buffer);
 	fz_try(ctx)

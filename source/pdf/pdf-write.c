@@ -166,6 +166,8 @@ expand_lists(fz_context *ctx, pdf_write_state *opts, int num)
 {
 	int i;
 
+	assert(num >= 3);
+
 	/* objects are numbered 0..num and maybe two additional objects for linearization */
 	num += 3;
 	if (num <= opts->list_len)
@@ -186,6 +188,7 @@ expand_lists(fz_context *ctx, pdf_write_state *opts, int num)
 		opts->rev_renumber_map[i] = i;
 	}
 	opts->list_len = num;
+	assert(opts->list_len >= 3);
 }
 
 /*
@@ -3131,6 +3134,7 @@ static void clean_content_streams(fz_context *ctx, pdf_document *doc, int saniti
 static void initialise_write_state(fz_context *ctx, pdf_document *doc, const pdf_write_options *in_opts, pdf_write_state *opts)
 {
 	int xref_len = pdf_xref_len(ctx, doc);
+	assert(xref_len >= 0);
 
 	opts->do_incremental = in_opts->do_incremental;
 	opts->do_ascii = in_opts->do_ascii;
@@ -3725,6 +3729,7 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 	}
 
 	xref_len = pdf_xref_len(ctx, doc);
+	assert(xref_len >= 3);
 
 	pdf_begin_operation(ctx, doc, "Save document");
 	fz_try(ctx)
@@ -3794,7 +3799,9 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 			opts->metadata = pdf_keep_obj(ctx, pdf_metadata(ctx, doc));
 
 		xref_len = pdf_xref_len(ctx, doc); /* May have changed due to repair */
+		assert(xref_len >= 3);
 		expand_lists(ctx, opts, xref_len);
+		assert(opts->use_list != NULL && opts->ofs_list != NULL && opts->gen_list != NULL && opts->renumber_map != NULL && opts->rev_renumber_map != NULL);
 
 		/* Sweep & mark objects from the trailer */
 		if (opts->do_garbage >= 1 || opts->do_linear)
@@ -3827,7 +3834,9 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 			gather_to_objstms(ctx, doc, opts, xref_len);
 
 		xref_len = pdf_xref_len(ctx, doc); /* May have changed due to repair */
+		assert(xref_len >= 3);
 		expand_lists(ctx, opts, xref_len);
+		assert(opts->use_list != NULL && opts->ofs_list != NULL && opts->gen_list != NULL && opts->renumber_map != NULL && opts->rev_renumber_map != NULL);
 
 		/* Truncate the xref after compacting and renumbering */
 		if ((opts->do_garbage >= 2 || opts->do_linear) &&
@@ -3850,6 +3859,7 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 			{
 				doc->xref_base = doc->num_incremental_sections - i - 1;
 				xref_len = pdf_xref_len(ctx, doc);
+				assert(xref_len >= 3);
 
 				writeobjects(ctx, doc, opts, 0);
 

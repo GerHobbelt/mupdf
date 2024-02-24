@@ -516,6 +516,8 @@ fz_new_icc_data_from_cal(fz_context *ctx,
 	profile_size = ICC_HEADER_SIZE;
 	header->deviceClass = icSigInputClass;
 
+	assert(n == 1 || n == 3);
+
 	if (n == 3)
 	{
 		desc_name = "CalRGB";

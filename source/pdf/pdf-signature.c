@@ -271,7 +271,7 @@ static char *
 pdf_format_signature_info(fz_context *ctx, pdf_pkcs7_signer *signer, int flags, const char *reason, const char *location, int64_t now, char **name)
 {
 	pdf_pkcs7_distinguished_name *dn = NULL;
-	char *info;
+	char *info = NULL;
 	fz_var(dn);
 	fz_try(ctx)
 	{
@@ -395,7 +395,7 @@ fz_pixmap *pdf_preview_signature_as_pixmap(fz_context *ctx,
 	const char *reason,
 	const char *location)
 {
-	fz_pixmap *pix;
+	fz_pixmap *pix = NULL;
 	fz_display_list *dlist = pdf_preview_signature_as_display_list(ctx,
 		w, h, lang,
 		signer, flags, graphic, reason, location);
@@ -542,7 +542,7 @@ pdf_pkcs7_distinguished_name *pdf_signature_get_signatory(fz_context *ctx, pdf_p
 {
 	char *contents = NULL;
 	size_t contents_len;
-	pdf_pkcs7_distinguished_name *dn;
+	pdf_pkcs7_distinguished_name *dn = NULL;
 
 	contents_len = pdf_signature_contents(ctx, doc, signature, &contents);
 	if (contents_len == 0)

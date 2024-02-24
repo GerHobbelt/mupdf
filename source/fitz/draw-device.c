@@ -242,7 +242,7 @@ static fz_draw_state *convert_stack(fz_context *ctx, fz_draw_device *dev, const 
 static fz_draw_state *
 fz_knockout_begin(fz_context *ctx, fz_draw_device *dev)
 {
-	fz_irect bbox, ga_bbox;
+	fz_irect bbox, ga_bbox = fz_infinite_irect;
 	fz_draw_state *state = &dev->stack[dev->top];
 	int isolated = state->blendmode & FZ_BLEND_ISOLATED;
 
@@ -823,11 +823,11 @@ fz_draw_clip_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 	float expansion = fz_matrix_expansion(ctm);
 	float flatness;
 	fz_irect bbox;
-	fz_draw_state *state = &dev->stack[dev->top];
+	fz_draw_state *state;
 	fz_colorspace *model;
 
 	if (dev->top == 0 && dev->resolve_spots)
-		state = push_group_for_separations(ctx, dev, fz_default_color_params /* FIXME */, dev->default_cs);
+		(void) push_group_for_separations(ctx, dev, fz_default_color_params /* FIXME */, dev->default_cs);
 
 	if (expansion < FLT_EPSILON)
 		expansion = 1;
@@ -888,13 +888,13 @@ fz_draw_clip_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, 
 	float flatness;
 	float linewidth = stroke->linewidth;
 	fz_irect bbox;
-	fz_draw_state *state = &dev->stack[dev->top];
+	fz_draw_state *state;
 	fz_colorspace *model;
 	float aa_level = 2.0f/(fz_rasterizer_graphics_aa_level(rast)+2);
 	float mlw = fz_rasterizer_graphics_min_line_width(rast);
 
 	if (dev->top == 0 && dev->resolve_spots)
-		state = push_group_for_separations(ctx, dev, fz_default_color_params /* FIXME */, dev->default_cs);
+		(void) push_group_for_separations(ctx, dev, fz_default_color_params /* FIXME */, dev->default_cs);
 
 	if (mlw > aa_level)
 		aa_level = mlw;
@@ -1231,7 +1231,7 @@ fz_draw_clip_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 	fz_rasterizer *rast = dev->rast;
 
 	if (dev->top == 0 && dev->resolve_spots)
-		state = push_group_for_separations(ctx, dev, fz_default_color_params /* FIXME */, dev->default_cs);
+		(void) push_group_for_separations(ctx, dev, fz_default_color_params /* FIXME */, dev->default_cs);
 
 	state = push_stack(ctx, dev, "clip text");
 
@@ -2778,7 +2778,7 @@ fz_draw_end_tile(fz_context *ctx, fz_device *devp)
 {
 	fz_draw_device *dev = (fz_draw_device*)devp;
 	float xstep, ystep;
-	fz_matrix ttm, ctm, shapectm, gactm;
+	fz_matrix ttm, ctm, shapectm = fz_identity, gactm = fz_identity;
 	fz_irect area, scissor, tile_bbox;
 	fz_rect scissor_tmp, tile_tmp;
 	int x0, y0, x1, y1, x, y, extra_x, extra_y;
@@ -3305,7 +3305,7 @@ fz_new_draw_device_with_options(fz_context *ctx, const fz_draw_options *opts, fz
 	float x_scale, y_scale;
 	fz_matrix transform;
 	fz_irect bbox;
-	fz_device *dev;
+	fz_device *dev = NULL;
 
 	fz_set_rasterizer_graphics_aa_level(ctx, &aa, opts->graphics);
 	fz_set_rasterizer_text_aa_level(ctx, &aa, opts->text);

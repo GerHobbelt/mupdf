@@ -225,7 +225,7 @@ fz_new_image_from_svg(fz_context *ctx, fz_buffer *buf, const char *base_uri, fz_
 {
 	fz_display_list *list;
 	fz_image *image = NULL;
-	float w, h;
+	float w = 0, h = 0;
 
 	list = fz_new_display_list_from_svg(ctx, buf, base_uri, zip, &w, &h);
 	fz_try(ctx)
@@ -242,7 +242,7 @@ fz_new_image_from_svg_xml(fz_context *ctx, fz_xml_doc *xmldoc, fz_xml *xml, cons
 {
 	fz_display_list *list;
 	fz_image *image = NULL;
-	float w, h;
+	float w = 0, h = 0;
 
 	list = fz_new_display_list_from_svg_xml(ctx, xmldoc, xml, base_uri, zip, &w, &h);
 	fz_try(ctx)

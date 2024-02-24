@@ -1611,11 +1611,11 @@ pdf_add_journal_fragment(fz_context *ctx, pdf_document *doc, int parent, pdf_obj
 
 void pdf_deserialise_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm)
 {
-	int num, version, c, nis, pos;
+	int num, version, c, nis = 0, pos = 0;
 	pdf_obj *obj = NULL, *fingerprint_obj;
 	fz_buffer *buffer;
 	unsigned char digest[16];
-	int64_t file_size;
+	int64_t file_size = -1;
 	int digests_match = 0;
 	pdf_token tok;
 

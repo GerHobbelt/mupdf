@@ -46,7 +46,7 @@ fz_output *fz_new_log_for_module(fz_context *ctx, const char *module)
 
 void fz_log(fz_context *ctx, const char *fmt, ...)
 {
-	fz_output *out;
+	fz_output *out = NULL;
 	va_list args;
 	va_start(args, fmt);
 	fz_try(ctx)
@@ -66,7 +66,7 @@ void fz_log(fz_context *ctx, const char *fmt, ...)
 
 void fz_log_module(fz_context *ctx, const char *module, const char *fmt, ...)
 {
-	fz_output *out;
+	fz_output *out = NULL;
 	va_list args;
 	va_start(args, fmt);
 	fz_try(ctx)
