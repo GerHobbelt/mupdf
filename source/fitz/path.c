@@ -1010,7 +1010,7 @@ void
 fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 {
 	int i, k, n;
-	fz_point p, p1, p2, p3, q, s;
+	fz_point p, p1, p2, p3, s, q = { 0 };
 
 	if (path->packed)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Cannot transform a packed path");
