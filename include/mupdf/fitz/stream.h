@@ -516,6 +516,8 @@ static inline int fz_is_eof(fz_context *ctx, fz_stream *stm)
 
 	n: The number of bits to read, between 1 and 8*sizeof(int)
 	inclusive.
+	TODO: IS THIS REALLY CORRECT, CAN WE READ 32 BITS WITHOUT
+	SHIFTING OUT OF BOUNDS?
 
 	Returns -1 for EOF, or the required number of bits.
 */
