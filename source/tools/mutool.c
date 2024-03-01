@@ -176,6 +176,8 @@ static struct tool_spec {
 	{ {.fa = curl_main }, "curl", "access/fetch a given URI" },
 
 #if defined(MUTOOL_EX)
+	{ {.fa = curl_schematable_tool_main }, "curl_schematable", "regenerate curl schematable C code" },
+
 	{ {.fa = mujs_example_main }, "js", "basic REPL for MuJS JavaScript interpreter" },
 	{ {.fa = mujs_prettyprint_main }, "jspretty", "prettyprint (reformat) MuJS JavaScript source files" },
 #endif

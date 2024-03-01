@@ -42,6 +42,7 @@ int tesseract_main(int argc, const char** argv);
 #endif
 
 int curl_main(int argc, const char** argv);
+int curl_schematable_tool_main(int argc, const char** argv);
 
 int mujs_example_main(int argc, const char** argv);				
 int mujs_prettyprint_main(int argc, const char** argv);
