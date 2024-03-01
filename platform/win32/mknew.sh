@@ -1067,6 +1067,22 @@ otl-ml
 png-pmt-tools-lib
 uberlogger
 
+mrpt
+pyglass
+DiskANN
+flann
+falconn
+ffht
+flinng
+lshbox
+liblbfgs
+CurvatureFilter
+aho_corasick
+aho-corasick
+libahocorasick
+libirwls
+kiwi
+
 EOT
 )
 

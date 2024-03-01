@@ -1,4 +1,7 @@
 
+directories:
+	../../scripts/libgflags/
+	
 also-ignore:
 	/test/
 	/bazel/

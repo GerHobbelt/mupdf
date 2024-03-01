@@ -455,10 +455,10 @@
 /* #undef HAVE_LIBSSH_LIBSSH_H */
 
 /* if zlib is available */
-/* #undef HAVE_LIBZ */
+#define HAVE_LIBZ    1
 
 /* if zlib-ng is available */
-#define HAVE_LIBZ_NG
+#define HAVE_LIBZ_NG   1
 
 /* if brotli is available */
 #define HAVE_BROTLI

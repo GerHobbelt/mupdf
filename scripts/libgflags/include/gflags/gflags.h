@@ -80,6 +80,7 @@
 
 #include <string>
 #include <vector>
+#include <atomic>
 
 #include "gflags/gflags_declare.h" // IWYU pragma: export
 
@@ -133,6 +134,18 @@ extern GFLAGS_DLL_DECL bool RegisterFlagValidator(const int64*       flag, bool 
 extern GFLAGS_DLL_DECL bool RegisterFlagValidator(const uint64*      flag, bool (*validate_fn)(const char*, uint64));
 extern GFLAGS_DLL_DECL bool RegisterFlagValidator(const double*      flag, bool (*validate_fn)(const char*, double));
 extern GFLAGS_DLL_DECL bool RegisterFlagValidator(const std::string* flag, bool (*validate_fn)(const char*, const std::string&));
+extern GFLAGS_DLL_DECL bool RegisterFlagValidator(const std::atomic_bool* flag,
+                                                  bool (*validate_fn)(const char*, bool));
+extern GFLAGS_DLL_DECL bool RegisterFlagValidator(const std::atomic_int32_t* flag,
+                                                  bool (*validate_fn)(const char*, int32));
+extern GFLAGS_DLL_DECL bool RegisterFlagValidator(const std::atomic_uint32_t* flag,
+                                                  bool (*validate_fn)(const char*, uint32));
+extern GFLAGS_DLL_DECL bool RegisterFlagValidator(const std::atomic_int64_t* flag,
+                                                  bool (*validate_fn)(const char*, int64));
+extern GFLAGS_DLL_DECL bool RegisterFlagValidator(const std::atomic_uint64_t* flag,
+                                                  bool (*validate_fn)(const char*, uint64));
+extern GFLAGS_DLL_DECL bool RegisterFlagValidator(const std::atomic<double>* flag,
+                                                  bool (*validate_fn)(const char*, double));
 
 // Convenience macro for the registration of a flag validator
 #define DEFINE_validator(name, validator) \
@@ -294,11 +307,11 @@ class GFLAGS_DLL_DECL FlagSaver {
 extern GFLAGS_DLL_DECL std::string CommandlineFlagsIntoString();
 // Usually where this is used, a FlagSaver should be used instead.
 extern GFLAGS_DLL_DECL
-bool ReadFlagsFromString(const std::string& flagfilecontents,
+bool ReadFlagsFromString(const std::string& flag_file_contents,
                          const char* prog_name,
                          bool errors_are_fatal);  // uses SET_FLAGS_VALUE
 
-// These let you manually implement --flagfile functionality.
+// These let you manually implement --flag-file functionality.
 // DEPRECATED.
 extern GFLAGS_DLL_DECL bool AppendFlagsIntoFile(const std::string& filename, const char* prog_name);
 extern GFLAGS_DLL_DECL bool ReadFromFlagsFile(const std::string& filename, const char* prog_name, bool errors_are_fatal);   // uses SET_FLAGS_VALUE
@@ -459,6 +472,12 @@ GFLAGS_DECLARE_FLAG_REGISTERER_CTOR(int64);
 GFLAGS_DECLARE_FLAG_REGISTERER_CTOR(uint64);
 GFLAGS_DECLARE_FLAG_REGISTERER_CTOR(double);
 GFLAGS_DECLARE_FLAG_REGISTERER_CTOR(std::string);
+GFLAGS_DECLARE_FLAG_REGISTERER_CTOR(std::atomic_bool);
+GFLAGS_DECLARE_FLAG_REGISTERER_CTOR(std::atomic_int32_t);
+GFLAGS_DECLARE_FLAG_REGISTERER_CTOR(std::atomic_uint32_t);
+GFLAGS_DECLARE_FLAG_REGISTERER_CTOR(std::atomic_int64_t);
+GFLAGS_DECLARE_FLAG_REGISTERER_CTOR(std::atomic_uint64_t);
+GFLAGS_DECLARE_FLAG_REGISTERER_CTOR(std::atomic<double>);
 
 #undef GFLAGS_DECLARE_FLAG_REGISTERER_CTOR
 
@@ -571,6 +590,7 @@ inline clstring* dont_pass0toDEFINE_string(char *stringspot,
 inline clstring* dont_pass0toDEFINE_string(char *stringspot,
                                            int value);
 
+
 // Auxiliary class used to explicitly call destructor of string objects
 // allocated using placement new during static program deinitialization.
 // The destructor MUST be an inline function such that the explicit
@@ -579,7 +599,7 @@ class StringFlagDestructor {
   void *current_storage_;
   void *defvalue_storage_;
 
-public: 
+public:
 
   StringFlagDestructor(void *current, void *defvalue)
   : current_storage_(current), defvalue_storage_(defvalue) {}
@@ -589,7 +609,6 @@ public:
     reinterpret_cast<clstring*>(defvalue_storage_)->~clstring();
   }
 };
-
 }  // namespace fLS
 
 // We need to define a var named FLAGS_no##name so people don't define
@@ -616,6 +635,43 @@ public:
     clstring& FLAGS_##name = *FLAGS_no##name;                               \
   }                                                                         \
   using fLS::FLAGS_##name
+
+#define DEFINE_ATOMIC_VARIABLE(type, atomic_type, shorttype, name, value, help)                  \
+  namespace fL##shorttype {                                                                      \
+    static const type FLAGS_nono##name = value;                                                  \
+    /* We always want to export defined variables, dll or no */                                  \
+    GFLAGS_DLL_DEFINE_FLAG atomic_type FLAGS_##name(FLAGS_nono##name);                           \
+    static atomic_type FLAGS_no##name(FLAGS_nono##name);                                         \
+    static GFLAGS_NAMESPACE::FlagRegisterer o_##name(#name, MAYBE_STRIPPED_HELP(help), __FILE__, \
+                                                     &FLAGS_##name, &FLAGS_no##name);            \
+  }                                                                                              \
+  using fL##shorttype::FLAGS_##name
+
+#define DEFINE_ATOMIC_bool(name, val, txt)                                                        \
+  namespace fLB {                                                                                 \
+  typedef ::fLB::CompileAssert                                                                    \
+      FLAG_##name##_value_is_not_a_bool[(sizeof(::fLB::IsBoolFlag(val)) != sizeof(double)) ? 1    \
+                                                                                           : -1]; \
+  }                                                                                               \
+  DEFINE_ATOMIC_VARIABLE(bool, std::atomic_bool, B, name, val, txt)
+
+#define DEFINE_ATOMIC_int32(name, val, txt) \
+  DEFINE_ATOMIC_VARIABLE(GFLAGS_NAMESPACE::int32, std::atomic_int32_t, I, name, val, txt)
+
+#define DEFINE_ATOMIC_uint32(name, val, txt)                                                      \
+  DEFINE_ATOMIC_VARIABLE(GFLAGS_NAMESPACE::uint32, std::atomic_uint32_t, U, name, val, \
+                         txt)
+
+#define DEFINE_ATOMIC_int64(name, val, txt)                                                       \
+  DEFINE_ATOMIC_VARIABLE(GFLAGS_NAMESPACE::int64, std::atomic_int64_t, I64, name, val, \
+                         txt)
+
+#define DEFINE_ATOMIC_uint64(name, val, txt)                                                   \
+  DEFINE_ATOMIC_VARIABLE(GFLAGS_NAMESPACE::uint64, std::atomic_uint64_t, U64, name, \
+                         val, txt)
+
+#define DEFINE_ATOMIC_double(name, val, txt) \
+  DEFINE_ATOMIC_VARIABLE(double, std::atomic<double>, D, name, val, txt)
 
 #endif  // SWIG
 
