@@ -1153,3 +1153,7 @@ typedef long ssize_t;
 
 /* Define to 1 to enable websocket support. */
 /* #undef USE_WEBSOCKETS */
+
+#if defined(_DEBUG) && !defined(DEBUGBUILD) && 0
+#define DEBUGBUILD 1
+#endif
