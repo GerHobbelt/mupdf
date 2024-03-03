@@ -14,7 +14,7 @@ using namespace system_override;
 // app: calls abort() (overridden) --> invoke_exit() [*] --> invoke_original_exit() --> exit() (actual system RTL call)
 // app: runs main() and *returns* --> SystemOverrideClass object destructor is invoked [*] 
 //
-// call chain pots marked with [*] are the places where you are supposed to "hook into" the exit phase of the application,
+// call chain points marked with [*] are the places where you are supposed to "hook into" the exit phase of the application,
 // i.e. break into the debugger, etc.
 //
 
@@ -23,6 +23,20 @@ static __declspec(noreturn) void invoke_original_exit(int code);
 
 static void BreakIntoDebugger(void);   
 
+// The idea behind this seemingly convoluted way to set the invoke-debugger flag to true or false
+// is that this is relatively to *patch* in the final compiled binary in both debug and release builds
+// so that debugging facilities can be triggered ad hoc when trouble ensues somewhere.
+//
+// For the 'easily patched' feature to work, both strings should have the same length: you only want to
+// flip a single byte in the hex editor when you want to switch this behaviour.
+#define DO_INVOKE_DEBUGGER_MARKER_STRING             "marker:do.invoke.debugger"
+#if !defined(NDEBUG)
+#define ACTIVE_INVOKE_DEBUGGER_MARKER_STRING         DO_INVOKE_DEBUGGER_MARKER_STRING
+#else
+#define ACTIVE_INVOKE_DEBUGGER_MARKER_STRING         "marker:No.invoke.debugger"
+#endif
+
+static const char *flag_do_invoke_debugger = ACTIVE_INVOKE_DEBUGGER_MARKER_STRING;
 
 namespace system_override {
 
@@ -56,7 +70,9 @@ namespace system_override {
 		if (should_do || always_kick_in) {
 			SystemOverrideClass *self = override;
 
-			BreakIntoDebugger();
+			if (0 == strcmp(flag_do_invoke_debugger, DO_INVOKE_DEBUGGER_MARKER_STRING)) {
+				BreakIntoDebugger();
+			}
 		}
 	}
 
@@ -139,7 +155,7 @@ static __declspec(noreturn) void invoke_exit(int code)
 
 // warning C4273: 'exit': inconsistent dll linkage
 #pragma warning(push)
-//#pragma warning(disable: 4273)
+#pragma warning(disable: 4273)
 
 _ACRTIMP __declspec(noreturn) void __cdecl abort(void);;
 _ACRTIMP __declspec(noreturn) void __cdecl exit(_In_ int _Code);
@@ -240,10 +256,11 @@ void BreakIntoDebugger(void)
 {
 	if (IsDebuggerPresent())
 	{
-#if defined(_CrtDbgBreak)
+#if defined(_CrtDbgBreak) && 01
 		_CrtDbgBreak();
-#endif
+#else
 		DebugBreak();
+#endif
 	}
 }
 
