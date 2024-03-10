@@ -9,7 +9,7 @@
 
 
 #if 01
-#include "../../thirdparty/owemdjee/libjpeg-turbo/jmemnobs.c"
+#include "../../thirdparty/owemdjee/libjpeg-turbo/src/jmemnobs.c"
 #endif
 
 #if 0
