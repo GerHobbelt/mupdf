@@ -575,6 +575,8 @@ static struct tool_spec {
 	{ {.fa = jpegturbo_wrjpegcom_main }, "wrjpegcom", "wrjpegcom tool" },
 	{ {.fa = jpegturbo_djpeg_main }, "djpeg", "djpeg tool" },
 	{ {.fa = jpegturbo_cjpeg_main }, "cjpeg", "cjpeg tool" },
+	{ {.f = tj_test_intrinsic_bitcount_main }, "test_intrinsic_bitcount", "turbojpeg intrinsic_bitcount test tool" },
+	
 #endif
 
 #if defined(MUTOOL_EX)
