@@ -43,7 +43,7 @@
 #include "../../thirdparty/owemdjee/jpeg-xl/lib/include/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/sqlite/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/crow/include/crow/monolithic_examples.h"
-#include "../../thirdparty/owemdjee/libjpeg-turbo/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/libjpeg-turbo/src/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/pcre/src/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/bibutils/src/bin/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libzopfli/src/zopfli/monolithic_examples.h"
