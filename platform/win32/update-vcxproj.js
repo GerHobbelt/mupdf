@@ -17,7 +17,7 @@
 // file that you cloned/copied from another project. Use `patch-vcxproj.js` to set up
 // an empty, FRESH project.
 //
-// Use `update-vcxprroj.js` to UPDATE/UPGRADE your existing project(s) WITHOUT altering
+// Use `update-vcxproj.js` to UPDATE/UPGRADE your existing project(s) WITHOUT altering
 // the source files set listed in these projects.
 //
 
@@ -95,6 +95,8 @@ src = src
 			return "";
 		if ("_CRTDBG_MAP_ALLOC" === l)
 			return "";
+		if (l[0] === '%')
+			return "";
 		
 		return l;
 	})
@@ -102,7 +104,11 @@ src = src
 	
 	let pnu = projectName.toUpperCase();
 
-	return `<PreprocessorDefinitions>${a.join(';')}</PreprocessorDefinitions>`;
+	let defs = `${a.join(';')};%(PreprocessorDefinitions)`
+	.replace(/;;/g, ';')
+	.replace(/^;/g, '')
+
+	return `<PreprocessorDefinitions>${defs}</PreprocessorDefinitions>`;
 })
 .replace(/<BrowseInformation>[^]*?<\/BrowseInformation>/g, `<BrowseInformation>false</BrowseInformation>`)
 //     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
@@ -417,7 +423,7 @@ ${m}
 // make sure all include path sets are the same: pick up the set from the largest entry and copy it around:
 //
 // Note: ResourceCmpiler SHOULD follow, NOT lead. This means we SHOULD NOT look at the include path listed for the 
-// (sometimes hidden) ResourceCompiler as this will thwart our editing efforts (done in the Clcompiler section, etc.)
+// (sometimes hidden) ResourceCompiler as this will thwart our editing efforts (done in the ClCompile section, etc.)
 // when we actually REDUCE the paths' set! (We ran into this issue while editing the libleptonica paths for example)
 let include_paths = '.;%(AdditionalIncludeDirectories)';
 const inc_re = /<AdditionalIncludeDirectories>([^]*?)<\/AdditionalIncludeDirectories>/g;
