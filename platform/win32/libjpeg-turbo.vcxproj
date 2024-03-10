@@ -127,14 +127,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo;../../scripts/libjpeg-turbo/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>JPEGLIB_WITH_FULLTRACING;PPM_SUPPORTED;BMP_SUPPORTED;BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo;../../scripts/libjpeg-turbo/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -144,7 +144,7 @@
     </Bscmake>
     <NASM>
       <IncludePaths>../../thirdparty/owemdjee/libjpeg-turbo/simd/nasm;../../thirdparty/owemdjee/libjpeg-turbo/simd</IncludePaths>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;PLATFORM=$(PlatformTarget);WIN$(PlatformArchitecture);PROCESSOR_ARCHITECTURE=$(ProcessorArchitecture);RGB_RED=0;RGB_GREEN=1;RGB_BLUE=2;RGB_PIXELSIZE=3;__x86_$(PlatformArchitecture)__</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;PLATFORM=$(PlatformTarget);WIN$(PlatformArchitecture);PROCESSOR_ARCHITECTURE=$(ProcessorArchitecture);RGB_RED=0;RGB_GREEN=1;RGB_BLUE=2;RGB_PIXELSIZE=3;__x86_$(PlatformArchitecture)__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </NASM>
   </ItemDefinitionGroup>
@@ -158,15 +158,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo;../../scripts/libjpeg-turbo/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JPEGLIB_WITH_FULLTRACING;PPM_SUPPORTED;BMP_SUPPORTED;BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>JPEGLIB_WITH_FULLTRACING;PPM_SUPPORTED;BMP_SUPPORTED;BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo;../../scripts/libjpeg-turbo/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -176,7 +176,7 @@
     </Bscmake>
     <NASM>
       <IncludePaths>../../thirdparty/owemdjee/libjpeg-turbo/simd/nasm;../../thirdparty/owemdjee/libjpeg-turbo/simd</IncludePaths>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;PLATFORM=$(PlatformTarget);WIN$(PlatformArchitecture);PROCESSOR_ARCHITECTURE=$(ProcessorArchitecture);RGB_RED=0;RGB_GREEN=1;RGB_BLUE=2;RGB_PIXELSIZE=3;__x86_$(PlatformArchitecture)__</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;PLATFORM=$(PlatformTarget);WIN$(PlatformArchitecture);PROCESSOR_ARCHITECTURE=$(ProcessorArchitecture);RGB_RED=0;RGB_GREEN=1;RGB_BLUE=2;RGB_PIXELSIZE=3;__x86_$(PlatformArchitecture)__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </NASM>
   </ItemDefinitionGroup>
@@ -192,14 +192,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo;../../scripts/libjpeg-turbo/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>JPEGLIB_WITH_FULLTRACING;PPM_SUPPORTED;BMP_SUPPORTED;BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo;../../scripts/libjpeg-turbo/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -209,7 +209,7 @@
     </Bscmake>
     <NASM>
       <IncludePaths>../../thirdparty/owemdjee/libjpeg-turbo/simd/nasm;../../thirdparty/owemdjee/libjpeg-turbo/simd</IncludePaths>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;PLATFORM=$(PlatformTarget);WIN$(PlatformArchitecture);PROCESSOR_ARCHITECTURE=$(ProcessorArchitecture);RGB_RED=0;RGB_GREEN=1;RGB_BLUE=2;RGB_PIXELSIZE=3;__x86_$(PlatformArchitecture)__</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;PLATFORM=$(PlatformTarget);WIN$(PlatformArchitecture);PROCESSOR_ARCHITECTURE=$(ProcessorArchitecture);RGB_RED=0;RGB_GREEN=1;RGB_BLUE=2;RGB_PIXELSIZE=3;__x86_$(PlatformArchitecture)__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </NASM>
   </ItemDefinitionGroup>
@@ -223,15 +223,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo;../../scripts/libjpeg-turbo/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JPEGLIB_WITH_FULLTRACING;PPM_SUPPORTED;BMP_SUPPORTED;BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>JPEGLIB_WITH_FULLTRACING;PPM_SUPPORTED;BMP_SUPPORTED;BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo;../../scripts/libjpeg-turbo/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -241,7 +241,7 @@
     </Bscmake>
     <NASM>
       <IncludePaths>../../thirdparty/owemdjee/libjpeg-turbo/simd/nasm;../../thirdparty/owemdjee/libjpeg-turbo/simd</IncludePaths>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;PLATFORM=$(PlatformTarget);WIN$(PlatformArchitecture);PROCESSOR_ARCHITECTURE=$(ProcessorArchitecture);RGB_RED=0;RGB_GREEN=1;RGB_BLUE=2;RGB_PIXELSIZE=3;__x86_$(PlatformArchitecture)__</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;PLATFORM=$(PlatformTarget);WIN$(PlatformArchitecture);PROCESSOR_ARCHITECTURE=$(ProcessorArchitecture);RGB_RED=0;RGB_GREEN=1;RGB_BLUE=2;RGB_PIXELSIZE=3;__x86_$(PlatformArchitecture)__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </NASM>
   </ItemDefinitionGroup>
@@ -256,128 +256,104 @@
     <ClInclude Include="../../scripts/libjpeg-turbo/jconfigint.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/cdjpeg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/cjpeg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/djpeg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jaricom.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcapimin.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcapistd.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcarith.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jccoefct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jccolext.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jccolor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcdctmgr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcdiffct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jchuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcicc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcinit.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jclhuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jclossls.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcmainct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcmarker.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcmaster.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcomapi.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcparam.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcphuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcprepct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcsample.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jcstest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jctrans.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdapimin.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdapistd.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdarith.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdatadst-tj.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdatadst.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdatasrc-tj.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdatasrc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdcoefct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdcol565.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdcolext.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdcolor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jddctmgr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jddiffct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdhuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdicc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdinput.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdlhuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdlossls.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdmainct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdmarker.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdmaster.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdmerge.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdmrg565.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdmrgext.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdphuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdpostct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdsample.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jdtrans.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jerror.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jfdctflt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jfdctfst.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jfdctint.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jidctflt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jidctfst.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jidctint.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jidctred.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jmemmgr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jmemnobs.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jpegtran.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jquant1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jquant2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jsimd_none.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jstdhuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/jutils.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/md5/md5.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/md5/md5cmp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/md5/md5hl.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/rdbmp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/rdcolmap.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/rdgif.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/rdjpgcom.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/rdppm.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/rdswitch.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/rdtarga.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jsimd_i386.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jsimd_x64.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/strtest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/tjbench.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/tjexample.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/tjunittest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/tjutil.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/transupp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/turbojpeg-mp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/turbojpeg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/wrbmp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/wrgif.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/wrjpgcom.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/wrppm.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/wrtarga.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/cderror.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/cdjpeg.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/cmyk.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jchuff.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jcmaster.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jdcoefct.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jdct.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jdhuff.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jdmainct.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jdmaster.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jdmerge.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jdsample.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jerror.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jinclude.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jlossls.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jmemsys.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jmorecfg.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jpeg_nbits_table.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jpegapicomp.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jpegint.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jpeglib.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jsamplecomp.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jsimd.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/jsimddct.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/md5/md5.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/monolithic_examples.h" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/cdjpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/cjpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/djpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jaricom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcapimin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcapistd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcarith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jccoefct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jccolext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jccolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcdctmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcdiffct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jchuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcicc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcinit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jclhuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jclossls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcmainct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcmarker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcmaster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcomapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcparam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcphuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcprepct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcsample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcstest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jctrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdapimin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdapistd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdarith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdatadst-tj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdatadst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdatasrc-tj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdatasrc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdcoefct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdcol565.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdcolext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdcolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jddctmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jddiffct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdhuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdicc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdinput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdlhuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdlossls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdmainct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdmarker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdmaster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdmerge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdmrg565.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdmrgext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdphuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdpostct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdsample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdtrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jfdctflt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jfdctfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jfdctint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jidctflt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jidctfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jidctint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jidctred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jmemmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jmemnobs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jpeg_nbits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jpegtran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jquant1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jquant2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jsimd_none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jstdhuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/md5/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/md5/md5cmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/md5/md5hl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/rdbmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/rdcolmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/rdgif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/rdjpgcom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/rdppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/rdswitch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/rdtarga.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/strtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/test_intrinsic_bitcount.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/tjbench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/tjexample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/tjunittest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/tjutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/transupp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/turbojpeg-mp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/turbojpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/wrbmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/wrgif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/wrjpgcom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/wrppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/wrtarga.c" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jccolext-avx2.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jccolext-mmx.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jccolext-sse2.inc" />
@@ -404,33 +380,60 @@
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jdcolext-sse2.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jdmrgext-avx2.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jdmrgext-sse2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/cderror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/cdjpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/cmyk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jchuff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jcmaster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdcoefct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdhuff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdmainct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdmaster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdmerge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jdsample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jinclude.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jlossls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jmemsys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jmorecfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jpeg_nbits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jpegapicomp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jpegint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jpeglib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jsamplecomp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jsimd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jsimddct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/md5/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/monolithic_examples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/tjutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/transupp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/turbojpeg.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/test1.icc" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/test2.icc" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/tjutil.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/transupp.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/turbojpeg.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/win/vc/jconfig.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/win/vc/jconfigint.h" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/bc_s.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/bdwn.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/closed.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/doc.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/folderclosed.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/folderopen.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/nav_f.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/nav_g.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/nav_h.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/open.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/search_l.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/search_m.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/search_r.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/splitbar.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/sync_off.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/sync_on.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/tab_a.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/tab_b.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/tab_h.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/tab_s.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/bc_s.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/bc_sd.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/closed.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/nav_f.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/nav_fd.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/nav_g.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/nav_h.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/nav_hd.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/open.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/splitbar.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/splitbard.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/sync_off.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/sync_on.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/tab_a.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/tab_ad.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/tab_b.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/tab_bd.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/tab_h.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/tab_hd.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/tab_s.png" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/tab_sd.png" />
     <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/big_tree8.bmp" />
     <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/testimgari.jpg" />
     <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/testimgint.jpg" />
@@ -518,106 +521,92 @@
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/README.ijg" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/README.md" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/appveyor.yml" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/cjpeg.1" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/cmakescripts/BuildPackages.cmake" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/cmakescripts/GNUInstallDirs.cmake" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/cmakescripts/PackageInfo.cmake" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/cmakescripts/cmake_uninstall.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/cmakescripts/testclean.cmake" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/cmakescripts/tjbenchtest.cmake" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/coderules.txt" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/croptest.in" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/djpeg.1" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/annotated.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/classes.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/doxygen-extra.css" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/doxygen.css" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/doxygen.svg" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/dynsections.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/functions.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/functions_vars.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/group___turbo_j_p_e_g.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/index.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/jquery.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/menu.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/menudata.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/modules.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_0.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_0.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_1.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_1.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_2.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_2.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_3.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_3.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_4.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_4.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_5.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_5.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_6.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_6.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_7.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_7.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_8.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_8.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_9.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/all_9.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/classes_0.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/classes_0.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/close.svg" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/enums_0.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/enums_0.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/enumvalues_0.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/enumvalues_0.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/functions_0.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/functions_0.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/groups_0.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/groups_0.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/mag_sel.svg" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/nomatches.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/search.css" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/search.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/searchdata.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/typedefs_0.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/typedefs_0.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_0.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_0.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_1.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_1.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_2.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_2.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_3.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_3.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_4.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_4.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_5.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_5.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_6.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_6.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_7.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_7.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_8.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_8.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_9.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/search/variables_9.js" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/structtjregion.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/structtjscalingfactor.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/structtjtransform.html" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/html/tabs.css" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doxygen-extra.css" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doxygen.config" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/jconfig.h.in" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/jconfig.txt" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/jconfigint.h.in" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/jpegtran.1" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/jversion.h.in" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/libjpeg.map.in" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/cjpeg.1" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/coderules.txt" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/djpeg.1" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/doxygen-extra.css" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/doxygen.config" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/jpegtran.1" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/libjpeg.txt" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/rdjpgcom.1" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/structure.txt" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/annotated.html" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/classes.html" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/doc.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/docd.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/doxygen-extra.css" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/doxygen.css" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/doxygen.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/dynsections.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/folderclosed.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/folderclosedd.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/folderopen.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/folderopend.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/functions.html" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/functions_vars.html" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/group___turbo_j_p_e_g.html" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/index.html" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/jquery.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/menu.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/menudata.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/minus.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/minusd.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/plus.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/plusd.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/all_0.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/all_1.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/all_2.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/all_3.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/all_4.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/all_5.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/all_6.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/all_7.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/all_8.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/all_9.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/all_a.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/all_b.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/classes_0.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/close.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/enums_0.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/enumvalues_0.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/functions_0.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/groups_0.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/mag.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/mag_d.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/mag_sel.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/mag_seld.svg" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/search.css" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/search.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/searchdata.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/typedefs_0.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/variables_0.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/variables_1.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/variables_2.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/variables_3.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/variables_4.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/variables_5.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/variables_6.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/variables_7.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/variables_8.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/search/variables_9.js" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/structtjregion.html" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/structtjscalingfactor.html" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/structtjtransform.html" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/tabs.css" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/topics.html" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/usage.txt" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/wizard.txt" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/wrjpgcom.1" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/libjpeg.pc.in" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/libjpeg.txt" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/makefile.vs" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/md5/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/mk12.sh" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/rdjpgcom.1" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/release/Config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/release/Distribution.xml.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/release/License.rtf" />
@@ -636,13 +625,17 @@
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/release/uninstall.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/sharedlib/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/structure.txt" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jconfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jconfig.txt" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jconfigint.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/src/jversion.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/src/libjpeg.map.in" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/src/md5/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/big_tree8.txt" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/test1.icc.txt" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/test2.icc.txt" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/tjbenchtest.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/tjexampletest.in" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/usage.txt" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/win/gcc/projectTargets-release.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/win/jpeg.rc.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/win/jpeg62-ro.def" />
@@ -653,8 +646,6 @@
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/win/projectTargets.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/win/turbojpeg.rc.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/win/vc/projectTargets-release.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/wizard.txt" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/wrjpgcom.1" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
