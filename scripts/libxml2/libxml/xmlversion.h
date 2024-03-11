@@ -21,9 +21,7 @@ extern "C" {
  * use those to be sure nothing nasty will happen if
  * your library and includes mismatch
  */
-#ifndef LIBXML2_COMPILING_MSCCDEF
 XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
-#endif /* LIBXML2_COMPILING_MSCCDEF */
 
 /**
  * LIBXML_DOTTED_VERSION:
@@ -548,6 +546,7 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
 #else
   #define XML_DECLARE_GLOBAL(name, type, attrs) \
     attrs XMLPUBVAR type name;
+  #define XML_GLOBAL_MACRO(name) (name)
 #endif
 #endif
 

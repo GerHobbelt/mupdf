@@ -21,9 +21,7 @@ extern "C" {
  * use those to be sure nothing nasty will happen if
  * your library and includes mismatch
  */
-#ifndef LIBXML2_COMPILING_MSCCDEF
 XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
-#endif /* LIBXML2_COMPILING_MSCCDEF */
 
 /**
  * LIBXML_DOTTED_VERSION:
