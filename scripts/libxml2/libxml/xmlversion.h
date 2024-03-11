@@ -523,17 +523,24 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  *
  * Macro used to ignore pointer cast warnings that can't be worked around.
  */
+#ifndef XML_IGNORE_FPTR_CAST_WARNINGS
 #define XML_IGNORE_FPTR_CAST_WARNINGS
+#endif
+
 /**
  * LIBXML_POP_WARNINGS:
  *
  * Macro used to restore warnings state.
  */
+#ifndef XML_POP_WARNINGS
 #define XML_POP_WARNINGS
+#endif
+
 #endif /* __GNUC__ */
 
 #define XML_NO_ATTR
 
+#ifndef XML_DECLARE_GLOBAL
 #ifdef LIBXML_THREAD_ENABLED
   #define XML_DECLARE_GLOBAL(name, type, attrs) \
     attrs XMLPUBFUN type *__##name(void);
@@ -541,6 +548,7 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
 #else
   #define XML_DECLARE_GLOBAL(name, type, attrs) \
     attrs XMLPUBVAR type name;
+#endif
 #endif
 
 #ifdef __cplusplus
