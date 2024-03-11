@@ -1083,6 +1083,10 @@ libahocorasick
 libirwls
 kiwi
 
+detect-character-encoding
+EigenRand
+rapidxml
+
 EOT
 )
 
