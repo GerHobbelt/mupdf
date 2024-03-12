@@ -1,4 +1,12 @@
 
 also-ignore:
-	doc/snippets/
+	bench/
+	blas/
+	demos/
+	doc/
+	failtest/
+	lapack/
+	scripts/
+	test/
+	unsupported/
 	

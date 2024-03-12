@@ -244,6 +244,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_custom_formatter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_custom_formatter_thread_name.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_custom_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_custom_tags.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_daily_file_rotation.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_file_callbacks.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_file_rotation.cpp" />
@@ -256,6 +257,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_signal_handler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_stdout_multiple_formatters.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_trivial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_trivial_file_logging.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_trivial_system_clock.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_user_defined_types.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/examples/example_wake_up_logging_thread.cpp" />
@@ -268,6 +270,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/src/detail/HandlerCollection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/src/detail/LoggerCollection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/src/detail/SignalHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/src/detail/ThreadContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/src/detail/ThreadContextCollection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/src/detail/backend/BackendWorker.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/src/detail/backend/BacktraceStorage.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/src/detail/backend/StringFromTime.cpp" />
@@ -283,7 +287,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/src/handlers/JsonFileHandler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/src/handlers/RotatingFileHandler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/src/handlers/StreamHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/src/handlers/TimeRotatingFileHandler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/test/BoundedQueueTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/test/FileUtilitiesTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/test/HandlerCollectionTest.cpp" />
@@ -298,9 +301,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/test/QuillLogWakeUpBackendTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/test/QuillStructuredLogTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/test/RdtscClockTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/test/RotatingFileHandlerTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/test/StringFromTimeTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/test/ThreadContextCollectionTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/test/TimeRotatingFileHandlerTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/test/TimestampFormatterTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/test/TransitEventBufferTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/quill-logging/quill/test/TypeTraitsCopyableTest.cpp" />
@@ -367,9 +370,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/quill-logging/quill/include/quill/handlers/FileHandler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/quill-logging/quill/include/quill/handlers/Handler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/quill-logging/quill/include/quill/handlers/JsonFileHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quill-logging/quill/include/quill/handlers/NullHandler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/quill-logging/quill/include/quill/handlers/RotatingFileHandler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/quill-logging/quill/include/quill/handlers/StreamHandler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/quill-logging/quill/include/quill/handlers/TimeRotatingFileHandler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/quill-logging/quill/test/bundled/doctest/doctest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/quill-logging/quill/test/misc/DocTestExtensions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/quill-logging/quill/test/misc/TestUtilities.h" />
@@ -405,6 +408,7 @@
     <Text Include="../../thirdparty/owemdjee/quill-logging/quill/src/bundled/fmt/LICENSE.rst" />
     <Text Include="../../thirdparty/owemdjee/quill-logging/quill/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/quill-logging/quill/test/bundled/doctest/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/quill-logging/scripts/rename_libfmt.py" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
