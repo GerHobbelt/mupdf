@@ -868,7 +868,6 @@ static struct tool_spec {
 	{ {.fa = xml_testhtml_main }, "xml_testhtml", "libxml testhtml demo/tool" },
 	{ {.fa = xml_testlimits_main }, "xml_testlimits", "libxml testlimits demo/tool" },
 	{ {.fa = xml_testmodule_main }, "xml_testmodule", "libxml testmodule demo/tool" },
-	{ {.fa = xml_testOOM_main }, "xml_testOOM", "libxml testOOM demo/tool" },
 	{ {.fa = xml_testreader_main }, "xml_testreader", "libxml testreader demo/tool" },
 	{ {.fa = xml_testrecurse_main }, "xml_testrecurse", "libxml testrecurse demo/tool" },
 	{ {.fa = xml_testregexp_main }, "xml_testregexp", "libxml testregexp demo/tool" },
