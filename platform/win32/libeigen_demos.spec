@@ -1,14 +1,14 @@
 
-directories:
-	../../thirdparty/owemdjee/libeigen/
+#directories:
+#	../../thirdparty/owemdjee/libeigen/
 
 also-ignore:
-	bench/
-	blas/
-#	demos/
-	doc/
-	failtest/
-	lapack/
-	scripts/
-	test/
-	unsupported/
+	/bench/
+	/blas/
+#	/demos/
+	/doc/
+	/failtest/
+	/lapack/
+	/scripts/
+	/test/
+	/unsupported/

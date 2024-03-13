@@ -9,4 +9,7 @@ also-ignore:
 	scripts/
 	test/
 	unsupported/
-	
+
+extra-sources:
+	dummy++.cpp
+		
