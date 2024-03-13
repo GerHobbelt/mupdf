@@ -1086,6 +1086,9 @@ kiwi
 detect-character-encoding
 EigenRand
 rapidxml
+LBFGS-Lite
+uno-solver
+MicroPather
 
 EOT
 )
