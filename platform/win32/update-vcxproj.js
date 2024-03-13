@@ -60,18 +60,22 @@ function collect_warning_codes(src) {
 }
 let warnings = collect_warning_codes(src);
 
+
 src = src
 //    <ProjectName>libcurl</ProjectName>
 //    <RootNamespace>libcurl</RootNamespace>
 .replace(/<ProjectName>[^]*?<\/ProjectName>/g, (m) => `<ProjectName>${projectName}</ProjectName>`)
 .replace(/<RootNamespace>[^]*?<\/RootNamespace>/g, (m) => `<RootNamespace>${projectName}</RootNamespace>`)
-//      <TypeLibraryName>.\Release/libcurl.tlb</TypeLibraryName>
+//      <TypeLibraryName>./Release/libcurl.tlb</TypeLibraryName>
 .replace(/<TypeLibraryName>[^]*?<\/TypeLibraryName>/g, "<TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>")
 //       <PreprocessorDefinitions>BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;_USRDLL;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;USE_SCHANNEL;USE_WINDOWS_SSPI;USE_SCHANNEL;USE_WINDOWS_SSPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 .replace(/<PreprocessorDefinitions>([^]*?)<\/PreprocessorDefinitions>/g, (m, p1) => {
 	// sort the defines so the build-type variable ones end up at the end, 
 	// so Visual Studio will show us the common ones when we look at the project properties for "All Environments"
 	let a = p1.split(';').map((l) => l.trim());
+
+	// deduplicate the preprocessor defines set:
+	let pp_set_hash = {};
 
 	// also clean up some mistakes that we know we've made in some projects:
 	a = a.map((l) => {
@@ -99,6 +103,13 @@ src = src
 			return "";
 		
 		return l;
+	})
+	.map(function (el) {
+		if (pp_set_hash[el])
+			return "";
+		
+		pp_set_hash[el] = true;
+		return el;
 	})
 	.filter((l) => l.trim().length > 0);
 	

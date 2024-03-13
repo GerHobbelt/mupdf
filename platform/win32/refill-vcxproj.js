@@ -186,7 +186,7 @@ const projectMap = {
 	//wxw-samples-dll-exe
 	//wxw-samples-dll-test-exe
 	"wxw-samples-htmlbox": "wxWidgets/samples/htlbox",
-	"wxw-samples-maskedctrl": "wxWidgets\samples\maskededit",
+	"wxw-samples-maskedctrl": "wxWidgets/samples/maskededit",
 	//wxw-samples-minimal-static-build
 	//wxw-samples-propgrid-minimal-static-build
 	"wxw-tests-benchmarks": "wxWidgets/tests/benchmarks",
