@@ -1143,7 +1143,7 @@ static int run_tool(struct tool_spec *spec, int argc, const char **argv, int tim
 {
 	void* snapshot = fz_TakeHeapSnapshot();
 	char* exe_path = NULL;
-	const char** argarr = fz_malloc(ctx, (argc + 2) * sizeof(argarr[0]));
+	const char** argarr = (const char**)fz_malloc(ctx, (argc + 2) * sizeof(argarr[0]));
 
 	// do NOT damage the original argv[] array any further: plugging in arbitrary strings in there
 	// would cause memory corruption later on as we'll attempt to free() the elements at the end.
