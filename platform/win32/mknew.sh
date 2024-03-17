@@ -1089,6 +1089,11 @@ rapidxml
 LBFGS-Lite
 uno-solver
 MicroPather
+spdmon
+miniscript
+libkra
+cjose
+liboauth2
 
 EOT
 )
