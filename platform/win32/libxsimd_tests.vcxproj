@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libxsimd</ProjectName>
-    <ProjectGuid>{45D2C855-D670-463C-BAB2-1C9D012E3F7B}</ProjectGuid>
-    <RootNamespace>libxsimd</RootNamespace>
+    <ProjectName>libxsimd_tests</ProjectName>
+    <ProjectGuid>{45D2C855-D670-463C-BAB2-7C9D012E3F7B}</ProjectGuid>
+    <RootNamespace>libxsimd_tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -228,10 +228,53 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/benchmark/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/xsimd/examples/mandelbrot.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/benchmark/xsimd_benchmark.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/examples/pico_bench.hpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/doc/explicit_use_of_an_instruction_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/doc/explicit_use_of_an_instruction_set_mean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/doc/explicit_use_of_an_instruction_set_mean_aligned.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/doc/explicit_use_of_an_instruction_set_mean_arch_independent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/doc/explicit_use_of_an_instruction_set_mean_tag_dispatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/doc/manipulating_abstract_batches.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/doc/manipulating_parametric_batches.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/doc/sum_avx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/doc/sum_sse2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/doc/writing_vectorized_code.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_arch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_basic_math.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_bool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_cast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_complex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_constant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_float.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_batch_manip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_bitwise_cast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_complex_exponential.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_complex_hyperbolic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_complex_power.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_complex_trigonometric.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_conversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_custom_default_arch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_error_gamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_explicit_batch_instantiation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_exponential.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_extract_pair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_fp_manipulation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_gnu_source.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_hyperbolic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_load_store.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_poly_evaluation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_power.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_rounding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_shuffle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_trigonometric.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_xsimd_api.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_arithmetic.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_complex.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_details.hpp" />
@@ -298,12 +341,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_utils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_wasm_register.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/xsimd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/test/doc/sum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/test/test_sum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/test/test_utils.hpp" />
     <Text Include="../../thirdparty/owemdjee/xsimd/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/xsimd/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/xsimd/Changelog.rst" />
     <Text Include="../../thirdparty/owemdjee/xsimd/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/xsimd/README.md" />
-    <Text Include="../../thirdparty/owemdjee/xsimd/benchmark/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/xsimd/cmake/JoinPaths.cmake" />
     <Text Include="../../thirdparty/owemdjee/xsimd/docs/Doxyfile" />
     <Text Include="../../thirdparty/owemdjee/xsimd/docs/Makefile" />
@@ -341,9 +386,22 @@
     <Text Include="../../thirdparty/owemdjee/xsimd/docs/source/vectorized_code.rst" />
     <Text Include="../../thirdparty/owemdjee/xsimd/docs/source/xsimd.svg" />
     <Text Include="../../thirdparty/owemdjee/xsimd/environment.yml" />
-    <Text Include="../../thirdparty/owemdjee/xsimd/examples/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/xsimd/install_sde.sh" />
     <Text Include="../../thirdparty/owemdjee/xsimd/readthedocs.yml" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/avx.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/avx2.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/check_inline_specifier.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/sse.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/sse2.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/sse3.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/sse4_1.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/sse4_2.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/ssse3.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/test_wasm/browser_main.html" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/test_wasm/test_wasm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/test_wasm/test_wasm_playwright.py" />
     <Text Include="../../thirdparty/owemdjee/xsimd/xsimd.pc.in" />
     <Text Include="../../thirdparty/owemdjee/xsimd/xsimdConfig.cmake.in" />
   </ItemGroup>
