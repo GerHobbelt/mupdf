@@ -127,7 +127,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../thirdparty/owemdjee/glog/src/windows;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLOG_NO_ABBREVIATED_SEVERITIES;BUILD_MONOLITHIC;BUILDING_LIBGLOG;GLOG_STATICLIB;GOOGLE_GLOG_DLL_DECL=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLOG_NO_ABBREVIATED_SEVERITIES;BUILD_MONOLITHIC;BUILDING_LIBGLOG;GLOG_STATICLIB;GLOG_STATIC_DEFINE;GLOG_USE_GLOG_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -154,7 +154,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../thirdparty/owemdjee/glog/src/windows;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLOG_NO_ABBREVIATED_SEVERITIES;BUILD_MONOLITHIC;BUILDING_LIBGLOG;GLOG_STATICLIB;GOOGLE_GLOG_DLL_DECL=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLOG_NO_ABBREVIATED_SEVERITIES;BUILD_MONOLITHIC;BUILDING_LIBGLOG;GLOG_STATICLIB;GLOG_STATIC_DEFINE;GLOG_USE_GLOG_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -184,7 +184,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../thirdparty/owemdjee/glog/src/windows;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLOG_NO_ABBREVIATED_SEVERITIES;BUILD_MONOLITHIC;BUILDING_LIBGLOG;GLOG_STATICLIB;GOOGLE_GLOG_DLL_DECL=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLOG_NO_ABBREVIATED_SEVERITIES;BUILD_MONOLITHIC;BUILDING_LIBGLOG;GLOG_STATICLIB;GLOG_STATIC_DEFINE;GLOG_USE_GLOG_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -211,7 +211,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../thirdparty/owemdjee/glog/src/windows;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLOG_NO_ABBREVIATED_SEVERITIES;BUILD_MONOLITHIC;BUILDING_LIBGLOG;GLOG_STATICLIB;GOOGLE_GLOG_DLL_DECL=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLOG_NO_ABBREVIATED_SEVERITIES;BUILD_MONOLITHIC;BUILDING_LIBGLOG;GLOG_STATICLIB;GLOG_STATIC_DEFINE;GLOG_USE_GLOG_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -248,7 +248,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/demangle.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/glog_statics_single_instance.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/raw_logging.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/signalhandler.cc" />

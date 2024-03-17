@@ -84,7 +84,7 @@
 
 #define GFLAGS_DLL_DECLARE_FLAG GOOGLE_GLOG_DLL_DECL
 
-#if defined(HAVE_LIB_GFLAGS)
+#if defined(GLOG_USE_GFLAGS)
 #include <gflags/gflags.h>
 #endif
 

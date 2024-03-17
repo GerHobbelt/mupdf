@@ -13,3 +13,5 @@ also-ignore:
 	/bazel/
 	/cmake/
 	
+	glog_statics_single_instance.cpp
+	
