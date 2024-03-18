@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{4166609B-8E91-4B93-B338-F75DC863C794}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTESSERACT;TESSERACT_STATICLIB;HAVE_TESSERACT_CONFIG_H;HAVE_MUPDF;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../scripts/tesseract;../../scripts/leptonica/include;../../thirdparty/tesseract/include;../../thirdparty/tesseract/src/api;../../thirdparty/tesseract/src/arch;../../thirdparty/tesseract/src/ccmain;../../thirdparty/tesseract/src/ccstruct;../../thirdparty/tesseract/src/ccutil;../../thirdparty/tesseract/src/classify;../../thirdparty/tesseract/src/dict;../../thirdparty/tesseract/src/lstm;../../thirdparty/tesseract/src/textord;../../thirdparty/tesseract/src/viewer;../../thirdparty/tesseract/src/wordrec;../../thirdparty/tesseract/src/cutil;../../thirdparty/tesseract/src/training/pango;../../thirdparty/tesseract/src/training/unicharset;../../thirdparty/libtiff/libtiff;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../scripts/libtiff;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pango;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/fontconfig;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../scripts/tesseract;../../scripts/leptonica/include;../../thirdparty/tesseract/include;../../thirdparty/tesseract/src/api;../../thirdparty/tesseract/src/arch;../../thirdparty/tesseract/src/ccmain;../../thirdparty/tesseract/src/ccstruct;../../thirdparty/tesseract/src/ccutil;../../thirdparty/tesseract/src/classify;../../thirdparty/tesseract/src/dict;../../thirdparty/tesseract/src/lstm;../../thirdparty/tesseract/src/textord;../../thirdparty/tesseract/src/viewer;../../thirdparty/tesseract/src/wordrec;../../thirdparty/tesseract/src/cutil;../../thirdparty/tesseract/src/training/pango;../../thirdparty/tesseract/src/training/unicharset;../../thirdparty/libtiff/libtiff;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../scripts/libtiff;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pango;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/fontconfig;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>
+      </Outputs>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <TreatOutputAsContent>
+      </TreatOutputAsContent>
+      <Inputs>
+      </Inputs>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>..\..\scripts\tesseract\copy-training-databases.cmd $(ProjectDir) $(OutDirFullPath)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Linking tesseract model data to $(OutDirFullPath)/tessdata/, etc.</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTESSERACT;TESSERACT_STATICLIB;HAVE_TESSERACT_CONFIG_H;HAVE_MUPDF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../scripts/tesseract;../../scripts/leptonica/include;../../thirdparty/tesseract/include;../../thirdparty/tesseract/src/api;../../thirdparty/tesseract/src/arch;../../thirdparty/tesseract/src/ccmain;../../thirdparty/tesseract/src/ccstruct;../../thirdparty/tesseract/src/ccutil;../../thirdparty/tesseract/src/classify;../../thirdparty/tesseract/src/dict;../../thirdparty/tesseract/src/lstm;../../thirdparty/tesseract/src/textord;../../thirdparty/tesseract/src/viewer;../../thirdparty/tesseract/src/wordrec;../../thirdparty/tesseract/src/cutil;../../thirdparty/tesseract/src/training/pango;../../thirdparty/tesseract/src/training/unicharset;../../thirdparty/libtiff/libtiff;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../scripts/libtiff;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pango;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/fontconfig;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../scripts/tesseract;../../scripts/leptonica/include;../../thirdparty/tesseract/include;../../thirdparty/tesseract/src/api;../../thirdparty/tesseract/src/arch;../../thirdparty/tesseract/src/ccmain;../../thirdparty/tesseract/src/ccstruct;../../thirdparty/tesseract/src/ccutil;../../thirdparty/tesseract/src/classify;../../thirdparty/tesseract/src/dict;../../thirdparty/tesseract/src/lstm;../../thirdparty/tesseract/src/textord;../../thirdparty/tesseract/src/viewer;../../thirdparty/tesseract/src/wordrec;../../thirdparty/tesseract/src/cutil;../../thirdparty/tesseract/src/training/pango;../../thirdparty/tesseract/src/training/unicharset;../../thirdparty/libtiff/libtiff;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../scripts/libtiff;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pango;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/fontconfig;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>
+      </Outputs>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <TreatOutputAsContent>
+      </TreatOutputAsContent>
+      <Inputs>
+      </Inputs>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>..\..\scripts\tesseract\copy-training-databases.cmd $(ProjectDir) $(OutDirFullPath)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Linking tesseract model data to $(OutDirFullPath)/tessdata/, etc.</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Custom</Optimization>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTESSERACT;TESSERACT_STATICLIB;HAVE_TESSERACT_CONFIG_H;HAVE_MUPDF;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../scripts/tesseract;../../scripts/leptonica/include;../../thirdparty/tesseract/include;../../thirdparty/tesseract/src/api;../../thirdparty/tesseract/src/arch;../../thirdparty/tesseract/src/ccmain;../../thirdparty/tesseract/src/ccstruct;../../thirdparty/tesseract/src/ccutil;../../thirdparty/tesseract/src/classify;../../thirdparty/tesseract/src/dict;../../thirdparty/tesseract/src/lstm;../../thirdparty/tesseract/src/textord;../../thirdparty/tesseract/src/viewer;../../thirdparty/tesseract/src/wordrec;../../thirdparty/tesseract/src/cutil;../../thirdparty/tesseract/src/training/pango;../../thirdparty/tesseract/src/training/unicharset;../../thirdparty/libtiff/libtiff;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../scripts/libtiff;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pango;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/fontconfig;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../scripts/tesseract;../../scripts/leptonica/include;../../thirdparty/tesseract/include;../../thirdparty/tesseract/src/api;../../thirdparty/tesseract/src/arch;../../thirdparty/tesseract/src/ccmain;../../thirdparty/tesseract/src/ccstruct;../../thirdparty/tesseract/src/ccutil;../../thirdparty/tesseract/src/classify;../../thirdparty/tesseract/src/dict;../../thirdparty/tesseract/src/lstm;../../thirdparty/tesseract/src/textord;../../thirdparty/tesseract/src/viewer;../../thirdparty/tesseract/src/wordrec;../../thirdparty/tesseract/src/cutil;../../thirdparty/tesseract/src/training/pango;../../thirdparty/tesseract/src/training/unicharset;../../thirdparty/libtiff/libtiff;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../scripts/libtiff;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pango;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/fontconfig;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>
+      </Outputs>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <TreatOutputAsContent>
+      </TreatOutputAsContent>
+      <Inputs>
+      </Inputs>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>..\..\scripts\tesseract\copy-training-databases.cmd $(ProjectDir) $(OutDirFullPath)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Linking tesseract model data to $(OutDirFullPath)/tessdata/, etc.</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTESSERACT;TESSERACT_STATICLIB;HAVE_TESSERACT_CONFIG_H;HAVE_MUPDF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../scripts/tesseract;../../scripts/leptonica/include;../../thirdparty/tesseract/include;../../thirdparty/tesseract/src/api;../../thirdparty/tesseract/src/arch;../../thirdparty/tesseract/src/ccmain;../../thirdparty/tesseract/src/ccstruct;../../thirdparty/tesseract/src/ccutil;../../thirdparty/tesseract/src/classify;../../thirdparty/tesseract/src/dict;../../thirdparty/tesseract/src/lstm;../../thirdparty/tesseract/src/textord;../../thirdparty/tesseract/src/viewer;../../thirdparty/tesseract/src/wordrec;../../thirdparty/tesseract/src/cutil;../../thirdparty/tesseract/src/training/pango;../../thirdparty/tesseract/src/training/unicharset;../../thirdparty/libtiff/libtiff;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../scripts/libtiff;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pango;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/fontconfig;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../scripts/tesseract;../../scripts/leptonica/include;../../thirdparty/tesseract/include;../../thirdparty/tesseract/src/api;../../thirdparty/tesseract/src/arch;../../thirdparty/tesseract/src/ccmain;../../thirdparty/tesseract/src/ccstruct;../../thirdparty/tesseract/src/ccutil;../../thirdparty/tesseract/src/classify;../../thirdparty/tesseract/src/dict;../../thirdparty/tesseract/src/lstm;../../thirdparty/tesseract/src/textord;../../thirdparty/tesseract/src/viewer;../../thirdparty/tesseract/src/wordrec;../../thirdparty/tesseract/src/cutil;../../thirdparty/tesseract/src/training/pango;../../thirdparty/tesseract/src/training/unicharset;../../thirdparty/libtiff/libtiff;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../scripts/libtiff;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pango;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/fontconfig;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>
+      </Outputs>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <TreatOutputAsContent>
+      </TreatOutputAsContent>
+      <Inputs>
+      </Inputs>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>..\..\scripts\tesseract\copy-training-databases.cmd $(ProjectDir) $(OutDirFullPath)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Linking tesseract model data to $(OutDirFullPath)/tessdata/, etc.</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/tessdoc/examples/Basic_example.cc" />
+    <ClCompile Include="../../thirdparty/tessdoc/examples/GetComponentImages_example.cc" />
+    <ClCompile Include="../../thirdparty/tessdoc/examples/LSTM_Choices_example.cc" />
+    <ClCompile Include="../../thirdparty/tessdoc/examples/OSD_example.cc" />
+    <ClCompile Include="../../thirdparty/tessdoc/examples/OpenCV_example.cc" />
+    <ClCompile Include="../../thirdparty/tessdoc/examples/ResultIterator_example.cc" />
+    <ClCompile Include="../../thirdparty/tessdoc/examples/SetRectangle_example.cc" />
+    <ClCompile Include="../../thirdparty/tessdoc/examples/UserPatterns_example.cc" />
+    <ClInclude Include="../../thirdparty/tessdoc/examples/monolithic_examples.h" />
+    <Image Include="../../thirdparty/tessdoc/examples/choices.png" />
+    <Image Include="../../thirdparty/tessdoc/examples/devatest-rotated-270.png" />
+    <Image Include="../../thirdparty/tessdoc/images/2col.png" />
+    <Image Include="../../thirdparty/tessdoc/images/Erosion_applied.png" />
+    <Image Include="../../thirdparty/tessdoc/images/Erosion_original.png" />
+    <Image Include="../../thirdparty/tessdoc/images/api_abi_changes.png" />
+    <Image Include="../../thirdparty/tessdoc/images/bilingual.png" />
+    <Image Include="../../thirdparty/tessdoc/images/binarisation.png" />
+    <Image Include="../../thirdparty/tessdoc/images/borders.png" />
+    <Image Include="../../thirdparty/tessdoc/images/eurotext.png" />
+    <Image Include="../../thirdparty/tessdoc/images/noise.png" />
+    <Image Include="../../thirdparty/tessdoc/images/skew-linedetection.png" />
+    <Image Include="../../thirdparty/tessdoc/images/tesseract_debug.png" />
+    <Image Include="../../thirdparty/tessdoc/images/toc.png" />
+    <Text Include="../../thirdparty/tessdoc/404.html" />
+    <Text Include="../../thirdparty/tessdoc/APIExample-user_patterns.md" />
+    <Text Include="../../thirdparty/tessdoc/APIExample.md" />
+    <Text Include="../../thirdparty/tessdoc/AddOns.md" />
+    <Text Include="../../thirdparty/tessdoc/Benchmarks.md" />
+    <Text Include="../../thirdparty/tessdoc/Command-Line-Usage.md" />
+    <Text Include="../../thirdparty/tessdoc/Common-Errors-and-Resolutions.md" />
+    <Text Include="../../thirdparty/tessdoc/Compiling-–-GitInstallation.md" />
+    <Text Include="../../thirdparty/tessdoc/Compiling.md" />
+    <Text Include="../../thirdparty/tessdoc/Data-Files-Contributions.md" />
+    <Text Include="../../thirdparty/tessdoc/Data-Files-in-different-versions.md" />
+    <Text Include="../../thirdparty/tessdoc/Data-Files-in-tessdata_best.md" />
+    <Text Include="../../thirdparty/tessdoc/Data-Files-in-tessdata_fast.md" />
+    <Text Include="../../thirdparty/tessdoc/Data-Files.md" />
+    <Text Include="../../thirdparty/tessdoc/Docker-Containers.md" />
+    <Text Include="../../thirdparty/tessdoc/Documentation.md" />
+    <Text Include="../../thirdparty/tessdoc/Downloads.md" />
+    <Text Include="../../thirdparty/tessdoc/Examples_C++.md" />
+    <Text Include="../../thirdparty/tessdoc/FAQ.md" />
+    <Text Include="../../thirdparty/tessdoc/Fonts.md" />
+    <Text Include="../../thirdparty/tessdoc/Home.md" />
+    <Text Include="../../thirdparty/tessdoc/ImproveQuality.md" />
+    <Text Include="../../thirdparty/tessdoc/InputFormats.md" />
+    <Text Include="../../thirdparty/tessdoc/Installation.md" />
+    <Text Include="../../thirdparty/tessdoc/InstallationOpenSuse.md" />
+    <Text Include="../../thirdparty/tessdoc/OldVersionDocs.md" />
+    <Text Include="../../thirdparty/tessdoc/Planning.md" />
+    <Text Include="../../thirdparty/tessdoc/README.md" />
+    <Text Include="../../thirdparty/tessdoc/ReleaseNotes.md" />
+    <Text Include="../../thirdparty/tessdoc/ScrollView.jar" />
+    <Text Include="../../thirdparty/tessdoc/TesseractOpenCL.md" />
+    <Text Include="../../thirdparty/tessdoc/TestingTesseract.md" />
+    <Text Include="../../thirdparty/tessdoc/UNLV-Testing-of-Tesseract.md" />
+    <Text Include="../../thirdparty/tessdoc/User-App-Example.md" />
+    <Text Include="../../thirdparty/tessdoc/User-Projects-–-3rdParty.md" />
+    <Text Include="../../thirdparty/tessdoc/ViewerDebugging.md" />
+    <Text Include="../../thirdparty/tessdoc/_config.yml" />
+    <Text Include="../../thirdparty/tessdoc/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/tessdoc/examples/phototest.tif" />
+    <Text Include="../../thirdparty/tessdoc/images/toc.pdf" />
+    <Text Include="../../thirdparty/tessdoc/tess3/ControlParams.md" />
+    <Text Include="../../thirdparty/tessdoc/tess3/Data-Files.md" />
+    <Text Include="../../thirdparty/tessdoc/tess3/FAQ-Old.md" />
+    <Text Include="../../thirdparty/tessdoc/tess3/Technical-Documentation.md" />
+    <Text Include="../../thirdparty/tessdoc/tess3/Training-Tesseract-3.00–3.02.md" />
+    <Text Include="../../thirdparty/tessdoc/tess3/Training-Tesseract-3.03–3.05.md" />
+    <Text Include="../../thirdparty/tessdoc/tess3/Training-Tesseract-–-Make-Box-Files.md" />
+    <Text Include="../../thirdparty/tessdoc/tess3/Training-Tesseract-–-tesstrain.sh.md" />
+    <Text Include="../../thirdparty/tessdoc/tess3/TrainingTesseract2.md" />
+    <Text Include="../../thirdparty/tessdoc/tess4/4.0-Accuracy-and-Performance.md" />
+    <Text Include="../../thirdparty/tessdoc/tess4/4.0x-Changelog.md" />
+    <Text Include="../../thirdparty/tessdoc/tess4/Make-Box-Files.md" />
+    <Text Include="../../thirdparty/tessdoc/tess4/NeuralNetsInTesseract4.00.md" />
+    <Text Include="../../thirdparty/tessdoc/tess4/The-Hallucination-Effect.md" />
+    <Text Include="../../thirdparty/tessdoc/tess4/TrainingTesseract-4.00---Finetune.md" />
+    <Text Include="../../thirdparty/tessdoc/tess4/TrainingTesseract-4.00.md" />
+    <Text Include="../../thirdparty/tessdoc/tess4/VGSLSpecs.md" />
+    <Text Include="../../thirdparty/tessdoc/tess5/TrainingTesseract-5.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
