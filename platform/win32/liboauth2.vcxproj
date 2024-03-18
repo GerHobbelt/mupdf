@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libfilesystem</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF38A587}</ProjectGuid>
-    <RootNamespace>libfilesystem</RootNamespace>
+    <ProjectName>liboauth2</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF023F36}</ProjectGuid>
+    <RootNamespace>liboauth2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -116,7 +116,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOAUTH2;OAUTH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOAUTH2;OAUTH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOAUTH2;OAUTH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -144,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOAUTH2;OAUTH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -152,15 +152,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOAUTH2;OAUTH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOAUTH2;OAUTH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -171,7 +171,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOAUTH2;OAUTH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOAUTH2;OAUTH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOAUTH2;OAUTH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -199,7 +199,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOAUTH2;OAUTH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -207,15 +207,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOAUTH2;OAUTH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOAUTH2;OAUTH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -228,21 +228,89 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/examples/dir.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/examples/du.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/examples/monolithic_examples.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/filesystem.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_std.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_std_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_std_impl.hpp" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/LICENSE" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/README.md" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/cmake/GhcHelper.cmake" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/cmake/config.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/examples/CMakeLists.txt" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cache/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cache/memcache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cache/redis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cache/shm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cfg/auth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cfg/cache_cfg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cfg/cfg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cfg/openidc_cfg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cfg/proto_cfg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cfg/session_cfg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cfg/source.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cfg/target.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/cfg/verify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/dpop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/http.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/ipc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/jose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/oauth2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/openidc/client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/openidc/openidc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/openidc/provider.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/openidc/resolver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/openidc/state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/proto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/server/apache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/server/nginx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/session.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/src/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_apache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_cfg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_http.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_ipc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_jose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_liboauth2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_nginx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_oauth2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_openidc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_proto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/check_version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/liboauth2/test/server_stubs.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/apache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/cfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/http.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/ipc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/jose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/nginx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/oauth2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/openidc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/proto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/src/cache_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/src/cfg_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/src/jose_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/src/oauth2_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/src/openidc_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/src/util_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/liboauth2/test/check_liboauth2.h" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/include/oauth2/version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/liboauth2.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/liboauth2_apache.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/liboauth2_nginx.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/m4/ax_code_coverage.m4" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/test/client.json" />
+    <Text Include="../../thirdparty/owemdjee/liboauth2/test/provider.json" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

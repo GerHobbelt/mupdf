@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libminiscript</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA5858E}</ProjectGuid>
+    <RootNamespace>libminiscript</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINISCRIPT;MINISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINISCRIPT;MINISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINISCRIPT;MINISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINISCRIPT;MINISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINISCRIPT;MINISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINISCRIPT;MINISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINISCRIPT;MINISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINISCRIPT;MINISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINISCRIPT;MINISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINISCRIPT;MINISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINISCRIPT;MINISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINISCRIPT;MINISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/DateTimeUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/Dictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/List.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptInterpreter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptIntrinsics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptKeywords.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptTAC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptTypes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/QA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/SimpleString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/SimpleVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/SplitJoin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/UnicodeUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/UnitTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/OstreamSupport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/ShellExec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/ShellIntrinsics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/editline/complete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/editline/editline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/editline/sysunix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/whereami/whereami.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/DateTimeUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/Dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/List.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptErrors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptInterpreter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptIntrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptKeywords.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptTAC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/MiniscriptTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/QA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/RefCountedStorage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/SimpleString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/SimpleVector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/SplitJoin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/UnicodeUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/MiniScript/UnitTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/OstreamSupport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/ShellExec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/ShellIntrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/editline/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/editline/editline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/editline/editline_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/editline/unix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/whereami/whereami.h" />
+    <Image Include="../../thirdparty/owemdjee/miniscript/Icon.png" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/FUNDING.yml" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-Release-Notes.txt" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/demo/acey-deucey.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/demo/countdown.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/demo/dogYears.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/demo/superstartrek.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/demo/textAdventure.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/demo/therapist.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/lib/dateTime.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/lib/grfon.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/lib/importUtil.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/lib/json.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/lib/listUtil.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/lib/mapUtil.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/lib/mathUtil.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/lib/matrixUtil.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/lib/qa.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/lib/stringUtil.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/lib/tsv.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/lib/vt.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/editline/README.md" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/whereami/LICENSE.WTFPLv2" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/src/whereami/SOURCE.txt" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cpp/test.ms" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cs/Miniscript.cs" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cs/Miniscript.userprefs" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cs/MiniscriptErrors.cs" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cs/MiniscriptInterpreter.cs" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cs/MiniscriptIntrinsics.cs" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cs/MiniscriptKeywords.cs" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cs/MiniscriptLexer.cs" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cs/MiniscriptParser.cs" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cs/MiniscriptTAC.cs" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cs/MiniscriptTypes.cs" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cs/MiniscriptUnitTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/MiniScript-cs/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/QuickRef.md" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/README.md" />
+    <Text Include="../../thirdparty/owemdjee/miniscript/TestSuite.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

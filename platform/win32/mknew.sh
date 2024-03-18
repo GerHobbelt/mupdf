@@ -1094,6 +1094,7 @@ miniscript
 libkra
 cjose
 liboauth2
+fnmatch
 
 EOT
 )

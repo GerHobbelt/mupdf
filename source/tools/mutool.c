@@ -63,6 +63,8 @@
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
 #include "../../thirdparty/lcms2/include/monolithic_examples.h"
 #include "../../thirdparty/leptonica/prog/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/filesystem/examples/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/glob/standalone/source/monolithic_examples.h"
 #include "../../source/fitz/tessocr.h"
 #include "../../thirdparty/gumbo-parser/src/gumbo.h"
 #undef BUILD_MONOLITHIC
@@ -825,6 +827,15 @@ static struct tool_spec {
 	{ {.fa = libbf_bench_main }, "bf_bench", "libbf benchmark tool" },
 	{ {.fa = libbf_test_main }, "bf_test", "libbf test tool" },
 	{ {.fa = libbf_tinypi_main }, "bf_tinypi", "libbf tiny PI demo" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = fs_dir_main }, "dir", "fs::dir tool" },
+	{ {.fa = fs_du_main }, "du", "fs::du tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = glob_standalone_main }, "glob", "fs::glob tool" },
 #endif
 
 #if defined(MUTOOL_EX)

@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libfilesystem</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF38A587}</ProjectGuid>
-    <RootNamespace>libfilesystem</RootNamespace>
+    <ProjectName>libcjose</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7D3BAC}</ProjectGuid>
+    <RootNamespace>libcjose</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -116,7 +116,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCJOSE;CJOSE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCJOSE;CJOSE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCJOSE;CJOSE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -144,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCJOSE;CJOSE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -152,15 +152,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCJOSE;CJOSE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCJOSE;CJOSE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -171,7 +171,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCJOSE;CJOSE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCJOSE;CJOSE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCJOSE;CJOSE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -199,7 +199,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCJOSE;CJOSE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -207,15 +207,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCJOSE;CJOSE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCJOSE;CJOSE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -228,21 +228,89 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/examples/dir.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/examples/du.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/examples/monolithic_examples.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/filesystem.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_std.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_std_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_std_impl.hpp" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/LICENSE" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/README.md" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/cmake/GhcHelper.cmake" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/cmake/config.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/examples/CMakeLists.txt" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/src/base64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/src/concatkdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/src/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/src/header.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/src/jwe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/src/jwk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/src/jws.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/src/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/src/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/test/check_base64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/test/check_cjose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/test/check_concatkdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/test/check_header.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/test/check_jwe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/test/check_jwk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/test/check_jws.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/test/check_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cjose/test/check_version.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/include/cjose/base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/include/cjose/cjose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/include/cjose/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/include/cjose/header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/include/cjose/jwe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/include/cjose/jwk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/include/cjose/jws.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/include/cjose/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/src/include/concatkdf_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/src/include/header_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/src/include/jwe_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/src/include/jwk_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/src/include/jws_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/src/include/util_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cjose/test/check_cjose.h" />
+    <Text Include="../../thirdparty/owemdjee/cjose/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/cjose/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/cjose/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/cjose/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cjose/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cjose/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/cjose/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cjose/aclocal.m4" />
+    <Text Include="../../thirdparty/owemdjee/cjose/cjose.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/cjose/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/cjose/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/cjose/doc/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/cjose/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cjose/doc/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/cjose/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cjose/include/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/cjose/include/cjose/version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/cjose/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/cjose/m4/doxygen.m4" />
+    <Text Include="../../thirdparty/owemdjee/cjose/m4/libtool.m4" />
+    <Text Include="../../thirdparty/owemdjee/cjose/m4/ltoptions.m4" />
+    <Text Include="../../thirdparty/owemdjee/cjose/m4/ltsugar.m4" />
+    <Text Include="../../thirdparty/owemdjee/cjose/m4/ltversion.m4" />
+    <Text Include="../../thirdparty/owemdjee/cjose/m4/lt~obsolete.m4" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/centos/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/centos/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/centos/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/centos/centos-6.x86_64.dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/centos/centos-7.x86_64.dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/centos/cjose.spec" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/centos/fedora-24.x86_64.dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/centos/prepare.sh" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/debian/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/debian/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/debian/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/debian/debian-jessie.armhf.dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/debian/debian-jessie.x86_64.dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/debian/debian-wheezy.x86_64.dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/debian/debian/changelog.in" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/debian/debian/libcjose-dev.install" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/debian/debian/libcjose0.install" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/debian/prepare.sh" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/debian/ubuntu-trusty.x86_64.dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/cjose/platform/debian/ubuntu-xenial.x86_64.dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/cjose/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cjose/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/cjose/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cjose/test/Makefile.in" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
