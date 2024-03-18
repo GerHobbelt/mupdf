@@ -55,7 +55,7 @@
 #include "../../thirdparty/owemdjee/tesslinesplit/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/uchardet/src/tools/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/tvision/include/tvision/monolithic_examples.h"
-#include "../../thirdparty/owemdjee/cpp-terminal/examples/monolithic_examples.h"
+//#include "../../thirdparty/owemdjee/cpp-terminal/examples/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libbf/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libcsv2/include/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/nanosvg/example/monolithic_examples.h"
@@ -65,6 +65,8 @@
 #include "../../thirdparty/leptonica/prog/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/filesystem/examples/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/glob/standalone/source/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/xsimd/examples/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/dirent/examples/monolithic_examples.h"
 #include "../../source/fitz/tessocr.h"
 #include "../../thirdparty/gumbo-parser/src/gumbo.h"
 #undef BUILD_MONOLITHIC
@@ -646,6 +648,16 @@ static struct tool_spec {
 	{ {.fa = qjs_main }, "qjs", "qjs (QuickJS) tool" },
 	{ {.fa = qjsc_main }, "qjsc", "qjsc (QuickJS Compiler) tool" },
 #endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = qjs_main }, "qjs", "qjs (QuickJS) tool" },
+	{ {.fa = qjsc_main }, "qjsc", "qjsc (QuickJS Compiler) tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = pthw32_all_tests_main }, "pthw32_all_tests", "pthred-win32 test runner tool" },
+#endif
+	
 #if defined(MUTOOL_EX)
 	{ {.fa = qjsd_main }, "qjsd", "qjsd (Execute compiled QuickJS function / binary code blob) tool" },
 	{ {.fa = qjscompress_main }, "qjscompress", "qjscompress tool" },
@@ -687,6 +699,11 @@ static struct tool_spec {
 
 #if defined(MUTOOL_EX)
 	{ {.fa = brotli_main }, "brotli", "brotli tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = xsimd_benchmark_main }, "xsimd_benchmark", "xsimd benchmark tool" },
+	{ {.f = xsimd_sample_mandelbrot_main }, "xsimd_sample_mandelbrot", "xsimd xsimd mandelbrot example" },
 #endif
 
 #if defined(MUTOOL_EX)
@@ -800,6 +817,7 @@ static struct tool_spec {
 	{ {.fa = gumbo_print_main }, "gumbo_print", "gumbo print demo/test/tool" },
 #endif
 
+#if 0 
 #if defined(MUTOOL_EX)
 	{ {.f = cppterminal_args_example_main }, "cppterm_args", "cpp-terminal args demo" },
 	{ {.f = cppterminal_attach_console_example_main }, "cppterm_attach_console", "cpp-terminal attach_console demo" },
@@ -822,6 +840,7 @@ static struct tool_spec {
 	{ {.f = cppterminal_styles_example_main }, "cppterm_styles", "cpp-terminal styles demo" },
 	{ {.f = cppterminal_utf8_example_main }, "cppterm_utf8", "cpp-terminal utf8 demo" },
 #endif
+#endif
 
 #if defined(MUTOOL_EX)
 	{ {.fa = libbf_bench_main }, "bf_bench", "libbf benchmark tool" },
@@ -836,6 +855,47 @@ static struct tool_spec {
 
 #if defined(MUTOOL_EX)
 	{ {.fa = glob_standalone_main }, "glob", "fs::glob tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = dirent_cat_main }, "dirent_cat", "dirent:cat example" },
+	{ {.fa = dirent_dir_main }, "dirent_dir", "dirent:dir example" },
+	{ {.fa = dirent_du_main }, "dirent_du", "dirent:du example" },
+	{ {.fa = dirent_example_lookup_main }, "dirent_example_lookup", "dirent:example_lookup example" },
+	{ {.fa = dirent_find_main }, "dirent_find", "dirent:find example" },
+	{ {.fa = dirent_ls_main }, "dirent_ls", "dirent:ls example" },
+	{ {.fa = dirent_scandir_main }, "dirent_scandir", "dirent:scandir example" },
+	{ {.fa = dirent_updatedb_main }, "dirent_updatedb", "dirent:updatedb example" },
+
+	{ {.f = dirent_compile_test_main }, "dirent_compile_test", "dirent: compile test" },
+	{ {.f = dirent_cpp_test_main }, "dirent_cpp_test", "dirent: cpp test" },
+	{ {.f = dirent_dirent_test_main }, "dirent_dirent_test", "dirent: dirent test" },
+	{ {.f = dirent_scandir_test_main }, "dirent_scandir_test", "dirent: scandir test" },
+	{ {.f = dirent_strverscmp_test_main }, "dirent_strverscmp_test", "dirent: strverscmp test" },
+	{ {.f = dirent_telldir_test_main }, "dirent_telldir_test", "dirent: telldir test" },
+	{ {.f = dirent_unicode_test_main }, "dirent_unicode_test", "dirent: unicode test" },
+	{ {.f = dirent_utf8_test_main }, "dirent_utf8_test", "dirent: utf8 test" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.f = crow_example_basic_main }, "crow_basic", "crow example: basic" },
+	{ {.f = crow_example_catch_all_main }, "crow_catch_all", "crow example: catch_all" },
+	{ {.f = crow_example_chat_main }, "crow_chat", "crow example: chat" },
+	{ {.f = crow_example_compression_main }, "crow_compression", "crow example: compression" },
+	{ {.f = crow_example_json_map_main }, "crow_json_map", "crow example: json_map" },
+	{ {.f = crow_example_static_file_main }, "crow_static_file", "crow example: static_file" },
+	{ {.f = crow_example_vs_main }, "crow_vs", "crow example: vs" },
+	{ {.f = crow_example_with_all_main }, "crow_with_all", "crow example: with_all" },
+	{ {.f = crow_hello_world_main }, "crow_hello_world", "crow example: hello_world" },
+	{ {.f = crow_example_ssl_main }, "crow_ssl", "crow example: ssl" },
+	{ {.f = crow_example_ws_main }, "crow_ws", "crow example: ws" },
+	{ {.f = crow_mustache_main }, "crow_mustache", "crow example: mustache" },
+	{ {.f = crow_example_blueprint_main }, "crow_blueprint", "crow example: blueprint" },
+	{ {.f = crow_example_middleware_main }, "crow_middleware", "crow example: middleware" },
+	{ {.f = crow_test_multi_file_main }, "crow_multi_file", "crow example/test: multi_file" },
+	{ {.f = crow_test_external_definition_main }, "crow_external_definition", "crow example/test: external_definition" },
+	{ {.f = crow_example_session_main }, "crow_session", "crow example: session" },
+	{ {.f = crow_example_file_upload_main }, "crow_file_upload", "crow example: file_upload" },
 #endif
 
 #if defined(MUTOOL_EX)
