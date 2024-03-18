@@ -41,7 +41,9 @@
     + Align data to 4-byte boundaries when generating for arm64.
  */
 
+#ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
+#endif
 
 #include <stdio.h>
 #include <string.h>
