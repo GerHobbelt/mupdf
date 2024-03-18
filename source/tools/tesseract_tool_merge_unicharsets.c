@@ -11,15 +11,11 @@
 #include <string.h>
 #include <stdio.h>
 
-#if defined(BUILD_MONOLITHIC)
-#define main tesseract_merge_unicharsets_maintool_main
-#else
 #ifdef _MSC_VER
 #define main mainutf8
 #endif
-#endif
 
-#if !defined(BUILD_MONOLITHIC) && defined(_MSC_VER)
+#if defined(_MSC_VER)
 
 int main(int argc, const char** argv);
 
