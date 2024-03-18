@@ -377,7 +377,7 @@ spec.ignores = spec.ignores
     return re;
 });
 
-if (DEBUG >= 1 || true) console.error({spec})
+if (DEBUG >= 1) console.error({spec})
 
 
 
@@ -396,7 +396,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
       for (const sp of spec.ignores) {
         if (DEBUG > 2) console.log('??IGNORE??:', {f, f4f, sp, DO_IGNORE: sp.test(f4f)});
         if (sp.test(f4f)) {
-          if (DEBUG > 1 || true) console.log('IGNORE:', {f, f4f, sp});
+          if (DEBUG > 1) console.log('IGNORE:', {f, f4f, sp});
           ignoreCount++;
           return false;
         }
