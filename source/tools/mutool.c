@@ -999,7 +999,7 @@ namematch_partial(const char *end, const char *start, const char *match)
 			// higher: smaller part of entire command --> 1.0 - (w / len)    == (len - w) / len
 			//
 			// calculated in integer arithmetic (fixed point values: decimal point is at bit 4, i.e. factor 16)
-			int score = (1 + i) * 16 * (len - w);
+			int score = (1 + i) + 16 * (len - w);
 			// ROUND-UP while dividing so we'll be sure never to hit zero as a score value:
 			score = (score + len - 1) / len;
 			if (best_match_score == 0 || score < best_match_score)
@@ -1009,6 +1009,98 @@ namematch_partial(const char *end, const char *start, const char *match)
 
 	return best_match_score;
 }
+
+// Calculate a metric similar to an edit distance. Better is closer to zero.
+// Returned value is always greater than 1(one).
+//
+// BTW: w applies to s1.
+static int str_approx_match(const char* s1, const char* s2, int w)
+{
+	int score = 2; // just a value for when w == 0
+	for (; w > 0 && *s1 && *s2; w--)
+	{
+		if (tolower(*s1) == tolower(*s2))
+		{
+			// match for this char. Do not worsen the score.
+			score++;
+			s1++;
+			s2++;
+			continue;
+		}
+
+		// edit-dist like check: can we match next char, or can next char match us?
+		int sc1 = 0;
+		int sc2 = 0;
+		if (tolower(*s1) == tolower(s2[1]))
+		{
+			sc1 = str_approx_match(s1 + 1, s2 + 2, w - 1);
+		}
+		if (tolower(s1[1]) == tolower(*s2))
+		{
+			sc2 = 1 + str_approx_match(s1 + 2, s2 + 1, w - 2);
+		}
+		// if skip, pick the best score.
+		// no skip? Then this is worse: ignore char.
+		int scbest = 1 + str_approx_match(s1 + 1, s2 + 1, w - 1);
+		if (sc1 > 0 && sc1 < scbest)
+		{
+			scbest = sc1;
+		}
+		if (sc2 > 0 && sc2 < scbest)
+		{
+			scbest = sc2;
+		}
+		w = 0;
+		score += scbest;
+		break;
+	}
+
+	// did we process the entire snippet or did we hit the EOS wall?
+	score += 3 * w;
+	return score;
+}
+
+static int
+namematch_partial_approx(const char* end, const char* start, const char* match)
+{
+	if (!start)
+		return 0;
+	int len = (int)strlen(match);
+	int w = (int)(end - start);
+	if (w >= len)
+		return 0;
+
+	// viability factor: 
+	// 0 = no match at all
+	// >0 = partial match. Smaller value means better ~ partial has been found closer to the start of the name and is a bigger part of the entire name.
+	int best_match_score = 0;
+	for (int i = 0; i <= len - w; i++)
+	{
+		int approx = str_approx_match(start, match + i, w);
+		if (approx < 3 + 2 * w)
+		{
+			// same score calculus as above, but with the added factor that this one is an INEXACT MATCH:
+			// higher score is worse.
+			// higher: more deviation / less near to current snippet --> score: approx
+			// i.e. score is a factor of the cost per character, 1 for optimal.
+			//
+			// ~~higher: more distant from command start/prefix --> score: 1 + i~~
+			// higher: smaller part of entire command --> 1.0 - (w / len)    == (len - w) / len
+			//
+			// calculated in integer arithmetic (fixed point values: decimal point is at bit 4, i.e. factor 16)
+			int score = 121 + 16 * (len - w) * approx;
+			// ROUND-UP while dividing so we'll be sure never to hit zero as a score value:
+			score = (score + len - 1) / len;
+			if (score > 81)
+				continue;
+			if (best_match_score == 0 || score < best_match_score)
+				best_match_score = score;
+		}
+	}
+
+	return best_match_score;
+}
+
 
 static int
 report_version(int argc, const char** argv)
@@ -1362,7 +1454,21 @@ static struct found_t find_approx_and_exec_tool(const char *start, const char *e
 		};
 		return rv;
 	}
-	
+
+	for (int i = 0; i < (int)nelem(tools); i++)
+	{
+		int viability = namematch_partial_approx(end, start, tools[i].name);
+		if (viability > 0 && (ambuous_name_set[i].score == 0 || viability < ambuous_name_set[i].score))
+		{
+			ambuous_name_set[i].score = viability;
+		}
+		if (viability > 0)
+		{
+			match_count++;
+			last_match_index = i;
+		}
+	}
+
 	struct found_t rv = {
 		FALSE,
 		-1
