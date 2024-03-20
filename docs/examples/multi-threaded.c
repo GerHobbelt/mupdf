@@ -343,7 +343,7 @@ int main(int argc, const char** argv)
 
 int main(int argc, const char** argv)
 {
-	fprintf(stderr, "%s: this tool is not supported in this build (multithreading has been disabled)\n", argv[0]);
+	fprintf(stderr, "%s: this tool is not supported in this build (multithreading has been disabled)\n", fz_basename(argv[0]));
 	return 1;
 }
 
