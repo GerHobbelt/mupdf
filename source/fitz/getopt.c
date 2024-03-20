@@ -16,9 +16,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "mupdf/fitz/getopt.h"
-#include "mupdf/fitz/string-util.h"
-
 const char *fz_optarg = NULL;    /* Global argument pointer. */
 int fz_optind = 0;               /* Global argv index. */
 static int fz_optlen = 0;        /* Option length. */
