@@ -1101,6 +1101,23 @@ fz_dash_moveto(fz_context *ctx, struct sctx *s, float x, float y)
 	}
 }
 
+/*
+	Performs: a += (b-a) * i/n
+	allowing for FP inaccuracies that can cause a to "overrun" b.
+*/
+static float advance(float a, float b, float i, float n)
+{
+	float d = b - a;
+	float target = a + d * i/n;
+
+	if (d < 0 && target < b)
+		target = b;
+	else if (d > 0 && target > b)
+		target = b;
+
+	return target;
+}
+
 static void
 fz_dash_lineto(fz_context *ctx, struct sctx *s, float bx, float by, int from_bezier)
 {
@@ -1149,7 +1166,7 @@ fz_dash_lineto(fz_context *ctx, struct sctx *s, float bx, float by, int from_bez
 a_moved_horizontally:	/* d and dx have the same sign */
 		assert((d > 0 && dx > 0) || (d < 0 && dx < 0));
 		assert(dx != 0);
-		ay += dy * d/dx;
+		ay = advance(ay, by, d, dx);
 		used = total * d/dx;
 		total -= used;
 		dx = bx - ax;
@@ -1183,7 +1200,7 @@ a_moved_horizontally:	/* d and dx have the same sign */
 a_moved_vertically:	/* d and dy have the same sign */
 		assert((d > 0 && dy > 0) || (d < 0 && dy < 0));
 		assert(dy != 0);
-		ax += dx * d/dy;
+		ax = advance(ax, bx, d, dy);
 		d = total * d/dy;
 		total -= d;
 		used += d;
@@ -1250,7 +1267,7 @@ a_moved_vertically:	/* d and dy have the same sign */
 b_moved_horizontally:	/* d and dx have the same sign */
 		assert((d > 0 && dx > 0) || (d < 0 && dx < 0));
 		assert(dx != 0);
-		by -= dy * d/dx;
+		by = advance(by, ay, -d, dx);
 		tail = total * d/dx;
 		total -= tail;
 		dx = bx - ax;
@@ -1277,7 +1294,7 @@ b_moved_horizontally:	/* d and dx have the same sign */
 b_moved_vertically:	/* d and dy have the same sign */
 		assert((d > 0 && dy > 0) || (d < 0 && dy < 0));
 		assert(dy != 0);
-		bx -= dx * d/dy;
+		bx = advance(bx, ax, -d, dy);
 		t = total * d/dy;
 		tail += t;
 		total -= t;
