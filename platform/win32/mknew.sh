@@ -1095,6 +1095,7 @@ libkra
 cjose
 liboauth2
 fnmatch
+text-wrangler
 
 EOT
 )
@@ -1153,6 +1154,7 @@ cryptest
 gperf
 manticore
 png-pmt-tools
+text-wrangler
 
 EOT
 )

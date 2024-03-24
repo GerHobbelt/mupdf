@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libvcopy_tests</ProjectName>
+    <ProjectGuid>{5A7C1B31-1EB5-4F0C-8873-355E5EE2FE16}</ProjectGuid>
+    <RootNamespace>libvcopy_tests</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVCOPY_TESTS;VCOPY_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVCOPY_TESTS;VCOPY_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVCOPY_TESTS;VCOPY_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVCOPY_TESTS;VCOPY_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVCOPY_TESTS;VCOPY_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVCOPY_TESTS;VCOPY_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVCOPY_TESTS;VCOPY_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVCOPY_TESTS;VCOPY_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVCOPY_TESTS;VCOPY_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVCOPY_TESTS;VCOPY_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVCOPY_TESTS;VCOPY_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVCOPY_TESTS;VCOPY_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/b2sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/basename.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/basenc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/cat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/chcon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/chgrp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/chmod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/chown.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/chroot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/cksum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/comm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/coreutils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/cp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/csplit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/cut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/date.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/dd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/df.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/dircolors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/dirname.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/du.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/echo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/env.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/expand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/expr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/factor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/false.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/fmt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/fold.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/groups.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/head.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/hostid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/hostname.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/id.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/install.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/join.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/kill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/link.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/ln.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/logname.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/ls.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/md5sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/mkdir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/mkfifo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/mknod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/mktemp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/mv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/nice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/nl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/nohup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/nproc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/numfmt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/od.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/paste.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/pathchk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/pinky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/pr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/printenv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/printf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/ptx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/pwd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/readlink.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/realpath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/rm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/rmdir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/runcon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/seq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/shred.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/shuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/sleep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/stat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/stdbuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/stty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/sync.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/tac.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/tail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/tee.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/template.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/timeout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/touch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/tr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/true.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/truncate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/tsort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/tty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/uname.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/unexpand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/uniq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/unlink.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/uptime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/users.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/wc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/who.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/whoami.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/yes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/basename.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/basenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/cat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/chcon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/chmod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/chown-chgrp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/chown-chown.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/chown-core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/chown.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/chroot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/cksum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/cksum_pclmul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/comm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/coreutils-arch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/coreutils-chgrp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/coreutils-dir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/coreutils-vdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/coreutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/cp-hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/cp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/crctab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/csplit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/cut.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/date.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/dd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/df.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/digest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/dircolors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/dirname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/du.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/echo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/env.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/expand-common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/expand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/expr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/factor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/false.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/find-mount-point.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/fmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/fold.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/force-link.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/getlimits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/group-list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/groups.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/head.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/hostid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/hostname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/id.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/install.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/iopoll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/join.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/kill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/lbracket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/libstdbuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/link.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/ln.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/logname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/ls-dir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/ls-ls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/ls-vdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/ls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/make-prime-list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/mkdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/mkfifo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/mknod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/mktemp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/mv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/nice.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/nl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/nohup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/nproc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/numfmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/od.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/operand2sig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/paste.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/pathchk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/pinky.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/pr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/printenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/printf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/prog-fprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/ptx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/pwd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/readlink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/realpath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/relpath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/remove.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/rm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/rmdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/runcon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/selinux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/seq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/set-fields.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/shred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/shuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/sleep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/split.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/stdbuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/stty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/sum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/sync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/tac-pipe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/tac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/tail.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/tee.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/temp-stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/timeout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/touch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/tr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/true.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/truncate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/tsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/tty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/uname-arch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/uname-uname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/uname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/unexpand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/uniq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/unlink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/uptime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/users.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/wc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/wc_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/who.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/whoami.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/yes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/convert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/dev_opera.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/first_component.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/is_prefixed_with.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/is_symlink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/istests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/linked_strings.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/starts_with.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/timeoperations.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/libwhereami/src/whereami.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/realpath-osx/realpath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/realpath_turbo/realpath_turbo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/securecopy/src/crc64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/securecopy/src/crcsum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/securecopy/src/crcsum_cli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/arch/arch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/basename/basename.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/bsdvers/bsdvers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/cat/cat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/chmod/chmod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/chroot/chroot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/comm/comm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/cp/cp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/cp/utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/csplit/csplit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/cut/cut.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/date/date.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/dd/args.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/dd/conv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/dd/conv_tab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/dd/dd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/dd/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/dd/position.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/df/df.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/df/ext2fs_df.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/df/ffs_df.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/dirname/dirname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/du/du.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/echo/echo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/env/env.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/expand/expand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/expr/expr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/factor/factor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/factor/fmt_scaled.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/factor/pattern.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/factor/pr_tbl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/false/false.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/fmt/fmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/fold/fold.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/head/head.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/id/id.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/join/join.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/ln/ln.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/logname/logname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/ls/cmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/ls/ls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/ls/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/ls/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/ls/utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/ls/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/mkdir/mkdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/mknod/mknod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/mktemp/mktemp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/mv/cp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/mv/mv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/mv/rm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/nice/nice.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/nl/nl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/nohup/nohup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/paste/paste.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/pathchk/pathchk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/pr/egetopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/pr/pr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/printenv/printenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/printf/printf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/pwd/pwd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/readlink/readlink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/realpath/realpath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/rm/rm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/rmdir/rmdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/sleep/sleep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/sort/bwstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/sort/coll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/sort/commoncrypto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/sort/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/sort/mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/sort/radixsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/sort/sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/sort/vsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/split/split.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/stat/stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/stty/cchar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/stty/gfmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/stty/key.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/stty/modes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/stty/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/stty/stty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/sync/sync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/tail/forward.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/tail/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/tail/read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/tail/reverse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/tail/tail.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/tee/tee.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/test/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/touch/touch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/tr/str.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/tr/tr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/true/true.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/tsort/tsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/tty/tty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/uname/uname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/unexpand/unexpand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/uniq/uniq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/users/users.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/wc/wc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/who/utmpentry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/who/who.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/xargs/strnsubst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/xargs/xargs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/xinstall/xinstall.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/src/yes/yes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/vcopy-impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/vcopy-utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/win2posix/src/dirent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/win2posix/src/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/win2posix/src/err_translate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/win2posix/src/realpath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/src/win2posix/src/sys/stat_mingw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/test/monolithic-main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/test/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/test/testpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/test/unittests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vcopy/tool/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/include/vcopy/vcopy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/cpp-src/include/globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/chown-core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/chown.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/cksum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/copy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/cp-hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/expand-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/find-mount-point.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/force-link.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/group-list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/ioblksize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/iopoll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/longlong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/ls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/operand2sig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/prog-fprintf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/relpath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/remove.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/selinux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/set-fields.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/statx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/sum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/system.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/temp-stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/uname.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/wc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/dev_opera.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/first_component.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/is_prefixed_with.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/is_symlink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/istests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/linked_strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/starts_with.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/symstruct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/libcompleteme/src/timeoperations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/libwhereami/src/whereami.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/realpath_turbo/realpath_turbo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/realpath_turbo/realpath_turbo_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/securecopy/src/crc64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/securecopy/src/crcsum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/bsdvers/colors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/cp/extern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/dd/dd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/dd/extern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/factor/primes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/ls/extern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/ls/ls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/pr/extern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/pr/pr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/sort/bwstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/sort/coll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/sort/commoncrypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/sort/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/sort/mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/sort/radixsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/sort/sort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/sort/vsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/stty/extern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/stty/stty.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/tail/extern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/tr/extern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/who/utmpentry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/xargs/pathnames.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/src/xinstall/pathnames.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/vcopy-priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/win2posix/src/compat_mingw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/win2posix/src/dirent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/win2posix/src/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/win2posix/src/sys/stat_mingw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/src/win2posix/sys/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vcopy/test/monolithic_examples.h" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/DESIGN.md" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/gnu-src/local.mk" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/realpath-osx/README.md" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/realpath_turbo/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/realpath_turbo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/securecopy/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/securecopy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/securecopy/src/crccp.x" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/securecopy/src/crcmv.x" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/securecopy/src/crcsum.x" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/arch/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/arch/arch.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/basename/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/basename/basename.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/bsdvers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/cat/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/cat/cat.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/chmod/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/chmod/chflags.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/chmod/chgrp.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/chmod/chmod.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/chmod/chown.8" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/chroot/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/chroot/chroot.8" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/comm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/comm/comm.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/cp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/cp/cp.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/csplit/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/csplit/csplit.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/cut/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/cut/cut.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/date/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/date/date.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/dd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/dd/dd.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/df/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/df/df.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/dirname/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/dirname/dirname.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/du/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/du/du.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/echo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/echo/echo.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/env/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/env/env.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/expand/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/expand/expand.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/expr/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/expr/expr.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/factor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/factor/factor.6" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/false/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/false/false.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/fmt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/fmt/fmt.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/fold/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/fold/fold.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/head/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/head/head.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/id/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/id/groups.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/id/id.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/id/whoami.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/join/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/join/join.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/ln/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/ln/ln.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/ln/symlink.7" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/logname/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/logname/logname.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/ls/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/ls/ls.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/mkdir/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/mkdir/mkdir.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/mknod/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/mknod/mkfifo.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/mknod/mknod.8" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/mktemp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/mktemp/mktemp.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/mv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/mv/mv.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/nice/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/nice/nice.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/nl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/nl/nl.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/nohup/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/nohup/nohup.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/paste/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/paste/paste.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/pathchk/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/pathchk/pathchk.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/pr/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/pr/pr.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/printenv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/printenv/printenv.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/printf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/printf/printf.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/pwd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/pwd/pwd.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/readlink/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/readlink/readlink.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/realpath/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/realpath/realpath.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/rm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/rm/rm.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/rmdir/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/rmdir/rmdir.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/sleep/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/sleep/sleep.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/sort/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/sort/sort.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/split/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/split/split.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/stat/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/stat/stat.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/stty/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/stty/stty.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/sync/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/sync/sync.8" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/tail/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/tail/tail.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/tee/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/tee/tee.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/test/test.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/touch/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/touch/touch.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/tr/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/tr/tr.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/true/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/true/true.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/tsort/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/tsort/tsort.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/tty/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/tty/tty.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/uname/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/uname/uname.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/unexpand/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/uniq/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/uniq/uniq.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/users/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/users/users.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/wc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/wc/wc.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/who/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/who/who.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/xargs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/xargs/xargs.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/xinstall/" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/xinstall/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/xinstall/install.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/yes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/src/src/yes/yes.1" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vcopy/tool/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
