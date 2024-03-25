@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libfigcone</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBC95C8}</ProjectGuid>
+    <RootNamespace>libfigcone</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFIGCONE;FIGCONE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFIGCONE;FIGCONE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFIGCONE;FIGCONE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFIGCONE;FIGCONE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFIGCONE;FIGCONE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFIGCONE;FIGCONE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFIGCONE;FIGCONE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFIGCONE;FIGCONE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFIGCONE;FIGCONE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFIGCONE;FIGCONE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFIGCONE;FIGCONE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFIGCONE;FIGCONE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/demo_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/demo_ini.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/demo_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/demo_json_root_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/demo_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/demo_shoal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/demo_toml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/demo_xml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/demo_yaml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/demo_yaml_root_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/ex01.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/ex02.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/ex03.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/ex04.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples/ex05.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples_static_refl/ex01_static_refl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples_static_refl/ex02_static_refl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples_static_refl/ex03_static_refl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples_static_refl/ex04_static_refl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/examples_static_refl/ex05_static_refl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests/test_copynodelist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests/test_defaultunregisteredfieldhandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests/test_dict.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests/test_nameformat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests/test_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests/test_nodelist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests/test_param.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests/test_paramlist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests/test_postprocessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests/test_unregisteredfieldhandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests_static_refl/test_copynodelist_cpp20.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests_static_refl/test_dict_cpp20.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests_static_refl/test_node_cpp20.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests_static_refl/test_nodelist_cpp20.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests_static_refl/test_param_cpp20.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/figcone/tests_static_refl/test_paramlist_cpp20.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/examples/demo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/examples/print_demo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/configreader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/configmacros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/configreaderaccess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/configreaderptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/creatormode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/dict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/dictcreator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/fieldtraits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/figcone_ini_import.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/figcone_json_import.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/figcone_shoal_import.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/figcone_toml_import.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/figcone_xml_import.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/figcone_yaml_import.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/iconfigentity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/initializedoptional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/inode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/iparam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/ivalidator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/loadingerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/nameof_import.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/nameutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/nodecreator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/nodelist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/nodelistcreator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/param.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/paramcreator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/paramlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/paramlistcreator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/stringconverter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/unregisteredfieldutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/detail/validator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/figcone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/nameformat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/postprocessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/shortmacros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/include/figcone/unregisteredfieldhandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/tests/assert_exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/figcone/tests_static_refl/assert_exception.h" />
+    <Image Include="../../thirdparty/owemdjee/figcone/doc/logo.jpg" />
+    <Text Include="../../thirdparty/owemdjee/figcone/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/figcone/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/figcone/README.md" />
+    <Text Include="../../thirdparty/owemdjee/figcone/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/figcone/examples/demo.ini" />
+    <Text Include="../../thirdparty/owemdjee/figcone/examples/demo.json" />
+    <Text Include="../../thirdparty/owemdjee/figcone/examples/demo.shoal" />
+    <Text Include="../../thirdparty/owemdjee/figcone/examples/demo.toml" />
+    <Text Include="../../thirdparty/owemdjee/figcone/examples/demo.yaml" />
+    <Text Include="../../thirdparty/owemdjee/figcone/examples/demo_root_list.json" />
+    <Text Include="../../thirdparty/owemdjee/figcone/examples/demo_root_list.yaml" />
+    <Text Include="../../thirdparty/owemdjee/figcone/examples_static_refl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/figcone/formats/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/figcone/functional_tests/lunchtoast.cfg" />
+    <Text Include="../../thirdparty/owemdjee/figcone/functional_tests/paths_to_filename.sh" />
+    <Text Include="../../thirdparty/owemdjee/figcone/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/figcone/tests_cpp20/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/figcone/tests_static_refl/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/figcone/examples/demo.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

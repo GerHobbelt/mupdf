@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libpano13</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBF90B0}</ProjectGuid>
+    <RootNamespace>libpano13</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANO13;PANO13_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANO13;PANO13_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANO13;PANO13_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANO13;PANO13_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANO13;PANO13_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANO13;PANO13_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANO13;PANO13_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANO13;PANO13_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANO13;PANO13_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANO13;PANO13_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANO13;PANO13_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANO13;PANO13_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/ColourBrightness.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/PTDialogs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/PTcommon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/PaniniGeneral.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/Triangulate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/ZComb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/adjust.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/bmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/correct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/fftn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/fourier.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/hdrfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/javastub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/jpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/jpegicc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/levmar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/lmdif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/metadata.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/morpher.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/multilayer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/optimize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/pan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/perspect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/ppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/pteditor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/ptfeather.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/ptpicker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/ptstitch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/queryfeature.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/remap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/resample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/rgbe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/seamer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/seamer_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/shell_mac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/sys_X11.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/sys_ansi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/sys_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/sys_compat_unix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/sys_compat_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/sys_mac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/sys_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tiff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTAInterpolate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTblender.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTcrop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTmasker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTmender.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/PToptimizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTroller.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTtiff2psd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTtiffdump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTuncrop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/compat_win32/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/panoinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpano13/tools/panoinfo_unix.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/ColourBrightness.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/PTcommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/PaniniGeneral.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/ZComb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/adjust.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/dump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/f2c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/fftn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/jpegicc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/levmar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/panorama.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/panotypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/pteditor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/ptfeather.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/ptstitch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/pttiff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/ptutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/queryfeature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/rgbe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/sys_X11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/sys_ansi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/sys_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/sys_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/sys_win.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/tools/PTmender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/tools/compat_win32/dirent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/tools/compat_win32/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpano13/version.h" />
+    <Image Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/051221_6054_750.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/051221_6055_750.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/reference/jpeg.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff16/reference/jpeg.jpg" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libpano13/pano13.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTainterpolate.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTblender.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTcrop.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTinfo.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTmasker.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTmender.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libpano13/tools/PToptimizer.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTroller.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTtiff2psd.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTtiffdump.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libpano13/tools/PTuncrop.rc" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/ChangeLog.hg" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/CpackDescription.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/FindGnuTar.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/README" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/doc/Optimize.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/doc/PTblender.readme" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/doc/PTmender.readme" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/doc/developmentPolicy.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/doc/stitch.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/filter.r" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/libpano13.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/PTAInterpolate.1" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/PTblender.1" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/PTcrop.1" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/PTinfo.1" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/PTmasker.1" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/PTmender.1" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/PToptimizer.1" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/PTroller.1" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/PTtiff2psd.1" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/PTtiffdump.1" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/PTuncrop.1" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/man/panoinfo.1" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/compareImages.pl" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/panoAutomatePSDtest.pl" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/panoAutomateTest.pl" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/reference/tiff_deflate.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/reference/tiff_lzw.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/reference/tiff_m0000.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/reference/tiff_m0001.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/reference/tiff_m_cropped0000.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/reference/tiff_m_cropped0001.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/reference/tiff_m_uncropped0000.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/reference/tiff_m_uncropped0001.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/reference/tiff_mask0000.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/reference/tiff_mask0001.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/reference/tiff_none.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleStitch/simple.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff16/060520_3398.TIF" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff16/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff16/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff16/README.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff16/reference/tiff_deflate.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff16/reference/tiff_lzw.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff16/reference/tiff_m0000.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff16/reference/tiff_m_cropped0000.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff16/reference/tiff_m_uncropped0000.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff16/reference/tiff_mask0000.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff16/reference/tiff_none.tif" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff16/simple.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/simpleTiff2psd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tests/tiff2psdTest.bat" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tools/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libpano13/tools/README.PTmender" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

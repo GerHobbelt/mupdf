@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libZQCNN</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE1CC3B}</ProjectGuid>
+    <RootNamespace>libZQCNN</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZQCNN;ZQCNN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZQCNN;ZQCNN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZQCNN;ZQCNN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZQCNN;ZQCNN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZQCNN;ZQCNN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZQCNN;ZQCNN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZQCNN;ZQCNN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZQCNN;ZQCNN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZQCNN;ZQCNN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZQCNN;ZQCNN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZQCNN;ZQCNN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZQCNN;ZQCNN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/CompareWithOpenBLAS/CompareWithOpenBLAS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleCascadeOnet/SampleCascadeOnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleCascadeOnet_Interface/SampleCascadeOnet_Interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleDetectMouth/SampleDetectMouth.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleFacialNet/SampleFacialNet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleGEPB/SampleGEPB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleGenderAge/SampleGenderAge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleHeatMap/SampleHeatMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleLnet/SampleLnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleLnet106/SampleLnet106.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleLnet106_vis/SampleLnet106_vis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleLnetMouth/SampleLnetMouth.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN/SampleMTCNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNNGesture/SampleMTCNNGesture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNNLoadFromCode/SampleMTCNNLoadFromCode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN_AspectRatio/SampleMTCNN_AspectRatio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN_Interface/SampleMTCNN_Interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN_NCHWC4/SampleMTCNN_NCHWC4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN_Video/SampleMTCNN_Video.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNNfromlist/SampleMTCNNfromlist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMatMul/MatMul_AB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMatMul/MatMul_ABt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMatMul/SampleMatMul.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMatMulNEON/SampleMatMulNEON.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMatMulNEON_FP16/SampleMatMulNEON_FP16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMobileFaceNet/SampleMobileFaceNet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleNSFW/SampleNSFW.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleOCR/SampleOCR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SamplePersonPose/SamplePersonPose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SamplePersonPose2Video/SamplePersonPose2Video.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SamplePersonPoseVideo/SamplePersonPoseVideo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SamplePnet/SamplePnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSSD/SampleSSD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSSDDetectorPytorch/SampleSSDDetectorPytorch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSphereFaceNet/SampleSphereFaceNet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSphereFaceNetLoadFromBuffer/SampleSphereFaceNetLoadFromBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSwapFace/SampleSwapFace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleTextBoxes/SampleTextBoxes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleVideoFaceDetection_Interface/SampleVideoFaceDetection_Interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/TrainMTCNNprocessor/TrainMTCNNprocessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/example_for_very_high_gflops/example_for_very_high_gflops.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/model2code/model2code.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/mxnet2zqcnn/mxnet2zqcnn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/swapRGBandBGR/swapRGBandBGR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/testImageProcessing/testImageProcessing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/testWinoF2233/testWinoF2233.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForArcFace/SampleCropImagesForArcFace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForArcFaceFast/SampleCropImagesForArcFaceFast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForSeetaFace/SampleCropImagesForSeetaFace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForSphereFace/SampleCropImagesForSphereFace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForSphereFaceFast/SampleCropImagesForSphereFaceFast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleDetectOutliersInFaceDatabase/SampleDetectOutliersInFaceDatabase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWArcFaceMiniCaffe/SampleEvaluationOnLFWArcFaceMiniCaffe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWArcFaceOpenCV/SampleEvaluationOnLFWArcFaceOpenCV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWArcFaceZQCNN/SampleEvaluationOnLFWArcFaceZQCNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWSeetaFace/SampleEvaluationOnLFWSeetaFace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWSphereFaceMiniCaffe/SampleEvaluationOnLFWSpherefaceMiniCaffe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWSphereFaceOpenCV/SampleEvaluationOnLFWSphereFaceOpenCV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWSphereFaceZQCNN/SampleEvaluationOnLFWSphereFaceZQCNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDatabaseGrayNCNN/SampleFaceDatabaseGrayNCNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDatabaseNCNN/SampleFaceDatabaseNCNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDatabaseOpenCV/SampleFaceDatabaseOpenCV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDatabaseZQCNN/SampleFaceDatabaseZQCNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDetectorLibFaceDetect/SampleFaceDetectorLibFaceDetect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDetectorMTCNN/SampleFaceDetectorMTCNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceRecognizerArcFaceMiniCaffe/SampleFaceRecognizerArcFaceMiniCaffe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceRecognizerArcFaceOpenCV/SampleFaceRecognizerArcFaceOpenCV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceRecognizerArcFaceZQCNN/SampleFaceRecognizerArcFaceZQCNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceRecognizerSphereFaceZQCNN/SampleFaceRecognizerSphereFaceZQCNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Forward_SSEUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Forward_SSEUtils_NCHWC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_LoadConfigUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Net_NCHWC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_SSDDetectorPytorch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Tensor4D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Tensor4D_NCHWC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_addbias_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_batchnormscale_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_convolution_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_convolution_gemm_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_deconvolution_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_deconvolution_gemm_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_depthwise_convolution_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_dropout_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_eltwise_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_innerproduct_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_innerproduct_gemm_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_lrn_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_lstm_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_normalize_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_pooling_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_prelu_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_reduction_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_relu_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_resize_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_scalaroperation_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_softmax_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_sqrt_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_addbias_nchwc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_batchnormscale_nchwc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_convolution_gemm_nchwc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_depthwise_convolution_nchwc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_eltwise_nchwc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_innerproduct_gemm_nchwc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_pooling_nchwc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_prelu_nchwc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_relu_nchwc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_resize_nchwc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_softmax_nchwc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/math/zq_avx_mathfun.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/math/zq_sse_mathfun.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN_to_MNN/SampleOnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN_to_MNN/converter/source/ZQCNN_to_MNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQ_GEMM/math/zq_gemm_32f_align_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/ZQ_GEMM/math/zq_gemm_32f_auto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/model/benchncnn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZQCNN/model/mobilefacenet.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleLnet106/ZQ_HeadPoseEstimation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNNLoadFromCode/det1_dw20_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNNLoadFromCode/det2_dw24_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNNLoadFromCode/det3_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMatMul/MatMul_AB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMatMul/MatMul_ABt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/TrainMTCNNprocessor/TrainMTCNNprocessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_BBox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_BBoxUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_CascadeOnet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_CascadeOnet_Interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_CompileConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_DetectorInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_FaceCropUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Forward_SSEUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Forward_SSEUtils_NCHWC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Layer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Layer_NCHWC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_LoadConfigUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_MTCNN.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_MTCNN_AspectRatio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_MTCNN_Interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_MTCNN_NCHWC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_MTCNN_ncnn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_MTCNN_old.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_MouthDetector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_NSFW.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Net.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Net_Interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Net_NCHWC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_PersonPose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_PersonPose2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_SSD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_SSDDetectorPytorch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_SSDDetectorUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Tensor4D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Tensor4D_Interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_Tensor4D_NCHWC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_TextBoxes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQ_CNN_VideoFaceDetection_Interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_addbias_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_addbias_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_batchnormscale_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_batchnormscale_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_convolution_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_convolution_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_convolution_gemm_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_convolution_gemm_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_deconvolution_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_deconvolution_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_deconvolution_gemm_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_deconvolution_gemm_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_depthwise_convolution_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_depthwise_convolution_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_dropout_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_dropout_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_eltwise_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_eltwise_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_innerproduct_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_innerproduct_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_innerproduct_gemm_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_innerproduct_gemm_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_lrn_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_lrn_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_lstm_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_lstm_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_normalize_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_normalize_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_pooling_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_pooling_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_prelu_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_prelu_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_reduction_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_relu_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_relu_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_resize_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_resize_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_scalaroperation_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_scalaroperation_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_softmax_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_softmax_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_c/zq_cnn_sqrt_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_addbias_nchwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_addbias_nchwc_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_batchnormscale_nchwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_batchnormscale_nchwc_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_convolution_gemm_nchwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_convolution_gemm_nchwc_col2im.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_convolution_gemm_nchwc_kernel1x1_neon_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_convolution_gemm_nchwc_packed4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_convolution_gemm_nchwc_packed4_handle_bias_prelu_1x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_convolution_gemm_nchwc_packed4_handle_bias_prelu_4x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_convolution_gemm_nchwc_packed4_handle_bias_prelu_6x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_convolution_gemm_nchwc_packed4_handle_bias_prelu_8x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_convolution_gemm_nchwc_prepack4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_convolution_gemm_nchwc_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_depthwise_convolution_nchwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_depthwise_convolution_nchwc_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_eltwise_nchwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_eltwise_nchwc_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_innerproduct_gemm_nchwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_innerproduct_gemm_nchwc_col2im.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_innerproduct_gemm_nchwc_packed4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_innerproduct_gemm_nchwc_prepack4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_innerproduct_gemm_nchwc_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_pooling_nchwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_pooling_nchwc_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_prelu_nchwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_prelu_nchwc_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_relu_nchwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_relu_nchwc_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_resize_nchwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_resize_nchwc_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_softmax_nchwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/layers_nchwc/zq_cnn_softmax_nchwc_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/math/zq_avx_mathfun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/math/zq_sse_mathfun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN_to_MNN/converter/source/ZQ_CNN_BBox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN_to_MNN/converter/source/ZQ_CNN_BBoxUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN_to_MNN/converter/source/ZQ_CNN_CompileConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN_to_MNN/converter/source/ZQ_CNN_Forward_SSEUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN_to_MNN/converter/source/ZQ_CNN_Layer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN_to_MNN/converter/source/ZQ_CNN_Net.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN_to_MNN/converter/source/ZQ_CNN_Tensor4D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQ_GEMM/math/zq_gemm_32f_align_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQ_GEMM/math/zq_gemm_32f_align_c_raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceClusterImagesForVideo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceClustersForVideo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceContainerForVideo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceDatabase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceDatabaseCompact.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceDatabaseMaker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceDetector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceDetectorLibFaceDetect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceDetectorMTCNN.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceExtractor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceFeature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceGroup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceIDPrecisionEvaluation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizerArcFaceGrayNCNN.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizerArcFaceMiniCaffe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizerArcFaceNCNN.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizerArcFaceOpenCV.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizerArcFaceZQCNN.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizerSeetaFace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizerSphereFace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizerSphereFaceGrayNCNN.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizerSphereFaceMiniCaffe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizerSphereFaceNCNN.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizerSphereFaceOpenCV.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizerSphereFaceZQCNN.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceRecognizerUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_FaceSearchTarget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQ_PixelFormat.h" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/00.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/00011.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/00051.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/002.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/004545.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/00_.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/01.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/010.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/012.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/01_.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/023.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/030.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/11.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/11_320x240.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/2013-12-09.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/4_160x120.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/4_320x240.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/AE_.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/CascadeOnet.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/LFV2A2156B3533072.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/LSVNP41Z7B2731969.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/dog.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/face.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/face0.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/face1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/face2500.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/keliamoniz1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/landmark106_vis0.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/landmark106_vis1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/landmark106_vis2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/landmark106_vis3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/landmark106_vis4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/landmark106_vis5.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/landmark106_vis6.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/mouth.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/mouth0.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/mouth1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/onet.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/onet4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/person0.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/person1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/pose.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/pose_1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/pose_2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/pose_3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/pose_4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/sex.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/test.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/test11.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/test12.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/test2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/text.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/text2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/text3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/data/text4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ZQCNN/mtcnn示意图.jpg" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/CompareWithOpenBLAS/CompareWithOpenBLAS.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/CompareWithOpenBLAS/CompareWithOpenBLAS.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleCascadeOnet/SampleCascadeOnet.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleCascadeOnet/SampleCascadeOnet.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleCascadeOnet_Interface/SampleCascadeOnet_Interface.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleCascadeOnet_Interface/SampleCascadeOnet_Interface.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleDetectMouth/SampleDetectMouth.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleDetectMouth/SampleDetectMouth.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleFacialNet/SampleFacialNet.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleFacialNet/SampleFacialNet.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleGEPB/SampleGEPB.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleGenderAge/SampleGenderAge.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleGenderAge/SampleGenderAge.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleHeatMap/SampleHeatMap.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleHeatMap/SampleHeatMap.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleLnet/SampleLnet.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleLnet/SampleLnet.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleLnet106/SampleLnet106.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleLnet106/SampleLnet106.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleLnet106_vis/SampleLnet106_vis.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleLnet106_vis/SampleLnet106_vis.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleLnetMouth/SampleLnetMouth.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleLnetMouth/SampleLnetMouth.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN/SampleMTCNN.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN/SampleMTCNN.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNNGesture/SampleMTCNNGesture.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNNGesture/SampleMTCNNGesture.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNNLoadFromCode/SampleMTCNNLoadFromCode.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNNLoadFromCode/SampleMTCNNLoadFromCode.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN_AspectRatio/SampleMTCNN_AspectRatio.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN_AspectRatio/SampleMTCNN_AspectRatio.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN_Interface/SampleMTCNN_Interface.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN_Interface/SampleMTCNN_Interface.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN_NCHWC4/SampleMTCNN_NCHWC4.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN_NCHWC4/SampleMTCNN_NCHWC4.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN_Video/SampleMTCNN_Video.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNN_Video/SampleMTCNN_Video.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNNfromlist/SampleMTCNNfromlist.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMTCNNfromlist/SampleMTCNNfromlist.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMatMul/SampleMatMul.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMatMul/SampleMatMul.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMatMulNEON/SampleMatMulNEON.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMatMulNEON_FP16/SampleMatMulNEON_FP16.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMobileFaceNet/SampleMobileFaceNet.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleMobileFaceNet/SampleMobileFaceNet.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleNSFW/SampleNSFW.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleNSFW/SampleNSFW.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleOCR/SampleOCR.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleOCR/SampleOCR.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SamplePersonPose/SamplePersonPose.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SamplePersonPose/SamplePersonPose.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SamplePersonPose2Video/SamplePersonPose2Video.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SamplePersonPose2Video/SamplePersonPose2Video.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SamplePersonPoseVideo/SamplePersonPoseVideo.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SamplePersonPoseVideo/SamplePersonPoseVideo.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SamplePnet/SamplePnet.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SamplePnet/SamplePnet.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSSD/SampleSSD.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSSD/SampleSSD.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSSDDetectorPytorch/SampleSSDDetectorPytorch.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSSDDetectorPytorch/SampleSSDDetectorPytorch.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSphereFaceNet/SampleSphereFaceNet.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSphereFaceNet/SampleSphereFaceNet.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSphereFaceNetLoadFromBuffer/SampleSphereFaceNetLoadFromBuffer.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSphereFaceNetLoadFromBuffer/SampleSphereFaceNetLoadFromBuffer.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSwapFace/SampleSwapFace.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleSwapFace/SampleSwapFace.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleTextBoxes/SampleTextBoxes.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleTextBoxes/SampleTextBoxes.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleVideoFaceDetection_Interface/SampleVideoFaceDetection_Interface.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/SampleVideoFaceDetection_Interface/SampleVideoFaceDetection_Interface.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/TrainMTCNNprocessor/TrainMTCNNprocessor.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/TrainMTCNNprocessor/TrainMTCNNprocessor.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/example_for_very_high_gflops/example_for_very_high_gflops.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/example_for_very_high_gflops/example_for_very_high_gflops.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/model2code/model2code.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/model2code/model2code.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/mxnet2zqcnn/mxnet2zqcnn.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/mxnet2zqcnn/mxnet2zqcnn.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/swapRGBandBGR/swapRGBandBGR.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/testImageProcessing/testImageProcessing.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/testImageProcessing/testImageProcessing.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/testWinoF2233/testWinoF2233.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQCNN/testWinoF2233/testWinoF2233.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForArcFace/SampleCropImagesForArcFace.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForArcFace/SampleCropImagesForArcFace.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForArcFaceFast/SampleCropImagesForArcFaceFast.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForArcFaceFast/SampleCropImagesForArcFaceFast.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForSeetaFace/SampleCropImagesForSeetaFace.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForSeetaFace/SampleCropImagesForSeetaFace.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForSphereFace/SampleCropImagesForSphereFace.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForSphereFace/SampleCropImagesForSphereFace.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForSphereFaceFast/SampleCropImagesForSphereFaceFast.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleCropImagesForSphereFaceFast/SampleCropImagesForSphereFaceFast.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleDetectOutliersInFaceDatabase/SampleDetectOutliersInFaceDatabase.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleDetectOutliersInFaceDatabase/SampleDetectOutliersInFaceDatabase.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWArcFaceMiniCaffe/SampleEvaluationOnLFWArcFaceMiniCaffe.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWArcFaceMiniCaffe/SampleEvaluationOnLFWArcFaceMiniCaffe.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWArcFaceOpenCV/SampleEvaluationOnLFWArcFaceOpenCV.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWArcFaceOpenCV/SampleEvaluationOnLFWArcFaceOpenCV.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWArcFaceZQCNN/SampleEvaluationOnLFWArcFaceZQCNN.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWArcFaceZQCNN/SampleEvaluationOnLFWArcFaceZQCNN.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWSeetaFace/SampleEvaluationOnLFWSeetaFace.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWSeetaFace/SampleEvaluationOnLFWSeetaFace.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWSphereFaceMiniCaffe/SampleEvaluationOnLFWSphereFaceMiniCaffe.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWSphereFaceMiniCaffe/SampleEvaluationOnLFWSphereFaceMiniCaffe.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWSphereFaceOpenCV/SampleEvaluationOnLFWSphereFaceOpenCV.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWSphereFaceOpenCV/SampleEvaluationOnLFWSphereFaceOpenCV.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWSphereFaceZQCNN/SampleEvaluationOnLFWSphereFaceZQCNN.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleEvaluationOnLFWSphereFaceZQCNN/SampleEvaluationOnLFWSphereFaceZQCNN.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDatabaseGrayNCNN/SampleFaceDatabaseGrayNCNN.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDatabaseGrayNCNN/SampleFaceDatabaseGrayNCNN.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDatabaseNCNN/SampleFaceDatabaseNCNN.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDatabaseNCNN/SampleFaceDatabaseNCNN.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDatabaseOpenCV/SampleFaceDatabaseOpenCV.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDatabaseOpenCV/SampleFaceDatabaseOpenCV.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDatabaseZQCNN/SampleFaceDatabaseZQCNN.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDatabaseZQCNN/SampleFaceDatabaseZQCNN.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDetectorLibFaceDetect/SampleFaceDetectorLibFaceDetect.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDetectorLibFaceDetect/SampleFaceDetectorLibFaceDetect.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDetectorMTCNN/SampleFaceDetectorMTCNN.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceDetectorMTCNN/SampleFaceDetectorMTCNN.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceRecognizerArcFaceMiniCaffe/SampleFaceRecognizerArcFaceMiniCaffe.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceRecognizerArcFaceMiniCaffe/SampleFaceRecognizerArcFaceMiniCaffe.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceRecognizerArcFaceOpenCV/SampleFaceRecognizerArcFaceOpenCV.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceRecognizerArcFaceOpenCV/SampleFaceRecognizerArcFaceOpenCV.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceRecognizerArcFaceZQCNN/SampleFaceRecognizerArcFaceZQCNN.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceRecognizerArcFaceZQCNN/SampleFaceRecognizerArcFaceZQCNN.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceRecognizerSphereFaceZQCNN/SampleFaceRecognizerSphereFaceZQCNN.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/SamplesZQlibFaceID/SampleFaceRecognizerSphereFaceZQCNN/SampleFaceRecognizerSphereFaceZQCNN.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/TensorFlow_to_ZQCNN/convertor.py" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQCNN.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN/ZQCNN.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN_to_MNN/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN_to_MNN/converter/CMakelists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN_to_MNN/det3-dw48-p0.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/ZQCNN_to_MNN/det3-dw48-p0.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/ZQ_GEMM/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/ZQ_GEMM/ZQ_GEMM.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/ZQ_GEMM/ZQ_GEMM.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQlibFaceID.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/ZQlibFaceID/ZQlibFaceID.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/build-with-cmake.md" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/mobilefacenet-mxnet2caffe-ZQ/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/mobilefacenet-mxnet2caffe-ZQ/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/mobilefacenet-mxnet2caffe-ZQ/check_results.py" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/mobilefacenet-mxnet2caffe-ZQ/find_caffe.py" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/mobilefacenet-mxnet2caffe-ZQ/find_mxnet.py" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/mobilefacenet-mxnet2caffe-ZQ/json2prototxt.py" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/mobilefacenet-mxnet2caffe-ZQ/mxnet2caffe.bat" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/mobilefacenet-mxnet2caffe-ZQ/mxnet2caffe.py" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/mobilefacenet-mxnet2caffe-ZQ/predictor_caffe.py" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/mobilefacenet-mxnet2caffe-ZQ/predictor_mxnet.py" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/mobilefacenet-mxnet2caffe-ZQ/prototxt_basic.py" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/mobilefacenet-mxnet2caffe-ZQ/show_mxnet_graph.py" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/MobileNetSSD_deploy.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/MobileNetSSD_deploy.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/Pose-zq.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/Pose-zq.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det1-dw20-fast.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det1-dw20-fast.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det1-dw20-plus.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det1-dw20-plus.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det1.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det1_bgr.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det2-dw24-fast.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det2-dw24-fast.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det2-dw24-p0.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det2-dw24-p0.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det2-dw24-plus.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det2-dw24-plus.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det2.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det2_bgr.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det3-dw48-fast.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det3-dw48-fast.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det3-dw48-p0.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det3-dw48-p0.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det3-dw48-plus.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det3-dw48-plus.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det3.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det3_bgr.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det4-dw48-v2n.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det4-dw48-v2n.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det4-dw48-v2s.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det4-dw48-v2s.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det4-dw64-v3s.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det4-dw64-v3s.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det5-112-gray.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det5-112-gray.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det5-dw112.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det5-dw112.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det5-dw64-v3s.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det5-dw64-v3s.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det5-dw96-v2s.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det5-dw96-v2s.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det5-dw96-v2t.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det5-dw96-v2t.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det5-dw96-v3s.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/det5-dw96-v3s.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/headposegaze-112-gray.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/headposegaze-112-gray.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/libfacedetection.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/libfacedetection.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/mobilefacenet-res2-6-10-2-dim128-emore.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/mobilefacenet-res2-6-10-2-dim128.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/mobilefacenet-res2-6-10-2.param" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/mobilefacenet-v1.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/mobilefacenet-v1.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/mobilefacenet.bin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/mobilefacenet.param" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/model-face.cfg" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/model-face.nchwbin" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/model/model-face.zqparams" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/onnx_to_ZQCNN/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/onnx_to_ZQCNN/model-face.onnx" />
+    <Text Include="../../thirdparty/owemdjee/ZQCNN/onnx_to_ZQCNN/onnx2ZQCNN.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

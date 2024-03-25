@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libCmathtuts</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB25FC2}</ProjectGuid>
+    <RootNamespace>libCmathtuts</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMATHTUTS;CMATHTUTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMATHTUTS;CMATHTUTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMATHTUTS;CMATHTUTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMATHTUTS;CMATHTUTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMATHTUTS;CMATHTUTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMATHTUTS;CMATHTUTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMATHTUTS;CMATHTUTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMATHTUTS;CMATHTUTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMATHTUTS;CMATHTUTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMATHTUTS;CMATHTUTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMATHTUTS;CMATHTUTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMATHTUTS;CMATHTUTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test1/test1C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test10/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test11/test11.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test12/testdot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test12/testmat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test12/testret.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test13/test13C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test14/test13C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test15/test13C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test16/test13C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test17/test13C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test18/test13C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test19/test13C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test2/test2C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test20/test13C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test21/test13C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test22/Ctest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test23/tst01.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test24/NUMBERS.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test3/CSUBS.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test32/cpps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test33/cpps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test34/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/c_calls_f77/kronrod_prb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/c_calls_f90/kronrod_prb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f77_calls_c/kronrod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f90_calls_c/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f90_calls_c/kronrod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed77/ex1_sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex1_sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex2_sub.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/ex1_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/ex2_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test4/cpp_main_0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test4/cpp_main_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test5/CMAIN.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test6/test6C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test7/cfunction1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test7/cppfunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test7/cprogram.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test8/cfunction1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test8/cppfunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test8/cppprogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test9/cfunction1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test9/cppfunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/ibm/sample1/sample1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/intel/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/lindonslog/example1/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/ubuntuforums/example1/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/ubuntuforums/example2/example2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/xianyi/example2/time_dgemm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/gnu/example1/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/ibm/sample3/sample3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/intel/example1/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/intel/example2/example2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/lindonslog/example1/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/common/blaio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/example1/blas1C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/example2/blas2bC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/example3/blas2C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/example4/blas3C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/example1/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/example2/example2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/auxiliary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_c2chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_c3chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_cblas1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_cblas2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_cblas3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_d2chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_d3chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_dblas1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_dblas2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_dblas3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_s2chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_s3chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_sblas1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_sblas2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_sblas3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_xerbla.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_z2chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_z3chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_zblas1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_zblas2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_zblas3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/seehuhn/example1/testblas.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/seehuhn/example2/matroot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/stackoverflow/example1/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/stackoverflow/example2/example2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/ubuntuforums/example1/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/ubuntuforums/example3/example3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/xianyi/example1/test_cblas_dgemm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/mitchr/slvSysC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/oregonstate/example1/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/oregonstate/example2/example2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/rochester/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/seehuhn/testdgtsv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/surfsara/testdsyev.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/E_CLAPACK/mercer/example1/dgesv_example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/E_CLAPACK/mercer/example2/zgesv_example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/awhan/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/intel/example1/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/intel/example2/example2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/lapackforum/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/netlib/example_DGELS_colmajor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/netlib/example_DGELS_rowmajor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/netlib/example_DGESV_colmajor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/netlib/example_DGESV_rowmajor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/netlib/example_user.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/netlib/lapacke_example_aux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/stackoverflow/example1/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/surfsara/testdsyev.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cmathtuts/H_ATLAS/seehuhn/testlapack.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test35/f77char.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test35/f77cmplx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test35/f77matrx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test35/fortran.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f77_calls_c/kronrod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f90_calls_c/kronrod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/BZ_common/make.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/common/blaio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/cblas_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/netlib/lapacke_example_aux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cmathtuts/common/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cmathtuts/common/include/lapacke_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cmathtuts/common/include/lapacke_utils.h" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/other/cfortran/cfortran-20110621.tar.bz2" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/other/f2c/buildf2c.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/other/f2c/f2c.tar" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/other/f2c/install_f2c_linux.csh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/other/f2c/install_f2c_osx.csh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test1/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test1/test1F.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test10/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test10/ranvec.f90" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test10/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test11/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test11/add.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test11/redme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test12/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test12/driver.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test12/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test13/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test13/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test13/test13F.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test14/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test14/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test14/test13F.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test15/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test15/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test15/test13F.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test16/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test16/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test16/test13F.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test17/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test17/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test17/test13F.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test18/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test18/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test18/test13F.f90" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test19/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test19/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test19/test13F.f90" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test2/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test2/test2F.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test20/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test20/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test20/test13F.f90" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test21/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test21/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test21/test13F.f90" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test22/Ftest.FOR" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test22/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test22/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test23/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test23/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test23/tstfunc1.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test24/FNUM.FOR" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test24/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test3/FORMAIN.FOR" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test3/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test3/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test32/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test32/main.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test32/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test33/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test33/main.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test33/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test34/ftnfctn.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test34/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test35/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/c_calls_f77/c_calls_f77.html" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/c_calls_f77/kronrod.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/c_calls_f77/kronrod_prb.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/c_calls_f77/kronrod_prb_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/c_calls_f77/robots.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/c_calls_f90/c_calls_f90.html" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/c_calls_f90/kronrod.f90" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/c_calls_f90/kronrod_prb.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/c_calls_f90/kronrod_prb_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/c_calls_f90/robots.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f77_calls_c/f77_calls_c.html" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f77_calls_c/kronrod.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f77_calls_c/kronrod_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f77_calls_c/kronrod_prb.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f77_calls_c/robots.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f90_calls_c/f90_calls_c.html" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f90_calls_c/hello.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f90_calls_c/hello_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f90_calls_c/hello_prb.f90" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f90_calls_c/kronrod.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f90_calls_c/kronrod_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f90_calls_c/kronrod_prb.f90" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/f90_calls_c/robots.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed77/ex1_f77_cc.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed77/ex1_f77_cc_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed77/ex1_g77_gcc.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed77/ex1_g77_gcc_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed77/ex1_main.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed77/mixed.html" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed77/robots.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex1_fort_cc.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex1_fort_cc_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex1_fort_gcc.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex1_fort_gcc_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex1_gfortran_gcc.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex1_gfortran_gcc_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex1_main.f90" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex2_fort_cxx.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex2_fort_cxx_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex2_fort_g++.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex2_fort_g++_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex2_gfortran_g++.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex2_gfortran_g++_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/ex2_main.f90" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixed90/robots.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/ex1_cc_fort.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/ex1_cc_fort_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/ex1_gcc_fort.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/ex1_gcc_fort_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/ex1_sub.f90" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/ex2_cc_fort.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/ex2_cc_fort_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/ex2_gcc_fort.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/ex2_gcc_fort_output.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/ex2_sub.f90" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/mixed.html" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/mixedC/robots.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test36/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test4/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test4/README" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test4/fortran_matrix_multiply.f90" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test5/FORSUBS.FOR" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test5/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test5/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test6/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test6/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test6/test6F.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test7/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test7/ffunction.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test7/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test8/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test8/ffunction.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test9/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test9/ffunction.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/A_fortran/test9/fprogram.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/BZ_common/buildnetlibblas.sh" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/ibm/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/ibm/sample1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/ibm/sample1/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/lindonslog/example1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/lindonslog/example1/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/ubuntuforums/example1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/ubuntuforums/example1/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/ubuntuforums/example2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/ubuntuforums/example2/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/ubuntuforums/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/xianyi/example2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/B_BLAS/xianyi/example2/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/ibm/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/ibm/sample3/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/intel/example1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/intel/example1/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/intel/example2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/intel/example2/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/lindonslog/example1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/lindonslog/example1/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/example1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/example1/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/example2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/example2/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/example3/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/example3/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/example4/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/example4/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/mitchr/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/example1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/example2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/example2/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_cblat1.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_cblat2.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_cblat3.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_dblat1.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_dblat2.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_dblat3.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_sblat1.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_sblat2.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_sblat3.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_zblat1.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_zblat2.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/netlib/testing/c_zblat3.f" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/seehuhn/example1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/seehuhn/example1/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/seehuhn/example2/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/stackoverflow/example1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/stackoverflow/example1/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/stackoverflow/example2/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/ubuntuforums/example1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/ubuntuforums/example3/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/ubuntuforums/example3/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/ubuntuforums/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/xianyi/example1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/C_CBLAS/xianyi/example1/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/mitchr/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/oregonstate/example1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/oregonstate/example2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/oregonstate/example2/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/oregonstate/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/rochester/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/seehuhn/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/surfsara/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/D_LAPACK/surfsara/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/E_CLAPACK/mercer/example1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/E_CLAPACK/mercer/example2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/E_CLAPACK/mercer/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/E_CLAPACK/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/awhan/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/awhan/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/lapackforum/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/lapackforum/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/stackoverflow/example1/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/surfsara/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/F_LAPACKE/surfsara/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/H_ATLAS/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/H_ATLAS/seehuhn/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/Cmathtuts/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

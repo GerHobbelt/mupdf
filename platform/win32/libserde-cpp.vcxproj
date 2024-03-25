@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libserde-cpp</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF8E8C06}</ProjectGuid>
+    <RootNamespace>libserde-cpp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDE_CPP;SERDE_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDE_CPP;SERDE_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDE_CPP;SERDE_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDE_CPP;SERDE_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDE_CPP;SERDE_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDE_CPP;SERDE_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDE_CPP;SERDE_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDE_CPP;SERDE_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDE_CPP;SERDE_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDE_CPP;SERDE_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDE_CPP;SERDE_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDE_CPP;SERDE_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/src/common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/src/generate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/src/init.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/test/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/src/deserializer_yaml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/src/serializer_yaml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/test/advanced.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/test/builtin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/test/errors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/test/std.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/test/types.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/builtin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/deserialize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/deserializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/deque.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/forward_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/optional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/unordered_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/unordered_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/std/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/de/traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/builtin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/serialize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/serializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/deque.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/forward_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/initializer_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/optional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/string_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/unordered_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/unordered_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/std/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/ser/traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/serde.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/deque.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/forward_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/initializer_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/optional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/string_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/unordered_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/unordered_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/include/serde/std/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/src/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/src/cppast_code_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/src/filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/src/gen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/src/generate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/src/init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/test/mytypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/include/serde_yaml/de_yaml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/include/serde_yaml/detail/de_detail.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/include/serde_yaml/detail/ser_detail.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/include/serde_yaml/ser_yaml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/include/serde_yaml/serde_yaml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/test/types.h" />
+    <Image Include="../../thirdparty/owemdjee/serde-cpp/extras/serde-diagram.png" />
+    <Text Include="../../thirdparty/owemdjee/serde-cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/serde-cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/serde-cpp/external/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/cmake/serde-cpp.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_gen/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/serde-cpp/serde-cpp/serde_yaml/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

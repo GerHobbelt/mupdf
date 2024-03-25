@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libserdepp</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF3F7AF2}</ProjectGuid>
+    <RootNamespace>libserdepp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDEPP;SERDEPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDEPP;SERDEPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDEPP;SERDEPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDEPP;SERDEPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDEPP;SERDEPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDEPP;SERDEPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDEPP;SERDEPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDEPP;SERDEPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDEPP;SERDEPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDEPP;SERDEPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDEPP;SERDEPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSERDEPP;SERDEPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/benchmark/benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/benchmark/data_type_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/benchmark/syntax_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/examples/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/examples/example1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/examples/flatten.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/examples/parse_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/examples/pointer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/examples/print.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/examples/reflection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/examples/simple_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/examples/struct_attribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/examples/sugar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/examples/variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/src/to_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/tests/nlohmann_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/tests/rapid_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/tests/reflection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/tests/serializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/tests/toml11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/serdepp/tests/yaml_cpp.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/adaptor/fmt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/adaptor/nlohmann_json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/adaptor/rapidjson.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/adaptor/reflection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/adaptor/sstream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/adaptor/toml11.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/adaptor/yaml-cpp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/attribute/algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/attribute/default.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/attribute/flatten.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/attribute/make_optional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/attribute/meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/attribute/mutli_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/attribute/skip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/attribute/string_convert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/attribute/value_or_struct.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/attributes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/ostream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/serde.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/serializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/include/serdepp/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/src/to_static.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/serdepp/tests/test_struct.hpp" />
+    <Image Include="../../thirdparty/owemdjee/serdepp/Serdepp_Structure.png" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/add_cppm_target.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/core_dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/core_load.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppkg/define.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppkg/download.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppkg/find.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppkg/search_cppkg.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppkg/updater.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppm/compiler_option.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppm/cppm_project.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppm/create_symlink.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppm/cxx_standard.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppm/setting.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppm/target_define.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppm/target_dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppm/target_install.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppm/uninstall.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/cppm/workspace.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/download/git.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/download/tool.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/set_cppm_install_prefix.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/system.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/utility/cppm_print.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/utility/set_cmake_cache.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-tools-0.0.13/version.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm-version.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cmake/cppm_loader.cmake" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/cppm.toml" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/examples/test.json" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/examples/test.toml" />
+    <Text Include="../../thirdparty/owemdjee/serdepp/examples/test.yaml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

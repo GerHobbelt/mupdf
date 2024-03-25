@@ -1,0 +1,2017 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libgtsam</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB141F1}</ProjectGuid>
+    <RootNamespace>libgtsam</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTSAM;GTSAM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTSAM;GTSAM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTSAM;GTSAM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTSAM;GTSAM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTSAM;GTSAM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTSAM;GTSAM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTSAM;GTSAM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTSAM;GTSAM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTSAM;GTSAM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTSAM;GTSAM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTSAM;GTSAM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTSAM;GTSAM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/CppUnitLite/Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/CppUnitLite/TestRegistry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/CppUnitLite/TestResult.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/cmake/example_cmake_find_gtsam/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/doc/Code/LocalizationExample2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/doc/Code/LocalizationFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/doc/Code/OdometryExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/doc/Code/OdometryMarginals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/doc/Code/OdometryOptimize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/doc/Code/Pose2SLAMExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/doc/Code/VisualISAMExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/CameraResectioning.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/CombinedImuFactorsExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/CreateSFMExampleData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/DiscreteBayesNetExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/DiscreteBayesNet_FG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/FisheyeExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/GNCExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/HMMExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/IMUKittiExampleGPS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/ISAM2Example_SmartFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/ImuFactorsExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/ImuFactorsExample2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/InverseKinematicsExampleExpressions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/LocalizationExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/METISOrderingExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/OdometryExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/PlanarSLAMExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose2SLAMExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose2SLAMExampleExpressions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose2SLAMExample_g2o.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose2SLAMExample_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose2SLAMExample_graphviz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose2SLAMExample_lago.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose2SLAMStressTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose2SLAMwSPCG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose3Localization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose3SLAMExampleExpressions_BearingRangeWithTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose3SLAMExample_changeKeys.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose3SLAMExample_g2o.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose3SLAMExample_initializePose3Chordal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose3SLAMExample_initializePose3Gradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/RangeISAMExample_plaza2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/SFMExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/SFMExampleExpressions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/SFMExampleExpressions_bal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/SFMExample_SmartFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/SFMExample_SmartFactorPCG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/SFMExample_bal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/SFMExample_bal_COLAMD_METIS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/SelfCalibrationExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/ShonanAveragingCLI.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/SimpleRotation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/SolverComparer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/StereoVOExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/StereoVOExample_large.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/TimeTBB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/TriangulationLOSTExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/UGM_chain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/UGM_small.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/VisualISAM2Example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/VisualISAMExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/easyPoint2KalmanFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/elaboratePoint2KalmanFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/DSFVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/Matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/SymmetricBlockMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/Vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/VerticalBlockMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/cholesky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/debug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testCholesky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testDSFMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testDSFVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testDebug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testFastContainers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testGroup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testKruskal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testNumericalDerivative.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testOptionalJacobian.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testSerializationBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testStdOptionalSerialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testSymmetricBlockMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testTreeTraversal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testVerticalBlockMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/testWeightedSampler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/timing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/base/utilities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/Basis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/Chebyshev.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/Chebyshev2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/tests/testBasisFactors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/tests/testChebyshev.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/tests/testChebyshev2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/tests/testFourier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/AlgebraicDecisionTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DecisionTreeFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteBayesNet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteBayesTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteConditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteDistribution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteEliminationTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteJunctionTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteKey.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteLookupDAG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteValues.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/Signature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/SignatureParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/TableFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testAlgebraicDecisionTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testDecisionTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testDecisionTreeFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testDiscreteBayesNet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testDiscreteBayesTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testDiscreteConditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testDiscreteDistribution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testDiscreteFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testDiscreteFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testDiscreteLookupDAG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testDiscreteMarginals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testDiscreteValues.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testSerializationDiscrete.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testSignature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testSignatureParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testTableFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3Bundler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3DS2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3DS2_Base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3Fisheye.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3Unified.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3_S2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3_S2Stereo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/CalibratedCamera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cyclic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/EssentialMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Line3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/OrientedPlane3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Point2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Point3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Pose2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Pose3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Rot2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Rot3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Rot3M.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Rot3Q.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/SO3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/SO4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/SOn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Similarity2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Similarity3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/SphericalCamera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/StereoCamera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/StereoPoint2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Unit3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testBearingRange.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testCal3Bundler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testCal3DFisheye.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testCal3DS2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testCal3Unified.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testCal3_S2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testCal3_S2Stereo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testCalibratedCamera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testCameraSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testCyclic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testEssentialMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testLine3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testOrientedPlane3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testPinholeCamera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testPinholePose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testPinholeSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testPoint2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testPoint3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testPose2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testPose3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testQuaternion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testRot2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testRot3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testRot3M.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testRot3Q.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testSO3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testSO4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testSOn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testSerializationGeometry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testSimilarity2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testSimilarity3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testSphericalCamera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testStereoCamera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testStereoPoint2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testTriangulation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testUnit3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/triangulation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/GaussianMixture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/GaussianMixtureFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridBayesNet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridBayesTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridConditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridEliminationTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridGaussianFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridGaussianISAM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridJunctionTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridNonlinearFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridNonlinearISAM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridSmoother.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testGaussianMixture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testGaussianMixtureFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testHybridBayesNet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testHybridBayesTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testHybridConditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testHybridEstimation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testHybridFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testHybridGaussianFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testHybridGaussianISAM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testHybridNonlinearFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testHybridNonlinearISAM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testHybridValues.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testMixtureFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/testSerializationHybrid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/BayesTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/DotWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/Factor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/Key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/LabeledSymbol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/Ordering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/Symbol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/VariableIndex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/VariableSlots.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/inferenceExceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/tests/testKey.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/tests/testLabeledSymbol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/tests/testOrdering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/tests/testSymbol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/tests/testVariableSlots.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/ConjugateGradientSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/Errors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianBayesNet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianBayesTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianConditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianDensity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianEliminationTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianISAM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianJunctionTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/HessianFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/IterativeSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/JacobianFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/KalmanFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/LossFunctions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/NoiseModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/PCGSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/Preconditioner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/Sampler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/Scatter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/SubgraphBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/SubgraphPreconditioner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/SubgraphSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/VectorValues.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/iterative.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/linearExceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testAcceleratedPowerMethod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testErrors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testGaussianBayesNet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testGaussianBayesTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testGaussianConditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testGaussianDensity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testGaussianFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testHessianFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testJacobianFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testKalmanFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testNoiseModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testPowerMethod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testRegularHessianFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testRegularJacobianFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testSampler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testScatter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testSerializationLinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testSparseEigen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/testVectorValues.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/AHRSFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/AttitudeFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/BarometricFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/CombinedImuFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/GPSFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ImuBias.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ImuFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ManifoldPreintegration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/NavState.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/PreintegratedRotation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/PreintegrationBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/PreintegrationParams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ScenarioRunner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/TangentPreintegration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testAHRSFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testAttitudeFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testBarometricFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testCombinedImuFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testConstantVelocityFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testGPSFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testGeographicLib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testImuBias.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testImuFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testMagFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testMagPoseFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testManifoldPreintegration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testNavExpressions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testNavState.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testPoseVelocityBias.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testScenario.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testScenarioRunner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testSerializationNavigation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testTangentPreintegration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/BatchFixedLagSmoother.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/CustomFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/DoglegOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/DoglegOptimizerImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/FixedLagSmoother.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/GaussNewtonOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/GraphvizFormatting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ISAM2-impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ISAM2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ISAM2Clique.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ISAM2Params.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/LevenbergMarquardtOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/LevenbergMarquardtParams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/LinearContainerFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/Marginals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/NonlinearConjugateGradientOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/NonlinearFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/NonlinearFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/NonlinearISAM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/NonlinearOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/NonlinearOptimizerParams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/Values.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/testAdaptAutoDiff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/testBatchFixedLagSmoother.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/testCallRecord.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/testExecutionTrace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/testExpression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/testFactorTesting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/testFunctorizedFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/testLinearContainerFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/testSerializationNonlinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/testUtilities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/testValues.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/testWhiteNoiseFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/precompiled_header.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sam/tests/testBearingFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sam/tests/testBearingRangeFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sam/tests/testRangeFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sam/tests/testSerializationSam.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/DsfTrackGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/MFAS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/SfmData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/SfmTrack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/ShonanAveraging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/ShonanFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/TranslationRecovery.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/tests/testBinaryMeasurement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/tests/testMFAS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/tests/testSfmData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/tests/testSfmTrack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/tests/testShonanAveraging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/tests/testShonanFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/tests/testShonanGaugeFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/tests/testTranslationFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/EssentialMatrixConstraint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/FrobeniusFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/InitializePose3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/OrientedPlane3Factor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/dataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/lago.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testAntiFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testBetweenFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testEssentialMatrixConstraint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testEssentialMatrixFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testFrobeniusFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testGeneralSFMFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testGeneralSFMFactor_Cal3Bundler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testInitializePose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testInitializePose3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testKarcherMeanFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testLago.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testOrientedPlane3Factor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testPoseRotationPrior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testPoseTranslationPrior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testPriorFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testProjectionFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testReferenceFrameFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testRegularImplicitSchurFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testRotateFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testSerializationDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testSerializationInSlam.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testSlamExpressions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testSmartFactorBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testSmartProjectionFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testSmartProjectionPoseFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testSmartProjectionRigFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testStereoFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/testTriangulationFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicBayesNet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicBayesTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicConditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicEliminationTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicISAM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicJunctionTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/tests/testSerializationSymbolic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/tests/testSymbolicBayesNet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/tests/testSymbolicBayesTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/tests/testSymbolicConditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/tests/testSymbolicEliminationTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/tests/testSymbolicFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/tests/testSymbolicFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/tests/testSymbolicISAM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/tests/testSymbolicJunctionTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/tests/testVariableIndex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/base/Dummy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/base/tests/testBTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/base/tests/testDSF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/base/tests/testFixedVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/AllDiff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/CSP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/Domain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/Scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/SingleValue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/examples/schedulingExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/examples/schedulingQuals12.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/examples/schedulingQuals13.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/tests/testCSP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/tests/testLoopyBelief.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/tests/testScheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/tests/testSudoku.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/PoseRTV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/SimpleHelicopter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/tests/testIMUSystem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/tests/testPendulumFactors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/tests/testPoseRTV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/tests/testSimpleHelicopter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/tests/testVelocityConstraint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/tests/testVelocityConstraint3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/examples/ConcurrentCalibration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/examples/ConcurrentFilteringAndSmoothingExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/examples/FixedLagSmootherExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/examples/GncPoseAveragingExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/examples/ISAM2_SmartFactorStereo_IMU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/examples/SmartProjectionFactorExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/examples/SmartRangeExample_plaza1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/examples/SmartRangeExample_plaza2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/examples/SmartStereoProjectionFactorExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/examples/TimeOfArrivalExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/BearingS2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/Event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/Pose3Upright.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/SimPolygon2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/SimWall2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/tests/testBearingS2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/tests/testEvent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/tests/testInvDepthCamera3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/tests/testPose3Upright.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/tests/testSimPolygon2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/tests/testSimWall2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/LPInitSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/LPSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/QPSParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/QPSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/tests/testLPSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/tests/testLinearEquality.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/tests/testQPSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/ConcurrentBatchFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/ConcurrentBatchSmoother.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/ConcurrentFilteringAndSmoothing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/ConcurrentIncrementalFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/ConcurrentIncrementalSmoother.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/IncrementalFixedLagSmoother.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/LinearizedFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/tests/testConcurrentBatchFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/tests/testConcurrentBatchSmoother.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/tests/testConcurrentIncrementalFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/tests/testConcurrentIncrementalSmootherDL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/tests/testConcurrentIncrementalSmootherGN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/tests/testCustomChartExpression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/tests/testIncrementalFixedLagSmoother.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/tests/testLinearizedFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/tests/testNonlinearClusterTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/tests/testParticleFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/partition/GenericGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/partition/tests/testFindSeparator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/partition/tests/testGenericGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/partition/tests/testNestedDissection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/AHRS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/DummyFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/LocalOrientedPlane3Factor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/Mechanization_bRn2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/ProjectionFactorRollingShutter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/RelativeElevationFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/SmartStereoProjectionFactorPP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/SmartStereoProjectionPoseFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/serialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testAHRS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testBetweenFactorEM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testBiasedGPSFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testDummyFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testEquivInertialNavFactor_GlobalVel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testGaussMarkov1stOrderFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testInertialNavFactor_GlobalVelocity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testInvDepthFactor3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testInvDepthFactorVariant1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testInvDepthFactorVariant2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testInvDepthFactorVariant3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testLocalOrientedPlane3Factor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testMultiProjectionFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testOccupancyGrid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testPartialPriorFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testPoseBetweenFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testPosePriorFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testPoseToPointFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testProjectionFactorPPP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testProjectionFactorPPPC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testProjectionFactorRollingShutter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testRelativeElevationFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testSerialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testSmartProjectionPoseFactorRollingShutter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testSmartRangeFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testSmartStereoFactor_iSAM2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testSmartStereoProjectionFactorPP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testSmartStereoProjectionPoseFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testTOAFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testTSAMFactors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testTransformBtwRobotsUnaryFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/testTransformBtwRobotsUnaryFactorEM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/timing/timeDSFvariants.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/timing/timeInertialNavFactor_GlobalVelocity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/timing/timeShonanAveraging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testBoundingConstraint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testDoglegOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testExpressionFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testExtendedKalmanFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testGaussianBayesTreeB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testGaussianFactorGraphB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testGaussianISAM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testGaussianISAM2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testGaussianJunctionTreeB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testGeneralSFMFactorB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testGncOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testGradientDescentOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testImuPreintegration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testIterative.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testLie.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testManifold.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testMarginals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testNonlinearEquality.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testNonlinearFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testNonlinearFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testNonlinearISAM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testNonlinearOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testPCGSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testPreconditioner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testRobust.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testRot3Optimization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testSerializationSlam.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testSimulated2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testSimulated2DOriented.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testSimulated3D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testSubgraphPreconditioner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testSubgraphSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testTranslationRecovery.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/tests/testVisualISAM2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeAdaptAutoDiff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeBatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeCalibratedCamera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeCameraExpression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeCholesky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeFactorOverhead.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeGaussianFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeGaussianFactorGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeIncremental.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeLago.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeMatrixOps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeOneCameraExpression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timePinholeCamera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timePose2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timePose3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeRot2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeRot3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeSFMBAL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeSFMBALautodiff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeSFMBALcamTnav.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeSFMBALnavTcam.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeSFMBALsmart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeSFMExpressions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeSchurFactors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeShonanFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeStereoCamera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeVirtual.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeVirtual2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/timing/timeiSAM2Chain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/cross_module_gil_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/cross_module_interleaved_error_already_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/eigen_tensor_avoid_stl_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/pybind11_cross_module_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/pybind11_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_async.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_buffers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_builtin_casters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_call_policies.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_callbacks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_chrono.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_class.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_cmake_build/embed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_cmake_build/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_const_name.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_constants_and_functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_copy_move.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_custom_type_casters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_custom_type_setup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_docstring_options.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_eigen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_eigen_matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_eigen_tensor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_embed/catch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_embed/external_module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_embed/test_interpreter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_enum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_eval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_exceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_factory_constructors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_gil_scoped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_iostream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_kwargs_and_defaults.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_local_bindings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_methods_and_attributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_modules.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_multiple_inheritance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_numpy_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_numpy_dtypes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_numpy_vectorize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_opaque_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_operator_overloading.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_pickling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_pytypes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_sequences_and_iterators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_smart_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_stl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_stl_binders.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_tagbased_polymorphic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_type_caster_pyobject_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_union.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_unnamed_namespace_a.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_unnamed_namespace_b.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_vector_unique_ptr_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_virtual_functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/matlab/class_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/matlab/enum_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/matlab/functions_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/matlab/geometry_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/matlab/inheritance_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/matlab/multiple_files_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/matlab/namespaces_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/matlab/special_cases_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/matlab/template_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/python/class_pybind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/python/enum_pybind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/python/functions_pybind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/python/geometry_pybind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/python/inheritance_pybind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/python/namespaces_pybind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/python/operator_pybind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/python/special_cases_pybind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/python/templates_pybind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/wrap/tests/pybind_wrapper_test.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/CppUnitLite/Failure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/CppUnitLite/Test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/CppUnitLite/TestHarness.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/CppUnitLite/TestRegistry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/CppUnitLite/TestResult.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/examples/SFMdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/ConcurrentMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/DSFMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/DSFVector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/FastDefaultAllocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/FastList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/FastMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/FastSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/FastVector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/GenericValue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/Group.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/Lie.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/Manifold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/Matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/MatrixSerialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/OptionalJacobian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/ProductLieGroup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/SymmetricBlockMatrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/Testable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/TestableAssertions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/ThreadsafeException.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/Value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/Vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/VectorSerialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/VectorSpace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/VerticalBlockMatrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/WeightedSampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/chartTesting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/cholesky.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/concepts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/kruskal-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/kruskal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/lieProxies.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/make_shared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/numericalDerivative.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/serializationTestHelpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/std_optional_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/testLie.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/timing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/treeTraversal-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/treeTraversal/parallelTraversalTasks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/treeTraversal/statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/base/utilities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/Basis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/BasisFactors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/Chebyshev.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/Chebyshev2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/FitBasis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/Fourier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/AlgebraicDecisionTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/Assignment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DecisionTree-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DecisionTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DecisionTreeFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteBayesNet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteBayesTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteConditional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteDistribution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteEliminationTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteFactorGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteJunctionTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteKey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteLookupDAG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteMarginals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/DiscreteValues.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/Signature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/SignatureParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/TableFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/BearingRange.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3Bundler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3DS2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3DS2_Base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3Fisheye.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3Unified.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3_S2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cal3_S2Stereo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/CalibratedCamera.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/CameraSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Cyclic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/EssentialMatrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Line3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/OrientedPlane3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/PinholeCamera.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/PinholePose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/PinholeSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Point2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Point3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Pose2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Pose3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Quaternion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Rot2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Rot3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/SO3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/SO4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/SOn-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/SOn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Similarity2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Similarity3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/SimpleCamera.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/SphericalCamera.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/StereoCamera.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/StereoPoint2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Unit3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/concepts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/testPoseAdjointMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/triangulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/global_includes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/GaussianMixture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/GaussianMixtureFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridBayesNet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridBayesTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridConditional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridEliminationTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridFactorGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridGaussianFactorGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridGaussianISAM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridJunctionTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridNonlinearFactorGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridNonlinearISAM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridSmoother.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/HybridValues.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/MixtureFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/Switching.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/TinyHybridExample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/BayesNet-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/BayesNet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/BayesTree-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/BayesTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/BayesTreeCliqueBase-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/BayesTreeCliqueBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/ClusterTree-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/ClusterTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/Conditional-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/Conditional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/DotWriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/EliminateableFactorGraph-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/EliminateableFactorGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/EliminationTree-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/EliminationTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/Factor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/FactorGraph-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/FactorGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/ISAM-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/ISAM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/JunctionTree-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/JunctionTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/Key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/LabeledSymbol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/MetisIndex-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/MetisIndex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/Ordering.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/Symbol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/VariableIndex-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/VariableIndex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/VariableSlots.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/graph-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/inference-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/inferenceExceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/AcceleratedPowerMethod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/BinaryJacobianFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/ConjugateGradientSolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/Errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianBayesNet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianBayesTree-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianBayesTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianConditional-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianConditional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianDensity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianEliminationTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianFactorGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianISAM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/GaussianJunctionTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/HessianFactor-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/HessianFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/IterativeSolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/JacobianFactor-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/JacobianFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/KalmanFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/LossFunctions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/NoiseModel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/PCGSolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/PowerMethod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/Preconditioner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/RegularHessianFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/RegularJacobianFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/Sampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/Scatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/SparseEigen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/SubgraphBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/SubgraphPreconditioner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/SubgraphSolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/VectorValues.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/iterative-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/iterative.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/linearAlgorithms-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/linearExceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/powerMethodExample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/AHRSFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/AttitudeFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/BarometricFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/CombinedImuFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ConstantVelocityFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/GPSFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ImuBias.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ImuFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/MagFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/MagPoseFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ManifoldPreintegration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/NavState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/PreintegratedRotation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/PreintegrationBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/PreintegrationCombinedParams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/PreintegrationParams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/Scenario.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ScenarioRunner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/TangentPreintegration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/expressions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/imuFactorTesting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/AdaptAutoDiff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/BatchFixedLagSmoother.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/CustomFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/DoglegOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/DoglegOptimizerImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/Expression-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/Expression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ExpressionFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ExpressionFactorGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ExtendedKalmanFilter-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ExtendedKalmanFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/FixedLagSmoother.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/FunctorizedFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/GaussNewtonOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/GncOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/GncParams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/GraphvizFormatting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ISAM2-impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ISAM2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ISAM2Clique.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ISAM2Params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ISAM2Result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/ISAM2UpdateParams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/LevenbergMarquardtOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/LevenbergMarquardtParams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/LinearContainerFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/Marginals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/NonlinearConjugateGradientOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/NonlinearEquality.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/NonlinearFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/NonlinearFactorGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/NonlinearISAM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/NonlinearOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/NonlinearOptimizerParams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/PriorFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/Symbol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/Values-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/Values.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/WhiteNoiseFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/expressionTesting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/expressions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/factorTesting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/internal/CallRecord.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/internal/ChiSquaredInverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/internal/ExecutionTrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/internal/ExpressionNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/internal/JacobianMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/internal/LevenbergMarquardtState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/internal/NonlinearOptimizerState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/nonlinearExceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/utilities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/precompiled_header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/sam/BearingFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/sam/BearingRangeFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/sam/RangeFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/BinaryMeasurement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/DsfTrackGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/MFAS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/SfmData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/SfmTrack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/ShonanAveraging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/ShonanFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/ShonanGaugeFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/TranslationFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/TranslationRecovery.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/AntiFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/BearingFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/BearingRangeFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/BetweenFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/BoundingConstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/EssentialMatrixConstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/EssentialMatrixFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/FrobeniusFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/GeneralSFMFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/InitializePose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/InitializePose3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/JacobianFactorQ.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/JacobianFactorQR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/JacobianFactorSVD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/KarcherMeanFactor-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/KarcherMeanFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/OrientedPlane3Factor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/PoseRotationPrior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/PoseTranslationPrior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/PriorFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/ProjectionFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/RangeFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/ReferenceFrameFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/RegularImplicitSchurFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/RotateFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/SmartFactorBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/SmartFactorParams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/SmartProjectionFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/SmartProjectionPoseFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/SmartProjectionRigFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/StereoFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/TriangulationFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/dataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/expressions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/lago.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/PinholeFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/smartFactorScenarios.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicBayesNet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicBayesTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicConditional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicEliminationTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicFactor-inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicFactorGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicISAM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/SymbolicJunctionTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/tests/symbolicExampleGraphs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/base/BTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/base/DSF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/base/Dummy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/base/FixedVector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/AllDiff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/BinaryAllDiff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/CSP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/Constraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/Domain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/Scheduler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/SingleValue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/DynamicsPriors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/FullIMUFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/IMUFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/Pendulum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/PoseRTV.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/SimpleHelicopter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/VelocityConstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/VelocityConstraint3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/BearingS2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/Event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/InvDepthCamera3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/Pose3Upright.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/SimPolygon2D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/SimWall2D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/ActiveSetSolver-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/ActiveSetSolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/EqualityFactorGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/InequalityFactorGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/InfeasibleInitialValues.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/InfeasibleOrUnboundedProblem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/LP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/LPInitSolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/LPSolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/LinearCost.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/LinearEquality.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/LinearInequality.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/QP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/QPInitSolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/QPSParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/QPSParserException.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/QPSolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/BatchFixedLagSmoother.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/ConcurrentBatchFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/ConcurrentBatchSmoother.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/ConcurrentFilteringAndSmoothing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/ConcurrentIncrementalFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/ConcurrentIncrementalSmoother.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/FixedLagSmoother.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/IncrementalFixedLagSmoother.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/LinearizedFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/NonlinearClusterTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/partition/FindSeparator-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/partition/FindSeparator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/partition/GenericGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/partition/NestedDissection-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/partition/NestedDissection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/partition/PartitionWorkSpace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/AHRS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/BetweenFactorEM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/BiasedGPSFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/DummyFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/EquivInertialNavFactor_GlobalVel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/EquivInertialNavFactor_GlobalVel_NoBias.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/GaussMarkov1stOrderFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/InertialNavFactor_GlobalVelocity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/InvDepthFactor3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/InvDepthFactorVariant1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/InvDepthFactorVariant2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/InvDepthFactorVariant3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/LocalOrientedPlane3Factor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/Mechanization_bRn2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/MultiProjectionFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/PartialPriorFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/PoseBetweenFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/PosePriorFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/PoseToPointFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/ProjectionFactorPPP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/ProjectionFactorPPPC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/ProjectionFactorRollingShutter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/RelativeElevationFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/SmartProjectionPoseFactorRollingShutter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/SmartRangeFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/SmartStereoProjectionFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/SmartStereoProjectionFactorPP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/SmartStereoProjectionPoseFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/TOAFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/TSAMFactors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/TransformBtwRobotsUnaryFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/TransformBtwRobotsUnaryFactorEM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/basis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/custom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/discrete.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/geometry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/gtsam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/hybrid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/inference.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/navigation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/nonlinear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/sam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/sfm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/slam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/symbolic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/preamble/values.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/basis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/custom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/discrete.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/geometry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/gtsam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/hybrid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/inference.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/navigation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/nonlinear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/sam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/sfm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/slam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/symbolic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam/specializations/values.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam_unstable/preamble.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/python/gtsam_unstable/specializations/gtsam_unstable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/tests/ImuMeasurement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/tests/Measurement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/tests/simulated2D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/tests/simulated2DConstraints.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/tests/simulated2DOriented.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/tests/simulated3D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/tests/smallExample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/timing/DummyFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/timing/timeLinearize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/timing/timeSFMBAL.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/matlab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/attr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/buffer_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/detail/class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/detail/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/detail/descr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/detail/init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/detail/internals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/detail/type_caster_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/detail/typeid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/eigen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/eigen/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/eigen/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/eigen/tensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/embed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/eval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/functional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/gil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/iostream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/numpy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/pybind11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/pytypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/stl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/stl/filesystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/stl_bind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/include/pybind11/type_caster_pyobject_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/constructor_stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/local_bindings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/pybind11_tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/tests/pybind_wrapper_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/wrap/tests/testDependencies.h" />
+    <Image Include="../../thirdparty/owemdjee/gtsam/doc/images/circular.png" />
+    <Image Include="../../thirdparty/owemdjee/gtsam/doc/images/n-steps.png" />
+    <Image Include="../../thirdparty/owemdjee/gtsam/examples/Data/Balbianello/BalbianelloMedium-1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gtsam/examples/Data/Balbianello/BalbianelloMedium-2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gtsam/examples/Data/Balbianello/BalbianelloMedium-3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gtsam/examples/Data/Balbianello/BalbianelloMedium-4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gtsam/examples/Data/Balbianello/BalbianelloMedium-5.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/pybind11-logo.png" />
+    <Image Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/pybind11_vs_boost_python1.png" />
+    <Image Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/pybind11_vs_boost_python2.png" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/CppUnitLite/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/DEVELOP.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/GTSAM-Concepts.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/THANKS.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/USAGE.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/Using-GTSAM-EXPORT.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/FindGooglePerfTools.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/FindMKL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/FindNumPy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/GTSAMCMakeToolsConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/GtsamAddPch.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/GtsamBuildTypes.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/GtsamMakeConfigFile.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/GtsamPrinting.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/GtsamTesting.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleAllocators.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleBoost.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleCCache.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleCPack.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleCephes.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleEigen.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleFinalChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleGeneralOptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleGlobalBuildFlags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleMKL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleMetis.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleOpenMP.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandlePerfTools.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandlePrintConfiguration.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandlePython.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleTBB.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/HandleUninstall.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/README.html" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/dllexport.h.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/example_cmake_find_gtsam/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/obsolete/FindCppUnitLite.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/obsolete/FindWrap.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/cmake/obsolete/GtsamTestingObsolete.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/Code/LocalizationOutput5.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/Code/OdometryOutput1.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/Code/OdometryOutput2.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/Code/OdometryOutput3.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/Code/PlanarSLAMExample.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/Code/calls.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/Code/print.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/Code/whos.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/CodingGuidelines.docx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/CodingGuidelines.lyx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/Hybrid.lyx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/Hybrid.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/ImuFactor.lyx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/ImuFactor.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/LieGroups.lyx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/LieGroups.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/PreintegratedIMUJacobians.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/cholesky.lyx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/common_macros.tex" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/gtsam-coordinate-frames.lyx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/gtsam-coordinate-frames.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/gtsam.lyx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/gtsam.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/Beijing.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/FactorGraph.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/FactorGraph2.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/FactorGraph3.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/FactorGraph4.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/Localization.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/Odometry.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/Victoria.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/circular.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/cube.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/example1.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/example2.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/gtsam-structure.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/hmm-FG.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/hmm.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/littleRobot.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/n-steps.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/sphere2500-result.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/images/w100-result.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/macros.lyx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/math.lyx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/math.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/robust.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/stats.html" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/trustregion.lyx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/doc/trustregion.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/docker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/docker/ubuntu-boost-tbb/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/docker/ubuntu-gtsam-python-vnc/bootstrap.sh" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/docker/ubuntu-gtsam-python-vnc/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/docker/ubuntu-gtsam-python-vnc/vnc.sh" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/docker/ubuntu-gtsam-python/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/docker/ubuntu-gtsam/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/18pointExample1.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/5pointExample1.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/5pointExample2.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/HS21.QPS" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/HS268.QPS" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/HS35.QPS" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/HS35MOD.QPS" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/HS51.QPS" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/HS52.QPS" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/ISAM2_SmartFactorStereo_IMU.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/KittiEquivBiasedImu.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/KittiEquivBiasedImu_metadata.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/KittiGps_converted.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/Plaza1_DR.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/Plaza1_TD.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/Plaza2_DR.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/Plaza2_TD.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/QPExample.QPS" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/QPTEST.QPS" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/VO_calibration.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/VO_calibration00.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/VO_calibration00s.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/VO_camera_poses00.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/VO_camera_poses00s.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/VO_camera_poses_large.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/VO_stereo_factors00.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/VO_stereo_factors00s.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/VO_stereo_factors_large.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/dubrovnik-1-1-pre.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/dubrovnik-3-7-18-pre.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/dubrovnik-3-7-pre.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/example.graph" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/imuAndGPSdata.csv" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/noisyToyGraph.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/optimizedNoisyToyGraph.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/orientationsNoisyToyGraph.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/pose2example.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/pose3Localizationexample.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/pose3example-grid.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/pose3example-offdiagonal-rewritten.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/pose3example-offdiagonal.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/pose3example.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/quadraped_imu_data.csv" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/simpleGraph10gradIter.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/sphere2500.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/sphere2500_groundtruth.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/sphere_smallnoise.graph" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/victoria_park.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/w100.graph" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/w10000.graph" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/w20000.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/base/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/base/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/basis/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testDiscreteBayesTree.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/groups.dox" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/hybrid/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/inference/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/linear/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/mainpage.dox" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/sam/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/sam/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/sfm/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/slam/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/symbolic/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_extra.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/base/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/base/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/examples/Doodle.csv" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/examples/Doodle.xls" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/examples/Doodle2012.csv" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/examples/Doodle2012.xls" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/examples/Doodle2013.csv" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/examples/Doodle2013.xls" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/examples/intrusive.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/examples/small.csv" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/discrete/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/dynamics/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/geometry/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/linear/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/mainpage.dox" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/nonlinear/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/partition/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/partition/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/slam/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/timing/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/timing/process_shonan_timing_results.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/timing/timeDSFvariants.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam_unstable/timing/timeDSFvariants2.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/makestats.sh" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/matlab/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/matlab/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/CustomFactors.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/dev_requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/CombinedImuFactorExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/CustomFactorExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/DogLegOptimizerExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/FixedLagSmootherExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/GPSFactorExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/IMUKittiExampleGPS.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/ImuFactorExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/ImuFactorISAM2Example.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/OdometryExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/PlanarManipulatorExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/PlanarSLAMExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/Pose2ISAM2Example.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/Pose2SLAMExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/Pose2SLAMExample_g2o.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/Pose2SLAMExample_lago.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/Pose3ISAM2Example.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/Pose3SLAMExample_g2o.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/Pose3SLAMExample_initializePose3Chordal.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/PreintegrationExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/SFMExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/SFMExample_bal.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/SFMdata.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/ShonanAveragingCLI.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/SimpleRotation.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/TranslationAveragingExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/VisualISAM2Example.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/VisualISAMExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/examples/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/gtsam.tpl" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/gtsfm.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/imuBias.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/noiseModel.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/symbol_shorthand.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/testEssentialMatrixConstraint.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/testScenarioRunner.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Cal3Fisheye.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Cal3Unified.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_DSFMap.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_DecisionTreeFactor.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_DiscreteBayesNet.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_DiscreteBayesTree.dot" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_DiscreteBayesTree.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_DiscreteConditional.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_DiscreteDistribution.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_DiscreteFactorGraph.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_DsfTrackGenerator.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Factors.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_FixedLagSmootherExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_FrobeniusFactor.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_GaussianBayesNet.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_GaussianFactorGraph.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_GraphvizFormatting.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_HybridBayesNet.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_HybridFactorGraph.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_HybridNonlinearFactorGraph.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_HybridValues.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_JacobianFactor.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_KalmanFilter.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_KarcherMeanFactor.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_LocalizationExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_NonlinearOptimizer.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_OdometryExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_PinholeCamera.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_PlanarSLAMExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Point2.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Point3.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Pose2.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Pose2SLAMExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Pose3.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Pose3SLAMExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_PriorFactor.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Robust.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Rot3.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_SFMExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_SO4.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_SOn.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Scenario.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_SfmData.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_ShonanAveraging.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Sim2.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Sim3.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_SimpleCamera.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_StereoVOExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_TranslationRecovery.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Triangulation.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Utilities.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_Values.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_VisualISAMExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_backwards_compatibility.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_basis.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_custom_factor.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_initialize_pose3.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_lago.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_logging_optimizer.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_pickle.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/tests/test_sam.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/utils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/utils/circlePose3.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/utils/logging_optimizer.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/utils/plot.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/utils/test_case.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/utils/visual_data_generator.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam/utils/visual_isam.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam_unstable/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam_unstable/examples/TimeOfArrivalExample.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam_unstable/examples/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam_unstable/gtsam_unstable.tpl" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam_unstable/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/gtsam_unstable/tests/test_ProjectionFactorRollingShutter.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/python/setup.py.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/timing/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/update_wrap.sh" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/DOCS.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/cmake/GtwrapUtils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/cmake/MatlabWrap.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/cmake/PybindWrap.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/cmake/gtwrapConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/docs/doc_template.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/docs/docs.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/docs/parser/doxygen.conf" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/docs/parser/parse_doxygen_xml.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/docs/parser/parse_xml.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/interface_parser/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/interface_parser/classes.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/interface_parser/declaration.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/interface_parser/enum.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/interface_parser/function.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/interface_parser/module.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/interface_parser/namespace.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/interface_parser/template.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/interface_parser/tokens.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/interface_parser/type.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/interface_parser/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/interface_parser/variable.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/matlab_wrapper/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/matlab_wrapper/mixins.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/matlab_wrapper/templates.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/matlab_wrapper/wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/pybind_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/template_instantiator/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/template_instantiator/classes.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/template_instantiator/constructor.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/template_instantiator/declaration.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/template_instantiator/function.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/template_instantiator/helpers.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/template_instantiator/method.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/gtwrap/template_instantiator/namespace.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/_static/css/custom.css" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/cast/chrono.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/cast/custom.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/cast/eigen.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/cast/functional.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/cast/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/cast/overview.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/cast/stl.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/cast/strings.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/classes.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/embedding.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/exceptions.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/functions.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/misc.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/pycpp/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/pycpp/numpy.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/pycpp/object.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/pycpp/utilities.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/advanced/smart_ptrs.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/basics.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/benchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/benchmark.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/changelog.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/classes.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/cmake/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/compiling.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/faq.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/limitations.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/pybind11_vs_boost_python1.svg" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/pybind11_vs_boost_python2.svg" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/reference.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/release.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/docs/upgrade.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/noxfile.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/pybind11/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/pybind11/__main__.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/pybind11/_version.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/pybind11/commands.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/pybind11/setup_helpers.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/conftest.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/env.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/extra_python_package/pytest.ini" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/extra_python_package/test_files.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/extra_setuptools/pytest.ini" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/extra_setuptools/test_setuphelper.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/pytest.ini" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_async.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_buffers.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_builtin_casters.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_call_policies.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_callbacks.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_chrono.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_class.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_cmake_build/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_cmake_build/installed_embed/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_cmake_build/installed_function/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_cmake_build/installed_target/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_cmake_build/subdirectory_embed/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_cmake_build/subdirectory_function/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_cmake_build/subdirectory_target/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_cmake_build/test.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_const_name.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_constants_and_functions.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_copy_move.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_custom_type_casters.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_custom_type_setup.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_docstring_options.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_eigen.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_eigen_matrix.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_eigen_tensor.inl" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_eigen_tensor.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_embed/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_embed/test_interpreter.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_embed/test_trampoline.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_enum.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_eval.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_eval_call.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_exceptions.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_factory_constructors.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_gil_scoped.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_iostream.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_kwargs_and_defaults.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_local_bindings.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_methods_and_attributes.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_modules.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_multiple_inheritance.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_numpy_array.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_numpy_dtypes.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_numpy_vectorize.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_opaque_types.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_operator_overloading.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_pickling.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_pytypes.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_sequences_and_iterators.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_smart_ptr.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_stl.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_stl_binders.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_tagbased_polymorphic.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_thread.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_type_caster_pyobject_ptr.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_union.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_unnamed_namespace_a.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_unnamed_namespace_b.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_vector_unique_ptr_member.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tests/test_virtual_functions.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/FindCatch.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/FindEigen3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/FindPythonLibsNew.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/JoinPaths.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/check-style.sh" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/codespell_ignore_lines_from_errors.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/libsize.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/make_changelog.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/pybind11.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/pybind11Common.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/pybind11Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/pybind11NewTools.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/pybind11Tools.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/setup_global.py.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/pybind11/tools/setup_main.py.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/scripts/matlab_wrap.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/scripts/pybind_wrap.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/sphinx/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/sphinx/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/sphinx/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/sphinx/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/sphinx/wrap.rst" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/templates/matlab_wrapper.tpl.in" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/combine.xslt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/compound.xsd" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/index.xsd" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/tests/pybind_wrapper.tpl" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/tests/pybind_wrapper_test_script.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/tests/test_docs.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/tests/test_interface_parser.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/tests/test_matlab_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/tests/test_pybind_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/tests/test_template_instantiator.py" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/wrap/utilities/update.sh" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/doc/DoxygenLayout.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/examples/Data/randomGrid3D.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/examples/Data/toy3D.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/tests/priorFactor.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/package.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/JacobianFactorQ_8h.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/NonlinearFactor_8h.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/classgtsam_1_1JacobianFactorQ.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/classgtsam_1_1NoiseModelFactor.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/classgtsam_1_1NoiseModelFactor1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/classgtsam_1_1NoiseModelFactor2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/classgtsam_1_1NoiseModelFactor3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/classgtsam_1_1NoiseModelFactor4.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/classgtsam_1_1NoiseModelFactor5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/classgtsam_1_1NoiseModelFactor6.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/classgtsam_1_1NonlinearFactor.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/deprecated.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/dir_59425e443f801f1f2fd8bbe4959a3ccf.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/dir_e4787312bc569bb879bb1171628269de.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/index.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/namespacegtsam.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/structgtsam_1_1traits_3_01JacobianFactorQ_3_01D_00_01ZDim_01_4_01_4.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gtsam/wrap/tests/expected/xml/structgtsam_1_1traits_3_01NonlinearFactor_01_4.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

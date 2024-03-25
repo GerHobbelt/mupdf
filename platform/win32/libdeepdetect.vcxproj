@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libdeepdetect</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF4830D7}</ProjectGuid>
+    <RootNamespace>libdeepdetect</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEEPDETECT;DEEPDETECT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEEPDETECT;DEEPDETECT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEEPDETECT;DEEPDETECT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEEPDETECT;DEEPDETECT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEEPDETECT;DEEPDETECT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEEPDETECT;DEEPDETECT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEEPDETECT;DEEPDETECT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEEPDETECT;DEEPDETECT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEEPDETECT;DEEPDETECT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEEPDETECT;DEEPDETECT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEEPDETECT;DEEPDETECT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEEPDETECT;DEEPDETECT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/main/dede.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/patches/caffe2/custom_ops/bbox_to_roi_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/patches/caffe2/custom_ops/multi_level_roi_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/patches/caffe2/custom_ops/segment_mask_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/apidata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe/caffeinputconns.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe/caffelib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe/caffemodel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/caffe2inputimg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/caffe2inputinterface.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/caffe2lib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/caffe2model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/nettools/debug.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/nettools/devices_and_operators.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/nettools/fillers_and_optimizers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/nettools/gradients.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/nettools/internal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/nettools/netgroup.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/nettools/workspace_and_nets.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/dlib/dlib_actions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/dlib/dliblib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/dlib/dlibmodel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/ncnn/caffe2ncnn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/ncnn/ncnnlib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/ncnn/ncnnmodel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/ncnn/upgrade_proto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/tensorrt/protoUtils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/tensorrt/tensorrtinputconns.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/tensorrt/tensorrtlib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/tensorrt/tensorrtmodel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/tf/tflib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/tf/tfmodel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/native_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/crnn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/crnn_head.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/nbeats.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/torchvision/resnet.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/ttransformer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/ttransformer/positionalenc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/ttransformer/tdecoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/ttransformer/tembedder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/ttransformer/tencoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/visformer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/vit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/optim/madgrad.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/optim/radam.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/optim/ranger.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchdataaug.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchdataset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchgraphbackend.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchinputconns.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchlib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchloss.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchmodel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchmodule.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchsolver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchutils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/tsne/tsneinputconns.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/tsne/tsnelib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/xgb/xgbinputconns.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/xgb/xgblib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/backends/xgb/xgbmodel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/chain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/chain_actions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/commandlineapi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/commandlinejsonapi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/csvinputfileconn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/csvtsinputfileconn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/deepdetect.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/dto/ddtypes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/ext/rmustache/mustache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/generators/net_caffe.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/generators/net_caffe_convnet.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/generators/net_caffe_mlp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/generators/net_caffe_recurrent.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/generators/net_caffe_resnet.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/graph/basegraph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/graph/caffeinput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/graph/graph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/graph/operators.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/http/access_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/http/error_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/httpjsonapi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/jsonapi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/oatppjsonapi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/resources.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/service_stats.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/simsearch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/svminputfileconn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/txtinputfileconn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/utils/db.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/utils/db_lmdb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/src/utils/oatpp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/opencv_tensor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-apidata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-caffe-mlp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-caffe2api.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-caffeapi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-chain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-conn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-dlibapi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-dto.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-graph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-jsonapi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-ncnnapi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-oatpp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-simsearch-faiss.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-simsearch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-tensorrtapi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-tfapi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-torchapi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-video.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tests/ut-xgbapi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tools/caffe2/convert_proto.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tools/caffe2/net2svg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/deepdetect/tools/caffe2/net2template.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/main/caffelibstrategy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/patches/caffe2/custom_ops/bbox_to_roi_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/patches/caffe2/custom_ops/multi_level_roi_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/patches/caffe2/custom_ops/segment_mask_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/allconnectors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/apidata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/apistrategy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe/caffeinputconns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe/caffelib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe/caffemodel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/caffe2inputconns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/caffe2lib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/caffe2libstate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/caffe2model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/nettools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/caffe2/nettools/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/dlib/DNNStructures.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/dlib/dlib_actions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/dlib/dlibinputconns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/dlib/dliblib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/dlib/dlibmodel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/ncnn/caffe2ncnn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/ncnn/ncnninputconns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/ncnn/ncnnlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/ncnn/ncnnmodel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/ncnn/upgrade_proto.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tensorrt/error_recorder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tensorrt/half.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tensorrt/models/yolo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tensorrt/protoUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tensorrt/tensorrtcalibrator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tensorrt/tensorrtinputconns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tensorrt/tensorrtlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tensorrt/tensorrtmodel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tf/tfinputconns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tf/tflib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tf/tfmodel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/llogging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/native.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/native_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/native_net.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/native_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/crnn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/crnn_head.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/nbeats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/torchvision/modelsimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/torchvision/resnet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/ttransformer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/ttransformer/positionalenc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/ttransformer/tdecoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/ttransformer/tembedder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/ttransformer/tencoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/ttransformer/ttypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/visformer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/vision_models.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/native/templates/vit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/optim/madgrad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/optim/radam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/optim/ranger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchdataaug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchdataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchgraphbackend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchinputconns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchloss.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchmodel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchmodule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchsolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/torch/torchutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tsne/tsneinputconns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tsne/tsnelib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/tsne/tsnemodel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/xgb/xgb_dmlc_macro_fix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/xgb/xgbinputconns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/xgb/xgblib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/backends/xgb/xgbmodel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/chain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/chain_actions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/commandlineapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/commandlinejsonapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/csvinputfileconn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/csvtsinputfileconn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dd_spdlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dd_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/deepdetect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/chain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/ddtypes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/info.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/input_connector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/measure.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/mllib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/model.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/output_connector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/parameters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/predict_out.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/resource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/service_create.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/service_predict.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/dto/stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/ext/base64/base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/ext/rmustache/mustache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/generators/net_caffe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/generators/net_caffe_convnet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/generators/net_caffe_mlp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/generators/net_caffe_recurrent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/generators/net_caffe_resnet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/generators/net_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/graph/basegraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/graph/caffeinput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/graph/graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/graph/operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/http/access_log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/http/app_component.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/http/controller.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/http/error_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/http/flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/http/swagger_component.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/http/swagger_controller.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/httpjsonapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/imginputfileconn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/inputconnectorstrategy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/jsonapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/mllibstrategy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/mlmodel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/mlservice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/oatppjsonapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/outputconnectorstrategy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/resources.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/service_stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/services.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/simsearch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/supervisedoutputconnector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/svminputfileconn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/txtinputfileconn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/unsupervisedoutputconnector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/utils/apitools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/utils/bbox.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/utils/csv_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/utils/cv_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/utils/db.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/utils/db_lmdb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/utils/fileops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/utils/httpclient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/utils/oatpp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/utils/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/src/videoinputfileconn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/deepdetect/tests/ut-oatpp.h" />
+    <Image Include="../../thirdparty/owemdjee/deepdetect/demo/imgdetect/images/loading.gif" />
+    <Image Include="../../thirdparty/owemdjee/deepdetect/examples/caffe/mnist/sample_digit.png" />
+    <Image Include="../../thirdparty/owemdjee/deepdetect/examples/caffe/mnist/sample_digit2.png" />
+    <Image Include="../../thirdparty/owemdjee/deepdetect/examples/caffe/voc_roi/000010_bw.jpg" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/ISSUE_TEMPLATE.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/README.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/aclocal.m4" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/ci/Jenkinsfile-jetson-nano.unittests" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/ci/Jenkinsfile-trt.unittests" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/ci/Jenkinsfile.docker" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/ci/Jenkinsfile.unittests" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/ci/README.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/ci/build-docker-images.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/ci/devel-jetson-nano.Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/ci/devel-trt.Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/ci/devel.Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/ci/release.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/clients/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/clients/python/dd_client/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/clients/python/dd_client/bench.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/clients/python/list_bench_files.txt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/clients/python/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/clients/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/clients/python/tox.ini" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/cmake/Cuda.cmake" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/cmake/DeepDetectConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/cmake/FindCUDNN.cmake" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/cmake/build_external.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/cmake/patch_external.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/cmake/patches-apply.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/datasets/imagenet/corresp_ilsvrc12.txt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/datasets/imagenet/scripts/build_dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/datasets/imagenet/scripts/gloss.txt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/datasets/imagenet/scripts/ilvrc2011.txt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/datasets/imagenet/scripts/imagenet.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/datasets/imagenet/scripts/wordnet.is_a.txt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/datasets/imagenet/scripts/words.txt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/gpt2/dd_client.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/gpt2/run_gpt2.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/imgdetect/README.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/imgdetect/css/jumbotron-narrow.css" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/imgdetect/index.html" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/imgdetect/js/main.js" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/imgsearch/README.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/imgsearch/dd_client.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/imgsearch/imgsearch.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/imgsearch/imgsearch_dd.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/objdetect/README.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/objdetect/chaindetect.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/objdetect/objdetect.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/objdetect/sliding_objdetect.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/objsearch/README.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/objsearch/inspect_rois.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/objsearch/launch_dd_detector.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/objsearch/model/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/objsearch/objsearch.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/objsearch/objsearch_dd.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/segmentation/README.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/segmentation/segment.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/segmentation/segment_sliding.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/segmentation/view_annot.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/tsne/README.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/tsne/demo_tsne.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/demo/tsne/demo_tsne_txt.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/docker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/docker/check-dede-deps.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/docker/cpu-arm.Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/docker/cpu.Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/docker/get_libs.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/docker/gpu.Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/docker/gpu_tensorrt.Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/docker/start-dede.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/docker/sync_gpu_dockerfiles.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/docs/api.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/docs/dependencies.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/docs/docker.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/docs/source.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/all/farm_ads/README" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/all/forest_type/README" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/all/n20/README" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/all/sinus/gen.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/caffe/mnist/lenet_deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/caffe/mnist/lenet_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/caffe/mnist/lenet_train_test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/caffe/plankton/README" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/caffe/voc_roi/000010_bw_histogram_equalizer.yml" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/caffe/voc_roi/000010_histogram_equalizer.yml" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/caffe2/detectron/README.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/caffe2/detectron/convert_pkl_to_pb.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/caffe2/detectron/masks.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/caffe2/detectron/plot_masks.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/examples/graph/recurrent.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/get_models.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/m4/ax_cxx_compile_stdcxx_11.m4" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/main/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/package.json" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/patches/test_patch.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/src/dd_config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/alexnet/alexnet.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/alexnet/alexnet_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/alexnet/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/alexnet/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/cifar/cifar.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/cifar/cifar_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/cifar/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/convnet/convnet.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/convnet/convnet_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/convnet/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/crnn/crnn.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/crnn/crnn_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/crnn/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/crnn_resnet_18/crnn_resnet_18.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/crnn_resnet_18/crnn_resnet_18_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/crnn_resnet_18/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/crnn_se_resnet_50/crnn_se_resnet_50.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/crnn_se_resnet_50/crnn_se_resnet_50_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/crnn_se_resnet_50/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/crnn_se_resnext_50/crnn_se_resnext_50.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/crnn_se_resnext_50/crnn_se_resnext_50_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/crnn_se_resnext_50/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/deeplab_vgg16/deeplab_vgg16.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/deeplab_vgg16/deeplab_vgg16_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/deeplab_vgg16/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/enet/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/enet/enet.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/enet/enet_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/googlenet/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/googlenet/googlenet.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/googlenet/googlenet_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/googlenet/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/googlenet_bn/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/googlenet_bn/googlenet_bn.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/googlenet_bn/googlenet_bn_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/lregression/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/lregression/lregression.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/lregression/lregression_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/mlp/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/mlp/mlp.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/mlp/mlp_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/mobilenet_v2/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/mobilenet_v2/mobilenet_v2.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/mobilenet_v2/mobilenet_v2_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/mobilenet_v2_ssd/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/mobilenet_v2_ssd/mobilenet_v2_ssd.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/mobilenet_v2_ssd/mobilenet_v2_ssd_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/nin/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/nin/nin.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/nin/nin_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/pspnet_101/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/pspnet_101/pspnet_101.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/pspnet_101/pspnet_101_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/pspnet_50/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/pspnet_50/pspnet_50.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/pspnet_50/pspnet_50_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/pspnet_vgg16/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/pspnet_vgg16/pspnet_vgg16.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/pspnet_vgg16/pspnet_vgg16_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/recurrent/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/recurrent/recurrent.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/recurrent/recurrent_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/refinedet_512/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/refinedet_512/refinedet_512.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/refinedet_512/refinedet_512_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/refinedet_vovnet27slim_512/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/refinedet_vovnet27slim_512/refinedet_vovnet27slim_512.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/refinedet_vovnet27slim_512/refinedet_vovnet27slim_512_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/refinedet_vovnet39_512/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/refinedet_vovnet39_512/refinedet_vovnet39_512.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/refinedet_vovnet39_512/refinedet_vovnet39_512_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet/resnet_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_101/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_101/resnet_101.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_101/resnet_101_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_10_ssd/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_10_ssd/resnet_10_ssd.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_10_ssd/resnet_10_ssd_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_152/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_152/resnet_152.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_152/resnet_152_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_18/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_18/resnet_18.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_18/resnet_18_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_18_ssd/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_18_ssd/resnet_18_ssd.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_18_ssd/resnet_18_ssd_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_32/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_32/resnet_32.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_32/resnet_32_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_34_ssd/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_34_ssd/resnet_34_ssd.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_34_ssd/resnet_34_ssd_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_50/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_50/resnet_50.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/resnet_50/resnet_50_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_bn_inception/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_bn_inception/se_bn_inception.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_bn_inception/se_bn_inception_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_net/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_net/se_net.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_net/se_net_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnet_101/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnet_101/se_resnet_101.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnet_101/se_resnet_101_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnet_152/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnet_152/se_resnet_152.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnet_152/se_resnet_152_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnet_50/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnet_50/se_resnet_50.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnet_50/se_resnet_50_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnext_101/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnext_101/se_resnext_101.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnext_101/se_resnext_101_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnext_50/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnext_50/se_resnext_50.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/se_resnext_50/se_resnext_50_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/segnet/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/segnet/segnet.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/segnet/segnet_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/shufflenet/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/shufflenet/shufflenet.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/shufflenet/shufflenet_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/squeezenet/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/squeezenet/squeezenet.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/squeezenet/squeezenet_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/squeezenet_ssd/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/squeezenet_ssd/squeezenet_ssd.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/squeezenet_ssd/squeezenet_ssd_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/ssd_300/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/ssd_300/ssd_300.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/ssd_300/ssd_300_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/ssd_300_res_128/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/ssd_300_res_128/ssd_300_res_128.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/ssd_300_res_128/ssd_300_res_128_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/ssd_512/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/ssd_512/ssd_512.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/ssd_512/ssd_512_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/ssd_512_res_128/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/ssd_512_res_128/ssd_512_res_128.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/ssd_512_res_128/ssd_512_res_128_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/unet/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/unet/unet.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/unet/unet_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/vdcnn_17/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/vdcnn_17/vdcnn_17.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/vdcnn_17/vdcnn_17_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/vdcnn_9/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/vdcnn_9/vdcnn_9.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/vdcnn_9/vdcnn_9_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/vgg_16/deploy.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/vgg_16/vgg_16.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe/vgg_16/vgg_16_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/alexnet/init_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/alexnet/predict_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/googlenet/init_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/googlenet/predict_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/inception_bn/init_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/inception_bn/predict_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/lenet/init_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/lenet/predict_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/resnet_18/init_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/resnet_18/predict_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/resnet_50/init_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/resnet_50/predict_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/vgg_16/init_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/vgg_16/predict_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/vgg_19/init_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/vgg_19/predict_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/wrn_50/init_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/wrn_50/predict_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/xception/init_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/templates/caffe2/xception/predict_net.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tests/ut_python/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tests/ut_python/ut_tools_torch.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tests/ut_python/ut_tools_torch_yolox.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tools/build-cpp-netlib-pkg.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tools/build_docker_images_with_debian_workaround.sh" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tools/caffe2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tools/torch/README.md" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tools/torch/trace_detr.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tools/torch/trace_pytorch_transformers.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tools/torch/trace_timm_models.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tools/torch/trace_torchvision.py" />
+    <Text Include="../../thirdparty/owemdjee/deepdetect/tools/torch/trace_yolox.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

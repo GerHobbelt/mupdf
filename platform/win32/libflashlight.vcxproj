@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libflashlight</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF359D00}</ProjectGuid>
+    <RootNamespace>libflashlight</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLASHLIGHT;FLASHLIGHT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLASHLIGHT;FLASHLIGHT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLASHLIGHT;FLASHLIGHT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLASHLIGHT;FLASHLIGHT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLASHLIGHT;FLASHLIGHT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLASHLIGHT;FLASHLIGHT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLASHLIGHT;FLASHLIGHT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLASHLIGHT;FLASHLIGHT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLASHLIGHT;FLASHLIGHT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLASHLIGHT;FLASHLIGHT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLASHLIGHT;FLASHLIGHT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLASHLIGHT;FLASHLIGHT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/Decode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/Train.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/tools/VoiceActivityDetection-CTC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/tools/alignment/Align.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/tools/benchmark/ArchBenchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/tutorial/FinetuneCTC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/tutorial/InferenceCTC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/benchmark/ModelBenchmarker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/benchmark/Run.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/benchmark/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/benchmark/models/AsrTransformer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/benchmark/models/LmTransformer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/imgclass/examples/Defines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/imgclass/examples/ImageNetEval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/imgclass/examples/ImageNetResnet34.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/imgclass/examples/ImageNetTransformer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/lm/BuildDictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/lm/Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/lm/Train.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/lm/Trainer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/lm/common/Defines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/lm/plugins/LMAdae1024SinposL16H8Fc4096Dp01Ldp0Amp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/lm/plugins/LmAdae512SinposL8H8Fc1024Dp03Ldp0Adsm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/objdet/examples/CocoDetr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/app/objdet/examples/ImageNetResnet50Backbone.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/Functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/Variable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/AutogradOps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/cudnn/BatchNorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/cudnn/Conv2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/cudnn/CudnnAutogradExtension.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/cudnn/CudnnUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/cudnn/Pool2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/cudnn/RNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/onednn/BatchNorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/onednn/Conv2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/onednn/DnnlUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/onednn/OneDnnAutogradExtension.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/onednn/Pool2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/onednn/RNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Defines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/DevicePtr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/DynamicBenchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/stacktrace/Backward.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/AdaptiveEmbedding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/AsymmetricConv1D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/Conformer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/PositionEmbedding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/RawWavSpecAugment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/Residual.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/SinusoidalPositionEmbedding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/SpecAugment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/TDSBlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/Transformer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/BatchDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/BlobDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/ConcatDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/FileBlobDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/MemoryBlobDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/MergeDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/PrefetchDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/ResampleDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/ShuffleDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/SpanDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/TensorDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/TransformDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/DistributedApi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/FileStore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/backend/cpu/DistributedBackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/backend/cuda/DistributedBackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/backend/stub/DistributedBackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/reducers/CoalescingReducer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/reducers/InlineReducer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/examples/AdaptiveClassification.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/examples/Benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/examples/Classification.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/examples/DistributedTraining.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/examples/LinearRegression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/examples/Mnist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/examples/Perceptron.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/examples/RnnClassification.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/examples/RnnLm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/examples/Xor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/AverageValueMeter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/CountMeter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/EditDistanceMeter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/FrameErrorMeter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/MSEMeter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/TimeMeter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/TopKMeter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/DistributedUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/Init.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Activations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/AdaptiveSoftMax.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/BatchNorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Container.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Conv2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Dropout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Embedding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Identity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/LayerNorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Linear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Loss.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Normalize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Padding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Pool2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/PrecisionCast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/RNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Reorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/View.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/WeightNorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/AMSgradOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/AdadeltaOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/AdagradOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/AdamOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/NAGOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/NovogradOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/Optimizers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/RMSPropOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/SGDOptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/CUDADevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/CUDAStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/CUDAUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/Device.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/DeviceManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/DeviceType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/Stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/SynchronousStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/CUDAProfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/Compute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/DefaultTensorType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/Index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/Init.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/Random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/Shape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/TensorAdapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/TensorBackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/TensorBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/TensorExtension.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/Types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/AdvancedIndex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/ArrayFireBLAS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/ArrayFireBackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/ArrayFireBinaryOps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/ArrayFireCPUStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/ArrayFireReductions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/ArrayFireShapeAndIndex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/ArrayFireTensor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/ArrayFireUnaryOps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/mem/CachingMemoryManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/mem/DefaultMemoryManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/mem/MemoryManagerAdapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/mem/MemoryManagerInstaller.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/JitBackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/JitTensorBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ShapeInference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/eval/Evaluator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/BinaryNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/CustomNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/ExternalUse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/IndexNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/IndexedUpdateNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/Node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/NodeType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/ScalarNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/Use.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/ValueNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/Optimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/backends/onednn/OneDnnJitOptimizerExtension.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/backends/onednn/OneDnnOpFusion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/passes/ScalarFolding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/printer/GraphvizPrinter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/printer/ScopedPostEvalGraphvizPrinter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/onednn/OneDnnBackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/onednn/OneDnnCPUStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/onednn/OneDnnTensor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/onednn/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/stub/StubBackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/stub/StubTensor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/autograd/AutogradBinaryOpsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/autograd/AutogradConv2DTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/autograd/AutogradNormalizationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/autograd/AutogradReductionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/autograd/AutogradRnnTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/autograd/AutogradTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/autograd/AutogradUnaryOpsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/common/DevicePtrTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/common/DynamicBenchmarkTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/common/HistogramTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/common/LoggingTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/common/SerializationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/common/UtilsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/contrib/modules/ContribModuleTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/contrib/modules/ContribSerializationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/dataset/DatasetTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/dataset/DatasetUtilsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/distributed/AllReduceBenchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/distributed/AllReduceTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/meter/MeterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/nn/ModuleTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/nn/NNSerializationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/nn/NNUtilsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/optim/OptimBenchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/optim/OptimTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/runtime/CUDADeviceTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/runtime/CUDAStreamTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/runtime/DeviceManagerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/runtime/DeviceTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/runtime/DeviceTypeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/ComputeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/IndexTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/ShapeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/TensorAdapterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/TensorBLASTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/TensorBaseTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/TensorBinaryOpsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/TensorExtensionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/TensorReductionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/TensorUnaryOpsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/af/ArrayFireCPUStreamTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/af/ArrayFireTensorBaseTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/af/CachingMemoryManagerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/af/MemoryFrameworkTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/af/MemoryInitTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/jit/JitEvaluatorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/jit/JitNodeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/jit/JitOneDnnOpFusionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/jit/JitScalarFoldingTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/jit/JitTensorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/onednn/OneDnnCPUStreamTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/tensor/onednn/OneDnnTensorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/halide/HalideInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/halide/test/HalideTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/halide/test/HalideTestPipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/Runtime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/amp/DynamicScaler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/common/DistributedUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/common/SequentialBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/plugin/ModulePlugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/plugin/plugincompiler/PluginModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/test/DynamicScalerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/test/common/SequentialBuilderTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/test/plugin/ModulePluginTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/test/plugin/test_module_plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Ceplifter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Dct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Derivatives.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Dither.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Mfcc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Mfsc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/PowerSpectrum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/PreEmphasis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/SpeechUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/TriFilterbank.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Windowing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/AdditiveNoise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/GaussianNoise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/Reverberation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/SoundEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/SoundEffectApply.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/SoundEffectConfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/SoundEffectUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/SoxWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/TimeStretch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/common/Flags.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/ConnectionistTemporalClassificationCriterion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/CriterionUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/ForceAlignmentCriterion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/FullConnectionCriterion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/Seq2SeqCriterion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/TransformerCriterion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/ContentAttention.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/LocationAttention.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/MedianWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/MultiHeadAttention.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/SoftPretrainWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/SoftWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/StepWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/WindowBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/backend/cpu/ConnectionistTemporalClassificationCriterion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/backend/cpu/CriterionUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/backend/cpu/ForceAlignmentCriterion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/backend/cpu/FullConnectionCriterion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/backend/cuda/ConnectionistTemporalClassificationCriterion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/backend/cuda/CriterionUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/backend/cuda/ForceAlignmentCriterion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/backend/cuda/FullConnectionCriterion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/data/FeatureTransforms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/data/ListFileDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/data/Sound.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/data/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/decoder/ConvLmModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/decoder/DecodeMaster.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/decoder/DecodeUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/decoder/PlGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/decoder/TranscriptionUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/runtime/Attention.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/runtime/Helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/runtime/Logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/runtime/Optimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/runtime/SpeechStatMeter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/audio/CeplifterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/audio/DctTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/audio/DerivativesTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/audio/DitherTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/audio/MfccTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/audio/PreEmphasisTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/audio/SpeechUtilsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/audio/TriFilterbankTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/audio/WindowingTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/augmentation/AdditiveNoiseTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/augmentation/GaussianNoiseTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/augmentation/ReverberationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/augmentation/SoundEffectConfigTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/augmentation/SoundEffectTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/augmentation/TimeStretchTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/common/ProducerConsumerQueueTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/criterion/BenchmarkASG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/criterion/BenchmarkCTC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/criterion/BenchmarkSeq2Seq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/criterion/CompareASG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/criterion/CriterionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/criterion/Seq2SeqTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/criterion/attention/AttentionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/criterion/attention/WindowTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/data/FeaturizationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/data/ListFileDatasetTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/data/SoundTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/decoder/ConvLmModuleTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/runtime/RuntimeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/text/data/TextDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/text/test/data/TextDatasetTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/criterion/Hungarian.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/criterion/HungarianImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/criterion/SetCriterion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/BoxUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/Coco.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/CocoTransforms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/DistributedDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/Imagenet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/Jpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/Transforms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/models/Detr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/models/Resnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/models/Resnet50Backbone.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/models/ResnetFrozenBatchNorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/models/ViT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/nn/FrozenBatchNorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/nn/PositionalEmbeddingSine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/nn/Transformer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/nn/VisionTransformer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/tensor/VisionOps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/tensor/backend/af/ArrayFireVisionExtension.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/test/ModelSerializationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/test/PositionalEmbeddingSineTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/test/TransformerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/test/TransformsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/test/criterion/HungarianTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/test/criterion/SetCriterionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/test/dataset/BoxUtilsTest.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/tools/alignment/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/app/benchmark/ModelBenchmarker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/app/benchmark/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/app/benchmark/models/AsrTransformer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/app/benchmark/models/LmTransformer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/app/imgclass/examples/Defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/app/lm/Trainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/app/lm/common/Defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/app/objdet/common/Defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/Functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/Variable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/autograd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/AutogradExtension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/AutogradExtensionBackends.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/AutogradOps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/cudnn/CudnnAutogradExtension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/cudnn/CudnnUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/onednn/DnnlUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/onednn/OneDnnAutogradExtension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/DevicePtr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/DynamicBenchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Filesystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Histogram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Serialization-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/stacktrace/Backward.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/threadpool/ThreadPool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/contrib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/AdaptiveEmbedding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/AsymmetricConv1D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/Conformer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/PositionEmbedding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/RawWavSpecAugment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/Residual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/SinusoidalPositionEmbedding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/SpecAugment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/TDSBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/Transformer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/modules.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/BatchDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/BlobDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/ConcatDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/Dataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/DatasetIterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/FileBlobDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/MemoryBlobDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/MergeDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/PrefetchDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/ResampleDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/ShuffleDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/SpanDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/TensorDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/TransformDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/datasets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/DistributedApi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/FileStore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/LRUCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/distributed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/reducers/CoalescingReducer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/reducers/InlineReducer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/reducers/Reducer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/reducers/reducers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/flashlight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/AverageValueMeter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/CountMeter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/EditDistanceMeter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/FrameErrorMeter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/MSEMeter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/TimeMeter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/TopKMeter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/meters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/DistributedUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/Init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Activations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/AdaptiveSoftMax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/BatchNorm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Conv2D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Dropout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Embedding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Identity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/LayerNorm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Loss.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Module.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Normalize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Padding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Pool2D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/PrecisionCast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/RNN.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Reorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/Transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/View.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/WeightNorm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/modules/modules.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/nn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/AMSgradOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/AdadeltaOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/AdagradOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/AdamOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/NAGOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/NovogradOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/Optimizers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/RMSPropOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/SGDOptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/optim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/CUDADevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/CUDAStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/CUDAUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/Device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/DeviceManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/DeviceType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/Stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/SynchronousStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/runtime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/Compute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/DefaultTensorType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/Index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/Init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/Profile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/Random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/Shape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/TensorAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/TensorBackend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/TensorBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/TensorExtension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/Types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/AdvancedIndex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/ArrayFireBackend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/ArrayFireCPUStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/ArrayFireTensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/mem/CachingMemoryManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/mem/DefaultMemoryManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/mem/MemoryManagerAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/mem/MemoryManagerDeviceInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/mem/MemoryManagerInstaller.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/JitBackend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/JitTensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/JitTensorBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ShapeInference.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/eval/Evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/BinaryNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/CustomNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/ExternalUse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/IndexNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/IndexedUpdateNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/Node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/NodeType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/ScalarNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/Use.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/ValueNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/JitOptimizerExtension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/JitOptimizerExtensionBackends.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/Optimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/Pass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/backends/onednn/OneDnnJitOptimizerExtension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/backends/onednn/OneDnnOpFusion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/passes/ScalarFolding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/printer/GraphvizPrinter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/printer/ScopedPostEvalGraphvizPrinter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/onednn/OneDnnBackend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/onednn/OneDnnCPUStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/onednn/OneDnnTensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/onednn/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/stub/StubBackend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/stub/StubTensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/tensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/autograd/AutogradTestUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/halide/HalideInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/Runtime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/amp/DynamicScaler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/common/DistributedUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/common/SequentialBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/common/Serializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/plugin/ModulePlugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Ceplifter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Dct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Derivatives.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Dither.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/FeatureParams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Mfcc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Mfsc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/PowerSpectrum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/PreEmphasis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/SpeechUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/TriFilterbank.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/Windowing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/AdditiveNoise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/GaussianNoise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/Reverberation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/SoundEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/SoundEffectConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/SoundEffectUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/SoxWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/TimeStretch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/common/Defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/common/Flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/common/ProducerConsumerQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/AutoSegmentationCriterion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/ConnectionistTemporalClassificationCriterion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/CriterionUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/Defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/ForceAlignmentCriterion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/FullConnectionCriterion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/LinearSegmentationCriterion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/Seq2SeqCriterion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/SequenceCriterion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/TransformerCriterion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/AttentionBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/ContentAttention.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/Defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/LocationAttention.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/MedianWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/MultiHeadAttention.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/SoftPretrainWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/SoftWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/StepWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/WindowBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/attention.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/attention/window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/criterion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/data/FeatureTransforms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/data/ListFileDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/data/Sound.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/data/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/decoder/ConvLmModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/decoder/DecodeMaster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/decoder/DecodeUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/decoder/Defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/decoder/PlGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/decoder/TranscriptionUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/runtime/Attention.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/runtime/Helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/runtime/Logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/runtime/Optimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/runtime/SpeechStatMeter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/runtime/runtime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/audio/TestUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/text/data/TextDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/common/BetaDistribution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/criterion/Hungarian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/criterion/HungarianImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/criterion/SetCriterion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/BatchTransformDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/BoxUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/Coco.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/CocoTransforms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/DistributedDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/Imagenet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/Jpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/LoaderDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/TransformAllDataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/Transforms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/models/Detr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/models/Resnet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/models/Resnet50Backbone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/models/ResnetFrozenBatchNorm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/models/ViT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/nn/FrozenBatchNorm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/nn/PositionalEmbeddingSine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/nn/Transformer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/nn/VisionTransformer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/tensor/VisionExtension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/tensor/VisionExtensionBackends.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/tensor/VisionOps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/tensor/backend/af/ArrayFireVisionExtension.h" />
+    <Image Include="../../thirdparty/owemdjee/flashlight/docs/source/images/variable.png" />
+    <Image Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/tools/alignment/alignment_example.png" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/bindings/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/BuildBackwardCpp.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/BuildCereal.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/BuildFlashlightSequence.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/BuildFlashlightText.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/BuildGloo.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/BuildGoogleTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/BuildSndFile.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/BuildStb.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/Buildsox.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/FindCBLAS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/FindCUDNN.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/FindFFTW3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/FindFLAC.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/FindFilesystem.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/FindGLOG.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/FindGMock.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/FindMKL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/FindNCCL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/FindOgg.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/FindSndFile.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/FindVorbis.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/Findgflags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/Findsox.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/HalideUtils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/InternalUtils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/TestUtils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/cmake/flashlightConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/codecov.yml" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/_static/css/styles.css" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/autograd.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/common.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/contrib.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/data_loading.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/debugging.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/dist.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/distributed.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/extend.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/functions.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/linearregression.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/logging.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/memory.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/meters.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/mnist.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/modules.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/optimization.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/quick_start.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/serial.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/serialization.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/tensor.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/docs/source/variable.rst" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/tools/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/tools/alignment/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/tools/alignment/convertToAudacityLabels.py" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/asr/tutorial/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/benchmark/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/benchmark/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/benchmark/models/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/imgclass/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/lm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/lm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/lm/common/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/objdet/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/objdet/scripts/eval_coco.py" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/objdet/scripts/prepare_coco.py" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/app/objdet/scripts/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/cudnn/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/autograd/tensor/backend/onednn/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/stacktrace/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/common/threadpool/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/contrib/modules/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/dataset/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/distributed/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/meter/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/nn/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/optim/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/runtime/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/af/mem/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/eval/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/ir/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/backends/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/backends/onednn/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/opt/passes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/jit/printer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/onednn/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/tensor/backend/stub/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/fl/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/halide/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/amp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/common/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/plugin/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/plugin/plugincompiler/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/runtime/test/common/arch.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/audio/feature/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/augmentation/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/common/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/criterion/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/data/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/decoder/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/runtime/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/audio/data/config.mfcc" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/decoder/data/gcnn_14B_lm_arch_as.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/speech/test/decoder/data/gcnn_14B_lm_arch_ce.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/text/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/text/data/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/text/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/text/test/data/test_data/dictionary.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/text/test/data/test_data/train.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/criterion/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/dataset/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/models/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/nn/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/tensor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/tensor/backend/af/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/flashlight/pkg/vision/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/logo.svg" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/scripts/colab/colab_install_deps.sh" />
+    <Text Include="../../thirdparty/owemdjee/flashlight/scripts/colab/record.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

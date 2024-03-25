@@ -1097,6 +1097,34 @@ liboauth2
 fnmatch
 text-wrangler
 
+kann
+deepdetect
+xbrzscale
+libxbr-standalone
+libpano13
+KDSPDSetup
+serde-cpp
+figcone
+config-cpp
+serdepp
+CNTK
+TNN
+gtsam
+Cmathtuts
+flashlight
+oneDNN
+ZQCNN
+blis
+MegEngine
+OpenNN
+fCWT
+wavelib
+wdenoise
+FastString
+SIMDString
+Multicore-TSNE
+luple
+
 EOT
 )
 
