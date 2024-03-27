@@ -24,22 +24,22 @@ package com.artifex.mupdf.fitz;
 
 public class RectI
 {
-	public int x0;
-	public int y0;
-	public int x1;
-	public int y1;
+	public final int x0;
+	public final int y0;
+	public final int x1;
+	public final int y1;
 
 	// Minimum and Maximum values that can survive round trip
 	// from int to float.
-	private static final int FZ_MIN_INF_RECT = 0x80000000;
-	private static final int FZ_MAX_INF_RECT = 0x7fffff80;
+	protected static final int MIN_INF_RECT = Rect.MIN_INF_RECT;
+	protected static final int MAX_INF_RECT = Rect.MAX_INF_RECT;
 
 	public RectI()
 	{
 		// Invalid (hence zero area) rectangle. Unioning
 		// this with any rectangle (or point) will 'cure' it
-		x0 = y0 = FZ_MAX_INF_RECT;
-		x1 = y1 = FZ_MIN_INF_RECT;
+		x0 = y0 = MAX_INF_RECT;
+		x1 = y1 = MIN_INF_RECT;
 	}
 
 	public RectI(int x0, int y0, int x1, int y1) {
@@ -66,13 +66,13 @@ public class RectI
 
 	public boolean isInfinite()
 	{
-		return this.x0 == FZ_MIN_INF_RECT &&
-			this.y0 == FZ_MIN_INF_RECT &&
-			this.x1 == FZ_MAX_INF_RECT &&
-			this.y1 == FZ_MAX_INF_RECT;
+		return this.x0 == MIN_INF_RECT &&
+			this.y0 == MIN_INF_RECT &&
+			this.x1 == MAX_INF_RECT &&
+			this.y1 == MAX_INF_RECT;
 	}
 
-	public RectI transform(Matrix tm)
+	public RectI transformed(Matrix tm)
 	{
 		if (this.isInfinite())
 			return this;
@@ -119,12 +119,12 @@ public class RectI
 		bx0 += dy0 + tm.f;
 		bx1 += dy1 + tm.f;
 
-		x0 = (int)Math.floor(ax0);
-		x1 = (int)Math.ceil(ax1);
-		y0 = (int)Math.floor(bx0);
-		y1 = (int)Math.ceil(bx1);
-
-		return this;
+		return new RectI(
+			(int)Math.floor(ax0),
+			(int)Math.floor(bx0),
+			(int)Math.ceil(ax1),
+			(int)Math.ceil(bx1)
+		);
 	}
 
 	public boolean contains(int x, int y)
@@ -153,62 +153,53 @@ public class RectI
 		return (x0 <= x1 || y0 <= y1);
 	}
 
-	public void union(RectI r)
+	public RectI unioned(RectI r)
 	{
 		if (!r.isValid() || this.isInfinite())
-			return;
+			return new RectI(this);
 		if (!this.isValid() || r.isInfinite())
-		{
-			x0 = r.x0;
-			y0 = r.y0;
-			x1 = r.x1;
-			y1 = r.y1;
-			return;
-		}
-
-		if (r.x0 < x0)
-			x0 = r.x0;
-		if (r.y0 < y0)
-			y0 = r.y0;
-		if (r.x1 > x1)
-			x1 = r.x1;
-		if (r.y1 > y1)
-			y1 = r.y1;
+			return new RectI(r);
+		return new RectI(
+			r.x0 < x0 ? r.x0 : x0,
+			r.y0 < y0 ? r.y0 : y0,
+			r.x1 > x1 ? r.x1 : x1,
+			r.y1 > y1 ? r.y1 : y1
+		);
 	}
 
-	public void inset(int dx, int dy) {
+	public RectI insetted(int dx, int dy) {
 		if (!this.isValid() || this.isInfinite() || this.isEmpty())
-			return;
-		x0 += dx;
-		y0 += dy;
-		x1 -= dx;
-		y1 -= dy;
+			return new RectI(this);
+		return new RectI(x0 + dx, y0 + dy, x1 - dx, y1 - dy);
 	}
 
-	public void inset(int left, int top, int right, int bottom) {
+	public RectI insetted(int left, int top, int right, int bottom) {
 		if (!this.isValid() || this.isInfinite() || this.isEmpty())
-			return;
-		x0 += left;
-		y0 += top;
-		x1 -= right;
-		y1 -= bottom;
+			return new RectI(this);
+		return new RectI(x0 + left, y0 + top, x1 - right, y1 - bottom);
 	}
 
-	public void offset(int dx, int dy) {
+	public RectI offsetted(int dx, int dy) {
 		if (!this.isValid() || this.isInfinite() || this.isEmpty())
-			return;
-		x0 += dx;
-		y0 += dy;
-		x1 += dx;
-		y1 += dy;
+			return new RectI(this);
+		return new RectI(x0 + dx, y0 + dy, x1 + dx, y1 + dy);
 	}
 
-	public void offsetTo(int left, int top) {
+	public RectI offsettedTo(int left, int top) {
 		if (!this.isValid() || this.isInfinite() || this.isEmpty())
-			return;
-		x1 += left - x0;
-		y1 += top - y0;
-		x0 = left;
-		y0 = top;
+			return new RectI(this);
+		return new RectI(left, top, left + x1 - x0, top + y1 - y0);
+	}
+
+	public static RectI Infinite() {
+		return new RectI(MIN_INF_RECT, MIN_INF_RECT, MAX_INF_RECT, MAX_INF_RECT);
+	}
+
+	public static RectI Empty() {
+		return new RectI(MAX_INF_RECT, MAX_INF_RECT, MIN_INF_RECT, MIN_INF_RECT);
+	}
+
+	public static RectI Invalid() {
+		return new RectI(MAX_INF_RECT, MAX_INF_RECT, MIN_INF_RECT, MIN_INF_RECT);
 	}
 }

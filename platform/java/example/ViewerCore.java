@@ -428,7 +428,7 @@ public class ViewerCore {
 					linkURIs = new String[pageLinks.length];
 					for (Link link: pageLinks)
 					{
-						links[i] = link.getBounds().transform(ctm);
+						links[i] = link.getBounds().transformed(ctm);
 						linkURIs[i] = link.getURI();
 						i++;
 					}
@@ -438,9 +438,9 @@ public class ViewerCore {
 					hits = page.search(searchNeedle);
 				if (hits == null)
 					hits = new Quad[0][];
-				for (Quad[] hit : hits)
-					for (Quad q : hit)
-						q.transform(ctm);
+				for (int i = 0; i < hits.length; i++)
+					for (int k = 0; k < hits[i].length; k++)
+						hits[i][k] = hits[i][k].transformed(ctm);
 
 				pixmap = new Pixmap(ColorSpace.DeviceBGR, bbox, true);
 				pixmap.clear(255);
