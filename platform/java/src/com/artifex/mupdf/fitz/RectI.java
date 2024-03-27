@@ -31,15 +31,15 @@ public class RectI
 
 	// Minimum and Maximum values that can survive round trip
 	// from int to float.
-	private static final int FZ_MIN_INF_RECT = 0x80000000;
-	private static final int FZ_MAX_INF_RECT = 0x7fffff80;
+	protected static final int MIN_INF_RECT = Rect.MIN_INF_RECT;
+	protected static final int MAX_INF_RECT = Rect.MAX_INF_RECT;
 
 	public RectI()
 	{
 		// Invalid (hence zero area) rectangle. Unioning
 		// this with any rectangle (or point) will 'cure' it
-		x0 = y0 = FZ_MAX_INF_RECT;
-		x1 = y1 = FZ_MIN_INF_RECT;
+		x0 = y0 = MAX_INF_RECT;
+		x1 = y1 = MIN_INF_RECT;
 	}
 
 	public RectI(int x0, int y0, int x1, int y1) {
@@ -66,10 +66,10 @@ public class RectI
 
 	public boolean isInfinite()
 	{
-		return this.x0 == FZ_MIN_INF_RECT &&
-			this.y0 == FZ_MIN_INF_RECT &&
-			this.x1 == FZ_MAX_INF_RECT &&
-			this.y1 == FZ_MAX_INF_RECT;
+		return this.x0 == MIN_INF_RECT &&
+			this.y0 == MIN_INF_RECT &&
+			this.x1 == MAX_INF_RECT &&
+			this.y1 == MAX_INF_RECT;
 	}
 
 	public RectI transform(Matrix tm)
@@ -127,6 +127,61 @@ public class RectI
 		return this;
 	}
 
+	public RectI transformed(Matrix tm)
+	{
+		if (this.isInfinite())
+			return this;
+		if (!this.isValid())
+			return this;
+
+		float ax0 = x0 * tm.a;
+		float ax1 = x1 * tm.a;
+
+		if (ax0 > ax1) {
+			float t = ax0;
+			ax0 = ax1;
+			ax1 = t;
+		}
+
+		float cy0 = y0 * tm.c;
+		float cy1 = y1 * tm.c;
+
+		if (cy0 > cy1) {
+			float t = cy0;
+			cy0 = cy1;
+			cy1 = t;
+		}
+		ax0 += cy0 + tm.e;
+		ax1 += cy1 + tm.e;
+
+		float bx0 = x0 * tm.b;
+		float bx1 = x1 * tm.b;
+
+		if (bx0 > bx1) {
+			float t = bx0;
+			bx0 = bx1;
+			bx1 = t;
+		}
+
+		float dy0 = y0 * tm.d;
+		float dy1 = y1 * tm.d;
+
+		if (dy0 > dy1) {
+			float t = dy0;
+			dy0 = dy1;
+			dy1 = t;
+		}
+		bx0 += dy0 + tm.f;
+		bx1 += dy1 + tm.f;
+
+		return new RectI(
+			(int)Math.floor(ax0),
+			(int)Math.floor(bx0),
+			(int)Math.ceil(ax1),
+			(int)Math.ceil(bx1)
+		);
+	}
+
 	public boolean contains(int x, int y)
 	{
 		if (isEmpty())
@@ -176,6 +231,21 @@ public class RectI
 			y1 = r.y1;
 	}
 
+	public RectI unioned(RectI r)
+	{
+		if (!r.isValid() || this.isInfinite())
+			return new RectI(this);
+		if (!this.isValid() || r.isInfinite())
+			return new RectI(this);
+
+		return new RectI(
+			r.x0 < x0 ? r.x0 : x0,
+			r.y0 < y0 ? r.y0 : y0,
+			r.x1 > x1 ? r.x1 : x1,
+			r.y1 > y1 ? r.y1 : y1
+		);
+	}
+
 	public void inset(int dx, int dy) {
 		if (!this.isValid() || this.isInfinite() || this.isEmpty())
 			return;
@@ -183,6 +253,12 @@ public class RectI
 		y0 += dy;
 		x1 -= dx;
 		y1 -= dy;
+	}
+
+	public RectI insetted(int dx, int dy) {
+		if (!isValid() || isInfinite() || isEmpty())
+			return new RectI(this);
+		return new RectI(x0 + dx, y0 + dy, x1 - dx, y1 - dy);
 	}
 
 	public void inset(int left, int top, int right, int bottom) {
@@ -194,6 +270,12 @@ public class RectI
 		y1 -= bottom;
 	}
 
+	public RectI insetted(int left, int top, int right, int bottom) {
+		if (!isValid() || isInfinite() || isEmpty())
+			return new RectI(this);
+		return new RectI(x0 + left, y0 + top, x1 - right, y1 - bottom);
+	}
+
 	public void offset(int dx, int dy) {
 		if (!this.isValid() || this.isInfinite() || this.isEmpty())
 			return;
@@ -203,6 +285,12 @@ public class RectI
 		y1 += dy;
 	}
 
+	public RectI offsetted(int dx, int dy) {
+		if (!isValid() || isInfinite() || isEmpty())
+			return new RectI(this);
+		return new RectI(x0 + dx, y0 + dy, x1 + dx, y1 + dy);
+	}
+
 	public void offsetTo(int left, int top) {
 		if (!this.isValid() || this.isInfinite() || this.isEmpty())
 			return;
@@ -210,5 +298,19 @@ public class RectI
 		y1 += top - y0;
 		x0 = left;
 		y0 = top;
+	}
+
+	public RectI offsettedTo(int left, int top) {
+		if (!isValid() || isInfinite() || isEmpty())
+			return new RectI(this);
+		return new RectI(left, top, left + x1 - x0, top + y1 - y0);
+	}
+
+	public static RectI Infinite() {
+		return new RectI(MIN_INF_RECT, MIN_INF_RECT, MAX_INF_RECT, MAX_INF_RECT);
+	}
+
+	public static RectI Empty() {
+		return new RectI(MAX_INF_RECT, MAX_INF_RECT, MIN_INF_RECT, MIN_INF_RECT);
 	}
 }

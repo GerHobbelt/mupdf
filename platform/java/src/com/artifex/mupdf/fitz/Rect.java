@@ -35,15 +35,15 @@ public class Rect
 
 	// Minimum and Maximum values that can survive round trip
 	// from int to float.
-	private static final int FZ_MIN_INF_RECT = 0x80000000;
-	private static final int FZ_MAX_INF_RECT = 0x7fffff80;
+	protected static final int MIN_INF_RECT = 0x80000000;
+	protected static final int MAX_INF_RECT = 0x7fffff80;
 
 	public Rect()
 	{
 		// Invalid (hence zero area) rectangle. Unioning
 		// this with any rectangle (or point) will 'cure' it
-		x0 = y0 = FZ_MAX_INF_RECT;
-		x1 = y1 = FZ_MIN_INF_RECT;
+		x0 = y0 = MAX_INF_RECT;
+		x1 = y1 = MIN_INF_RECT;
 	}
 
 	public Rect(float x0, float y0, float x1, float y1)
@@ -81,10 +81,10 @@ public class Rect
 
 	public boolean isInfinite()
 	{
-		return this.x0 == FZ_MIN_INF_RECT &&
-			this.y0 == FZ_MIN_INF_RECT &&
-			this.x1 == FZ_MAX_INF_RECT &&
-			this.y1 == FZ_MAX_INF_RECT;
+		return this.x0 == MIN_INF_RECT &&
+			this.y0 == MIN_INF_RECT &&
+			this.x1 == MAX_INF_RECT &&
+			this.y1 == MAX_INF_RECT;
 	}
 
 	public Rect transform(Matrix tm)
@@ -146,6 +146,60 @@ public class Rect
 		return this;
 	}
 
+	public Rect transformed(Matrix tm)
+	{
+		if (this.isInfinite())
+			return new Rect(this);
+		if (!this.isValid())
+			return new Rect(this);
+
+		float ax0 = x0 * tm.a;
+		float ax1 = x1 * tm.a;
+
+		if (ax0 > ax1)
+		{
+			float t = ax0;
+			ax0 = ax1;
+			ax1 = t;
+		}
+
+		float cy0 = y0 * tm.c;
+		float cy1 = y1 * tm.c;
+
+		if (cy0 > cy1)
+		{
+			float t = cy0;
+			cy0 = cy1;
+			cy1 = t;
+		}
+		ax0 += cy0 + tm.e;
+		ax1 += cy1 + tm.e;
+
+		float bx0 = x0 * tm.b;
+		float bx1 = x1 * tm.b;
+
+		if (bx0 > bx1)
+		{
+			float t = bx0;
+			bx0 = bx1;
+			bx1 = t;
+		}
+
+		float dy0 = y0 * tm.d;
+		float dy1 = y1 * tm.d;
+
+		if (dy0 > dy1)
+		{
+			float t = dy0;
+			dy0 = dy1;
+			dy1 = t;
+		}
+		bx0 += dy0 + tm.f;
+		bx1 += dy1 + tm.f;
+
+		return new Rect(ax0, bx0, ax1, bx1);
+	}
+
 	public boolean contains(float x, float y)
 	{
 		if (isEmpty())
@@ -200,6 +254,21 @@ public class Rect
 			y1 = r.y1;
 	}
 
+	public Rect unioned(Rect r)
+	{
+		if (!r.isValid() || this.isInfinite())
+			return new Rect(this);
+		if (!this.isValid() || r.isInfinite())
+			return new Rect(this);
+
+		return new Rect(
+			r.x0 < x0 ? r.x0 : x0,
+			r.y0 < y0 ? r.y0 : y0,
+			r.x1 > x1 ? r.x1 : x1,
+			r.y1 > y1 ? r.y1 : y1
+		);
+	}
+
 	public void inset(float dx, float dy) {
 		if (!isValid() || isInfinite() || isEmpty())
 			return;
@@ -207,6 +276,12 @@ public class Rect
 		y0 += dy;
 		x1 -= dx;
 		y1 -= dy;
+	}
+
+	public Rect insetted(float dx, float dy) {
+		if (!isValid() || isInfinite() || isEmpty())
+			return new Rect(this);
+		return new Rect(x0 + dx, y0 + dy, x1 - dx, y1 - dy);
 	}
 
 	public void inset(float left, float top, float right, float bottom) {
@@ -218,6 +293,12 @@ public class Rect
 		y1 -= bottom;
 	}
 
+	public Rect insetted(float left, float top, float right, float bottom) {
+		if (!isValid() || isInfinite() || isEmpty())
+			return new Rect(this);
+		return new Rect(x0 + left, y0 + top, x1 - right, y1 - bottom);
+	}
+
 	public void offset(float dx, float dy) {
 		if (!isValid() || isInfinite() || isEmpty())
 			return;
@@ -225,6 +306,12 @@ public class Rect
 		y0 += dy;
 		x1 += dx;
 		y1 += dy;
+	}
+
+	public Rect offsetted(float dx, float dy) {
+		if (!isValid() || isInfinite() || isEmpty())
+			return new Rect(this);
+		return new Rect(x0 + dx, y0 + dy, x1 + dx, y1 + dy);
 	}
 
 	public void offsetTo(float left, float top) {
@@ -236,4 +323,17 @@ public class Rect
 		y0 = top;
 	}
 
+	public Rect offsettedTo(float left, float top) {
+		if (!isValid() || isInfinite() || isEmpty())
+			return new Rect(this);
+		return new Rect(left, top, left + x1 - x0, top + y1 - y0);
+	}
+
+	public static Rect Infinite() {
+		return new Rect(MIN_INF_RECT, MIN_INF_RECT, MAX_INF_RECT, MAX_INF_RECT);
+	}
+
+	public static Rect Empty() {
+		return new Rect(MAX_INF_RECT, MAX_INF_RECT, MIN_INF_RECT, MIN_INF_RECT);
+	}
 }
