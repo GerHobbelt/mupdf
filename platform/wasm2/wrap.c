@@ -24,6 +24,13 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+// These exist to silence VSCode Intellisense and should not impact code.
+#ifndef EMSCRIPTEN_KEEPALIVE
+#define EMSCRIPTEN_KEEPALIVE
+#define EM_ASM(...)
+#endif
+
+
 static fz_context *ctx;
 
 __attribute__((noinline)) void
@@ -173,7 +180,7 @@ int count_stext_page_letters(fz_context *ctx, fz_stext_page *page)
 
 
 EMSCRIPTEN_KEEPALIVE
-int checkNativeText(fz_document *doc)
+int checkNativeText(fz_document *doc, int extract_text)
 {
 	static unsigned char *data = NULL;
 	fz_rect mediabox;
@@ -182,12 +189,19 @@ int checkNativeText(fz_document *doc)
 	float zoom;
 	float rotation = 0;
 
-	fz_stext_page *text = NULL;
+	fz_stext_page *stext_page = NULL;
+	
+	fz_output *out = NULL;
 
 	fz_page *page;
 
 	fz_matrix ctm;
 	fz_rect tmediabox;
+
+	if (extract_text) {
+		char *output = "/download.txt";
+		out = fz_new_output_with_path(ctx, output, 0);
+	}
 
 	int letterCountTotal = 0;
 	int letterCountVis = 0;
@@ -216,12 +230,15 @@ int checkNativeText(fz_document *doc)
 
 
 			// Calculate total number of letters on the page
-			text = fz_new_stext_page(ctx, tmediabox);
-			dev = fz_new_stext_device(ctx, text, &stext_options);
+			stext_page = fz_new_stext_page(ctx, tmediabox);
+			dev = fz_new_stext_device(ctx, stext_page, &stext_options);
 			cookie.skip_text_invis = 0;
 			fz_run_page(ctx, page, dev, ctm, &cookie);
+			fz_close_device(ctx, dev);
+			fz_drop_device(ctx, dev);
+			dev = NULL;
 
-			int letterCountTotalI = count_stext_page_letters(ctx, text);
+			int letterCountTotalI = count_stext_page_letters(ctx, stext_page);
 
 			letterCountTotal = letterCountTotal + letterCountTotalI;
 
@@ -229,19 +246,20 @@ int checkNativeText(fz_document *doc)
 				pageCountTotalText++;
 			}
 
-			fz_close_device(ctx, dev);
-			fz_drop_device(ctx, dev);
-			dev = NULL;
-			fz_drop_stext_page(ctx, text);
-			text = NULL;
+			if (extract_text) {
+				fz_print_stext_page_as_text(ctx, out, stext_page);
+			}
+
+			fz_drop_stext_page(ctx, stext_page);
+			stext_page = NULL;
 
 			// Calculate number of visible letters on the page
-			text = fz_new_stext_page(ctx, tmediabox);
-			dev = fz_new_stext_device(ctx, text, &stext_options);
+			stext_page = fz_new_stext_page(ctx, tmediabox);
+			dev = fz_new_stext_device(ctx, stext_page, &stext_options);
 			cookie.skip_text_invis = 1;
 			fz_run_page(ctx, page, dev, ctm, &cookie);
 
-			int letterCountVisI = count_stext_page_letters(ctx, text);
+			int letterCountVisI = count_stext_page_letters(ctx, stext_page);
 
 			if (letterCountVisI) {
 				pageCountVisText++;
@@ -255,13 +273,18 @@ int checkNativeText(fz_document *doc)
 			fz_drop_page(ctx, page);
 			fz_close_device(ctx, dev);
 			fz_drop_device(ctx, dev);
-			fz_drop_stext_page(ctx, text);
+			fz_drop_stext_page(ctx, stext_page);
 		}
 		fz_catch(ctx)
 		{
 			fz_rethrow(ctx);
 		}
 
+	}
+
+	if (extract_text) {
+		fz_close_output(ctx, out);
+		fz_drop_output(ctx, out);
 	}
 
 	// Text native
@@ -291,7 +314,7 @@ char *pageText(fz_document *doc, int pagenum, float dpi, int format, int skip_te
 	float zoom;
 	float rotation = 0;
 
-	fz_stext_page *text = NULL;
+	fz_stext_page *stext_page = NULL;
 	fz_buffer *buf = NULL;
 	fz_output *out = NULL;
 
@@ -316,8 +339,8 @@ char *pageText(fz_document *doc, int pagenum, float dpi, int format, int skip_te
 
 
 		tmediabox = fz_transform_rect(mediabox, ctm);
-		text = fz_new_stext_page(ctx, tmediabox);
-		dev = fz_new_stext_device(ctx, text, &stext_options);
+		stext_page = fz_new_stext_page(ctx, tmediabox);
+		dev = fz_new_stext_device(ctx, stext_page, &stext_options);
 
 		fz_cookie cookie = {0};
 		if (skip_text_invis) {
@@ -334,15 +357,15 @@ char *pageText(fz_document *doc, int pagenum, float dpi, int format, int skip_te
 		// Format numbers are copied from mutool draw for consistency
 		// See "mudraw.c"
 		if (format == 0) {
-			fz_print_stext_page_as_text(ctx, out, text);
+			fz_print_stext_page_as_text(ctx, out, stext_page);
 		} else if (format == 1) {
-			fz_print_stext_page_as_html(ctx, out, text, pagenum);
+			fz_print_stext_page_as_html(ctx, out, stext_page, pagenum);
 		} else if (format == 2) {
-			fz_print_stext_page_as_xhtml(ctx, out, text, pagenum);
+			fz_print_stext_page_as_xhtml(ctx, out, stext_page, pagenum);
 		} else if (format == 3) {
-			fz_print_stext_page_as_xml(ctx, out, text, pagenum);
+			fz_print_stext_page_as_xml(ctx, out, stext_page, pagenum);
 		} else {
-			fz_print_stext_page_as_json(ctx, out, text, pagenum);
+			fz_print_stext_page_as_json(ctx, out, stext_page, pagenum);
 		}
 
 		fz_close_output(ctx, out);
@@ -355,7 +378,7 @@ char *pageText(fz_document *doc, int pagenum, float dpi, int format, int skip_te
 	{
 		fz_drop_page(ctx, page);
 		fz_drop_device(ctx, dev);
-		fz_drop_stext_page(ctx, text);
+		fz_drop_stext_page(ctx, stext_page);
 		fz_drop_output(ctx, out);
 		fz_drop_buffer(ctx, buf);
 	}
@@ -607,14 +630,6 @@ static void runpageOverlayImage(int number, fz_document *doc, fz_document_writer
 		fz_run_page(ctx, page, dev, fz_identity, &cookie);
 
 		fz_end_page(ctx, out);
-		// fz_close_device(ctx, dev);
-		// fz_drop_device(ctx, dev);
-
-		// fz_drop_image(ctx, background_img);
-		// fz_drop_page(ctx, page);
-		// fz_close_device(ctx, dev);
-		// fz_drop_device(ctx, dev);
-
 
 	}
 	fz_always(ctx)
@@ -643,15 +658,9 @@ void overlayPDFTextImageStart(int humanReadable){
 
 EMSCRIPTEN_KEEPALIVE
 void overlayPDFTextImageAddPage(fz_document *doc, int i, int pagewidth, int pageheight){
-	// fz_document_writer *out;
-	// char *output = "/download.pdf";
-	// char *options = "";
-	// out = fz_new_pdf_writer(ctx, output, options);
 
 	runpageOverlayImage(i, doc, out, pagewidth, pageheight);
-	// fz_close_document_writer(ctx, out);
-	// fz_drop_document_writer(ctx, out);
-
+	
 }
 
 EMSCRIPTEN_KEEPALIVE
@@ -666,13 +675,10 @@ void overlayPDFTextImage(fz_document *doc, int minpage, int maxpage, int pagewid
 {
 	fz_document_writer *out;
 
-	// fz_rect mediabox;
-
 	fz_page *page;
 	fz_device *dev = NULL;
 
 	char *output = "/download.pdf";
-	// char *options = "";
 	char *optionsDefault = "compress";
 	char *optionsHumanReadable = "ascii,decompress,pretty,compress-images,compress-fonts";
 	char *options = humanReadable == 1 ? optionsHumanReadable : optionsDefault;
@@ -701,13 +707,10 @@ void writePDF(fz_document *doc, int minpage, int maxpage, int pagewidth, int pag
 {
 	fz_document_writer *out;
 
-	// fz_rect mediabox;
-
 	fz_page *page;
 	fz_device *dev = NULL;
 
 	char *output = "/download.pdf";
-	// char *options = "";
 	char *optionsDefault = "compress";
 	char *optionsHumanReadable = "ascii,decompress,pretty,compress-images,compress-fonts";
 	char *options = humanReadable == 1 ? optionsHumanReadable : optionsDefault;
