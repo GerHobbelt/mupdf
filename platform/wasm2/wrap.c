@@ -22,7 +22,7 @@
 
 #include "emscripten.h"
 #include "mupdf/fitz.h"
-// #include "mupdf/pdf.h"
+#include "mupdf/pdf.h"
 
 static fz_context *ctx;
 
@@ -76,20 +76,20 @@ fz_document *openDocumentFromBuffer(char *magic, unsigned char *data, size_t len
 }
 
 // Function used for pdf-unlock tool
-// EMSCRIPTEN_KEEPALIVE
-// void writeDocument()
-// {
+EMSCRIPTEN_KEEPALIVE
+void writeDocument()
+{
 
-// 	char *infile = "test_1.pdf";
-// 	char *outfile = "test_2.pdf";
-// 	char *password = "";
-// 	char *argv = "";	
+	char *infile = "test_1.pdf";
+	char *outfile = "test_2.pdf";
+	char *password = "";
+	char *argv = "";	
 
-// 	pdf_write_options opts = pdf_default_write_options;
-// 	opts.do_encrypt = PDF_ENCRYPT_NONE;
+	pdf_write_options opts = pdf_default_write_options;
+	opts.do_encrypt = PDF_ENCRYPT_NONE;
 
-// 	pdf_clean_file(ctx, infile, outfile, password, &opts, 0, argv);
-// }
+	pdf_clean_file(ctx, infile, outfile, password, &opts, 0, argv);
+}
 
 EMSCRIPTEN_KEEPALIVE
 void freeDocument(fz_document *doc)
@@ -138,6 +138,9 @@ int count_stext_page_letters(fz_context *ctx, fz_stext_page *page)
 	char utf[10];
 	int i, n;
 	int ct = 0;
+	int nnmlCt = 0;
+	int ctrCt = 0;
+	int imageCt = 0;
 
 	for (block = page->first_block; block; block = block->next)
 	{
@@ -149,13 +152,21 @@ int count_stext_page_letters(fz_context *ctx, fz_stext_page *page)
 				{
 					// This excludes whitespace, control chars, etc.
 					if (ch->c >= 33 && ch->c <= 127) {
+						nnmlCt++;
 						ct++;
+					} else if (ch->c < 32) {
+						ctrCt++;
+						ct-=5;
 					}
 					
 				}
 			}
+		} else {
+			imageCt++;
 		}
 	}
+
+	// printf("Normal characters: %d\nControl characters: %d\nTotal score: %d\nImage count: %d\n", nnmlCt, ctrCt, ct, imageCt);
 
 	return ct;
 }
@@ -180,12 +191,14 @@ int checkNativeText(fz_document *doc)
 
 	int letterCountTotal = 0;
 	int letterCountVis = 0;
+	
+	int pageCountVisText = 0;
+	int pageCountTotalText = 0;
+	int pageCount = fz_count_pages(ctx, doc);
 
 	fz_cookie cookie = {0};
 
-	int maxpage = fz_count_pages(ctx, doc) - 1;
-
-	for (int i=0; i<=maxpage; i++) {
+	for (int i=0; i<=(pageCount - 1); i++) {
 
 		fz_try(ctx)
 		{
@@ -208,7 +221,13 @@ int checkNativeText(fz_document *doc)
 			cookie.skip_text_invis = 0;
 			fz_run_page(ctx, page, dev, ctm, &cookie);
 
-			letterCountTotal = letterCountTotal + count_stext_page_letters(ctx, text);
+			int letterCountTotalI = count_stext_page_letters(ctx, text);
+
+			letterCountTotal = letterCountTotal + letterCountTotalI;
+
+			if (letterCountTotalI >= 100) {
+				pageCountTotalText++;
+			}
 
 			fz_close_device(ctx, dev);
 			fz_drop_device(ctx, dev);
@@ -221,8 +240,14 @@ int checkNativeText(fz_document *doc)
 			dev = fz_new_stext_device(ctx, text, &stext_options);
 			cookie.skip_text_invis = 1;
 			fz_run_page(ctx, page, dev, ctm, &cookie);
+
+			int letterCountVisI = count_stext_page_letters(ctx, text);
+
+			if (letterCountVisI) {
+				pageCountVisText++;
+			}
 			
-			letterCountVis = letterCountVis + count_stext_page_letters(ctx, text);
+			letterCountVis = letterCountVis + letterCountVisI;
 
 		}
 		fz_always(ctx)
@@ -240,13 +265,17 @@ int checkNativeText(fz_document *doc)
 	}
 
 	// Text native
-    if (letterCountTotal >= (maxpage + 1) * 100 && letterCountVis >= letterCountTotal * 0.9) {
+    if (letterCountTotal >= pageCount * 100 && letterCountVis >= letterCountTotal * 0.9 && pageCountVisText >= pageCount / 2) {
+		// printf("Native text\n");
+		// printf("pageCountVisText: %d\npageCount: %d\n", pageCountVisText, pageCount);
         return 0;
 	// Image + OCR text
-    } else if (letterCountTotal >= (maxpage + 1) * 100) {
+    } else if (letterCountTotal >= pageCount * 100 && pageCountTotalText >= pageCount / 2) {
+		// printf("Image + OCR text\n");
         return 1;
 	// Image native
     } else {
+		// printf("Image native\n");
         return 2;
     }
 }
@@ -389,7 +418,7 @@ void doDrawPageAsPNGGray(fz_document *doc, int number, float dpi, int skip_text)
 }
 
 EMSCRIPTEN_KEEPALIVE
-static void runpageOverlayPDF(int number, fz_document *doc, fz_document *doc2, fz_document_writer *out, int pagewidth, int pageheight)
+static void runpageOverlayPDF(int number, fz_document *doc, fz_document *doc2, fz_document_writer *out, int pagewidth, int pageheight, int skip_text)
 {
 	fz_rect mediabox;
 	fz_rect mediabox2;
@@ -430,7 +459,8 @@ static void runpageOverlayPDF(int number, fz_document *doc, fz_document *doc2, f
 		text_matrix = fz_make_matrix(mediabox.x1/mediabox2.x1, 0, 0, mediabox.x1/mediabox2.x1, 0, 0);
 
 		fz_cookie cookie = {0};
-		cookie.skip_text = 1;
+		cookie.skip_text = skip_text;
+		cookie.skip_text_invis = 1;
 
 		fz_run_page(ctx, page, dev, fz_identity, &cookie);
 
@@ -493,7 +523,7 @@ static void runpage(int number, fz_document *doc, fz_document_writer *out, int p
 
 
 EMSCRIPTEN_KEEPALIVE
-void overlayPDFText(fz_document *doc, fz_document *doc2, int minpage, int maxpage, int pagewidth, int pageheight)
+void overlayPDFText(fz_document *doc, fz_document *doc2, int minpage, int maxpage, int pagewidth, int pageheight, int humanReadable, int skip_text)
 {
 	fz_document_writer *out;
 
@@ -503,7 +533,10 @@ void overlayPDFText(fz_document *doc, fz_document *doc2, int minpage, int maxpag
 	fz_page *page2;
 
 	char *output = "/download.pdf";
-	char *options = "compress";
+
+	char *optionsDefault = "compress";
+	char *optionsHumanReadable = "ascii,decompress,pretty,compress-images,compress-fonts";
+	char *options = humanReadable == 1 ? optionsHumanReadable : optionsDefault;
 
 	out = fz_new_pdf_writer(ctx, output, options);
 
@@ -520,7 +553,7 @@ void overlayPDFText(fz_document *doc, fz_document *doc2, int minpage, int maxpag
 
 	for (int i=minpage; i<=maxpage; i++) {
 
-		runpageOverlayPDF(i, doc, doc2, out, pagewidth, pageheight);
+		runpageOverlayPDF(i, doc, doc2, out, pagewidth, pageheight, skip_text);
 
 	}
 
@@ -599,10 +632,12 @@ static void runpageOverlayImage(int number, fz_document *doc, fz_document_writer
 // for (potentially) hundreds of different images. 
 static fz_document_writer *out;
 EMSCRIPTEN_KEEPALIVE
-void overlayPDFTextImageStart(){
+void overlayPDFTextImageStart(int humanReadable){
 	char *output = "/download.pdf";
-	// char *options = "";
-	char *options = "compress";
+
+	char *optionsDefault = "compress";
+	char *optionsHumanReadable = "ascii,decompress,pretty,compress-images,compress-fonts";
+	char *options = humanReadable == 1 ? optionsHumanReadable : optionsDefault;
 	out = fz_new_pdf_writer(ctx, output, options);
 }
 
@@ -627,7 +662,7 @@ void overlayPDFTextImageEnd(){
 
 
 EMSCRIPTEN_KEEPALIVE
-void overlayPDFTextImage(fz_document *doc, int minpage, int maxpage, int pagewidth, int pageheight)
+void overlayPDFTextImage(fz_document *doc, int minpage, int maxpage, int pagewidth, int pageheight, int humanReadable)
 {
 	fz_document_writer *out;
 
@@ -638,7 +673,9 @@ void overlayPDFTextImage(fz_document *doc, int minpage, int maxpage, int pagewid
 
 	char *output = "/download.pdf";
 	// char *options = "";
-	char *options = "compress";
+	char *optionsDefault = "compress";
+	char *optionsHumanReadable = "ascii,decompress,pretty,compress-images,compress-fonts";
+	char *options = humanReadable == 1 ? optionsHumanReadable : optionsDefault;
 
 	out = fz_new_pdf_writer(ctx, output, options);
 
@@ -660,7 +697,7 @@ void overlayPDFTextImage(fz_document *doc, int minpage, int maxpage, int pagewid
 }
 
 EMSCRIPTEN_KEEPALIVE
-void writePDF(fz_document *doc, int minpage, int maxpage, int pagewidth, int pageheight)
+void writePDF(fz_document *doc, int minpage, int maxpage, int pagewidth, int pageheight, int humanReadable)
 {
 	fz_document_writer *out;
 
@@ -671,7 +708,9 @@ void writePDF(fz_document *doc, int minpage, int maxpage, int pagewidth, int pag
 
 	char *output = "/download.pdf";
 	// char *options = "";
-	char *options = "compress";
+	char *optionsDefault = "compress";
+	char *optionsHumanReadable = "ascii,decompress,pretty,compress-images,compress-fonts";
+	char *options = humanReadable == 1 ? optionsHumanReadable : optionsDefault;
 
 	out = fz_new_pdf_writer(ctx, output, options);
 
