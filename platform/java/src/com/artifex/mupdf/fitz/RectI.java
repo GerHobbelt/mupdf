@@ -127,61 +127,6 @@ public class RectI
 		return this;
 	}
 
-	public RectI transformed(Matrix tm)
-	{
-		if (this.isInfinite())
-			return this;
-		if (!this.isValid())
-			return this;
-
-		float ax0 = x0 * tm.a;
-		float ax1 = x1 * tm.a;
-
-		if (ax0 > ax1) {
-			float t = ax0;
-			ax0 = ax1;
-			ax1 = t;
-		}
-
-		float cy0 = y0 * tm.c;
-		float cy1 = y1 * tm.c;
-
-		if (cy0 > cy1) {
-			float t = cy0;
-			cy0 = cy1;
-			cy1 = t;
-		}
-		ax0 += cy0 + tm.e;
-		ax1 += cy1 + tm.e;
-
-		float bx0 = x0 * tm.b;
-		float bx1 = x1 * tm.b;
-
-		if (bx0 > bx1) {
-			float t = bx0;
-			bx0 = bx1;
-			bx1 = t;
-		}
-
-		float dy0 = y0 * tm.d;
-		float dy1 = y1 * tm.d;
-
-		if (dy0 > dy1) {
-			float t = dy0;
-			dy0 = dy1;
-			dy1 = t;
-		}
-		bx0 += dy0 + tm.f;
-		bx1 += dy1 + tm.f;
-
-		return new RectI(
-			(int)Math.floor(ax0),
-			(int)Math.floor(bx0),
-			(int)Math.ceil(ax1),
-			(int)Math.ceil(bx1)
-		);
-	}
-
 	public boolean contains(int x, int y)
 	{
 		if (isEmpty())
@@ -190,7 +135,7 @@ public class RectI
 		return (x >= x0 && x < x1 && y >= y0 && y < y1);
 	}
 
-	public boolean contains(Rect r)
+	public boolean contains(RectI r)
 	{
 		if (isEmpty() || r.isEmpty())
 			return false;
@@ -231,21 +176,6 @@ public class RectI
 			y1 = r.y1;
 	}
 
-	public RectI unioned(RectI r)
-	{
-		if (!r.isValid() || this.isInfinite())
-			return new RectI(this);
-		if (!this.isValid() || r.isInfinite())
-			return new RectI(this);
-
-		return new RectI(
-			r.x0 < x0 ? r.x0 : x0,
-			r.y0 < y0 ? r.y0 : y0,
-			r.x1 > x1 ? r.x1 : x1,
-			r.y1 > y1 ? r.y1 : y1
-		);
-	}
-
 	public void inset(int dx, int dy) {
 		if (!this.isValid() || this.isInfinite() || this.isEmpty())
 			return;
@@ -253,12 +183,6 @@ public class RectI
 		y0 += dy;
 		x1 -= dx;
 		y1 -= dy;
-	}
-
-	public RectI insetted(int dx, int dy) {
-		if (!isValid() || isInfinite() || isEmpty())
-			return new RectI(this);
-		return new RectI(x0 + dx, y0 + dy, x1 - dx, y1 - dy);
 	}
 
 	public void inset(int left, int top, int right, int bottom) {
@@ -270,12 +194,6 @@ public class RectI
 		y1 -= bottom;
 	}
 
-	public RectI insetted(int left, int top, int right, int bottom) {
-		if (!isValid() || isInfinite() || isEmpty())
-			return new RectI(this);
-		return new RectI(x0 + left, y0 + top, x1 - right, y1 - bottom);
-	}
-
 	public void offset(int dx, int dy) {
 		if (!this.isValid() || this.isInfinite() || this.isEmpty())
 			return;
@@ -283,12 +201,6 @@ public class RectI
 		y0 += dy;
 		x1 += dx;
 		y1 += dy;
-	}
-
-	public RectI offsetted(int dx, int dy) {
-		if (!isValid() || isInfinite() || isEmpty())
-			return new RectI(this);
-		return new RectI(x0 + dx, y0 + dy, x1 + dx, y1 + dy);
 	}
 
 	public void offsetTo(int left, int top) {
@@ -300,10 +212,95 @@ public class RectI
 		y0 = top;
 	}
 
-	public RectI offsettedTo(int left, int top) {
-		if (!isValid() || isInfinite() || isEmpty())
-			return new RectI(this);
-		return new RectI(left, top, left + x1 - x0, top + y1 - y0);
+	public static RectI Transformed(RectI r, Matrix tm)
+	{
+		if (!r.isValid() || r.isInfinite())
+			return new RectI(r);
+
+		float ax0 = r.x0 * tm.a;
+		float ax1 = r.x1 * tm.a;
+
+		if (ax0 > ax1) {
+			float t = ax0;
+			ax0 = ax1;
+			ax1 = t;
+		}
+
+		float cy0 = r.y0 * tm.c;
+		float cy1 = r.y1 * tm.c;
+
+		if (cy0 > cy1) {
+			float t = cy0;
+			cy0 = cy1;
+			cy1 = t;
+		}
+		ax0 += cy0 + tm.e;
+		ax1 += cy1 + tm.e;
+
+		float bx0 = r.x0 * tm.b;
+		float bx1 = r.x1 * tm.b;
+
+		if (bx0 > bx1) {
+			float t = bx0;
+			bx0 = bx1;
+			bx1 = t;
+		}
+
+		float dy0 = r.y0 * tm.d;
+		float dy1 = r.y1 * tm.d;
+
+		if (dy0 > dy1) {
+			float t = dy0;
+			dy0 = dy1;
+			dy1 = t;
+		}
+		bx0 += dy0 + tm.f;
+		bx1 += dy1 + tm.f;
+
+		return new RectI(
+			(int)Math.floor(ax0),
+			(int)Math.floor(bx0),
+			(int)Math.ceil(ax1),
+			(int)Math.ceil(bx1)
+		);
+	}
+
+	public static RectI Unioned(RectI r1, RectI r2)
+	{
+		if (!r2.isValid() || r1.isInfinite())
+			return new RectI(r1);
+		if (!r1.isValid() || r2.isInfinite())
+			return new RectI(r2);
+		return new RectI(
+			r2.x0 < r1.x0 ? r2.x0 : r1.x0,
+			r2.y0 < r1.y0 ? r2.y0 : r1.y0,
+			r2.x1 > r1.x1 ? r2.x1 : r1.x1,
+			r2.y1 > r1.y1 ? r2.y1 : r1.y1
+		);
+	}
+
+	public static RectI Insetted(RectI r, int dx, int dy) {
+		if (!r.isValid() || r.isInfinite() || r.isEmpty())
+			return new RectI(r);
+		return new RectI(r.x0 + dx, r.y0 + dy, r.x1 - dx, r.y1 - dy);
+	}
+
+	public static RectI Insetted(RectI r, int left, int top, int right, int bottom) {
+		if (!r.isValid() || r.isInfinite() || r.isEmpty())
+			return new RectI(r);
+		return new RectI(r.x0 + left, r.y0 + top, r.x1 - right, r.y1 - bottom);
+	}
+
+	public static RectI Offsetted(RectI r, int dx, int dy) {
+		if (!r.isValid() || r.isInfinite() || r.isEmpty())
+			return new RectI(r);
+		return new RectI(r.x0 + dx, r.y0 + dy, r.x1 + dx, r.y1 + dy);
+	}
+
+	public static RectI OffsettedTo(RectI r, int left, int top) {
+		if (!r.isValid() || r.isInfinite() || r.isEmpty())
+			return new RectI(r);
+		return new RectI(left, top, left + r.x1 - r.x0, top + r.y1 - r.y0);
 	}
 
 	public static RectI Infinite() {
