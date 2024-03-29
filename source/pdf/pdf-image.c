@@ -395,6 +395,44 @@ pdf_determine_jbig2_segment_length(fz_context *ctx,
 	return p - data;
 }
 
+static uint32_t
+pdf_determine_jbig2_segment_length(fz_context *ctx,
+	const unsigned char *data, const unsigned char *end,
+	struct jbig2_segment_header *info)
+{
+	int is_mmr;
+	const unsigned char *p;
+	uint8_t mmr_marker[2] = { 0x00, 0x00 };
+	uint8_t arith_marker[2] = { 0xff, 0xac };
+	uint8_t *desired;
+
+	if (data + 18 > end) return 0xffffffff;
+
+	is_mmr = data[17] & 1;
+	desired = is_mmr ? mmr_marker : arith_marker;
+
+	p = data + 18;
+	if (p + 2 > end)
+		return 0xffffffff;
+
+	while (p[0] != desired[0] || p[1] != desired[1])
+	{
+		p++;
+		if (p + 2 > end)
+			return 0xffffffff;
+	}
+
+	/* marker found */
+	p += 2;
+
+	/* marker is followed by 4 byte row count */
+	if (p + 4 > end)
+		return 0xffffffff;
+	p += 4;
+
+	return p - data;
+}
+
 static size_t
 pdf_parse_jbig2_segment_header(fz_context *ctx,
 	const unsigned char *data, const unsigned char *end,
