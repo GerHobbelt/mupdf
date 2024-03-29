@@ -332,7 +332,7 @@ struct jbig2_segment_header {
 	int flags;
 	/* referred-to-segment numbers */
 	int page;
-	int length;
+	uint32_t length;
 };
 
 /* coverity[-tainted_data_return] */
