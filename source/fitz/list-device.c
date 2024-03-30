@@ -1350,6 +1350,8 @@ fz_list_set_default_colorspaces(fz_context *ctx, fz_device *dev, fz_default_colo
 static void
 fz_list_begin_layer(fz_context *ctx, fz_device *dev, const char *layer_name)
 {
+	size_t len = layer_name ? strlen(layer_name) : 0;
+
 	fz_append_display_node(
 		ctx,
 		dev,
@@ -1362,8 +1364,8 @@ fz_list_begin_layer(fz_context *ctx, fz_device *dev, const char *layer_name)
 		NULL, /* alpha */
 		NULL,
 		NULL, /* stroke */
-		layer_name, /* private_data */
-		1+strlen(layer_name)); /* private_data_len */
+		len ? layer_name : "", /* private_data */
+		len + 1); /* private_data_len */
 }
 
 static void
@@ -2078,10 +2080,10 @@ visible:
 			case FZ_CMD_BEGIN_STRUCTURE:
 			{
 				const unsigned char *data;
-				int idx;
+				int uid;
 				data = (const unsigned char *)node;
-				memcpy(&idx, data+1, sizeof(idx));
-				fz_begin_structure(ctx, dev, (fz_structure)data[0], (const char *)(data[1+sizeof(idx)] == 0 ? NULL : &data[1+sizeof(idx)]), idx);
+				memcpy(&uid, data+1, sizeof(uid));
+				fz_begin_structure(ctx, dev, (fz_structure)data[0], (const char *)(&data[1+sizeof(uid)]), uid);
 				break;
 			}
 			case FZ_CMD_END_STRUCTURE:
@@ -2093,7 +2095,7 @@ visible:
 				const char *text;
 				data = (const unsigned char *)node;
 				text = (const char *)&data[1];
-				fz_begin_metatext(ctx, dev, (fz_metatext)data[0], (text[0] == 0 ? NULL : text));
+				fz_begin_metatext(ctx, dev, (fz_metatext)data[0], text);
 				break;
 			}
 			case FZ_CMD_END_METATEXT:
