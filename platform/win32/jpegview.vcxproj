@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-219078E04984}</ProjectGuid>
+    <RootNamespace>jpegview</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_JPEGVIEW;JPEGVIEW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_JPEGVIEW;JPEGVIEW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_JPEGVIEW;JPEGVIEW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_JPEGVIEW;JPEGVIEW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpp-terminal.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2367fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnanosvg.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-751bff971987}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/AVIFWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/AboutDlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ApplyFilterAVX.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/BasicProcessing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/BatchCopyDlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Clipboard.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/CropCtl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/CropSizeDlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/DesktopWallpaper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/DirectoryWatcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/EXIFDisplay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/EXIFDisplayCtl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/EXIFHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/EXIFReader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/FileExtensionsDlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/FileExtensionsRegistry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/FileList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/FileOpenDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/GUIControls.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HEIFWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HashCompareLPCTSTR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HelpDisplay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HelpDisplayCtl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HelpDlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HelpersGUI.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HistogramCorr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ICCProfileTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ImageLoadThread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ImageProcPanelCtl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ImageProcessingPanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/InfoButtonPanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/InfoButtonPanelCtl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/JPEGImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/JPEGLosslessTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/JPEGProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/JPEGView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/JXLWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/KeyMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/LocalDensityCorr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/MainDlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ManageOpenWithDlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/MultiMonitorSupport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/NLS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/NavigationPanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/NavigationPanelCtl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PNGWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PSDWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PaintMemDCMgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Panel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PanelController.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PanelMgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ParameterDB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PrintDlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PrintImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ProcessingThreadPool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/QOIWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/RAWWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ReaderBMP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ReaderTGA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ResizeDlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ResizeFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/RotationPanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/RotationPanelCtl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/SaveImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/SettingsProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/TJPEGWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/TiltCorrectionPanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/TiltCorrectionPanelCtl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Tooltip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/TransformPanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/TransformPanelCtl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/UnsharpMaskPanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/UnsharpMaskPanelCtl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/UserCommand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/WEBPWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/WndButtonPanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/WndButtonPanelCtl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/WorkThread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/XMMImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ZoomNavigator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ZoomNavigatorCtl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/dcraw_mod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/stdafx.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/AVIFWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/AboutDlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ApplyFilterAVX.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/BasicProcessing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/BatchCopyDlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Clipboard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/CropCtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/CropSizeDlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/DesktopWallpaper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/DirectoryWatcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/EXIFDisplay.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/EXIFDisplayCtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/EXIFHelpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/EXIFReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/FileExtensionsDlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/FileExtensionsRegistry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/FileList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/FileOpenDialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/GUIControls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HEIFWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HashCompareLPCTSTR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HelpDisplay.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HelpDisplayCtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HelpDlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HelpersGUI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/HistogramCorr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ICCProfileTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ImageLoadThread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ImageProcPanelCtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ImageProcessingPanel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ImageProcessingTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/InfoButtonPanel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/InfoButtonPanelCtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/JPEGImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/JPEGLosslessTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/JPEGProvider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/JXLWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/KeyMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/LocalDensityCorr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/MainDlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ManageOpenWithDlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/MaxImageDef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/MessageDef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/MultiMonitorSupport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/NLS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/NavigationPanel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/NavigationPanelCtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PNGWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PSDWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PaintMemDCMgr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Panel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PanelController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PanelMgr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ParameterDB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PrintDlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PrintImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/PrintParameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ProcessParams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ProcessingThreadPool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/QOIWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/RAWWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/RawMetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ReaderBMP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ReaderTGA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ResizeDlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ResizeFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/RotationPanel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/RotationPanelCtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/SaveImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/SettingsProvider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/TJPEGWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/TiltCorrectionPanel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/TiltCorrectionPanelCtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/TimerEventIDs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/TransformPanel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/TransformPanelCtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/UnsharpMaskPanel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/UnsharpMaskPanelCtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/UserCommand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/WEBPWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/WndButtonPanel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/WndButtonPanelCtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/WorkThread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/XMMImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ZoomNavigator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/ZoomNavigatorCtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/dcraw_mod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/lcms2/include/lcms2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libavif/include/avif/avif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libavif/include/avif/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/api_structs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/avif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/bitstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/box.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/common_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/exif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/heif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/heif_cxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/heif_emscripten.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/heif_plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/heif_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/hevc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/metadata_compression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/nclx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/pixelimage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/plugin_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/plugins_unix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/plugins_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/region.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/security_limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/uncompressed_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjpeg-turbo/include/jconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjpeg-turbo/include/jerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjpeg-turbo/include/jmorecfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjpeg-turbo/include/jpeglib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjpeg-turbo/include/turbojpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/cms_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/codestream_header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/color_encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/decode_cxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/encode_cxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/jxl_export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/jxl_threads_export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/memory_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/parallel_runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/resizable_parallel_runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/resizable_parallel_runner_cxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/thread_parallel_runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/thread_parallel_runner_cxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/include/jxl/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libpng-apng/include/png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libpng-apng/include/pngconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libpng-apng/include/pnglibconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libraw/include/libraw/libraw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libraw/include/libraw/libraw_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libraw/include/libraw/libraw_const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libraw/include/libraw/libraw_datastream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libraw/include/libraw/libraw_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libraw/include/libraw/libraw_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libraw/include/libraw/libraw_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libwebp/include/webp/decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libwebp/include/webp/demux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libwebp/include/webp/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libwebp/include/webp/mux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libwebp/include/webp/mux_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libwebp/include/webp/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/qoi/qoi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/WICLoader/MaxImageDef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/WICLoader/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/WICLoader/targetver.h" />
+    <Image Include="../../thirdparty/owemdjee/jpegview/src/JPEGView.Setup/res/BannerTop.bmp" />
+    <Image Include="../../thirdparty/owemdjee/jpegview/src/JPEGView.Setup/res/Dialog.bmp" />
+    <Image Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/NavPanel.png" />
+    <Image Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/res/JPEGView.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/JPEGView.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/jpegview/src/WICLoader/WICLoader.rc" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/CHANGELOG.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/COMPILING.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/COPYING.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/HowToInstall.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/HowToInstall_ru.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/README.md" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/deps/README.md" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/README.md" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/JPEGView.vcxproj-postbuild-event.bat" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/README.md" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/build-lcms2.bat" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/build-libheif_libavif.bat" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/build-libjpegturbo.bat" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/build-libjxl.bat" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/build-libpng-apng.bat" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/build-libraw.bat" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/build-libwebp.bat" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/jpegview-build-release.bat" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/keymap_convert_readme_xp_compat.py" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/keymap_generate_symbols_and_readme.py" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/sha256sum.py" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/strings_txt_builder.py" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/strings_txt_sync_all.py" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/util_common.py" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/scripts/vs-init.bat" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/sw_repos/README.md" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/sw_repos/WinGet-sylikc.JPEGView/" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/sw_repos/WinGet-sylikc.JPEGView/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/sw_repos/WinGet-sylikc.JPEGView/sylikc.JPEGView.installer.yaml" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/sw_repos/WinGet-sylikc.JPEGView/sylikc.JPEGView.locale.en-US.yaml" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/extras/sw_repos/WinGet-sylikc.JPEGView/sylikc.JPEGView.yaml" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView.Setup/Product.wxs" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView.Setup/Product_en-us.wxl" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView.Setup/res/License.rtf" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/JPEGView.ini" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/JPEGView.ini.tpl" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/JPEGView_ru.ini" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/JPEGView_ru.ini.tpl" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/KeyMap-README.html" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/KeyMap-README_ru.html" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/readme.html" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/readme_ru.html" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/readme_uk.html" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_be.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_bg.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_cs.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_de.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_el.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_es-ar.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_es.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_eu.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_fi.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_fr.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_hu.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_it.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_ja.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_ko.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_pl.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_pt-br.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_pt.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_ro.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_ru.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_sk.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_sl.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_sr.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_sv.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_ta.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_tr.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_uk.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_zh-tw.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/Config/strings_zh.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/JPEGView.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/JPEGView_VS2017.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/dcraw.c-original.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/lcms2/bin/lcms2.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/lcms2/bin64/lcms2.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libavif/bin/avif.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libavif/bin/dav1d.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libavif/bin64/avif.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libavif/bin64/dav1d.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/bin/heif.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/bin/libde265.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/bin64/heif.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/bin64/libde265.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjpeg-turbo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/bin/brotlicommon.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/bin/brotlidec.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/bin/jxl_dec.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/bin/jxl_threads.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/bin64/brotlicommon.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/bin64/brotlidec.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/bin64/jxl_dec.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjxl/bin64/jxl_threads.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libraw/bin/libraw.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libraw/bin64/libraw.dll" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/WICLoader/WICLoader.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/jpegview/src/WICLoader/WICLoader_VS2017.vcxproj.filters" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>

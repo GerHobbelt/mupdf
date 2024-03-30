@@ -1124,6 +1124,7 @@ FastString
 SIMDString
 Multicore-TSNE
 luple
+fastrange
 
 EOT
 )
@@ -1183,6 +1184,7 @@ gperf
 manticore
 png-pmt-tools
 text-wrangler
+jpegview
 
 EOT
 )

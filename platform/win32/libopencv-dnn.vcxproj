@@ -258,6 +258,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/int8layers/elementwise_layers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/int8layers/eltwise_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/int8layers/fully_connected_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/int8layers/layers_rvp052.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/int8layers/pooling_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/int8layers/quantization_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/int8layers/scale_layer.cpp" />
@@ -266,6 +267,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layer_factory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/accum_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/arg_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/attention_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/batch_norm_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/blank_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/concat_layer.cpp" />
@@ -274,6 +276,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/correlation_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/conv_depthwise.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/conv_winograd_f63.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/conv_winograd_f63.neon.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/fast_gemm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/fast_norm.cpp" />
@@ -291,10 +294,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/gather_elements_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/gather_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/gemm_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/group_norm_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/instance_norm_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/layer_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/layers_common.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/lrn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/matmul_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/max_unpooling_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/mvn_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/nary_eltwise_layers.cpp" />
@@ -359,6 +364,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/shader/conv_depthwise_spv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/shader/conv_implicit_gemm_spv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/shader/gemm_spv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/shader/nary_eltwise_binary_forward_spv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/shader/spv_shader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/src/buffer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/src/command.cpp" />
@@ -368,6 +374,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/src/op_base.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/src/op_conv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/src/op_matmul.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/src/op_naryEltwise.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/src/pipeline.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/src/tensor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/vulkan/vk_functions.cpp" />
@@ -470,10 +477,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/cuda4dnn/primitives/crop_and_resize.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/cuda4dnn/primitives/detection_output.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/cuda4dnn/primitives/eltwise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/cuda4dnn/primitives/group_norm.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/cuda4dnn/primitives/inner_product.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/cuda4dnn/primitives/instance_norm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/cuda4dnn/primitives/layer_norm.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/cuda4dnn/primitives/lrn.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/cuda4dnn/primitives/matmul.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/cuda4dnn/primitives/matmul_broadcast.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/cuda4dnn/primitives/max_unpooling.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/cuda4dnn/primitives/mvn.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/cuda4dnn/primitives/normalize_bbox.hpp" />
@@ -502,6 +512,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/ie_ngraph.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/int8layers/layers_common.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/int8layers/layers_common.simd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/int8layers/layers_rvp052.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layer_internals.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/conv_block.simd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/conv_depthwise.simd.hpp" />
@@ -547,6 +558,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include/op_base.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include/op_conv.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include/op_matmul.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include/op_naryeltwise.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include/pipeline.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include/tensor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include/vkcom.hpp" />

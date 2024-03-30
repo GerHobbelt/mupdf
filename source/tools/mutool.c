@@ -67,6 +67,8 @@
 #include "../../thirdparty/owemdjee/glob/standalone/source/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/xsimd/examples/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/dirent/examples/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/edit-distance/src/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/spdlog/include/monolithic_examples.h"
 #include "../../source/fitz/tessocr.h"
 #include "../../thirdparty/gumbo-parser/src/gumbo.h"
 #undef BUILD_MONOLITHIC
@@ -702,6 +704,10 @@ static struct tool_spec {
 #endif
 
 #if defined(MUTOOL_EX)
+	{ {.f = editdist_test_main }, "editdist_test", "edit-distance test tool" },
+#endif
+
+#if defined(MUTOOL_EX)
 	{ {.fa = xsimd_benchmark_main }, "xsimd_benchmark", "xsimd benchmark tool" },
 	{ {.f = xsimd_sample_mandelbrot_main }, "xsimd_sample_mandelbrot", "xsimd xsimd mandelbrot example" },
 #endif
@@ -902,6 +908,14 @@ static struct tool_spec {
 	{ {.fa = csv2_bench_main }, "csv2_bench", "libcsv2 benchmark tool" },
 	{ {.fa = csv2_csv_count_main }, "csv_count", "libcsv2 csv_count row count tool" },
 	{ {.fa = csv2_fieldcount_main }, "csv_fieldcount", "libcsv2 fieldcount tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = spdlog_async_bench_main }, "spdlog_async_bench", "spdlog async benchmark tool" },
+	{ {.fa = spdlog_bench_main }, "spdlog_bench", "spdlog main benchmark tool" },
+	{ {.fa = spdlog_formatter_bench_main }, "spdlog_formatter_bench", "spdlog formatter benchmark tool" },
+	{ {.fa = spdlog_latency_bench_main }, "spdlog_latency_bench", "spdlog latency benchmark tool" },
+	{ {.fa = spdlog_example_main }, "spdlog_example", "spdlog example/demo" },
 #endif
 
 #if defined(MUTOOL_EX)

@@ -43,11 +43,11 @@
 #define HAVE_NEON                        1
 #endif
 
-#define TESSERACT_DISABLE_DEBUG_FONTS    1
+#define TESSERACT_DISABLE_DEBUG_FONTS    0
 #define TESSERACT_IMAGEDATA_AS_PIX       1
 
 #define GRAPHICS_DISABLED                0
-#define DISABLED_LEGACY_ENGINE           1
+#define DISABLED_LEGACY_ENGINE           0
 
 #define PANGO_ENABLE_ENGINE              1
 

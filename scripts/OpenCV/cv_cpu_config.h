@@ -14,6 +14,31 @@
 // AVX2 is approaching 75% which is really good, but still potentially a blocker 
 // for a game to rely on without a fallback path.
 
+// Also taking care of Microsoft Visual Studio here. Inspired by:
+// https://stackoverflow.com/questions/18563978/detect-the-availability-of-sse-sse2-instruction-set-in-visual-studio
+ 
+#if defined ( __x86_64__ ) || defined(_M_AMD64) || defined(_M_X64)
+// SSE2 x64
+#if !defined (__SSE2__)
+#define __SSE2__    1
+#endif
+#endif
+
+#if defined(_M_IX86_FP) && (_M_IX86_FP == 2)
+// SSE2 x32
+#if !defined (__SSE2__)
+#define __SSE2__    1
+#endif
+#endif
+
+#if defined(_M_IX86_FP) && (_M_IX86_FP == 1)
+// SSE x32
+#ifndef __SSE__
+#define __SSE__ 1
+#endif
+#endif
+
+//-----------------------------------------------------
 
 #if defined ( __SSE__ ) || \
 	defined ( __SSE2__ ) || defined ( __x86_64__ ) || defined(_M_X64) || \
@@ -89,7 +114,7 @@
 #define CV_CPU_BASELINE_COMPILE_AVX2 1
 #endif
 
-// Special: wheh AVX512 is enabled as default for the entire compilate, 
+// Special: when AVX512 is enabled as default for the entire compilate, 
 // we assume this is a build for the very latest hardware: 
 // we assume support for the hole caboodle then!
 
