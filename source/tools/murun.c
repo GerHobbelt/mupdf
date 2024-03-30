@@ -3286,10 +3286,10 @@ static void ffi_Device_beginStructure(js_State *J)
 	fz_device *dev = js_touserdata(J, 0, "fz_device");
 	fz_structure str = js_iscoercible(J, 1) ? fz_structure_from_string(js_tostring(J, 1)) : FZ_STRUCTURE_INVALID;
 	const char *raw = js_iscoercible(J, 2) ? js_tostring(J, 2) : "";
-	int idx = js_tointeger(J, 3);
+	int uid = js_tointeger(J, 3);
 
 	fz_try(ctx)
-		fz_begin_structure(ctx, dev, str, raw, idx);
+		fz_begin_structure(ctx, dev, str, raw, uid);
 	fz_catch(ctx)
 		rethrow(J);
 }
@@ -4693,26 +4693,6 @@ static void ffi_Pixmap_saveAsPKM(js_State *J)
 		rethrow(J);
 }
 
-static void ffi_Pixmap_md5(js_State *J)
-{
-	fz_context *ctx = js_getcontext(J);
-	fz_pixmap *pixmap = ffi_topixmap(J, 0);
-	unsigned char digest[16] = { 0 };
-	size_t i;
-
-	fz_try(ctx)
-		fz_md5_pixmap(ctx, pixmap, digest);
-	fz_catch(ctx)
-		rethrow(J);
-
-	js_newarray(J);
-	for (i = 0; i < nelem(digest); ++i)
-	{
-		js_pushnumber(J, digest[i]);
-		js_setindex(J, -2, i);
-	}
-}
-
 static void ffi_Pixmap_convertToColorSpace(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -4764,7 +4744,7 @@ static void ffi_Pixmap_clear(js_State *J)
 	}
 }
 
-static void ffi_Pixmap_computeMD5(js_State *J)
+static void ffi_Pixmap_computeMD5_numArr(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	fz_pixmap *pixmap = ffi_topixmap(J, 0);
@@ -9041,10 +9021,10 @@ static void ffi_PDFAnnotation_addVertex(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_annot *annot = ffi_toannot(J, 0);
-	float x = js_tonumber(J, 1);
-	float y = js_tonumber(J, 2);
+	fz_point p = ffi_topoint(J, 1);
+
 	fz_try(ctx)
-		pdf_add_annot_vertex(ctx, annot, fz_make_point(x, y));
+		pdf_add_annot_vertex(ctx, annot, p);
 	fz_catch(ctx)
 		rethrow(J);
 }
@@ -11089,7 +11069,8 @@ int murun_main(int argc, const char** argv)
 		// Pixmap.saveAsPCL?, PCLM?, PDFOCR?, PSD?, PWG?
 
 		// Pixmap.halftone() -> Bitmap
-		jsB_propfun(J, "Pixmap.md5", ffi_Pixmap_md5, 0);
+
+		jsB_propfun(J, "Pixmap.md5", ffi_Pixmap_computeMD5_numArr, 0);
 	}
 	js_setregistry(J, "fz_pixmap");
 
