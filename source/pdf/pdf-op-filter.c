@@ -3008,6 +3008,8 @@ pdf_new_sanitize_filter(
 		fz_rethrow(ctx);
 	}
 
+	proc->super.requirements = proc->chain->requirements;
+
 	return (pdf_processor*)proc;
 }
 
