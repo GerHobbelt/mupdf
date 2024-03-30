@@ -382,13 +382,18 @@ if (DEBUG >= 1) console.error({spec})
 
 
 function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
-  if (DEBUG > 2) console.error("process_glob_list:", {files, sourcesPath, is_dir, spec})
+  let is_backref_up_the_tree = rawSourcesPath.trim().startsWith("../../../");
+  if (DEBUG > 2) console.error("process_glob_list:", {files, sourcesPath, is_dir, is_backref_up_the_tree, spec})
 
   let filterDirs = new Set();
+  let rootDir = sourcesPath + '/';
+  if (is_backref_up_the_tree) {
+    rootDir = path.dirname(path.dirname(rootDir)) + '/';
+  }
 
   let a = files.map((f) => {
-    if (DEBUG > 2) console.error("files.map:", {f, dst: f.replace(sourcesPath + '/', ''), sourcesPath })
-    return f.replace(sourcesPath + '/', '');
+    if (DEBUG > 2) console.error("files.map:", {f, dst: f.replace(rootDir, ''), sourcesPath, rootDir })
+    return f.replace(rootDir, '');
   })
   .filter((f) => {
     let f4f = '/' + f;
@@ -421,8 +426,8 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Source Files/' + base;
-            filterDirs.add(base);
+          base = 'Source Files/' + base;
+          filterDirs.add(base);
         }
         return true;
 
@@ -439,8 +444,8 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Header Files/' + base;
-            filterDirs.add(base);
+          base = 'Header Files/' + base;
+          filterDirs.add(base);
         }
         return true;
 
@@ -464,8 +469,8 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Resource Files/' + base;
-            filterDirs.add(base);
+          base = 'Resource Files/' + base;
+          filterDirs.add(base);
         }
         return true;
 
@@ -479,8 +484,8 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Misc Files/' + base;
-            filterDirs.add(base);
+          base = 'Misc Files/' + base;
+          filterDirs.add(base);
         }
         return true;
     }
@@ -492,7 +497,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
   let fcnt = 0;
   if (DEBUG > 3) console.error("filterDirs:", {filterDirs})
   for (let item of Array.from(filterDirs.keys()).sort().values()) {
-    item = item.replace(/\//g, '\\');
+    item = item.replace(/\/+/g, '\\');
     do {
       if (DEBUG > 3) console.error("item -- dir build-up:", {item})
       if (!m.includes(`<Filter Include="${xmlEncode(item)}">`)) {
@@ -511,7 +516,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
       // make sure the entire parent path is present in the filters too, or MSVC will barf!
       item = path.dirname(item);
       if (item === '.') {
-          item = '';
+        item = '';
       }
     } while (item.length > 0);
   }
@@ -520,6 +525,18 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
   extraFilters.sort();
 
   if (DEBUG >= 1) console.error("filtered files.map:", {a})
+
+  let sre = null;
+  if (is_backref_up_the_tree) {
+    let stripbase = sourcesPath + '/';
+    stripbase = stripbase.replace(/\/+/g, '/');
+    // prepare to strip off those 2 extra levels we left in there for the project FILTERS:
+    let d = stripbase.split('/');
+    d.splice(0, d.length - 3);
+    let stripPath = d.join('/');
+    sre = new RegExp(`^${ stripPath }`);
+    if (DEBUG >= 2) console.error("extra strip-off path:", {stripbase, stripPath, sre});
+  }
 
   // construct the files to add
   let filesToAdd = [];
@@ -535,14 +552,17 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Misc Files/' + base;
+          base = 'Misc Files/' + base;
         }
         else {
-            base = 'Misc Files';
+          base = 'Misc Files';
         }
-        base = base.replace(/\//g, '\\');
-        if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath, is_dir})
-        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/\//g, '/');
+        base = base.replace(/\/+/g, '\\');
+        if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath, is_dir, sre})
+        if (sre) {
+          item = item.replace(sre, '');
+        }
+        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/+/g, '/');
         slot = `
     <Text Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
@@ -566,14 +586,17 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Source Files/' + base;
+          base = 'Source Files/' + base;
         }
         else {
-            base = 'Source Files';
+          base = 'Source Files';
         }
-        base = base.replace(/\//g, '\\');
+        base = base.replace(/\/+/g, '\\');
         if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath, is_dir})
-        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/\//g, '/');
+        if (sre) {
+          item = item.replace(sre, '');
+        }
+        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/+/g, '/');
         slot = `
     <ClCompile Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
@@ -599,14 +622,17 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Header Files/' + base;
+          base = 'Header Files/' + base;
         }
         else {
-            base = 'Header Files';
+          base = 'Header Files';
         }
-        base = base.replace(/\//g, '\\');
+        base = base.replace(/\/+/g, '\\');
         if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath, is_dir})
-        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/\//g, '/');
+        if (sre) {
+          item = item.replace(sre, '');
+        }
+        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/+/g, '/');
         slot = `
     <ClInclude Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
@@ -626,14 +652,17 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Resource Files/' + base;
+          base = 'Resource Files/' + base;
         }
         else {
-            base = 'Resource Files';
+          base = 'Resource Files';
         }
-        base = base.replace(/\//g, '\\');
+        base = base.replace(/\/+/g, '\\');
         if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath, is_dir})
-        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/\//g, '/');
+        if (sre) {
+          item = item.replace(sre, '');
+        }
+        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/+/g, '/');
         slot = `
     <ResourceCompile Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
@@ -657,14 +686,17 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Resource Files/' + base;
+          base = 'Resource Files/' + base;
         }
         else {
-            base = 'Resource Files';
+          base = 'Resource Files';
         }
-        base = base.replace(/\//g, '\\');
+        base = base.replace(/\/+/g, '\\');
         if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath, is_dir})
-        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/\//g, '/');
+        if (sre) {
+          item = item.replace(sre, '');
+        }
+        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/+/g, '/');
         slot = `
     <Image Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
@@ -686,14 +718,17 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Resource Files/' + base;
+          base = 'Resource Files/' + base;
         }
         else {
-            base = 'Resource Files';
+          base = 'Resource Files';
         }
-        base = base.replace(/\//g, '\\');
+        base = base.replace(/\/+/g, '\\');
         if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath, is_dir})
-        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/\//g, '/');
+        if (sre) {
+          item = item.replace(sre, '');
+        }
+        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/+/g, '/');
         slot = `
     <Font Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
@@ -715,14 +750,17 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Resource Files/' + base;
+          base = 'Resource Files/' + base;
         }
         else {
-            base = 'Resource Files';
+          base = 'Resource Files';
         }
-        base = base.replace(/\//g, '\\');
+        base = base.replace(/\/+/g, '\\');
         if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath, is_dir})
-        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/\//g, '/');
+        if (sre) {
+          item = item.replace(sre, '');
+        }
+        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/+/g, '/');
         slot = `
     <Text Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
@@ -742,27 +780,30 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Source Files/' + base;
+          base = 'Source Files/' + base;
         }
         else {
-            base = 'Source Files';
+          base = 'Source Files';
         }
-        base = base.replace(/\//g, '\\');
+        base = base.replace(/\/+/g, '\\');
         if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath, is_dir})
-        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/\//g, '/');
+        if (sre) {
+          item = item.replace(sre, '');
+        }
+        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/+/g, '/');
         let do_nasm = spec.nasm_or_masm;
         if (!do_nasm) {
             do_nasm = /masm/.test(f) ? -1 : +1;
         }
         let asmexe =  do_nasm < 0 ? "MASM" : "NASM";
-            slot = `
+        slot = `
     <${ asmexe } Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
     </${ asmexe }>
-            `;
-            filesToAdd.push(slot);
+        `;
+        filesToAdd.push(slot);
 
-            slot = `
+        slot = `
     <${ asmexe } Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
@@ -775,14 +816,17 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Resource Files/' + base;
+          base = 'Resource Files/' + base;
         }
         else {
-            base = 'Resource Files';
+          base = 'Resource Files';
         }
-        base = base.replace(/\//g, '\\');
+        base = base.replace(/\/+/g, '\\');
         if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath, is_dir})
-        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/\//g, '/');
+        if (sre) {
+          item = item.replace(sre, '');
+        }
+        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/+/g, '/');
         slot = `
     <None Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
@@ -802,14 +846,17 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           base = '';
         }
         if (base.length > 0) {
-            base = 'Misc Files/' + base;
+          base = 'Misc Files/' + base;
         }
         else {
-            base = 'Misc Files';
+          base = 'Misc Files';
         }
-        base = base.replace(/\//g, '\\');
+        base = base.replace(/\/+/g, '\\');
         if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath, is_dir})
-        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/\//g, '/');
+        if (sre) {
+          item = item.replace(sre, '');
+        }
+        f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/+/g, '/');
         slot = `
     <Xml Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
@@ -854,49 +901,49 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
 
 
 function process_path(rawSourcesPath, is_dir) {
-    if (DEBUG > 1) console.error("process_path RAW:", {rawSourcesPath, is_dir});
-    while (/\/[^.\/][^\/]*\/\.\.\//.test(rawSourcesPath)) {
-        rawSourcesPath = rawSourcesPath.replace(/\/[^.\/][^\/]*\/\.\.\//, '/')
-    }
+  if (DEBUG > 1) console.error("process_path RAW:", {rawSourcesPath, is_dir});
+  while (/\/[^.\/][^\/]*\/\.\.\//.test(rawSourcesPath)) {
+    rawSourcesPath = rawSourcesPath.replace(/\/[^.\/][^\/]*\/\.\.\//, '/')
+  }
 
-    let sourcesPath = unixify(path.resolve(rawSourcesPath.trim()));
-    if (DEBUG > 1) console.error("process_path NORMALIZED:", {rawSourcesPath, sourcesPath, is_dir});
-    if (!fs.existsSync(sourcesPath)) {
-        console.error("Non-existing path specified:", sourcesPath);
-        process.exit(1);
-    }
+  let sourcesPath = unixify(path.resolve(rawSourcesPath.trim()));
+  if (DEBUG > 1) console.error("process_path NORMALIZED:", {rawSourcesPath, sourcesPath, is_dir});
+  if (!fs.existsSync(sourcesPath)) {
+    console.error("Non-existing path specified:", sourcesPath);
+    process.exit(1);
+  }
 
-    const globConfig = Object.assign({}, globDefaultOptions, {
-      nodir: !is_dir,
-      cwd: is_dir ? sourcesPath : path.dirname(sourcesPath)
-    });
+  const globConfig = Object.assign({}, globDefaultOptions, {
+    nodir: !is_dir,
+    cwd: is_dir ? sourcesPath : path.dirname(sourcesPath)
+  });
 
-    let pathWithWildCards = is_dir ? '*' : path.basename(sourcesPath);
-    if (DEBUG > 2) console.error("process_path GLOB:", {pathWithWildCards, globConfig, cwd: globConfig.cwd, is_dir});
+  let pathWithWildCards = is_dir ? '*' : path.basename(sourcesPath);
+  if (DEBUG > 2) console.error("process_path GLOB:", {pathWithWildCards, globConfig, cwd: globConfig.cwd, is_dir});
 
-    if (pathWithWildCards.indexOf('*') >= 0 || pathWithWildCards.indexOf('?') >= 0 || is_dir || !fs.existsSync(sourcesPath)) {
-        let files_rec = glob(pathWithWildCards, globConfig);
-        if (DEBUG > 2) console.error("process_path GLOB DONE:", {pathWithWildCards, globConfig, cwd: files_rec.cwd, is_dir, found: files_rec.found});
-        process_glob_list(files_rec.found, files_rec.cwd, is_dir, rawSourcesPath);
-    }
-    else {
-        process_glob_list([sourcesPath], globConfig.cwd, false, rawSourcesPath);
-    }
+  if (pathWithWildCards.indexOf('*') >= 0 || pathWithWildCards.indexOf('?') >= 0 || is_dir || !fs.existsSync(sourcesPath)) {
+    let files_rec = glob(pathWithWildCards, globConfig);
+    if (DEBUG > 2) console.error("process_path GLOB DONE:", {pathWithWildCards, globConfig, cwd: files_rec.cwd, is_dir, found: files_rec.found});
+    process_glob_list(files_rec.found, files_rec.cwd, is_dir, rawSourcesPath);
+  }
+  else {
+    process_glob_list([sourcesPath], globConfig.cwd, false, rawSourcesPath);
+  }
 }
 
 
 
 if (spec.special_inject != null) {
-    fsrc1_arr.push(spec.special_inject);
+  fsrc1_arr.push(spec.special_inject);
 }
 
 
 
 for (let f of spec.sources) {
-    process_path(f, false);
+  process_path(f, false);
 }
 for (let f of spec.directories) {
-    process_path(f, true);
+  process_path(f, true);
 }
 
 
@@ -921,9 +968,9 @@ fs.writeFileSync(filepath, src, 'utf8');
 fs.writeFileSync(filterFilepath, filterSrc, 'utf8');
 
 if (spec.ignores.length > 0) {
-console.info("Added", addedCount, "entries. (", ignoreCount, " files IGNORED due to IgnoreSpec.)");
+  console.info("Added", addedCount, "entries. (", ignoreCount, " files IGNORED due to IgnoreSpec.)");
 } else {
-console.info("Added", addedCount, "entries.");
+  console.info("Added", addedCount, "entries.");
 }
 
 
