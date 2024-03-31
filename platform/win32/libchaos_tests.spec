@@ -1,7 +1,8 @@
 
 also-ignore:
 	/cmake/
-	/tests/t_.*
+	/src/
+	/examples/
 	
 	/tmp/
 	
