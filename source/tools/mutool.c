@@ -69,6 +69,7 @@
 #include "../../thirdparty/owemdjee/dirent/examples/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/edit-distance/src/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/spdlog/include/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/libchaos/include/chaos/monolithic_examples.h"
 #include "../../source/fitz/tessocr.h"
 #include "../../thirdparty/gumbo-parser/src/gumbo.h"
 #undef BUILD_MONOLITHIC
@@ -783,6 +784,21 @@ static struct tool_spec {
 
 #if defined(MUTOOL_EX)
 	{ {.fa = uchardet_tool_main }, "uchardet", "uchardet tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.f = chaos_benchmark_graph_main }, "chaos_benchmark_graph", "chaos benchmark_graph tool" },
+	{ {.fa = chaos_file_checksum_main }, "chaos_file_checksum", "chaos file_checksum tool" },
+	{ {.f = chaos_machine_interface_main }, "chaos_machine_interface", "chaos machine_interface tool" },
+	{ {.f = chaos_interface_main }, "chaos_interface", "chaos interface tool" },
+	{ {.f = chaos_long_period_urandom_main }, "chaos_long_period_urandom", "chaos long_period_urandom tool" },
+	{ {.f = chaos_normal_dist_diagram_main }, "chaos_normal_dist_diagram", "chaos normal_dist_diagram tool" },
+	{ {.f = chaos_tests_library_main }, "chaos_tests_library", "chaos tests_library tool" },
+//	{ {.f = chaos_tests_testU01_main }, "chaos_tests_testU01", "chaos tests_testU01 tool" },
+	{ {.f = chaos_truely_random_main }, "chaos_truely_random", "chaos truely_random tool" },
+	{ {.fa = chaos_deep_main }, "chaos_deep", "chaos deep tool" },
+	{ {.f = chaos_sandbox_main }, "chaos_sandbox", "chaos sandbox tool" },
+//	{ {.f = chaos_testu01_main }, "chaos_testu01", "chaos testu01 tool" },
 #endif
 
 #if defined(MUTOOL_EX)
