@@ -544,6 +544,16 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				str = va_arg(args, const char*);
 				if (!str)
 					str = "(null)";
+				{
+					const char *p = str;
+					while (*p++ != 0);
+					if (p - str < w)
+					{
+						w -= p - str;
+						while (w-- > 0)
+							fmtputc(&out, ' ');
+					}
+				}
 				while ((c = *str++) != 0)
 					fmtputc(&out, c);
 				break;
