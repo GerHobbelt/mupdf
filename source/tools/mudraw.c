@@ -335,6 +335,7 @@ static pdf_document *pdfout = NULL;
 static int no_icc = 0;
 static int ignore_errors = 0;
 static int uselist = 1;
+static int useprogressive = 0;
 static int alphabits_text = 8;
 static int alphabits_graphics = 8;
 
@@ -463,6 +464,7 @@ static int usage(void)
 		"\t-K\tdo not draw text\n"
 		"\t-KK\tonly draw text\n"
 		"\t-D\tdisable use of display list\n"
+		"\t-g\tforce the use of progressive mode\n"
 		"\t-i\tignore errors\n"
 		"\t-m -\tlimit memory usage in bytes\n"
 		"\t-L\tlow memory mode (avoid caching, clear objects after each page)\n"
@@ -2026,7 +2028,7 @@ int mudraw_main(int argc, char **argv)
 
 	fz_var(doc);
 
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:Yz:Z:NO:am:Kb:")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:Yz:Z:NO:am:Kb:g")) != -1)
 	{
 		switch (c)
 		{
@@ -2138,6 +2140,7 @@ int mudraw_main(int argc, char **argv)
 		case 'a': useaccel = 0; break;
 
 		case 'v': fprintf(stderr, "mudraw version %s\n", FZ_VERSION); return 1;
+		case 'g': useprogressive = 1; break;
 		}
 	}
 
@@ -2518,6 +2521,11 @@ int mudraw_main(int argc, char **argv)
 				time_t atime;
 				time_t dtime;
 				int layouttime;
+				fz_stream *filef = NULL;
+				fz_stream *accelf = NULL;
+
+				fz_var(filef);
+				fz_var(accelf);
 
 				fz_try(ctx)
 				{
@@ -2551,7 +2559,12 @@ int mudraw_main(int argc, char **argv)
 						}
 					}
 
-					doc = fz_open_accelerated_document(ctx, filename, accel);
+					filef = fz_open_file(ctx, filename);
+					if (useprogressive)
+						filef->progressive = 1;
+					if (accel)
+						accelf = fz_open_file(ctx, accel);
+					doc = fz_open_accelerated_document_with_stream(ctx, filename, filef, accelf);
 
 #ifdef CLUSTER
 					/* Load and then drop the outline if we're running under the cluster.
@@ -2640,6 +2653,8 @@ int mudraw_main(int argc, char **argv)
 				{
 					fz_drop_document(ctx, doc);
 					doc = NULL;
+					fz_drop_stream(ctx, filef);
+					fz_drop_stream(ctx, accelf);
 				}
 				fz_catch(ctx)
 				{
