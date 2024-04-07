@@ -363,6 +363,7 @@ static int make_hyperlinks = 0;
 static int no_icc = 0;
 static int ignore_errors = 0;
 static int uselist = 1;
+static int useprogressive = 0;
 static int alphabits_text = 8;
 static int alphabits_graphics = 8;
 static int subpix_preset = 0;
@@ -544,9 +545,9 @@ static int usage(void)
 		"  -e -  proof icc profile (filename of ICC profile)\n"
 		"  -G -  apply gamma correction\n"
 #if FZ_ENABLE_GAMMA
-		"  -g -  use gamma blending\n"
+		"  -Q -  use gamma blending\n"
 #else
-		"  -g -  use gamma blending (disabled in this build)\n"
+		"  -Q -  use gamma blending (disabled in this build)\n"
 #endif
 		"  -I    invert colors\n"
 		"\n"
@@ -560,6 +561,7 @@ static int usage(void)
 		"  -K    do not draw text\n"
 		"  -KK   only draw text\n"
 		"  -D    disable use of display list\n"
+		"  -g    force the use of progressive mode\n"
 		"  -j -  render only selected types of content. Use a comma-separated list\n"
 		"        to combine types (everything,content,annotations,Unknown,\n"
 		"        max_nodes=NNN,max_time=MS,"
@@ -2879,7 +2881,7 @@ int main(int argc, const char** argv)
 	atexit(mu_drop_context);
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:gG:Is:A:DiW:H:S:T:t:d:U:XLvVPl:y:Yz:Z:NO:am:x:Xhj:J:Kb")) != -1)
+	while ((c = fz_getopt(argc, argv, "qQp:o:F:R:r:w:h:fB:c:e:gG:Is:A:DiW:H:S:T:t:d:U:LvVPl:y:Yz:Z:NO:am:x:Xhj:J:Kb:")) != -1)
 	{
 		switch (c)
 		{
@@ -2911,7 +2913,7 @@ int main(int argc, const char** argv)
 		case 'c': out_cs = parse_colorspace(fz_optarg); break;
 		case 'e': proof_filename = fz_optarg; break;
 		case 'G': gamma_value = fz_atof(fz_optarg); break;
-		case 'g':
+		case 'Q':
 #if FZ_ENABLE_GAMMA
 			use_gamma = 1;
 #else
@@ -3027,6 +3029,7 @@ int main(int argc, const char** argv)
 		case 'x': txtdraw_options = fz_optarg; break;
 
 		case 'V': fz_info(ctx, "mudraw version %s", FZ_VERSION); return EXIT_FAILURE;
+		case 'g': useprogressive = 1; break;
 		}
 	}
 
@@ -3566,6 +3569,11 @@ int main(int argc, const char** argv)
 				time_t atime;
 				time_t dtime;
 				int layouttime;
+				fz_stream *filef = NULL;
+				fz_stream *accelf = NULL;
+
+				fz_var(filef);
+				fz_var(accelf);
 
 				fz_try(ctx)
 				{
@@ -3595,7 +3603,12 @@ int main(int argc, const char** argv)
 						}
 					}
 
-					doc = fz_open_accelerated_document(ctx, filename, accel);
+					filef = fz_open_file(ctx, filename);
+					if (useprogressive)
+						filef->progressive = 1;
+					if (accel)
+						accelf = fz_open_file(ctx, accel);
+					doc = fz_open_accelerated_document_with_stream(ctx, filename, filef, accelf);
 
 #ifdef CLUSTER
 					/* Load and then drop the outline if we're running under the cluster.
@@ -3687,6 +3700,8 @@ int main(int argc, const char** argv)
 				{
 					fz_drop_document(ctx, doc);
 					doc = NULL;
+					fz_drop_stream(ctx, filef);
+					fz_drop_stream(ctx, accelf);
 				}
 				fz_catch(ctx)
 				{
