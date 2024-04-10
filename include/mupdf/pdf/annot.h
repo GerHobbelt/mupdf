@@ -114,6 +114,12 @@ enum
 	PDF_ANNOT_Q_RIGHT = 2
 };
 
+enum
+{
+	PDF_ANNOT_RT_R = 0,
+	PDF_ANNOT_RT_GROUP = 1,
+};
+
 enum pdf_intent
 {
 	PDF_ANNOT_IT_DEFAULT = 0,
@@ -815,6 +821,10 @@ int64_t pdf_annot_modification_date(fz_context *ctx, pdf_annot *annot);
 void pdf_set_annot_modification_date(fz_context *ctx, pdf_annot *annot, int64_t time);
 int64_t pdf_annot_creation_date(fz_context *ctx, pdf_annot *annot);
 void pdf_set_annot_creation_date(fz_context *ctx, pdf_annot *annot, int64_t time);
+
+int pdf_annot_has_reply_type(fz_context *ctx, pdf_annot *annot);
+int pdf_annot_reply_type(fz_context *ctx, pdf_annot *annot);
+void pdf_set_annot_reply_type(fz_context *ctx, pdf_annot *annot, int rt);
 
 int pdf_annot_has_intent(fz_context *ctx, pdf_annot *annot);
 enum pdf_intent pdf_annot_intent(fz_context *ctx, pdf_annot *annot);

@@ -3202,6 +3202,60 @@ pdf_set_annot_author(fz_context *ctx, pdf_annot *annot, const char *author)
 	}
 }
 
+int
+pdf_annot_has_reply_type(fz_context *ctx, pdf_annot *annot)
+{
+	return is_allowed_subtype_wrap(ctx, annot, PDF_NAME(RT), markup_subtypes);
+}
+
+int
+pdf_annot_reply_type(fz_context *ctx, pdf_annot *annot)
+{
+	pdf_obj *rt;
+
+	pdf_annot_push_local_xref(ctx, annot);
+
+	fz_try(ctx)
+	{
+		check_allowed_subtypes(ctx, annot, PDF_NAME(RT), markup_subtypes);
+		rt = pdf_dict_get(ctx, annot->obj, PDF_NAME(RT));
+	}
+	fz_always(ctx)
+		pdf_annot_pop_local_xref(ctx, annot);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+
+	return rt == PDF_NAME(Group);
+}
+
+void
+pdf_set_annot_reply_type(fz_context *ctx, pdf_annot *annot, int rt)
+{
+	begin_annot_op(ctx, annot, "Set reply type");
+
+	fz_try(ctx)
+	{
+		check_allowed_subtypes(ctx, annot, PDF_NAME(RT), markup_subtypes);
+		switch (rt)
+		{
+		default:
+		case PDF_ANNOT_RT_R:
+			pdf_dict_put(ctx, annot->obj, PDF_NAME(RT), PDF_NAME(R));
+			break;
+		case PDF_ANNOT_RT_GROUP:
+			pdf_dict_put(ctx, annot->obj, PDF_NAME(RT), PDF_NAME(Group));
+			break;
+		}
+		pdf_dirty_annot(ctx, annot);
+		end_annot_op(ctx, annot);
+	}
+	fz_catch(ctx)
+	{
+		abandon_annot_op(ctx, annot);
+		fz_rethrow(ctx);
+	}
+}
+
 static pdf_obj *intent_subtypes[] = {
 	PDF_NAME(FreeText),
 	PDF_NAME(Line),
