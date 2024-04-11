@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{641BC0F8-5302-4520-9293-21522802DD47}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPDLOG;SPDLOG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/spdlog/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/3rd/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;SPDLOG_FMT_EXTERNAL;SPDLOG_COMPILED_LIB;BUILDING_LIBSPDLOG;SPDLOG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPDLOG;SPDLOG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/spdlog/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/3rd/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPDLOG;SPDLOG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/spdlog/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/3rd/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;SPDLOG_FMT_EXTERNAL;SPDLOG_COMPILED_LIB;BUILDING_LIBSPDLOG;SPDLOG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPDLOG;SPDLOG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/spdlog/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/3rd/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPDLOG;SPDLOG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/spdlog/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/3rd/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;SPDLOG_FMT_EXTERNAL;SPDLOG_COMPILED_LIB;BUILDING_LIBSPDLOG;SPDLOG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPDLOG;SPDLOG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/spdlog/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/3rd/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPDLOG;SPDLOG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/spdlog/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/3rd/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;SPDLOG_FMT_EXTERNAL;SPDLOG_COMPILED_LIB;BUILDING_LIBSPDLOG;SPDLOG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPDLOG;SPDLOG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/spdlog/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/3rd/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ProjectReference Include="libcxxtest_gtest_catch2_2.vcxproj">
+      <Project>{c8e6eecc-6ded-4f1f-b8fe-ebe2a25bd784}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgbenchmark.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6fa4e9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libspdlog.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff35655c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libspdlog_benchmark.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff35633c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libspdlog_sqlite_sink.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff78999c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_backtrace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_bin_to_hex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_cfg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_circular_q.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_create_dir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_custom_callbacks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_daily_logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_dup_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_errors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_eventlog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_file_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_file_logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_fmt_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_hierarchical.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_json_formatter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_macros.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_mpmc_q.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_pattern_formatter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_registry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_stdout_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_stopwatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_systemd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/test_time_point.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spdlog/tests/utils.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cxxtest_catch_2_gtest\3rd\Catch2\src\catch2\internal\catch_main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/monolithic_examples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/async_logger-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/async_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/cfg/argv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/cfg/env.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/cfg/helpers-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/cfg/helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/common-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/backtracer-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/backtracer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/circular_q.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/console_globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/file_helper-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/file_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/fmt_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/log_msg-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/log_msg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/log_msg_buffer-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/log_msg_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/mpmc_blocking_q.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/null_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/os-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/periodic_worker-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/periodic_worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/registry-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/source_location.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/synchronous_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/tcp_client-windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/tcp_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/thread_pool-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/thread_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/udp_client-windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/udp_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/details/windows_include.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/bin_to_hex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/compile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/fmt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/ostr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/ranges.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/std.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fmt/xchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/json_formatter-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/json_formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/logger-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/mdc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/pattern_formatter-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/pattern_formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/android_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/ansicolor_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/ansicolor_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/base_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/base_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/basic_file_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/basic_file_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/callback_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/daily_file_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/dist_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/dup_filter_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/hourly_file_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/kafka_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/minutely_file_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/mongo_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/msvc_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/null_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/ostream_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/qt_sinks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/ringbuffer_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/rotating_file_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/rotating_file_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/stdout_color_sinks-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/stdout_color_sinks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/stdout_sinks-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/stdout_sinks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/syslog_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/systemd_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/tcp_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/udp_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/win_eventlog_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/wincolor_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/sinks/wincolor_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/spdlog-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/spdlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/stopwatch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/structured_spdlog-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/structured_spdlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/tweakme.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/include/spdlog/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/tests/includes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/tests/test_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/spdlog/tests/utils.h" />
+    <Image Include="../../thirdparty/owemdjee/spdlog/logos/spdlog.png" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/cmake/ide.cmake" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/cmake/spdlog.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/cmake/spdlogCPack.cmake" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/cmake/spdlogConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/cmake/utils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/cmake/version.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/logos/jetbrains-variant-4.svg" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/premake5.lua" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/scripts/ci_setup_clang.sh" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/scripts/extract_version.py" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/scripts/format.sh" />
+    <Text Include="../../thirdparty/owemdjee/spdlog/tests/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

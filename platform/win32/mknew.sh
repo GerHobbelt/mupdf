@@ -496,7 +496,8 @@ libgateY
 libgd
 libgif
 libgrape-lite
-libharry
+harry
+sally
 libheif
 libheif-alt
 libicns
@@ -967,7 +968,6 @@ PEGTL
 doctest
 fpng
 jsoncpp
-libparameters
 mosquitto
 qoi
 safeclib
@@ -1125,6 +1125,26 @@ SIMDString
 Multicore-TSNE
 luple
 fastrange
+rollinghashcpp
+Hackers-Delight
+bustache
+rtl
+tapkee
+see-phit
+FM-fast-match
+sse-popcount
+readerwriterqueue
+blazingmq
+lockfree
+sparsepp
+cef-pdf
+FiberTaskingLib
+state-threads
+continuable
+quantum
+directorywatcher
+MPMCQueue
+SPSCQueue
 
 EOT
 )
@@ -1134,6 +1154,9 @@ EOT
 myapplist=$(
 grep -v '#' <<EOT
 
+#sdcc
+
+cef-pdf
 pikchr
 capnproto
 loki

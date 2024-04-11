@@ -1,0 +1,3 @@
+
+also-ignore:
+	/example/
