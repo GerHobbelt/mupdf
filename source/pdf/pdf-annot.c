@@ -3061,6 +3061,7 @@ static pdf_obj *intent_subtypes[] = {
 	PDF_NAME(Line),
 	PDF_NAME(Polygon),
 	PDF_NAME(PolyLine),
+	PDF_NAME(Stamp),
 	NULL,
 };
 
@@ -3071,7 +3072,8 @@ enum pdf_intent pdf_intent_from_name(fz_context *ctx, pdf_obj *it)
 		it == PDF_NAME(FreeText) ||
 		it == PDF_NAME(Line) ||
 		it == PDF_NAME(PolyLine) ||
-		it == PDF_NAME(Polygon)
+		it == PDF_NAME(Polygon) ||
+		it == PDF_NAME(Stamp)
 	)
 		return PDF_ANNOT_IT_DEFAULT;
 	if (it == PDF_NAME(FreeTextCallout))
@@ -3088,6 +3090,10 @@ enum pdf_intent pdf_intent_from_name(fz_context *ctx, pdf_obj *it)
 		return PDF_ANNOT_IT_POLYGON_CLOUD;
 	if (it == PDF_NAME(PolygonDimension))
 		return PDF_ANNOT_IT_POLYGON_DIMENSION;
+	if (it == PDF_NAME(StampImage))
+		return PDF_ANNOT_IT_STAMP_IMAGE;
+	if (it == PDF_NAME(StampSnapshot))
+		return PDF_ANNOT_IT_STAMP_SNAPSHOT;
 	return PDF_ANNOT_IT_UNKNOWN;
 }
 
@@ -3098,7 +3104,8 @@ enum pdf_intent pdf_intent_from_string(fz_context *ctx, const char *it)
 		!strcmp(it, "FreeText") ||
 		!strcmp(it, "Line") ||
 		!strcmp(it, "PolyLine") ||
-		!strcmp(it, "Polygon")
+		!strcmp(it, "Polygon") ||
+		!strcmp(it, "Stamp")
 	)
 		return PDF_ANNOT_IT_DEFAULT;
 	if (!strcmp(it, "FreeTextCallout"))
@@ -3115,6 +3122,10 @@ enum pdf_intent pdf_intent_from_string(fz_context *ctx, const char *it)
 		return PDF_ANNOT_IT_POLYGON_CLOUD;
 	if (!strcmp(it, "PolygonDimension"))
 		return PDF_ANNOT_IT_POLYGON_DIMENSION;
+	if (!strcmp(it, "StampImage"))
+		return PDF_ANNOT_IT_STAMP_IMAGE;
+	if (!strcmp(it, "StampSnapshot"))
+		return PDF_ANNOT_IT_STAMP_SNAPSHOT;
 	return PDF_ANNOT_IT_UNKNOWN;
 }
 
