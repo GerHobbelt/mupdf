@@ -404,7 +404,7 @@ font_analysis_Do_form(fz_context *ctx, pdf_processor *proc, const char *name, pd
 	if (!resources)
 		resources = pr->rstack->res;
 
-	pdf_process_contents(ctx, (pdf_processor*)pr, doc, resources, xobj, NULL, NULL);
+	pdf_process_contents(ctx, (pdf_processor*)pr, doc, resources, xobj, NULL);
 }
 
 static pdf_processor *
@@ -450,10 +450,10 @@ examine_page(fz_context *ctx, pdf_document *doc, pdf_page *page, fonts_usage_t *
 
 	fz_try(ctx)
 	{
-		pdf_process_contents(ctx, proc, doc, resources, contents, NULL, NULL);
+		pdf_process_contents(ctx, proc, doc, resources, contents, NULL);
 
 		for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
-			pdf_process_annot(ctx, proc, annot, NULL);
+			pdf_process_annot(ctx, proc, annot);
 	}
 	fz_always(ctx)
 	{

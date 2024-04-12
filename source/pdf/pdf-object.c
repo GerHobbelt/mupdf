@@ -3942,10 +3942,9 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 	{
 		float f = pdf_to_real(ctx, obj);
 		if (f == (int)f)
-			fz_snprintf(buf, sizeof buf, "%d", (int)f);
+			fmt_printf(ctx, fmt, "%d", (int)f);
 		else
-			fz_snprintf(buf, sizeof buf, "%g", f);
-		fmt_puts(ctx, fmt, buf);
+			fmt_printf(ctx, fmt, "%g", f);
 		fmt->sep = 1;
 		return;
 	}

@@ -2793,7 +2793,7 @@ int main(int argc, const char** argv)
 	band_height = 0;
 	lowmemory = 0;
 
-	kill = 0;
+	s_kill = 0;
 	verbosity = 1;
 	errored = 0;
 	colorspace = NULL;
@@ -3270,7 +3270,7 @@ int main(int argc, const char** argv)
 				fz_error(ctx, "Making hyperlinks only possible in HTML output\n");
 				make_hyperlinks = 0;
 			}
-			if (kill == 1 || kill == 2)
+			if (s_kill == 1 || s_kill == 2)
 			{
 				fz_error(ctx, "No sense in making hyperlinks if the switch -K or -KK is used\n");
 				make_hyperlinks = 0;

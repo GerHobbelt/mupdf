@@ -33,16 +33,12 @@ typedef struct fz_context fz_context;
 
 #if !defined(NO_ASSERTIONS)
 
-#ifndef CTX
-#define CTX   ctx
-#endif
-
 // --------------------------------------------------------------------------------------------------------------------------------------
 
 #ifndef FZ_WARN_ABOUT_ASSERT_COLLISION_WITH_STD_RTL
 #define assert(expression) (void)(							                        \
             (!!(expression)) ||						                                \
-            fz_report_failed_assertion(CTX, #expression, __FILE__, __LINE__)		\
+            fz_report_failed_assertion(NULL, #expression, __FILE__, __LINE__)		\
         )
 #else
 // make sure this expands to a compiler error:
@@ -52,28 +48,28 @@ typedef struct fz_context fz_context;
 
 #define ASSERT(expression) (void)(							                        \
             (!!(expression)) ||						                                \
-            fz_report_failed_assertion(CTX, #expression, __FILE__, __LINE__)		\
+            fz_report_failed_assertion(NULL, #expression, __FILE__, __LINE__)		\
         )
 
 #define ASSERT_AND_CONTINUE(expression) (void)(													\
             (!!(expression)) ||																	\
-            fz_report_failed_assertion_and_continue(CTX, #expression, __FILE__, __LINE__)		\
+            fz_report_failed_assertion_and_continue(NULL, #expression, __FILE__, __LINE__)		\
         )
 
 #define VERIFY(expression)              ASSERT(expression)
 #define VERIFY_AND_CONTINUE(expression) ASSERT_AND_CONTINUE(expression)
 
 #define VERIFY_AND_CONTINUE_EQ(expr1, expr2) 												\
-            fz_check_and_report_failed_assertion_and_continue(CTX, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)		
+            fz_check_and_report_failed_assertion_and_continue(NULL, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)		
 #define ASSERT_AND_CONTINUE_EQ(expr1, expr2) 												\
-            fz_check_and_report_failed_assertion_and_continue(CTX, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)
+            fz_check_and_report_failed_assertion_and_continue(NULL, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)
 
 #if !defined(GTEST_DONT_DEFINE_ASSERT_EQ)
 
 #define VERIFY_EQ(expr1, expr2) 															\
-            fz_check_and_report_failed_assertion_and_continue(CTX, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)		
+            fz_check_and_report_failed_assertion_and_continue(NULL, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)		
 #define ASSERT_EQ(expr1, expr2) 															\
-            fz_check_and_report_failed_assertion_and_continue(CTX, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)
+            fz_check_and_report_failed_assertion_and_continue(NULL, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)
 
 #endif
 
