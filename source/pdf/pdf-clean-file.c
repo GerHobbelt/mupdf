@@ -229,7 +229,7 @@ static int strip_outlines(fz_context *ctx, pdf_document *doc, pdf_obj *outlines,
 	return nc;
 }
 
-static void pdf_rearrange_pages_imp(fz_context *ctx, pdf_document *doc, int count, int *new_page_list)
+static void pdf_rearrange_pages_imp(fz_context *ctx, pdf_document *doc, int count, const int *new_page_list)
 {
 	pdf_obj *oldroot, *pages, *kids, *olddests;
 	pdf_obj *root = NULL;
@@ -416,7 +416,7 @@ static void pdf_rearrange_pages_imp(fz_context *ctx, pdf_document *doc, int coun
 	}
 }
 
-void pdf_rearrange_pages(fz_context *ctx, pdf_document *doc, int count, int *new_page_list)
+void pdf_rearrange_pages(fz_context *ctx, pdf_document *doc, int count, const int *new_page_list)
 {
 	pdf_begin_operation(ctx, doc, "Rearrange pages");
 	fz_try(ctx)
@@ -488,7 +488,7 @@ void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, co
 		pdf_rewrite_images(ctx, pdf, &opts->image);
 
 		if (opts->subset_fonts)
-			pdf_subset_fonts(ctx, pdf);
+			pdf_subset_fonts(ctx, pdf, len, pages);
 
 		pdf_save_document(ctx, pdf, outfile, &opts->write);
 	}

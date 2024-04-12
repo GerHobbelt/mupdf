@@ -90,9 +90,16 @@ def declaration_text(
 
     pointee = type_.get_pointee()
     if pointee and pointee.spelling:
-        if verbose: jlib.log( '{pointee.spelling=}')
+        if type_.kind == state.clang.cindex.TypeKind.LVALUEREFERENCE:
+            pointee_type = '&'
+        elif type_.kind == state.clang.cindex.TypeKind.POINTER:
+            pointee_type = '*'
+        else:
+            assert 0, f'Unrecognised pointer kind {type_.kind=}.'
+        if verbose: jlib.log( '{type_=} {type_.kind=} {pointee.spelling=}')
         ret = declaration_text(
-                pointee, f'*{name}',
+                pointee,
+                f'{pointee_type}{name}',
                 nest+1,
                 name_is_simple=False,
                 verbose=verbose,
@@ -325,6 +332,8 @@ def make_fncall( tu, cursor, return_type, fncall, out, refcheck_if):
                 out.write( f'        std::cerr << " {arg.name}=" << {arg.name};\n')
             elif arg.cursor.type.kind == state.clang.cindex.TypeKind.POINTER:
                 out.write( f'        if ({varname_enable()}) std::cerr << " {arg.name}=" << {arg.name};\n')
+            elif arg.cursor.type.kind == state.clang.cindex.TypeKind.LVALUEREFERENCE:
+                out.write( f'        if ({varname_enable()}) std::cerr << " &{arg.name}=" << &{arg.name};\n')
             else:
                 out.write( f'        std::cerr << " &{arg.name}=" << &{arg.name};\n')
         elif parse.is_pointer_to(arg.cursor.type, 'char') and state.get_name_canonical( arg.cursor.type.get_pointee()).is_const_qualified():
@@ -350,6 +359,8 @@ def make_fncall( tu, cursor, return_type, fncall, out, refcheck_if):
         elif arg.cursor.type.kind == state.clang.cindex.TypeKind.POINTER:
             # Don't assume non-const 'char*' is a zero-terminated string.
             out.write( f'        if ({varname_enable()}) std::cerr << " {arg.name}=" << (void*) {arg.name};\n')
+        elif arg.cursor.type.kind == state.clang.cindex.TypeKind.LVALUEREFERENCE:
+            out.write( f'        if ({varname_enable()}) std::cerr << " &{arg.name}=" << &{arg.name};\n')
         else:
             out.write( f'        std::cerr << " {arg.name}=" << {arg.name};\n')
     out.write( f'        std::cerr << "\\n";\n')
@@ -1053,7 +1064,7 @@ g_extra_declarations = textwrap.dedent(f'''
         pointer via Swig from Python/C#. */
         FZ_FUNCTION int fz_document_recognize_content_fn_call(fz_context* ctx, fz_document_recognize_content_fn fn, fz_stream* stream, fz_archive* dir);
 
-        /* Swig-friendly wrapper for pdf_choice_widget_options(), returns the
+        /** Swig-friendly wrapper for pdf_choice_widget_options(), returns the
         options directly in a vector. */
         FZ_FUNCTION std::vector<std::string> pdf_choice_widget_options2(fz_context* ctx, pdf_annot* tw, int exportval);
 
@@ -1070,11 +1081,14 @@ g_extra_declarations = textwrap.dedent(f'''
                 int yres,
                 int interpolate,
                 int imagemask,
-                const std::vector<float>* decode,
-                const std::vector<int>* colorkey,
+                const std::vector<float>& decode,
+                const std::vector<int>& colorkey,
                 fz_compressed_buffer* buffer,
                 fz_image* mask
                 );
+
+        /** Swig-friendly wrapper for pdf_rearrange_pages(). */
+        void pdf_rearrange_pages2(fz_context* ctx, pdf_document* doc, const std::vector<int>& pages);
         ''')
 
 g_extra_definitions = textwrap.dedent(f'''
@@ -1236,18 +1250,17 @@ g_extra_definitions = textwrap.dedent(f'''
                 int yres,
                 int interpolate,
                 int imagemask,
-                const std::vector<float> *decode,
-                const std::vector<int> *colorkey,
+                const std::vector<float>& decode,
+                const std::vector<int>& colorkey,
                 fz_compressed_buffer* buffer,
                 fz_image* mask
                 )
         {{
             int n = fz_colorspace_n(ctx, colorspace);
-            printf("fz_new_image_from_compressed_buffer2() decode=%p colorkey=%p n=%i\\n", decode, colorkey, n);
-            assert(!decode || decode->size() == 2 * n);
-            assert(!colorkey || colorkey->size() == 2 * n);
-            const float* decode2 = decode ? &(*decode)[0] : nullptr;
-            const int* colorkey2 = colorkey ? &(*colorkey)[0] : nullptr;
+            assert(decode.empty() || decode.size() == 2 * n);
+            assert(colorkey.empty() || colorkey.size() == 2 * n);
+            const float* decode2 = decode.empty() ? nullptr : &decode[0];
+            const int* colorkey2 = colorkey.empty() ? nullptr : &colorkey[0];
             fz_image* ret = fz_new_image_from_compressed_buffer(
                     ctx,
                     w,
@@ -1260,10 +1273,15 @@ g_extra_definitions = textwrap.dedent(f'''
                     imagemask,
                     decode2,
                     colorkey2,
-                    buffer,
+                    fz_keep_compressed_buffer(ctx, buffer),
                     mask
                     );
             return ret;
+        }}
+
+        void pdf_rearrange_pages2(fz_context* ctx, pdf_document* doc, const std::vector<int>& pages)
+        {{
+            return pdf_rearrange_pages(ctx, doc, pages.size(), &pages[0]);
         }}
         ''')
 
@@ -4598,7 +4616,7 @@ def refcount_check_code( out, refcheck_if):
             a static instance of this class template with T set to our wrapper
             class, for example:
 
-                static RefsCheck<fz_document, Document> s_Document_refs_check;
+                static RefsCheck<fz_document, FzDocument> s_FzDocument_refs_check;
 
             Then if s_check_refs is true, each constructor function calls
             .add(), the destructor calls .remove() and other class functions

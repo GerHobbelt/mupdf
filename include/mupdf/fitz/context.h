@@ -187,6 +187,14 @@ const char *fz_caught_message(fz_context *ctx);
 */
 int fz_caught(fz_context *ctx);
 
+/*
+	Within an fz_catch() block, retrieve the errno code for
+	the current SYSTEM exception.
+
+	Is undefined for non-SYSTEM errors.
+*/
+int fz_caught_errno(fz_context *ctx);
+
 /**
 	Within an fz_catch() block, rethrow the current exception
 	if the errcode of the current exception matches.

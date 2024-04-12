@@ -37,79 +37,136 @@ typedef struct
 	fz_output *out;
 	int ahxencode;
 	int extgstate;
+	int newlines;
 	pdf_obj *res;
 	pdf_obj *last_res;
 	resources_stack *rstack;
+	int sep;
 } pdf_output_processor;
 
 /* general graphics state */
 
 static void
-pdf_out_w(fz_context *ctx, pdf_processor *proc, float linewidth)
+post_op(fz_context *ctx, pdf_output_processor *proc)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	if (!((pdf_output_processor*)proc)->extgstate)
-		fz_write_printf(ctx, out, "%g w\n", linewidth);
-}
-
-static void
-pdf_out_j(fz_context *ctx, pdf_processor *proc, int linejoin)
-{
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	if (!((pdf_output_processor*)proc)->extgstate)
-		fz_write_printf(ctx, out, "%d j\n", linejoin);
-}
-
-static void
-pdf_out_J(fz_context *ctx, pdf_processor *proc, int linecap)
-{
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	if (!((pdf_output_processor*)proc)->extgstate)
-		fz_write_printf(ctx, out, "%d J\n", linecap);
-}
-
-static void
-pdf_out_M(fz_context *ctx, pdf_processor *proc, float a)
-{
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	if (!((pdf_output_processor*)proc)->extgstate)
-		fz_write_printf(ctx, out, "%g M\n", a);
-}
-
-static void
-pdf_out_d(fz_context *ctx, pdf_processor *proc, pdf_obj *array, float phase)
-{
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	int ahx = !!((pdf_output_processor*)proc)->ahxencode;
-	if (!((pdf_output_processor*)proc)->extgstate)
+	if (proc->newlines)
 	{
-		pdf_print_obj(ctx, out, array, 1, ahx);
-		fz_write_printf(ctx, out, " %g d\n", phase);
+		fz_write_byte(ctx, proc->out, '\n');
+		proc->sep = 0;
 	}
+	else
+		proc->sep = 1;
 }
 
 static void
-pdf_out_ri(fz_context *ctx, pdf_processor *proc, const char *intent)
+pdf_out_w(fz_context *ctx, pdf_processor *proc_, float linewidth)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	if (!((pdf_output_processor*)proc)->extgstate)
-		fz_write_printf(ctx, out, "%n ri\n", intent);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->extgstate != 0)
+		return;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g w", linewidth);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_i(fz_context *ctx, pdf_processor *proc, float flatness)
+pdf_out_j(fz_context *ctx, pdf_processor *proc_, int linejoin)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	if (!((pdf_output_processor*)proc)->extgstate)
-		fz_write_printf(ctx, out, "%g i\n", flatness);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->extgstate != 0)
+		return;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%d j", linejoin);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_gs_begin(fz_context *ctx, pdf_processor *proc, const char *name, pdf_obj *extgstate)
+pdf_out_J(fz_context *ctx, pdf_processor *proc_, int linecap)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	((pdf_output_processor*)proc)->extgstate = 1;
-	fz_write_printf(ctx, out, "%n gs\n", name);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->extgstate != 0)
+		return;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%d J", linecap);
+	post_op(ctx, proc);
+}
+
+static void
+pdf_out_M(fz_context *ctx, pdf_processor *proc_, float a)
+{
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->extgstate != 0)
+		return;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g M", a);
+	post_op(ctx, proc);
+}
+
+static void
+pdf_out_d(fz_context *ctx, pdf_processor *proc_, pdf_obj *array, float phase)
+{
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+	int ahx = proc->ahxencode;
+
+	if (proc->extgstate != 0)
+		return;
+
+	pdf_print_encrypted_obj(ctx, proc->out, array, 1, ahx, NULL, 0, 0, &proc->sep);
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g d", phase);
+	post_op(ctx, proc);
+}
+
+static void
+pdf_out_ri(fz_context *ctx, pdf_processor *proc_, const char *intent)
+{
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->extgstate != 0)
+		return;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%n ri", intent);
+	post_op(ctx, proc);
+}
+
+static void
+pdf_out_i(fz_context *ctx, pdf_processor *proc_, float flatness)
+{
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->extgstate != 0)
+		return;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g i", flatness);
+	post_op(ctx, proc);
+}
+
+static void
+pdf_out_gs_begin(fz_context *ctx, pdf_processor *proc_, const char *name, pdf_obj *extgstate)
+{
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	proc->extgstate = 1;
+
+	fz_write_printf(ctx, proc->out, "%n gs", name);
+	post_op(ctx, proc);
 }
 
 static void
@@ -121,264 +178,402 @@ pdf_out_gs_end(fz_context *ctx, pdf_processor *proc)
 /* special graphics state */
 
 static void
-pdf_out_q(fz_context *ctx, pdf_processor *proc)
+pdf_out_q(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "q\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "q");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_Q(fz_context *ctx, pdf_processor *proc)
+pdf_out_Q(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "Q\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "Q");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_cm(fz_context *ctx, pdf_processor *proc, float a, float b, float c, float d, float e, float f)
+pdf_out_cm(fz_context *ctx, pdf_processor *proc_, float a, float b, float c, float d, float e, float f)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g %g %g %g %g cm\n", a, b, c, d, e, f);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g %g %g %g %g cm", a, b, c, d, e, f);
+	post_op(ctx, proc);
 }
 
 /* path construction */
 
 static void
-pdf_out_m(fz_context *ctx, pdf_processor *proc, float x, float y)
+pdf_out_m(fz_context *ctx, pdf_processor *proc_, float x, float y)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g m\n", x, y);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g m", x, y);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_l(fz_context *ctx, pdf_processor *proc, float x, float y)
+pdf_out_l(fz_context *ctx, pdf_processor *proc_, float x, float y)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g l\n", x, y);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g l", x, y);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_c(fz_context *ctx, pdf_processor *proc, float x1, float y1, float x2, float y2, float x3, float y3)
+pdf_out_c(fz_context *ctx, pdf_processor *proc_, float x1, float y1, float x2, float y2, float x3, float y3)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g %g %g %g %g c\n", x1, y1, x2, y2, x3, y3);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g %g %g %g %g c", x1, y1, x2, y2, x3, y3);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_v(fz_context *ctx, pdf_processor *proc, float x2, float y2, float x3, float y3)
+pdf_out_v(fz_context *ctx, pdf_processor *proc_, float x2, float y2, float x3, float y3)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g %g %g v\n", x2, y2, x3, y3);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g %g %g v", x2, y2, x3, y3);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_y(fz_context *ctx, pdf_processor *proc, float x1, float y1, float x3, float y3)
+pdf_out_y(fz_context *ctx, pdf_processor *proc_, float x1, float y1, float x3, float y3)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g %g %g y\n", x1, y1, x3, y3);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g %g %g c", x1, y1, x3, y3);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_h(fz_context *ctx, pdf_processor *proc)
+pdf_out_h(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "h\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "h");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_re(fz_context *ctx, pdf_processor *proc, float x, float y, float w, float h)
+pdf_out_re(fz_context *ctx, pdf_processor *proc_, float x, float y, float w, float h)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g %g %g re\n", x, y, w, h);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g %g %g re", x, y, w, h);
+	post_op(ctx, proc);
 }
 
 /* path painting */
 
 static void
-pdf_out_S(fz_context *ctx, pdf_processor *proc)
+pdf_out_S(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "S\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "S");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_s(fz_context *ctx, pdf_processor *proc)
+pdf_out_s(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "s\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "s");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_F(fz_context *ctx, pdf_processor *proc)
+pdf_out_F(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "F\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "F");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_f(fz_context *ctx, pdf_processor *proc)
+pdf_out_f(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "f\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "f");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_fstar(fz_context *ctx, pdf_processor *proc)
+pdf_out_fstar(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "f*\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "f*");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_B(fz_context *ctx, pdf_processor *proc)
+pdf_out_B(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "B\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "B");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_Bstar(fz_context *ctx, pdf_processor *proc)
+pdf_out_Bstar(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "B*\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "B*");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_b(fz_context *ctx, pdf_processor *proc)
+pdf_out_b(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "b\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "b");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_bstar(fz_context *ctx, pdf_processor *proc)
+pdf_out_bstar(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "b*\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "b*");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_n(fz_context *ctx, pdf_processor *proc)
+pdf_out_n(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "n\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "n");
+	post_op(ctx, proc);
 }
 
 /* clipping paths */
 
 static void
-pdf_out_W(fz_context *ctx, pdf_processor *proc)
+pdf_out_W(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "W\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "W");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_Wstar(fz_context *ctx, pdf_processor *proc)
+pdf_out_Wstar(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "W*\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "W*");
+	post_op(ctx, proc);
 }
 
 /* text objects */
 
 static void
-pdf_out_BT(fz_context *ctx, pdf_processor *proc)
+pdf_out_BT(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "BT\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "BT");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_ET(fz_context *ctx, pdf_processor *proc)
+pdf_out_ET(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "ET\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "ET");
+	post_op(ctx, proc);
 }
 
 /* text state */
 
 static void
-pdf_out_Tc(fz_context *ctx, pdf_processor *proc, float charspace)
+pdf_out_Tc(fz_context *ctx, pdf_processor *proc_, float charspace)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g Tc\n", charspace);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g Tc", charspace);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_Tw(fz_context *ctx, pdf_processor *proc, float wordspace)
+pdf_out_Tw(fz_context *ctx, pdf_processor *proc_, float wordspace)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g Tw\n", wordspace);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g Tw", wordspace);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_Tz(fz_context *ctx, pdf_processor *proc, float scale)
+pdf_out_Tz(fz_context *ctx, pdf_processor *proc_, float scale)
 {
 	/* scale is exactly as read from the file. */
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g Tz\n", scale);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g Tz", scale);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_TL(fz_context *ctx, pdf_processor *proc, float leading)
+pdf_out_TL(fz_context *ctx, pdf_processor *proc_, float leading)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g TL\n", leading);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g TL", leading);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_Tf(fz_context *ctx, pdf_processor *proc, const char *name, pdf_font_desc *font, float size)
+pdf_out_Tf(fz_context *ctx, pdf_processor *proc_, const char *name, pdf_font_desc *font, float size)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	if (!((pdf_output_processor*)proc)->extgstate)
-	{
-		fz_write_printf(ctx, out, "%n %g Tf\n", name, size);
-	}
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->extgstate != 0)
+		return;
+
+	fz_write_printf(ctx, proc->out, "%n %g Tf", name, size);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_Tr(fz_context *ctx, pdf_processor *proc, int render)
+pdf_out_Tr(fz_context *ctx, pdf_processor *proc_, int render)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%d Tr\n", render);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%d Tr", render);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_Ts(fz_context *ctx, pdf_processor *proc, float rise)
+pdf_out_Ts(fz_context *ctx, pdf_processor *proc_, float rise)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g Ts\n", rise);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g Ts", rise);
+	post_op(ctx, proc);
 }
 
 /* text positioning */
 
 static void
-pdf_out_Td(fz_context *ctx, pdf_processor *proc, float tx, float ty)
+pdf_out_Td(fz_context *ctx, pdf_processor *proc_, float tx, float ty)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g Td\n", tx, ty);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g Td", tx, ty);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_TD(fz_context *ctx, pdf_processor *proc, float tx, float ty)
+pdf_out_TD(fz_context *ctx, pdf_processor *proc_, float tx, float ty)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g TD\n", tx, ty);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g TD", tx, ty);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_Tm(fz_context *ctx, pdf_processor *proc, float a, float b, float c, float d, float e, float f)
+pdf_out_Tm(fz_context *ctx, pdf_processor *proc_, float a, float b, float c, float d, float e, float f)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g %g %g %g %g Tm\n", a, b, c, d, e, f);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g %g %g %g %g Tm", a, b, c, d, e, f);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_Tstar(fz_context *ctx, pdf_processor *proc)
+pdf_out_Tstar(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "T*\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "T*");
+	post_op(ctx, proc);
 }
 
 /* text showing */
@@ -418,174 +613,243 @@ fz_write_pdf_string(fz_context *ctx, fz_output *out, const unsigned char *str, s
 }
 
 static void
-pdf_out_TJ(fz_context *ctx, pdf_processor *proc, pdf_obj *array)
+pdf_out_TJ(fz_context *ctx, pdf_processor *proc_, pdf_obj *array)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	int ahx = !!((pdf_output_processor*)proc)->ahxencode;
-	pdf_print_obj(ctx, out, array, 1, ahx);
-	fz_write_string(ctx, out, " TJ\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+	int ahx = proc->ahxencode;
+
+	pdf_print_encrypted_obj(ctx, proc->out, array, 1, ahx, NULL, 0, 0, &proc->sep);
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "TJ");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_Tj(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
+pdf_out_Tj(fz_context *ctx, pdf_processor *proc_, const char *str, size_t len)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_pdf_string(ctx, out, (const unsigned char *)str, len);
-	fz_write_string(ctx, out, " Tj\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	fz_write_pdf_string(ctx, proc->out, (const unsigned char *)str, len);
+	fz_write_string(ctx, proc->out, "Tj");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_squote(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
+pdf_out_squote(fz_context *ctx, pdf_processor *proc_, const char *str, size_t len)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_pdf_string(ctx, out, (const unsigned char *)str, len);
-	fz_write_string(ctx, out, " '\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	fz_write_pdf_string(ctx, proc->out, (const unsigned char *)str, len);
+	fz_write_string(ctx, proc->out, "'");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, const char *str, size_t len)
+pdf_out_dquote(fz_context *ctx, pdf_processor *proc_, float aw, float ac, const char *str, size_t len)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g ", aw, ac);
-	fz_write_pdf_string(ctx, out, (const unsigned char *)str, len);
-	fz_write_string(ctx, out, " \"\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g ", aw, ac);
+	fz_write_pdf_string(ctx, proc->out, (const unsigned char *)str, len);
+	fz_write_string(ctx, proc->out, "\"");
+	post_op(ctx, proc);
 }
 
 /* type 3 fonts */
 
 static void
-pdf_out_d0(fz_context *ctx, pdf_processor *proc, float wx, float wy)
+pdf_out_d0(fz_context *ctx, pdf_processor *proc_, float wx, float wy)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g d0\n", wx, wy);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g d0", wx, wy);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_d1(fz_context *ctx, pdf_processor *proc, float wx, float wy, float llx, float lly, float urx, float ury)
+pdf_out_d1(fz_context *ctx, pdf_processor *proc_, float wx, float wy, float llx, float lly, float urx, float ury)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g %g %g %g %g d1\n", wx, wy, llx, lly, urx, ury);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g %g %g %g %g d1", wx, wy, llx, lly, urx, ury);
+	post_op(ctx, proc);
 }
 
 /* color */
 
 static void
-pdf_out_CS(fz_context *ctx, pdf_processor *proc, const char *name, fz_colorspace *cs)
+pdf_out_CS(fz_context *ctx, pdf_processor *proc_, const char *name, fz_colorspace *cs)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%n CS\n", name);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	fz_write_printf(ctx, proc->out, "%n CS", name);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_cs(fz_context *ctx, pdf_processor *proc, const char *name, fz_colorspace *cs)
+pdf_out_cs(fz_context *ctx, pdf_processor *proc_, const char *name, fz_colorspace *cs)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%n cs\n", name);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	fz_write_printf(ctx, proc->out, "%n cs", name);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_SC_pattern(fz_context *ctx, pdf_processor *proc, const char *name, pdf_pattern *pat, int n, float *color)
+pdf_out_SC_pattern(fz_context *ctx, pdf_processor *proc_, const char *name, pdf_pattern *pat, int n, float *color)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
 	int i;
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
 	for (i = 0; i < n; ++i)
-		fz_write_printf(ctx, out, "%g ", color[i]);
-	fz_write_printf(ctx, out, "%n SCN\n", name);
+		fz_write_printf(ctx, proc->out, "%g ", color[i]);
+	fz_write_printf(ctx, proc->out, "%n SCN", name);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_sc_pattern(fz_context *ctx, pdf_processor *proc, const char *name, pdf_pattern *pat, int n, float *color)
+pdf_out_sc_pattern(fz_context *ctx, pdf_processor *proc_, const char *name, pdf_pattern *pat, int n, float *color)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
 	int i;
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
 	for (i = 0; i < n; ++i)
-		fz_write_printf(ctx, out, "%g ", color[i]);
-	fz_write_printf(ctx, out, "%n scn\n", name);
+		fz_write_printf(ctx, proc->out, "%g ", color[i]);
+	fz_write_printf(ctx, proc->out, "%n scn", name);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_SC_shade(fz_context *ctx, pdf_processor *proc, const char *name, fz_shade *shade)
+pdf_out_SC_shade(fz_context *ctx, pdf_processor *proc_, const char *name, fz_shade *shade)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%n SCN\n", name);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	fz_write_printf(ctx, proc->out, "%n SCN", name);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_sc_shade(fz_context *ctx, pdf_processor *proc, const char *name, fz_shade *shade)
+pdf_out_sc_shade(fz_context *ctx, pdf_processor *proc_, const char *name, fz_shade *shade)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%n scn\n", name);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	fz_write_printf(ctx, proc->out, "%n scn", name);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_SC_color(fz_context *ctx, pdf_processor *proc, int n, float *color)
+pdf_out_SC_color(fz_context *ctx, pdf_processor *proc_, int n, float *color)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
 	int i;
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
 	for (i = 0; i < n; ++i)
-		fz_write_printf(ctx, out, "%g ", color[i]);
-	fz_write_string(ctx, out, "SCN\n");
+		fz_write_printf(ctx, proc->out, "%g ", color[i]);
+	fz_write_string(ctx, proc->out, "SCN");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_sc_color(fz_context *ctx, pdf_processor *proc, int n, float *color)
+pdf_out_sc_color(fz_context *ctx, pdf_processor *proc_, int n, float *color)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
 	int i;
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
 	for (i = 0; i < n; ++i)
-		fz_write_printf(ctx, out, "%g ", color[i]);
-	fz_write_string(ctx, out, "scn\n");
+		fz_write_printf(ctx, proc->out, "%g ", color[i]);
+	fz_write_string(ctx, proc->out, "scn");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_G(fz_context *ctx, pdf_processor *proc, float g)
+pdf_out_G(fz_context *ctx, pdf_processor *proc_, float g)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g G\n", g);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g G", g);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_g(fz_context *ctx, pdf_processor *proc, float g)
+pdf_out_g(fz_context *ctx, pdf_processor *proc_, float g)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g g\n", g);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g g", g);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_RG(fz_context *ctx, pdf_processor *proc, float r, float g, float b)
+pdf_out_RG(fz_context *ctx, pdf_processor *proc_, float r, float g, float b)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g %g RG\n", r, g, b);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g %g RG", r, g, b);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_rg(fz_context *ctx, pdf_processor *proc, float r, float g, float b)
+pdf_out_rg(fz_context *ctx, pdf_processor *proc_, float r, float g, float b)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g %g rg\n", r, g, b);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g %g rg", r, g, b);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_K(fz_context *ctx, pdf_processor *proc, float c, float m, float y, float k)
+pdf_out_K(fz_context *ctx, pdf_processor *proc_, float c, float m, float y, float k)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g %g %g K\n", c, m, y, k);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g %g %g K", c, m, y, k);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_k(fz_context *ctx, pdf_processor *proc, float c, float m, float y, float k)
+pdf_out_k(fz_context *ctx, pdf_processor *proc_, float c, float m, float y, float k)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%g %g %g %g k\n", c, m, y, k);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_printf(ctx, proc->out, "%g %g %g %g k", c, m, y, k);
+	post_op(ctx, proc);
 }
 
 /* shadings, images, xobjects */
 
 static void
-pdf_out_BI(fz_context *ctx, pdf_processor *proc, fz_image *img, const char *colorspace)
+pdf_out_BI(fz_context *ctx, pdf_processor *proc_, fz_image *img, const char *colorspace)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	int ahx = !!((pdf_output_processor*)proc)->ahxencode;
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+	fz_output *out = proc->out;
+	int ahx = proc->ahxencode;
 	fz_compressed_buffer *cbuf;
 	fz_buffer *buf;
 	int i;
@@ -601,24 +865,26 @@ pdf_out_BI(fz_context *ctx, pdf_processor *proc, fz_image *img, const char *colo
 	if (buf == NULL)
 		return;
 
-	fz_write_string(ctx, out, "BI\n");
-	fz_write_printf(ctx, out, "/W %d\n", img->w);
-	fz_write_printf(ctx, out, "/H %d\n", img->h);
-	fz_write_printf(ctx, out, "/BPC %d\n", img->bpc);
+	if (proc->sep)
+		fz_write_byte(ctx, out, ' ');
+	fz_write_string(ctx, out, "BI ");
+	fz_write_printf(ctx, out, "/W %d", img->w);
+	fz_write_printf(ctx, out, "/H %d", img->h);
+	fz_write_printf(ctx, out, "/BPC %d", img->bpc);
 	if (img->imagemask)
-		fz_write_string(ctx, out, "/IM true\n");
+		fz_write_string(ctx, out, "/IM true");
 	else if (img->colorspace == fz_device_gray(ctx))
-		fz_write_string(ctx, out, "/CS/G\n");
+		fz_write_string(ctx, out, "/CS/G");
 	else if (img->colorspace == fz_device_rgb(ctx))
-		fz_write_string(ctx, out, "/CS/RGB\n");
+		fz_write_string(ctx, out, "/CS/RGB");
 	else if (img->colorspace == fz_device_cmyk(ctx))
-		fz_write_string(ctx, out, "/CS/CMYK\n");
+		fz_write_string(ctx, out, "/CS/CMYK");
 	else if (colorspace)
-		fz_write_printf(ctx, out, "/CS%n\n", colorspace);
+		fz_write_printf(ctx, out, "/CS%n", colorspace);
 	else
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "BI operator can only show ImageMask, Gray, RGB, or CMYK images");
 	if (img->interpolate)
-		fz_write_string(ctx, out, "/I true\n");
+		fz_write_string(ctx, out, "/I true");
 	fz_write_string(ctx, out, "/D[");
 	for (i = 0; i < img->n * 2; ++i)
 	{
@@ -626,7 +892,8 @@ pdf_out_BI(fz_context *ctx, pdf_processor *proc, fz_image *img, const char *colo
 			fz_write_byte(ctx, out, ' ');
 		fz_write_printf(ctx, out, "%g", img->decode[i]);
 	}
-	fz_write_string(ctx, out, "]\n");
+	fz_write_string(ctx, out, "]");
+	proc->sep = 0;
 
 	switch (cbuf->params.type)
 	{
@@ -635,79 +902,97 @@ pdf_out_BI(fz_context *ctx, pdf_processor *proc, fz_image *img, const char *colo
 		break;
 
 	case FZ_IMAGE_JPEG:
-		fz_write_string(ctx, out, ahx ? "/F[/AHx/DCT]\n" : "/F/DCT\n");
+		fz_write_string(ctx, out, ahx ? "/F[/AHx/DCT]" : "/F/DCT");
+		proc->sep = !ahx;
 		if (cbuf->params.u.jpeg.color_transform >= 0)
-			fz_write_printf(ctx, out, "/DP<</ColorTransform %d>>\n", cbuf->params.u.jpeg.color_transform);
+		{
+			fz_write_printf(ctx, out, "/DP<</ColorTransform %d>>", cbuf->params.u.jpeg.color_transform);
+			proc->sep = 0;
+		}
 		if (cbuf->params.u.jpeg.invert_cmyk && img->n == 4)
-			fz_write_printf(ctx, out, "/D[1 0 1 0 1 0 1 0]\n");
+		{
+			fz_write_printf(ctx, out, "/D[1 0 1 0 1 0 1 0]");
+			proc->sep = 0;
+		}
 		break;
 
 	case FZ_IMAGE_FAX:
-		fz_write_string(ctx, out, ahx ? "/F[/AHx/CCF]\n/DP[null<<\n" : "/F/CCF\n/DP<<\n");
-		fz_write_printf(ctx, out, "/K %d\n", cbuf->params.u.fax.k);
+		fz_write_string(ctx, out, ahx ? "/F[/AHx/CCF]/DP[null<<" : "/F/CCF/DP<<");
+		fz_write_printf(ctx, out, "/K %d", cbuf->params.u.fax.k);
 		if (cbuf->params.u.fax.columns != 1728)
-			fz_write_printf(ctx, out, "/Columns %d\n", cbuf->params.u.fax.columns);
+			fz_write_printf(ctx, out, "/Columns %d", cbuf->params.u.fax.columns);
 		if (cbuf->params.u.fax.rows > 0)
-			fz_write_printf(ctx, out, "/Rows %d\n", cbuf->params.u.fax.rows);
+			fz_write_printf(ctx, out, "/Rows %d", cbuf->params.u.fax.rows);
 		if (cbuf->params.u.fax.end_of_line)
-			fz_write_string(ctx, out, "/EndOfLine true\n");
+			fz_write_string(ctx, out, "/EndOfLine true");
 		if (cbuf->params.u.fax.encoded_byte_align)
-			fz_write_string(ctx, out, "/EncodedByteAlign true\n");
+			fz_write_string(ctx, out, "/EncodedByteAlign true");
 		if (!cbuf->params.u.fax.end_of_block)
-			fz_write_string(ctx, out, "/EndOfBlock false\n");
+			fz_write_string(ctx, out, "/EndOfBlock false");
 		if (cbuf->params.u.fax.black_is_1)
-			fz_write_string(ctx, out, "/BlackIs1 true\n");
+			fz_write_string(ctx, out, "/BlackIs1 true");
 		if (cbuf->params.u.fax.damaged_rows_before_error > 0)
-			fz_write_printf(ctx, out, "/DamagedRowsBeforeError %d\n",
+			fz_write_printf(ctx, out, "/DamagedRowsBeforeError %d",
 				cbuf->params.u.fax.damaged_rows_before_error);
-		fz_write_string(ctx, out, ahx ? ">>]\n" : ">>\n");
+		fz_write_string(ctx, out, ahx ? ">>]" : ">>");
+		proc->sep = 0;
 		break;
 
 	case FZ_IMAGE_RAW:
 		if (ahx)
-			fz_write_string(ctx, out, "/F/AHx\n");
+		{
+			fz_write_string(ctx, out, "/F/AHx");
+			proc->sep = 1;
+		}
 		break;
 
 	case FZ_IMAGE_RLD:
-		fz_write_string(ctx, out, ahx ? "/F[/AHx/RL]\n" : "/F/RL\n");
+		fz_write_string(ctx, out, ahx ? "/F[/AHx/RL]" : "/F/RL");
+		proc->sep = !ahx;
 		break;
 
 	case FZ_IMAGE_FLATE:
-		fz_write_string(ctx, out, ahx ? "/F[/AHx/Fl]\n" : "/F/Fl\n");
+		fz_write_string(ctx, out, ahx ? "/F[/AHx/Fl]" : "/F/Fl");
+		proc->sep = !ahx;
 		if (cbuf->params.u.flate.predictor > 1)
 		{
-			fz_write_string(ctx, out, ahx ? "/DP[null<<\n" : "/DP<<\n");
-			fz_write_printf(ctx, out, "/Predictor %d\n", cbuf->params.u.flate.predictor);
+			fz_write_string(ctx, out, ahx ? "/DP[null<<" : "/DP<<");
+			fz_write_printf(ctx, out, "/Predictor %d", cbuf->params.u.flate.predictor);
 			if (cbuf->params.u.flate.columns != 1)
-				fz_write_printf(ctx, out, "/Columns %d\n", cbuf->params.u.flate.columns);
+				fz_write_printf(ctx, out, "/Columns %d", cbuf->params.u.flate.columns);
 			if (cbuf->params.u.flate.colors != 1)
-				fz_write_printf(ctx, out, "/Colors %d\n", cbuf->params.u.flate.colors);
+				fz_write_printf(ctx, out, "/Colors %d", cbuf->params.u.flate.colors);
 			if (cbuf->params.u.flate.bpc != 8)
-				fz_write_printf(ctx, out, "/BitsPerComponent %d\n", cbuf->params.u.flate.bpc);
-			fz_write_string(ctx, out, ahx ? ">>]\n" : ">>\n");
+				fz_write_printf(ctx, out, "/BitsPerComponent %d", cbuf->params.u.flate.bpc);
+			fz_write_string(ctx, out, ahx ? ">>]" : ">>");
+			proc->sep = 0;
 		}
 		break;
 
 	case FZ_IMAGE_LZW:
-		fz_write_string(ctx, out, ahx ? "/F[/AHx/LZW]\n" : "/F/LZW\n");
+		fz_write_string(ctx, out, ahx ? "/F[/AHx/LZW]" : "/F/LZW");
+		proc->sep = !ahx;
 		if (cbuf->params.u.lzw.predictor > 1)
 		{
-			fz_write_string(ctx, out, ahx ? "/DP[<<null\n" : "/DP<<\n");
-			fz_write_printf(ctx, out, "/Predictor %d\n", cbuf->params.u.lzw.predictor);
+			fz_write_string(ctx, out, ahx ? "/DP[<<null" : "/DP<<");
+			fz_write_printf(ctx, out, "/Predictor %d", cbuf->params.u.lzw.predictor);
 			if (cbuf->params.u.lzw.columns != 1)
-				fz_write_printf(ctx, out, "/Columns %d\n", cbuf->params.u.lzw.columns);
+				fz_write_printf(ctx, out, "/Columns %d", cbuf->params.u.lzw.columns);
 			if (cbuf->params.u.lzw.colors != 1)
-				fz_write_printf(ctx, out, "/Colors %d\n", cbuf->params.u.lzw.colors);
+				fz_write_printf(ctx, out, "/Colors %d", cbuf->params.u.lzw.colors);
 			if (cbuf->params.u.lzw.bpc != 8)
-				fz_write_printf(ctx, out, "/BitsPerComponent %d\n", cbuf->params.u.lzw.bpc);
+				fz_write_printf(ctx, out, "/BitsPerComponent %d", cbuf->params.u.lzw.bpc);
 			if (cbuf->params.u.lzw.early_change != 1)
-				fz_write_printf(ctx, out, "/EarlyChange %d\n", cbuf->params.u.lzw.early_change);
-			fz_write_string(ctx, out, ahx ? ">>]\n" : ">>\n");
+				fz_write_printf(ctx, out, "/EarlyChange %d", cbuf->params.u.lzw.early_change);
+			fz_write_string(ctx, out, ahx ? ">>]" : ">>");
+			proc->sep = 0;
 		}
 		break;
 	}
 
-	fz_write_string(ctx, out, "ID\n");
+	if (proc->sep)
+		fz_write_byte(ctx, out, ' ');
+	fz_write_string(ctx, out, "ID ");
 	len = fz_buffer_storage(ctx, buf, &data);
 	if (ahx)
 	{
@@ -726,87 +1011,120 @@ pdf_out_BI(fz_context *ctx, pdf_processor *proc, fz_image *img, const char *colo
 	{
 		fz_write_data(ctx, out, data, len);
 	}
-	fz_write_string(ctx, out, "\nEI\n");
+	fz_write_string(ctx, out, " EI");
+	proc->sep = 1;
 }
 
 static void
-pdf_out_sh(fz_context *ctx, pdf_processor *proc, const char *name, fz_shade *shade)
+pdf_out_sh(fz_context *ctx, pdf_processor *proc_, const char *name, fz_shade *shade)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%n sh\n", name);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	fz_write_printf(ctx, proc->out, "%n sh", name);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_Do_image(fz_context *ctx, pdf_processor *proc, const char *name, fz_image *image)
+pdf_out_Do_image(fz_context *ctx, pdf_processor *proc_, const char *name, fz_image *image)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%n Do\n", name);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	fz_write_printf(ctx, proc->out, "%n Do", name);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_Do_form(fz_context *ctx, pdf_processor *proc, const char *name, pdf_obj *xobj)
+pdf_out_Do_form(fz_context *ctx, pdf_processor *proc_, const char *name, pdf_obj *xobj)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%n Do\n", name);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	fz_write_printf(ctx, proc->out, "%n Do", name);
+	post_op(ctx, proc);
 }
 
 /* marked content */
 
 static void
-pdf_out_MP(fz_context *ctx, pdf_processor *proc, const char *tag)
+pdf_out_MP(fz_context *ctx, pdf_processor *proc_, const char *tag)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%n MP\n", tag);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	fz_write_printf(ctx, proc->out, "%n MP", tag);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_DP(fz_context *ctx, pdf_processor *proc, const char *tag, pdf_obj *raw, pdf_obj *cooked)
+pdf_out_DP(fz_context *ctx, pdf_processor *proc_, const char *tag, pdf_obj *raw, pdf_obj *cooked)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	int ahx = !!((pdf_output_processor*)proc)->ahxencode;
-	fz_write_printf(ctx, out, "%n ", tag);
-	pdf_print_obj(ctx, out, raw, 1, ahx);
-	fz_write_string(ctx, out, " DP\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+	int ahx = proc->ahxencode;
+
+	fz_write_printf(ctx, proc->out, "%n", tag);
+	proc->sep = 1;
+	pdf_print_encrypted_obj(ctx, proc->out, raw, 1, ahx, NULL, 0, 0, &proc->sep);
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "DP");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_BMC(fz_context *ctx, pdf_processor *proc, const char *tag)
+pdf_out_BMC(fz_context *ctx, pdf_processor *proc_, const char *tag)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_printf(ctx, out, "%n BMC\n", tag);
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	fz_write_printf(ctx, proc->out, "%n BMC", tag);
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_BDC(fz_context *ctx, pdf_processor *proc, const char *tag, pdf_obj *raw, pdf_obj *cooked)
+pdf_out_BDC(fz_context *ctx, pdf_processor *proc_, const char *tag, pdf_obj *raw, pdf_obj *cooked)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	int ahx = !!((pdf_output_processor*)proc)->ahxencode;
-	fz_write_printf(ctx, out, "%n ", tag);
-	pdf_print_obj(ctx, out, raw, 1, ahx);
-	fz_write_string(ctx, out, " BDC\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+	int ahx = proc->ahxencode;
+
+	fz_write_printf(ctx, proc->out, "%n", tag);
+	proc->sep = 1;
+	pdf_print_encrypted_obj(ctx, proc->out, raw, 1, ahx, NULL, 0, 0, &proc->sep);
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "BDC");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_EMC(fz_context *ctx, pdf_processor *proc)
+pdf_out_EMC(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "EMC\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "EMC");
+	post_op(ctx, proc);
 }
 
 /* compatibility */
 
 static void
-pdf_out_BX(fz_context *ctx, pdf_processor *proc)
+pdf_out_BX(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "BX\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "BX");
+	post_op(ctx, proc);
 }
 
 static void
-pdf_out_EX(fz_context *ctx, pdf_processor *proc)
+pdf_out_EX(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
-	fz_write_string(ctx, out, "EX\n");
+	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	if (proc->sep)
+		fz_write_byte(ctx, proc->out, ' ');
+	fz_write_string(ctx, proc->out, "EX");
+	post_op(ctx, proc);
 }
 
 static void
@@ -849,7 +1167,7 @@ pdf_out_pop_resources(fz_context *ctx, pdf_processor *proc)
 }
 
 pdf_processor *
-pdf_new_output_processor(fz_context *ctx, fz_output *out, int ahxencode)
+pdf_new_output_processor(fz_context *ctx, fz_output *out, int ahxencode, int newlines)
 {
 	pdf_output_processor *proc = (pdf_output_processor *)pdf_new_processor(ctx, sizeof *proc);
 
@@ -977,7 +1295,8 @@ pdf_new_output_processor(fz_context *ctx, fz_output *out, int ahxencode)
 	proc->super.op_gs_UseBlackPtComp = NULL;
 
 	proc->out = out;
-	proc->ahxencode = !!ahxencode;
+	proc->ahxencode = ahxencode;
+	proc->newlines = newlines;
 
 	proc->super.requirements = PDF_PROCESSOR_REQUIRES_DECODED_IMAGES;
 
@@ -985,13 +1304,13 @@ pdf_new_output_processor(fz_context *ctx, fz_output *out, int ahxencode)
 }
 
 pdf_processor *
-pdf_new_buffer_processor(fz_context *ctx, fz_buffer *buffer, int ahxencode)
+pdf_new_buffer_processor(fz_context *ctx, fz_buffer *buffer, int ahxencode, int newlines)
 {
 	pdf_processor *proc = NULL;
 	fz_output *out = fz_new_output_with_buffer(ctx, buffer);
 	fz_try(ctx)
 	{
-		proc = pdf_new_output_processor(ctx, out, ahxencode);
+		proc = pdf_new_output_processor(ctx, out, ahxencode, newlines);
 	}
 	fz_catch(ctx)
 	{

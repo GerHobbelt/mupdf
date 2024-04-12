@@ -374,7 +374,7 @@ static const char *icc_filename = NULL;
 static int use_gamma = 0;
 static float gamma_value = 1;
 static int invert = 0;
-static int kill = 0;
+static int s_kill = 0; /* Using `kill` causes problems on Android. */
 static int band_height = 0;
 static int lowmemory = 0;
 
@@ -476,7 +476,7 @@ static int usage(void)
 		"\n"
 		"  -o -  output file name (%%d or ### for page number, '-' for stdout)\n"
 		"  -F -  output format (default inferred from output file name)\n"
-		"        raster: png, pgm, ppm, pnm, pam, pbm, pkm, pwg, pcl, psd, ps, muraw\n"
+		"        raster: png, pgm, ppm, pnm, pam, pbm, pkm, pwg, pcl, psd, ps, muraw, pdf, j2k\n"
 #if FZ_ENABLE_OCR
 		"        vector: svg, pdf, trace, ocr.trace\n"
 #else
@@ -721,14 +721,14 @@ file_level_trailers(fz_context *ctx)
 
 static void apply_kill_switch(fz_device *dev)
 {
-	if (kill == 1)
+	if (s_kill == 1)
 	{
 		/* kill all non-clipping text operators */
 		dev->fill_text = NULL;
 		dev->stroke_text = NULL;
 		dev->ignore_text = NULL;
 	}
-	else if (kill == 2)
+	else if (s_kill == 2)
 	{
 		/* kill all non-clipping path, image, and shading operators */
 		dev->fill_path = NULL;
@@ -2922,7 +2922,7 @@ int main(int argc, const char** argv)
 		case 'U': layout_css = fz_optarg; break;
 		case 'X': layout_use_doc_css = 0; break;
 
-		case 'K': ++kill; break;
+		case 'K': ++s_kill; break;
 
 		case 'O': spots = fz_atof(fz_optarg);
 #ifndef FZ_ENABLE_SPOT_RENDERING

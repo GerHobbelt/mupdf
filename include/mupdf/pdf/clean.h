@@ -36,6 +36,8 @@ typedef struct
 {
 	pdf_write_options write;
 	pdf_image_rewriter_options image;
+
+	/* Experimental option. Subject to change. */
 	int subset_fonts;
 } pdf_clean_options;
 
@@ -44,20 +46,16 @@ typedef struct
 */
 void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, const char *password, pdf_clean_options *opts, int retainlen, const char *retainlist[]);
 
+/*
+	Recreate page tree to include only the pages listed in the array, in the order listed.
+*/
+void pdf_rearrange_pages(fz_context *ctx, pdf_document *doc, int count, const int *pages);
+
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-
-/*
-	Recreate page tree to include only the pages listed in the array, in the order listed.
-*/
-void pdf_rearrange_pages(fz_context *ctx, pdf_document *doc, int count, int *pages);
-
-/*
-	Recreate page tree to include only the pages listed in the array, in the order listed.
-*/
-void pdf_rearrange_pages(fz_context *ctx, pdf_document *doc, int count, int *pages);
 
 #endif
