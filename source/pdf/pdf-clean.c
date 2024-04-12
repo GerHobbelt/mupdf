@@ -463,6 +463,8 @@ pdf_redact_end_page(fz_context *ctx, fz_buffer *buf, void *opaque)
 	pdf_obj *qp;
 	int i;
 
+	fz_append_string(ctx, buf, " ");
+
 	for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
 	{
 		if (red->target != NULL && red->target != annot)
