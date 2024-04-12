@@ -199,6 +199,10 @@ font_analysis_Tf(fz_context *ctx, pdf_processor *proc, const char *name, pdf_fon
 			{
 				cidfont = 0; // fontsub2a
 			}
+			else if (pdf_name_eq(ctx, subtype, PDF_NAME(CIDFontType0C)))
+			{
+				is_cff = 1;
+			}
 			else
 			{
 				is_cff = 1;
@@ -311,6 +315,10 @@ show_string(fz_context *ctx, pdf_font_analysis_processor *p, const unsigned char
 	pdf_font_desc *fontdesc = gs->font;
 	size_t pos = 0;
 	font_usage_t *font = &p->usage->font[gs->current_font];
+
+	/* e.g. for non-embedded base14 fonts. */
+	if (fontdesc == NULL)
+		return;
 
 	while (pos < len)
 	{
