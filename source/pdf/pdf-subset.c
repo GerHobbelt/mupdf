@@ -452,12 +452,14 @@ static void
 examine_page(fz_context *ctx, pdf_document *doc, pdf_page *page, fonts_usage_t *usage)
 {
 	pdf_processor *proc = pdf_new_font_analysis_processor(ctx, usage);
-	pdf_obj *contents = pdf_page_contents(ctx, page);
-	pdf_obj *resources = pdf_page_resources(ctx, page);
+	pdf_obj *contents, *resources;
 	pdf_annot *annot;
 
 	fz_try(ctx)
 	{
+		contents = pdf_page_contents(ctx, page);
+		resources = pdf_page_resources(ctx, page);
+
 		pdf_process_contents(ctx, proc, doc, resources, contents, NULL);
 
 		for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
