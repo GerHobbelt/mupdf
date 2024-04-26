@@ -3779,6 +3779,7 @@ pdf_document *pdf_create_document(fz_context *ctx)
 static const char *pdf_extensions[] =
 {
 	"pdf",
+	"fdf",
 	"pclm",
 	"ai",
 	NULL
@@ -3795,6 +3796,7 @@ static int
 pdf_recognize_doc_content(fz_context *ctx, fz_stream *stream, fz_archive *dir)
 {
 	const char *match = "%PDF-";
+	const char *match2 = "%FDF-";
 	int pos = 0;
 	int n = 4096+5;
 	int c;
@@ -3807,7 +3809,7 @@ pdf_recognize_doc_content(fz_context *ctx, fz_stream *stream, fz_archive *dir)
 		c = fz_read_byte(ctx, stream);
 		if (c == EOF)
 			return 0;
-		if (c == match[pos])
+		if (c == match[pos] || c == match2[pos])
 		{
 			pos++;
 			if (pos == 5)
