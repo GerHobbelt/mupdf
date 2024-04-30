@@ -1145,6 +1145,13 @@ quantum
 directorywatcher
 MPMCQueue
 SPSCQueue
+libascii
+libintrinsics
+tinyexr
+Digital-Halftoning
+qHilbert
+ruy
+half
 
 EOT
 )

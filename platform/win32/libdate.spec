@@ -1,0 +1,4 @@
+
+also-ignore:
+	.*fail[.]cpp
+	

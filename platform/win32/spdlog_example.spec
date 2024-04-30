@@ -3,6 +3,6 @@ also-ignore:
 	/bench/
 	/tests/
 	/src/
-	example.cpp
+	example.*cpp
 	
 	
