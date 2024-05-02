@@ -161,7 +161,10 @@ int count_stext_page_letters(fz_context *ctx, fz_stext_page *page)
 					if (ch->c >= 33 && ch->c <= 127) {
 						nnmlCt++;
 						ct++;
-					} else if (ch->c < 32) {
+					// Characters 0-31 are control characters, which are uncommon in legitimate text but commom in invalid encodings,
+					// which often arbitrarily map glyphs to codes starting at 0.
+					// Character 65533 is the replacement character, which is an explicit indication that the character is unknown.
+					} else if (ch->c < 32 || ch->c == 65533) {
 						ctrCt++;
 						ct-=5;
 					}
