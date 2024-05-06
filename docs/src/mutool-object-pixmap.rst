@@ -339,8 +339,6 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
 .. method:: warp(points, width, height)
 
-    |mutool_tag|
-
     Return a warped subsection of the `Pixmap`, where the result has the requested dimensions.
 
     :arg points: `[x0, y0, x1, y1, x2, y2, x3, y3, x4, y4]` Points give the corner points of a convex quadrilateral within the `Pixmap` to be warped.
@@ -357,8 +355,6 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
 
 .. method:: convertToColorSpace(colorspace, proof, defaultColorSpaces, colorParams, keepAlpha)
-
-    |mutool_tag|
 
     Convert pixmap into a new pixmap of a desired colorspace. A proofing colorspace, a set of default colorspaces and color parameters used during conversion may be specified. Finally a boolean indicates if alpha should be preserved (default is to not preserve alpha).
 

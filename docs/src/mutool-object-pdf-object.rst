@@ -143,15 +143,15 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
 .. method:: forEach(fun)
 
-    Iterate over all the entries in a dictionary or array and call a function for each key-value pair.
+    Iterate over all the entries in a dictionary or array and call a function for each value-key pair.
 
-    :arg fun: Function in the format `function(key,value){...}`.
+    :arg fun: Function in the format `function(value,key){...}`.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        pdfObj.forEach(function(key,value){console.log("key="+key+",value="+value)});
+        pdfObj.forEach(function(value,key){console.log("value="+value+",key="+key)});
 
 
 .. method:: push(item)
@@ -181,8 +181,6 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
 
 .. method:: valueOf()
-
-    |mutool_tag|
 
     Convert primitive :title:`PDF` objects to a corresponding primitive `Null`, `Boolean`, `Number` or `String` :title:`JavaScript` objects. Indirect :title:`PDF` objects get converted to the string "R" while :title:`PDF` names are converted to plain strings. :title:`PDF` arrays or dictionaries are returned unchanged.
 
