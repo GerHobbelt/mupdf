@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF813DF}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBRUNSLI;BRUNSLI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBRUNSLI;BRUNSLI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBRUNSLI;BRUNSLI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBRUNSLI;BRUNSLI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBRUNSLI;BRUNSLI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBRUNSLI;BRUNSLI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBRUNSLI;BRUNSLI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBRUNSLI;BRUNSLI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBRUNSLI;BRUNSLI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBRUNSLI;BRUNSLI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBRUNSLI;BRUNSLI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBRUNSLI;BRUNSLI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/common/ans_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/common/constants.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/common/context.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/common/lehmer_code.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/common/platform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/common/predict.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/common/quant_matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/dec/ans_decode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/dec/bit_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/dec/brunsli_decode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/dec/context_map_decode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/dec/decode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/dec/histogram_decode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/dec/huffman_decode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/dec/huffman_table.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/dec/jpeg_data_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/dec/state.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/enc/ans_encode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/enc/brunsli_encode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/enc/context_map_encode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/enc/encode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/enc/histogram_encode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/enc/huffman_encode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/enc/huffman_tree.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/enc/jpeg_data_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/enc/jpeg_huffman_decode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/enc/write_bits.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/experimental/groups.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tests/bit_reader_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tests/build_huffman_table_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tests/c_api_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tests/context_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tests/distributions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tests/fallback_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tests/headerless_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tests/huffman_tree_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tests/lehmer_code_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tests/quant_matrix_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tests/stream_decode_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tests/test_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tools/cbrunsli.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/c/tools/dbrunsli.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/contrib/mod_brunsli/mod_brunsli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/contrib/ngx_brunsli/src/ngx_http_brunsli_static_module.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/java/dev/brunsli/wrapper/codec_jni.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/java/dev/brunsli/wrapper/codec_jni_onload.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/brunsli/wasm/codec.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/common/ans_params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/common/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/common/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/common/distributions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/common/histogram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/common/lehmer_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/common/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/common/port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/common/predict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/common/quant_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/dec/ans_decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/dec/arith_decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/dec/bit_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/dec/brunsli_input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/dec/context_map_decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/dec/histogram_decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/dec/huffman_decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/dec/huffman_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/dec/output_chunk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/dec/serialization_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/dec/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/dec/state_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/enc/ans_encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/enc/cluster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/enc/context_map_encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/enc/fast_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/enc/histogram_encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/enc/huffman_encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/enc/huffman_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/enc/jpeg_huffman_decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/enc/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/enc/write_bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/experimental/groups.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/include/brunsli/brunsli_decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/include/brunsli/brunsli_encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/include/brunsli/decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/include/brunsli/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/include/brunsli/jpeg_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/include/brunsli/jpeg_data_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/include/brunsli/jpeg_data_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/include/brunsli/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/include/brunsli/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/c/tests/test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/brunsli/java/dev/brunsli/wrapper/codec_jni.h" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/README.md" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/brunsli.cmake" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/c/common/README" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/c/dec/README" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/c/enc/README" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/compiler_config_setting.bzl" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/contrib/mod_brunsli/README.md" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/contrib/ngx_brunsli/README.md" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/contrib/py/jxl_library_patches/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/contrib/py/jxl_library_patches/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/contrib/py/jxl_library_patches/jxl_imageio.py" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/contrib/py/jxl_library_patches/jxl_pillow.py" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/contrib/py/jxl_library_patches/jxl_pythonmagick.py" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/contrib/py/jxl_library_patches/jxl_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/explainer.md" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/java/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/java/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/java/dev/brunsli/wrapper/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/java/dev/brunsli/wrapper/Codec.java" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/java/dev/brunsli/wrapper/CodecJNI.java" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/java/dev/brunsli/wrapper/CodecTest.java" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/scripts/README" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/scripts/compress.sh" />
+    <Text Include="../../thirdparty/owemdjee/brunsli/security-privacy-questionnaire.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

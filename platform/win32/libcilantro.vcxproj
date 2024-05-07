@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0FFD54}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCILANTRO;CILANTRO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCILANTRO;CILANTRO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCILANTRO;CILANTRO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCILANTRO;CILANTRO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCILANTRO;CILANTRO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCILANTRO;CILANTRO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCILANTRO;CILANTRO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCILANTRO;CILANTRO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCILANTRO;CILANTRO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCILANTRO;CILANTRO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCILANTRO;CILANTRO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCILANTRO;CILANTRO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/connected_component_extraction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/convex_hull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/flat_convex_hull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/fusion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/grid_downsampler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/image_point_cloud_conversions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/image_viewer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/kd_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/kmeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/matrix_io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/mean_shift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/multidimensional_scaling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/non_rigid_icp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/normal_estimation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/ply_io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/principal_component_analysis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/ransac_plane_estimator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/ransac_transform_estimator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/rigid_icp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/robust_normal_estimation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/space_region_2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/space_region_3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/spectral_clustering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/examples/visualizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/src/visualization/common_renderables.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/src/visualization/image_viewer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/src/visualization/renderable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/src/visualization/visualizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cilantro/src/visualization/visualizer_handler.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/cilantro.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/clustering.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/clustering/clustering_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/clustering/connected_component_extraction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/clustering/kmeans.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/clustering/mean_shift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/clustering/spectral_clustering.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/common_accumulators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/common_pair_evaluators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/correspondence.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/covariance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/data_containers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/grid_accumulator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/grid_downsampler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/image_point_cloud_conversions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/kd_tree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/nearest_neighbors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/normal_estimation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/openmp_reductions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/principal_component_analysis.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/random.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/space_transformations.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/core/spectral_embedding_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/correspondence_search.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/correspondence_search/common_transformable_feature_adaptors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/correspondence_search/correspondence_search_kd_tree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/correspondence_search/correspondence_search_kd_tree_utilities.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/correspondence_search/correspondence_search_oracle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/correspondence_search/correspondence_search_projective.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/model_estimation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/model_estimation/ransac_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/model_estimation/ransac_hyperplane_estimator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/model_estimation/ransac_transform_estimator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/registration.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/registration/correspondence_search_combined_metric_adaptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/registration/correspondence_search_combined_metric_combiner.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/registration/icp_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/registration/icp_common_instances.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/registration/icp_single_transform_combined_metric.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/registration/icp_single_transform_point_to_point_metric.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/registration/icp_warp_field_combined_metric_dense.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/registration/icp_warp_field_combined_metric_sparse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/registration/transform_estimation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/registration/warp_field_estimation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/registration/warp_field_utilities.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/spatial.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/spatial/convex_hull_utilities.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/spatial/convex_polytope.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/spatial/flat_convex_hull_3d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/spatial/space_region.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/utilities.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/utilities/io_utilities.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/utilities/multidimensional_scaling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/utilities/nearest_neighbor_graph_utilities.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/utilities/ply_io.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/utilities/point_cloud.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/utilities/timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/visualization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/visualization/colormap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/visualization/common_renderables.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/visualization/image_viewer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/visualization/renderable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/visualization/visualizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cilantro/include/cilantro/visualization/visualizer_handler.hpp" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/cmake/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/cmake/cilantroConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/cmake/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/cmake/config.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/docs/about.rst" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/docs/getting_started.rst" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/examples/test_clouds/frame_1.ply" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/examples/test_clouds/frame_2.ply" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/examples/test_clouds/test.ply" />
+    <Text Include="../../thirdparty/owemdjee/cilantro/format.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

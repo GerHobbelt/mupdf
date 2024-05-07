@@ -1,0 +1,1640 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0B109E}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINK_CC;TINK_CC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINK_CC;TINK_CC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINK_CC;TINK_CC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINK_CC;TINK_CC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINK_CC;TINK_CC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINK_CC;TINK_CC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINK_CC;TINK_CC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINK_CC;TINK_CC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINK_CC;TINK_CC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINK_CC;TINK_CC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINK_CC;TINK_CC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINK_CC;TINK_CC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/aead/aead_cli.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/daead/deterministic_aead_cli.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/digital_signatures/digital_signatures_cli.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/hybrid_encryption/hybrid_cli.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/jwt/jwt_generate_public_jwk_set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/jwt/jwt_sign.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/jwt/jwt_verify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/key_derivation/key_derivation_cli.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/mac/mac_cli.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/util/util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/create_keyset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/create_keyset_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/load_cleartext_keyset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/load_cleartext_keyset_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/load_encrypted_keyset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/load_encrypted_keyset_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/obtain_and_use_a_primitive.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/obtain_and_use_a_primitive_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/write_cleartext_keyset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/write_cleartext_keyset_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/write_keyset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/write_keyset_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_factory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_key_templates.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_key_templates_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_ctr_hmac_aead_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_ctr_hmac_aead_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_ctr_hmac_aead_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_ctr_hmac_aead_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_ctr_hmac_aead_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_ctr_hmac_aead_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_ctr_hmac_aead_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_ctr_hmac_aead_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_eax_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_eax_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_eax_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_eax_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_eax_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_eax_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_eax_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_siv_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_siv_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_siv_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_siv_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_siv_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_siv_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_siv_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/chacha20_poly1305_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/chacha20_poly1305_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/chacha20_poly1305_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/chacha20_poly1305_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/chacha20_poly1305_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/chacha20_poly1305_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/cord_aead_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/cord_aead_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/failing_aead.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/failing_aead_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/aead_from_zero_copy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/aead_from_zero_copy_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/aead_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/aead_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/cord_aes_gcm_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/cord_aes_gcm_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/ssl_aead.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/ssl_aead_large_inputs_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/ssl_aead_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/wycheproof_aead.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/zero_copy_aead_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/zero_copy_aead_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/zero_copy_aes_gcm_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/zero_copy_aes_gcm_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/kms_aead_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/kms_envelope_aead.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/kms_envelope_aead_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/kms_envelope_aead_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/kms_envelope_aead_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/xchacha20_poly1305_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/xchacha20_poly1305_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/xchacha20_poly1305_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/xchacha20_poly1305_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/xchacha20_poly1305_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/xchacha20_poly1305_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/xchacha20_poly1305_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/config_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/config_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/fips_140_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/fips_140_2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/global_registry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/global_registry_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/key_gen_fips_140_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/key_gen_fips_140_2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/key_gen_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/tink_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/tink_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/tink_fips.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/tink_fips_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/config/v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/big_integer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/big_integer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/binary_keyset_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/binary_keyset_reader_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/binary_keyset_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/binary_keyset_writer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/cleartext_keyset_handle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/cleartext_keyset_handle_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/crypto_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/crypto_format_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/ec_point_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/json_keyset_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/json_keyset_reader_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/json_keyset_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/json_keyset_writer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/key_access_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/key_manager_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/key_type_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/keyset_handle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/keyset_handle_builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/keyset_handle_builder_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/keyset_handle_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/keyset_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/keyset_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/kms_clients.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/kms_clients_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/partial_key_access_token_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/primitive_set_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/private_key_manager_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/restricted_big_integer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/restricted_big_integer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/restricted_data.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/restricted_data_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/template_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/version.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/core/version_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/aes_siv_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/aes_siv_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/aes_siv_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/aes_siv_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/aes_siv_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/aes_siv_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/aes_siv_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_factory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_key_templates.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_key_templates_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/failing_daead.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/failing_daead_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/internal/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/internal/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/internal/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/subtle/aead_or_daead.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/daead/subtle/aead_or_daead_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_aead_hkdf_dem_helper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_aead_hkdf_dem_helper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_aead_hkdf_private_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_aead_hkdf_private_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_aead_hkdf_public_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_aead_hkdf_public_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_hybrid_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_hybrid_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_hybrid_key_templates.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_hybrid_key_templates_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_aead_hkdf_hybrid_decrypt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_aead_hkdf_hybrid_decrypt_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_aead_hkdf_hybrid_encrypt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_aead_hkdf_hybrid_encrypt_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_hkdf_recipient_kem_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_hkdf_recipient_kem_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_hkdf_sender_kem_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_hkdf_sender_kem_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_subtle_boringssl_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_subtle_boringssl_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/util/test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/util/test_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/dilithium_key_template.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/dilithium_key_template_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/dilithium_sign_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/dilithium_sign_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/dilithium_verify_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/dilithium_verify_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/falcon_key_template.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/falcon_key_template_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/falcon_sign_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/falcon_sign_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/falcon_verify_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/falcon_verify_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/internal/slh_dsa_sign_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/internal/slh_dsa_sign_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/internal/slh_dsa_test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/internal/slh_dsa_verify_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/internal/slh_dsa_verify_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/signature_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/signature_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/signature_config_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/slh_dsa_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/slh_dsa_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/slh_dsa_private_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/slh_dsa_private_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/slh_dsa_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/slh_dsa_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/slh_dsa_public_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/slh_dsa_public_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/sphincs_key_template.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/sphincs_key_template_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/sphincs_sign_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/sphincs_sign_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/sphincs_verify_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/sphincs_verify_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/dilithium_avx2_sign.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/dilithium_avx2_sign_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/dilithium_avx2_verify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/dilithium_avx2_verify_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/dilithium_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/dilithium_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/falcon_sign.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/falcon_sign_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/falcon_subtle_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/falcon_subtle_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/falcon_verify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/falcon_verify_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/sphincs_helper_pqclean.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/sphincs_sign.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/sphincs_sign_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/sphincs_subtle_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/sphincs_subtle_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/sphincs_verify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/sphincs_verify_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/util/enums.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/util/enums_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_dem_helper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_dem_helper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_hybrid_decrypt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_hybrid_decrypt_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_hybrid_encrypt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_hybrid_encrypt_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_private_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_private_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_public_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_public_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_private_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_private_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_public_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_public_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/failing_hybrid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/failing_hybrid_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_private_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_private_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_public_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_public_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_decrypt_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_decrypt_factory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_decrypt_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_decrypt_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_encrypt_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_encrypt_factory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_encrypt_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_encrypt_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_key_templates.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_key_templates_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_context.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_context_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_context_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_context_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_decrypt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_decrypt_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_decrypt_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_decrypt_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_encrypt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_encrypt_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_encrypt_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_encrypt_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_key_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_key_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_key_manager_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_key_manager_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_private_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_private_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_public_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_public_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_util_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_util_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/test_hpke_context_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/aes_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/aes_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/bn_encoding_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/bn_encoding_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/bn_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/bn_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/call_with_core_dump_protection_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/configuration_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/ec_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/ec_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/err_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/err_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/fips_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/fips_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_gen_configuration_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_info_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_parser_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_serializer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_status_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_status_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_type_info_store.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_type_info_store_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/keyset_handle_builder_entry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/keyset_handle_builder_entry_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/keyset_wrapper_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/keyset_wrapper_store_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/legacy_proto_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/legacy_proto_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/legacy_proto_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/legacy_proto_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/md_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/md_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/monitoring_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/mutable_serialization_registry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/mutable_serialization_registry_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/parameters_parser_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/parameters_serializer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/parser_index_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_key_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_key_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parameters_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parameters_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/registry_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/registry_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/rsa_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/rsa_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/safe_stringops_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serialization_registry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serialization_registry_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serialization_test_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serializer_index_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/test_file_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/test_file_util_bazel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/test_file_util_cmake.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/test_random_access_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/test_random_access_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/json_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/json_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_ecdsa_sign_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_ecdsa_sign_verify_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_ecdsa_verify_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_format_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_hmac_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_hmac_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_mac_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_mac_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_mac_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_mac_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_public_key_sign_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_public_key_sign_verify_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_public_key_sign_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_public_key_verify_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_public_key_verify_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_public_key_wrappers_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_rsa_ssa_pkcs1_sign_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_rsa_ssa_pkcs1_sign_verify_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_rsa_ssa_pkcs1_verify_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_rsa_ssa_pss_sign_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_rsa_ssa_pss_sign_verify_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_rsa_ssa_pss_verify_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_ecdsa_sign_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_ecdsa_sign_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_ecdsa_verify_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_ecdsa_verify_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_hmac_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_hmac_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_rsa_ssa_pkcs1_sign_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_rsa_ssa_pkcs1_sign_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_rsa_ssa_pkcs1_verify_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_rsa_ssa_pkcs1_verify_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_rsa_ssa_pss_sign_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_rsa_ssa_pss_sign_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_rsa_ssa_pss_verify_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_rsa_ssa_pss_verify_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwk_set_converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwk_set_converter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_ecdsa_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_ecdsa_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_ecdsa_private_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_ecdsa_private_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_ecdsa_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_ecdsa_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_ecdsa_public_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_ecdsa_public_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_hmac_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_hmac_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_hmac_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_hmac_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_hmac_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_hmac_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_key_templates.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_key_templates_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_mac_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_mac_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_signature_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_signature_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_validator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_validator_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/raw_jwt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/raw_jwt_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/verified_jwt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/verified_jwt_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/internal/config_prf_for_deriver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/internal/key_derivers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/internal/key_derivers_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/internal/prf_based_deriver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/internal/prf_based_deriver_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/internal/prf_based_deriver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/key_derivation_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/key_derivation_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/key_derivation_key_templates.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/key_derivation_key_templates_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/keyset_deriver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/keyset_deriver_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/keyset_deriver_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/aes_cmac_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/aes_cmac_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/aes_cmac_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/aes_cmac_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/aes_cmac_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/aes_cmac_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/aes_cmac_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/failing_mac.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/failing_mac_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/hmac_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/hmac_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/hmac_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/hmac_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/hmac_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/hmac_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/hmac_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/hmac_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/chunked_mac_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/chunked_mac_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/chunked_mac_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/chunked_mac_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/chunked_mac_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_factory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_key_templates.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_key_templates_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/aes_cmac_prf_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/failing_prfset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/failing_prfset_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/hkdf_prf_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/hmac_prf_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/hmac_prf_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/internal/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/internal/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/internal/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_key_templates.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_key_templates_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_set_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_set_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_set_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/proto_keyset_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/proto_keyset_format_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_private_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_private_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_public_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_public_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_sign_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_sign_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_verify_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_verify_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_private_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_private_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_public_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_public_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_sign_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_sign_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_verify_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_verify_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/failing_signature.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/failing_signature_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/internal/config_fips_140_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/internal/config_fips_140_2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/internal/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/internal/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/internal/ecdsa_raw_sign_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/internal/ecdsa_raw_sign_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/internal/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/public_key_sign_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/public_key_sign_factory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/public_key_sign_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/public_key_sign_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/public_key_verify_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/public_key_verify_factory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/public_key_verify_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/public_key_verify_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_private_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_private_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_public_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_public_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_sign_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_sign_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_verify_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_verify_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_private_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_private_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_proto_serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_public_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_public_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_sign_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_sign_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_verify_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_verify_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/sig_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/signature_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/signature_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/signature_key_templates.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/signature_key_templates_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/signature_pem_keyset_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/signature_pem_keyset_reader_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/aes_ctr_hmac_streaming_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/aes_ctr_hmac_streaming_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/aes_gcm_hkdf_streaming_key_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/aes_gcm_hkdf_streaming_key_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/buffered_input_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/buffered_input_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/decrypting_input_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/decrypting_input_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/decrypting_random_access_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/decrypting_random_access_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/internal/config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/internal/config_v0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/internal/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/key_gen_config_v0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/shared_input_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/shared_random_access_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/streaming_aead_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/streaming_aead_config_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/streaming_aead_key_templates.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/streaming_aead_key_templates_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/streaming_aead_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/streaming_aead_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aead_test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aead_test_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_cmac_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_cmac_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_ctr_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_ctr_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_ctr_hmac_streaming.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_ctr_hmac_streaming_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_eax_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_eax_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_hkdf_stream_segment_decrypter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_hkdf_stream_segment_decrypter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_hkdf_stream_segment_encrypter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_hkdf_stream_segment_encrypter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_hkdf_streaming.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_hkdf_streaming_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_siv_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_siv_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_siv_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_siv_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/common_enums.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/common_enums_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/decrypting_random_access_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/decrypting_random_access_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ecdsa_sign_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ecdsa_sign_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ecdsa_verify_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ecdsa_verify_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ecies_hkdf_recipient_kem_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ecies_hkdf_recipient_kem_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ecies_hkdf_sender_kem_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ecies_hkdf_sender_kem_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ed25519_sign_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ed25519_sign_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ed25519_verify_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ed25519_verify_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/encrypt_then_authenticate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/encrypt_then_authenticate_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/hkdf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/hkdf_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/hmac_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/hmac_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/hybrid_test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/hybrid_test_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/nonce_based_streaming_aead.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/pem_parser_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/pem_parser_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/prf/hkdf_streaming_prf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/prf/hkdf_streaming_prf_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/prf/prf_set_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/prf/prf_set_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/prf/streaming_prf_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/prf/streaming_prf_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/random.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/random_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/rsa_ssa_pkcs1_sign_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/rsa_ssa_pkcs1_sign_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/rsa_ssa_pkcs1_verify_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/rsa_ssa_pkcs1_verify_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/rsa_ssa_pss_sign_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/rsa_ssa_pss_sign_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/rsa_ssa_pss_verify_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/rsa_ssa_pss_verify_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/stateful_cmac_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/stateful_cmac_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/stateful_hmac_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/stateful_hmac_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/streaming_aead_decrypting_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/streaming_aead_decrypting_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/streaming_aead_encrypting_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/streaming_aead_encrypting_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/streaming_aead_test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/streaming_aead_test_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/streaming_mac_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/streaming_mac_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/subtle_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/subtle_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/wycheproof_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/xchacha20_poly1305_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/xchacha20_poly1305_boringssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/buffer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/buffer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/constants.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/enums.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/enums_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/errors_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/fake_kms_client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/fake_kms_client_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/file_input_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/file_input_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/file_output_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/file_output_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/file_random_access_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/file_random_access_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/input_stream_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/input_stream_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/istream_input_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/istream_input_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/keyset_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/ostream_output_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/ostream_output_stream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/secret_data_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/secret_proto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/test_keyset_handle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/test_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/validation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/util/validation_test.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/examples/util/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/create_keyset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/load_cleartext_keyset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/load_encrypted_keyset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/obtain_and_use_a_primitive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/write_cleartext_keyset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/write_keyset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_ctr_hmac_aead_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_ctr_hmac_aead_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_ctr_hmac_aead_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_ctr_hmac_aead_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_eax_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_eax_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_eax_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_eax_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_siv_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_siv_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_siv_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aes_gcm_siv_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/chacha20_poly1305_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/chacha20_poly1305_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/chacha20_poly1305_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/cord_aead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/cord_aead_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/failing_aead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/aead_from_zero_copy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/aead_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/cord_aes_gcm_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/mock_zero_copy_aead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/ssl_aead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/wycheproof_aead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/zero_copy_aead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/zero_copy_aead_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/zero_copy_aes_gcm_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/kms_aead_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/kms_envelope_aead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/kms_envelope_aead_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/mock_aead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/xchacha20_poly1305_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/xchacha20_poly1305_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/xchacha20_poly1305_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead/xchacha20_poly1305_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/aead_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/big_integer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/binary_keyset_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/binary_keyset_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/chunked_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/cleartext_keyset_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/config/config_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/config/fips_140_2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/config/global_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/config/key_gen_fips_140_2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/config/key_gen_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/config/tink_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/config/tink_fips.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/config/v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/configuration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/core/key_manager_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/core/key_type_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/core/private_key_manager_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/core/private_key_type_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/core/template_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/crypto_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/aes_siv_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/aes_siv_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/aes_siv_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/aes_siv_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/deterministic_aead_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/failing_daead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/internal/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/internal/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/daead/subtle/aead_or_daead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/deterministic_aead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/deterministic_aead_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/deterministic_aead_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/deterministic_aead_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/ec_point.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/kem/kem_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/kem/kem_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/kem/kem_public_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_aead_hkdf_dem_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_aead_hkdf_private_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_aead_hkdf_public_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_hybrid_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_hybrid_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_aead_hkdf_hybrid_decrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_aead_hkdf_hybrid_encrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_hkdf_recipient_kem_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_hkdf_sender_kem_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/cecpq2_subtle_boringssl_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/util/test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/dilithium_key_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/dilithium_sign_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/dilithium_verify_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/falcon_key_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/falcon_sign_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/falcon_verify_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/internal/slh_dsa_sign_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/internal/slh_dsa_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/internal/slh_dsa_verify_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/signature_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/slh_dsa_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/slh_dsa_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/slh_dsa_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/slh_dsa_public_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/sphincs_key_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/sphincs_sign_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/sphincs_verify_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/dilithium_avx2_sign.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/dilithium_avx2_verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/dilithium_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/falcon_sign.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/falcon_subtle_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/falcon_verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/sphincs_helper_pqclean.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/sphincs_sign.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/sphincs_subtle_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/subtle/sphincs_verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/signature/util/enums.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_dem_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_hybrid_decrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_hybrid_encrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_private_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_aead_hkdf_public_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/ecies_public_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/failing_hybrid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hpke_public_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_decrypt_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_decrypt_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_encrypt_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_encrypt_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/hybrid_public_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_context_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_decrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_decrypt_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_encrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_encrypt_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_key_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_key_manager_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_private_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_public_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/hpke_util_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/test_hpke_context_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid_decrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid_decrypt_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid_encrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid_encrypt_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/input_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/insecure_secret_key_access.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/aes_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/bn_encoding_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/bn_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/call_with_core_dump_protection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/configuration_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/ec_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/err_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/fips_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_gen_configuration_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_serializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_status_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/key_type_info_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/keyset_handle_builder_entry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/keyset_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/keyset_wrapper_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/keyset_wrapper_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/legacy_proto_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/legacy_proto_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/md_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/monitoring_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/mutable_serialization_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/parameters_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/parameters_serializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/parser_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_key_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parameters_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/registry_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/rsa_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/safe_stringops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serialization_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serialization_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serializer_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/ssl_unique_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/ssl_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/test_file_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/test_random_access_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/json_keyset_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/json_keyset_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/json_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_ecdsa_sign_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_ecdsa_verify_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_hmac_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_mac_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_mac_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_mac_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_public_key_sign_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_public_key_sign_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_public_key_sign_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_public_key_verify_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_public_key_verify_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_public_key_verify_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_rsa_ssa_pkcs1_sign_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_rsa_ssa_pkcs1_verify_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_rsa_ssa_pss_sign_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/jwt_rsa_ssa_pss_verify_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_ecdsa_sign_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_ecdsa_verify_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_hmac_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_rsa_ssa_pkcs1_sign_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_rsa_ssa_pkcs1_verify_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_rsa_ssa_pss_sign_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/raw_jwt_rsa_ssa_pss_verify_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwk_set_converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_ecdsa_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_ecdsa_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_ecdsa_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_ecdsa_public_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_hmac_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_hmac_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_hmac_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_mac_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_mac_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_mac_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_public_key_sign.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_public_key_verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_signature_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_signature_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_signature_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_signature_public_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/jwt_validator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/raw_jwt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/verified_jwt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/kem/internal/raw_kem_decapsulate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/kem/internal/raw_kem_encapsulate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/key_access.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/key_gen_configuration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/key_status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/internal/config_prf_for_deriver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/internal/key_derivers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/internal/prf_based_deriver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/internal/prf_based_deriver_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/key_derivation_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/key_derivation_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/keyset_deriver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/keyset_deriver_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/keyset_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/keyset_handle_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/keyset_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/keyset_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/keyset_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/kms_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/kms_clients.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/aes_cmac_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/aes_cmac_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/aes_cmac_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/aes_cmac_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/failing_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/hmac_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/hmac_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/hmac_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/hmac_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/chunked_mac_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/chunked_mac_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac/mac_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/monitoring/monitoring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/monitoring/monitoring_client_mocks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/output_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/output_stream_with_result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/partial_key_access.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/partial_key_access_token.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/prf/aes_cmac_prf_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/prf/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/prf/failing_prfset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/prf/hkdf_prf_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/prf/hmac_prf_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/prf/internal/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/prf/internal/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/prf/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_set_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/primitive_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/primitive_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/proto_keyset_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/public_key_sign.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/public_key_sign_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/public_key_verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/public_key_verify_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/random_access_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/restricted_big_integer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/restricted_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/secret_key_access.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/secret_key_access_token.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_public_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_sign_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_verify_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_public_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_sign_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ed25519_verify_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/failing_signature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/internal/config_fips_140_2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/internal/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/internal/ecdsa_raw_sign_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/internal/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/public_key_sign_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/public_key_sign_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/public_key_verify_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/public_key_verify_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_public_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_sign_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pkcs1_verify_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_public_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_sign_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/rsa_ssa_pss_verify_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/sig_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/signature_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/signature_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/signature_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/signature_pem_keyset_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/signature_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/signature_public_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streaming_aead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streaming_aead_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streaming_aead_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streaming_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/aes_ctr_hmac_streaming_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/aes_gcm_hkdf_streaming_key_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/buffered_input_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/decrypting_input_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/decrypting_random_access_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/internal/config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/internal/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/key_gen_config_v0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/shared_input_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/shared_random_access_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/streaming_aead_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/streaming_aead_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/streaming_aead_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aead_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_cmac_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_ctr_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_ctr_hmac_streaming.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_eax_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_hkdf_stream_segment_decrypter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_hkdf_stream_segment_encrypter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_hkdf_streaming.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_gcm_siv_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/aes_siv_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/common_enums.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/decrypting_random_access_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ec_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ecdsa_sign_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ecdsa_verify_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ecies_hkdf_recipient_kem_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ecies_hkdf_sender_kem_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ed25519_sign_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ed25519_verify_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/encrypt_then_authenticate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/hkdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/hmac_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/hybrid_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/ind_cpa_cipher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/mac/stateful_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/nonce_based_streaming_aead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/pem_parser_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/prf/hkdf_streaming_prf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/prf/prf_set_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/prf/streaming_prf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/prf/streaming_prf_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/rsa_ssa_pkcs1_sign_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/rsa_ssa_pkcs1_verify_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/rsa_ssa_pss_sign_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/rsa_ssa_pss_verify_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/stateful_cmac_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/stateful_hmac_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/stream_segment_decrypter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/stream_segment_encrypter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/streaming_aead_decrypting_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/streaming_aead_encrypting_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/streaming_aead_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/streaming_mac_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/subtle_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/subtle_util_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/wycheproof_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/xchacha20_poly1305_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/tink_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/enums.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/fake_kms_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/file_input_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/file_output_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/file_random_access_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/input_stream_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/istream_input_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/keyset_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/ostream_output_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/protobuf_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/secret_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/secret_data_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/secret_proto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/statusor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/test_keyset_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/test_matchers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/util/validation.h" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/cmake/HttpArchive.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/cmake/TinkBuildRules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/cmake/TinkUtil.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/cmake/TinkWorkspace.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/docs/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/docs/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/aead/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/aead/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/aead/aead_cli_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/aead/aead_test_keyset.json" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/daead/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/daead/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/daead/deterministic_aead_cli_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/daead/deterministic_aead_test_keyset.json" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/digital_signatures/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/digital_signatures/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/digital_signatures/digital_signature_private_keyset.json" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/digital_signatures/digital_signature_public_keyset.json" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/digital_signatures/digital_signatures_cli_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/hybrid_encryption/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/hybrid_encryption/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/hybrid_encryption/hybrid_cli_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/hybrid_encryption/testdata/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/hybrid_encryption/testdata/hpke_test_private_keyset.json" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/hybrid_encryption/testdata/hpke_test_public_keyset.json" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/hybrid_encryption/testdata/hybrid_test_private_keyset.json" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/hybrid_encryption/testdata/hybrid_test_public_keyset.json" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/jwt/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/jwt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/jwt/jwt_signature_cli_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/jwt/jwt_signature_private_keyset.json" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/jwt/jwt_signature_public_keyset.json" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/key_derivation/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/key_derivation/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/key_derivation/key_derivation_cli_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/key_derivation/keyset.json" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/mac/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/mac/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/mac/mac_cli_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/mac/mac_test_keyset.json" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/util/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/util/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/extensions.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/create_github_release_branch.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/create_github_release_tag.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/gcp_ubuntu/bazel/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/gcp_ubuntu/bazel_fips/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/gcp_ubuntu/bzlmod/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/gcp_ubuntu/cmake/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/gcp_ubuntu/cmake_installed_deps/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/gcp_ubuntu/cmake_openssl/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/gcp_ubuntu/cmake_openssl3/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/gcp_windows/bazel/run_tests.bat" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/gcp_windows/cmake/run_tests.bat" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/macos_external/bazel/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/macos_external/cmake/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/macos_external/cmake_openssl/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/testutils/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/testutils/cc_test_container_images.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/testutils/github_release_util.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/testutils/github_release_util_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/testutils/install_openssl.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/testutils/run_bazel_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/testutils/run_cmake_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/testutils/run_command.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/kokoro/testutils/test_utils.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/proto/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/proto/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/proto/experimental/pqcrypto/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/proto/experimental/pqcrypto/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/template_rule.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/testvectors/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/aead/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/aead/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/aead/internal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/aead/subtle/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/aead/subtle/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/config/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/config/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/config/internal/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/config/internal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/daead/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/daead/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/daead/internal/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/daead/internal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/daead/subtle/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/daead/subtle/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/kem/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/kem/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/subtle/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/util/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/proto/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/exported_symbols.lds" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/internal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/subtle/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/hybrid/subtle/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/internal/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/internal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/jwt/internal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/kem/internal/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/kem/internal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/internal/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/internal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/subtle/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/keyderivation/subtle/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/mac/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/mac/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/mac/subtle/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/mac/subtle/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/monitoring/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/monitoring/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/prf/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/prf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/prf/internal/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/prf/internal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/prf/subtle/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/prf/subtle/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/signature/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/signature/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/signature/internal/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/signature/internal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/signature/subtle/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/signature/subtle/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/internal/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/internal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/subtle/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/streamingaead/subtle/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/mac/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/mac/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/prf/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/subtle/prf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/util/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/util/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/version.h.templ" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/version_script.lds" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink_cc_deps.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tink_cc_deps_init.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tools/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tools/update_build_files_for_tink_2_0_bazel.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/tools/update_build_files_for_tink_2_0_bazel_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tink-cc/version.bzl" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

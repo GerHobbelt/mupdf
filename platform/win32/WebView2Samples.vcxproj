@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-2190784A5F2A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WEBVIEW2SAMPLES;WEBVIEW2SAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WEBVIEW2SAMPLES;WEBVIEW2SAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WEBVIEW2SAMPLES;WEBVIEW2SAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WEBVIEW2SAMPLES;WEBVIEW2SAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpp-terminal.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2367fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnanosvg.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-751bff971987}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/Win32_GettingStarted/HelloWebView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/App.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/AppStartPage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/AppWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/AudioComponent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/CheckFailure.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ClientCertificateSelectionDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ControlComponent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/CustomStatusBar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/DCompTargetImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/DpiUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/DropTarget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/FileComponent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/HostObjectSampleImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ProcessComponent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioAddHostObject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioAuthentication.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioClientCertificateRequested.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioCookieManagement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioCustomDownloadExperience.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioDOMContentLoaded.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioNavigateWithWebResourceRequest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioVirtualHostMappingForPopUpWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioVirtualHostMappingForSW.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioWebMessage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioWebViewEventMonitor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScriptComponent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/SettingsComponent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/TextInputDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/Toolbar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ViewComponent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/stdafx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/App.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/AppWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/CheckFailure.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/CompositionHost.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/pch.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/App.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/AppStartPage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/AppWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/AudioComponent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/CheckFailure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ClientCertificateSelectionDialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ComponentBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ControlComponent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/CustomStatusBar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/DCompTargetImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/DpiUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/DropTarget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/FileComponent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/HostObjectSampleImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ProcessComponent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioAddHostObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioAuthentication.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioClientCertificateRequested.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioCookieManagement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioCustomDownloadExperience.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioDOMContentLoaded.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioNavigateWithWebResourceRequest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioVirtualHostMappingForPopUpWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioVirtualHostMappingForSW.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioWebMessage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScenarioWebViewEventMonitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ScriptComponent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/SettingsComponent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/TextInputDialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/Toolbar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/ViewComponent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/targetver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/App.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/AppWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/CheckFailure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/CompositionHost.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/Resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/framework.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/pch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/targetver.h" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample (Package)/Images/LockScreenLogo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample (Package)/Images/SplashScreen.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample (Package)/Images/Square150x150Logo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample (Package)/Images/Square44x44Logo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample (Package)/Images/Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample (Package)/Images/StoreLogo.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample (Package)/Images/Wide310x150Logo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/AppBackground.bmp" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/WebView2APISample.ico" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/WebView2APISample_Inprivate.ico" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/EdgeWebView2-80.jpg" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/crash-browser-process-3.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/crash-browser-process-5.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/crash-browser-process-7.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/custom-script-dialog.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/debugger-dropdown.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/default-script-dialog.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/download-client-certificate.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/install-client-certificate.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/new-script-debugging-tool.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/old-script-debugging-tool.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/on-add-click-breakpoint.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/on-add-header-breakpoint.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/sample-app-layout-diagram.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/sample-app-screenshot.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/sample-app-webmessaging-screenshot.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/script-debugging-reg-key.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/success-client-certificate.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/unresponsive-renderer-error.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/vs-javascript-diagnostics.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/vs-script-debugging-set-up.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/screenshots/zoomview.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/small.ico" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/WebView2SampleWinComp.ico" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/WebViewStartPageBackground.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/screenshots/WinComp-Sample-App-Screenshot.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/small.ico" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WindowsFormsBrowser/assets/EdgeWebView2-80.jpg" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WindowsFormsBrowser/screenshots/winforms-browser-screenshot.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WpfBrowser/assets/EdgeWebView2-80.jpg" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WpfBrowser/screenshots/wpf-browser-screenshot.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/assets/LockScreenLogo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/assets/SplashScreen.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/assets/Square150x150Logo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/assets/Square44x44Logo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/assets/Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/assets/StoreLogo.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/assets/Wide310x150Logo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/media/CreateSetupProject.PNG" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/media/SelectPrerequisites.PNG" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/media/SetupPrerequisites.PNG" />
+    <Image Include="../../thirdparty/owemdjee/WebView2Samples/media/icon/EdgeWebView2.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/WebView2APISample.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/WebView2SampleWinComp.rc" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WPF_GettingStarted/App.xaml" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WPF_GettingStarted/App.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WPF_GettingStarted/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WPF_GettingStarted/MainWindow.xaml" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WPF_GettingStarted/MainWindow.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WPF_GettingStarted/README.md" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/Win32_GettingStarted/README.md" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/Win32_GettingStarted/WebView2GettingStarted.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/Win32_GettingStarted/packages.config" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinForms_GettingStarted/App.config" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinForms_GettingStarted/Form1.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinForms_GettingStarted/Form1.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinForms_GettingStarted/Form1.resx" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinForms_GettingStarted/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinForms_GettingStarted/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinForms_GettingStarted/Properties/Resources.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinForms_GettingStarted/Properties/Resources.resx" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinForms_GettingStarted/Properties/Settings.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinForms_GettingStarted/Properties/Settings.settings" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinForms_GettingStarted/packages.config" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/README.md" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample (Package)/Package.appxmanifest" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample (Package)/WinUI_Sample (Package).wapproj.user" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample (Package)/build/Microsoft.WinUI.AppX.targets" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample/App.xaml" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample/App.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample/MainWindow.xaml" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample/MainWindow.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample/app.manifest" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample/obj/WinUI_Sample.csproj.nuget.dgspec.json" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample/obj/WinUI_Sample.csproj.nuget.g.props" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample/obj/WinUI_Sample.csproj.nuget.g.targets" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample/obj/project.assets.json" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2CDPExtensionWPFSample/App.xaml" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2CDPExtensionWPFSample/App.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2CDPExtensionWPFSample/MainWindow.xaml" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2CDPExtensionWPFSample/MainWindow.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2CDPExtensionWPFSample/README.md" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2DeploymentVSInstallerSample/README.md" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2DeploymentVSInstallerSample/en/eula.rtf" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2DeploymentWiXBurnBundleSample/Bundle.wxs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2DeploymentWiXBurnBundleSample/README.md" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2DeploymentWiXCustomActionSample/Product.wxs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2DeploymentWiXCustomActionSample/README.md" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2DeploymentWiXCustomActionSample/RemoveNotUsedFiles.xslt" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/HostObjectSample.idl" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/README.md" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/WebView2APISample.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/AppStartPage.html" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/AppStartPage.js" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/ScenarioAddHostObject.html" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/ScenarioCookieManagement.html" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/ScenarioDOMContentLoaded.html" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/ScenarioJavaScriptDebugIndex.html" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/ScenarioJavaScriptDebugIndex.js" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/ScenarioTestingFocus.html" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/ScenarioTypeScriptDebugIndex.html" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/ScenarioTypeScriptDebugIndex.ts" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/ScenarioVirtualHostMappingForPopUpWindow.html" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/ScenarioVirtualHostMappingForPopUpWindow.js" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/ScenarioWebMessage.html" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/assets/ScenarioWebViewEventMonitor.html" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/documentation/Testing-Instructions.md" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2APISample/packages.config" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/WebView2SamplePage.html" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/WebView2SampleWinComp.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2SampleWinComp/packages.config" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WindowsFormsBrowser/App.config" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WindowsFormsBrowser/BrowserForm.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WindowsFormsBrowser/BrowserForm.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WindowsFormsBrowser/BrowserForm.resx" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WindowsFormsBrowser/EventMonitor.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WindowsFormsBrowser/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WindowsFormsBrowser/README.md" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WindowsFormsBrowser/app.manifest" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WpfBrowser/App.xaml" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WpfBrowser/App.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WpfBrowser/BridgeAddRemoteObject.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WpfBrowser/ClientCertificateSelectionDialog.xaml" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WpfBrowser/ClientCertificateSelectionDialog.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WpfBrowser/MainWindow.xaml" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WpfBrowser/MainWindow.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WpfBrowser/README.md" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WpfBrowser/TextInputDialog.xaml" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WebView2WpfBrowser/TextInputDialog.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/App.xaml" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/App.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/MainPage.xaml" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/MainPage.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/Package.appxmanifest" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/WebView2_UWP_TemporaryKey.pfx" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/webview2_sample_uwp/readme.md" />
+    <Xml Include="../../thirdparty/owemdjee/WebView2Samples/GettingStartedGuides/WinUI3_GettingStarted/WinUI_Sample/WinUI_Sample (Package)/build/LiftedWinRTClassRegistrations.xml" />
+    <Xml Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2DeploymentVSInstallerSample/en/package.xml" />
+    <Xml Include="../../thirdparty/owemdjee/WebView2Samples/SampleApps/WV2DeploymentVSInstallerSample/product.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

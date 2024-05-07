@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0A809E}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBROARINGBITMAP;ROARINGBITMAP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBROARINGBITMAP;ROARINGBITMAP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBROARINGBITMAP;ROARINGBITMAP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBROARINGBITMAP;ROARINGBITMAP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBROARINGBITMAP;ROARINGBITMAP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBROARINGBITMAP;ROARINGBITMAP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBROARINGBITMAP;ROARINGBITMAP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBROARINGBITMAP;ROARINGBITMAP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBROARINGBITMAP;ROARINGBITMAP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBROARINGBITMAP;ROARINGBITMAP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBROARINGBITMAP;ROARINGBITMAP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBROARINGBITMAP;ROARINGBITMAP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/LICENSE-2.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/java11/java/org/roaringbitmap/ArraysShim.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/module-info.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/AppendableStorage.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/ArrayBatchIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/ArrayContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/ArraysShim.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/BatchIntIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/BatchIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/BitSetUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/BitmapBatchIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/BitmapContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/BitmapDataProvider.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/BitmapDataProviderSupplier.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/CharIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/ConstantMemoryContainerAppender.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/Container.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/ContainerAppender.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/ContainerBatchIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/ContainerPointer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/FastAggregation.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/FastRankRoaringBitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/ImmutableBitmapDataProvider.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/IntConsumer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/IntConsumerRelativeRangeAdapter.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/IntIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/IntIteratorFlyweight.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/InvalidRoaringFormat.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/ParallelAggregation.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/PeekableCharIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/PeekableCharRankIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/PeekableIntIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/PeekableIntRankIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/RangeBitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/RelativeRangeConsumer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/ReverseIntIteratorFlyweight.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/RoaringArray.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/RoaringBatchIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/RoaringBitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/RoaringBitmapPrivate.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/RoaringBitmapSupplier.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/RoaringBitmapWriter.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/RunBatchIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/RunContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/Util.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/WordStorage.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/AbstractShuttle.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/Art.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/BackwardShuttle.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/ContainerIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/Containers.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/ForwardShuttle.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/KeyIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/LeafNode.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/LeafNodeIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/Node.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/Node16.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/Node256.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/Node4.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/Node48.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/NodeType.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/SearchResult.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/art/Shuttle.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/ArrayBatchIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/BitmapBatchIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/BufferBitSetUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/BufferFastAggregation.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/BufferIntIteratorFlyweight.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/BufferParallelAggregation.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/BufferReverseIntIteratorFlyweight.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/BufferUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/ImmutableRoaringArray.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/ImmutableRoaringBitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/MappeableArrayContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/MappeableBitmapContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/MappeableContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/MappeableContainerPointer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/MappeableRunContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/MutableRoaringArray.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/MutableRoaringBitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/MutableRoaringBitmapPrivate.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/MutableRoaringBitmapSupplier.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/PointableRoaringArray.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/RoaringBatchIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/RunBatchIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/buffer/package-info.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/insights/BitmapAnalyser.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/insights/BitmapStatistics.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/insights/NaiveWriterRecommender.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/ContainerWithIndex.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/HighLowContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/ImmutableLongBitmapDataProvider.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/IntegerUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/LongBitmapDataProvider.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/LongConsumer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/LongConsumerRelativeRangeAdapter.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/LongIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/LongUtils.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/PeekableLongIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/Roaring64Bitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/Roaring64NavigableMap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/RoaringIntPacking.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/longlong/package-info.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/main/java/org/roaringbitmap/package-info.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/CloneBatchIteratorTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/ContainerBatchIteratorTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/KryoTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/OrNotTruncationTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/ParallelAggregationTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/PreviousValueTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/RangeBitmapTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/RoaringArrayTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/RoaringBitmapBatchIteratorTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/RoaringBitmapIntervalIntersectionTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/RoaringBitmapSubsetTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/RoaringBitmapWriterRandomisedTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/SeededTestData.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestAdversarialInputs.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestArrayContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestBitSetUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestBitmapContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestConcatenation.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestEmptyRoaringBatchIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestFastAggregation.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestForAllInRange.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestForEach.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestImmutableRoaringBitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestIntIteratorFlyweight.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestIteratorMemory.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestIterators.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestMemory.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestRange.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestRangeCardinality.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestRankIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestRankIteratorsOfContainers.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestReverseIteratorsOfContainers.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestRoaringBitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestRoaringBitmapOrNot.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestRoaringBitmapWriter.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestRoaringBitmapWriterWizard.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestRoaringBitmap_FastRank.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestRunContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestSerialization.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestSerializationViaByteBuffer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestSerializedSize.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestStreams.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/TestVeryLargeBitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/UnorderedRoaringBitmapWriterRandomisedTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/ValidationRangeConsumer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/art/Node16Test.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/art/Node256Test.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/art/Node48Test.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/art/Node4Test.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/BufferContainerBatchIteratorTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/CloneBatchIteratorTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/ImmutableRoaringBitmapBatchIteratorTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/MutableRoaringArrayTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/MutableRoaringBitmapSubsetTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/RoaringBitmapIntervalIntersectionTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestBitSetUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestBufferAdversarialInputs.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestBufferRangeCardinality.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestCompressionRates.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestExamples.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestFastAggregation.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestForEach.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestImmutableRoaringBitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestImmutableRoaringBitmapOrNot.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestIntIteratorFlyweight.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestIterators.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestMappeableArrayContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestMappeableBitmapContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestMappeableBitmapContainerCharIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestMappeableRunContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestMemory.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestMemoryMapping.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestRange.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestReverseMappeableRunContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestRoaringBitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestRunContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestSerializationViaByteBuffer.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestSerializedSize.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/buffer/TestVeryLargeBitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/insights/BitmapAnalyserTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/insights/BitmapStatisticsTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/insights/NaiveWriterRecommenderTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/longlong/ArtTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/longlong/BytesUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/longlong/ContainersTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/longlong/IntegerUtilTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/longlong/Issue319.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/longlong/JolBenchmarksTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/longlong/TestRoaring64Bitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/java/org/roaringbitmap/longlong/TestRoaring64NavigableMap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/junit-platform.properties" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/64map32bitvals.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/64mapempty.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/64maphighvals.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/64mapspreadvals.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/bitmapwithoutruns.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/bitmapwithruns.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/crashproneinput1.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/crashproneinput2.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/crashproneinput3.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/crashproneinput4.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/crashproneinput5.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/crashproneinput6.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/crashproneinput7.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/crashproneinput8.bin" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/offset_failure_case_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/offset_failure_case_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/offset_failure_case_3.txt" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/prevvalue-regression.txt" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/rangebitmap_regression.txt" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/src/test/resources/testdata/testIssue260.txt" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/bsi/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/bsi/src/main/java/org/roaringbitmap/bsi/BitmapSliceIndex.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/bsi/src/main/java/org/roaringbitmap/bsi/Pair.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/bsi/src/main/java/org/roaringbitmap/bsi/RoaringBitmapSliceIndex.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/bsi/src/main/java/org/roaringbitmap/bsi/WritableUtils.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/bsi/src/main/java/org/roaringbitmap/bsi/buffer/BitSliceIndexBase.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/bsi/src/main/java/org/roaringbitmap/bsi/buffer/ImmutableBitSliceIndex.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/bsi/src/main/java/org/roaringbitmap/bsi/buffer/MutableBitSliceIndex.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/bsi/src/test/java/org/roaringbitmap/bsi/BufferBSITest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/bsi/src/test/java/org/roaringbitmap/bsi/RBBsiTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/src/main/java/Basic.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/src/main/java/Bitmap64.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/src/main/java/CompressionResults.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/src/main/java/ForEachExample.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/src/main/java/ImmutableRoaringBitmapExample.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/src/main/java/IntervalCheck.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/src/main/java/MemoryMappingExample.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/src/main/java/PagedIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/src/main/java/SerializeToByteArrayExample.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/src/main/java/SerializeToByteBufferExample.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/src/main/java/SerializeToDiskExample.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/src/main/java/SerializeToStringExample.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/examples/src/main/java/VeryLargeBitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/compare.py" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/grabresults.sh" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/samplescript.sh" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/AbstractBenchmarkState.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/AddOffsetBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/AdvanceIfNeededBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/BasicBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/BitSetUtilBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/BitmapOfRangeBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/CheckedAddBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/IntermediateByteArrayBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/RadixSort.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/RandomData.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/RangeOperationBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/RoaringOnlyBenchmarkState.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/SelectTopValuesBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/UtilBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/FastAggregationRLEStressTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/and/BitmapContainerAndBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/and/bestcase/Roaring64BitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/and/bestcase/RoaringBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/and/identical/Roaring64BitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/and/identical/RoaringBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/and/worstcase/Roaring64BitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/and/worstcase/RoaringBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/andnot/bestcase/Roaring64BitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/andnot/bestcase/RoaringBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/andnot/identical/Roaring64BitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/andnot/identical/RoaringBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/andnot/worstcase/Roaring64BitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/andnot/worstcase/RoaringBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/or/BitmapContainerOrBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/or/RoaringBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/aggregation/xor/BitmapContainerXorBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/arraycontainer/AddBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/bithacking/SelectBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/bithacking/UnsignedVSFlip.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/bitmapcontainer/SelectBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/buffer/BufferUtilBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/buffer/aggregation/and/bestcase/MutableRoaringBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/buffer/aggregation/and/identical/MutableRoaringBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/buffer/aggregation/and/worstcase/MutableRoaringBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/buffer/aggregation/andnot/bestcase/MutableRoaringBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/buffer/aggregation/andnot/identical/MutableRoaringBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/buffer/aggregation/andnot/worstcase/MutableRoaringBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/cardinality64/Cardinality64Benchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/cardinality64/Roaring64BmpCardinalityBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/combinedcardinality/CombinedCardinalityBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/contains/ContainsBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/deserialization/BitmapContainersDeserializationBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/equals/EqualsBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/iteration/BatchIteratorBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/iteration/BitmapIteratorBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/iteration/BitmapNextBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/iteration/Concatenation.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/iteration/IteratorsBenchmark32.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/iteration/IteratorsBenchmark64.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/iteration/IteratorsBenchmarkRoaring64Bmp.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/longlong/ShiftLeftFromSpecifiedPositionBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/map/MapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/needwork/RandomAccess.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/needwork/SlowMappedORaggregate1.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/needwork/SlowMappedORaggregate2.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/needwork/SlowORaggregate1.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/needwork/SlowORaggregate2.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/needwork/SlowORaggregate3.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/needwork/state/NeedWorkBenchmarkState.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/range/ContainsRange.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/rangebitmap/RangeBitmapBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/ParallelAggregatorBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkAnd.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkAndNot.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkCardinality.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkContains.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkForEach.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkIOr.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkInot.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkIterate.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkOr.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkOrNot.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkReverseIterate.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkWideAndNaive.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkWideOrNaive.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkWideOrPq.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataBenchmarkXor.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/RealDataSerializationBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/state/RealDataBenchmarkState.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/state/RealDataRoaringBitmaps.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/state/RealDataRoaringOnlyBenchmarkState.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/wrapper/Bitmap.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/wrapper/BitmapAggregator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/wrapper/BitmapFactory.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/wrapper/BitmapIterator.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/wrapper/ConciseSetIteratorWrapper.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/wrapper/ConciseSetWrapper.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/wrapper/Ewah32BitmapWrapper.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/wrapper/EwahBitmapWrapper.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/wrapper/EwahIteratorWrapper.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/wrapper/ImmutableConciseSetWrapper.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/wrapper/ImmutableRoaringBitmapWrapper.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/wrapper/RoaringBitmapWrapper.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/realdata/wrapper/RoaringIteratorWrapper.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/AllRunHorizontalOrBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/ArrayContainerAndNotRunContainerBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/BasicAndContainerBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/BasicAndNotContainerBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/BasicHorizontalOrBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/BasicIteratorBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/BasicOrContainerBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/BasicXorContainerBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/BitmapToRuncontainerConversions.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/GetCardinalityMappeableContainerBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/MappedRunContainerRealDataBenchmarkRunOptimize.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/RandomUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/RunArrayAndBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/RunArrayAndNotBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/RunArrayOrBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/RunArrayXorBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/runcontainer/RunContainerRealDataBenchmarkRunOptimize.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/serialization/Roaring64BmpSerializationBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/serialization/SerializationBenchmark.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/spe150271/roaring/RealDataBenchmarkAnd.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/spe150271/roaring/RealDataBenchmarkOr.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/spe150271/roaring/RealDataBenchmarkWideOrNaive.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/spe150271/roaring/state/RealDataBenchmarkState.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/spe150271/runroaring/RealDataBenchmarkAnd.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/spe150271/runroaring/RealDataBenchmarkOr.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/spe150271/runroaring/RealDataBenchmarkWideOrNaive.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/spe150271/runroaring/state/RealDataBenchmarkState.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/writer/WriteSequential.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/jmh/java/org/roaringbitmap/writer/WriteUnordered.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/test/java/org/roaringbitmap/realdata/RealDataBenchmarkAndNotTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/test/java/org/roaringbitmap/realdata/RealDataBenchmarkAndTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/test/java/org/roaringbitmap/realdata/RealDataBenchmarkForEachTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/test/java/org/roaringbitmap/realdata/RealDataBenchmarkIOrTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/test/java/org/roaringbitmap/realdata/RealDataBenchmarkIterateTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/test/java/org/roaringbitmap/realdata/RealDataBenchmarkOrTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/test/java/org/roaringbitmap/realdata/RealDataBenchmarkReverseIterateTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/test/java/org/roaringbitmap/realdata/RealDataBenchmarkSanityTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/test/java/org/roaringbitmap/realdata/RealDataBenchmarkWideAndNaiveTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/test/java/org/roaringbitmap/realdata/RealDataBenchmarkWideOrNaiveTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/test/java/org/roaringbitmap/realdata/RealDataBenchmarkWideOrPqTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/test/java/org/roaringbitmap/realdata/RealDataBenchmarkXorTest.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/jmh/src/test/resources/junit-platform.properties" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/real-roaring-dataset/src/main/java/org/roaringbitmap/RealDataset.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/real-roaring-dataset/src/main/java/org/roaringbitmap/ZipRealDataRangeRetriever.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/real-roaring-dataset/src/main/java/org/roaringbitmap/ZipRealDataRetriever.java" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/real-roaring-dataset/src/main/resources/real-roaring-dataset/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/settings.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/simplebenchmark/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/simplebenchmark/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/RoaringBitmap/simplebenchmark/src/main/java/simplebenchmark.java" />
+    <Xml Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/style/eclipse-java-google-style.xml" />
+    <Xml Include="../../thirdparty/owemdjee/RoaringBitmap/RoaringBitmap/style/roaring_google_checks.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

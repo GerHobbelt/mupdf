@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF71596C}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQJS_OPENCV;QJS_OPENCV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQJS_OPENCV;QJS_OPENCV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQJS_OPENCV;QJS_OPENCV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQJS_OPENCV;QJS_OPENCV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQJS_OPENCV;QJS_OPENCV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQJS_OPENCV;QJS_OPENCV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQJS_OPENCV;QJS_OPENCV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQJS_OPENCV;QJS_OPENCV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQJS_OPENCV;QJS_OPENCV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQJS_OPENCV;QJS_OPENCV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQJS_OPENCV;QJS_OPENCV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQJS_OPENCV;QJS_OPENCV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/dominant_colors_grabber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/geometry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/highgui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/init_module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_affine3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_clahe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_contour.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_cv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_draw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_fast_line_detector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_feature2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_imgproc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_keypoint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_libcamera_app.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_line.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_line_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_line_segment_detector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_mat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_point.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_point_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_raspi_cam.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_rect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_rotated_rect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_size.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_slice_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_subdiv2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_umat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_utility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_video_capture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/js_video_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/jsbindings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/line.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/examples/lsd_call_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/examples/lsd_cmd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/examples/lsd_filterAngle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/examples/lsd_lines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/examples/lsd_opencv_cmd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/examples/lsd_opencv_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/examples/lsd_wrap_cmd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/src/lsd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/src/lsd_opencv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/src/lsd_wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/tests/accuracy_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/tests/houghlines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/tests/perf_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/lsd/tests/visual_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qjs-opencv/util.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/dominant_colors_grabber.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/geometry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/gif_write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_affine3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_alloc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_contour.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_cv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_keypoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_libcamera_app.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_line.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_line_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_mat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_point.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_point_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_rect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_rotated_rect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_slice_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_typed_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/js_umat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/jsbindings.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/line.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/lsd/include/lsd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/lsd/include/lsd_opencv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/lsd/include/lsd_wrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/palette.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/pixel_neighborhood.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/png_read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/png_write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/psimpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/skeletonization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/trace_skeleton.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/qjs-opencv/util.hpp" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/doxygen.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/form_0.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/form_1.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/form_10.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/form_2.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/form_3.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/form_4.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/form_5.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/form_6.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/form_7.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/form_8.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/form_9.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/graph_legend.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c__incl.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a19_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a20_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a21_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a22_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a23_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a24_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a25_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a26_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a27_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a28_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a29_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a30_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a31_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a32_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a33_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a34_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a39_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a40_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a41_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a42_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a43_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a44_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a45_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a46_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a47_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a48_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a49_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a50_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a51_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a52_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a53_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a54_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a55_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a56_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c_a57_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8h__dep__incl.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8h_a0_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8h_a1_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8h_a2_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8h_a3_cgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/structcoorlist__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/images/board.jpg" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/images/building.jpg" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/lsd/images/left01.jpg" />
+    <Image Include="../../thirdparty/owemdjee/qjs-opencv/tests/test_linesegmentdetector.jpg" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/README.md" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/build-opencv.sh" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/cfg.sh" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/cmake/CCache.cmake" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/cmake/CheckFlags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/cmake/FindOpenCV.cmake" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/cmake/FindPNG.cmake" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/cmake/FindQuickJS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/cmake/JSBindings.cmake" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/cmake/MoreFunctions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/cmake/QuickJSModule.cmake" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/cmake/UseMultiArch.cmake" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/cmake/functions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/cmake/libcamera.cmake" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/iwyu.sh" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/js/cvHighGUI.js" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/js/cvPipeline.js" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/js/cvUtils.js" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/js/cvVideo.js" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/annotated.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/doxygen.css" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/files.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/formula.repository" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/functions.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/functions_vars.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/globals.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/globals_defs.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/globals_func.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/globals_type.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/graph_legend.dot" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/graph_legend.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/index.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c-source.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8c.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8h-source.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_8h.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/lsd_opencv.rst" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/structcoorlist.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/structimage__char__s.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/structimage__double__s.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/structimage__int__s.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/structntuple__list__s.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/structpoint.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/structrect.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doc/structrect__iter.html" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/doxygen.config" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/lsd/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/parse-iwyu.js" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/scripts/prettier.sh" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/scripts/proto.sh" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/tests/test_contours.js" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/tests/test_fastlinedetector.js" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/tests/test_freetype.js" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/tests/test_gif.js" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/tests/test_linesegmentdetector.js" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/tests/test_png.js" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/tests/test_rotated_rect.js" />
+    <Text Include="../../thirdparty/owemdjee/qjs-opencv/tests/test_video_writer.js" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

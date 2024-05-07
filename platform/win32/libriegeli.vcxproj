@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF3AF12}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRIEGELI;RIEGELI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRIEGELI;RIEGELI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRIEGELI;RIEGELI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRIEGELI;RIEGELI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRIEGELI;RIEGELI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRIEGELI;RIEGELI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRIEGELI;RIEGELI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRIEGELI;RIEGELI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRIEGELI;RIEGELI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRIEGELI;RIEGELI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRIEGELI;RIEGELI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRIEGELI;RIEGELI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/python/riegeli/base/utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/python/riegeli/bytes/python_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/python/riegeli/bytes/python_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/python/riegeli/records/record_position.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/python/riegeli/records/record_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/python/riegeli/records/record_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/assert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/background_cleaning.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/buffer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/chain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/compact_string.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/cord_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/errno_mapping.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/memory_estimator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/object.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/options_parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/parallelism.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/recycling_pool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/shared_buffer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/sized_shared_buffer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/status.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/string_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/unicode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/zeros.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/brotli/brotli_allocator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/brotli/brotli_dictionary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/brotli/brotli_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/brotli/brotli_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/array_backward_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/array_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/backward_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/buffer_options.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/buffered_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/buffered_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_handle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_internal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/chain_backward_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/chain_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/chain_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/copy_all.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cord_backward_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cord_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cord_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_handle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal_for_headers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_mmap_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/file_mode_string.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/istream_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/joining_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/limiting_backward_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/limiting_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/limiting_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/null_backward_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/null_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/ostream_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/pullable_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/pushable_backward_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/pushable_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/read_all.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/reader_cfile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/reader_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/reader_istream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/resizable_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/restricted_chain_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/splitting_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/std_io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/string_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/string_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/wrapping_backward_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/wrapping_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/wrapping_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/write_int_internal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/writer_cfile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/writer_ostream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bzip2/bzip2_error.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bzip2/bzip2_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bzip2/bzip2_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/chunk.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/chunk_decoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/chunk_encoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/compressor_options.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/decompressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/deferred_encoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/field_projection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/hash.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/simple_decoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/simple_encoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/transpose_decoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/transpose_encoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/containers/chunked_sorted_string_set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/containers/linear_sorted_string_set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/csv/csv_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/csv/csv_record.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/csv/csv_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/adler32_digester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/crc32_digester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/digester_handle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/digesting_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/digesting_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/lines/line_reading.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/lines/text_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/lines/text_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_dictionary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_parse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_serialize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_wire_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_parse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_print.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/ordered_varint/ordered_varint_reading.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/ordered_varint/ordered_varint_writing.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/records/chunk_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/records/chunk_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/records/record_position.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/records/record_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/records/record_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/records/skipped_region.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/records/tools/describe_riegeli_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/records/tools/records_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/records/tools/tfrecord_recognizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/framed/framed_snappy_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/framed/framed_snappy_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/hadoop/hadoop_snappy_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/hadoop/hadoop_snappy_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/snappy_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/snappy_streams.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/snappy_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/tensorflow/io/file_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/tensorflow/io/file_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/tensorflow/kernels/riegeli_dataset_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/tensorflow/ops/riegeli_dataset_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/text/write_int.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/varint/varint_reading.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/xz/xz_error.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/xz/xz_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/xz/xz_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/zlib/zlib_error.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/zlib/zlib_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/zlib/zlib_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/zstd/zstd_dictionary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/zstd/zstd_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/zstd/zstd_writer.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/python/riegeli/base/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/python/riegeli/bytes/python_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/python/riegeli/bytes/python_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/python/riegeli/records/record_position.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/any_dependency.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/any_dependency_initializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/any_dependency_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/arithmetic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/background_cleaning.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/binary_search.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/buffering.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/chain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/closing_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/compact_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/compare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/constexpr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/cord_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/dependency.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/dependency_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/dependency_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/errno_mapping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/estimated_allocated_size.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/initializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/intrusive_shared_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/iterable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/maker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/memory_estimator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/moving_dependency.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/new_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/options_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/parallelism.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/recycling_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/ref_count.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/reset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/shared_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/shared_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/sized_shared_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/stable_dependency.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/string_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/type_id.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/unicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/zeros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/brotli/brotli_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/brotli/brotli_dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/brotli/brotli_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/brotli/brotli_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/absl_stringify_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/array_backward_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/array_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/backward_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/buffer_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/buffered_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/buffered_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/chain_backward_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/chain_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/chain_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/compact_string_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/copy_all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cord_backward_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cord_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cord_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal_for_headers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_mmap_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/file_mode_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/iostream_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/istream_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/joining_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/limiting_backward_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/limiting_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/limiting_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/null_backward_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/null_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/ostream_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/pullable_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/pushable_backward_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/pushable_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/read_all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/reader_cfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/reader_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/reader_istream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/resizable_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/restricted_chain_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/splitting_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/std_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/string_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/string_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/wrapping_backward_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/wrapping_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/wrapping_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/write.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/write_int_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/writer_cfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/writer_ostream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bzip2/bzip2_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bzip2/bzip2_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bzip2/bzip2_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/chunk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/chunk_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/chunk_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/compressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/compressor_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/decompressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/deferred_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/field_projection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/simple_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/simple_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/transpose_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/transpose_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/transpose_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/containers/chunked_sorted_string_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/containers/linear_sorted_string_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/csv/csv_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/csv/csv_record.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/csv/csv_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/adler32_digester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/crc32_digester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/crc32c_digester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/digest_converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/digester_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/digesting_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/digesting_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/highwayhash/highwayhash_digester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/md5_digester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/openssl_digester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/sha1_digester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/sha256_digester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/sha512_256_digester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/sha512_digester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/digests/wrapping_digester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/endian/endian_reading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/endian/endian_writing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lines/line_reading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lines/line_writing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lines/newline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lines/text_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lines/text_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_serialize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_wire_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/ordered_varint/ordered_varint_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/ordered_varint/ordered_varint_reading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/ordered_varint/ordered_varint_writing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/records/block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/records/chunk_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/records/chunk_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/records/record_position.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/records/record_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/records/record_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/records/skipped_region.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/records/tools/tfrecord_recognizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/framed/framed_snappy_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/framed/framed_snappy_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/hadoop/hadoop_snappy_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/hadoop/hadoop_snappy_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/snappy_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/snappy_streams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/snappy_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/tensorflow/io/file_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/tensorflow/io/file_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/text/ascii_align.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/text/write_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/varint/varint_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/varint/varint_reading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/varint/varint_writing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/xz/xz_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/xz/xz_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/xz/xz_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/zlib/zlib_dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/zlib/zlib_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/zlib/zlib_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/zlib/zlib_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/zstd/zstd_dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/zstd/zstd_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/zstd/zstd_writer.h" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/README.md" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/doc/index.md" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/doc/record_writer_options.md" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/doc/riegeli_records_file_format.md" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/build_pip_package.sh" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/dummy_binary.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/BUILD.tpl" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/base/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/base/riegeli_error.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/py_extension.bzl" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/python_configure.bzl" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/records/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/records/examples/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/records/examples/write_read_records.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/records/skipped_region.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/records/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/records/tests/records_test.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/tensorflow/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/tensorflow/kernel_tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/tensorflow/kernel_tests/riegeli_dataset_test.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/tensorflow/ops/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/riegeli/tensorflow/ops/riegeli_dataset_ops.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/riegeli/chunk_encoding/README.md" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/riegeli/records/README.md" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/tf_dependency/BUILD.tpl" />
+    <Text Include="../../thirdparty/owemdjee/riegeli/tf_dependency/tf_configure.bzl" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

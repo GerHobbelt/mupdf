@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF1CBB95}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCSD;CSD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCSD;CSD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCSD;CSD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCSD;CSD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCSD;CSD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCSD;CSD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCSD;CSD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCSD;CSD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCSD;CSD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCSD;CSD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCSD;CSD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCSD;CSD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/Build.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/FMIndex/SSA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/FMIndex/SuffixArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/Hash/Hash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/Hash/HashBBdh.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/Hash/HashBdh.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/Hash/HashDAC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/Hash/Hashdh.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/HuTucker/HuTucker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/Huffman/Huffman.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/Huffman/huff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/CRePair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/IRePair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/arrayg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/basics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/dictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/hash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/heap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/records.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/RePair/RePair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/StringDictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/StringDictionaryFMINDEX.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/StringDictionaryHASHHF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/StringDictionaryHASHRPDAC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/StringDictionaryHASHRPF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/StringDictionaryHASHUFFDAC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/StringDictionaryHHTFC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/StringDictionaryHTFC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/StringDictionaryPFC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/StringDictionaryRPDAC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/StringDictionaryRPFC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/StringDictionaryRPHTFC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/StringDictionaryXBW.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/XBW/TrieNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/XBW/XBW.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceBuilderDArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceBuilderRG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceBuilderRRR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceBuilderSDArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceDArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceRG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceRRR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceSDArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/TableOffsetRRR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/sdarraySadakane.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequence375.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceBuilder375.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceBuilderDArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceBuilderRG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceBuilderRRR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceBuilderSDArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceDArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceRG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceRRR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceSDArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/TableOffsetRRR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/sdarraySadakane.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/coders/HuffmanCoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/coders/huff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/mapper/Mapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/mapper/MapperCont.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/mapper/MapperNone.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/permutation/Permutation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/permutation/PermutationBuilderMRRR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/permutation/PermutationMRRR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/permutation/perm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/BitmapsSequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/Sequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceAlphPart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceBuilderAlphPart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceBuilderGMR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceBuilderGMRChunk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceBuilderStr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceBuilderWaveletTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceBuilderWaveletTreeNoptrs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceGMR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceGMRChunk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/WaveletTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/WaveletTreeNoptrs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/wt_coder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/wt_coder_binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/wt_coder_huff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/wt_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/wt_node_internal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/wt_node_leaf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_DAC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_DAC_VAR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_FMN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_PT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_PhiSpare.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_Sad.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_naive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/NPR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/NPR_CN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/NPR_FMN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/NSV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/PSV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/RMQ_succinct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/RMQ_succinct_lcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/SuffixTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/SuffixTreeY.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/factorization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/factorization_var.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/textindex/TextIndex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/textindex/TextIndexCSA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/textindex/comparray4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/textindex/mmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/textindex/qsufsort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/textindex/suftest3.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/utils/Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/utils/BitString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/src/utils/cppUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/tests/testArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/tests/testBitSequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/tests/testHuffman.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/tests/testLCP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/tests/testNPR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/tests/testSequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/tests/testSuffixTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/libcds/tests/testTextIndex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/utils/Coder/BinaryNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/utils/Coder/Coder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/utils/Coder/DecodingTable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/utils/Coder/DecodingTableBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/utils/Coder/DecodingTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/utils/Coder/StatCoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/utils/DAC_BVLS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/utils/DAC_VLS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/utils/LogSequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libCSD/utils/VByte.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/FMIndex/SSA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/FMIndex/SuffixArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/Hash/Hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/Hash/HashBBdh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/Hash/HashBdh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/Hash/HashDAC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/Hash/HashUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/Hash/Hashdh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/HuTucker/HuTucker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/Huffman/Huffman.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/Huffman/huff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/CRePair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/IRePair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/arrayg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/basics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/RePair/Coder/records.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/RePair/RePair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/StringDictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/StringDictionaryFMINDEX.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/StringDictionaryHASHHF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/StringDictionaryHASHRPDAC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/StringDictionaryHASHRPF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/StringDictionaryHASHUFFDAC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/StringDictionaryHHTFC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/StringDictionaryHTFC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/StringDictionaryPFC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/StringDictionaryRPDAC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/StringDictionaryRPFC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/StringDictionaryRPHTFC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/StringDictionaryXBW.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/XBW/TrieNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/XBW/XBW.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictID.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictIDContiguous.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictIDDuplicates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictIDNoContiguous.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictIDXBW.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictIDXBWDuplicates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictStringFMINDEX.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictStringFMINDEXDuplicates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictStringHHTFC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictStringHTFC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictStringPFC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictStringPlain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictStringRPDAC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictStringRPFC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictStringRPHTFC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictStringVector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictStringXBW.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/iterators/IteratorDictStringXBWDuplicates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceBuilderDArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceBuilderRG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceBuilderRRR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceBuilderSDArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceDArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceRG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceRRR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/BitSequenceSDArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/TableOffsetRRR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/sdarraySadakane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequence375.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceBuilder375.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceBuilderDArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceBuilderRG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceBuilderRRR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceBuilderSDArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceDArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceRG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceRRR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/BitSequenceSDArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/TableOffsetRRR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/sdarraySadakane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/coders/Coder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/coders/HuffmanCoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/coders/huff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/mapper/Mapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/mapper/MapperCont.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/mapper/MapperNone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/permutation/Permutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/permutation/PermutationBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/permutation/PermutationBuilderMRRR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/permutation/PermutationMRRR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/permutation/perm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/BitmapsSequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/Sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceAlphPart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceBuilderAlphPart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceBuilderGMR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceBuilderGMRChunk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceBuilderStr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceBuilderWaveletTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceBuilderWaveletTreeNoptrs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceGMR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/SequenceGMRChunk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/WaveletTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/WaveletTreeNoptrs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/wt_coder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/wt_coder_binary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/wt_coder_huff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/wt_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/wt_node_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/wt_node_leaf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_DAC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_DAC_VAR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_FMN.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_PT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_PhiSpare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_Sad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/LCP_naive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/NPR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/NPR_CN.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/NPR_FMN.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/NSV.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/PSV.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/RMQ_succinct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/RMQ_succinct_lcp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/SuffixTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/SuffixTreeY.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/factorization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/factorization_var.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/textindex/TextIndex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/textindex/TextIndexCSA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/textindex/comparray4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/textindex/interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/textindex/mmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/utils/Array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/utils/BitString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/utils/cppUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/utils/libcdsBasics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/utils/libcdsSDArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/libcds/src/utils/libcdsTrees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/utils/Coder/BinaryNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/utils/Coder/Coder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/utils/Coder/Codeword.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/utils/Coder/DecodingTable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/utils/Coder/DecodingTableBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/utils/Coder/DecodingTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/utils/Coder/StatCoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/utils/DAC_BVLS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/utils/DAC_VLS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/utils/LogSequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/utils/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libCSD/utils/VByte.h" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/README" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/Changelog" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/src/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence (copia)/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/bitsequence/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/coders/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/mapper/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/permutation/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/sequence/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/suffixtree/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/src/static/textindex/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/src/utils/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libCSD/libcds/tests/runTests.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

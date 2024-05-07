@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE8C336}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBAYERTORGB;BAYERTORGB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBAYERTORGB;BAYERTORGB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBAYERTORGB;BAYERTORGB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBAYERTORGB;BAYERTORGB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBAYERTORGB;BAYERTORGB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBAYERTORGB;BAYERTORGB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBAYERTORGB;BAYERTORGB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBAYERTORGB;BAYERTORGB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBAYERTORGB;BAYERTORGB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBAYERTORGB;BAYERTORGB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBAYERTORGB;BAYERTORGB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBAYERTORGB;BAYERTORGB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/BayerToRGB/src/rawscaler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BayerToRGB/src/util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BayerToRGB/tools/RawScaler/RawScaler.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv/cv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv/cv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv/cvaux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv/cvaux.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv/cvwimage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv/cxcore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv/cxcore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv/cxeigen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv/cxmisc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv/highgui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv/ml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/calib3d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/calib3d/calib3d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/contrib/contrib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/contrib/detection_based_tracker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/contrib/hybridtracker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/contrib/openfabmap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/contrib/retina.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/affine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/core_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/cuda_devptrs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/devmem2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/eigen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/gpumat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/internal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/mat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/opengl_interop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/opengl_interop_deprecated.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/operations.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/types_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/core/wimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/features2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/features2d/features2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/all_indices.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/any.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/autotuned_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/composite_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/dist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/dummy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/dynamic_bitset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/flann.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/flann_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/general.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/ground_truth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/hdf5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/hierarchical_clustering_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/index_testing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/kdtree_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/kdtree_single_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/kmeans_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/linear_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/lsh_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/lsh_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/miniflann.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/nn_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/object_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/result_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/sampling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/saving.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/simplex_downhill.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/flann/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/border_interpolate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/color.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/datamov_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/detail/color_detail.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/detail/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/detail/reduce_key_val.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/detail/transform_detail.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/detail/type_traits_detail.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/detail/vec_distance_detail.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/dynamic_smem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/emulation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/filters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/funcattrib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/functional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/limits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/saturate_cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/simd_functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/static_check.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/vec_distance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/vec_math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/vec_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/warp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/warp_reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/device/warp_shuffle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/devmem2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/gpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/gpumat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/gpu/stream_accessor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/highgui.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/highgui/cap_ios.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/highgui/highgui.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/highgui/highgui_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/highgui/ios.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/imgproc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/imgproc/imgproc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/imgproc/imgproc_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/imgproc/types_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/legacy/blobtrack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/legacy/compat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/legacy/legacy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/legacy/streams.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/ml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/ml/ml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/nonfree/features2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/nonfree/gpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/nonfree/nonfree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/nonfree/ocl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/objdetect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/objdetect/objdetect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/ocl/matrix_operations.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/ocl/ocl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/opencv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/opencv_modules.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/photo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/photo/photo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/photo/photo_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching/detail/autocalib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching/detail/blenders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching/detail/camera.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching/detail/exposure_compensate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching/detail/matchers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching/detail/motion_estimators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching/detail/seam_finders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching/detail/util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching/detail/util_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching/detail/warpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching/detail/warpers_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching/stitcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/stitching/warpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/superres.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/superres/optical_flow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/superres/superres.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/ts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/ts/gpu_perf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/ts/gpu_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/ts/ts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/ts/ts_gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/ts/ts_perf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/video.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/video/background_segm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/video/tracking.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/video/video.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/videostab.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/videostab/deblurring.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/videostab/fast_marching.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/videostab/fast_marching_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/videostab/frame_source.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/videostab/global_motion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/videostab/inpainting.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/videostab/log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/videostab/motion_stabilizing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/videostab/optical_flow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/videostab/stabilizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/include/opencv2/videostab/videostab.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv/cv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv/cv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv/cvaux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv/cvaux.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv/cvwimage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv/cxcore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv/cxcore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv/cxeigen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv/cxmisc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv/highgui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv/ml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/calib3d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/calib3d/calib3d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/contrib/contrib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/contrib/detection_based_tracker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/contrib/hybridtracker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/contrib/openfabmap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/contrib/retina.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/affine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/core_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/cuda_devptrs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/devmem2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/eigen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/gpumat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/internal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/mat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/opengl_interop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/opengl_interop_deprecated.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/operations.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/types_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/core/wimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/features2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/features2d/features2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/all_indices.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/any.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/autotuned_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/composite_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/dist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/dummy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/dynamic_bitset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/flann.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/flann_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/general.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/ground_truth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/hdf5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/hierarchical_clustering_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/index_testing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/kdtree_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/kdtree_single_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/kmeans_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/linear_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/lsh_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/lsh_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/miniflann.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/nn_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/object_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/result_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/sampling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/saving.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/simplex_downhill.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/flann/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/border_interpolate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/color.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/datamov_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/detail/color_detail.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/detail/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/detail/reduce_key_val.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/detail/transform_detail.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/detail/type_traits_detail.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/detail/vec_distance_detail.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/dynamic_smem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/emulation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/filters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/funcattrib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/functional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/limits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/saturate_cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/simd_functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/static_check.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/vec_distance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/vec_math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/vec_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/warp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/warp_reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/device/warp_shuffle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/devmem2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/gpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/gpumat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/gpu/stream_accessor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/highgui.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/highgui/cap_ios.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/highgui/highgui.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/highgui/highgui_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/highgui/ios.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/imgproc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/imgproc/imgproc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/imgproc/imgproc_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/imgproc/types_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/legacy/blobtrack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/legacy/compat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/legacy/legacy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/legacy/streams.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/ml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/ml/ml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/nonfree/features2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/nonfree/gpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/nonfree/nonfree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/nonfree/ocl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/objdetect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/objdetect/objdetect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/ocl/matrix_operations.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/ocl/ocl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/opencv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/opencv_modules.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/photo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/photo/photo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/photo/photo_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching/detail/autocalib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching/detail/blenders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching/detail/camera.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching/detail/exposure_compensate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching/detail/matchers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching/detail/motion_estimators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching/detail/seam_finders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching/detail/util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching/detail/util_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching/detail/warpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching/detail/warpers_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching/stitcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/stitching/warpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/superres.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/superres/optical_flow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/superres/superres.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/ts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/ts/gpu_perf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/ts/gpu_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/ts/ts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/ts/ts_gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/ts/ts_perf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/video.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/video/background_segm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/video/tracking.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/video/video.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/videostab.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/videostab/deblurring.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/videostab/fast_marching.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/videostab/fast_marching_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/videostab/frame_source.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/videostab/global_motion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/videostab/inpainting.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/videostab/log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/videostab/motion_stabilizing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/videostab/optical_flow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/videostab/stabilizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/include/opencv2/videostab/videostab.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/RawScaler.config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/include/bitmap_image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/include/rawscaler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BayerToRGB/include/util.h" />
+    <Image Include="../../thirdparty/owemdjee/BayerToRGB/data/kodim01.bmp" />
+    <Image Include="../../thirdparty/owemdjee/BayerToRGB/data/kodim01.png" />
+    <Image Include="../../thirdparty/owemdjee/BayerToRGB/data/kodim19.bmp" />
+    <Image Include="../../thirdparty/owemdjee/BayerToRGB/data/kodim19.png" />
+    <Image Include="../../thirdparty/owemdjee/BayerToRGB/flow.png" />
+    <Image Include="../../thirdparty/owemdjee/BayerToRGB/ip.png" />
+    <Image Include="../../thirdparty/owemdjee/BayerToRGB/opencv.png" />
+    <Image Include="../../thirdparty/owemdjee/BayerToRGB/result.png" />
+    <Image Include="../../thirdparty/owemdjee/BayerToRGB/rgb2raw.png" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/OpenCVConfig-version.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/OpenCVConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_calib3d2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_contrib2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_core2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_features2d2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_ffmpeg2413_64.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_flann2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_gpu2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_highgui2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_imgproc2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_legacy2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_ml2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_nonfree2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_objdetect2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_ocl2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_photo2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_stitching2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_superres2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_video2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/bin/opencv_videostab2413d.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/lib/OpenCVConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/lib/OpenCVModules-debug.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/x64/vc14/lib/OpenCVModules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/OpenCVConfig-version.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/OpenCVConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_calib3d2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_contrib2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_core2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_features2d2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_ffmpeg2413_64.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_flann2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_gpu2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_highgui2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_imgproc2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_legacy2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_ml2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_nonfree2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_objdetect2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_ocl2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_photo2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_stitching2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_superres2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_video2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/bin/opencv_videostab2413.dll" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/lib/OpenCVConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/lib/OpenCVModules-release.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/x64/vc14/lib/OpenCVModules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/README.md" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/RawScaler.config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/script/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/script/build_win.cmd" />
+    <Text Include="../../thirdparty/owemdjee/BayerToRGB/tools/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_eye.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_eye_tree_eyeglasses.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_frontalcatface.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_frontalcatface_extended.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_frontalface_alt.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_frontalface_alt2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_frontalface_alt_tree.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_fullbody.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_lefteye_2splits.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_licence_plate_rus_16stages.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_lowerbody.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_mcs_eyepair_big.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_mcs_eyepair_small.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_mcs_leftear.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_mcs_lefteye.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_mcs_mouth.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_mcs_nose.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_mcs_rightear.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_mcs_righteye.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_mcs_upperbody.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_profileface.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_righteye_2splits.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_russian_plate_number.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_smile.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/haarcascades/haarcascade_upperbody.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/lbpcascades/lbpcascade_frontalcatface.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/lbpcascades/lbpcascade_frontalface.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/lbpcascades/lbpcascade_profileface.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_DEBUG/share/OpenCV/lbpcascades/lbpcascade_silverware.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_eye.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_eye_tree_eyeglasses.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_frontalcatface.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_frontalcatface_extended.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_frontalface_alt.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_frontalface_alt2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_frontalface_alt_tree.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_fullbody.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_lefteye_2splits.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_licence_plate_rus_16stages.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_lowerbody.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_mcs_eyepair_big.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_mcs_eyepair_small.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_mcs_leftear.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_mcs_lefteye.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_mcs_mouth.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_mcs_nose.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_mcs_rightear.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_mcs_righteye.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_mcs_upperbody.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_profileface.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_righteye_2splits.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_russian_plate_number.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_smile.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/haarcascades/haarcascade_upperbody.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/lbpcascades/lbpcascade_frontalcatface.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/lbpcascades/lbpcascade_frontalface.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/lbpcascades/lbpcascade_profileface.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BayerToRGB/OpenCV_RELEASE/share/OpenCV/lbpcascades/lbpcascade_silverware.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

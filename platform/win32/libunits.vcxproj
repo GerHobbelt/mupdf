@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF584CC5}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNITS;UNITS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNITS;UNITS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNITS;UNITS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNITS;UNITS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNITS;UNITS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNITS;UNITS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNITS;UNITS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNITS;UNITS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNITS;UNITS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNITS;UNITS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNITS;UNITS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNITS;UNITS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/units/ThirdParty/xml/tinyxml2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/converter/converter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/examples_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/pkg_test_code/header_only.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/pkg_test_code/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_all_unit_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_commodities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_complete_unit_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_conversions1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_conversions2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_defined_units.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_equation_units.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_google_units.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_leadingNumbers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_math.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_measurement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_measurement_strings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_pu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_r20.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_random_round_trip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_siunits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_ucum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_udunits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_uncertain_measurements.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_unit_ops.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/test/test_unit_strings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/units/commodities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/units/r20_conv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/units/units.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/units/x12_conv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/units/webserver/unit_web_server.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/units/ThirdParty/CLI11.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/units/ThirdParty/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/units/ThirdParty/xml/tinyxml2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/units/test/test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/units/units/commodity_definitions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/units/units/unit_definitions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/units/units/units.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/units/units/units_conversion_maps.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/units/units/units_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/units/units/units_math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/units/units/units_util.hpp" />
+    <Text Include="../../thirdparty/owemdjee/units/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/units/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/units/CONTRIBUTORS.md" />
+    <Text Include="../../thirdparty/owemdjee/units/CPPLINT.cfg" />
+    <Text Include="../../thirdparty/owemdjee/units/FuzzTargets/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/units/README.md" />
+    <Text Include="../../thirdparty/owemdjee/units/ThirdParty/cmake/CodeCoverage.cmake" />
+    <Text Include="../../thirdparty/owemdjee/units/ThirdParty/cmake/GitUtils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/units/ThirdParty/cmake/Utils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/units/ThirdParty/cmake/extraMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/units/azure-pipelines.yml" />
+    <Text Include="../../thirdparty/owemdjee/units/config/AddGoogletest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/units/config/compiler_flags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/units/config/cppcheck_suppressions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/config/docker_rules.yml" />
+    <Text Include="../../thirdparty/owemdjee/units/config/spelling_ignorelines.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/config/spelling_whitelist.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/config/unitsConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/units/converter/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/_static/convert.html" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/_static/css/custom.css" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/application_notes/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/application_notes/strain.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/contents.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/details/commodities.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/details/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/details/string_parsing_squared.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/details/unit_base.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/installation/cmake_variables.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/installation/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/introduction/converter.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/introduction/how.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/introduction/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/introduction/sources.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/introduction/testing.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/reference/2004-09-10_UOMCodes.pdf" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/reference/ANSI_ASC_X12_code_sequence.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/reference/ANSI_UNITS_OF_MEASURE_20120209.pdf" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/reference/Rec20_units.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/reference/containers.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/reference/expaescsv.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/reference/impaescsv.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/reference/rec20_Rev7e_2010.pdf" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/reference/rec20_Rev7e_2010.xls" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/reference/rec21rev1_ecetrd195e.pdf" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/Physical_constants.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/Unit_domains.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/commodities.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/conversion_flags.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/custom_count_units.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/custom_units.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/defined_units.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/equation_units.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/fixed_measurements.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/from_string.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/math_operations.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/measurements.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/special_units.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/to_string.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/uncertain_measurements.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/units.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/user-guide/user_defined_units.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/docs/web/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/units/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/CPPLINT.cfg" />
+    <Text Include="../../thirdparty/owemdjee/units/test/download_gtest.in" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/Physics_constants.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/SI_Units.csv" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/UDUNITS2/UDUNITS2_COPYRIGHT.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/complete_unit_list.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/example_ucum_codes.csv" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/google_defined_units.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/si_examples.csv" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/absorbed_dose_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/acceleration_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/activity_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/angle_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/angular_accel_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/angular_velocity_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/area_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/capacitance_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/charge_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/charge_density_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/computer_speed_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/concentration_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/concentration_ratio_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/conductance_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/conductivity_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/current_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/data_transfer_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/density_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/distance_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/dose_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/efficiency_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/electric_field_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/energy_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/energy_per_vol_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/enzyme_activity_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/exposure_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/flow_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/force_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/force_moment_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/fraction_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/fuel_consumption_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/heat_density_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/heat_flux_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/heat_transfer_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/illumination_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/inductance_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/kinematic_viscosity_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/linear_charge_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/linear_current_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/linear_mass_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/luminance_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/luminosity_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/mag_field_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/mag_flux_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/mag_flux_density_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/mass_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/mass_flow_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/mass_flux_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/mmf_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/mol_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/molar_concentration_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/molar_flow_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/moment_of_inertia_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/number_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/potential_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/power2_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/power_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/pressure_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/radiation_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/resistance_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/resistivity_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/sound_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/specific_heat_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/surface_charge_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/surface_current_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/surface_tension_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/temperature_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/thermal_conductivity_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/thermal_resistance_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/time_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/typography_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/velocity_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/viscosity_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/volume_concentration_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_conversions/volume_conversions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_unit_files/bad_unit_definitions.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_unit_files/other_units.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_unit_files/other_units2.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_unit_files/other_units3.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_unit_files/other_units4.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_units_unicode.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/test_units_unicode_u8.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/test/files/ucumDefs.json" />
+    <Text Include="../../thirdparty/owemdjee/units/test/find_package_tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/units/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/webserver/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/units/webserver/CPPLINT.cfg" />
+    <Text Include="../../thirdparty/owemdjee/units/webserver/convert.html" />
+    <Text Include="../../thirdparty/owemdjee/units/webserver/index.html" />
+    <Text Include="../../thirdparty/owemdjee/units/webserver/web_script.sh" />
+    <Xml Include="../../thirdparty/owemdjee/units/test/files/UDUNITS2/udunits2-accepted.xml" />
+    <Xml Include="../../thirdparty/owemdjee/units/test/files/UDUNITS2/udunits2-common.xml" />
+    <Xml Include="../../thirdparty/owemdjee/units/test/files/UDUNITS2/udunits2-derived.xml" />
+    <Xml Include="../../thirdparty/owemdjee/units/test/files/UcumFunctionalTests.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

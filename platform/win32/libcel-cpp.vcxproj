@@ -1,0 +1,1046 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE83546}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCEL_CPP;CEL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCEL_CPP;CEL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCEL_CPP;CEL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCEL_CPP;CEL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCEL_CPP;CEL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCEL_CPP;CEL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCEL_CPP;CEL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCEL_CPP;CEL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCEL_CPP;CEL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCEL_CPP;CEL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCEL_CPP;CEL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCEL_CPP;CEL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/base/ast_internal/ast_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/base/ast_internal/ast_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/base/ast_internal/expr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/base/ast_internal/expr_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/base/attribute.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/base/function_descriptor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/base/function_result_set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/base/internal/memory_manager_testing.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/base/internal/unknown_set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/base/operators.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/base/operators_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/codelab/exercise1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/codelab/exercise1_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/codelab/exercise2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/codelab/exercise2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/codelab/exercise3_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/codelab/solutions/exercise1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/codelab/solutions/exercise2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/codelab/solutions/exercise3_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/codelab/solutions/exercise4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/any.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/any_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/ast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/ast_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/casting_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/constant.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/constant_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/internal/data_interface_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/internal/reference_count_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/internal/shared_byte_string_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/json.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/json_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/kind.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/kind_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/legacy_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/list_type_reflector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/map_type_reflector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/memory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/memory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/native_type.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/native_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/operators.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/sized_input_view_benchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/sized_input_view_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/source.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/source_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/type_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/type_factory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/type_introspector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/type_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/type_reflector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/type_reflector_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/any_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/bool_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/bool_wrapper_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/bytes_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/bytes_wrapper_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/double_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/double_wrapper_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/duration_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/dyn_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/error_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/int_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/int_wrapper_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/legacy_type_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/list_type.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/list_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/map_type.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/map_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/null_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/opaque_type.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/opaque_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/optional_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/string_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/string_wrapper_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/struct_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/thread_compatible_type_introspector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/thread_compatible_type_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/thread_safe_type_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/timestamp_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/type_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/type_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/uint_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/uint_wrapper_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/types/unknown_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/value_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/value_factory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/value_interface.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/value_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/value_testing.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/value_testing_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/bool_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/bool_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/bytes_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/bytes_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/double_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/double_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/duration_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/duration_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/error_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/error_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/int_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/int_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/legacy_list_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/legacy_map_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/legacy_struct_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/legacy_struct_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/legacy_value_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/list_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/list_value_interface.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/list_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/map_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/map_value_interface.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/map_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/null_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/null_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/optional_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/optional_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/parsed_list_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/parsed_map_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/parsed_struct_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/string_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/string_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/struct_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/thread_compatible_type_reflector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/thread_compatible_value_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/thread_safe_value_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/timestamp_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/timestamp_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/type_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/type_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/uint_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/uint_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/unknown_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/unknown_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/common/values/value_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/conformance/server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/conformance/value_conversion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/cel_expression_builder_flat_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/cel_expression_builder_flat_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/comprehension_vulnerability_check.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/constant_folding.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/constant_folding_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/flat_expr_builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/flat_expr_builder_comprehensions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/flat_expr_builder_extensions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/flat_expr_builder_extensions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/flat_expr_builder_short_circuiting_conformance_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/flat_expr_builder_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/instrumentation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/instrumentation_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/qualified_reference_resolver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/qualified_reference_resolver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/regex_precompilation_optimization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/regex_precompilation_optimization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/resolver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/resolver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/attribute_trail.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/attribute_trail_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/attribute_utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/attribute_utility_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/cel_expression_flat_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/compiler_constant_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/compiler_constant_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/comprehension_slots_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/comprehension_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/comprehension_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/const_value_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/const_value_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/container_access_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/container_access_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/create_list_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/create_list_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/create_map_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/create_map_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/create_struct_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/create_struct_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/direct_expression_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/evaluator_core.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/evaluator_core_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/evaluator_stack.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/evaluator_stack_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/function_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/function_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/ident_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/ident_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/jump_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/lazy_init_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/lazy_init_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/logic_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/logic_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/regex_match_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/regex_match_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/select_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/select_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/shadowable_value_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/shadowable_value_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/ternary_step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/ternary_step_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/internal/adapter_activation_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/internal/cel_value_equal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/internal/cel_value_equal_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/internal/errors.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/activation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/activation_bind_helper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/activation_bind_helper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/activation_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_rewrite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_rewrite_native.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_rewrite_native_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_rewrite_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_traverse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_traverse_native.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_traverse_native_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_traverse_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/builtin_func_registrar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/builtin_func_registrar_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/builtin_func_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_attribute.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_attribute_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_expr_builder_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_function.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_function_adapter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_function_registry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_function_registry_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_number.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_number_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_options.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_type_registry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_type_registry_protobuf_reflection_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_type_registry_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/comparison_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/comparison_functions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/container_function_registrar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/container_function_registrar_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/container_backed_map_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/container_backed_map_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/field_access.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/field_access_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/field_backed_list_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/field_backed_map_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/internal_field_backed_list_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/internal_field_backed_list_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/internal_field_backed_map_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/internal_field_backed_map_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/equality_function_registrar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/equality_function_registrar_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/extension_func_registrar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/extension_func_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/logical_function_registrar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/logical_function_registrar_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/message_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/portable_cel_expr_builder_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/portable_cel_expr_builder_factory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/portable_cel_function_adapter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/set_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/set_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/source_position.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/source_position_native.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/source_position_native_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/source_position_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/string_extension_func_registrar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/string_extension_func_registrar_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/cel_proto_descriptor_pool_builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/cel_proto_descriptor_pool_builder_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/cel_proto_lite_wrap_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/cel_proto_lite_wrap_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/cel_proto_wrap_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/cel_proto_wrap_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/cel_proto_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/cel_proto_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/dynamic_descriptor_pool_end_to_end_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/field_access_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/field_access_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/legacy_type_adapter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/legacy_type_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/legacy_type_provider_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/proto_message_type_adapter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/proto_message_type_adapter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/protobuf_descriptor_type_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/protobuf_descriptor_type_provider_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/trivial_legacy_type_info_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/testing/matchers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/testing/matchers_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/transform_utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/unknown_attribute_set_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/unknown_function_result_set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/unknown_function_result_set_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/unknown_set_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/value_export_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/public/value_export_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/tests/allocation_benchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/tests/benchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/tests/end_to_end_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/tests/expression_builder_benchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/tests/memory_safety_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/eval/tests/unknowns_end_to_end_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/bindings_ext.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/bindings_ext_benchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/bindings_ext_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/encoders.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/math_ext.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/math_ext_macros.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/math_ext_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/proto_ext.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/ast_converters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/ast_converters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/enum_adapter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/any.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/any_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/any_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/ast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/ast_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/duration.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/duration_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/duration_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/field_mask.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/field_mask_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/field_mask_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/json.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/json_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/legacy_value_heavy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/legacy_value_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/map_reflection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/message_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/qualify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/struct.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/struct_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/struct_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/timestamp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/timestamp_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/timestamp_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/wrappers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/wrappers_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/wrappers_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/json.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/memory_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/memory_manager_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/runtime_adapter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/type.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/type_introspector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/type_introspector_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/type_reflector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/type_reflector_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/value_end_to_end_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/value_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/regex_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/regex_functions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/select_optimization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/sets_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/sets_functions_benchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/sets_functions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/strings.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/extensions/strings_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/align_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/copy_on_write_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/deserialize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/dynamic_loader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/lexis.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/lexis_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/names.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/names_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/new_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/number_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/overflow.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/overflow_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/page_size.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/page_size_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/proto_time_encoding.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/proto_time_encoding_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/proto_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/proto_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/proto_wire.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/proto_wire_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/serialize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/strings.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/strings_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/testing.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/time.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/time_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/utf8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/internal/utf8_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/parser/macro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/parser/macro_registry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/parser/macro_registry_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/parser/parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/parser/parser_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/parser/source_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/parser/standard_macros.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/activation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/activation_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/comprehension_vulnerability_check.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/comprehension_vulnerability_check_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/constant_folding.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/constant_folding_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/function_adapter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/function_registry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/function_registry_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/composed_type_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/convert_constant.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/errors.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/function_adapter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/issue_collector_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/mutable_list_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/mutable_list_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/runtime_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/optional_types.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/optional_types_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/reference_resolver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/reference_resolver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/regex_precompilation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/regex_precompilation_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/runtime_builder_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/arithmetic_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/arithmetic_functions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/comparison_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/comparison_functions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/container_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/container_functions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/container_membership_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/container_membership_functions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/equality_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/equality_functions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/logical_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/logical_functions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/regex_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/regex_functions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/string_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/string_functions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/time_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/time_functions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/type_conversion_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/type_conversion_functions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard_runtime_builder_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard_runtime_builder_factory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/runtime/type_registry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/testutil/expr_printer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/tools/branch_coverage.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/tools/branch_coverage_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/tools/flatbuffers_backed_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/tools/flatbuffers_backed_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/tools/navigable_ast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cel-cpp/tools/navigable_ast_test.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/ast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/ast_internal/ast_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/ast_internal/expr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/attribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/attribute_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/builtins.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/function_adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/function_descriptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/function_result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/function_result_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/internal/memory_manager_testing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/internal/message_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/internal/operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/internal/unknown_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/kind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/base/type_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/codelab/exercise1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/codelab/exercise2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/any.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/ast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/casting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/constant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/internal/arena_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/internal/casting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/internal/data_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/internal/reference_count.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/internal/shared_byte_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/kind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/legacy_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/memory_testing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/native_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/sized_input_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/type_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/type_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/type_introspector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/type_kind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/type_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/type_reflector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/type_testing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/any_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/bool_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/bool_wrapper_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/bytes_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/bytes_wrapper_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/double_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/double_wrapper_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/duration_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/dyn_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/error_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/int_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/int_wrapper_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/legacy_type_introspector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/legacy_type_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/list_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/map_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/null_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/opaque_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/optional_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/string_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/string_wrapper_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/struct_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/thread_compatible_type_introspector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/thread_compatible_type_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/thread_safe_type_introspector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/thread_safe_type_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/timestamp_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/type_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/type_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/uint_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/uint_wrapper_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/types/unknown_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/unknown.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/value_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/value_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/value_kind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/value_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/value_testing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/bool_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/bytes_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/double_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/duration_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/error_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/int_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/legacy_list_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/legacy_map_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/legacy_struct_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/legacy_type_reflector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/legacy_value_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/list_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/list_value_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/map_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/map_value_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/null_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/opaque_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/optional_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/parsed_list_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/parsed_map_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/parsed_struct_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/piecewise_value_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/string_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/struct_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/struct_value_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/thread_compatible_type_reflector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/thread_compatible_value_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/thread_safe_type_reflector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/thread_safe_value_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/timestamp_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/type_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/uint_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/unknown_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/value_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/common/values/values.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/conformance/value_conversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/cel_expression_builder_flat_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/comprehension_vulnerability_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/constant_folding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/flat_expr_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/flat_expr_builder_extensions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/instrumentation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/qualified_reference_resolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/regex_precompilation_optimization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/resolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/attribute_trail.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/attribute_utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/cel_expression_flat_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/compiler_constant_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/comprehension_slots.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/comprehension_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/const_value_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/container_access_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/create_list_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/create_map_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/create_struct_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/direct_expression_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/evaluator_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/evaluator_stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/expression_step_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/function_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/ident_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/jump_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/lazy_init_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/logic_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/regex_match_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/select_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/shadowable_value_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/ternary_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/trace_step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/internal/adapter_activation_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/internal/cel_value_equal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/internal/errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/internal/interop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/activation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/activation_bind_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_rewrite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_rewrite_native.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_traverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_traverse_native.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_visitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_visitor_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_visitor_native.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/ast_visitor_native_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/base_activation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/builtin_func_registrar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_attribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_builtins.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_expr_builder_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_expression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_function_adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_function_adapter_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_function_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_number.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_type_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_value_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/cel_value_producer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/comparison_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/container_function_registrar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/container_backed_list_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/container_backed_map_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/field_access.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/field_backed_list_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/field_backed_map_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/internal_field_backed_list_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/containers/internal_field_backed_map_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/equality_function_registrar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/extension_func_registrar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/logical_function_registrar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/message_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/portable_cel_expr_builder_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/portable_cel_function_adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/set_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/source_position.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/source_position_native.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/string_extension_func_registrar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/cel_proto_descriptor_pool_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/cel_proto_lite_wrap_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/cel_proto_wrap_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/cel_proto_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/field_access_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/legacy_any_packing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/legacy_type_adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/legacy_type_info_apis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/legacy_type_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/proto_message_type_adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/protobuf_descriptor_type_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/protobuf_value_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/structs/trivial_legacy_type_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/testing/matchers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/transform_utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/unknown_attribute_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/unknown_function_result_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/unknown_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/public/value_export_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/eval/tests/mock_cel_expression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/bindings_ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/encoders.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/math_ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/math_ext_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/proto_ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/ast_converters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/enum_adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/any.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/any_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/ast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/duration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/duration_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/field_mask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/field_mask_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/legacy_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/map_reflection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/qualify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/struct_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/timestamp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/timestamp_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/wrappers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/internal/wrappers_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/memory_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/runtime_adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/type_introspector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/type_reflector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/protobuf/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/regex_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/select_optimization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/sets_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/extensions/strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/align.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/casts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/copy_on_write.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/deserialize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/dynamic_loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/lexis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/names.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/new.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/number.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/optional_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/overflow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/page_size.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/proto_file_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/proto_matchers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/proto_time_encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/proto_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/proto_wire.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/serialize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/status_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/status_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/testing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/unicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/internal/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/parser/internal/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/parser/macro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/parser/macro_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/parser/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/parser/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/parser/source_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/parser/standard_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/activation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/activation_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/comprehension_vulnerability_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/constant_folding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/function_adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/function_overload_reference.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/function_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/function_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/composed_type_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/convert_constant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/function_adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/issue_collector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/mutable_list_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/runtime_friend_access.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/internal/runtime_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/managed_value_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/optional_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/reference_resolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/regex_precompilation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/register_function_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/runtime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/runtime_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/runtime_builder_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/runtime_issue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/runtime_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/arithmetic_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/comparison_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/container_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/container_membership_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/equality_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/logical_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/regex_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/string_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/time_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard/type_conversion_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/standard_runtime_builder_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/runtime/type_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/testutil/expr_printer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/testutil/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/tools/branch_coverage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/tools/flatbuffers_backed_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/tools/internal/navigable_ast_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cel-cpp/tools/navigable_ast.h" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/bazel/antlr.bzl" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/bazel/deps.bzl" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/bazel/deps_extra.bzl" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/cloudbuild.yaml" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/codelab/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/eval/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/eval/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/eval/compiler/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/eval/eval/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/eval/public/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/eval/tests/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/eval/tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/parser/internal/Cel.g4" />
+    <Text Include="../../thirdparty/owemdjee/cel-cpp/tools/testdata/flatbuffers.fbs" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
