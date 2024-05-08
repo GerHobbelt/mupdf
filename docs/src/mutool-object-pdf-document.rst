@@ -1071,7 +1071,7 @@ The following functions can be used to copy objects from one :title:`PDF` docume
 
     .. code-block:: javascript
 
-        pdfDocument.graftObject(docB, 0, docA, 0);
+        pdfDocument.graftPage(docB, 0, docA, 0);
 
     |example_tag|
 
@@ -1079,7 +1079,7 @@ The following functions can be used to copy objects from one :title:`PDF` docume
 
     .. code-block:: javascript
 
-        pdfDocument.graftObject(-1, srcdoc, 0);
+        pdfDocument.graftPage(-1, srcdoc, 0);
 
     |example_tag|
 
