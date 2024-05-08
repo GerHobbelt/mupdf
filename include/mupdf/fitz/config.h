@@ -83,15 +83,15 @@
 	By default all are enabled. To avoid building unwanted
 	ones, define FZ_ENABLE_..._OUTPUT to 0.
 */
-#define FZ_ENABLE_OCR_OUTPUT 0
-#define FZ_ENABLE_DOCX_OUTPUT 0
-#define FZ_ENABLE_ODT_OUTPUT 0 
+#define FZ_ENABLE_OCR_OUTPUT 1
+#define FZ_ENABLE_DOCX_OUTPUT 1
+#define FZ_ENABLE_ODT_OUTPUT 1
 #define FZ_ENABLE_PS_OUTPUT 0 
 
 /**
 	Choose whether to enable ICC color profiles.
 */
-#define FZ_ENABLE_ICC 0
+#define FZ_ENABLE_ICC 1
 
 /**
 	Choose whether to enable JPEG2000 decoding.
