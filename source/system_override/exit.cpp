@@ -234,17 +234,7 @@ namespace std {
 
 
 
-#if defined(_MSC_VER) && 0
-
-void BreakIntoDebugger(void)
-{
-#if defined(_CrtDbgBreak)
-	_CrtDbgBreak();
-#endif
-	__debugbreak();
-}
-
-#elif defined(__MINGW32__) || defined(_WIN32) || defined(WIN64)
+#if defined(__MINGW32__) || defined(_WIN32) || defined(WIN64)
 
 extern "C" __declspec(dllimport) void __stdcall DebugBreak();
 
@@ -256,12 +246,22 @@ void BreakIntoDebugger(void)
 {
 	if (IsDebuggerPresent())
 	{
-#if defined(_CrtDbgBreak) && 01
+#if defined(_CrtDbgBreak)
 		_CrtDbgBreak();
 #else
 		DebugBreak();
 #endif
 	}
+}
+
+#elif defined(_MSC_VER)
+
+void BreakIntoDebugger(void)
+{
+#if defined(_CrtDbgBreak)
+	_CrtDbgBreak();
+#endif
+	__debugbreak();
 }
 
 #else
