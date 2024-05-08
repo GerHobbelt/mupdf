@@ -52,7 +52,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
 .. method:: toPixmap(transform, colorspace, alpha)
 
-    Render the annotation into a `Pixmap`, using the transform and colorspace.
+    Render the annotation into a :ref:`Pixmap <mutool_object_pixmap>`, using the transform and colorspace.
 
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: `ColorSpace`.
@@ -543,7 +543,6 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: hasRect()
 
-    |mutool_tag_wasm_soon|
 
     Checks the support for annotation bounding box.
 
@@ -602,7 +601,7 @@ These properties are only present for some annotation types, so support for them
 
     Set the default text appearance used for free text annotations.
 
-    :arg font: `String`.
+    :arg font: `String` ("Helv" = Helvetica, "TiRo" = Times New Roman, "Cour" = Courier).
     :arg size: `Integer`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
 
@@ -620,7 +619,6 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: hasInteriorColor()
 
-    |mutool_tag_wasm_soon|
 
     Checks whether the annotation has support for an interior color.
 
@@ -632,7 +630,7 @@ These properties are only present for some annotation types, so support for them
 
         var hasInteriorColor = annotation.hasInteriorColor();
 
-    |tor_todo| WASM TypeError: annotation.hasInteriorColor is not a function
+
 
 
 .. method:: getInteriorColor()
@@ -672,7 +670,7 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: hasAuthor()
 
-    |mutool_tag_wasm_soon|
+
 
     Checks whether the annotation has an author.
 
@@ -684,7 +682,7 @@ These properties are only present for some annotation types, so support for them
 
         var hasAuthor = annotation.hasAuthor();
 
-    |tor_todo| WASM TypeError: annotation.hasAuthor is not a function
+
 
 .. method:: getAuthor()
 
@@ -714,7 +712,6 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: hasLineEndingStyles()
 
-    |mutool_tag_wasm_soon|
 
     Checks the support for :ref:`line ending styles<mutool_pdf_annotation_line_ending_styles>`.
 
@@ -726,7 +723,7 @@ These properties are only present for some annotation types, so support for them
 
         var hasLineEndingStyles = annotation.hasLineEndingStyles();
 
-    |tor_todo| WASM TypeError: annotation.hasLineEndingStyles is not a function
+
 
 
 .. method:: getLineEndingStyles()
@@ -782,7 +779,6 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: hasIcon()
 
-    |mutool_tag_wasm_soon|
 
     Checks the support for annotation icon.
 
@@ -794,7 +790,7 @@ These properties are only present for some annotation types, so support for them
 
         var hasIcon = annotation.hasIcon();
 
-    |tor_todo| WASM TypeError: annotation.hasIcon is not a function
+
 
 
 .. method:: getIcon()
@@ -900,7 +896,7 @@ These properties are only present for some annotation types, so support for them
 
         var hasLine = annotation.hasLine();
 
-    |tor_todo| WASM TypeError: annotation.hasLine is not a function
+
 
 
 .. method:: getLine()
@@ -939,7 +935,6 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: hasOpen()
 
-    |mutool_tag_wasm_soon|
 
     Checks the support for annotation open state.
 
@@ -951,7 +946,7 @@ These properties are only present for some annotation types, so support for them
 
         var hasOpen = annotation.hasOpen();
 
-    |tor_todo| WASM TypeError: annotation.hasOpen is not a function
+
 
 
 .. method:: getIsOpen()
@@ -986,7 +981,6 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: hasFilespec()
 
-    |mutool_tag|
 
     Checks support for the annotation file specification.
 
@@ -1050,7 +1044,7 @@ The border drawn around some annotations can be controlled by:
 
 .. method:: hasBorder()
 
-    |mutool_tag_wasm_soon|
+
 
     Check support for the annotation border style.
 
@@ -1062,7 +1056,7 @@ The border drawn around some annotations can be controlled by:
 
         var hasBorder = annotation.hasBorder();
 
-    |tor_todo| WASM, TypeError: annotation.hasBorder is not a function
+
 
 
 .. method:: getBorderStyle()
@@ -1211,7 +1205,6 @@ Annotations that have a border effect allows the effect to be controlled by:
 
 .. method:: hasBorderEffect()
 
-    |mutool_tag_wasm_soon|
 
     Check support for annotation border effect.
 
@@ -1224,7 +1217,7 @@ Annotations that have a border effect allows the effect to be controlled by:
         var hasEffect = annotation.hasBorderEffect();
 
 
-    |tor_todo| WASM, TypeError:
+
 
 
 .. method:: getBorderEffect()
@@ -1415,8 +1408,6 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
 .. method:: hasQuadPoints()
 
-    |mutool_tag_wasm_soon|
-
     Check support for the annotation quadpoints.
 
     :return: `Boolean`.
@@ -1427,7 +1418,7 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
         var hasQuadPoints = annotation.hasQuadPoints();
 
-    |tor_todo| WASM, TypeError: annotation.hasQuadPoints is not a function
+
 
 .. method:: getQuadPoints()
 
@@ -1478,14 +1469,12 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
     .. code-block:: javascript
 
-        annotation.setQuadPoints([1,2,3,4,5,6,7,8]);
+        annotation.addQuadPoint([1,2,3,4,5,6,7,8]);
 
 
 Polygon and polyline annotations consist of a sequence of vertices with a straight line between them. Those can be controlled by:
 
 .. method:: hasVertices()
-
-    |mutool_tag_wasm_soon|
 
     Check support for the annotation vertices.
 
@@ -1497,7 +1486,7 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
         var hasVertices = annotation.hasVertices();
 
-    |tor_todo| WASM, TypeError: annotation.hasVertices is not a function
+
 
 
 .. method:: getVertices()
@@ -1542,7 +1531,7 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
 .. method:: addVertex(vertex)
 
-    |mutool_tag_wasm_soon|
+
 
     Append a single vertex as an array of its X/Y coordinates.
 

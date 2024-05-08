@@ -244,7 +244,7 @@ static const format_cs_table_t format_cs_table[] =
 	{ OUT_OCR_TRACE, CS_GRAY, { CS_GRAY } },
 };
 
-static fz_stext_options stext_options;
+static fz_stext_options stext_options = { 0 };
 
 static fz_cookie master_cookie = { 0 };
 
