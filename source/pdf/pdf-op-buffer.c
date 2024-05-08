@@ -38,6 +38,7 @@ typedef struct
 	int ahxencode;
 	int extgstate;
 	int newlines;
+	int balance;
 	pdf_obj *res;
 	pdf_obj *last_res;
 	resources_stack *rstack;
@@ -182,6 +183,8 @@ pdf_out_q(fz_context *ctx, pdf_processor *proc_)
 {
 	pdf_output_processor *proc = (pdf_output_processor *)proc_;
 
+	proc->balance++;
+
 	if (proc->sep)
 		fz_write_byte(ctx, proc->out, ' ');
 	fz_write_string(ctx, proc->out, "q");
@@ -192,6 +195,10 @@ static void
 pdf_out_Q(fz_context *ctx, pdf_processor *proc_)
 {
 	pdf_output_processor *proc = (pdf_output_processor *)proc_;
+
+	proc->balance--;
+	if (proc->balance < 0)
+		fz_warn(ctx, "gstate underflow (too many Q operators)");
 
 	if (proc->sep)
 		fz_write_byte(ctx, proc->out, ' ');
@@ -1128,9 +1135,22 @@ pdf_out_EX(fz_context *ctx, pdf_processor *proc_)
 }
 
 static void
-pdf_close_output_processor(fz_context *ctx, pdf_processor *proc)
+pdf_close_output_processor(fz_context *ctx, pdf_processor *proc_)
 {
-	fz_output *out = ((pdf_output_processor*)proc)->out;
+	pdf_output_processor *proc = (pdf_output_processor*)proc_;
+	fz_output *out = proc->out;
+
+	/* Add missing 'Q' operators to get back to zero. */
+	/* We can't prepend missing 'q' operators to guarantee we don't underflow. */
+	while (proc->balance > 0)
+	{
+		proc->balance--;
+		if (proc->sep)
+			fz_write_byte(ctx, proc->out, ' ');
+		fz_write_byte(ctx, out, 'Q');
+		post_op(ctx, proc);
+	}
+
 	fz_close_output(ctx, out);
 }
 
@@ -1300,6 +1320,8 @@ pdf_new_output_processor(fz_context *ctx, fz_output *out, int ahxencode, int new
 
 	proc->super.requirements = PDF_PROCESSOR_REQUIRES_DECODED_IMAGES;
 
+	proc->balance = 0;
+
 	return (pdf_processor*)proc;
 }
 
@@ -1318,6 +1340,68 @@ pdf_new_buffer_processor(fz_context *ctx, fz_buffer *buffer, int ahxencode, int 
 		fz_rethrow(ctx);
 	}
 	return proc;
+}
+
+/* Simplified processor that only counts matching q/Q pairs. */
+
+typedef struct
+{
+	pdf_processor super;
+	int *balance;
+	int *minimum;
+} pdf_balance_processor;
+
+static void
+pdf_balance_q(fz_context *ctx, pdf_processor *proc_)
+{
+	pdf_balance_processor *proc = (pdf_balance_processor*)proc_;
+	(*proc->balance)++;
+}
+
+static void
+pdf_balance_Q(fz_context *ctx, pdf_processor *proc_)
+{
+	pdf_balance_processor *proc = (pdf_balance_processor*)proc_;
+	(*proc->balance)--;
+	if (*proc->balance < *proc->minimum)
+		*proc->minimum = *proc->balance;
+}
+
+static pdf_processor *
+pdf_new_balance_processor(fz_context *ctx, int *balance, int *minimum)
+{
+	pdf_balance_processor *proc = pdf_new_processor(ctx, sizeof *proc);
+
+	proc->super.op_q = pdf_balance_q;
+	proc->super.op_Q = pdf_balance_Q;
+
+	proc->balance = balance;
+	proc->minimum = minimum;
+
+	return (pdf_processor*)proc;
+}
+
+void
+pdf_count_q_balance(fz_context *ctx, pdf_document *doc, pdf_obj *res, pdf_obj *stm, int *underflow, int *overflow)
+{
+	pdf_processor *proc;
+
+	int balance = 0;
+	int minimum = 0;
+
+	proc = pdf_new_balance_processor(ctx, &balance, &minimum);
+	fz_try(ctx)
+	{
+		pdf_process_raw_contents(ctx, proc, doc, res, stm, NULL);
+		pdf_close_processor(ctx, proc);
+	}
+	fz_always(ctx)
+		pdf_drop_processor(ctx, proc);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+
+	*underflow = -minimum;
+	*overflow = balance - minimum;
 }
 
 #endif
