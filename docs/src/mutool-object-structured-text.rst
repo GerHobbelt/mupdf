@@ -79,6 +79,8 @@
 
     |wasm_tag|
 
+    :arg walker: Function with protocol methods, see example below for details.
+
     Walk through the blocks (images or text blocks) of the structured text. For each text block walk over its lines of text, and for each line each of its characters. For each block, line or character the walker will have a method called.
 
     |example_tag|
@@ -112,12 +114,13 @@
         On `beginLine` the direction parameter is a vector (e.g. `[0, 1]`) and can you can calculate the rotation as an angle with some trigonometry on the vector.
 
 
-.. method:: asJSON()
+.. method:: asJSON(scale)
 
     |wasm_tag|
 
     Returns the instance in :title:`JSON` format.
 
+    :arg scale: `Float` Default: `1`. Multiply all the coordinates by this factor to get the coordinates at another resolution.
     :return: `String`.
 
     |example_tag|

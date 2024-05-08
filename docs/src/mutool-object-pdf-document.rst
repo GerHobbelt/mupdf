@@ -105,8 +105,6 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 .. method:: rearrangePages(pages)
 
-    |mutool_tag|
-
     Rearrange (re-order and/or delete) pages in the `PDFDocument`.
 
     The pages in the document will be rearranged according to the input list.
@@ -877,7 +875,6 @@ All page objects are structured into a page tree, which defines the order the pa
 .. method:: addPage(mediabox, rotate, resources, contents)
 
 
-
     Create a new `PDFPage` object. Note: this function does NOT add it to the page tree, use :ref:`insertPage<mutool_insertPage>` to do that.
 
     :arg mediabox: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
@@ -909,7 +906,6 @@ All page objects are structured into a page tree, which defines the order the pa
 
     |example_tag|
 
-    |mutool_tag|
 
     .. literalinclude:: ../examples/pdf-create.js
        :caption: docs/examples/pdf-create.js
