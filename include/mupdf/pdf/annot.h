@@ -537,6 +537,14 @@ float pdf_annot_opacity(fz_context *ctx, pdf_annot *annot);
 void pdf_annot_color(fz_context *ctx, pdf_annot *annot, int *n, float color[4]);
 
 /*
+	Retrieve the annotation text color.
+
+	n components, each between 0 and 1.
+	n = 1 (grey), 3 (rgb) or 4 (cmyk).
+*/
+void pdf_annot_text_color(fz_context *ctx, pdf_annot *annot, int *n, float color[4]);
+
+/*
 	Retrieve the annotation interior color.
 
 	n components, each between 0 and 1.
