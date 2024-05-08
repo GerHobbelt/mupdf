@@ -87,6 +87,7 @@
 
 #include "mupdf/fitz/story.h"
 #include "mupdf/fitz/story-writer.h"
+#include "mupdf/fitz/encode-jbig2.h"
 
 #include "../../source/fitz/leptonica-wrap.h"
 

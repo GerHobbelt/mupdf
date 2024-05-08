@@ -157,6 +157,11 @@ $(OUT)/source/fitz/leptonica-wrap.o : source/fitz/leptonica-wrap.c
 	$(CC_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(THIRD_CFLAGS) $(LEPTONICA_CFLAGS) $(LEPTONICA_DEFINES) $(LEPTONICA_BUILD_CFLAGS)
 endif
 
+ifeq ($(HAVE_JBIG2ENC),yes)
+$(OUT)/source/fitz/jbig2enc-wrap.o : source/fitz/jbig2enc-wrap.cpp
+	$(CXX_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(THIRD_CFLAGS) $(JBIG2ENC_CFLAGS) $(JBIG2ENC_DEFINES) $(JBIG2ENC_LANGFLAGS) $(LEPTONICA_BUILD_CFLAGS)
+endif
+
 $(OUT)/platform/%.o : platform/%.c
 	$(CC_CMD) $(WARNING_CFLAGS)
 

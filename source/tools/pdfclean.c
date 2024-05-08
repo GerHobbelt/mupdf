@@ -287,6 +287,10 @@ int pdfclean_main(int argc, const char** argv)
 		outfile = argv[fz_optind++];
 	}
 
+#ifdef HAVE_JBIG2ENC
+	fz_register_jbig2_encoder(ctx, fz_jbig2enc_encoder(ctx));
+#endif
+
 	fz_try(ctx)
 	{
 		char file_path[PATH_MAX];

@@ -384,6 +384,8 @@ fz_clone_context(fz_context *ctx)
 	fz_keep_colorspace_context(new_ctx);
 	fz_keep_store_context(new_ctx);
 	fz_keep_glyph_cache(new_ctx);
+	
+	new_ctx->jbig2encoder = ctx->jbig2encoder;
 #endif
 
 	fz_clear_system_error(new_ctx);

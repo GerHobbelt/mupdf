@@ -573,7 +573,7 @@ GLUT_LIBS += -lGL
 GLUT_LIBS += -lX11
 GLUT_LIBS += -lXrandr
 
-# --- LEPTONICA (optional, used by Tesseract) ---
+# --- LEPTONICA (optional, used by Tesseract and jbig2enc) ---
 
 LEPTONICA_CFLAGS += -Ithirdparty/leptonica/src
 
@@ -989,6 +989,18 @@ EXTRACT_SRC += thirdparty/extract/src/text.c
 EXTRACT_SRC += thirdparty/extract/src/xml.c
 EXTRACT_SRC += thirdparty/extract/src/zip.c
 #EXTRACT_SRC += thirdparty/extract/src/tables_cv.cpp
+
+# --- JBIG2ENC ---
+
+JBIG2ENC_CFLAGS += -Iscripts -Ithirdparty/jbig2enc/src
+JBIG2ENC_BUILD_CFLAGS += -DVERSION=\"0.28\"
+
+JBIG2ENC_LIBS += -lstdc++
+
+JBIG2ENC_SRC += thirdparty/jbig2enc/src/jbig2arith.cc
+JBIG2ENC_SRC += thirdparty/jbig2enc/src/jbig2comparator.cc
+JBIG2ENC_SRC += thirdparty/jbig2enc/src/jbig2enc.c
+JBIG2ENC_SRC += thirdparty/jbig2enc/src/jbig2sym.c
 
 # --- JPEG-XL (optional) ---
 
