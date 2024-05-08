@@ -260,10 +260,6 @@ fz_new_document_writer(fz_context *ctx, const char *path, const char *explicit_f
 fz_document_writer *
 fz_new_document_writer_with_output(fz_context *ctx, fz_output *out, const char *format, const char *options)
 {
-#if FZ_ENABLE_CBZ
-	if (is_extension(format, "cbz"))
-		return fz_new_cbz_writer_with_output(ctx, out, options);
-#endif
 #if FZ_ENABLE_OCR_OUTPUT
 	if (is_extension(format, "ocr"))
 		return fz_new_pdfocr_writer_with_output(ctx, out, options);
@@ -272,6 +268,14 @@ fz_new_document_writer_with_output(fz_context *ctx, fz_output *out, const char *
 	if (is_extension(format, "pdf"))
 		return fz_new_pdf_writer_with_output(ctx, out, options);
 #endif
+
+#if FZ_ENABLE_CBZ
+	if (is_extension(format, "cbz"))
+		return fz_new_cbz_writer_with_output(ctx, out, options);
+#endif
+
+	if (is_extension(format, "svg"))
+		return fz_new_svg_writer_with_output(ctx, out, options);
 
 #if FZ_ENABLE_PS_OUTPUT
 	if (is_extension(format, "pcl"))
