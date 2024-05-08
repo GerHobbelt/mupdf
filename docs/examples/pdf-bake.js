@@ -15,23 +15,23 @@ function request_synthesis(list) {
 			list[i].requestSynthesis()
 }
 
-function flatten_document(doc, do_flatten_annots, do_flatten_widgets) {
+function bake_document(doc, do_bake_annots, do_bake_widgets) {
 	var i, n, page, list
 	n = doc.countPages()
 	for (i = 0; i < n; ++i) {
 		page = doc.loadPage(i)
-		if (do_flatten_annots)
+		if (do_bake_annots)
 			request_synthesis(page.getAnnotations())
-		if (do_flatten_widgets)
+		if (do_bake_widgets)
 			request_synthesis(page.getWidgets())
 		page.update()
-		flatten_page(doc, page.getObject(), do_flatten_annots, do_flatten_widgets)
+		bake_page(doc, page.getObject(), do_bake_annots, do_bake_widgets)
 	}
-	if (do_flatten_widgets)
+	if (do_bake_widgets)
 		delete doc.getTrailer().Root.AcroForm
 }
 
-function flatten_page(doc, page, do_flatten_annots, do_flatten_widgets) {
+function bake_page(doc, page, do_bake_annots, do_bake_widgets) {
 	var i, n, list, keep, buf
 	list = page.Annots
 	if (list) {
@@ -48,13 +48,13 @@ function flatten_page(doc, page, do_flatten_annots, do_flatten_widgets) {
 			if (list[i].Subtype == "Link") {
 				keep.push(list[i])
 			} else if (list[i].Subtype == "Widget") {
-				if (do_flatten_widgets)
-					buf += flatten_annot(doc, page, list[i])
+				if (do_bake_widgets)
+					buf += bake_annot(doc, page, list[i])
 				else
 					keep.push(list[i])
 			} else {
-				if (do_flatten_annots)
-					buf += flatten_annot(doc, page, list[i])
+				if (do_bake_annots)
+					buf += bake_annot(doc, page, list[i])
 				else
 					keep.push(list[i])
 			}
@@ -94,7 +94,7 @@ function get_annot_transform(rect, bbox, transform) {
 	return [ w, 0, 0, h, x, y ]
 }
 
-function flatten_annot(doc, page, annot) {
+function bake_annot(doc, page, annot) {
 	var name = "Annot" + annot.asIndirect()
 	var ap = get_annot_ap(annot)
 	if (ap) {
@@ -109,7 +109,7 @@ function flatten_annot(doc, page, annot) {
 
 var doc = mupdf.Document.openDocument(scriptArgs[0])
 doc.enableJournal()
-doc.beginOperation("flat")
-flatten_document(doc, true, true)
+doc.beginOperation("bake")
+bake_document(doc, true, true)
 doc.endOperation()
 doc.save(scriptArgs[1], "garbage,compress")
