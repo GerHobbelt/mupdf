@@ -856,7 +856,7 @@ adjust_for_removed_space(fz_context *ctx, pdf_sanitize_processor *p)
 {
 	filter_gstate *gstate = p->gstate;
 	float adj = gstate->pending.text.word_space;
-	adjust_text(ctx, p, adj * gstate->pending.text.scale, adj);
+	adjust_text(ctx, p, adj, adj);
 }
 
 static void
@@ -888,8 +888,7 @@ push_adjustment_to_array(fz_context *ctx, pdf_sanitize_processor *p, pdf_obj *ar
 {
 	if (p->Tm_adjust == 0)
 		return;
-	/* Negate the number here, because it will be subtracted upon use. */
-	pdf_array_push_real(ctx, arr, -p->Tm_adjust * 1000);
+	pdf_array_push_real(ctx, arr, p->Tm_adjust * 1000);
 	p->Tm_adjust = 0;
 }
 
@@ -920,7 +919,7 @@ filter_show_string(fz_context *ctx, pdf_sanitize_processor *p, const unsigned ch
 		}
 		if (i != len)
 		{
-			adjust_text(ctx, p, p->tos.char_tx / p->gstate->pending.text.scale, p->tos.char_ty / p->gstate->pending.text.scale);
+			adjust_text(ctx, p, p->tos.char_tx / p->gstate->pending.text.scale, p->tos.char_ty);
 			i += inc;
 		}
 		if (removed_space)
@@ -977,7 +976,7 @@ filter_show_text(fz_context *ctx, pdf_sanitize_processor *p, pdf_obj *text)
 					}
 					if (j != len)
 					{
-						adjust_text(ctx, p, -p->tos.char_tx / p->gstate->pending.text.scale, -p->tos.char_ty / p->gstate->pending.text.scale);
+						adjust_text(ctx, p, p->tos.char_tx / p->gstate->pending.text.scale, p->tos.char_ty);
 						j += inc;
 					}
 					if (removed_space)
@@ -986,11 +985,11 @@ filter_show_text(fz_context *ctx, pdf_sanitize_processor *p, pdf_obj *text)
 			}
 			else
 			{
-				float tadj = pdf_to_real(ctx, item) * gstate->pending.text.size * 0.001f / p->gstate->pending.text.scale;
+				float tadj = - pdf_to_real(ctx, item) * gstate->pending.text.size * 0.001f;
 				if (fontdesc->wmode == 0)
 				{
 					adjust_text(ctx, p, tadj, 0);
-					p->tos.tm = fz_pre_translate(p->tos.tm, -tadj * p->gstate->pending.text.scale, 0);
+					p->tos.tm = fz_pre_translate(p->tos.tm, tadj * p->gstate->pending.text.scale, 0);
 				}
 				else
 				{
