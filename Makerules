@@ -363,6 +363,17 @@ ifeq "$(OS)" "wasm"
   HAVE_LIBCRYPTO=no
 endif
 
+ifeq "$(OS)" "wasm2"
+  build_prefix += wasm2/
+  CC = emcc
+  CXX = em++
+  AR = emar
+  HAVE_GLUT=no
+  HAVE_X11=no
+  HAVE_OBJCOPY=no
+  HAVE_LIBCRYPTO=no
+endif
+
 ifeq "$(OS)" "wasm-mt"
   build_prefix += wasm-mt/
   ifeq ($(PYODIDE_ROOT),)

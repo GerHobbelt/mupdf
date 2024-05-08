@@ -557,8 +557,11 @@ pdf_load_embedded_font(fz_context *ctx, pdf_document *doc, pdf_font_desc *fontde
 	fz_buffer *buf;
 	unsigned char *data;
 	size_t size;
+	int try_cff_only;
 
 	fz_var(buf);
+
+	try_cff_only = 0;
 
 	buf = pdf_load_stream(ctx, stmref);
 
@@ -571,6 +574,8 @@ pdf_load_embedded_font(fz_context *ctx, pdf_document *doc, pdf_font_desc *fontde
 				fz_buffer *cff = pdf_extract_cff_subtable(ctx, data, size);
 				if (cff)
 				{
+					try_cff_only = 1;
+					// printf("Attempting to use CFF table only.\n");
 					fz_drop_buffer(ctx, buf);
 					buf = cff;
 				}
@@ -578,6 +583,27 @@ pdf_load_embedded_font(fz_context *ctx, pdf_document *doc, pdf_font_desc *fontde
 		}
 
 		fontdesc->font = fz_new_font_from_buffer(ctx, fontname, buf, 0, 1);
+
+
+		if (try_cff_only) {
+
+			FT_ULong ucs;
+			FT_UInt gid;
+
+			fz_lock(ctx, FZ_LOCK_FREETYPE);
+			ucs = FT_Get_First_Char(fontdesc->font->ft_face, &gid);
+			fz_unlock(ctx, FZ_LOCK_FREETYPE);
+
+			if (!ucs) {
+				// printf("CFF table only failed, embedding full font.\n");
+				fz_drop_font(ctx, fontdesc->font);
+				fz_drop_buffer(ctx, buf);
+				buf = pdf_load_stream(ctx, stmref);
+				fontdesc->font = fz_new_font_from_buffer(ctx, fontname, buf, 0, 1);
+			}
+		}
+
+
 	}
 	fz_always(ctx)
 		fz_drop_buffer(ctx, buf);

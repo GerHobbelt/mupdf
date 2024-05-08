@@ -4130,7 +4130,7 @@ static void ffi_Page_toPixmap(js_State *J)
 
 	fz_try(ctx)
 		if (extra)
-			pixmap = fz_new_pixmap_from_page(ctx, page, ctm, colorspace, alpha);
+			pixmap = fz_new_pixmap_from_page(ctx, page, ctm, colorspace, alpha, 0);
 		else
 			pixmap = fz_new_pixmap_from_page_contents(ctx, page, ctm, colorspace, alpha);
 	fz_catch(ctx)
