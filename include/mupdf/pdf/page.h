@@ -31,6 +31,9 @@
 extern "C" {
 #endif
 
+pdf_page *pdf_keep_page(fz_context *ctx, pdf_page *page);
+void pdf_drop_page(fz_context *ctx, pdf_page *page);
+
 int pdf_lookup_page_number(fz_context *ctx, pdf_document *doc, pdf_obj *pageobj);
 int pdf_count_pages(fz_context *ctx, pdf_document *doc);
 pdf_obj *pdf_lookup_page_obj(fz_context *ctx, pdf_document *doc, int needle);

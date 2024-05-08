@@ -203,7 +203,7 @@ static int strip_outlines(fz_context *ctx, pdf_document *doc, pdf_obj *outlines,
 	pdf_obj *first;
 	pdf_obj *last = NULL;
 
-	if (outlines == NULL)
+	if (!pdf_is_dict(ctx, outlines))
 		return 0;
 
 	first = pdf_dict_get(ctx, outlines, PDF_NAME(First));
@@ -447,13 +447,13 @@ void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, co
 			if (!pdf_authenticate_password(ctx, pdf, password))
 				fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot authenticate password: %s", infile);
 
+		len = cap = 0;
+
 		/* Only retain the specified subset of the pages */
 		if (argc)
 		{
 			int pagecount = pdf_count_pages(ctx, pdf);
 			int argidx = 0;
-
-			len = cap = 0;
 
 			while (argc - argidx)
 			{

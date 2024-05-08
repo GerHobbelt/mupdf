@@ -1191,6 +1191,7 @@ int fz_is_page_range(fz_context *ctx, const char *s)
 const char *fz_parse_page_range(fz_context *ctx, const char *s, int *a, int *b, int n)
 {
 	int rev = 0;
+	const char *orig = s;
 
 	if (!s || !s[0])
 		return NULL;
@@ -1233,6 +1234,12 @@ const char *fz_parse_page_range(fz_context *ctx, const char *s, int *a, int *b, 
 
 	*a = fz_clampi(*a, 1, n);
 	*b = fz_clampi(*b, 1, n);
+
+	if (s == orig)
+	{
+		fz_warn(ctx, "skipping invalid page range");
+		return NULL;
+	}
 
 	return s;
 }

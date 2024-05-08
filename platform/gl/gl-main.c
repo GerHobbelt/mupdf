@@ -2552,7 +2552,7 @@ process_sigs(fz_context *ctx_, pdf_obj *field, void *arg, pdf_obj **ft)
 
 	if (!pdf_name_eq(ctx, pdf_dict_get(ctx, field, PDF_NAME(Type)), PDF_NAME(Annot)) ||
 		!pdf_name_eq(ctx, pdf_dict_get(ctx, field, PDF_NAME(Subtype)), PDF_NAME(Widget)) ||
-		!pdf_name_eq(ctx, pdf_dict_get(ctx, field, ft[0]), PDF_NAME(Sig)))
+		!pdf_name_eq(ctx, *ft, PDF_NAME(Sig)))
 		return;
 
 	if (sigs->len == sigs->max)

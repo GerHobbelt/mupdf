@@ -4470,7 +4470,7 @@ static void ffi_new_Pixmap(js_State *J)
 		fz_catch(ctx)
 			rethrow(J);
 	} else {
-		fz_colorspace *colorspace = js_touserdata(J, 1, "fz_colorspace");
+		fz_colorspace *colorspace = js_iscoercible(J, 1) ? js_touserdata(J, 1, "fz_colorspace") : NULL;
 		fz_irect bounds = ffi_toirect(J, 2);
 		int alpha = js_toboolean(J, 3);
 
@@ -8710,6 +8710,7 @@ static void ffi_PDFAnnotation_hasRect(js_State *J)
 		rethrow(J);
 	js_pushboolean(J, has);
 }
+
 static void ffi_PDFAnnotation_getRect(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);

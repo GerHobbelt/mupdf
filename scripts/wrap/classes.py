@@ -1932,7 +1932,6 @@ classextras = ClassExtras(
                         f'/* Returns wrapper for .obj member. */',
                         ),
                     ],
-                copyable = 'default',
                 ),
 
         pdf_image_rewriter_options = ClassExtra(
