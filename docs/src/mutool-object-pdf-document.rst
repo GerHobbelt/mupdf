@@ -363,7 +363,6 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 .. method:: enableJS()
 
-    |mutool_tag|
 
     Enable interpretation of document :title:`JavaScript` actions.
 
@@ -375,7 +374,6 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 .. method:: disableJS()
 
-    |mutool_tag|
 
     Disable interpretation of document :title:`JavaScript` actions.
 
@@ -387,7 +385,6 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 .. method:: isJSSupported()
 
-    |mutool_tag|
 
     Returns *true* if interpretation of document :title:`JavaScript` actions is supported.
 
@@ -421,6 +418,17 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
                         print(message);
                 }
         });
+
+
+.. method:: bake(bakeAnnots, bakeWidgets)
+
+    *Baking* a document changes all the annotations and/or form fields (otherwise known as widgets) in the document into static content. It "bakes" the appearance of the annotations and fields onto the page, before removing the interactive objects so they can no longer be changed.
+
+    Effectively this removes the "annotation or "widget" type of these objects, but keeps the appearance of the objects.
+
+    :arg bakeAnnots: `Boolean` Whether to bake annotations or not. Defaults to `true`.
+    :arg bakeWidgets: `Boolean` Whether to bake widgets or not. Defaults to `true`.
+
 
 ----
 
@@ -484,8 +492,6 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
         pdfDocument.beginImplicitOperation();
 
 .. method:: abandonOperation()
-
-    |mutool_tag|
 
     Abandon an operation. Reverts to the state before that operation began.
 
@@ -632,8 +638,6 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
 .. method:: newBoolean(boolean)
 
-    |mutool_tag|
-
     Create a new boolean object.
 
     :arg boolean: The boolean value.
@@ -645,24 +649,6 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
     .. code-block:: javascript
 
         var obj = pdfDocument.newBoolean(true);
-
-
-.. method:: newBool(boolean)
-
-    |wasm_tag|
-
-    Create a new boolean object.
-
-    :arg boolean: The boolean value.
-
-    :return: `PDFObject`.
-
-    |example_tag|
-
-    .. code-block:: javascript
-
-        var obj = pdfDocument.newBool(true);
-
 
 
 .. method:: newInteger(number)

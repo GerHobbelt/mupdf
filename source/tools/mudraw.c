@@ -142,7 +142,9 @@ static const suffix_t suffix_table[] =
 	{ ".emptybox", OUT_EMPTY_BOX, 0 },
 
 	/* And the 'single extension' ones go last. */
+#if FZ_ENABLE_JPX
 	{ ".j2k", OUT_J2K, 0 },
+#endif
 	{ ".png", OUT_PNG, 0 },
 	{ ".tiff", OUT_TIFF, 0 },
 	{ ".muraw", OUT_MURAW, 0 },
@@ -1399,10 +1401,14 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					ASSERT(drawheight <= pix->h);
 					fz_write_band(ctx, bander, bit ? bit->stride : pix->stride, drawheight, bit ? bit->samples : pix->samples);
 				}
+#if FZ_ENABLE_JPX
 				if (output_format->format == OUT_J2K)
 				{
 					fz_write_pixmap_as_jpx(ctx, out, pix, 80);
 				}
+#else
+					fz_throw(ctx, FZ_ERROR_GENERIC, "JPX support disabled");
+#endif
 				fz_drop_bitmap(ctx, bit);
 				bit = NULL;
 

@@ -26,6 +26,8 @@
 
 #if BUILDING_MUPDF_MINIMAL_CORE < 2
 
+#if FZ_ENABLE_JPX
+
 static opj_image_t *
 image_from_pixmap(fz_context *ctx, const fz_pixmap *pix)
 {
@@ -367,6 +369,16 @@ fz_new_buffer_from_pixmap_as_jpx(fz_context *ctx, const fz_pixmap *pix, fz_color
 {
 	return jpx_from_pixmap(ctx, pix, color_params, quality, 0);
 }
+
+#else
+
+void
+fz_write_pixmap_as_jpx(fz_context *ctx, fz_output *out, fz_pixmap *pix, int q)
+{
+	fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "JPX support disabled");
+}
+
+#endif
 
 #endif // BUILDING_MUPDF_MINIMAL_CORE
 
