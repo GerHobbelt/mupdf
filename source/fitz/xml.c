@@ -163,7 +163,8 @@ static void xml_print_xml(struct fmtbuf* out, fz_xml *item, int level)
 	/* Skip over the DOC object at the top. */
 	if (item->up == NULL)
 	{
-		xml_print_xml(out, item->down, level);
+		for (fz_xml *child = fz_xml_down(item); child; child = child->u.node.next)
+			xml_print_xml(out, child, level + 1);
 		return;
 	}
 

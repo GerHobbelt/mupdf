@@ -397,6 +397,40 @@ const char *fz_dom_attribute(fz_context *ctx, fz_xml *elt, const char *att);
 */
 const char *fz_dom_get_attribute(fz_context *ctx, fz_xml *elt, int i, const char **att);
 
+/**
+	Make new xml dom root element.
+*/
+fz_xml *fz_new_dom(fz_context *ctx, const char *tag);
+
+/**
+	Create a new dom node.
+
+	This will NOT be linked in yet.
+*/
+fz_xml *fz_new_dom_node(fz_context *ctx, fz_xml *dom, const char *tag);
+
+/**
+	Create a new dom text node.
+
+	This will NOT be linked in yet.
+*/
+fz_xml *fz_new_dom_text_node(fz_context *ctx, fz_xml *dom, const char *text);
+
+/**
+	Write our xml structure out to an xml stream.
+
+	Properly formatted XML is only allowed to have a single top-level node
+	under which everything must sit. Our structures allow for multiple
+	top level nodes. If required, we will output an extra 'ROOT' node
+	at the top so that the xml is well-formed.
+*/
+void fz_write_xml(fz_context *ctx, fz_xml *root, fz_output *out);
+
+/**
+	As for fz_write_xml, but direct to a file.
+*/
+void fz_save_xml(fz_context *ctx, fz_xml *root, const char *path);
+
 #ifdef __cplusplus
 }
 #endif
