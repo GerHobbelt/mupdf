@@ -111,6 +111,7 @@ typedef struct marked_content_stack
 	struct marked_content_stack *next;
 	pdf_obj *tag;
 	pdf_obj *val;
+	int structure_pushed;
 } marked_content_stack;
 
 typedef struct begin_layer_stack
@@ -1698,7 +1699,7 @@ pop_structure_to(fz_context *ctx, pdf_run_processor *proc, pdf_obj *common)
 	}
 #endif
 
-	while (pdf_objcmp(ctx, proc->mcid_sent, common))
+	while (proc->mcid_sent != NULL && pdf_objcmp(ctx, proc->mcid_sent, common))
 	{
 		pdf_obj *p = pdf_dict_get(ctx, proc->mcid_sent, PDF_NAME(P));
 		pdf_obj *tag = pdf_dict_get(ctx, proc->mcid_sent, PDF_NAME(S));
@@ -1800,7 +1801,7 @@ get_struct_index(fz_context *ctx, pdf_obj *send)
 	return -1;
 }
 
-static void
+static int
 send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 {
 	pdf_obj *common = NULL;
@@ -1831,13 +1832,28 @@ send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 		pdf_obj *slowptr = send;
 		int slow = 0;
 
+		/* Run up the ancestor stack, looking for the first child of mcid_sent.
+		 * That's the one we need to send next. */
 		while (1) {
 			pdf_obj *p = pdf_dict_get(ctx, send, PDF_NAME(P));
 
+			/* If we ever fail to find a dict, then do not step down lest
+			 * we can't get back later! */
+			if (!pdf_is_dict(ctx, send))
+			{
+				fz_warn(ctx, "Bad parent link in structure tree. Ignoring structure.");
+				proc->broken_struct_tree = 1;
+				return 0;
+			}
+			/* If p is the one we last sent, then we want to send 'send'
+			 * next. Exit the loop. */
 			if (!pdf_objcmp(ctx, p, proc->mcid_sent))
 				break;
+
+			/* We need to go at least one step further up the stack. */
 			send = p;
 
+			/* Check for a loop in the parent tree. */
 			slow ^= 1;
 			if (slow == 0)
 				slowptr = pdf_dict_get(ctx, slowptr, PDF_NAME(P));
@@ -1845,7 +1861,7 @@ send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 			{
 				fz_warn(ctx, "Loop found in structure tree. Ignoring structure.");
 				proc->broken_struct_tree = 1;
-				return;
+				return 0;
 			}
 		}
 
@@ -1864,6 +1880,8 @@ send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 #ifdef DEBUG_STRUCTURE
 	structure_dump(ctx, "on exit", proc->mcid_sent);
 #endif
+
+	return 1;
 }
 
 static void
@@ -1890,6 +1908,7 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 		mc->next = proc->marked_content;
 		mc->tag = tag;
 		mc->val = pdf_keep_obj(ctx, val);
+		mc->structure_pushed = 0;
 		proc->marked_content = mc;
 		drop_tag = 0;
 
@@ -1909,7 +1928,7 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 		{
 			fz_try(ctx)
 			{
-				send_begin_structure(ctx, proc, mc_dict);
+				mc->structure_pushed = send_begin_structure(ctx, proc, mc_dict);
 			}
 			fz_catch(ctx)
 			{
@@ -1952,6 +1971,7 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 	marked_content_stack *mc = proc->marked_content;
 	pdf_obj *val, *tag;
 	pdf_obj *mc_dict = NULL;
+	int pushed;
 
 	if (mc == NULL)
 		return;
@@ -1959,6 +1979,7 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 	proc->marked_content = mc->next;
 	tag = mc->tag;
 	val = mc->val;
+	pushed = mc->structure_pushed;
 	fz_free(ctx, mc);
 
 	/* If we're not interested in neatly closing any open layers etc
@@ -1993,7 +2014,7 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 		end_metatext(ctx, proc, val, mc_dict, PDF_NAME(ActualText));
 
 		/* Structure */
-		if (mc_dict && !proc->broken_struct_tree)
+		if (mc_dict && !proc->broken_struct_tree && pushed)
 		{
 			pdf_obj *p = pdf_dict_get(ctx, mc_dict, PDF_NAME(P));
 			pop_structure_to(ctx, proc, p);

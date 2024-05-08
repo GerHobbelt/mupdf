@@ -138,6 +138,14 @@ typedef void (fz_output_close_fn)(fz_context *ctx, fz_output *out);
 /**
 	A function type for use when implementing
 	fz_outputs. The supplied function of this type is called
+	when the output stream is reset, and resets the state
+	to that when it was first initialised.
+*/
+typedef void (fz_output_reset_fn)(fz_context *ctx, void *state);
+
+/**
+	A function type for use when implementing
+	fz_outputs. The supplied function of this type is called
 	when the output stream is dropped, to release the stream
 	specific state information.
 */
@@ -217,8 +225,10 @@ struct fz_output
 	fz_output_tell_fn *tell;
 	fz_output_close_fn *close;
 	fz_output_drop_fn *drop;
+	fz_output_reset_fn *reset;
 	fz_stream_from_output_fn *as_stream;
 	fz_truncate_fn *truncate;
+	int closed;
 	char *bp, *wp, *ep;
 	char *filepath;
 #if !defined(DISABLE_MUTHREADS)
@@ -411,6 +421,14 @@ void fz_flush_output_no_lock(fz_context *ctx, fz_output *out);
 	Flush pending output and close an output stream.
 */
 void fz_close_output(fz_context *, fz_output *);
+
+/**
+	Reset a closed output stream. Returns state to
+	(broadly) that which it was in when opened. Not
+	all outputs can be reset, so this may throw an
+	exception.
+*/
+void fz_reset_output(fz_context *, fz_output *);
 
 /**
 	Free an output stream. Don't forget to close it first!
