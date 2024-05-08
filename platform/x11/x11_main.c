@@ -866,16 +866,19 @@ static void signal_handler(int signal)
 static void usage(const char *argv0)
 {
 	fprintf(stderr, "usage: %s [options] file.pdf [page]\n", argv0);
-	fprintf(stderr, "\t-p -\tpassword\n");
-	fprintf(stderr, "\t-r -\tresolution\n");
-	fprintf(stderr, "\t-A -\tset anti-aliasing quality in bits (0=off, 8=best)\n");
-	fprintf(stderr, "\t-C -\tRRGGBB (tint color in hexadecimal syntax)\n");
-	fprintf(stderr, "\t-W -\tpage width for EPUB layout\n");
-	fprintf(stderr, "\t-H -\tpage height for EPUB layout\n");
-	fprintf(stderr, "\t-I -\tinvert colors\n");
-	fprintf(stderr, "\t-S -\tfont size for EPUB layout\n");
-	fprintf(stderr, "\t-U -\tuser style sheet for EPUB layout\n");
-	fprintf(stderr, "\t-X\tdisable document styles for EPUB layout\n");
+	fprintf(stderr, "  -p -  password\n");
+	fprintf(stderr, "  -r -  resolution\n");
+	fprintf(stderr, "  -c -  display ICC profile\n");
+	fprintf(stderr, "  -b -  set progressive image mode using the specified KBPS rate\n");
+	fprintf(stderr, "  -e -  max to-screen zoom percentage (default: 90)\n");
+	fprintf(stderr, "  -A -  set anti-aliasing quality in bits (0=off, 8=best)\n");
+	fprintf(stderr, "  -C -  RRGGBB (tint color in hexadecimal syntax)\n");
+	fprintf(stderr, "  -W -  page width for EPUB layout\n");
+	fprintf(stderr, "  -H -  page height for EPUB layout\n");
+	fprintf(stderr, "  -I -  invert colors\n");
+	fprintf(stderr, "  -S -  font size for EPUB layout\n");
+	fprintf(stderr, "  -U -  user style sheet for EPUB layout\n");
+	fprintf(stderr, "  -X    disable document styles for EPUB layout\n");
 	exit(1);
 }
 
@@ -896,6 +899,7 @@ int main(int argc, char **argv)
 	struct timeval now;
 	struct timeval *timeout;
 	struct timeval tmo_advance_delay;
+	char *profile_name = NULL;
 	int kbps = 0;
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
@@ -907,7 +911,7 @@ int main(int argc, char **argv)
 
 	pdfapp_init(ctx, &gapp);
 
-	while ((c = fz_getopt(argc, argv, "Ip:r:A:C:W:H:S:U:Xb:e:")) != -1)
+	while ((c = fz_getopt(argc, argv, "Ip:r:A:C:W:H:S:U:Xb:e:c:")) != -1)
 	{
 		switch (c)
 		{
@@ -920,6 +924,7 @@ int main(int argc, char **argv)
 		case 'r': resolution = atoi(fz_optarg); break;
 		case 'I': gapp.invert = 1; break;
 		case 'A': fz_set_aa_level(ctx, atoi(fz_optarg)); break;
+		case 'c': profile_name = fz_optarg; break;
 		case 'W': gapp.layout_w = fz_atof(fz_optarg); break;
 		case 'H': gapp.layout_h = fz_atof(fz_optarg); break;
 		case 'S': gapp.layout_em = fz_atof(fz_optarg); break;
@@ -954,6 +959,9 @@ int main(int argc, char **argv)
 	gapp.default_resolution = resolution;
 	gapp.resolution = resolution;
 	gapp.pageno = pageno;
+
+	if (profile_name)
+		pdfapp_load_profile(&gapp, profile_name);
 
 	tmo_at.tv_sec = 0;
 	tmo_at.tv_usec = 0;

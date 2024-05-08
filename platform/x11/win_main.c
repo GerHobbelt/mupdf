@@ -1289,16 +1289,19 @@ static void usage(const char *argv0)
 {
     const char *msg =
         "usage: mupdf [options] file.pdf [page]\n"
-        "\t-p -\tpassword\n"
-        "\t-r -\tresolution\n"
-        "\t-A -\tset anti-aliasing quality in bits (0=off, 8=best)\n"
-        "\t-C -\tRRGGBB (tint color in hexadecimal syntax)\n"
-        "\t-W -\tpage width for EPUB layout\n"
-        "\t-H -\tpage height for EPUB layout\n"
-        "\t-I -\tinvert colors\n"
-        "\t-S -\tfont size for EPUB layout\n"
-        "\t-U -\tuser style sheet for EPUB layout\n"
-        "\t-X\tdisable document styles for EPUB layout\n";
+        "  -p -  password\n"
+        "  -r -  resolution\n"
+		"  -c -  display ICC profile\n"
+		"  -b -  set progressive image mode using the specified KBPS rate\n"
+		"  -e -  max to-screen zoom percentage (default: 90)\n"
+        "  -A -  set anti-aliasing quality in bits (0=off, 8=best)\n"
+        "  -C -  RRGGBB (tint color in hexadecimal syntax)\n"
+        "  -W -  page width for EPUB layout\n"
+        "  -H -  page height for EPUB layout\n"
+        "  -I -  invert colors\n"
+        "  -S -  font size for EPUB layout\n"
+        "  -U -  user style sheet for EPUB layout\n"
+        "  -X    disable document styles for EPUB layout\n";
     MessageBoxA(NULL, msg, "MuPDF: Usage", MB_OK);
 }
 
@@ -1312,6 +1315,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
     MSG msg;
     int code;
     fz_context *ctx;
+	char *profile_name = NULL;
     int kbps = 0;
     int displayRes = get_system_dpi();
     int c;
@@ -1347,7 +1351,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
     }
 
     fz_getopt_reset();
-    while ((c = fz_getopt(argc, argv, "Ip:r:A:C:W:H:S:U:Xb:")) != -1)
+	while ((c = fz_getopt(argc, argv, "Ip:r:A:C:W:H:S:U:Xb:e:c:")) != -1)
     {
         switch (c)
         {
@@ -1360,12 +1364,14 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
         case 'r': displayRes = fz_atoi(fz_optarg); break;
         case 'I': gapp.invert = 1; break;
         case 'A': fz_set_aa_level(ctx, fz_atoi(fz_optarg)); break;
+        case 'c': profile_name = fz_optarg; break;
         case 'W': gapp.layout_w = fz_atoi(fz_optarg); break;
         case 'H': gapp.layout_h = fz_atoi(fz_optarg); break;
         case 'S': gapp.layout_em = fz_atoi(fz_optarg); break;
         case 'b': kbps = fz_atoi(fz_optarg); break;
         case 'U': gapp.layout_css = fz_optarg; break;
         case 'X': gapp.layout_use_doc_css = 0; break;
+		case 'e': gapp.maxpercentage = fz_clampi(fz_atof(fz_optarg), 0, 100); break;
         default: 
             usage(argv[0]);
 			fz_free_argv(ctx, argc, argv);
@@ -1400,6 +1406,9 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 
     if (fz_optind < argc)
         gapp.pageno = atoi(argv[fz_optind++]);
+
+	if (profile_name)
+		pdfapp_load_profile(&gapp, profile_name)
 
     if (kbps)
         pdfapp_open_progressive(&gapp, filename, 0, kbps);
