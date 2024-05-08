@@ -271,7 +271,10 @@ pdf_sign_signature_with_appearance(fz_context *ctx, pdf_annot *widget, pdf_pkcs7
 			pdf_dict_put_int(ctx, form, PDF_NAME(SigFlags), sf | PDF_SIGFLAGS_SIGSEXIST | PDF_SIGFLAGS_APPENDONLY);
 
 		pdf_signature_set_value(ctx, doc, wobj, signer, t);
-		end_annot_op(ctx, doc);
+	}
+	fz_always(ctx)
+	{
+		end_annot_op(ctx, widget);
 	}
 	fz_catch(ctx)
 	{

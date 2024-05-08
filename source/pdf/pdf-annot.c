@@ -1157,7 +1157,9 @@ pdf_set_annot_rect(fz_context *ctx, pdf_annot *annot, fz_rect rect)
 		pdf_dirty_annot(ctx, annot);
 	}
 	fz_always(ctx)
+	{
 		end_annot_op(ctx, annot);
+	}
 	fz_catch(ctx)
 	{
 		pdf_abandon_operation(ctx, annot->page->doc);
@@ -2930,6 +2932,7 @@ pdf_clear_annot_ink_list(fz_context *ctx, pdf_annot *annot)
 		pdf_dict_del(ctx, annot->obj, PDF_NAME(InkList));
 	}
 	fz_always(ctx)
+	{
 		end_annot_op(ctx, annot);
 	}
 	fz_catch(ctx)
