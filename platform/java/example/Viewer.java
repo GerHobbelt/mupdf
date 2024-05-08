@@ -794,10 +794,10 @@ public class Viewer extends Frame implements WindowListener, ActionListener, Ite
 		float scaleY = (float) Math.floor(height * (currentDPI/72.0f) * pixelScale + 0.5f) / height;
 		Matrix ctm = new Matrix().scale(scaleX, scaleY).rotate(rotate);
 
-		Rect atOrigin = new Rect(bbox).transform(ctm);
+		Rect atOrigin = new Rect(bbox).transformed(ctm);
 		ctm.e -= atOrigin.x0;
 		ctm.f -= atOrigin.y0;
-		Rect bounds = new Rect(bbox).transform(ctm);
+		Rect bounds = new Rect(bbox).transformed(ctm);
 
 		Cookie cookie = new Cookie();
 
