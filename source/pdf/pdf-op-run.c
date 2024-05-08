@@ -952,7 +952,8 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 	if (pr->super.hidden)
 		dostroke = dofill = 0;
 
-	if (pr->cookie && pr->cookie->skip_text_invis == 1 && (doinvisible || (!dofill || gstate->fill.alpha == 0.0f) && (!dostroke || gstate->stroke.alpha == 0.0f))) {
+	if ((pr->dev->hints & FZ_SKIP_INVISIBLE_TEXT) != 0
+		&& (doinvisible || (!dofill || gstate->fill.alpha == 0.0f) && (!dostroke || gstate->stroke.alpha == 0.0f))) {
 		return gstate;
 	}
 
@@ -3133,7 +3134,7 @@ pdf_new_run_processor(fz_context *ctx, pdf_document *doc, fz_device *dev, fz_mat
 		proc->super.op_W = pdf_run_W;
 		proc->super.op_Wstar = pdf_run_Wstar;
 
-		if (!cookie || cookie->skip_text == 0) {
+		if ((dev->hints & FZ_SKIP_TEXT) == 0) {
 			/* text objects */
 			proc->super.op_BT = pdf_run_BT;
 			proc->super.op_ET = pdf_run_ET;
