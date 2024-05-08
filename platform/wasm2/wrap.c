@@ -161,7 +161,10 @@ int count_stext_page_letters(fz_context *ctx, fz_stext_page *page)
 					if (ch->c >= 33 && ch->c <= 127) {
 						nnmlCt++;
 						ct++;
-					} else if (ch->c < 32) {
+					// Characters 0-31 are control characters, which are uncommon in legitimate text but commom in invalid encodings,
+					// which often arbitrarily map glyphs to codes starting at 0.
+					// Character 65533 is the replacement character, which is an explicit indication that the character is unknown.
+					} else if (ch->c < 32 || ch->c == 65533) {
 						ctrCt++;
 						ct-=5;
 					}
@@ -586,7 +589,7 @@ void overlayPDFText(fz_document *doc, fz_document *doc2, int minpage, int maxpag
 }
 
 EMSCRIPTEN_KEEPALIVE
-static void runpageOverlayImage(int number, fz_document *doc, fz_document_writer *out, int pagewidth, int pageheight)
+static void runpageOverlayImage(int number, fz_document *doc, fz_document_writer *out, int pagewidth, int pageheight, float angle)
 {
 	fz_rect mediabox;
 
@@ -594,6 +597,9 @@ static void runpageOverlayImage(int number, fz_document *doc, fz_document_writer
 	fz_device *dev = NULL;
 
 	fz_matrix immat;
+	fz_matrix rotmat;
+	fz_matrix transmat1;
+	fz_matrix transmat2;
 
 	fz_image *background_img;
 
@@ -619,10 +625,21 @@ static void runpageOverlayImage(int number, fz_document *doc, fz_document_writer
 
 		dev = fz_begin_page(ctx, out, mediabox);
 
+		// Create initial matrix for image using orientation and scale.
 		immat = fz_image_orientation_matrix(ctx, background_img);
 		immat = fz_post_scale(immat, mediabox.x1, mediabox.y1);
 
-		fz_fill_image(ctx, dev, background_img, immat, 1, fz_default_color_params);
+		// Rotate image around center point		
+		rotmat = fz_rotate(angle);
+
+		transmat1 = fz_translate(-background_img->w / 2, -background_img->h / 2);
+		transmat2 = fz_translate(background_img->w / 2, background_img->h / 2);
+
+		immat = fz_concat(immat, transmat1);
+		immat = fz_concat(immat, rotmat);
+		immat = fz_concat(immat, transmat2);
+
+		fz_fill_image(ctx, dev, background_img, immat, 1.0f, fz_default_color_params);
 
 		fz_cookie cookie = {0};
 		cookie.skip_text = 0;
@@ -657,9 +674,9 @@ void overlayPDFTextImageStart(int humanReadable){
 }
 
 EMSCRIPTEN_KEEPALIVE
-void overlayPDFTextImageAddPage(fz_document *doc, int i, int pagewidth, int pageheight){
+void overlayPDFTextImageAddPage(fz_document *doc, int i, int pagewidth, int pageheight, float angle){
 
-	runpageOverlayImage(i, doc, out, pagewidth, pageheight);
+	runpageOverlayImage(i, doc, out, pagewidth, pageheight, angle);
 	
 }
 
@@ -693,7 +710,7 @@ void overlayPDFTextImage(fz_document *doc, int minpage, int maxpage, int pagewid
 
 	for (int i=minpage; i<=maxpage; i++) {
 
-		runpageOverlayImage(i, doc, out, pagewidth, pageheight);
+		runpageOverlayImage(i, doc, out, pagewidth, pageheight, 0.0);
 
 	}
 

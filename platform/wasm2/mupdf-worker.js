@@ -102,7 +102,7 @@ Module.onRuntimeInitialized = function () {
   mupdf.doDrawPageAsPNGGray = Module.cwrap('doDrawPageAsPNGGray', 'null', ['number', 'number', 'number', 'number']);
   mupdf.overlayPDFText = Module.cwrap('overlayPDFText', 'null', ['number', 'number', 'number', 'number', 'number', 'number', 'number', 'number']);
   mupdf.overlayPDFTextImageStart = Module.cwrap('overlayPDFTextImageStart', 'null', ['number']);
-  mupdf.overlayPDFTextImageAddPage = Module.cwrap('overlayPDFTextImageAddPage', 'null', ['number', 'number', 'number', 'number']);
+  mupdf.overlayPDFTextImageAddPage = Module.cwrap('overlayPDFTextImageAddPage', 'null', ['number', 'number', 'number', 'number', 'number']);
   mupdf.overlayPDFTextImageEnd = Module.cwrap('overlayPDFTextImageEnd', 'null', ['number']);
   mupdf.overlayPDFTextImage = Module.cwrap('overlayPDFTextImage', 'null', ['number', 'number', 'number', 'number', 'number', 'number']);
   mupdf.writePDF = Module.cwrap('writePDF', 'null', ['number', 'number', 'number', 'number', 'number', 'number']);
@@ -136,7 +136,13 @@ mupdf.checkNativeText = function (doc) {
  */
 mupdf.detectExtractText = function (doc) {
   const res = wasm_checkNativeText(doc, true);
-  const text = FS.readFile('/download.txt', { encoding: 'utf8' });
+  let text = FS.readFile('/download.txt', { encoding: 'utf8' });
+
+  // Sometimes mupdf makes files with an excessive number of newlines.
+  // Therefore, a maximum of 2 newlines is allowed.
+  if (typeof text === 'string') {
+    text = text.replace(/(\n\s*){3,}/g, '\n\n').trim();
+  }
   FS.unlink('/download.txt');
 
   const type = ['Native text', 'Image + OCR text', 'Image native'][res];
@@ -200,16 +206,19 @@ mupdf.overlayTextImageStart = function (doc, { humanReadable = false }) {
  * @param {number} args.i
  * @param {number} args.pagewidth
  * @param {number} args.pageheight
+ * @param {number} [args.angle=0] - Angle in degrees to rotate the image counter-clockwise.
  */
 mupdf.overlayTextImageAddPage = function (doc, {
-  doc1, image, i, pagewidth, pageheight,
+  doc1, image, i, pagewidth, pageheight, angle = 0,
 }) {
   const imgData = new Uint8Array(atob(image.split(',')[1])
     .split('')
     .map((c) => c.charCodeAt(0)));
+
+  // Despite the images being named as PNG, they can be any format supported by mupdf.
   Module.FS_createDataFile('/', `${String(i)}.png`, imgData, 1, 1, 1);
 
-  mupdf.overlayPDFTextImageAddPage(doc1, i, pagewidth, pageheight);
+  mupdf.overlayPDFTextImageAddPage(doc1, i, pagewidth, pageheight, angle);
 
   FS.unlink(`${String(i)}.png`);
 };
@@ -242,6 +251,7 @@ mupdf.overlayTextImage = function (doc, {
       // If not a string, imageArr is assumed to contain a buffer already
       imgData = imageArr[i];
     }
+    // Despite the images being named as PNG, they can be any format supported by mupdf.
     Module.FS_createDataFile('/', `${String(pageNum)}.png`, imgData, 1, 1, 1);
   }
 
@@ -271,18 +281,18 @@ mupdf.overlayTextImageEnd = function (doc) {
 
 /**
  *
- * @param {number} doc
+ * @param {number} doc - Ignored (included as boilerplate for consistency with other functions).
  * @param {Object} args
- * @param {number} args.doc1
- * @param {number} args.minpage
- * @param {number} args.maxpage
- * @param {number} args.pagewidth
- * @param {number} args.pageheight
+ * @param {number} args.doc1 - Document to write.
+ * @param {number} [args.minpage=0] - First page to include in the output PDF. Default is 0.
+ * @param {number} [args.maxpage=-1] - Last page to include in the output PDF. Default is -1 (all pages).
+ * @param {number} [args.pagewidth=-1] - Width of the pages in the output PDF. Default is -1 (same as input).
+ * @param {number} [args.pageheight=-1] - Height of the pages in the output PDF. Default is -1 (same as input).
  * @param {Boolean} [args.humanReadable=false]
  * @returns
  */
 mupdf.write = function (doc, {
-  doc1, minpage, maxpage, pagewidth, pageheight, humanReadable = false,
+  doc1, minpage = 0, maxpage = -1, pagewidth = -1, pageheight = -1, humanReadable = false,
 }) {
   mupdf.writePDF(doc1, minpage, maxpage, pagewidth, pageheight, humanReadable);
   const content = FS.readFile('/download.pdf');
