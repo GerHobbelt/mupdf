@@ -61,6 +61,7 @@
 #include "../../thirdparty/owemdjee/nanosvg/example/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libgif/gif_lib.h"
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/jbig2enc/src/monolithic_examples.h"
 #include "../../thirdparty/lcms2/include/monolithic_examples.h"
 #include "../../thirdparty/leptonica/prog/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/filesystem/examples/monolithic_examples.h"
@@ -593,6 +594,10 @@ static struct tool_spec {
 	{ {.fa = jbig2dec_arith_test_main }, "jbig2_arith_test", "jbig2dec test" },
 	{ {.fa = jbig2dec_huffman_test_main }, "jbig2_huffman_test", "jbig2dec test" },
 	{ {.fa = jbig2dec_pbm2png_main }, "jbig2dec_pbm2png", "jbig2dec_pbm2png tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = jbig2enc_main }, "jbig2enc", "jbig2enc tool" },
 #endif
 
 #if defined(MUTOOL_EX)
