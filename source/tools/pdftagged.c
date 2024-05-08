@@ -40,7 +40,7 @@ static fz_context *ctx = NULL;
 static int usage(void)
 {
 	fprintf(stderr, "usage: mutool tagged [options] file.pdf\n");
-	fprintf(stderr, "\t-p\tpassword\n");
+	fprintf(stderr, "  -p -  password\n");
 	return 1;
 }
 
@@ -252,12 +252,15 @@ int pdftagged_main(int argc, const char **argv)
 		return 1;
 	}
 
-	doc = pdf_open_document(ctx, infile);
+	fz_var(doc);
+
 	fz_try(ctx)
 	{
+		doc = pdf_open_document(ctx, infile);
+		
 		if (pdf_needs_password(ctx, doc))
 			if (!pdf_authenticate_password(ctx, doc, password))
-				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", infile);
+				fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot authenticate password: %s", infile);
 
 		n = pdf_count_pages(ctx, doc);
 
@@ -288,7 +291,7 @@ int pdftagged_main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "error: %s", fz_caught_message(ctx));
+		fz_report_error(ctx);
 	}
 
 	fz_flush_warnings(ctx);

@@ -30,6 +30,7 @@ int pdfrecolor_main(int argc, const char** argv);
 int pdftrim_main(int argc, const char** argv);
 int pdfbake_main(int argc, const char** argv);
 int pdftagged_main(int argc, const char** argv);
+int pdftag_main(int argc, const char** argv);
 int pdfmetadump_main(int argc, const char** argv);
 
 int mupdf_base64_test_main(int argc, const char** argv);

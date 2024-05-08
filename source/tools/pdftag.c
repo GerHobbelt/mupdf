@@ -24,6 +24,7 @@
  * PDF tag; tag dumper and rewriter.
  */
 
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
@@ -33,13 +34,15 @@
 
 #undef DEBUG_STRUCTURE
 
+#if FZ_ENABLE_RENDER_CORE 
+
 static int usage(void)
 {
 	fprintf(stderr,
 		"usage: mutool tag [options] input.pdf\n"
-		"\t-c\tinclude contents\n"
-		"\t-f - \ttag file\n"
-		"\t-p -\tpassword\n"
+		"  -c    include contents\n"
+		"  -f -  tag file\n"
+		"  -p -  password\n"
 
 		);
 	return 1;
@@ -695,14 +698,14 @@ pdf_structure_to_xml(fz_context *ctx, pdf_document *doc, const char *tagfile, in
 	fz_drop_device(ctx, dev);
 }
 
-int pdftag_main(int argc, char **argv)
+int pdftag_main(int argc, const char **argv)
 {
 	char *infile;
 	char *tagfile = NULL;
 	char *password = "";
 	int c;
-	pdf_document *doc;
-	fz_context *ctx;
+	pdf_document *doc = NULL;
+	fz_context *ctx = NULL;
 	int ret = 0;
 	int contents = 0;
 
@@ -726,7 +729,7 @@ int pdftag_main(int argc, char **argv)
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		exit(1);
+		return 1;
 	}
 
 	fz_var(doc);
@@ -744,13 +747,19 @@ int pdftag_main(int argc, char **argv)
 		pdf_structure_to_xml(ctx, doc, tagfile, contents);
 	}
 	fz_always(ctx)
+	{
 		pdf_drop_document(ctx, doc);
+	}
 	fz_catch(ctx)
 	{
 		fz_report_error(ctx);
 		ret = 1;
 	}
+
+	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 
 	return ret;
 }
+
+#endif
