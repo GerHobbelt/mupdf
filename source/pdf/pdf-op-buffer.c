@@ -1370,7 +1370,7 @@ pdf_balance_Q(fz_context *ctx, pdf_processor *proc_)
 static pdf_processor *
 pdf_new_balance_processor(fz_context *ctx, int *balance, int *minimum)
 {
-	pdf_balance_processor *proc = pdf_new_processor(ctx, sizeof *proc);
+	pdf_balance_processor *proc = (pdf_balance_processor * )pdf_new_processor(ctx, sizeof *proc);
 
 	proc->super.op_q = pdf_balance_q;
 	proc->super.op_Q = pdf_balance_Q;
@@ -1392,7 +1392,7 @@ pdf_count_q_balance(fz_context *ctx, pdf_document *doc, pdf_obj *res, pdf_obj *s
 	proc = pdf_new_balance_processor(ctx, &balance, &minimum);
 	fz_try(ctx)
 	{
-		pdf_process_raw_contents(ctx, proc, doc, res, stm, NULL);
+		pdf_process_raw_contents(ctx, proc, doc, res, stm);
 		pdf_close_processor(ctx, proc);
 	}
 	fz_always(ctx)
