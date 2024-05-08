@@ -882,6 +882,7 @@ load_shared_strings(fz_context *ctx, fz_archive *arch, fz_xml *rels, doc_info *i
 
 	fz_var(xml);
 	fz_var(str);
+	fz_var(resolved);
 
 	fz_try(ctx)
 	{
@@ -931,6 +932,7 @@ load_footnotes(fz_context *ctx, fz_archive *arch, fz_xml *rels, doc_info *info, 
 
 	fz_var(xml);
 	fz_var(str);
+	fz_var(resolved);
 
 	fz_try(ctx)
 	{
@@ -1070,6 +1072,8 @@ process_office_document_properties(fz_context *ctx, fz_archive *arch, const char
 {
 	fz_xml *xml = NULL;
 	char *title;
+
+	fz_var(xml);
 
 	fz_try(ctx)
 	{
