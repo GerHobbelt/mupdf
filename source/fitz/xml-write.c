@@ -109,11 +109,12 @@ xml_escape_string(fz_context *ctx, fz_output *out, const char *s)
 	}
 }
 
-static void
+static int
 do_write(fz_context *ctx, fz_xml *node, fz_output *out)
 {
 	const char *tag;
 	fz_xml *down;
+	int last_was_text = 0;
 
 	for (; node != NULL; node = fz_xml_next(node))
 	{
@@ -126,9 +127,12 @@ do_write(fz_context *ctx, fz_xml *node, fz_output *out)
 			char *text = fz_xml_text(node);
 			if (text)
 				xml_escape_tag(ctx, out, text);
+			last_was_text = 1;
 			continue;
 		}
 
+		last_was_text = 0;
+		fz_write_byte(ctx, out, '\n');
 		fz_write_byte(ctx, out, '<');
 		xml_escape_tag(ctx, out, tag);
 
@@ -144,17 +148,19 @@ do_write(fz_context *ctx, fz_xml *node, fz_output *out)
 		down = fz_xml_down(node);
 		if (down)
 		{
-			fz_write_byte(ctx, out, '>');
-			do_write(ctx, down, out);
+			fz_write_string(ctx, out, ">");
+			if (!do_write(ctx, down, out))
+				fz_write_byte(ctx, out, '\n');
 			fz_write_string(ctx, out, "</");
 			xml_escape_tag(ctx, out, tag);
-			fz_write_byte(ctx, out, '>');
+			fz_write_string(ctx, out, ">");
 		}
 		else
 		{
 			fz_write_string(ctx, out, "/>");
 		}
 	}
+	return last_was_text;
 }
 
 void fz_write_xml(fz_context *ctx, fz_xml *root, fz_output *out)
@@ -168,5 +174,6 @@ void fz_write_xml(fz_context *ctx, fz_xml *root, fz_output *out)
 	if (root->up == NULL)
 		root = root->down;
 
-	do_write(ctx, root, out);
+	if (!do_write(ctx, root, out))
+		fz_write_byte(ctx, out, '\n');
 }
