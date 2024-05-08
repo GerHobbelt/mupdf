@@ -621,6 +621,9 @@ static int check_enums()
 	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_zh_Hans == FZ_LANG_zh_Hans;
 	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_zh_Hant == FZ_LANG_zh_Hant;
 
+	valid &= com_artifex_mupdf_fitz_Rect_MIN_INF_RECT == FZ_MIN_INF_RECT;
+	valid &= com_artifex_mupdf_fitz_Rect_MAX_INF_RECT == FZ_MAX_INF_RECT;
+
 	valid &= com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT == FZ_LINK_DEST_FIT;
 	valid &= com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_B == FZ_LINK_DEST_FIT_B;
 	valid &= com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_H == FZ_LINK_DEST_FIT_H;

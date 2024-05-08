@@ -428,7 +428,7 @@ public class ViewerCore {
 					linkURIs = new String[pageLinks.length];
 					for (Link link: pageLinks)
 					{
-						links[i] = link.getBounds().transform(ctm);
+						links[i] = Rect.Transformed(link.getBounds(), ctm);
 						linkURIs[i] = link.getURI();
 						i++;
 					}
