@@ -933,6 +933,7 @@ static struct tool_spec {
 	{ {.fa = spdlog_formatter_bench_main }, "spdlog_formatter_bench", "spdlog formatter benchmark tool" },
 	{ {.fa = spdlog_latency_bench_main }, "spdlog_latency_bench", "spdlog latency benchmark tool" },
 	{ {.fa = spdlog_example_main }, "spdlog_example", "spdlog example/demo" },
+	{ {.fa = spdlog_example2_main }, "spdlog_ex2", "spdlog example/demo #2" },
 #endif
 
 #if defined(MUTOOL_EX)
