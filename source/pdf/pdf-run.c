@@ -615,26 +615,37 @@ run_ds(fz_context *ctx, fz_device *dev, pdf_obj *role_map, pdf_obj *obj, int idx
 		cookie->d.progress++;
 	}
 
+	if (pdf_is_number(ctx, obj))
+	{
+		/* A marked-content identifier denoting a marked content sequence. WHAT? */
+		return;
+	}
+
 	if (pdf_mark_obj(ctx, obj))
 		return;
 
 	fz_try(ctx)
 	{
 		pdf_obj *tag = pdf_dict_get(ctx, obj, PDF_NAME(S));
+		if (!tag)
+			break;
+
 		fz_structure standard = pdf_structure_type(ctx, role_map, tag);
 		if (standard == FZ_STRUCTURE_INVALID)
 			break;
 		fz_begin_structure(ctx, dev, standard, pdf_to_name(ctx, tag), idx);
 		k = pdf_dict_get(ctx, obj, PDF_NAME(K));
-		n = pdf_array_len(ctx, k);
-		if (n == 0)
-			run_ds(ctx, dev, role_map, k, 0, cookie);
-		else
+		if (k)
 		{
-			for (i = 0; i < n; i++)
-				run_ds(ctx, dev, role_map, pdf_array_get(ctx, k, i), i, cookie);
+			n = pdf_array_len(ctx, k);
+			if (n == 0)
+				run_ds(ctx, dev, role_map, k, 0, cookie);
+			else
+			{
+				for (i = 0; i < n; i++)
+					run_ds(ctx, dev, role_map, pdf_array_get(ctx, k, i), i, cookie);
+			}
 		}
-
 		fz_end_structure(ctx, dev);
 	}
 	fz_always(ctx)
@@ -646,7 +657,10 @@ run_ds(fz_context *ctx, fz_device *dev, pdf_obj *role_map, pdf_obj *obj, int idx
 void pdf_run_document_structure(fz_context *ctx, pdf_document *doc, fz_device *dev, fz_cookie *cookie)
 {
 	int nocache;
-	pdf_obj *st, *rm;
+	int marked = 0;
+	pdf_obj *st, *rm, *k;
+
+	fz_var(marked);
 
 	nocache = !!(dev->hints & FZ_NO_CACHE);
 	if (nocache)
@@ -654,12 +668,31 @@ void pdf_run_document_structure(fz_context *ctx, pdf_document *doc, fz_device *d
 
 	fz_try(ctx)
 	{
-		st = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(StructTreeRoot));
+		st = pdf_dict_get(ctx, pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root)), PDF_NAME(StructTreeRoot));
 		rm = pdf_dict_get(ctx, st, PDF_NAME(RoleMap));
-		run_ds(ctx, dev, rm, st, 0, cookie);
+
+		if (pdf_mark_obj(ctx, st))
+			break;
+		marked = 1;
+
+		k = pdf_dict_get(ctx, st, PDF_NAME(K));
+		if (k)
+		{
+			int n = pdf_array_len(ctx, k);
+			if (n == 0)
+				run_ds(ctx, dev, rm, k, 0, cookie);
+			else
+			{
+				int i;
+				for (i = 0; i < n; i++)
+					run_ds(ctx, dev, rm, pdf_array_get(ctx, k, i), i, cookie);
+			}
+		}
 	}
 	fz_always(ctx)
 	{
+		if (marked)
+			pdf_unmark_obj(ctx, st);
 		if (nocache)
 			pdf_clear_xref_to_mark(ctx, doc);
 	}

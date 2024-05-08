@@ -3185,6 +3185,10 @@ static void __pdf_document_set_metadata(fz_context* ctx, fz_document* doc, const
 {
 	pdf_set_metadata(ctx, pdf_document_from_fz_document(ctx, doc), key, value);
 }
+static void __pdf_run_document_structure(fz_context* ctx, fz_document* doc, fz_device* dev, fz_cookie* cookie)
+{
+	pdf_run_document_structure(ctx, pdf_document_from_fz_document(ctx, doc), dev, cookie);
+}
 
 
 /*
@@ -3219,6 +3223,7 @@ pdf_new_document(fz_context *ctx, fz_stream *file)
 	doc->super.page_label = pdf_page_label_imp;
 	doc->super.lookup_metadata = __pdf_lookup_metadata;
 	doc->super.set_metadata = __pdf_document_set_metadata;
+	doc->super.run_structure = __pdf_run_document_structure;
 
 	pdf_lexbuf_init(ctx, &doc->lexbuf.base, PDF_LEXBUF_LARGE);
 	doc->file = fz_keep_stream(ctx, file);

@@ -566,7 +566,8 @@ fz_trace_begin_structure(fz_context *ctx, fz_device *dev_, fz_structure standard
 	fz_write_printf(ctx, out, "<structure standard=\"%s\"", str);
 	if (raw && strcmp(str, raw))
 		fz_write_printf(ctx, out, " raw=\"%s\"", raw);
-	fz_write_printf(ctx, out, " idx=\"%d\"", idx);
+	if (idx != 0)
+		fz_write_printf(ctx, out, " idx=\"%d\"", idx);
 	fz_write_printf(ctx, out, ">\n");
 	dev->depth++;
 }

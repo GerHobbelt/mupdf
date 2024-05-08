@@ -2078,10 +2078,10 @@ visible:
 			case FZ_CMD_BEGIN_STRUCTURE:
 			{
 				const unsigned char *data;
-				int uid;
+				int idx;
 				data = (const unsigned char *)node;
-				memcpy(&uid, data+1, sizeof(uid));
-				fz_begin_structure(ctx, dev, (fz_structure)data[0], (const char *)(&data[1+sizeof(uid)]), uid);
+				memcpy(&idx, data+1, sizeof(idx));
+				fz_begin_structure(ctx, dev, (fz_structure)data[0], (const char *)(&data[1+sizeof(idx)]), idx);
 				break;
 			}
 			case FZ_CMD_END_STRUCTURE:
