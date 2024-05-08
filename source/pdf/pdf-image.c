@@ -348,13 +348,51 @@ struct jbig2_segment_header {
 	int flags;
 	/* referred-to-segment numbers */
 	int page;
-	int length;
+	uint32_t length;
 };
 
 /* coverity[-tainted_data_return] */
 static uint32_t getu32(const unsigned char *data)
 {
 	return (((uint32_t)data[0]<<24) | ((uint32_t)data[1]<<16) | ((uint32_t)data[2]<<8) | (uint32_t)data[3]) & 0xFFFFFFFF;
+}
+
+static uint32_t
+pdf_determine_jbig2_segment_length(fz_context *ctx,
+	const unsigned char *data, const unsigned char *end,
+	struct jbig2_segment_header *info)
+{
+	int is_mmr;
+	const unsigned char *p;
+	uint8_t mmr_marker[2] = { 0x00, 0x00 };
+	uint8_t arith_marker[2] = { 0xff, 0xac };
+	uint8_t *desired;
+
+	if (data + 18 > end) return 0xffffffff;
+
+	is_mmr = data[17] & 1;
+	desired = is_mmr ? mmr_marker : arith_marker;
+
+	p = data + 18;
+	if (p + 2 > end)
+		return 0xffffffff;
+
+	while (p[0] != desired[0] || p[1] != desired[1])
+	{
+		p++;
+		if (p + 2 > end)
+			return 0xffffffff;
+	}
+
+	/* marker found */
+	p += 2;
+
+	/* marker is followed by 4 byte row count */
+	if (p + 4 > end)
+		return 0xffffffff;
+	p += 4;
+
+	return p - data;
 }
 
 static size_t
@@ -420,8 +458,17 @@ pdf_copy_jbig2_segments(fz_context *ctx, fz_buffer *output, const unsigned char 
 		if (n == 0)
 			fz_throw(ctx, FZ_ERROR_FORMAT, "truncated jbig2 segment header");
 
-		/* omit end of page, end of file, and segments for other pages */
 		type = (info.flags & 63);
+
+		/* determine length for immediate generic region segments with unknown length */
+		if (type == 38 && info.length == 0xffffffff)
+		{
+			info.length = pdf_determine_jbig2_segment_length(ctx, data, end, &info);
+			if (info.length == 0xffffffff)
+				fz_throw(ctx, FZ_ERROR_FORMAT, "unable to determine jbig2 segment length");
+		}
+
+		/* omit end of page, end of file, and segments for other pages */
 		if (type == 49 || type == 51 || (info.page > 0 && info.page != page))
 		{
 			data += n;
