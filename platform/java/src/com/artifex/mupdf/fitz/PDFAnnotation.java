@@ -129,8 +129,6 @@ public class PDFAnnotation
 	public native String getContents();
 	public native void setContents(String contents);
 	public native boolean hasRect();
-	public native float getBorder();
-	public native void setBorder(float width);
 	public native float[] getColor();
 	public native void setColor(float[] color);
 	public native float getOpacity();
@@ -367,4 +365,10 @@ public class PDFAnnotation
 
 	private native void updateAppearanceFromDisplayList(DisplayList dlist);
 	public void updateAppearance(DisplayList dlist) {updateAppearanceFromDisplayList(dlist);}
+
+	/** @deprecated use getBorderWidth instead. */
+	public float getBorder() { return getBorderWidth(); }
+
+	/** @deprecated use setBorderWidth instead. */
+	public void setBorder(float width) { setBorderWidth(width); }
 }
