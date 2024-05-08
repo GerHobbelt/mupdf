@@ -36036,6 +36036,25 @@ FZ_FUNCTION int ll_fz_strcasecmp(const char *a, const char *b)
 	return ret;
 }
 
+/** Low-level wrapper for `::fz_strcasestr()`. */
+FZ_FUNCTION char *ll_fz_strcasestr(char *a, const char *b)
+{
+#ifndef NDEBUG
+	if (s_trace > 1) {
+		std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): calling fz_strcasestr():";
+		if (a) std::cerr << " a='" << a << "'";
+		else std::cerr << " a:null";
+		if (b) std::cerr << " b='" << b << "'";
+		else std::cerr << " b:null";
+		std::cerr << "\n";
+	}
+#endif
+	int ret;
+	/* No fz_context* arg, so no need for fz_try()/fz_catch() to convert MuPDF exceptions into C++ exceptions. */
+	ret = ::fz_strcasestr(a, b);
+	return ret;
+}
+
 /** Low-level wrapper for `::fz_strdup()`. */
 FZ_FUNCTION char *ll_fz_strdup(const char *s)
 {

@@ -10646,6 +10646,20 @@ FZ_FUNCTION int fz_strcasecmp(const char *a, const char *b)
 }
 
 
+/* Class-aware wrapper for `::fz_strcasestr()`.  */
+FZ_FUNCTION char *fz_strcasestr(char *a, const char *b)
+{
+#ifndef NDEBUG
+	if (s_trace) {
+		std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "():"
+			<< " calling mupdf::ll_fz_strcasestr()\n";
+	}
+#endif
+	auto ret = mupdf::ll_fz_strcasestr(a, b);
+	return ret;
+}
+
+
 /* Class-aware wrapper for `::fz_strdup()`.  */
 FZ_FUNCTION char *fz_strdup(const char *s)
 {

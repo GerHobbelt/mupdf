@@ -6888,6 +6888,12 @@ namespace mupdf
 	*/
 	FZ_FUNCTION int fz_strcasecmp(const char *a, const char *b);
 
+	/** Class-aware wrapper for `::fz_strcasestr()`.  */
+	/**
+		Case insensitive (ASCII only) string-in-string search.
+	*/
+	FZ_FUNCTION char *fz_strcasestr(char *str, const char *substr);
+
 	/** Class-aware wrapper for `::fz_strdup()`.  */
 	/**
 		Portable strdup implementation, using fz allocators.

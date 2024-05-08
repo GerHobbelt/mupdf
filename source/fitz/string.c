@@ -115,6 +115,34 @@ fz_strcasecmp(const char *a, const char *b)
 }
 
 char *
+fz_strcasestr(char* str, const char* substr)
+{
+	if (substr == NULL || str == NULL)
+		return NULL;
+	if (!*substr)
+		return str;
+
+	while (*str)
+	{
+		int i;
+		int muster = fz_tolower(*substr);
+		while (*str && fz_tolower(*str) != muster)
+			str++;
+		if (!*str)
+			return NULL;
+		// right now: str[0] == substr[0]; check the tail to see if we have a full match:
+		i = 1;
+		while (str[i] && substr[i] && fz_tolower(str[i]) == fz_tolower(substr[i]))
+			i++;
+		if (!substr[i])
+			return str;
+		// not a full match: move str forward and continue the scan
+		str++;
+	}
+	return NULL;
+}
+
+char *
 fz_strsep(char **stringp, const char *delim)
 {
 	char *ret = *stringp;

@@ -324,6 +324,11 @@ int fz_strcasecmp(const char *a, const char *b);
 int fz_strncasecmp(const char *a, const char *b, size_t n);
 
 /**
+	Case insensitive (ASCII only) string-in-string search.
+*/
+char *fz_strcasestr(char *str, const char *substr);
+
+/**
 	Return the length of the string until the last occurrence of any of the characters in the set.
 	Consequently, this API returns the length of the string when none of the characters in the set were found.
 

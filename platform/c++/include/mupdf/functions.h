@@ -7869,6 +7869,12 @@ FZ_FUNCTION const char *ll_fz_story_warnings(::fz_story *story);
 */
 FZ_FUNCTION int ll_fz_strcasecmp(const char *a, const char *b);
 
+/** Low-level wrapper for `::fz_strcasestr()`. */
+/**
+	Case insensitive (ASCII only) string-in-string search.
+*/
+FZ_FUNCTION char *ll_fz_strcasestr(char *str, const char *substr);
+
 /** Low-level wrapper for `::fz_strdup()`. */
 /**
 	Portable strdup implementation, using fz allocators.
