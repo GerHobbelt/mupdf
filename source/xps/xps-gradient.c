@@ -243,6 +243,8 @@ xps_draw_one_radial_gradient(fz_context *ctx, xps_document *doc, fz_matrix ctm,
 	fz_device *dev = doc->dev;
 	fz_shade *shade;
 
+	assert(count >= 2);
+
 	shade = fz_malloc_struct(ctx, fz_shade);
 	FZ_INIT_STORABLE(shade, 1, fz_drop_shade_imp);
 	shade->colorspace = fz_keep_colorspace(ctx, fz_device_rgb(ctx));
@@ -482,7 +484,7 @@ xps_parse_gradient_brush(fz_context *ctx, xps_document *doc, fz_matrix ctm, fz_r
 	fz_xml *transform_tag = NULL;
 	fz_xml *stop_tag = NULL;
 
-	struct stop stop_list[MAX_STOPS];
+	struct stop stop_list[MAX_STOPS] = { 0 };
 	int stop_count;
 	int spread_method;
 
@@ -523,6 +525,7 @@ xps_parse_gradient_brush(fz_context *ctx, xps_document *doc, fz_matrix ctm, fz_r
 	}
 
 	stop_count = xps_parse_gradient_stops(ctx, doc, base_uri, stop_tag, stop_list, MAX_STOPS);
+	assert(stop_count >= 2);
 	if (stop_count == 0)
 	{
 		fz_warn(ctx, "no gradient stops found");

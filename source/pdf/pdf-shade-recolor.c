@@ -330,7 +330,10 @@ float_queue_push(fz_context *ctx, float_queue *p, float f)
 static float
 float_queue_pop(fz_context *ctx, float_queue *p)
 {
-	return p->p[p->pos++];
+	if (p->p)
+		return p->p[p->pos++];
+	else
+		return 0;
 }
 
 static void
@@ -889,6 +892,8 @@ pdf_recolor_shade(fz_context *ctx, pdf_obj *shade, pdf_shade_recolorer *reshade,
 	src_cs = pdf_load_colorspace(ctx, pdf_dict_get(ctx, shade, PDF_NAME(ColorSpace)));
 
 	fz_var(rewritten);
+
+	memset(samples, 0, sizeof(samples));
 
 	rd.funcs = 0;
 

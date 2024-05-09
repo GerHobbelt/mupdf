@@ -30,7 +30,7 @@
 int
 pdf_obj_num_is_stream(fz_context *ctx, pdf_document *doc, int num)
 {
-	pdf_xref_entry *entry;
+	pdf_xref_entry *entry = NULL;
 
 	if (num <= 0 || num >= pdf_xref_len(ctx, doc))
 		return 0;
@@ -44,6 +44,7 @@ pdf_obj_num_is_stream(fz_context *ctx, pdf_document *doc, int num)
 		fz_report_error(ctx);
 		return 0;
 	}
+	assert(entry != NULL);
 
 	return entry->stm_ofs != 0 || entry->stm_buf;
 }
@@ -214,7 +215,7 @@ build_filter(fz_context *ctx, fz_stream *chain, pdf_document *doc, pdf_obj *f, p
 
 	else if (params->type == FZ_IMAGE_JBIG2)
 	{
-		fz_stream *stm;
+		fz_stream *stm = NULL;
 		fz_try(ctx)
 			stm = fz_open_image_decomp_stream(ctx, chain, params, NULL);
 		fz_always(ctx)
@@ -258,7 +259,7 @@ build_filter(fz_context *ctx, fz_stream *chain, pdf_document *doc, pdf_obj *f, p
 static fz_stream *
 build_filter_drop(fz_context *ctx, fz_stream *tail, pdf_document *doc, pdf_obj *f, pdf_obj *p, int num, int gen, fz_compression_params *params, pdf_cycle_list *cycle, int might_be_image)
 {
-	fz_stream *head;
+	fz_stream *head = NULL;
 	fz_try(ctx)
 		head = build_filter(ctx, tail, doc, f, p, num, gen, params, cycle, might_be_image);
 	fz_always(ctx)
@@ -310,7 +311,7 @@ static fz_stream *
 pdf_open_raw_filter(fz_context *ctx, fz_stream *file_stm, pdf_document *doc, pdf_obj *stmobj, int num, int *orig_num, int *orig_gen, int64_t offset)
 {
 	pdf_xref_entry *x = NULL;
-	fz_stream *null_stm, *crypt_stm;
+	fz_stream *crypt_stm = NULL, *null_stm = NULL;
 	int hasexplicitcrypt;
 	int64_t len;
 
@@ -369,7 +370,7 @@ pdf_open_filter(fz_context *ctx, pdf_document *doc, fz_stream *file_stm, pdf_obj
 	pdf_obj *filters = pdf_dict_geta(ctx, stmobj, PDF_NAME(Filter), PDF_NAME(F));
 	pdf_obj *params = pdf_dict_geta(ctx, stmobj, PDF_NAME(DecodeParms), PDF_NAME(DP));
 	int orig_num, orig_gen;
-	fz_stream *rstm, *fstm;
+	fz_stream *rstm, *fstm = NULL;
 
 	rstm = pdf_open_raw_filter(ctx, file_stm, doc, stmobj, num, &orig_num, &orig_gen, offset);
 	fz_try(ctx)
@@ -490,7 +491,7 @@ pdf_load_raw_stream_number(fz_context *ctx, pdf_document *doc, int num)
 {
 	fz_stream *stm;
 	pdf_obj *dict;
-	int64_t len;
+	int64_t len = 0;
 	fz_buffer *buf = NULL;
 	pdf_xref_entry *x;
 
@@ -609,7 +610,7 @@ pdf_load_image_stream(fz_context *ctx, pdf_document *doc, int num, fz_compressio
 	fz_stream *stm = NULL;
 	pdf_obj *dict, *obj;
 	int i, n;
-	size_t len;
+	size_t len = 0;
 	fz_buffer *buf;
 
 	fz_var(buf);

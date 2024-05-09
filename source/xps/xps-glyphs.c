@@ -222,7 +222,7 @@ xps_lookup_font(fz_context *ctx, xps_document *doc, char *base_uri, char *font_u
 	char fakename[1024];
 	char *subfont;
 	int subfontid = 0;
-	xps_part *part;
+	xps_part *part = NULL;
 	fz_font *font;
 	fz_cookie* cookie = ctx->cookie;
 
@@ -276,6 +276,7 @@ xps_lookup_font(fz_context *ctx, xps_document *doc, char *base_uri, char *font_u
 			}
 			return NULL;
 		}
+		assert(part != NULL);
 
 		/* deobfuscate if necessary */
 		if (strstr(part->name, ".odttf"))

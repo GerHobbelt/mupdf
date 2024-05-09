@@ -144,6 +144,7 @@ xps_parse_image_brush(fz_context *ctx, xps_document *doc, fz_matrix ctm, fz_rect
 		}
 		return;
 	}
+	assert(part != NULL);
 
 	fz_try(ctx)
 	{

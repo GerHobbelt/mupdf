@@ -1054,7 +1054,7 @@ static fz_document *
 epub_open_document(fz_context *ctx, fz_stream *file, fz_stream *accel, fz_archive *dir)
 {
 	fz_stream *file2 = NULL;
-	fz_document *doc;
+	fz_document *doc = NULL;
 	fz_archive *zip = NULL;
 
 	if (file == NULL)

@@ -64,6 +64,7 @@ fz_new_stream(fz_context *ctx, void *state, fz_stream_next_fn *next, fz_stream_d
 //			drop(ctx, state);
 		fz_rethrow(ctx);
 	}
+	assert(stm != NULL);
 
 	stm->refs = 1;
 	stm->error = 0;

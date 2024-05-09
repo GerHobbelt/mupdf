@@ -926,6 +926,7 @@ find_seps(fz_context *ctx, fz_separations **seps, pdf_obj *obj, pdf_mark_list *c
 			fz_report_error(ctx);
 			return; /* ignore broken colorspace */
 		}
+		assert(cs != NULL);
 		fz_try(ctx)
 		{
 			if (!*seps)
@@ -1003,6 +1004,7 @@ find_devn(fz_context *ctx, fz_separations **seps, pdf_obj *obj, pdf_mark_list *c
 				fz_report_error(ctx);
 				continue; /* ignore broken colorspace */
 			}
+			assert(cs != NULL);
 			fz_try(ctx)
 			{
 				if (!*seps)

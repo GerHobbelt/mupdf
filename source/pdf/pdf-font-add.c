@@ -257,7 +257,6 @@ pdf_add_cid_font_widths(fz_context *ctx, pdf_document *doc, pdf_obj *fobj, fz_fo
 	fw = pdf_add_new_array(ctx, doc, 10);
 	fz_try(ctx)
 	{
-		curr_code = 0;
 		curr_size = fz_advance_glyph(ctx, font, 0, 0) * 1000;
 		first_code = 0;
 
@@ -375,7 +374,7 @@ static pdf_obj*
 pdf_add_descendant_cid_font(fz_context *ctx, pdf_document *doc, fz_font *font)
 {
 	FT_Face face = font->ft_face;
-	pdf_obj *fobj, *fref;
+	pdf_obj *fobj, *fref = NULL;
 	const char *ps_name;
 
 	fobj = pdf_new_dict(ctx, doc, 3);

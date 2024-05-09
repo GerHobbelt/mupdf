@@ -106,6 +106,10 @@ fz_halftone *fz_default_halftone(fz_context *ctx, int num_comps)
 		fz_drop_halftone(ctx, ht);
 		fz_rethrow(ctx);
 	}
+	assert(num_comps >= 1 && ht->comp[0] != NULL);
+	assert(num_comps >= 2 && ht->comp[1] != NULL);
+	assert(num_comps >= 3 && ht->comp[2] != NULL);
+	assert(num_comps >= 4 && ht->comp[3] != NULL);
 
 	return ht;
 }
@@ -608,6 +612,7 @@ fz_bitmap *fz_new_bitmap_from_pixmap_band(fz_context *ctx, const fz_pixmap *pix,
 	for (i = 0; i < ht->n; i++)
 	{
 		w = ht->comp[i]->w;
+		assert(w > 0);
 		lcm = lcm / gcd(lcm, w) * w;
 	}
 

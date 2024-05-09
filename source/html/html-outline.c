@@ -392,6 +392,7 @@ add_html_outline(fz_context *ctx, struct outline_parser *x, fz_html_box *box)
 	}
 
 	heading = box->heading;
+	assert(heading >= 1 && heading <= 6);
 	if (x->level[x->current] < heading && x->current < 5)
 	{
 		x->tail[x->current+1] = x->down[x->current];

@@ -487,6 +487,7 @@ fz_paint_shade(fz_context *ctx, fz_shade *shade, fz_colorspace *colorspace, fz_m
 	}
 	fz_always(ctx)
 	{
+		assert((recache != 0 && cache != NULL) || recache == 0);
 		if (recache)
 		{
 			cache->src = fz_keep_colorspace(ctx, colorspace);
@@ -499,6 +500,7 @@ fz_paint_shade(fz_context *ctx, fz_shade *shade, fz_colorspace *colorspace, fz_m
 			fz_fin_cached_color_converter(ctx, &ptd.cc);
 		if (shade->use_function)
 		{
+			assert((recache2 != 0 && cache != NULL) || recache2 == 0);
 			if (recache2)
 			{
 				cache->src2 = fz_keep_colorspace(ctx, colorspace);

@@ -276,6 +276,8 @@ psd_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_st
 	if (!out)
 		return;
 
+	memset(buffer, 0, nelem(buffer));
+
 	w = writer->super.w;
 	h = writer->super.h;
 	n = writer->super.n;
@@ -340,6 +342,7 @@ psd_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_st
 		{
 			fz_write_data(ctx, out, buffer, b - buffer);
 			b = buffer;
+			(void) b;
 		}
 		fz_seek_output(ctx, out, plane_inc, SEEK_CUR);
 	}

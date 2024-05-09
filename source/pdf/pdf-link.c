@@ -310,7 +310,7 @@ pdf_verify_embedded_file_checksum(fz_context *ctx, pdf_obj *fs)
 	unsigned char digest[16];
 	pdf_obj *file, *params;
 	const char *checksum;
-	fz_buffer *contents;
+	fz_buffer *contents = NULL;
 	int valid = 0;
 	size_t len;
 
@@ -815,7 +815,7 @@ has_named_dest(fz_context *ctx, const char *uri)
 static char *
 parse_file_uri_path(fz_context *ctx, const char *uri)
 {
-	char *frag, *path, *temp;
+	char *frag, *temp, *path = NULL;
 
 	temp = fz_strdup(ctx, uri + 5);
 	fz_try(ctx)
@@ -841,7 +841,7 @@ parse_uri_named_dest(fz_context *ctx, const char *uri)
 	if (nameddest_s)
 	{
 		char *temp = fz_strdup(ctx, nameddest_s + 10);
-		char *dest;
+		char *dest = NULL;
 		fz_try(ctx)
 		{
 			char *ampersand = strchr(temp, '&');

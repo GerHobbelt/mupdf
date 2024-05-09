@@ -282,7 +282,7 @@ fz_pixmap *
 fz_clone_pixmap_area_with_different_seps(fz_context *ctx, fz_pixmap *src, const fz_irect *bbox, fz_colorspace *dcs, fz_separations *dseps, fz_color_params color_params, fz_default_colorspaces *default_cs)
 {
 	fz_irect local_bbox;
-	fz_pixmap *dst, *pix;
+	fz_pixmap *dst, *pix = NULL;
 	int drop_src = 0;
 
 	if (bbox == NULL)

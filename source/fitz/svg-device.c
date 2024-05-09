@@ -486,7 +486,7 @@ static font *
 svg_dev_text_span_as_paths_defs(fz_context *ctx, fz_device *dev, fz_text_span *span, fz_matrix ctm)
 {
 	svg_device *sdev = (svg_device*)dev;
-	fz_buffer *out = sdev->out;
+	fz_buffer *out;
 	int i, font_idx;
 	font *fnt;
 
@@ -555,7 +555,7 @@ svg_dev_text_span_as_paths_defs(fz_context *ctx, fz_device *dev, fz_text_span *s
 				fnt = &sdev->fonts[font_idx]; /* recursion may realloc the font array! */
 				fz_append_printf(ctx, out, "</g>\n");
 			}
-			out = end_def(ctx, sdev, 1);
+			(void) end_def(ctx, sdev, 1);
 			fnt->sentlist[gid] = 1;
 		}
 	}
@@ -803,7 +803,7 @@ static void
 svg_dev_clip_text(fz_context *ctx, fz_device *dev, const fz_text *text, fz_matrix ctm, fz_rect scissor)
 {
 	svg_device *sdev = (svg_device*)dev;
-	fz_buffer *out = sdev->out;
+	fz_buffer *out;
 
 	fz_rect bounds;
 	int num = sdev->id++;
@@ -958,7 +958,7 @@ svg_dev_fill_image(fz_context *ctx, fz_device *dev, fz_image *image, fz_matrix c
 	svg_device *sdev = (svg_device*)dev;
 	fz_buffer *out = sdev->out;
 
-	fz_matrix local_ctm = ctm;
+	fz_matrix local_ctm;
 	fz_matrix scale = { 0 };
 
 	if (alpha == 0)
@@ -1030,7 +1030,7 @@ svg_dev_fill_image_mask(fz_context *ctx, fz_device *dev, fz_image *image, fz_mat
 {
 	svg_device *sdev = (svg_device*)dev;
 	fz_buffer *out;
-	fz_matrix local_ctm = ctm;
+	fz_matrix local_ctm;
 	fz_matrix scale = { 0 };
 	int mask = sdev->id++;
 
@@ -1054,7 +1054,7 @@ svg_dev_clip_image_mask(fz_context *ctx, fz_device *dev, fz_image *image, fz_mat
 {
 	svg_device *sdev = (svg_device*)dev;
 	fz_buffer *out;
-	fz_matrix local_ctm = ctm;
+	fz_matrix local_ctm;
 	fz_matrix scale = { 0 };
 	int mask = sdev->id++;
 

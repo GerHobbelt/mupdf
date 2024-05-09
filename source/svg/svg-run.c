@@ -896,7 +896,7 @@ svg_lex_viewbox(const char *s, float *x, float *y, float *w, float *h)
 	while (svg_is_whitespace_or_comma(*s)) ++s;
 	if (svg_is_digit(*s)) s = svg_lex_number(w, s);
 	while (svg_is_whitespace_or_comma(*s)) ++s;
-	if (svg_is_digit(*s)) s = svg_lex_number(h, s);
+	if (svg_is_digit(*s)) (void) svg_lex_number(h, s);
 }
 
 static int

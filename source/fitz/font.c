@@ -740,7 +740,7 @@ fz_new_font_from_buffer(fz_context *ctx, const char *name, fz_buffer *buffer, in
 {
 	FT_Face face;
 	TT_OS2 *os2;
-	fz_font *font;
+	fz_font *font = NULL;
 	int fterr;
 	FT_ULong tag, size, i, n;
 	FT_UShort flags;
@@ -792,6 +792,7 @@ fz_new_font_from_buffer(fz_context *ctx, const char *name, fz_buffer *buffer, in
 		fz_drop_freetype(ctx);
 		fz_rethrow(ctx);
 	}
+	assert(font != NULL);
 
 	font->ft_face = face;
 	fz_set_font_bbox(ctx, font,
@@ -1604,7 +1605,7 @@ void
 fz_prepare_t3_glyph(fz_context *ctx, fz_font *font, int gid)
 {
 	fz_device *dev;
-	fz_rect d1_rect;
+	fz_rect d1_rect = { 0 };
 
 	/* We've not already loaded this one! */
 	assert(font->t3lists[gid] == NULL);
@@ -1949,9 +1950,10 @@ fz_advance_glyph(fz_context *ctx, fz_font *font, int gid, int wmode)
 					fz_ft_unlock(ctx);
 					fz_rethrow(ctx);
 				}
+				assert(font->advance_cache != NULL);
 				memset(font->advance_cache, 0, n * sizeof(float *));
 			}
-			if (!font->advance_cache[block])
+			if (font->advance_cache && !font->advance_cache[block])
 			{
 				int i, n;
 				fz_try(ctx)
@@ -1968,7 +1970,8 @@ fz_advance_glyph(fz_context *ctx, fz_font *font, int gid, int wmode)
 				for (i = 0; i < n; ++i)
 					font->advance_cache[block][i] = fz_advance_ft_glyph_aux(ctx, font, (block<<8)+i, 0, 1);
 			}
-			f = font->advance_cache[block][gid & 255];
+			if (font->advance_cache)
+				f = font->advance_cache[block][gid & 255];
 			fz_ft_unlock(ctx);
 			return f;
 		}

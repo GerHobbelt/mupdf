@@ -525,6 +525,7 @@ fz_clear_pixmap(fz_context *ctx, fz_pixmap *pix)
 	ptrdiff_t stride = pix->w * (ptrdiff_t)pix->n;
 	int h = pix->h;
 	unsigned char *s = pix->samples;
+	assert(s != NULL);
 	if (stride == pix->stride)
 	{
 		stride *= h;
@@ -1254,6 +1255,7 @@ fz_new_pixmap_from_1bpp_data(fz_context *ctx, int x, int y, int w, int h, unsign
 				bit = 0x80, in++;
 		}
 		out += stride;
+		(void) out;
 	}
 
 	return pixmap;
@@ -1415,6 +1417,8 @@ fz_new_pixmap_from_alpha_channel(fz_context *ctx, fz_pixmap *src)
 	n = src->n;
 	sp = src->samples + n - 1;
 	dp = dst->samples;
+	assert(dst->samples != NULL);
+	assert(src->samples != NULL);
 
 	while (h--)
 	{
@@ -1455,6 +1459,9 @@ fz_new_pixmap_from_color_and_mask(fz_context *ctx, fz_pixmap *color, fz_pixmap *
 		unsigned char *cs = &color->samples[y * color->stride];
 		unsigned char *ms = &mask->samples[y * mask->stride];
 		unsigned char *ds = &dst->samples[y * dst->stride];
+		assert(cs != NULL);
+		assert(ms != NULL);
+		assert(ds != NULL);
 		for (x = 0; x < w; ++x)
 		{
 			unsigned char a = *ms++;
@@ -1912,6 +1919,7 @@ fz_convert_indexed_pixmap_to_base(fz_context *ctx, const fz_pixmap *src)
 	d = dst->samples;
 	s_line_inc = src->stride - src->w * (ptrdiff_t)src->n;
 	d_line_inc = dst->stride - dst->w * (ptrdiff_t)dst->n;
+	assert(dst->w > 0 && dst->h > 0 && d != NULL);
 
 	if (src->alpha)
 	{

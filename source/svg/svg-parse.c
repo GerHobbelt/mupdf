@@ -148,9 +148,6 @@ svg_parse_transform(fz_context *ctx, svg_document *doc, const char *str, fz_matr
 	float args[6];
 	int nargs;
 
-	nargs = 0;
-	keywordlen = 0;
-
 	while (*str)
 	{
 		while (svg_is_whitespace_or_comma(*str))

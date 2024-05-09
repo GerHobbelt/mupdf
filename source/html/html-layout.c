@@ -210,7 +210,7 @@ static const hb_feature_t small_caps_feature[1] = {
 static int walk_string(string_walker *walker)
 {
 	fz_context *ctx = walker->ctx;
-	FT_Face face;
+	FT_Face face = NULL;
 	int fterr;
 	int quickshape;
 	char lang[8];
@@ -297,6 +297,7 @@ static int walk_string(string_walker *walker)
 	{
 		fz_rethrow(ctx);
 	}
+	assert(face != NULL);
 
 	if (quickshape)
 	{

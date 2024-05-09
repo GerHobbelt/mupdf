@@ -57,7 +57,7 @@ xps_load_links_in_path(fz_context *ctx, xps_document *doc, fz_matrix ctm,
 
 		fz_path *path = NULL;
 		int fill_rule;
-		fz_rect area;
+		fz_rect area = fz_infinite_rect;
 
 		xps_resolve_resource_reference(ctx, doc, dict, &data_att, &data_tag, NULL);
 		xps_resolve_resource_reference(ctx, doc, dict, &transform_att, &transform_tag, NULL);
@@ -105,7 +105,7 @@ xps_load_links_in_glyphs(fz_context *ctx, xps_document *doc, fz_matrix ctm,
 		int bidi_level = 0;
 		fz_font *font;
 		fz_text *text = NULL;
-		fz_rect area;
+		fz_rect area = fz_empty_rect;
 
 		xps_resolve_resource_reference(ctx, doc, dict, &transform_att, &transform_tag, NULL);
 

@@ -818,10 +818,12 @@ polygon_winding(fz_context *ctx, pdf_obj *v, int n)
 static void
 pdf_write_polygon_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, fz_rect *rect, pdf_obj **res, int close)
 {
-	struct cloud_list cloud_list;
+	struct cloud_list cloud_list = { 0 };
 	float cloud = 0;
 	pdf_obj *verts, *le;
-	fz_point p, first, last;
+	fz_point first = { 0 };
+	fz_point last = { 0 };
+	fz_point p;
 	int i, n;
 	float lw;
 	int sc, ic;
@@ -2659,7 +2661,8 @@ static pdf_obj *draw_push_button(fz_context *ctx, pdf_annot *annot, fz_rect bbox
 	const char *caption, const char *font, float size, int n, float *color,
 	int down)
 {
-	pdf_obj *ap, *res = NULL;
+	pdf_obj *ap = NULL;
+	pdf_obj *res = NULL;
 	fz_buffer *buf;
 	float bc[3] = { 0, 0, 0 };
 	float bg[3] = { 0.8f, 0.8f, 0.8f };
@@ -2730,7 +2733,7 @@ static pdf_obj *draw_push_button(fz_context *ctx, pdf_annot *annot, fz_rect bbox
 
 static pdf_obj *draw_radio_button(fz_context *ctx, pdf_annot *annot, fz_rect bbox, fz_matrix matrix, float w, float h, int yes)
 {
-	pdf_obj *ap;
+	pdf_obj *ap = NULL;
 	fz_buffer *buf;
 	float b;
 
@@ -2768,7 +2771,8 @@ static pdf_obj *draw_radio_button(fz_context *ctx, pdf_annot *annot, fz_rect bbo
 static pdf_obj *draw_check_button(fz_context *ctx, pdf_annot *annot, fz_rect bbox, fz_matrix matrix, float w, float h, int yes)
 {
 	float black[1] = { 0 };
-	pdf_obj *ap, *res = NULL;
+	pdf_obj *ap = NULL;
+	pdf_obj *res = NULL;
 	fz_buffer *buf;
 	float b;
 

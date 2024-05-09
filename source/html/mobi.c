@@ -113,7 +113,7 @@ static uint32_t
 mobi_read_data(fz_context *ctx, fz_buffer *out, fz_stream *stm, uint32_t *offset, uint32_t total_count, int format)
 {
 	// https://wiki.mobileread.com/wiki/MOBI
-	uint32_t compression, text_length, record_count, text_encoding, i;
+	uint32_t compression = COMPRESSION_NONE, text_length, record_count = 0, text_encoding = TEXT_ENCODING_LATIN_1, i;
 	unsigned char buf[4];
 	fz_range range = { 0 };
 	fz_stream *rec = NULL;

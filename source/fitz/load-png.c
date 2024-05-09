@@ -438,6 +438,7 @@ png_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 {
 	unsigned int passw[7], passh[7], passofs[8];
 	unsigned int code, size;
+	int interlace;
 	zng_stream stm;
 
 	memset(info, 0, sizeof (struct info));
@@ -464,13 +465,15 @@ png_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 	else
 		fz_throw(ctx, FZ_ERROR_FORMAT, "png file must start with IHDR chunk");
 
+	interlace = info->interlace;
+
 	p += size + 12;
 	total -= size + 12;
 
 	/* Prepare output buffer */
 	if (!only_metadata)
 	{
-		if (!info->interlace)
+		if (!interlace)
 		{
 			info->size = info->height * (1 + ((size_t) info->width * info->n * info->depth + 7) / 8);
 		}
@@ -552,7 +555,7 @@ png_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 		/* Apply prediction filter and deinterlacing */
 		fz_try(ctx)
 		{
-			if (!info->interlace)
+			if (!interlace)
 				png_predict(info->samples, info->width, info->height, info->n, info->depth);
 			else
 				png_deinterlace(ctx, info, passw, passh, passofs);
@@ -642,7 +645,7 @@ fz_pixmap *
 fz_load_png(fz_context *ctx, const unsigned char *p, size_t total)
 {
 	fz_pixmap *image = NULL;
-	struct info png;
+	struct info png = { 0 };
 	size_t stride;
 	int alpha;
 

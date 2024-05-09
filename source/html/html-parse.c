@@ -1534,7 +1534,7 @@ static void html_debug_emit(fz_context* ctx, void* user, int c)
 static fz_xml_doc *
 parse_to_xml(fz_context *ctx, fz_buffer *buf, int try_xml, int try_html5)
 {
-	fz_xml_doc *xml;
+	fz_xml_doc *xml = NULL;
 
 	if (try_xml && try_html5)
 	{
@@ -1899,7 +1899,7 @@ static fz_html_tree *
 fz_new_html_tree_of_size(fz_context *ctx, size_t size, fz_store_drop_fn *drop)
 {
 	fz_pool *pool = fz_new_pool(ctx);
-	fz_html_tree *tree;
+	fz_html_tree *tree = NULL;
 
 	fz_try(ctx)
 	{

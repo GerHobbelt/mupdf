@@ -547,7 +547,7 @@ void fz_dom_add_attribute(fz_context *ctx, fz_xml *elt, const char *att, const c
 	/* Move mvalue to be an fz_pool thing. */
 	if (mvalue)
 	{
-		char *tmp;
+		char *tmp = NULL;
 		fz_try(ctx)
 		{
 			tmp = fz_pool_alloc(ctx, doc->u.doc.pool, strlen(mvalue)+1);

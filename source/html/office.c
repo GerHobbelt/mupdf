@@ -795,7 +795,7 @@ collate_t_content(fz_context *ctx, fz_xml *top)
 				val = fz_strdup(ctx, s);
 			else
 			{
-				char *val2;
+				char *val2 = NULL;
 				size_t z1 = strlen(val);
 				size_t z2 = strlen(s) + 1;
 				fz_try(ctx)
@@ -807,6 +807,7 @@ collate_t_content(fz_context *ctx, fz_xml *top)
 					fz_free(ctx, val);
 					fz_rethrow(ctx);
 				}
+				assert(val2 != NULL);
 				memcpy(val2, val, z1);
 				memcpy(val2 + z1, s, z2);
 				fz_free(ctx, val);

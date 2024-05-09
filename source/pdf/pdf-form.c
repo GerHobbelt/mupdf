@@ -322,7 +322,8 @@ static void add_field_hierarchy_to_array(fz_context *ctx, pdf_obj *result, pdf_o
 {
 	pdf_obj *kids = pdf_dict_get(ctx, field, PDF_NAME(Kids));
 	char *needle = pdf_load_field_name(ctx, field);
-	int i, n;
+	int i = 0;
+	int n = 0;
 
 	fz_try(ctx)
 	{
@@ -1632,7 +1633,7 @@ size_t pdf_signature_contents(fz_context *ctx, pdf_document *doc, pdf_obj *signa
 	pdf_obj *v_ref = pdf_dict_get_inheritable(ctx, signature, PDF_NAME(V));
 	pdf_obj *v_obj = pdf_load_unencrypted_object(ctx, doc, pdf_to_num(ctx, v_ref));
 	char *copy = NULL;
-	size_t len;
+	size_t len = 0;
 
 	fz_var(copy);
 	fz_try(ctx)
@@ -1784,7 +1785,7 @@ get_locked_fields_from_xfa(fz_context *ctx, pdf_document *doc, pdf_obj *field)
 	char *name = pdf_load_field_name(ctx, field);
 	char *n = name;
 	const char *use;
-	fz_xml *node;
+	fz_xml *node = NULL;
 
 	if (name == NULL)
 		return NULL;
@@ -2302,7 +2303,7 @@ int pdf_field_event_keystroke(fz_context *ctx, pdf_document *doc, pdf_obj *field
 
 int pdf_annot_field_event_keystroke(fz_context *ctx, pdf_document *doc, pdf_annot *annot, pdf_keystroke_event *evt)
 {
-	int ret;
+	int ret = 0;
 
 	pdf_annot_push_local_xref(ctx, annot);
 

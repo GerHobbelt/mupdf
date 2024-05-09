@@ -41,7 +41,7 @@
 fz_layout_block *fz_new_layout(fz_context *ctx)
 {
 	fz_pool *pool = fz_new_pool(ctx);
-	fz_layout_block *block;
+	fz_layout_block *block = NULL;
 	fz_try(ctx)
 	{
 		block = fz_pool_alloc(ctx, pool, sizeof (fz_layout_block));
@@ -54,6 +54,7 @@ fz_layout_block *fz_new_layout(fz_context *ctx)
 		fz_drop_pool(ctx, pool);
 		fz_rethrow(ctx);
 	}
+	assert(block != NULL);
 	return block;
 }
 
@@ -260,6 +261,10 @@ add_block_to_page(fz_context *ctx, fz_stext_page *page)
 	fz_stext_block *block = fz_pool_alloc(ctx, page->pool, sizeof *page->first_block);
 	block->bbox = fz_empty_rect; /* Fixes bug 703267. */
 	block->prev = page->last_block;
+	assert(
+	(page->first_block == NULL && page->last_block == NULL) ||
+	(page->first_block != NULL && page->last_block != NULL)
+	);
 	if (!page->first_block)
 		page->first_block = page->last_block = block;
 	else

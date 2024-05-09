@@ -554,7 +554,7 @@ mobi_open_document_with_buffer(fz_context *ctx, fz_buffer *mobi)
 {
 	fz_archive *dir = NULL;
 	fz_buffer *html;
-	fz_document *doc;
+	fz_document *doc = NULL;
 	fz_var(dir);
 	fz_try(ctx)
 	{

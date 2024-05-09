@@ -693,7 +693,8 @@ void pdf_ensure_solid_xref(fz_context *ctx, pdf_document *doc, int num)
 
 int pdf_xref_ensure_incremental_object(fz_context *ctx, pdf_document *doc, int num)
 {
-	pdf_xref_entry *new_entry, *old_entry;
+	pdf_xref_entry *new_entry = NULL;
+	pdf_xref_entry *old_entry;
 	pdf_xref_subsec *sub = NULL;
 	int i;
 	pdf_obj *copy;
@@ -736,6 +737,8 @@ int pdf_xref_ensure_incremental_object(fz_context *ctx, pdf_document *doc, int n
 		doc->xref_index[num] = i;
 		fz_rethrow(ctx);
 	}
+	assert(new_entry != NULL);
+
 	*new_entry = *old_entry;
 	if (new_entry->type == 'o')
 	{
@@ -753,7 +756,8 @@ int pdf_xref_ensure_incremental_object(fz_context *ctx, pdf_document *doc, int n
 
 void pdf_xref_ensure_local_object(fz_context *ctx, pdf_document *doc, int num)
 {
-	pdf_xref_entry *new_entry, *old_entry;
+	pdf_xref_entry *new_entry = NULL;
+	pdf_xref_entry *old_entry;
 	pdf_xref_subsec *sub = NULL;
 	int i;
 	pdf_xref *xref;
@@ -803,6 +807,8 @@ void pdf_xref_ensure_local_object(fz_context *ctx, pdf_document *doc, int num)
 		doc->xref_index[num] = i;
 		fz_rethrow(ctx);
 	}
+	assert(new_entry != NULL);
+
 	*new_entry = *old_entry;
 	if (new_entry->type == 'o')
 	{
@@ -824,7 +830,7 @@ void pdf_replace_xref(fz_context *ctx, pdf_document *doc, pdf_xref_entry *entrie
 {
 	int *xref_index = NULL;
 	pdf_xref *xref = NULL;
-	pdf_xref_subsec *sub;
+	pdf_xref_subsec *sub = NULL;
 
 	fz_var(xref_index);
 	fz_var(xref);
@@ -841,6 +847,7 @@ void pdf_replace_xref(fz_context *ctx, pdf_document *doc, pdf_xref_entry *entrie
 		fz_free(ctx, xref_index);
 		fz_rethrow(ctx);
 	}
+	assert(sub != NULL);
 
 	sub->table = entries;
 	sub->start = 0;
@@ -893,8 +900,11 @@ void pdf_forget_xref(fz_context *ctx, pdf_document *doc)
 		fz_rethrow(ctx);
 	}
 
-	/* Set the trailer of the final xref section. */
-	doc->xref_sections[0].trailer = trailer;
+	if (doc->xref_sections)
+	{
+		/* Set the trailer of the final xref section. */
+		doc->xref_sections[0].trailer = trailer;
+	}
 }
 
 /*
@@ -1399,8 +1409,8 @@ pdf_read_new_xref(fz_context *ctx, pdf_document *doc)
 	pdf_obj *trailer = NULL;
 	pdf_obj *index = NULL;
 	pdf_obj *obj = NULL;
-	int gen, num = 0;
-	int64_t ofs, stm_ofs;
+	int gen = 0, num = 0;
+	int64_t ofs = 0, stm_ofs = 0;
 	int size, w0, w1, w2;
 	int t;
 
@@ -2688,7 +2698,7 @@ pdf_resolve_indirect(fz_context *ctx, pdf_obj *ref)
 	{
 		pdf_document *doc = pdf_get_indirect_document(ctx, ref);
 		int num = pdf_to_num(ctx, ref);
-		pdf_xref_entry *entry;
+		pdf_xref_entry *entry = NULL;
 
 		if (!doc)
 			return NULL;
@@ -2709,6 +2719,7 @@ pdf_resolve_indirect(fz_context *ctx, pdf_obj *ref)
 			fz_warn(ctx, "cannot load object (%d 0 R) into cache", num);
 			return NULL;
 		}
+		assert(entry != NULL);
 
 		ref = entry->obj;
 	}
@@ -5011,7 +5022,7 @@ pdf_validate_changes(fz_context *ctx, pdf_document *doc, int version)
 	int unsaved_versions = pdf_count_unsaved_versions(ctx, doc);
 	int n = pdf_count_versions(ctx, doc);
 	pdf_locked_fields *locked = NULL;
-	int result;
+	int result = 0;
 
 	if (version < 0 || version >= n)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "There aren't that many changes to find in this document!");
@@ -5119,7 +5130,8 @@ int pdf_find_version_for_obj(fz_context *ctx, pdf_document *doc, pdf_obj *obj)
 int pdf_validate_signature(fz_context *ctx, pdf_annot *widget)
 {
 	pdf_document *doc;
-	int unsaved_versions, num_versions, version, i;
+	int unsaved_versions, num_versions, version;
+	int i = 0;
 	pdf_locked_fields *locked = NULL;
 	int o_xref_base;
 

@@ -280,6 +280,7 @@ lex_name(fz_context *ctx, fz_stream *f, pdf_lexbuf *lb)
 			if (e - lb->scratch < 127)
 			{
 				s += pdf_lexbuf_grow(ctx, lb);
+				assert(s != NULL);
 				e = lb->scratch + fz_minz(127, lb->size);
 			}
 			else

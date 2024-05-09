@@ -1680,7 +1680,7 @@ void pdf_deserialise_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm)
 	pdf_obj *obj = NULL, *fingerprint_obj;
 	fz_buffer *buffer;
 	unsigned char digest[16];
-	int64_t file_size = 0;
+	int64_t file_size = -1;
 	int digests_match = 0;
 	pdf_token tok;
 

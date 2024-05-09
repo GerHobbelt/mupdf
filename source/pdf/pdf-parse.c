@@ -494,7 +494,7 @@ pdf_new_text_string_utf16be(fz_context *ctx, const char *s)
 	const char *ss;
 	int c, i, n, a, b;
 	unsigned char *p;
-	pdf_obj *obj;
+	pdf_obj *obj = NULL;
 
 	ss = s;
 	n = 0;
@@ -784,7 +784,7 @@ pdf_parse_ind_obj_or_newobj(fz_context *ctx, pdf_document *doc, fz_stream *file,
 {
 	pdf_obj *obj = NULL;
 	int num = 0, gen = 0;
-	int64_t stm_ofs;
+	int64_t stm_ofs = -1;
 	pdf_token tok;
 	pdf_lexbuf *buf = &doc->lexbuf.base;
 	int64_t a, b;

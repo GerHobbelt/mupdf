@@ -349,11 +349,14 @@ static void field_getValue(js_State *J)
 	fz_catch(js->ctx)
 		rethrow(js);
 
-	num = strtod(str, &end);
-	if (*str && *end == 0)
-		js_pushnumber(J, num);
-	else
-		js_pushstring(J, str);
+	if (str != NULL)
+	{
+		num = strtod(str, &end);
+		if (*str && *end == 0)
+			js_pushnumber(J, num);
+		else
+			js_pushstring(J, str);
+	}
 }
 
 static void field_setValue(js_State *J)
@@ -372,7 +375,7 @@ static void field_getType(js_State *J)
 {
 	pdf_js *js = js_getcontext(J);
 	pdf_obj *field = js_touserdata(J, 0, "Field");
-	const char *type;
+	const char *type = NULL;
 
 	fz_try(js->ctx)
 		type = pdf_field_type_string(js->ctx, field);
@@ -428,7 +431,7 @@ static void doc_getMetaString(js_State *J, const char *key)
 {
 	pdf_js *js = js_getcontext(J);
 	char buf[256];
-	int ret;
+	int ret = 0;
 
 	fz_try(js->ctx)
 		ret = fz_lookup_metadata(js->ctx, &js->doc->super, key, buf, nelem(buf)) > 0;
@@ -452,7 +455,7 @@ static void doc_getMetaDate(js_State *J, const char *key)
 {
 	pdf_js *js = js_getcontext(J);
 	char buf[256];
-	int ret;
+	int ret = 0;
 	double time;
 
 	fz_try(js->ctx)

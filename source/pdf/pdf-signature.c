@@ -295,7 +295,7 @@ static char *
 pdf_format_signature_info(fz_context *ctx, pdf_pkcs7_signer *signer, int flags, const char *reason, const char *location, int64_t now, char **name)
 {
 	pdf_pkcs7_distinguished_name *dn = NULL;
-	char *info;
+	char *info = NULL;
 	fz_var(dn);
 	fz_try(ctx)
 	{
@@ -419,7 +419,7 @@ fz_pixmap *pdf_preview_signature_as_pixmap(fz_context *ctx,
 	const char *reason,
 	const char *location)
 {
-	fz_pixmap *pix;
+	fz_pixmap *pix = NULL;
 	fz_display_list *dlist = pdf_preview_signature_as_display_list(ctx,
 		w, h, lang,
 		signer, flags, graphic, reason, location);
@@ -440,7 +440,7 @@ void pdf_clear_signature(fz_context *ctx, pdf_annot *widget)
 	if (pdf_dict_get(ctx, widget->obj, PDF_NAME(FT)) != PDF_NAME(Sig))
 		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation is not a signature widget");
 	if (pdf_annot_is_readonly(ctx, widget))
-		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Signature read only, it cannot be cleared.");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "read only signature cannot be cleared.");
 
 	begin_annot_op(ctx, widget, "Clear Signature");
 
@@ -573,7 +573,7 @@ pdf_pkcs7_distinguished_name *pdf_signature_get_signatory(fz_context *ctx, pdf_p
 {
 	char *contents = NULL;
 	size_t contents_len;
-	pdf_pkcs7_distinguished_name *dn;
+	pdf_pkcs7_distinguished_name *dn = NULL;
 
 	if (pdf_dict_get(ctx, signature, PDF_NAME(FT)) != PDF_NAME(Sig))
 		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation is not a signature widget");

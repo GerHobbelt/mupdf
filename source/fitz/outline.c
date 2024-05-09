@@ -302,7 +302,7 @@ iter_std_drop(fz_context *ctx, fz_outline_iterator *iter_)
 
 fz_outline_iterator *fz_outline_iterator_from_outline(fz_context *ctx, fz_outline *outline)
 {
-	fz_outline_iter_std *iter;
+	fz_outline_iter_std *iter = NULL;
 
 	fz_try(ctx)
 	{

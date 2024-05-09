@@ -856,7 +856,7 @@ fz_document *
 fz_new_xhtml_document_from_document(fz_context *ctx, fz_document *old_doc, const fz_stext_options *opts)
 {
 	fz_stext_options default_opts = { FZ_STEXT_PRESERVE_IMAGES | FZ_STEXT_DEHYPHENATE };
-	fz_document *new_doc;
+	fz_document *new_doc = NULL;
 	fz_buffer *buf = NULL;
 	fz_output *out = NULL;
 	fz_stream *stm = NULL;
