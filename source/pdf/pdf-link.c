@@ -610,7 +610,7 @@ pdf_load_link(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf_obj *dict,
 	fz_try(ctx)
 	{
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(QuadPoints));
-		if (obj)
+		if (pdf_is_array(ctx, obj))
 		{
 			count = pdf_array_len(ctx, obj) / 8;
 
