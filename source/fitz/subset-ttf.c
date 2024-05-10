@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /*
 	For the purposes of this code, and to save my tiny brain from
 	overload, we will adopt the following notation:
@@ -1616,3 +1618,5 @@ fz_subset_ttf_for_gids(fz_context *ctx, fz_buffer *orig, int *gids, int num_gids
 
 	return newbuf;
 }
+
+#endif  // FZ_ENABLE_RENDER_CORE 
