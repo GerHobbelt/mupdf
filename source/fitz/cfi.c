@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 typedef struct struct_stack
 {
 	struct struct_stack *parent;
@@ -204,7 +206,7 @@ fz_cfi_from_point(fz_context *ctx, fz_page *page, fz_matrix ctm, fz_point p)
 
 	fz_try(ctx)
 	{
-		fz_run_page_contents(ctx, page, &dev->super, ctm, NULL);
+		fz_run_page_contents(ctx, page, &dev->super, ctm);
 		fz_close_device(ctx, &dev->super);
 		cfi = dev->cfi;
 	}
@@ -233,3 +235,6 @@ fz_rect fz_rect_from_cfi(fz_context *ctx, fz_page *page, char *cfi)
 {
 	return fz_empty_rect;
 }
+
+#endif  // FZ_ENABLE_RENDER_CORE 
+

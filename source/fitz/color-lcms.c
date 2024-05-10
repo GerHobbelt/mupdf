@@ -27,6 +27,8 @@
 #include <string.h>
 #include <math.h>
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #if FZ_ENABLE_ICC
 
 #ifndef LCMS_USE_FLOAT
@@ -148,7 +150,7 @@ struct fz_icc_link
 	void *handle;
 };
 
-#ifdef HAVE_LCMS2MT
+#if defined(HAVE_LCMS2MT)
 
 static void fz_lcms_log_error(cmsContext id, cmsUInt32Number error_code, const char *error_text)
 {
@@ -207,7 +209,7 @@ void fz_drop_icc_context(fz_context *ctx)
 	ctx->colorspace->icc_instance = NULL;
 }
 
-#else
+#else  // defined(HAVE_LCMS2MT)
 
 static fz_context *glo_ctx = NULL;
 
@@ -230,7 +232,7 @@ void fz_drop_icc_context(fz_context *ctx)
 	cmsSetLogErrorHandler(NULL);
 }
 
-#endif
+#endif  // defined(HAVE_LCMS2MT)
 
 fz_icc_profile *fz_new_icc_profile(fz_context *ctx, unsigned char *data, size_t size)
 {
@@ -535,7 +537,7 @@ fz_icc_transform_pixmap(fz_context *ctx, fz_icc_link *link, const fz_pixmap *src
 	}
 }
 
-#endif
+#endif  // FZ_ENABLE_ICC
 
 #if FZ_ENABLE_GAMMA
 
@@ -629,7 +631,7 @@ fz_measure_colorspace_linearity(fz_context *ctx, fz_colorspace *colorspace)
 		cmsCloseProfile(GLO xyz_pro);
 	}
 	else
-#endif
+#endif  // FZ_ENABLE_ICC
 
 	/* Use the sRGB gamma curve if color management is not available. */
 	{
@@ -658,4 +660,7 @@ fz_measure_colorspace_linearity(fz_context *ctx, fz_colorspace *colorspace)
 	}
 }
 
-#endif
+#endif  // FZ_ENABLE_GAMMA
+
+#endif  // BUILDING_MUPDF_MINIMAL_CORE < 2
+

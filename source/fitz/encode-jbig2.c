@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include "../fitz/pixmap-imp.h"
 
 void
@@ -91,3 +93,5 @@ void fz_drop_jbig2e(fz_context *ctx, fz_jbig2e *inst)
 
 	enc->fin(ctx, inst);
 }
+
+#endif   // BUILDING_MUPDF_MINIMAL_CORE < 2

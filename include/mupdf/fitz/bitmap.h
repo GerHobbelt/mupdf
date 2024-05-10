@@ -182,6 +182,6 @@ void fz_drop_halftone(fz_context *ctx, fz_halftone *ht);
 }
 #endif
 
-#endif
+#endif  // BUILDING_MUPDF_MINIMAL_CORE < 2
 
 #endif

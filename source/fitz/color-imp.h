@@ -72,7 +72,7 @@ fz_icc_link *fz_find_icc_link(fz_context *ctx,
 void fz_icc_transform_color(fz_context *ctx, fz_color_converter *cc, const float *src, float *dst);
 void fz_icc_transform_pixmap(fz_context *ctx, fz_icc_link *link, const fz_pixmap *src, fz_pixmap *dst, int copy_spots);
 
-#endif
+#endif  // FZ_ENABLE_ICC
 
 typedef void (fz_color_convert_fn)(fz_context *ctx, fz_color_converter *cc, const float *src, float *dst);
 
@@ -123,6 +123,6 @@ void fz_convert_slow_pixmap_samples(fz_context *ctx, const fz_pixmap *src, fz_pi
 void fz_measure_colorspace_linearity(fz_context *ctx, fz_colorspace *colorspace);
 #endif
 
-#endif
+#endif  // BUILDING_MUPDF_MINIMAL_CORE < 2
 
 #endif
