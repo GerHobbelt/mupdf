@@ -5309,7 +5309,7 @@ const char *pdf_dict_get_text_string_opt(fz_context *ctx, pdf_obj *dict, pdf_obj
 	pdf_obj *obj = pdf_dict_get(ctx, dict, key);
 	if (!pdf_is_string(ctx, obj))
 		return NULL;
-	return pdf_to_text_string(ctx, obj);
+	return pdf_to_text_string(ctx, obj, NULL);
 }
 
 fz_rect pdf_dict_get_rect(fz_context *ctx, pdf_obj *dict, pdf_obj *key)

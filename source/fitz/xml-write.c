@@ -22,13 +22,13 @@
 
 #include "xml-imp.h"
 
-void fz_save_xml(fz_context *ctx, fz_xml *root, const char *path)
+void fz_save_xml(fz_context *ctx, fz_xml *root, const char *path, int indented)
 {
 	fz_output *out = fz_new_output_with_path(ctx, path, 0);
 
 	fz_try(ctx)
 	{
-		fz_write_xml(ctx, root, out);
+		fz_write_xml(ctx, root, out, indented);
 		fz_close_output(ctx, out);
 	}
 	fz_always(ctx)
@@ -109,8 +109,18 @@ xml_escape_string(fz_context *ctx, fz_output *out, const char *s)
 	}
 }
 
+static void
+indent(fz_context *ctx, fz_output *out, int depth)
+{
+	fz_write_byte(ctx, out, '\n');
+	while (depth-- > 0)
+	{
+		fz_write_byte(ctx, out, ' ');
+	}
+}
+
 static int
-do_write(fz_context *ctx, fz_xml *node, fz_output *out)
+do_write(fz_context *ctx, fz_xml *node, fz_output *out, int depth)
 {
 	const char *tag;
 	fz_xml *down;
@@ -132,7 +142,8 @@ do_write(fz_context *ctx, fz_xml *node, fz_output *out)
 		}
 
 		last_was_text = 0;
-		fz_write_byte(ctx, out, '\n');
+		if (depth >= 0)
+			indent(ctx, out, depth);
 		fz_write_byte(ctx, out, '<');
 		xml_escape_tag(ctx, out, tag);
 
@@ -148,22 +159,23 @@ do_write(fz_context *ctx, fz_xml *node, fz_output *out)
 		down = fz_xml_down(node);
 		if (down)
 		{
-			fz_write_string(ctx, out, ">");
-			if (!do_write(ctx, down, out))
-				fz_write_byte(ctx, out, '\n');
+			fz_write_byte(ctx, out, '>');
+			if (!do_write(ctx, down, out, depth >= 0 ? depth+1 : -1))
+				indent(ctx, out, depth);
 			fz_write_string(ctx, out, "</");
 			xml_escape_tag(ctx, out, tag);
-			fz_write_string(ctx, out, ">");
+			fz_write_byte(ctx, out, '>');
 		}
 		else
 		{
 			fz_write_string(ctx, out, "/>");
 		}
 	}
-	return last_was_text;
+	return depth >= 0 ? last_was_text : 1;
 }
 
-void fz_write_xml(fz_context *ctx, fz_xml *root, fz_output *out)
+void
+fz_write_xml(fz_context *ctx, fz_xml *root, fz_output *out, int indented)
 {
 	if (root == NULL)
 		return;
@@ -174,6 +186,6 @@ void fz_write_xml(fz_context *ctx, fz_xml *root, fz_output *out)
 	if (root->up == NULL)
 		root = root->down;
 
-	if (!do_write(ctx, root, out))
+	if (!do_write(ctx, root, out, indented ? 0 : -1))
 		fz_write_byte(ctx, out, '\n');
 }

@@ -423,13 +423,17 @@ fz_xml *fz_new_dom_text_node(fz_context *ctx, fz_xml *dom, const char *text);
 	under which everything must sit. Our structures allow for multiple
 	top level nodes. If required, we will output an extra 'ROOT' node
 	at the top so that the xml is well-formed.
+
+	If 'indented' is non-zero then additional whitespace will be added to
+	make the XML easier to read in a text editor. It will NOT be properly
+	compliant.
 */
-void fz_write_xml(fz_context *ctx, fz_xml *root, fz_output *out);
+void fz_write_xml(fz_context *ctx, fz_xml *root, fz_output *out, int indented);
 
 /**
 	As for fz_write_xml, but direct to a file.
 */
-void fz_save_xml(fz_context *ctx, fz_xml *root, const char *path);
+void fz_save_xml(fz_context *ctx, fz_xml *root, const char *path, int indented);
 
 #ifdef __cplusplus
 }
