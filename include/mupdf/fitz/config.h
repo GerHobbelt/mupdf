@@ -261,9 +261,25 @@
 #define FZ_ENABLE_HTML 1
 #endif /* FZ_ENABLE_HTML */
 
-#ifndef FZ_ENABLE_EPUB
+#ifndef FZ_ENABLE_FB2 
+#define FZ_ENABLE_FB2 1
+#endif /* FZ_ENABLE_FB2 */
+
+#ifndef FZ_ENABLE_MOBI 
+#define FZ_ENABLE_MOBI 1
+#endif /* FZ_ENABLE_MOBI */
+
+#ifndef FZ_ENABLE_EPUB 
 #define FZ_ENABLE_EPUB 1
 #endif /* FZ_ENABLE_EPUB */
+
+#ifndef FZ_ENABLE_OFFICE 
+#define FZ_ENABLE_OFFICE 1
+#endif /* FZ_ENABLE_OFFICE */
+
+#ifndef FZ_ENABLE_TXT 
+#define FZ_ENABLE_TXT 1
+#endif /* FZ_ENABLE_TXT */
 
 #ifndef FZ_ENABLE_WEBP
 #define FZ_ENABLE_WEBP 1
