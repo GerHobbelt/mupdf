@@ -19,13 +19,20 @@
 --------------
 
 
-All functions that take `PDFObjects`, do automatic translation between :title:`JavaScript` objects and `PDFObjects` using a few basic rules:
+All functions that take `PDFObjects`, do automatic translation between
+:title:`JavaScript` objects and `PDFObjects` using a few basic rules:
 
 
 - Null, booleans, and numbers are translated directly.
-- :title:`JavaScript` strings are translated to :title:`PDF` names, unless they are surrounded by parentheses: "Foo" becomes the :title:`PDF` name /Foo and "(Foo)" becomes the :title:`PDF` string (Foo).
-- Arrays and dictionaries are recursively translated to :title:`PDF` arrays and dictionaries. Be aware of cycles though! The translation does NOT cope with cyclic references!
-- The translation goes both ways: :title:`PDF` dictionaries and arrays can be accessed similarly to :title:`JavaScript` objects and arrays by getting and setting their properties.
+- :title:`JavaScript` strings are translated to :title:`PDF` names, unless
+they are surrounded by parentheses: "Foo" becomes the :title:`PDF` name /Foo
+and "(Foo)" becomes the :title:`PDF` string (Foo).
+- Arrays and dictionaries are recursively translated to :title:`PDF` arrays
+and dictionaries. Be aware of cycles though! The translation does NOT cope
+with cyclic references!
+- The translation goes both ways: :title:`PDF` dictionaries and arrays can
+be accessed similarly to :title:`JavaScript` objects and arrays by getting
+and setting their properties.
 
 
 |instance_props|
@@ -58,7 +65,8 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
 .. method:: put(ref, value)
 
-    Put information into dictionaries and arrays in the `PDFObject`. Dictionaries and arrays can also be accessed using normal property syntax: `obj.Foo = 42; delete obj.Foo; x = obj[5]`.
+    Put information into dictionaries and arrays in the `PDFObject`.
+    Dictionaries and arrays can also be accessed using normal property syntax: `obj.Foo = 42; delete obj.Foo; x = obj[5]`.
 
     :arg ref: Key or index.
     :arg value: The value for the key or index.
@@ -182,7 +190,11 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
 .. method:: valueOf()
 
-    Convert primitive :title:`PDF` objects to a corresponding primitive `Null`, `Boolean`, `Number` or `String` :title:`JavaScript` objects. Indirect :title:`PDF` objects get converted to the string "R" while :title:`PDF` names are converted to plain strings. :title:`PDF` arrays or dictionaries are returned unchanged.
+    Convert primitive :title:`PDF` objects to a corresponding primitive `Null`,
+    `Boolean`, `Number` or `String` :title:`JavaScript` objects.
+    Indirect :title:`PDF` objects get converted to the string "R"
+    while :title:`PDF` names are converted to plain strings.
+    :title:`PDF` arrays or dictionaries are returned unchanged.
 
     :return: `Null` \| `Boolean` \| `Number` \| `String`.
 
@@ -280,7 +292,8 @@ The only way to access a stream is via an indirect object, since all streams are
 
 .. method:: writeStream(buffer)
 
-    Update the contents of the stream the indirect reference points to. This will update the "Length", "Filter" and "DecodeParms" automatically.
+    Update the contents of the stream the indirect reference points to.
+    This will update the "Length", "Filter" and "DecodeParms" automatically.
 
     :arg buffer: `Buffer`.
 
@@ -292,7 +305,10 @@ The only way to access a stream is via an indirect object, since all streams are
 
 .. method:: writeRawStream(buffer)
 
-    Update the contents of the stream the indirect reference points to. The buffer must contain already compressed data that matches the "Filter" and "DecodeParms". This will update the "Length" automatically, but leave the "Filter" and "DecodeParms" untouched.
+    Update the contents of the stream the indirect reference points to.
+    The buffer must contain already compressed data that matches
+    the "Filter" and "DecodeParms". This will update the "Length"
+    automatically, but leave the "Filter" and "DecodeParms" untouched.
 
 
     :arg buffer: `Buffer`.
