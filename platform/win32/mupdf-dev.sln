@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.4.33205.214
+VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "!Solution Items", "!Solution Items", "{A641717E-DD60-4E51-9973-D57D1CDAFB69}"
 	ProjectSection(SolutionItems) = preProject
@@ -650,7 +650,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "__build_target_tesseract", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "__build_target_unittests", "__build_target_unittests.vcxproj", "{0688FE97-E8B4-4D80-8B8B-D445B349A821}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "__docs", "__docs_src.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFE9A558}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "__docs_src", "__docs_src.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFE9A558}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base58x_test", "base58x_test.vcxproj", "{ACE48C47-B9F9-460F-8535-08C8D37D78C5}"
 EndProject
@@ -661,6 +661,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bibutils", "bibutils.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF55313E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bin2coff", "bin2coff.vcxproj", "{BFE316B3-BD90-433A-A20D-C73975F1CAA7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "binlog_bread", "binlog_bread.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFF5C137}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "binlog_brecovery", "binlog_brecovery.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF5B415A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "binlog_tests", "binlog_tests.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFF37137}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "binlog_tools", "binlog_tools.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFF32137}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "brotli", "brotli.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFB3B08F}"
 EndProject
@@ -1070,7 +1078,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcrow_tests", "libcrow_te
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcrumsort", "libcrumsort.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF84A237}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcryptopp", "cryptlib.vcxproj", "{424334E5-ADDF-490D-BA7B-46CF3686B48D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cryptlib", "cryptlib.vcxproj", "{424334E5-ADDF-490D-BA7B-46CF3686B48D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcsp", "libcsp.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF8A0E28}"
 EndProject
@@ -1526,11 +1534,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libivf-hnsw", "libivf-hnsw.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libjansson", "libjansson.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF95A080}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libjasper", "libJasPer.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFA3F9A5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libJasPer", "libJasPer.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFA3F9A5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libjbig2dec", "libjbig2dec.vcxproj", "{5EDCF4FD-0291-4FB9-8D96-958957CA5E3C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libjerryscript", "libjerryscript.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFD2CC3C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libjbig2enc", "libjbig2enc.vcxproj", "{83AC0BDA-89B9-4703-A77D-8049AC3A0D04}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libjimtcl", "libjimtcl.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFE237DA}"
 EndProject
@@ -1702,7 +1712,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmmkv", "libmmkv.vcxproj"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmobi", "libmobi.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFB8E5FC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmorton_filter", "morton_filter.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF4363E5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "morton_filter", "morton_filter.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF4363E5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmosquitto", "libmosquitto.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF5F66DB}"
 EndProject
@@ -3034,7 +3044,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stdext-path", "stdext-path.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "storytest", "storytest.vcxproj", "{0FDC74D7-D18C-45CE-94D6-C5A0EDFCCDF2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "subprocess_tests", "subprocess.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF27C32D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "subprocess", "subprocess.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF27C32D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sync_nas_filelock", "sync_nas_filelock.vcxproj", "{87EE9DA4-DE1E-4448-8324-183C98F87EAA}"
 EndProject
@@ -3093,6 +3103,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tesseract-unittests", "tesseract-unittests.vcxproj", "{0AC5D24B-CBCC-4D67-8C89-52DD772121D1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tesseract-wordlist2dawg", "tesseract-wordlist2dawg.vcxproj", "{D05636BA-A83A-44ED-9E12-F98F5EFB8EFA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tesseract_api_docs", "tesseract_api_docs.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A51BCAD}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tesseract_docs", "tesseract_docs.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A271B3D}"
 EndProject
@@ -3183,6 +3195,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zmq_tools", "zmq_tools.vcxproj", "{A60D8644-5A1C-4D29-8972-7518FF258E43}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zstd_demos", "zstd_demos.vcxproj", "{00112979-815B-4F64-BC9D-2190780C0A35}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zstd_demos", "zstd_demos.vcxproj", "{00112979-815B-4F64-BC9D-2190780C0A35}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mutool-redux", "mutool-redux.vcxproj", "{FA4CF35D-25C0-472E-AA2F-A28B4A60D302}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmupdf_sans_tesseract", "libmupdf_sans_tesseract.vcxproj", "{26B92352-70ED-4BEC-BA5F-9B6A07E073FD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmutool_redux", "libmutool_redux.vcxproj", "{4F61960E-4AC9-489A-8D60-5302DD82DCAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
