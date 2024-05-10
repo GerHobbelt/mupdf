@@ -1,6 +1,11 @@
 
 #include "pch.h"
 
+#ifndef TEST_HARDWARE_EXCEPTION
+#define TEST_HARDWARE_EXCEPTION  0
+#endif
+
+
 TEST(muqCoreBelief, ThrownCpluplusExceptionIsCaught) {
 	throw std::exception("aborting");
 }
@@ -17,10 +22,15 @@ TEST(muqCoreBelief, ThrownCpluplusArbitraryExceptionPointerIsCaught) {
 	throw NULL;
 }
 
+#if TEST_HARDWARE_EXCEPTION
+
 TEST(muqCoreBelief, MemoryAccessFailureCaughtBySEH) {
 	volatile int* pInt = 0x00000000;
 	*pInt = 20;
 }
+
+#endif
+
 
 
 

@@ -5,6 +5,10 @@
 
 #pragma once
 
+#include "mupdf/fitz/context.h"
+#include "mupdf/assertions.h"
+#include "mupdf/fitz/geometry.h"
+
 #include "gtest/gtest.h"
 
 #include <iostream>

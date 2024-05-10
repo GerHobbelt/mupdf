@@ -373,9 +373,14 @@ fz_normalize_vector(fz_point p)
 
 /* Rectangles and bounding boxes */
 
+#if 0
+
 /* biggest and smallest integers that a float can represent perfectly (i.e. 24 bits) */
 #define MAX_SAFE_INT 16777216
 #define MIN_SAFE_INT -16777216
+
+#endif
+
 
 const fz_rect fz_infinite_rect = { FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT };
 const fz_rect fz_empty_rect = { FZ_MAX_INF_RECT, FZ_MAX_INF_RECT, FZ_MIN_INF_RECT, FZ_MIN_INF_RECT };
@@ -396,10 +401,10 @@ fz_irect_from_rect(fz_rect r)
 	if (!fz_is_valid_rect(r))
 		return fz_invalid_irect;
 
-	b.x0 = fz_clamp(floorf(r.x0), MIN_SAFE_INT, MAX_SAFE_INT);
-	b.y0 = fz_clamp(floorf(r.y0), MIN_SAFE_INT, MAX_SAFE_INT);
-	b.x1 = fz_clamp(ceilf(r.x1), MIN_SAFE_INT, MAX_SAFE_INT);
-	b.y1 = fz_clamp(ceilf(r.y1), MIN_SAFE_INT, MAX_SAFE_INT);
+	b.x0 = fz_clamp(floorf(r.x0), FZ_MIN_SAFE_INT, FZ_MAX_SAFE_INT);
+	b.y0 = fz_clamp(floorf(r.y0), FZ_MIN_SAFE_INT, FZ_MAX_SAFE_INT);
+	b.x1 = fz_clamp(ceilf(r.x1), FZ_MIN_SAFE_INT, FZ_MAX_SAFE_INT);
+	b.y1 = fz_clamp(ceilf(r.y1), FZ_MIN_SAFE_INT, FZ_MAX_SAFE_INT);
 
 	return b;
 }
@@ -426,13 +431,13 @@ fz_round_rect(fz_rect r)
 	float f;
 
 	f = floorf(r.x0 + 0.001f);
-	b.x0 = fz_clamp(f, MIN_SAFE_INT, MAX_SAFE_INT);
+	b.x0 = fz_clamp(f, FZ_MIN_SAFE_INT, FZ_MAX_SAFE_INT);
 	f = floorf(r.y0 + 0.001f);
-	b.y0 = fz_clamp(f, MIN_SAFE_INT, MAX_SAFE_INT);
+	b.y0 = fz_clamp(f, FZ_MIN_SAFE_INT, FZ_MAX_SAFE_INT);
 	f = ceilf(r.x1 - 0.001f);
-	b.x1 = fz_clamp(f, MIN_SAFE_INT, MAX_SAFE_INT);
+	b.x1 = fz_clamp(f, FZ_MIN_SAFE_INT, FZ_MAX_SAFE_INT);
 	f = ceilf(r.y1 - 0.001f);
-	b.y1 = fz_clamp(f, MIN_SAFE_INT, MAX_SAFE_INT);
+	b.y1 = fz_clamp(f, FZ_MIN_SAFE_INT, FZ_MAX_SAFE_INT);
 
 	return b;
 }

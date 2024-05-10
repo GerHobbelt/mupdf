@@ -239,6 +239,11 @@ static inline fz_point fz_make_point(float x, float y)
 #define FZ_MAX_INF_RECT ((int)0x7fffff80)
 
 
+/* biggest and smallest integers that a float can represent perfectly (i.e. 24 bits) */
+#define FZ_MAX_SAFE_INT ((int)16777216)
+#define FZ_MIN_SAFE_INT ((int)-16777216)
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
