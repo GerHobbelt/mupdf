@@ -205,19 +205,30 @@ static float pdf_write_border_appearance(fz_context *ctx, pdf_annot *annot, fz_b
 	return w;
 }
 
+static int
+write_color(fz_context *ctx, fz_buffer *buf, int n, float *color, int stroke)
+{
+	if (n == 4)
+		fz_append_printf(ctx, buf, "%g %g %g %g %c\n", color[0], color[1], color[2], color[3], stroke ? 'K' : 'k');
+	else if (n == 3)
+		fz_append_printf(ctx, buf, "%g %g %g %s\n", color[0], color[1], color[2], stroke ? "RG" : "rg");
+	else if (n == 1)
+		fz_append_printf(ctx, buf, "%g %c\n", color[0], stroke ? 'G' : 'g');
+	else if (n == 0)
+		fz_append_printf(ctx, buf, "0 %c\n", stroke ? 'G' : 'g');
+	else
+		return 0;
+	return 1;
+}
+
 static int pdf_write_stroke_color_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf)
 {
 	float color[4];
 	int n;
 	pdf_annot_color(ctx, annot, &n, color);
-	switch (n)
-	{
-	default: return 0;
-	case 1: fz_append_printf(ctx, buf, "%g G\n", color[0]); break;
-	case 3: fz_append_printf(ctx, buf, "%g %g %g RG\n", color[0], color[1], color[2]); break;
-	case 4: fz_append_printf(ctx, buf, "%g %g %g %g K\n", color[0], color[1], color[2], color[3]); break;
-	}
-	return 1;
+	if (n == 0)
+		return 0;
+	return write_color(ctx, buf, n, color, 1);
 }
 
 static int pdf_is_dark_fill_color(fz_context *ctx, pdf_annot *annot)
@@ -249,14 +260,9 @@ static int pdf_write_fill_color_appearance(fz_context *ctx, pdf_annot *annot, fz
 	float color[4];
 	int n;
 	pdf_annot_color(ctx, annot, &n, color);
-	switch (n)
-	{
-	default: return 0;
-	case 1: fz_append_printf(ctx, buf, "%g g\n", color[0]); break;
-	case 3: fz_append_printf(ctx, buf, "%g %g %g rg\n", color[0], color[1], color[2]); break;
-	case 4: fz_append_printf(ctx, buf, "%g %g %g %g k\n", color[0], color[1], color[2], color[3]); break;
-	}
-	return 1;
+	if (n == 0)
+		return 0;
+	return write_color(ctx, buf, n, color, 0);
 }
 
 static int pdf_write_interior_fill_color_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf)
@@ -264,14 +270,9 @@ static int pdf_write_interior_fill_color_appearance(fz_context *ctx, pdf_annot *
 	float color[4];
 	int n;
 	pdf_annot_interior_color(ctx, annot, &n, color);
-	switch (n)
-	{
-	default: return 0;
-	case 1: fz_append_printf(ctx, buf, "%g g\n", color[0]); break;
-	case 3: fz_append_printf(ctx, buf, "%g %g %g rg\n", color[0], color[1], color[2]); break;
-	case 4: fz_append_printf(ctx, buf, "%g %g %g %g k\n", color[0], color[1], color[2], color[3]); break;
-	}
-	return 1;
+	if (n == 0)
+		return 0;
+	return write_color(ctx, buf, n, color, 0);
 }
 
 static int pdf_write_MK_BG_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf)
@@ -279,14 +280,9 @@ static int pdf_write_MK_BG_appearance(fz_context *ctx, pdf_annot *annot, fz_buff
 	float color[4];
 	int n;
 	pdf_annot_MK_BG(ctx, annot, &n, color);
-	switch (n)
-	{
-	default: return 0;
-	case 1: fz_append_printf(ctx, buf, "%g g\n", color[0]); break;
-	case 3: fz_append_printf(ctx, buf, "%g %g %g rg\n", color[0], color[1], color[2]); break;
-	case 4: fz_append_printf(ctx, buf, "%g %g %g %g k\n", color[0], color[1], color[2], color[3]); break;
-	}
-	return 1;
+	if (n == 0)
+		return 0;
+	return write_color(ctx, buf, n, color, 0);
 }
 
 static int pdf_write_MK_BC_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf)
@@ -294,14 +290,9 @@ static int pdf_write_MK_BC_appearance(fz_context *ctx, pdf_annot *annot, fz_buff
 	float color[4];
 	int n;
 	pdf_annot_MK_BC(ctx, annot, &n, color);
-	switch (n)
-	{
-	default: return 0;
-	case 1: fz_append_printf(ctx, buf, "%g G\n", color[0]); break;
-	case 3: fz_append_printf(ctx, buf, "%g %g %g RG\n", color[0], color[1], color[2]); break;
-	case 4: fz_append_printf(ctx, buf, "%g %g %g %g K\n", color[0], color[1], color[2], color[3]); break;
-	}
-	return 1;
+	if (n == 0)
+		return 0;
+	return write_color(ctx, buf, n, color, 1);
 }
 
 static void maybe_stroke_and_fill(fz_context *ctx, fz_buffer *buf, int sc, int ic)
@@ -2012,14 +2003,7 @@ write_variable_text(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, pdf_obj *
 		}
 
 		fz_append_string(ctx, buf, "BT\n");
-		if (n == 4)
-			fz_append_printf(ctx, buf, "%g %g %g %g k\n", color[0], color[1], color[2], color[3]);
-		else if (n == 3)
-			fz_append_printf(ctx, buf, "%g %g %g rg\n", color[0], color[1], color[2]);
-		else if (n == 1)
-			fz_append_printf(ctx, buf, "%g g\n", color[0]);
-		else if (n == 0)
-			fz_append_printf(ctx, buf, "0 g\n");
+		write_color(ctx, buf, n, color, 0);
 		if (multiline)
 		{
 			fz_append_printf(ctx, buf, "%g %g Td\n", padding, padding+h-baseline+lineheight);
@@ -2166,10 +2150,10 @@ pdf_write_free_text_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 	fz_rect *rect, fz_rect *bbox, fz_matrix *matrix, pdf_obj **res)
 {
 	const char *font;
-	float size, color[4];
+	float size, color[4], textcolor[4];
 	const char *text;
 	float w, h, t, b;
-	int q, r, n;
+	int q, r, n, textcolor_n;
 	int lang;
 	fz_rect rd;
 #if FZ_ENABLE_HTML_ENGINE
@@ -2181,6 +2165,7 @@ pdf_write_free_text_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 	r = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(Rotate));
 	q = pdf_annot_quadding(ctx, annot);
 	pdf_annot_default_appearance(ctx, annot, &font, &size, &n, color);
+	pdf_annot_text_color(ctx, annot, &textcolor_n, textcolor);
 	lang = pdf_annot_language(ctx, annot);
 	rd = pdf_annot_rect_diff(ctx, annot);
 
@@ -2243,14 +2228,7 @@ pdf_write_free_text_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 	b = pdf_write_border_appearance(ctx, annot, buf);
 	if (b > 0)
 	{
-		if (n == 4)
-			fz_append_printf(ctx, buf, "%g %g %g %g K\n", color[0], color[1], color[2], color[3]);
-		else if (n == 3)
-			fz_append_printf(ctx, buf, "%g %g %g RG\n", color[0], color[1], color[2]);
-		else if (n == 1)
-			fz_append_printf(ctx, buf, "%g G\n", color[0]);
-		else if (n == 0)
-			fz_append_printf(ctx, buf, "0 G\n");
+		write_color(ctx, buf, n, color, 1);
 		fz_append_printf(ctx, buf, "%g %g %g %g re\nS\n", b / 2 + rd.x0, b / 2 + rd.y0, w - b - rd.x1 - rd.x0, h - b - rd.y1 - rd.y0);
 	}
 
@@ -2324,13 +2302,19 @@ pdf_write_free_text_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 	if (rd.x0 != 0 || rd.y0 != 0)
 		fz_append_printf(ctx, buf, "q 1 0 0 1 %g %g cm\n", rd.x0, -rd.y1);
 
+	if (textcolor_n == 0)
+	{
+		textcolor_n = n;
+		memcpy(textcolor, color, sizeof(textcolor));
+	}
+
 #if FZ_ENABLE_HTML_ENGINE
 	rc = pdf_dict_get_text_string_opt(ctx, annot->obj, PDF_NAME(RC));
 	if (rc)
 		write_rich_content(ctx, annot, buf, res, rc, size, w, h);
 	else
 #endif
-		write_variable_text(ctx, annot, buf, res, lang, text, font, size, n, color, q, w, h, b*2,
+		write_variable_text(ctx, annot, buf, res, lang, text, font, size, textcolor_n, textcolor, q, w, h, b*2,
 			0.8f, 1.2f, 1, 0, 0);
 	if (rd.x0 != 0 || rd.y0 != 0)
 		fz_append_printf(ctx, buf, "Q\n");
