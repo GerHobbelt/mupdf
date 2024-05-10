@@ -42,6 +42,7 @@ static int usage(void)
 		"usage: mutool tag [options] input.pdf\n"
 		"  -c    include contents\n"
 		"  -f -  tag file\n"
+		"  -i    indent the XML for easy reading\n"
 		"  -p -  password\n"
 
 		);
@@ -663,7 +664,7 @@ fz_new_struct_gatherer(fz_context *ctx)
 }
 
 static void
-pdf_structure_to_xml(fz_context *ctx, pdf_document *doc, const char *tagfile, int pages)
+pdf_structure_to_xml(fz_context *ctx, pdf_document *doc, const char *tagfile, int pages, int indent)
 {
 	fz_device *dev = fz_new_struct_gatherer(ctx);
 
@@ -693,7 +694,7 @@ pdf_structure_to_xml(fz_context *ctx, pdf_document *doc, const char *tagfile, in
 		}
 	}
 
-	fz_save_xml(ctx, ((fz_struct_gatherer *)dev)->root, tagfile);
+	fz_save_xml(ctx, ((fz_struct_gatherer *)dev)->root, tagfile, indent);
 
 	fz_drop_device(ctx, dev);
 }
@@ -708,14 +709,16 @@ int pdftag_main(int argc, const char **argv)
 	fz_context *ctx = NULL;
 	int ret = 0;
 	int contents = 0;
+	int indent = 0;
 
-	while ((c = fz_getopt(argc, argv, "cf:p:")) != -1)
+	while ((c = fz_getopt(argc, argv, "icf:p:")) != -1)
 	{
 		switch (c)
 		{
 		case 'p': password = fz_optarg; break;
 		case 'f': tagfile = fz_optarg; break;
 		case 'c': contents = 1; break;
+		case 'i': indent = 1; break;
 		default: return usage();
 		}
 	}
@@ -744,7 +747,7 @@ int pdftag_main(int argc, const char **argv)
 			if (!pdf_authenticate_password(ctx, doc, password))
 				fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot authenticate password: %s", infile);
 
-		pdf_structure_to_xml(ctx, doc, tagfile, contents);
+		pdf_structure_to_xml(ctx, doc, tagfile, contents, indent);
 	}
 	fz_always(ctx)
 	{
