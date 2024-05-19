@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF82206C}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTLSH;TLSH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTLSH;TLSH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTLSH;TLSH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTLSH;TLSH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTLSH;TLSH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTLSH;TLSH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTLSH;TLSH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTLSH;TLSH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTLSH;TLSH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTLSH;TLSH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTLSH;TLSH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTLSH;TLSH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/Windows/WinFunctions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/py_ext/tlshmodule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/src/gen_arr2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/src/input_desc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/src/shared_file_functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/src/tlsh.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/src/tlsh_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/src/tlsh_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/test/order_bug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/test/simple_unittest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/test/timing_unittest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/test/tlsh_parts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/test/tlsh_pattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/test/tlsh_unittest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tlsh/utils/rand_tags.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlsh/Windows/WinFunctions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlsh/include/input_desc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlsh/include/shared_file_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlsh/include/tlsh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlsh/include/tlsh_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlsh/include/tlsh_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlsh/include/win_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/setup/Redhat/version.h" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/2015_Euro_DFRWS_Criteria_Sim_Digests.pdf" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Attacking_LSH_and_Sim_Dig.pdf" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Change_History.md" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/DFRWS_Similarity_Digests.pdf" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/NOTICE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/PUBLIC.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/README.mingw" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/README.python" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/README.windows" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/TLSH_CTC_final.pdf" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/TLSH_Introduction.pdf" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/README" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/destroy_refresh_exp.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/021106_yossivassa.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/0Alice.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/11-17-06_Academy.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/1english-only.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/2005NISSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/2006-07_Resource_Brochure.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/2006_2007PhysicalEducationConceptMap.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/2007ShowcaseFilm_Package.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/22-ppa-3rd_e2snewsletter_jun06.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/42nd_street.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/5._.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/7-prikaz-slozeno.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/AccessToNationalSportsCentresPassportScheme.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Adult-Sports.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/AfghanistanLiteracyDiscussionPaper.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/BBVDlivepr.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/BBVDpr.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/BENEFITS_OF_EXERCISE_for_the_manual.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Call-for-abstracts.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/ClaremontTrioBio0607.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/CommandGde.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/DOC-DHHS_Joint_Action_Plan_summary.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/DanceFestOMAIPressReleaseFeb15_07.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/ExercisePocketSliderText.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/FF06_press_9-7.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Fitness_Myths.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Global_Warming_Resolution_April_2001.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/GovernorsTaskForceReport.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Groove_Yard.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/HSCPR10306.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/HandoutSportsInjuryPrevention.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/IntlChildrensFestRevisedRelease.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/LOTRLeadRelease.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Landau-Pickford-Press-Rel.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Lotuspike-VBTD-Jenkins.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/MEDT6491.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/MRbio.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Meeting_the_Challenges.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Memo_Ehrlich_1103.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Midwestern_Rock_Garden.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Newsletter_20-1-3.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Reviews-GrooveYard.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/SAR_Dog_Avalanche_promo.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/SCE_3320.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Shopping.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/SoundResources.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Summer_Math_Syllabus.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/TeachingMathCameroon.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/The-Global-Warming-Response-Act.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/WPTC2006Season.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/Week3.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/aReportOfTheSurgeonGeneral.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/ashaam2.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/billboard-021205.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/bio.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/cme2i05.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/didges_brew_band_info.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/exploring_dallas.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/exxonmobil_climate_change_backgrounder.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/fitnessTerms.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/gogirls.2003-10.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/greenhouse.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/lac_rfp_inner-cities.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/ledger091505.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/modelgeneralnotice.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/parentarticle.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/record_voting.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/rkc_flyer.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/sisters_pressrelease.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/small.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/small2.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/socy642_f02_milkie.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/spanish_place_namesA.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/spanish_place_namesB.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/sports_massage_and_recovery.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/srilanka.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/survey_mathtch.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/syllabus.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/victim.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data/website_course_descriptors06-07.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data_col_swap.csv" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data_col_swap.tlsh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data_variants/021106_yossivassa.txt.plus" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data_variants/0Alice.txt.plus" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data_variants/11-17-06_Academy.txt.plus" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data_variants/1english-only.txt.plus" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data_variants/2005NISSE.txt.plus" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data_variants/2006-07_Resource_Brochure.txt.plus" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data_variants/2006_2007PhysicalEducationConceptMap.txt.plus" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data_variants/2007ShowcaseFilm_Package.txt.plus" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data_variants/22-ppa-3rd_e2snewsletter_jun06.txt.plus" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data_variants/42nd_street.txt.plus" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/example_data_variants/fake_image.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/exp/example_data.Week3.split.tlsh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/python_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/test.bat" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/test_parts.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/test_pattern.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Testing/testlen.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Windows/clean.bat" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/Windows/clean.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/clean.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/clean_mingw.bat" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/docs/_config.yml" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/docs/index.html" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/docs/papers.html" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/docs/style.css" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/docs/usage.html" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/example/com/trendmicro/tlsh/example/TlshExample.java" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/example/new_code.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/example/old_code.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/src/main/java/com/trendmicro/tlsh/BucketOption.java" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/src/main/java/com/trendmicro/tlsh/ChecksumOption.java" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/src/main/java/com/trendmicro/tlsh/Tlsh.java" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/src/main/java/com/trendmicro/tlsh/TlshCreator.java" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/src/main/java/com/trendmicro/tlsh/TlshUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/src/main/java/com/trendmicro/tlsh/VersionOption.java" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/src/main/resources/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/src/test/java/com/trendmicro/tlsh/ExampleDataUtilities.java" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/src/test/java/com/trendmicro/tlsh/TlshPerformanceTests.java" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/java/src/test/java/com/trendmicro/tlsh/TlshTest.java" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/js_ext/tlsh.html" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/js_ext/tlsh.js" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/make.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/make_mingw.bat" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/mingw/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/mingw/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/py_ext/pypi_package/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/py_ext/pypi_package/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/py_ext/pypi_package/clean.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/py_ext/pypi_package/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/py_ext/pypi_package/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/py_ext/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/py_ext/test.py" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/py_ext/tlsh_digest.py" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/py_ext/tlsh_parts.py" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/register/tlsh_reg.cfg" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/register/tlsh_reg.conf" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/register/tlsh_reg.py" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/NOTICE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/bh_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/extended_file_properties/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/extended_file_properties/extended_file_properties.py" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/setup/Debian/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/setup/Debian/setup_debian.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/setup/MacOSX/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/setup/MacOSX/setup_macosx.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/setup/Redhat/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/setup/Redhat/setup_redhat.sh" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/tlsh_bh_tool.cfg" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/tlsh_bh_tool.conf" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/tlsh_bh_tool/tlsh_bh_tool.py" />
+    <Text Include="../../thirdparty/owemdjee/tlsh/utils/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

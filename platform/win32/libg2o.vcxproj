@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB72D2F}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBG2O;G2O_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBG2O;G2O_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBG2O;G2O_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBG2O;G2O_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBG2O;G2O_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBG2O;G2O_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBG2O;G2O_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBG2O;G2O_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBG2O;G2O_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBG2O;G2O_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBG2O;G2O_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBG2O;G2O_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/benchmarks/jacobian_timing_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/EXTERNAL/freeglut/freeglut_font.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/EXTERNAL/freeglut/freeglut_stroke_mono_roman.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/EXTERNAL/freeglut/freeglut_stroke_roman.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_cli/dl_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_cli/g2o.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_cli/g2o_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_cli/output_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/pointsensorparameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_line3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_odometry2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_odometry3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pointxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pointxy_bearing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pointxy_offset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pointxyz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pointxyz_depth.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pointxyz_disparity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pose2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pose3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pose3d_offset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_se3_prior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_segment2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_segment2d_line.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_segment2d_pointline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/simulator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/simulator2d_segment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/simutils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/test_simulator2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/test_simulator3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/g2o_qglviewer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/g2o_viewer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/gui_hyper_graph_action.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/main_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/properties_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/run_g2o_viewer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/stream_redirect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/viewer_properties_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/batch_stats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/cache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/estimate_propagator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/hyper_dijkstra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/hyper_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/hyper_graph_action.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/jacobian_workspace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/marginal_covariance_cholesky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/matrix_structure.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/optimizable_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/optimization_algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/optimization_algorithm_dogleg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/optimization_algorithm_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/optimization_algorithm_gauss_newton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/optimization_algorithm_levenberg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/optimization_algorithm_with_hessian.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/parameter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/parameter_container.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/robust_kernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/robust_kernel_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/robust_kernel_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/sparse_optimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/core/sparse_optimizer_terminate_action.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/anonymize_observations/g2o_anonymize_observations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/ba/ba_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/ba_anchored_inverse_depth/ba_anchored_inverse_depth_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/bal/bal_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/closed_form_calibration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/edge_se2_pure_calib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/gm2dl_io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/sclam_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/sclam_laser_calib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/sclam_odom_laser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/sclam_pure_calibration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/convert_segment_line/convertSegmentLine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/data_convert/convert_sba_slam3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/data_fitting/circle_fit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/data_fitting/curve_fit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/dynamic_vertex/polynomial_fit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/dynamic_vertex/static_dynamic_function_fit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/backbone_tree_action.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/edge_creator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/edge_labeler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/edge_types_cost_function.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/g2o_hierarchical.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/simple_star_ops.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/star.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/icp/gicp_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/icp/gicp_sba_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_incremental/g2o_incremental.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_incremental/graph_optimizer_sparse_incremental.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_interactive/g2o_online.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_interactive/g2o_slam_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_interactive/generate_commands.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_interactive/graph_optimizer_sparse_online.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_interactive/types_online.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/example/example_slam_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/example/test_slam_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/interface/parser_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/interface/slam_context_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/bison_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/flex_scanner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/slam_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/test_slam_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/line_slam/line_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/line_slam/simulator_3d_line.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/logging/logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/plane_slam/plane_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/plane_slam/simulator_3d_plane.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/sba/sba_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/sim3/optimize_sphere_by_sim3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/simple_optimize/simple_optimize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/slam2d/main_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/slam2d/slam2d_g2o.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/slam2d/slam2d_viewer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/sphere/create_sphere.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/target/constant_velocity_target.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/target/static_target.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/edge_se2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/edge_se2_pointxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/parameter_se2_offset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/simulator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/tutorial_slam2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/types_tutorial_slam2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/vertex_point_xy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/vertex_se2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/solvers/cholmod/cholmod_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/solvers/cholmod/solver_cholmod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/solvers/csparse/csparse_extension.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/solvers/csparse/csparse_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/solvers/csparse/csparse_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/solvers/csparse/solver_csparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/solvers/dense/solver_dense.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/solvers/eigen/solver_eigen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/solvers/pcg/solver_pcg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/solvers/slam2d_linear/slam2d_linear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/solvers/slam2d_linear/solver_slam2d_linear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/solvers/structure_only/structure_only.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/stuff/command_args.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/stuff/filesys_tools.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/stuff/logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/stuff/opengl_primitives.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/stuff/property.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/stuff/sampler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/stuff/sparse_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/stuff/string_tools.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/stuff/tictoc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/stuff/timeutil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/data/data_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/data/laser_parameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/data/raw_laser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/data/robot_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/data/robot_laser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/data/types_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/data/vertex_ellipse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/data/vertex_tag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/icp/types_icp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_p2mc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_p2sc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_psi2uv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_stereo_xyz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_stereo_xyz_onlypose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_xyz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_xyz2uv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_xyz2uvu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_xyz_onlypose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_sba_cam.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_sba_scale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_se3_expmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/parameter_cameraparameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/sbacam.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/types_sba.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/types_six_dof_expmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/vertex_cam.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/vertex_intrinsics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/vertex_se3_expmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sclam2d/edge_se2_odom_differential_calib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sclam2d/edge_se2_sensor_calib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sclam2d/odometry_measurement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sclam2d/types_sclam2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sclam2d/vertex_odom_differential_params.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/sim3/types_seven_dof_expmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_pointxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_lotsofxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_offset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_pointxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_pointxy_bearing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_pointxy_calib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_pointxy_offset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_prior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_twopointsxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_xyprior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_xy_prior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/parameter_se2_offset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/types_slam2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/vertex_point_xy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/vertex_se2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/edge_line2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/edge_line2d_pointxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/edge_se2_line2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/edge_se2_segment2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/edge_se2_segment2d_line.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/edge_se2_segment2d_pointLine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/types_slam2d_addons.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/vertex_line2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/vertex_segment2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/dquat2mat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/dquat2mat_maxima_generated.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_pointxyz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_lotsofxyz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_offset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_pointxyz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_pointxyz_depth.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_pointxyz_disparity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_prior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_xyzprior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_xyz_prior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/isometry3d_gradients.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/isometry3d_mappings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/parameter_camera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/parameter_se3_offset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/parameter_stereo_camera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/types_slam3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/vertex_pointxyz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/vertex_se3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/edge_plane.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/edge_se3_calib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/edge_se3_euler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/edge_se3_line.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/edge_se3_plane_calib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/line3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/types_slam3d_addons.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/vertex_line3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/vertex_plane.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/vertex_se3_euler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/data/data_queue_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/data/io_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/general/allocate_optimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/general/auto_diff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/general/base_fixed_sized_edge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/general/batch_statistics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/general/clear_and_redo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/general/graph_operations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/general/robust_kernel_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/general/sparse_block_matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/sba/io_sba.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/sba/io_six_dof_expmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/sclam2d/io_sclam2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/sclam2d/odom_convert_sclam2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/sim3/allocate_sim3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/sim3/io_sim3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/sim3/jacobians_sim3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/slam2d/io_slam2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/slam2d/jacobians_slam2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/slam2d/mappings_se2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/slam2d_addons/io_slam2d_addons.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/slam3d/io_slam3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/slam3d/jacobians_slam3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/slam3d/mappings_slam3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/slam3d/optimization_slam3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/slam3d/orthogonal_matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/slam3d_addons/io_slam3d_addons.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/solver/allocate_algorithm_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/solver/linear_solver_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/solver/sparse_system_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/stuff/command_args_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/stuff/filesys_tools_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/stuff/misc_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/stuff/property_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/stuff/string_tools_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/stuff/tuple_tools_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/stuff/unscented_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/g2o/unit_test/test_helper/test_main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/EXTERNAL/freeglut/freeglut_minimal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_cli/dl_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_cli/g2o_cli_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_cli/g2o_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_cli/output_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/g2o_simulator_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/pointsensorparameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_line3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_odometry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_odometry2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_odometry3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pointxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pointxy_bearing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pointxy_offset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pointxyz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pointxyz_depth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pointxyz_disparity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pose2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pose3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_pose3d_offset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_se3_prior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_segment2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_segment2d_line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/sensor_segment2d_pointline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/simulator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/simulator2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/simulator2d_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/simulator3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/simulator3d_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/simutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/g2o_qglviewer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/g2o_viewer_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/gui_hyper_graph_action.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/main_window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/properties_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/run_g2o_viewer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/stream_redirect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/viewer_properties_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/array_selector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/autodiff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/disable_warnings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/eigen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/fixed_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/integer_sequence_algorithm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/jet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/parameter_dims.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/reenable_warnings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/variadic_evaluate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/auto_differentiation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/base_binary_edge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/base_dynamic_vertex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/base_edge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/base_fixed_sized_edge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/base_fixed_sized_edge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/base_multi_edge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/base_unary_edge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/base_variable_sized_edge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/base_variable_sized_edge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/base_vertex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/base_vertex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/batch_stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/block_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/block_solver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/creators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/dynamic_aligned_buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/eigen_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/estimate_propagator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/g2o_core_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/hyper_dijkstra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/hyper_graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/hyper_graph_action.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/io_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/jacobian_workspace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/linear_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/marginal_covariance_cholesky.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/matrix_operations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/matrix_structure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/openmp_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/optimizable_graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/optimization_algorithm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/optimization_algorithm_dogleg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/optimization_algorithm_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/optimization_algorithm_gauss_newton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/optimization_algorithm_levenberg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/optimization_algorithm_property.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/optimization_algorithm_with_hessian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/ownership.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/parameter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/parameter_container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/robust_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/robust_kernel_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/robust_kernel_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/sparse_block_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/sparse_block_matrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/sparse_block_matrix_ccs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/sparse_block_matrix_diagonal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/sparse_optimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/core/sparse_optimizer_terminate_action.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/closed_form_calibration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/edge_se2_pure_calib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/g2o_calibration_odom_laser_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/gm2dl_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/motion_information.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/sclam_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/backbone_tree_action.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/edge_creator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/edge_labeler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/edge_types_cost_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/g2o_hierarchical_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/simple_star_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/star.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_incremental/g2o_incremental_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_incremental/graph_optimizer_sparse_incremental.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_incremental/linear_solver_cholmod_online.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_interactive/fast_output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_interactive/g2o_interactive_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_interactive/g2o_slam_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_interactive/graph_optimizer_sparse_online.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_interactive/types_slam2d_online.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_interactive/types_slam3d_online.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/example/example_slam_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/interface/abstract_slam_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/interface/parser_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/interface/slam_context_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/FlexLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/bison_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/commands.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/location.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/position.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/scanner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/slam_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/slam2d/main_window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/slam2d/slam2d_viewer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/target/continuous_to_discrete.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/target/targetTypes3D.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/target/targetTypes6D.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/edge_se2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/edge_se2_pointxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/g2o_tutorial_slam2d_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/parameter_se2_offset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/se2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/simulator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/types_tutorial_slam2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/vertex_point_xy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/vertex_se2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/cholmod/cholmod_ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/cholmod/cholmod_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/cholmod/linear_solver_cholmod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/csparse/csparse_extension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/csparse/csparse_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/csparse/csparse_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/csparse/g2o_csparse_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/csparse/g2o_csparse_extension_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/csparse/linear_solver_csparse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/dense/linear_solver_dense.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/eigen/linear_solver_eigen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/pcg/linear_solver_pcg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/pcg/linear_solver_pcg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/slam2d_linear/g2o_slam2d_linear_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/slam2d_linear/solver_slam2d_linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/solvers/structure_only/structure_only_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/color_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/command_args.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/filesys_tools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/g2o_stuff_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/logger_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/opengl_primitives.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/opengl_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/property.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/sampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/sparse_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/string_tools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/tictoc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/timeutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/tuple_tools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/stuff/unscented.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/data/data_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/data/g2o_types_data_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/data/laser_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/data/raw_laser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/data/robot_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/data/robot_laser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/data/types_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/data/vertex_ellipse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/data/vertex_tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/icp/g2o_types_icp_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/icp/types_icp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_p2mc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_p2sc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_psi2uv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_stereo_xyz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_stereo_xyz_onlypose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_xyz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_xyz2uv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_xyz2uvu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_project_xyz_onlypose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_sba_cam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_sba_scale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/edge_se3_expmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/g2o_types_sba_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/parameter_cameraparameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/sba_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/sbacam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/types_sba.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/types_six_dof_expmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/vertex_cam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/vertex_intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/vertex_se3_expmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sclam2d/edge_se2_odom_differential_calib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sclam2d/edge_se2_sensor_calib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sclam2d/g2o_types_sclam2d_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sclam2d/odometry_measurement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sclam2d/types_sclam2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sclam2d/vertex_odom_differential_params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sim3/sim3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/sim3/types_seven_dof_expmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_pointxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_lotsofxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_offset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_pointxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_pointxy_bearing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_pointxy_calib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_pointxy_offset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_prior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_twopointsxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_se2_xyprior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/edge_xy_prior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/g2o_types_slam2d_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/parameter_se2_offset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/se2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/types_slam2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/vertex_point_xy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/vertex_se2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/edge_line2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/edge_line2d_pointxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/edge_se2_line2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/edge_se2_segment2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/edge_se2_segment2d_line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/edge_se2_segment2d_pointLine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/g2o_types_slam2d_addons_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/line_2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/types_slam2d_addons.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/vertex_line2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/vertex_segment2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/dquat2mat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_pointxyz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_lotsofxyz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_offset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_pointxyz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_pointxyz_depth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_pointxyz_disparity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_prior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_se3_xyzprior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/edge_xyz_prior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/g2o_types_slam3d_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/isometry3d_gradients.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/isometry3d_mappings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/parameter_camera.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/parameter_se3_offset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/parameter_stereo_camera.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/se3_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/se3_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/se3quat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/types_slam3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/vertex_pointxyz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/vertex_se3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/edge_plane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/edge_se3_calib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/edge_se3_euler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/edge_se3_line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/edge_se3_plane_calib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/g2o_types_slam3d_addons_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/line3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/plane3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/types_slam3d_addons.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/vertex_line3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/vertex_plane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/vertex_se3_euler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/unit_test/general/allocate_optimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/unit_test/solver/sparse_system_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/unit_test/test_helper/eigen_matcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/unit_test/test_helper/evaluate_jacobian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/unit_test/test_helper/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/g2o/unit_test/test_helper/random_state.h" />
+    <Image Include="../../thirdparty/owemdjee/g2o/doc/pics/viewer.png" />
+    <Text Include="../../thirdparty/owemdjee/g2o/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/g2o/README.md" />
+    <Text Include="../../thirdparty/owemdjee/g2o/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/cmake_modules/CheckIfUnderscorePrefixedBesselFunctionsExist.cmake" />
+    <Text Include="../../thirdparty/owemdjee/g2o/cmake_modules/Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/g2o/cmake_modules/FindCSparse.cmake" />
+    <Text Include="../../thirdparty/owemdjee/g2o/cmake_modules/FindEigen3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/g2o/cmake_modules/FindG2O.cmake" />
+    <Text Include="../../thirdparty/owemdjee/g2o/cmake_modules/FindMETIS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/g2o/cmake_modules/FindQGLViewer.cmake" />
+    <Text Include="../../thirdparty/owemdjee/g2o/cmake_modules/FindSuiteSparse.cmake" />
+    <Text Include="../../thirdparty/owemdjee/g2o/codecov.yml" />
+    <Text Include="../../thirdparty/owemdjee/g2o/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/g2o/doc/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/g2o/doc/README_IF_IT_WAS_WORKING_AND_IT_DOES_NOT.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/doc/doxygen/doxy.config" />
+    <Text Include="../../thirdparty/owemdjee/g2o/doc/doxygen/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/doc/g2o.tex" />
+    <Text Include="../../thirdparty/owemdjee/g2o/doc/license-bsd.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/doc/license-gpl.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/doc/license-lgpl.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/doc/pics/classes.svg" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/EXTERNAL/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/EXTERNAL/freeglut/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/apps/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_cli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_simulator/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/apps/g2o_viewer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/apps/linked_binaries/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/autodiff/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/anonymize_observations/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/ba/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/ba_anchored_inverse_depth/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/bal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/calibration_odom_laser/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/convert_segment_line/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/data_convert/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/data_fitting/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/dynamic_vertex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/g2o_hierarchical/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/icp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_incremental/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_incremental/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_incremental/protocol.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_interactive/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/g2o_interactive/protocol.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/interface/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/grammar.sh" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/parser.yy" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/interactive_slam/slam_parser/parser/scanner.l" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/line_slam/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/logging/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/plane_slam/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/sba/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/sim3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/simple_optimize/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/slam2d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/sphere/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/target/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/examples/tutorial_slam2d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/solvers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/solvers/cholmod/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/solvers/csparse/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/solvers/dense/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/solvers/eigen/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/solvers/pcg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/solvers/slam2d_linear/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/solvers/structure_only/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/stuff/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/types/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/types/data/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/types/icp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/types/sba/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/types/sclam2d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/types/sim3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/types/slam2d_addons/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/types/slam3d_addons/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/g2o/what_is_in_these_directories.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/script/android.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/g2o/script/install-additional-deps-windows.bat" />
+    <Text Include="../../thirdparty/owemdjee/g2o/script/install-deps-linux.sh" />
+    <Text Include="../../thirdparty/owemdjee/g2o/script/install-deps-osx.sh" />
+    <Text Include="../../thirdparty/owemdjee/g2o/script/install-deps-windows.bat" />
+    <Text Include="../../thirdparty/owemdjee/g2o/unit_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/unit_test/data/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/unit_test/general/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/unit_test/sba/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/unit_test/sclam2d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/unit_test/sim3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/unit_test/slam2d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/unit_test/slam2d_addons/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/unit_test/slam3d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/unit_test/slam3d_addons/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/unit_test/solver/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/g2o/unit_test/stuff/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

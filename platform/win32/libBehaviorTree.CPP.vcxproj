@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE03069}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBEHAVIORTREE.CPP;BEHAVIORTREE.CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBEHAVIORTREE.CPP;BEHAVIORTREE.CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBEHAVIORTREE.CPP;BEHAVIORTREE.CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBEHAVIORTREE.CPP;BEHAVIORTREE.CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBEHAVIORTREE.CPP;BEHAVIORTREE.CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBEHAVIORTREE.CPP;BEHAVIORTREE.CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBEHAVIORTREE.CPP;BEHAVIORTREE.CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBEHAVIORTREE.CPP;BEHAVIORTREE.CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBEHAVIORTREE.CPP;BEHAVIORTREE.CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBEHAVIORTREE.CPP;BEHAVIORTREE.CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBEHAVIORTREE.CPP;BEHAVIORTREE.CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBEHAVIORTREE.CPP;BEHAVIORTREE.CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/ex01_wrap_legacy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/ex02_runtime_ports.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/ex03_ncurses_manual_selector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/ex03_sqlite_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/plugin_example/plugin_action.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/plugin_example/plugin_executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t01_build_your_first_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t02_basic_ports.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t03_generic_ports.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t04_reactive_sequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t05_crossdoor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t06_subtree_port_remapping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t07_load_multiple_xml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t08_additional_node_args.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t09_scripting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t10_observer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t11_groot_howto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t12_default_ports.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t13_access_by_ref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t14_subtree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t15_nodes_mocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t16_global_blackboard.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t17_blackboard_backup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/t18_waypoints.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/sample_nodes/crossdoor_nodes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/sample_nodes/dummy_nodes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/sample_nodes/movebase_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/action_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/actions/sleep_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/actions/test_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/actions/updated_action.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/basic_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/behavior_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/blackboard.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/bt_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/condition_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/control_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/controls/fallback_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/controls/if_then_else_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/controls/manual_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/controls/parallel_all_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/controls/parallel_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/controls/reactive_fallback.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/controls/reactive_sequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/controls/sequence_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/controls/sequence_with_memory_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/controls/switch_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/controls/while_do_else_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/decorator_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/decorators/delay_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/decorators/inverter_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/decorators/repeat_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/decorators/retry_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/decorators/subtree_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/decorators/timeout_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/decorators/updated_decorator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/json_export.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/loggers/bt_cout_logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/loggers/bt_file_logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/loggers/bt_file_logger_v2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/loggers/bt_minitrace_logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/loggers/bt_observer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/loggers/bt_sqlite_logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/loggers/groot2_publisher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/script_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/shared_library.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/shared_library_UNIX.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/shared_library_WIN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/tree_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/xml_parsing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_any.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_async_action_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_blackboard.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_coroutines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_decorator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_enums.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_fallback.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_logger_zmq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_match.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_parallel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_ports.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_postconditions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_preconditions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_reactive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_reactive_backchaining.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_scripting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_sequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_skipping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_substitution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_subtree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_switch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_updates.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/gtest_wakeup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/navigation_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/script_parser_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/src/action_test_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/src/condition_test_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tools/bt_log_cat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tools/bt_plugin_manifest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tools/bt_recorder.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/plugin_example/custom_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/action_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/actions/always_failure_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/actions/always_success_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/actions/pop_from_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/actions/script_condition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/actions/script_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/actions/set_blackboard_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/actions/sleep_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/actions/test_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/actions/unset_blackboard_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/actions/updated_action.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/basic_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/behavior_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/blackboard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/bt_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/bt_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/condition_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/contrib/any.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/contrib/expected.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/contrib/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/contrib/magic_enum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/control_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/controls/fallback_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/controls/if_then_else_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/controls/manual_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/controls/parallel_all_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/controls/parallel_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/controls/reactive_fallback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/controls/reactive_sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/controls/sequence_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/controls/sequence_with_memory_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/controls/switch_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/controls/while_do_else_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorator_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/consume_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/delay_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/force_failure_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/force_success_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/inverter_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/keep_running_until_failure_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/loop_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/repeat_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/retry_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/run_once_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/script_precondition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/subtree_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/timeout_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/decorators/updated_decorator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/flatbuffers/BT_logger_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/flatbuffers/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/flatbuffers/bt_flatbuffer_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/flatbuffers/flatbuffers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/flatbuffers/stl_emulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/json_export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/leaf_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/loggers/abstract_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/loggers/bt_cout_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/loggers/bt_file_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/loggers/bt_file_logger_v2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/loggers/bt_minitrace_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/loggers/bt_observer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/loggers/bt_sqlite_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/loggers/groot2_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/loggers/groot2_publisher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/scripting/any_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/scripting/operators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/scripting/script_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/tree_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/utils/convert_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/utils/demangle_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/utils/locked_reference.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/utils/platform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/utils/safe_any.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/utils/shared_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/utils/signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/utils/simple_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/utils/strcat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/utils/timer_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/utils/wakeup_signal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/xml_parsing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/sample_nodes/crossdoor_nodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/sample_nodes/dummy_nodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/sample_nodes/movebase_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/src/loggers/zmq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/include/action_test_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/include/condition_test_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/include/environment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/test_helper.hpp" />
+    <Image Include="../../thirdparty/owemdjee/BehaviorTree.CPP/btcpp_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/BehaviorTree.CPP/docs/groot-screenshot.png" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/CHANGELOG.rst" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/MOOD2Be_final_report.pdf" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/README.md" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/animated.svg" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/btcpp_logo.svg" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/cmake/Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/cmake/FindZeroMQ.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/cmake/ament_build.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/cmake/catkin_build.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/cmake/conan.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/cmake/conan_build.cmake" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/conanfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/contributors.txt" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/convert_v3_to_v4.py" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/docs/substitution_sample.json" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/flatbuffers/BT_logger.fbs" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/include/behaviortree_cpp/flatbuffers/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/mkdocs.yml" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/netlify.toml" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/pixi.toml" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/run_clang_format.sh" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/runtime.txt" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/sample_nodes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tools/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/test_files/Check.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/test_files/log_test.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/test_files/subtree_test.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/examples/test_files/subtrees/Talk.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/package.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/trees/child/child/child_child_no_include.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/trees/child/child_include_child.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/trees/child/child_include_parent.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/trees/child/child_include_sibling.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/trees/child/child_no_include.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/trees/parent_include_child.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/trees/parent_include_child_include_child.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/trees/parent_include_child_include_parent.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/trees/parent_include_child_include_sibling.xml" />
+    <Xml Include="../../thirdparty/owemdjee/BehaviorTree.CPP/tests/trees/parent_no_include.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA57AFC}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAGIC;COLORMAGIC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAGIC;COLORMAGIC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAGIC;COLORMAGIC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAGIC;COLORMAGIC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAGIC;COLORMAGIC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAGIC;COLORMAGIC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAGIC;COLORMAGIC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAGIC;COLORMAGIC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAGIC;COLORMAGIC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAGIC;COLORMAGIC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAGIC;COLORMAGIC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAGIC;COLORMAGIC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/ColorMagic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/dllmain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/chromatic_adaptation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/color_adjustments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/color_blend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/color_calculation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/color_combinations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/color_converter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/color_distance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/porter_duff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/cieluv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/cmyk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/grey_deepcolor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/grey_truecolor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/hcy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/hsi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/hsl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/hsv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/lab.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/lch_ab.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/lch_uv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/rgb_deepcolor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/rgb_truecolor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/xyy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/xyz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/stdafx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/CIELUV_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/CMYK_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/ChromaticAdaptation_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/ColorAdjustments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/ColorBlend_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/ColorCalculator_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/ColorCombinations_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/ColorConverter_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/ColorDistance_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/Gamma_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/Grey_Deep_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/Grey_True_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/HCY_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/HSI_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/HSL_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/HSV_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/LCH_ab_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/LCH_uv_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/Lab_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/Main_TestAll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/MatrixTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/PorterDuff_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/RGBColorSpaceDefinitionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/RGB_Deep_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/RGB_True_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/XYY_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/XYZ_Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/pch.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/base_color_blend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/chromatic_adaptation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/color_adjustments.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/color_blend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/color_calculation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/color_combinations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/color_converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/color_distance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/manipulation/porter_duff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/cieluv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/cmyk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/color_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/gamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/grey_deepcolor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/grey_truecolor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/hcy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/hsi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/hsl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/hsv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/lab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/lch_ab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/lch_uv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/rgb_color_space_definition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/rgb_deepcolor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/rgb_truecolor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/white_point.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/xyy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/spaces/xyz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/targetver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/utils/color_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/utils/colors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/utils/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/pch.h" />
+    <Text Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic/ColorMagic.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/ColorMagic/ColorMagic_Test/packages.config" />
+    <Text Include="../../thirdparty/owemdjee/ColorMagic/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/ColorMagic/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

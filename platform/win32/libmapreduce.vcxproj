@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF2C60EE}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAPREDUCE;MAPREDUCE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAPREDUCE;MAPREDUCE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAPREDUCE;MAPREDUCE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAPREDUCE;MAPREDUCE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAPREDUCE;MAPREDUCE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAPREDUCE;MAPREDUCE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAPREDUCE;MAPREDUCE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAPREDUCE;MAPREDUCE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAPREDUCE;MAPREDUCE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAPREDUCE;MAPREDUCE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAPREDUCE;MAPREDUCE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAPREDUCE;MAPREDUCE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/examples/crmat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/examples/cwordfreq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/examples/in.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/examples/rmat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/examples/rmat2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/examples/wordfreq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/mpistubs/mpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/cc_find.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/cc_stats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/degree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/degree_stats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/degree_weight.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/edge_upper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/histo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/library.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/luby_find.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_add_label.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_add_weight.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_edge_to_vertex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_edge_to_vertex_pair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_edge_to_vertices.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_edge_upper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_invert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_read_edge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_read_edge_label.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_read_edge_weight.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_read_vertex_label.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_read_vertex_weight.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_read_words.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/map_rmat_generate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/mrmpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/neigh_tri.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/neighbor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/object.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/oink.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/pagerank.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/random_mars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/reduce_count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/reduce_cull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/rmat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/rmat2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/scan_print_edge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/scan_print_string_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/scan_print_vertex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/sssp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/tri_find.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/universe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/variable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/vertex_extract.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/oink/wordfreq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/src/cmapreduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/src/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/src/hash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/src/irregular.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/src/keymultivalue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/src/keyvalue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/src/mapreduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/src/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/src/spool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mapreduce/txt2html/txt2html.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/mpistubs/mpi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/blockmacros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/cc_find.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/cc_stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/command.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/degree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/degree_stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/degree_weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/edge_upper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/histo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/luby_find.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/map_rmat_generate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/mrmpi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/neigh_tri.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/neighbor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/oink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/pagerank.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/pointers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/random_mars.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/rmat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/rmat2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/sssp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/tri_find.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/typedefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/universe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/variable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/vertex_extract.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/oink/wordfreq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/src/cmapreduce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/src/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/src/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/src/irregular.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/src/keymultivalue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/src/keyvalue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/src/mapreduce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/src/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/src/mrtype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/src/spool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mapreduce/src/version.h" />
+    <Image Include="../../thirdparty/owemdjee/mapreduce/txt2html/equation.gif" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/README" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/debian/README.source" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/debian/changelog" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/debian/deepin/workflows.yml" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/debian/libmrmpi1.lintian-overrides" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/debian/mrmpi-doc.doc-base.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/debian/mrmpi-doc.doc-base.pdf" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/debian/mrmpi-doc.docs" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Background.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Background.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Examples.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Examples.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Interface_c++.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Interface_c++.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Interface_c.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Interface_c.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Interface_oink.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Interface_oink.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Interface_python.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Interface_python.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Manual.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Manual.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/PDFgen.sh" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Program.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Program.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Start.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Start.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Technical.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Technical.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Whatis.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/Whatis.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/add.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/add.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/aggregate.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/aggregate.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/broadcast.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/broadcast.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/clone.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/clone.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/collapse.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/collapse.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/collate.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/collate.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/compress.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/compress.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/convert.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/convert.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/copy.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/copy.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/create.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/create.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/destroy.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/destroy.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/gather.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/gather.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/kv_add.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/kv_add.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/map.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/map.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/open.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/open.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/print.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/print.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/reduce.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/reduce.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/scan.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/scan.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/scrunch.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/scrunch.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/settings.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/settings.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/sort_keys.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/sort_keys.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/sort_multivalues.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/sort_multivalues.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/sort_values.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/sort_values.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/stats.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/doc/stats.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/examples/Makefile.linux" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/examples/Makefile.mac64" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/examples/Makefile.mpicc" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/examples/Makefile.serial" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/examples/in.luby" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/examples/in.wordfreq" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/examples/pypar_serial.py" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/examples/rmat.py" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/examples/wordfreq.py" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/mpistubs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oink/MAKE/Makefile.linux" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oink/MAKE/Makefile.mac" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oink/MAKE/Makefile.mac_serial" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oink/MAKE/Makefile.mpicc" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oink/MAKE/Makefile.serial" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oink/Make.py" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oink/Make.sh" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oink/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/Manual.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/Manual.py" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/Manual.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/PDFgen.sh" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/Section_build.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/Section_build.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/Section_commands.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/Section_commands.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/Section_errors.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/Section_errors.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/Section_functions.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/Section_functions.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/Section_script.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/Section_script.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/cc_find.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/cc_find.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/cc_stats.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/cc_stats.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/clear.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/clear.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/command.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/command.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/degree.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/degree.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/degree_stats.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/degree_stats.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/degree_weight.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/degree_weight.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/echo.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/echo.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/edge_upper.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/edge_upper.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/histo.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/histo.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/if.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/if.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/include.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/include.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/input.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/input.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/jump.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/jump.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/label.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/label.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/log.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/log.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/luby_find.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/luby_find.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/mr.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/mr.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/mrmpi.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/mrmpi.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/neigh_tri.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/neigh_tri.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/neighbor.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/neighbor.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/next.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/next.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/output.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/output.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/pagerank.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/pagerank.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/print.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/print.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/rmat.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/rmat.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/set.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/set.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/shell.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/shell.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/sssp.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/sssp.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/tri_find.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/tri_find.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/variable.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/variable.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/vertex_extract.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/vertex_extract.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/wordfreq.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/oinkdoc/wordfreq.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/python/README" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/python/install.py" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/python/mrmpi.py" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/src/MAKE/Makefile.linux" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/src/MAKE/Makefile.mac" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/src/MAKE/Makefile.mac_serial" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/src/MAKE/Makefile.mpicc" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/src/MAKE/Makefile.odin" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/src/MAKE/Makefile.serial" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/src/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/txt2html/README.html" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/txt2html/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/mapreduce/user/README" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

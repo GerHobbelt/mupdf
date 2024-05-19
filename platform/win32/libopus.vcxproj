@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFAE098F}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPUS;OPUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPUS;OPUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPUS;OPUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPUS;OPUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPUS;OPUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPUS;OPUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPUS;OPUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPUS;OPUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPUS;OPUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPUS;OPUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPUS;OPUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPUS;OPUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/arm/arm_celt_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/arm/armcpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/arm/celt_fft_ne10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/arm/celt_mdct_ne10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/arm/celt_neon_intr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/arm/pitch_neon_intr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/bands.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/celt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/celt_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/celt_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/celt_lpc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/cwrs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/dump_modes/dump_modes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/dump_modes/dump_modes_arm_ne10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/entcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/entdec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/entenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/kiss_fft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/laplace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/mathops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/mdct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/modes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/opus_custom_demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/pitch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/quant_bands.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/rate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/tests/test_unit_cwrs32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/tests/test_unit_dft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/tests/test_unit_entropy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/tests/test_unit_laplace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/tests/test_unit_mathops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/tests/test_unit_mdct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/tests/test_unit_rotation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/tests/test_unit_types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/vq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/x86/celt_lpc_sse4_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/x86/pitch_avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/x86/pitch_sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/x86/pitch_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/x86/pitch_sse4_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/x86/vq_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/x86/x86_celt_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/x86/x86cpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/cmake/cpu_info_by_asm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/cmake/cpu_info_by_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/cmake/vla.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/adaconvtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/arm/arm_dnn_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/arm/nnet_dotprod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/arm/nnet_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/burg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/dred_coding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/dred_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/dred_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/dred_rdovae_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/dred_rdovae_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/dump_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/dump_lpcnet_tables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/fargan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/fargan_demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/freq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/fwgan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/kiss99.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/lossgen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/lossgen_demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/lpcnet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/lpcnet_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/lpcnet_plc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/lpcnet_tables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/nndsp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/nnet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/nnet_default.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/osce.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/osce_features.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/parse_lpcnet_weights.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/pitchdnn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/test_vec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/torch/rdovae/packets/fec_packets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/fec_packets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/write_lpcnet_weights.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/x86/nnet_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/x86/nnet_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/x86/nnet_sse4_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/dnn/x86/x86_dnn_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/doc/trivial_example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/A2NLSF.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/CNG.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/HP_variable_cutoff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/LPC_analysis_filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/LPC_fit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/LPC_inv_pred_gain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/LP_variable_cutoff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/NLSF2A.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/NLSF_VQ.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/NLSF_VQ_weights_laroia.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/NLSF_decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/NLSF_del_dec_quant.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/NLSF_encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/NLSF_stabilize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/NLSF_unpack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/NSQ.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/NSQ_del_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/PLC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/VAD.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/VQ_WMat_EC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/ana_filt_bank_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/arm/LPC_inv_pred_gain_neon_intr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/arm/NSQ_del_dec_neon_intr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/arm/NSQ_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/arm/arm_silk_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/arm/biquad_alt_neon_intr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/biquad_alt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/bwexpander.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/bwexpander_32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/check_control_input.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/code_signs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/control_SNR.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/control_audio_bandwidth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/control_codec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/dec_API.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/decode_core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/decode_frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/decode_indices.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/decode_parameters.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/decode_pitch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/decode_pulses.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/decoder_set_fs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/enc_API.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/encode_indices.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/encode_pulses.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/LTP_analysis_filter_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/LTP_scale_ctrl_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/apply_sine_window_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/arm/warped_autocorrelation_FIX_neon_intr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/autocorr_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/burg_modified_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/corrMatrix_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/encode_frame_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/find_LPC_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/find_LTP_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/find_pitch_lags_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/find_pred_coefs_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/k2a_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/k2a_Q16_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/noise_shape_analysis_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/pitch_analysis_core_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/process_gains_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/regularize_correlations_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/residual_energy16_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/residual_energy_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/schur64_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/schur_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/vector_ops_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/warped_autocorrelation_FIX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/x86/burg_modified_FIX_sse4_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/fixed/x86/vector_ops_FIX_sse4_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/LPC_analysis_filter_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/LPC_inv_pred_gain_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/LTP_analysis_filter_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/LTP_scale_ctrl_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/apply_sine_window_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/autocorrelation_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/burg_modified_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/bwexpander_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/corrMatrix_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/encode_frame_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/energy_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/find_LPC_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/find_LTP_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/find_pitch_lags_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/find_pred_coefs_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/inner_product_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/k2a_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/noise_shape_analysis_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/pitch_analysis_core_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/process_gains_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/regularize_correlations_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/residual_energy_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/scale_copy_vector_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/scale_vector_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/schur_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/sort_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/warped_autocorrelation_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/wrappers_FLP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/float/x86/inner_product_FLP_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/gain_quant.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/init_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/init_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/inner_prod_aligned.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/interpolate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/lin2log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/log2lin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/pitch_est_tables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/process_NLSFs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/quant_LTP_gains.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/resampler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/resampler_down2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/resampler_down2_3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/resampler_private_AR2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/resampler_private_IIR_FIR.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/resampler_private_down_FIR.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/resampler_private_up2_HQ.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/resampler_rom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/shell_coder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/sigm_Q15.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/stereo_LR_to_MS.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/stereo_MS_to_LR.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/stereo_decode_pred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/stereo_encode_pred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/stereo_find_predictor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/stereo_quant_pred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/sum_sqr_shift.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/table_LSF_cos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/tables_LTP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/tables_NLSF_CB_NB_MB.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/tables_NLSF_CB_WB.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/tables_gain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/tables_other.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/tables_pitch_lag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/tables_pulses_per_block.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/tests/test_unit_LPC_inv_pred_gain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/x86/NSQ_del_dec_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/x86/NSQ_del_dec_sse4_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/x86/NSQ_sse4_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/x86/VAD_sse4_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/x86/VQ_WMat_EC_sse4_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/silk/x86/x86_silk_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/analysis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/extensions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/mapping_matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/mlp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/mlp_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/opus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/opus_compare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/opus_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/opus_demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/opus_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/opus_multistream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/opus_multistream_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/opus_multistream_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/opus_projection_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/opus_projection_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/repacketizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/repacketizer_demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/tests/opus_encode_regressions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/tests/test_opus_api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/tests/test_opus_decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/tests/test_opus_dred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/tests/test_opus_encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/tests/test_opus_extensions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/tests/test_opus_padding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/tests/test_opus_projection.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/_kiss_fft_guts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/armcpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/fft_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/fixed_arm64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/fixed_armv4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/fixed_armv5e.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/kiss_fft_armv4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/kiss_fft_armv5e.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/mdct_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/pitch_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/bands.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/celt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/celt_lpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/cpu_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/cwrs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/dump_modes/dump_modes_arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/ecintrin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/entcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/entdec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/entenc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/fixed_c5x.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/fixed_c6x.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/fixed_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/fixed_generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/float_cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/kiss_fft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/laplace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/mathops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/mdct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/mfrngcod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/mips/celt_mipsr1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/mips/fixed_generic_mipsr1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/mips/kiss_fft_mipsr1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/mips/mdct_mipsr1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/mips/pitch_mipsr1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/mips/vq_mipsr1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/modes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/os_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/pitch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/quant_bands.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/rate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/stack_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/static_modes_fixed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/static_modes_fixed_arm_ne10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/static_modes_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/static_modes_float_arm_ne10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/vq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/x86/celt_lpc_sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/x86/pitch_sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/x86/vq_sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/x86/x86_arch_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/x86/x86cpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/arm/dnn_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/burg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/dred_coding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/dred_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/dred_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/dred_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/dred_rdovae.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/dred_rdovae_dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/dred_rdovae_enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/fargan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/freq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/fwgan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/kiss99.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/lossgen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/lpcnet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/lpcnet_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/nndsp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/nnet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/nnet_arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/osce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/osce_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/osce_features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/osce_structs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/pitchdnn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/tansig_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/torch/rdovae/packets/fec_packets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/fec_packets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/vec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/vec_avx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/vec_neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/dnn/x86/dnn_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/include/opus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/include/opus_custom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/include/opus_defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/include/opus_multistream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/include/opus_projection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/include/opus_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/API.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/Inlines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/MacroCount.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/MacroDebug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/NSQ.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/PLC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/SigProc_FIX.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/arm/LPC_inv_pred_gain_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/arm/NSQ_del_dec_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/arm/NSQ_neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/arm/SigProc_FIX_armv4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/arm/SigProc_FIX_armv5e.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/arm/biquad_alt_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/arm/macros_arm64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/arm/macros_armv4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/arm/macros_armv5e.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/control.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/define.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/fixed/arm/warped_autocorrelation_FIX_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/fixed/main_FIX.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/fixed/mips/noise_shape_analysis_FIX_mipsr1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/fixed/mips/prefilter_FIX_mipsr1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/fixed/mips/warped_autocorrelation_FIX_mipsr1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/fixed/structs_FIX.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/float/SigProc_FLP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/float/main_FLP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/float/structs_FLP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/mips/NSQ_del_dec_mipsr1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/mips/macros_mipsr1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/mips/sigproc_fix_mipsr1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/pitch_est_defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/resampler_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/resampler_rom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/resampler_structs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/structs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/tuning_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/typedef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/x86/SigProc_FIX_sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/silk/x86/main_sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/src/analysis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/src/mapping_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/src/mlp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/src/opus_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/src/tansig_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/tests/test_opus_common.h" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/env.rc" />
+    <Text Include="../../thirdparty/owemdjee/opus/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/opus/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opus/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/opus/LICENSE_PLEASE_READ.txt" />
+    <Text Include="../../thirdparty/owemdjee/opus/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/opus/Makefile.mips" />
+    <Text Include="../../thirdparty/owemdjee/opus/Makefile.unix" />
+    <Text Include="../../thirdparty/owemdjee/opus/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/opus/README" />
+    <Text Include="../../thirdparty/owemdjee/opus/README.draft" />
+    <Text Include="../../thirdparty/owemdjee/opus/autogen.bat" />
+    <Text Include="../../thirdparty/owemdjee/opus/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/celt/arm/arm2gnu.pl" />
+    <Text Include="../../thirdparty/owemdjee/opus/celt/arm/armopts.s.in" />
+    <Text Include="../../thirdparty/owemdjee/opus/celt/arm/celt_pitch_xcorr_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/opus/celt/dump_modes/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/opus/celt_headers.mk" />
+    <Text Include="../../thirdparty/owemdjee/opus/celt_sources.mk" />
+    <Text Include="../../thirdparty/owemdjee/opus/cmake/CFeatureCheck.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opus/cmake/OpusBuildtype.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opus/cmake/OpusConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opus/cmake/OpusConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/opus/cmake/OpusFunctions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opus/cmake/OpusPackageVersion.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opus/cmake/OpusSources.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opus/cmake/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opus/cmake/RunTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opus/cmake/config.h.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/opus/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/LPCNet.yml" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/README" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/datasets.txt" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/download_model.bat" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/download_model.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/quantization/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/quantization/softquant.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/relegance/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/relegance/meta_critic.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/relegance/relegance.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/sparsification/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/sparsification/base_sparsifier.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/sparsification/common.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/sparsification/conv1d_sparsifier.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/sparsification/conv_transpose1d_sparsifier.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/sparsification/gru_sparsifier.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/sparsification/linear_sparsifier.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/dnntools/sparsification/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/dnntools/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fargan/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fargan/adv_train_fargan.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fargan/dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fargan/dump_fargan_weights.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fargan/fargan.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fargan/filters.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fargan/rc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fargan/stft_loss.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fargan/test_fargan.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fargan/train_fargan.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fwgan/dump_model_weights.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fwgan/inference.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fwgan/models/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fwgan/models/fwgan400.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/fwgan/models/fwgan500.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lossgen/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lossgen/export_lossgen.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lossgen/lossgen.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lossgen/process_data.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lossgen/test_lossgen.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lossgen/train_lossgen.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/add_dataset_config.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/data/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/data/lpcnet_dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/engine/lpcnet_engine.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/make_default_setup.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/make_test_config.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/models/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/models/lpcnet.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/models/multi_rate_lpcnet.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/print_lpcnet_complexity.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/scripts/collect_multi_run_results.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/scripts/loop_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/scripts/make_animation.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/scripts/modify_dataset_target.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/scripts/multi_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/scripts/run_inference_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/scripts/update_checkpoints.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/scripts/update_output_folder.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/scripts/update_setups.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/test_lpcnet.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/train_lpcnet.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/data.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/endoscopy.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/layers/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/layers/dual_fc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/layers/pcm_embeddings.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/layers/subconditioner.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/misc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/pcm.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/sample.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/sparsification/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/sparsification/common.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/sparsification/gru_sparsifier.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/templates.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/ulaw.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/lpcnet/utils/wav.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/neural-pitch/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/neural-pitch/data_augmentation.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/neural-pitch/download_demand.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/neural-pitch/evaluation.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/neural-pitch/experiments.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/neural-pitch/export_neuralpitch_weights.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/neural-pitch/models.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/neural-pitch/neural_pitch_update.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/neural-pitch/ptdb_process.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/neural-pitch/run_crepe.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/neural-pitch/training.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/neural-pitch/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/adv_train_model.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/adv_train_vocoder.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/create_testvectors.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/data/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/data/lpcnet_vocoding_dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/data/silk_conversion_set.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/data/silk_enhancement_set.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/engine/engine.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/engine/vocoder_engine.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/export_model_weights.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/losses/stft_loss.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/losses/td_lowpass.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/make_default_setup.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/models/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/models/fd_discriminator.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/models/lace.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/models/lavoce.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/models/lavoce_400.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/models/lpcnet_feature_net.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/models/nns_base.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/models/no_lace.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/models/scale_embedding.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/models/shape_up_48.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/models/silk_feature_net.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/models/silk_feature_net_pl.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/resources/training_files.txt" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/resources/validation_files.txt" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/scripts/concatenator.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/silk_16_to_48.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/create_input_data.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/evaluate.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/lace_loss_metric.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/make_boxplots.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/make_boxplots_moctest.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/make_tables.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/make_tables_moctest.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/moc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/moc2.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/process_dataset.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/run_nomad.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/presentation/endoscopy.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/presentation/playback.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/test_model.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/test_vocoder.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/train_model.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/train_vocoder.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/ada_conv.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/complexity.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/endoscopy.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/layers/fir.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/layers/limited_adaptive_comb1d.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/layers/limited_adaptive_conv1d.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/layers/noise_shaper.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/layers/pitch_auto_correlator.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/layers/silk_upsampler.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/layers/td_shaper.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/lpcnet_features.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/misc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/moc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/pitch.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/silk_features.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/softquant.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/spec.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/utils/templates.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/plc/export_plc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/plc/plc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/plc/plc_dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/plc/train_plc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/rdovae/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/rdovae/export_rdovae_weights.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/rdovae/fec_encoder.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/rdovae/import_rdovae_weights.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/rdovae/packets/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/rdovae/packets/fec_packets.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/rdovae/rdovae/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/rdovae/rdovae/dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/rdovae/rdovae/rdovae.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/rdovae/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/rdovae/train_rdovae.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/testsuite/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/testsuite/examples/lpcnet_c_example.yml" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/testsuite/examples/lpcnet_c_plc_example.yml" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/testsuite/examples/lpcnet_torch_example.yml" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/testsuite/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/testsuite/run_test.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/testsuite/utils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/testsuite/utils/files.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/testsuite/utils/pesq.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/testsuite/utils/pitch.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/weight-exchange/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/weight-exchange/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/weight-exchange/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/weight-exchange/wexchange/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/weight-exchange/wexchange/c_export/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/weight-exchange/wexchange/c_export/c_writer.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/weight-exchange/wexchange/c_export/common.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/weight-exchange/wexchange/tf/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/weight-exchange/wexchange/tf/tf.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/weight-exchange/wexchange/torch/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/weight-exchange/wexchange/torch/torch.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/dataloader.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/decode_rdovae.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/diffembed.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/dump_lpcnet.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/dump_plc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/dump_rdovae.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/encode_rdovae.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/fec_encoder.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/fec_packets.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/keraslayerdump.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/lossfuncs.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/lpcnet.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/lpcnet_plc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/mdense.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/pade.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/parameters.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/plc_loader.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/rdovae.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/rdovae_exchange.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/rdovae_import.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/test_lpcnet.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/test_plc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/tf_funcs.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/train_lpcnet.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/train_plc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/train_rdovae.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/ulaw.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/training_tf2/uniform_noise.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/doc/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/opus/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/opus/doc/build_draft.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/doc/build_isobmff.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/doc/build_oggdraft.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/doc/customdoxygen.css" />
+    <Text Include="../../thirdparty/owemdjee/opus/doc/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/opus/doc/header.html" />
+    <Text Include="../../thirdparty/owemdjee/opus/doc/opus_in_isobmff.css" />
+    <Text Include="../../thirdparty/owemdjee/opus/doc/opus_in_isobmff.html" />
+    <Text Include="../../thirdparty/owemdjee/opus/doc/opus_logo.svg" />
+    <Text Include="../../thirdparty/owemdjee/opus/doc/release.txt" />
+    <Text Include="../../thirdparty/owemdjee/opus/lpcnet_headers.mk" />
+    <Text Include="../../thirdparty/owemdjee/opus/lpcnet_sources.mk" />
+    <Text Include="../../thirdparty/owemdjee/opus/m4/as-gcc-inline-assembly.m4" />
+    <Text Include="../../thirdparty/owemdjee/opus/m4/ax_add_fortify_source.m4" />
+    <Text Include="../../thirdparty/owemdjee/opus/m4/opus-intrinsics.m4" />
+    <Text Include="../../thirdparty/owemdjee/opus/meson/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opus/meson/get-version.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/meson/read-sources-list.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/meson_options.txt" />
+    <Text Include="../../thirdparty/owemdjee/opus/opus-uninstalled.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/opus/opus.m4" />
+    <Text Include="../../thirdparty/owemdjee/opus/opus.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/opus/opus_headers.mk" />
+    <Text Include="../../thirdparty/owemdjee/opus/opus_sources.mk" />
+    <Text Include="../../thirdparty/owemdjee/opus/releases.sha2" />
+    <Text Include="../../thirdparty/owemdjee/opus/scripts/dump_rnn.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/scripts/local_build.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/scripts/rnn_train.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/scripts/shrink_model.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/silk_headers.mk" />
+    <Text Include="../../thirdparty/owemdjee/opus/silk_sources.mk" />
+    <Text Include="../../thirdparty/owemdjee/opus/tests/opus_build_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/tests/random_config.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/tests/run_vectors.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/training/rnn_dump.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/training/rnn_train.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/training/txt2hdf5.py" />
+    <Xml Include="../../thirdparty/owemdjee/opus/doc/draft-ietf-codec-oggopus.xml" />
+    <Xml Include="../../thirdparty/owemdjee/opus/doc/draft-ietf-codec-opus-update.xml" />
+    <Xml Include="../../thirdparty/owemdjee/opus/doc/draft-ietf-codec-opus.xml" />
+    <Xml Include="../../thirdparty/owemdjee/opus/doc/draft-ietf-payload-rtp-opus.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

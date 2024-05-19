@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF08FEC2}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASYOCR;EASYOCR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASYOCR;EASYOCR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASYOCR;EASYOCR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASYOCR;EASYOCR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASYOCR;EASYOCR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASYOCR;EASYOCR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASYOCR;EASYOCR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASYOCR;EASYOCR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASYOCR;EASYOCR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASYOCR;EASYOCR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASYOCR;EASYOCR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASYOCR;EASYOCR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/src/deform_conv_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/src/deform_conv_cpu_kernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/src/deform_conv_cuda.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/src/deform_pool_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/src/deform_pool_cpu_kernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/src/deform_pool_cuda.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/src/deform_conv_cpu_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/src/deform_pool_cpu_kernel.h" />
+    <Image Include="../../thirdparty/owemdjee/EasyOCR/examples/chinese.jpg" />
+    <Image Include="../../thirdparty/owemdjee/EasyOCR/examples/english.png" />
+    <Image Include="../../thirdparty/owemdjee/EasyOCR/examples/example.png" />
+    <Image Include="../../thirdparty/owemdjee/EasyOCR/examples/example2.png" />
+    <Image Include="../../thirdparty/owemdjee/EasyOCR/examples/example3.png" />
+    <Image Include="../../thirdparty/owemdjee/EasyOCR/examples/french.jpg" />
+    <Image Include="../../thirdparty/owemdjee/EasyOCR/examples/japanese.jpg" />
+    <Image Include="../../thirdparty/owemdjee/EasyOCR/examples/korean.png" />
+    <Image Include="../../thirdparty/owemdjee/EasyOCR/examples/thai.jpg" />
+    <Image Include="../../thirdparty/owemdjee/EasyOCR/examples/width_ths.png" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/README.md" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/custom_model.md" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/DBNet.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/README.md" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/functions/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/functions/deform_conv.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/functions/deform_pool.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/modules/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/modules/deform_conv.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/modules/deform_pool.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/assets/ops/dcn/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/backbones/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/backbones/mobilenetv3.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/backbones/resnet.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/configs/DBNet_inference.yaml" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/decoders/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/decoders/balance_cross_entropy_loss.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/decoders/dice_loss.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/decoders/feature_attention.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/decoders/l1_loss.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/decoders/pss_loss.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/decoders/seg_detector.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/decoders/seg_detector_asf.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/decoders/seg_detector_loss.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/decoders/simple_detection.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/model/constructor.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/model/detector.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/DBNet/model/model.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ab_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/abq_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ady_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/af_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/am_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/amh_text.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ang_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ar_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/as_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ava_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/az_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/be_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/bg_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/bh_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/bho_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/bn_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/braille_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/bs_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ch_pin_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ch_sim_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ch_tra_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/che_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/cs_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/cy_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/da_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/dar_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/de_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/en_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/es_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/et_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/fa_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/fr_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ga_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ge_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/gom_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/gre_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/he_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/hi_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/hr_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/hu_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/id_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/inh_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/is_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/it_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ja_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/kas_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/kbd_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/kn.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/kn_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ko_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ku_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/la_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/lbe_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/lez_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/lt_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/lv_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/mah_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/mai_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/mi_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ml_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/mn_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/mr_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ms_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/mt_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/my_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ne_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/new_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/nl_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/no_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/oc_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/or_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/os_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/pb_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/pi_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/pl_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ps_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/pt_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ro_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/rs_cyrillic_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/rs_latin_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ru_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/sck_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/sh_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/si_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/sk_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/sl_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/sq_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/sv_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/sw_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ta_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/tab_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/te.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/te_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/th_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ti_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/tjk_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/tl_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/tr_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/udm_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ug_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/uk_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/ur_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/uz_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/character/vi_char.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/cli.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/config.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/craft.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/craft_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/detection.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/detection_db.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ab.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ady.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/af.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/am.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ar.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/az.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/be.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/bg.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/bn.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/braille.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/bs.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ch-pin-syl.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ch_pin.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/cs.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/cy.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/da.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/de.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/en.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/es.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/et.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/fa.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/fr.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ga.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ge.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/gre.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/he.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/hi.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/hr.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/hu.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/id.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/is.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/it.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ja.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/kas.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/kn.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ko.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ku.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/la.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/lt.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/lv.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/mi.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ml.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/mn.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/mr.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ms.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/mt.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/my.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ne.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/nl.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/no.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/oc.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/or.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/os.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/pb.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/pi.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/pl.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ps.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/pt.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ro.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/rs_cyrillic.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/rs_latin.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ru.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/sh.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/si.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/sk.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/sl.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/sq.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/sv.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/sw.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ta.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/te.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/th.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ti.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ti2.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/tjk.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/tl.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/tr.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/udm.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ug.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/uk.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/ur.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/uz.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/dict/vi.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/easyocr.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/export.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/imgproc.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/model/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/model/model.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/model/modules.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/model/vgg_model.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/recognition.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/scripts/compile_dbnet_dcn.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/easyocr/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/releasenotes.md" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/README.md" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/all_data/folder.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/config_files/en_filtered_config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/README.md" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/config/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/config/custom_data_train.yaml" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/config/load_config.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/config/syn_train.yaml" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/data/boxEnlarge.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/data/dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/data/gaussian.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/data/imgaug.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/data/imgproc.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/data/pseudo_label/make_charbox.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/data/pseudo_label/watershed.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/data_root_dir/folder.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/eval.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/exp/folder.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/loss/mseloss.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/metrics/eval_det_iou.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/model/craft.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/model/vgg16_bn.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/scripts/run_cde.sh" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/train.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/trainSynth.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/train_distributed.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/utils/craft_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/utils/inference_boxes.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/craft/utils/util.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/model.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/modules/feature_extraction.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/modules/prediction.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/modules/sequence_modeling.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/modules/transformation.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/saved_models/folder.txt" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/test.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/train.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/trainer/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/unit_test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/unit_test/demo.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/unit_test/make_test_solution.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/unit_test/run_unit_test.py" />
+    <Text Include="../../thirdparty/owemdjee/EasyOCR/unit_test/unit_test.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

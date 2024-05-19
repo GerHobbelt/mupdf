@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF276B8E}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPKE;PKE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPKE;PKE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPKE;PKE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPKE;PKE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPKE;PKE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPKE;PKE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPKE;PKE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPKE;PKE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPKE;PKE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPKE;PKE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPKE;PKE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPKE;PKE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/fontawesome-webfont.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Inconsolata-Bold.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Inconsolata-Regular.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Inconsolata.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato-Bold.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato-Regular.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato/lato-bold.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato/lato-bolditalic.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato/lato-italic.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato/lato-regular.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/RobotoSlab-Bold.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/RobotoSlab-Regular.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/RobotoSlab/roboto-slab-v7-bold.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/RobotoSlab/roboto-slab-v7-regular.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/fontawesome-webfont.ttf" />
+    <Image Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/ajax-loader.gif" />
+    <Image Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/comment-bright.png" />
+    <Image Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/comment-close.png" />
+    <Image Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/comment.png" />
+    <Image Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/down-pressed.png" />
+    <Image Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/down.png" />
+    <Image Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/file.png" />
+    <Image Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/minus.png" />
+    <Image Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/plus.png" />
+    <Image Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/up-pressed.png" />
+    <Image Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/up.png" />
+    <Text Include="../../thirdparty/owemdjee/pke/LICENCE.md" />
+    <Text Include="../../thirdparty/owemdjee/pke/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/pke/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/basic.css" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/classic.css" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/badge_only.css" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/Roboto-Slab-Bold.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/Roboto-Slab-Bold.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/Roboto-Slab-Regular.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/Roboto-Slab-Regular.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/fontawesome-webfont.svg" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/fontawesome-webfont.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/fontawesome-webfont.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/lato-bold-italic.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/lato-bold-italic.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/lato-bold.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/lato-bold.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/lato-normal-italic.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/lato-normal-italic.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/lato-normal.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/fonts/lato-normal.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/css/theme.css" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/doctools.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/documentation_options.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato/lato-bold.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato/lato-bold.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato/lato-bolditalic.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato/lato-bolditalic.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato/lato-italic.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato/lato-italic.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato/lato-regular.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/Lato/lato-regular.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/RobotoSlab/roboto-slab-v7-bold.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/RobotoSlab/roboto-slab-v7-bold.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/RobotoSlab/roboto-slab-v7-regular.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/RobotoSlab/roboto-slab-v7-regular.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/fontawesome-webfont.svg" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/fontawesome-webfont.woff" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/fonts/fontawesome-webfont.woff2" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/jquery-3.2.1.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/jquery-3.5.1.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/jquery.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/js/badge_only.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/js/html5shiv-printshiv.min.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/js/html5shiv.min.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/js/modernizr.min.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/js/theme.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/language_data.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/pygments.css" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/searchtools.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/sidebar.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/underscore-1.13.1.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/underscore-1.3.1.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/underscore.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/_static/websupport.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/base.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/genindex.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/index.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/py-modindex.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/readers.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/search.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/searchindex.js" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/supervised.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/tutorials/df.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/tutorials/input.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/tutorials/non-english.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/tutorials/training.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/unsupervised.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/build/html/utils.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/index.html" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/source/base.rst" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/source/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/source/readers.rst" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/source/supervised.rst" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/source/tutorials/df.rst" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/source/tutorials/input.rst" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/source/tutorials/non-english.rst" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/source/tutorials/training.rst" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/source/unsupervised.rst" />
+    <Text Include="../../thirdparty/owemdjee/pke/docs/source/utils.rst" />
+    <Text Include="../../thirdparty/owemdjee/pke/examples/2.txt" />
+    <Text Include="../../thirdparty/owemdjee/pke/examples/benchmarking-models.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/examples/compute-df-counts.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/examples/compute-lda_model.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/examples/keyphrase-extraction.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/examples/training_and_testing_a_kea_model/2.txt" />
+    <Text Include="../../thirdparty/owemdjee/pke/examples/training_and_testing_a_kea_model/gold-annotation.txt" />
+    <Text Include="../../thirdparty/owemdjee/pke/examples/training_and_testing_a_kea_model/test.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/examples/training_and_testing_a_kea_model/train.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/examples/training_and_testing_a_kea_model/train/6.txt" />
+    <Text Include="../../thirdparty/owemdjee/pke/examples/training_and_testing_a_kea_model/train/7.txt" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/base.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/data_structures.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/lang.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/readers.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/supervised/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/supervised/api.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/supervised/feature_based/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/supervised/feature_based/kea.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/supervised/feature_based/wingnus.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/unsupervised/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/unsupervised/graph_based/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/unsupervised/graph_based/multipartiterank.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/unsupervised/graph_based/positionrank.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/unsupervised/graph_based/single_tpr.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/unsupervised/graph_based/singlerank.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/unsupervised/graph_based/textrank.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/unsupervised/graph_based/topicrank.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/unsupervised/statistical/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/unsupervised/statistical/firstphrases.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/unsupervised/statistical/kpminer.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/unsupervised/statistical/tfidf.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/unsupervised/statistical/yake.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/pke/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/pke/results.md" />
+    <Text Include="../../thirdparty/owemdjee/pke/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/tests/data/1939.txt" />
+    <Text Include="../../thirdparty/owemdjee/pke/tests/data/inspec_sent2vec.bin" />
+    <Text Include="../../thirdparty/owemdjee/pke/tests/data/reference.final" />
+    <Text Include="../../thirdparty/owemdjee/pke/tests/data/reference.json" />
+    <Text Include="../../thirdparty/owemdjee/pke/tests/data/reference.stem.final" />
+    <Text Include="../../thirdparty/owemdjee/pke/tests/data/reference.stem.json" />
+    <Text Include="../../thirdparty/owemdjee/pke/tests/sample.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/tests/test_firstphrases.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/tests/test_reading.py" />
+    <Text Include="../../thirdparty/owemdjee/pke/tests/test_utils.py" />
+    <Xml Include="../../thirdparty/owemdjee/pke/tests/data/1939.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

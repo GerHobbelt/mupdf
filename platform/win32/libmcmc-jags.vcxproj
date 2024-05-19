@@ -1,0 +1,1512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF541B76}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCMC_JAGS;MCMC_JAGS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCMC_JAGS;MCMC_JAGS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCMC_JAGS;MCMC_JAGS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCMC_JAGS;MCMC_JAGS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCMC_JAGS;MCMC_JAGS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCMC_JAGS;MCMC_JAGS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCMC_JAGS;MCMC_JAGS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCMC_JAGS;MCMC_JAGS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCMC_JAGS;MCMC_JAGS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCMC_JAGS;MCMC_JAGS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCMC_JAGS;MCMC_JAGS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCMC_JAGS;MCMC_JAGS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_aat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_control.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_defaults.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_order.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_post_tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_postorder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_preprocess.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_valid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Check/cholmod_check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Check/cholmod_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Check/cholmod_write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/cholmod_amd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/cholmod_analyze.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/cholmod_colamd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/cholmod_etree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/cholmod_factorize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/cholmod_postorder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/cholmod_rcond.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/cholmod_resymbol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/cholmod_rowcolcounts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/cholmod_rowfac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/cholmod_solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/cholmod_spsolve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/t_cholmod_lsolve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/t_cholmod_ltsolve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/t_cholmod_rowfac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/t_cholmod_solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_aat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_add.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_band.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_change_factor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_complex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_dense.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_factor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_sparse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_transpose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/cholmod_triplet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/t_cholmod_change_factor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/t_cholmod_dense.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/t_cholmod_transpose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/t_cholmod_triplet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/MatrixOps/cholmod_drop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/MatrixOps/cholmod_horzcat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/MatrixOps/cholmod_norm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/MatrixOps/cholmod_scale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/MatrixOps/cholmod_sdmult.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/MatrixOps/cholmod_ssmult.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/MatrixOps/cholmod_submatrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/MatrixOps/cholmod_symmetry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/MatrixOps/cholmod_vertcat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/MatrixOps/t_cholmod_sdmult.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Modify/cholmod_rowadd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Modify/cholmod_rowdel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Modify/cholmod_updown.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Modify/t_cholmod_updown.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Modify/t_cholmod_updown_numkr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Partition/cholmod_camd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Partition/cholmod_ccolamd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Partition/cholmod_csymamd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Partition/cholmod_metis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Partition/cholmod_nesdis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Supernodal/cholmod_super_numeric.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Supernodal/cholmod_super_solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Supernodal/cholmod_super_symbolic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Supernodal/t_cholmod_super_numeric.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Supernodal/t_cholmod_super_solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/COLAMD/colamd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/COLAMD/colamd_global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/bd0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/bessel_i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/bessel_j.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/bessel_k.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/bessel_y.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/beta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/callbacks.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/chebyshev.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/choose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/cospi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/d1mach.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dbeta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dbinom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dcauchy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dchisq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/df.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dgamma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dgeom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dhyper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dlnorm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dlogis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dnbeta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dnbinom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dnchisq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dnf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dnorm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dpois.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dunif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dweibull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dweibull2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/fmax2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/fmin2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/fprec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/fround.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/fsign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/ftrunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/gamma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/gamma_cody.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/gammalims.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/i1mach.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/imax2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/imin2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/lbeta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/lgamma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/lgammacor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/mlutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pbeta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pbinom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pcauchy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pchisq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pgamma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pgeom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/phyper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/plnorm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/plogis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pnbeta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pnbinom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pnchisq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pnf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pnorm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/polygamma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/ppois.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/punif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pweibull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/pweibull2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qbeta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qbinom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qcauchy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qchisq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qgamma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qgeom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qhyper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qlnorm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qlogis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qnbeta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qnbinom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qnchisq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qnf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qnorm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qpois.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qunif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qweibull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/qweibull2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rbeta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rbinom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rcauchy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rchisq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rgamma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rgeom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rhyper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rlnorm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rlogis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rnbinom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rnchisq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rnorm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rpois.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/runif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rweibull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/rweibull2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/sign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/stirlerr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/toms708.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/Console.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/Compiler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/Counter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/CounterTab.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/LogicalFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/MixCompiler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/MixtureFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/NodeFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/ObsFuncTab.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/ParseTree.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/distribution/ArrayDist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/distribution/DistError.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/distribution/DistPtr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/distribution/DistTab.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/distribution/Distribution.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/distribution/RScalarDist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/distribution/ScalarDist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/distribution/VectorDist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/distribution/c99_math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/ArrayFunction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/ArrayLogDensity.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/DFunction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/DPQFunction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/FuncError.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/FuncTab.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/Function.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/FunctionPtr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/LinkFunction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/PFunction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/QFunction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/ScalarFunction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/ScalarLogDensity.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/ScalarVectorFunction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/VectorFunction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/VectorLogDensity.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/testfun.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/AggNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/ArrayLogicalNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/ArrayStochasticNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/ConstantNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/DeterministicNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/Graph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/GraphMarks.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/LinkNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/LogicalNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/MixTab.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/MixtureNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/Node.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/NodeError.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/NodeNameTab.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/ScalarLogicalNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/ScalarStochasticNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/StochasticNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/VSLogicalNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/VectorLogicalNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/VectorStochasticNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/model/BUGSModel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/model/CODA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/model/Model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/model/Monitor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/model/MonitorControl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/model/MonitorFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/model/MonitorInfo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/model/NodeArray.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/model/NodeArraySubset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/model/SymTab.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/module/Module.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/module/ModuleError.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/rng/RNG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/rng/RNGFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/rng/RmathRNG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/rng/TruncatedNormal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/GraphView.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/ImmutableSampleMethod.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/ImmutableSampler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/Linear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/Metropolis.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/MutableSampleMethod.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/MutableSampler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/RWMetropolis.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/Sampler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/SamplerFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/SingletonFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/Slicer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/StepAdapter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/TemperedMetropolis.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sarray/Range.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sarray/RangeIterator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sarray/SArray.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sarray/SimpleRange.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/testlib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/util/dim.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/util/integer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/util/naconst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/util/nainf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/base.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Add.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/And.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Divide.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Equal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/GreaterOrEqual.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/GreaterThan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Infix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/LessOrEqual.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/LessThan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Multiply.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Neg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Not.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/NotEqual.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Or.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Pow.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Seq.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Subtract.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/testbasefun.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/MeanMonitor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/MeanMonitorFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/PoolMeanMonitor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/PoolVarianceMonitor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/TraceMonitor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/TraceMonitorFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/VarianceMonitor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/VarianceMonitorFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/rngs/BaseRNGFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/rngs/MarsagliaRNG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/rngs/MersenneTwisterRNG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/rngs/SuperDuperRNG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/rngs/WichmannHillRNG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/DiscreteSlicer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/FiniteFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/FiniteMethod.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/MSlicer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/RealSlicer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/SliceFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/testbase.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/bugs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DBern.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DBeta.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DBin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DCat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DChisqr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DDexp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DDirch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DExp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DF.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DGamPois.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DGamma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DGenGamma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DHyper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DInterval.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DLnorm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DLogis.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DMNorm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DMNormVC.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DMT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DMulti.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DNChisqr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DNT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DNegBin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DNorm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DPar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DPois.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DRW1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DRound.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DSample.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DSum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DUnif.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DWeib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DWish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/SumDist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/testbugsdist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Abs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ArcCos.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ArcCosh.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ArcSin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ArcSinh.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ArcTan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ArcTanh.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/BesselI.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/BesselJ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/BesselK.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/BesselY.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/CLogLog.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Combine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Cos.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Cosh.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/DIntervalFunc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/DRoundFunc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/DSumFunc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Equals.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Exp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ICLogLog.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ILogit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/IfElse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/InProd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/InterpLin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Inverse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/InverseLU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Log.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/LogDet.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/LogFact.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/LogGam.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Logit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/MatMult.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Max.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Mean.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Min.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Order.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Phi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Probit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Prod.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Rank.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Rep.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Round.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/SD.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Sin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Sinh.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Sort.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Sqrt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Step.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Sum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Tan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Tanh.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Trunc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/testbugsfun.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/matrix/matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/BinomSliceFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/BinomSlicer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/Censored.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/CensoredFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateBeta.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateDirichlet.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateGamma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateMNormal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateMethod.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateNormal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateWishart.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/DMultiDSum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/DSumFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/DSumMethod.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/Dirichlet.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/DirichletFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/DiscreteDSum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/MNormal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/MNormalFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/REFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/RESampler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/RW1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/RW1Factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/RWDSum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/RealDSum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ShiftedCount.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ShiftedMultinomial.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/SumFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/SumMethod.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/TruncatedGamma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/testbugs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/cut/CutFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/cut/CutSampler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/cut/DCut.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/cut/cut.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityEnums.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityMean.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityPoolMean.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityPoolVariance.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityTotal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityTrace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityVariance.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DevianceMean.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DevianceMonitorFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DevianceTrace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/NodeDensityMonitorFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/ObsStochDensMonitorFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PDMonitor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PDMonitorFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PDTrace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PDTraceFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PenaltyPD.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PenaltyPDTotal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PenaltyPOPT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PenaltyPOPTTotal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PenaltyPOPTTotalRep.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PenaltyPV.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PoptMonitor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/WAICMonitor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/WAICMonitorFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/dic.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd_aat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd_control.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd_defaults.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd_dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd_global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd_order.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd_post_tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd_postorder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd_preprocess.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd_valid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Source/camd_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Source/camd_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Source/camd_aat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Source/camd_control.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Source/camd_defaults.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Source/camd_dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Source/camd_global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Source/camd_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Source/camd_order.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Source/camd_postorder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Source/camd_preprocess.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Source/camd_valid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CCOLAMD/Source/ccolamd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Check/cholmod_check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Check/cholmod_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Check/cholmod_write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/cholmod_amd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/cholmod_analyze.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/cholmod_colamd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/cholmod_etree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/cholmod_factorize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/cholmod_postorder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/cholmod_rcond.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/cholmod_resymbol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/cholmod_rowcolcounts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/cholmod_rowfac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/cholmod_solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/cholmod_spsolve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/t_cholmod_lsolve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/t_cholmod_ltsolve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/t_cholmod_rowfac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/t_cholmod_solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_aat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_add.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_band.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_change_factor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_complex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_dense.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_factor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_sparse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_transpose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_triplet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/cholmod_version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/t_cholmod_change_factor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/t_cholmod_dense.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/t_cholmod_transpose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/t_cholmod_triplet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/cholmod_drop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/cholmod_horzcat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/cholmod_norm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/cholmod_scale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/cholmod_sdmult.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/cholmod_ssmult.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/cholmod_submatrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/cholmod_symmetry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/cholmod_vertcat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/t_cholmod_sdmult.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Modify/cholmod_rowadd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Modify/cholmod_rowdel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Modify/cholmod_updown.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Modify/t_cholmod_updown.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Modify/t_cholmod_updown_numkr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Supernodal/cholmod_super_numeric.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Supernodal/cholmod_super_solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Supernodal/cholmod_super_symbolic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Supernodal/t_cholmod_super_numeric.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Supernodal/t_cholmod_super_solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/COLAMD/Source/colamd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/COLAMD/Source/colamd_global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/config/SuiteSparse_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/distributions/DOrdered.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/distributions/DOrderedLogit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/distributions/DOrderedProbit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/distributions/DScaledGamma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/distributions/DScaledWishart.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/distributions/testglmdist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/glm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/AuxMixBinomial.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/AuxMixPoisson.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/BinaryLogit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/BinaryProbit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/Classify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/GLMBlock.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/GLMFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/GLMGenericFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/GLMGibbs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/GLMMethod.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/GLMSampler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/HolmesHeld.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/HolmesHeldFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/HolmesHeldGibbs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/IWLS.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/IWLSFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/IWLSOutcome.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/KS.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/LGMix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/LogNormalLinear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/LogisticLinear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/MNormalLinear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/NormalLinear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/OrderedLogit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/OrderedProbit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/Outcome.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/PGcommon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/PolyaGamma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REFactory2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REGamma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REGamma2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REGammaFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REGammaFactory2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REGammaSlicer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REGammaSlicer2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REMethod.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REMethod2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/RESampler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledGamma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledGamma2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledGammaFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledGammaFactory2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledWishart.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledWishart2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledWishartFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledWishartFactory2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/SampleWishart.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/ScaledGamma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/ScaledGammaFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/ScaledWishart.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/ScaledWishartFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/TLinear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/testglmsamp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/testglm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/lecuyer/RngStream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/lecuyer/RngStreamFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/lecuyer/lecuyer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/distributions/DBetaBin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/distributions/DNormMix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/distributions/DPick.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/distributions/testmixdist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/mix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/CatDirichlet.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/DirichletCat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/DirichletCatFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/DirichletInfo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/LDA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/LDAFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/MixSampler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/MixSamplerFactory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/NormMix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/testmix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/distributions/DMState.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/functions/Mexp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/matrix/matexp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/msm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/terminal/ReadData.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/test/base.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/test/bugs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/test/glm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcmc-jags/test/mix.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/amd_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Include/cholmod_blas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Include/cholmod_complexity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Include/cholmod_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Include/cholmod_io64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Include/cholmod_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/Console.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/JRmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/UFsparse/UFconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/UFsparse/amd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/UFsparse/cholmod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/UFsparse/cholmod_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/UFsparse/cholmod_cholesky.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/UFsparse/cholmod_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/UFsparse/cholmod_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/UFsparse/cholmod_matrixops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/UFsparse/cholmod_modify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/UFsparse/cholmod_supernodal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/UFsparse/colamd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/compiler/Compiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/compiler/Counter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/compiler/CounterTab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/compiler/LogicalFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/compiler/MixtureFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/compiler/NodeFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/compiler/ObsFuncTab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/compiler/ParseTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/distribution/ArrayDist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/distribution/DistError.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/distribution/DistPtr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/distribution/DistTab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/distribution/Distribution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/distribution/RScalarDist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/distribution/ScalarDist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/distribution/VectorDist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/ArrayFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/ArrayLogDensity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/DFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/DPQFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/FuncError.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/FuncTab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/Function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/FunctionPtr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/LinkFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/PFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/QFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/ScalarFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/ScalarLogDensity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/ScalarVectorFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/VectorFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/VectorLogDensity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/testfun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/AggNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/ArrayLogicalNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/ArrayStochasticNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/ConstantNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/DeterministicNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/Graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/GraphMarks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/LinkNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/LogicalNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/MixTab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/MixtureNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/Node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/NodeError.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/ScalarLogicalNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/ScalarStochasticNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/StochasticNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/VSLogicalNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/VectorLogicalNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/VectorStochasticNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/model/BUGSModel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/model/Model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/model/Monitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/model/MonitorControl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/model/MonitorFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/model/MonitorInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/model/NodeArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/model/NodeArraySubset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/model/SymTab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/module/Module.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/module/ModuleError.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/rng/RNG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/rng/RNGFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/rng/RmathRNG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/rng/TruncatedNormal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/GraphView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/ImmutableSampleMethod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/ImmutableSampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/Linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/Metropolis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/MutableSampleMethod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/MutableSampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/RWMetropolis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/SampleMethodNoAdapt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/Sampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/SamplerFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/SingletonFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/SingletonGraphView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/Slicer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/StepAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/TemperedMetropolis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sarray/Range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sarray/RangeIterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sarray/SArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sarray/SimpleRange.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/testlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/util/dim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/util/integer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/util/logical.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/include/util/nainf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/bessel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/dpq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/nmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/MixCompiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/parser_extra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/remap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/distribution/c99_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/model/CODA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Add.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/And.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Divide.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Equal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/GreaterOrEqual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/GreaterThan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Infix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/LessOrEqual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/LessThan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Multiply.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Neg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Not.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/NotEqual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Or.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Pow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Seq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Subtract.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/testbasefun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/MeanMonitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/MeanMonitorFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/PoolMeanMonitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/PoolVarianceMonitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/TraceMonitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/TraceMonitorFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/VarianceMonitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/VarianceMonitorFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/rngs/BaseRNGFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/rngs/MarsagliaRNG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/rngs/MersenneTwisterRNG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/rngs/SuperDuperRNG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/rngs/WichmannHillRNG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/DiscreteSlicer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/FiniteFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/FiniteMethod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/MSlicer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/RealSlicer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/SliceFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/testbase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DBern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DBeta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DBin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DCat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DChisqr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DDexp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DDirch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DExp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DGamPois.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DGamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DGenGamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DHyper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DInterval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DLnorm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DLogis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DMNorm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DMNormVC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DMT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DMulti.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DNChisqr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DNT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DNegBin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DNorm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DPar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DPois.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DRW1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DRound.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DSample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DSum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DUnif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DWeib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/DWish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/SumDist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/testbugsdist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Abs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ArcCos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ArcCosh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ArcSin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ArcSinh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ArcTan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ArcTanh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/BesselI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/BesselJ.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/BesselK.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/BesselY.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/CLogLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Combine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Cos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Cosh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/DIntervalFunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/DRoundFunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/DSumFunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Equals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Exp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ICLogLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/ILogit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/IfElse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/InProd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/InterpLin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Inverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/InverseLU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/LogDet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/LogFact.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/LogGam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Logit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/MatMult.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Max.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Mean.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Min.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Order.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Phi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Probit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Prod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Rank.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Rep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Round.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/SD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Sin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Sinh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Sort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Sqrt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Step.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Sum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Tan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Tanh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Trunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/testbugsfun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/matrix/lapack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/matrix/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/BinomSliceFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/BinomSlicer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/Censored.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/CensoredFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateBeta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateDirichlet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateGamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateMNormal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateMethod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateNormal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ConjugateWishart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/DMultiDSum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/DSumFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/DSumMethod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/Dirichlet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/DirichletFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/DiscreteDSum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/MNormal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/MNormalFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/REFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/RESampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/RW1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/RW1Factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/RWDSum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/RealDSum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ShiftedCount.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/ShiftedMultinomial.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/SumFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/SumMethod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/TruncatedGamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/testbugs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/cut/CutFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/cut/CutSampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/cut/DCut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityEnums.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityMean.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityPoolMean.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityPoolVariance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityTotal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityTrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DensityVariance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DevianceMean.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DevianceMonitorFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/DevianceTrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/NodeDensityMonitorFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/ObsStochDensMonitorFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PDMonitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PDMonitorFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PDTrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PDTraceFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PenaltyPD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PenaltyPDTotal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PenaltyPOPT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PenaltyPOPTTotal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PenaltyPOPTTotalRep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PenaltyPV.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/PoptMonitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/WAICMonitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/WAICMonitorFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Include/amd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Include/amd_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Include/camd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Include/camd_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CCOLAMD/Include/ccolamd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_blas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_camd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_cholesky.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_complexity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_gpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_gpu_kernels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_io64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_matrixops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_modify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_partition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_supernodal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/cholmod_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/COLAMD/Include/colamd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/config/SuiteSparse_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/distributions/DOrdered.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/distributions/DOrderedLogit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/distributions/DOrderedProbit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/distributions/DScaledGamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/distributions/DScaledWishart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/distributions/testglmdist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/AuxMixBinomial.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/AuxMixPoisson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/BinaryLogit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/BinaryProbit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/Classify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/GLMBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/GLMFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/GLMGenericFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/GLMGibbs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/GLMMethod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/GLMSampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/HolmesHeld.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/HolmesHeldFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/HolmesHeldGibbs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/IWLS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/IWLSFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/IWLSOutcome.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/KS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/LGMix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/LogNormalLinear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/LogisticLinear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/MNormalLinear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/NormalLinear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/OrderedLogit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/OrderedProbit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/Outcome.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/PG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/PolyaGamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REFactory2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REGamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REGamma2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REGammaFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REGammaFactory2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REGammaSlicer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REGammaSlicer2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REMethod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REMethod2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/RESampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledGamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledGamma2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledGammaFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledGammaFactory2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledWishart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledWishart2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledWishartFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/REScaledWishartFactory2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/SampleWishart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/ScaledGamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/ScaledGammaFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/ScaledWishart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/ScaledWishartFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/TLinear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/testglmsamp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/testglm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/lecuyer/RngStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/lecuyer/RngStreamFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/distributions/DBetaBin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/distributions/DNormMix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/distributions/DPick.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/distributions/testmixdist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/CatDirichlet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/DirichletCat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/DirichletCatFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/DirichletInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/LDA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/LDAFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/MixSampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/MixSamplerFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/NormMix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/testmix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/distributions/DMState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/functions/Mexp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/matrix/lapack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/matrix/matexp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcmc-jags/src/terminal/ReadData.h" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/dllversion.rc" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/FindMKL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/README" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/doc/jags.1" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/doc/manual/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/doc/manual/figures/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/doc/manual/figures/halft.R" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/doc/manual/figures/halft.pdf" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/doc/manual/jags_developer_manual.tex" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/doc/manual/jags_installation_manual.tex" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/doc/manual/jags_user_manual.tex" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/doc/manual/version.in" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/etc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/etc/jags.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/m4/R.m4" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/m4/ax_lapack.m4" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/m4/ax_openmp.m4" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/m4/axx_blas.m4" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/License" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/AMD/lesser.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Check/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Check/lesser.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Cholesky/lesser.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Core/lesser.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/MatrixOps/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/MatrixOps/gpl.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Modify/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Modify/gpl.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Partition/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Partition/lesser.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Supernodal/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/CHOLMOD/Supernodal/gpl.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/COLAMD/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/COLAMD/lesser.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/UFsparse/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/UFsparse/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/compiler/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/distribution/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/function/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/graph/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/model/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/module/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/rng/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sampler/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/sarray/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/util/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/include/version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/jrmath/README" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/parser.yy" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/compiler/scanner.ll" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/distribution/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/distribution/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/function/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/graph/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/model/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/model/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/module/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/module/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/rng/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/rng/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sampler/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sarray/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/sarray/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/util/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/util/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/lib/version.cc.in" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/functions/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/monitors/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/rngs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/rngs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/base/samplers/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/distributions/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/functions/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/matrix/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/matrix/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/bugs/samplers/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/cut/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/cut/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/dic/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amd.f" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/AMD/Source/amdbar.f" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CAMD/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CCOLAMD/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CCOLAMD/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CCOLAMD/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Check/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Check/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Check/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Check/lesser.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Cholesky/lesser.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Core/lesser.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Include/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/MatrixOps/gpl.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Modify/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Modify/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Modify/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Modify/gpl.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Supernodal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Supernodal/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Supernodal/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CHOLMOD/Supernodal/gpl.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/COLAMD/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/COLAMD/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/COLAMD/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/SSparse/config/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/distributions/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/glm/samplers/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/lecuyer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/lecuyer/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/distributions/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/distributions/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/mix/samplers/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/distributions/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/distributions/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/functions/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/functions/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/matrix/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/modules/msm/matrix/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/terminal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/terminal/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/terminal/jags.bat" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/terminal/jags.in" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/terminal/parser.yy" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/src/terminal/scanner.ll" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/win/AdvUninstLog.nsh" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/win/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/win/MultiUser64.nsh" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/win/README.WIN" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/win/jags.nsi" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/win/runtime32/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/win/runtime32/README.RUNTIME32" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/win/runtime64/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcmc-jags/win/runtime64/README.RUNTIME64" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

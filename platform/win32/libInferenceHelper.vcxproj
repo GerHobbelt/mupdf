@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7FD082}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINFERENCEHELPER;INFERENCEHELPER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINFERENCEHELPER;INFERENCEHELPER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINFERENCEHELPER;INFERENCEHELPER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINFERENCEHELPER;INFERENCEHELPER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINFERENCEHELPER;INFERENCEHELPER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINFERENCEHELPER;INFERENCEHELPER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINFERENCEHELPER;INFERENCEHELPER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINFERENCEHELPER;INFERENCEHELPER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINFERENCEHELPER;INFERENCEHELPER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINFERENCEHELPER;INFERENCEHELPER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINFERENCEHELPER;INFERENCEHELPER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINFERENCEHELPER;INFERENCEHELPER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_armnn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_libtorch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_mnn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_ncnn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_nnabla.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_onnx_runtime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_opencv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_snpe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_tensorflow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_tensorflow_lite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_tensorrt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/snpe/CreateUserBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/snpe/Util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/snpe/udlExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/logger.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_armnn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_libtorch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_mnn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_ncnn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_nnabla.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_onnx_runtime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_opencv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_sample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_snpe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_tensorflow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_tensorflow_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/inference_helper_tensorrt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/snpe/CreateUserBuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/snpe/Util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/snpe/udlExample.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/BatchStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/EntropyCalibrator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/ErrorRecorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/logging.h" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/00_doc/class_diagram.png" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/00_doc/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/00_doc/overview.png" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000000139.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000000285.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000000632.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000000724.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000000776.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000000785.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000000802.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000000872.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000000885.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000001000.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000001268.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000001296.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000001353.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000001425.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000001490.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000001503.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000001532.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000001584.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000001675.jpg" />
+    <Image Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_org/000000001761.jpg" />
+    <Text Include="../../thirdparty/owemdjee/InferenceHelper/01_script/build_run_linux.sh" />
+    <Text Include="../../thirdparty/owemdjee/InferenceHelper/01_script/build_run_windows.ps1" />
+    <Text Include="../../thirdparty/owemdjee/InferenceHelper/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/InferenceHelper/NOTICE.md" />
+    <Text Include="../../thirdparty/owemdjee/InferenceHelper/README.md" />
+    <Text Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/snpe/NOTICE.txt" />
+    <Text Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/batchPrepare.py" />
+    <Text Include="../../thirdparty/owemdjee/InferenceHelper/inference_helper/tensorrt/calibration/sample_ppm/list.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

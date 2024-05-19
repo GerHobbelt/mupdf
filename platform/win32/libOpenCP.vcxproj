@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF1F322A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCP;OPENCP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCP;OPENCP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCP;OPENCP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCP;OPENCP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCP;OPENCP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCP;OPENCP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCP;OPENCP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCP;OPENCP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCP;OPENCP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCP;OPENCP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCP;OPENCP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCP;OPENCP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/TexturenessSampling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/clusteringHDKF/TileClusteringHDKF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/clusteringHDKF/bilateralFilterLocalStatisticsPrior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/clusteringHDKF/clusteringHDKF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/clusteringHDKF/clusteringHDKF_Interpolation2_single.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/clusteringHDKF/clusteringHDKF_Interpolation3_single.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/clusteringHDKF/clusteringHDKF_Interpolation_single.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/clusteringHDKF/clusteringHDKF_nystrom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/clusteringHDKF/clusteringHDKF_nystrom_single.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/clusteringHDKF/clusteringHDKF_softassignment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/clusteringHDKF/clusteringHDKF_softassignment_single.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/clusteringHDKF/quantization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/dllmain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/pch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/presampling_for_clutering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/randomCentroid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/MultiScaleFilter/LocalMultiscaleFilterFourier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/MultiScaleFilter/LocalMultiscaleFilterFull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/MultiScaleFilter/LocalMultiscaleFilterInterpolation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/MultiScaleFilter/MultiscaleBilateralFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/MultiScaleFilter/MultiscaleFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/MultiScaleFilter/MultiscaleFilterAlias.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/MultiScaleFilter/MultiscaleGaussianFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/MultiScaleFilter/MultiscaleGuidedImageFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/MultiScaleFilter/stdafx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/Calibrator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/GaussianBlurIPOL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/GaussianFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/GaussianFilterSpectralRecursive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/GaussianKDTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/IM2COL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/L0Smoothing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/MultiCameraCalibrator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/NEDI.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/PermutohedralLattice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/StereoBM2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/StereoBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/StereoEx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/StereoIterativeBM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/StereoSGM2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/VideoSubtitle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/Wiener2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/adaptiveManifold.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/arithmetic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/bilateralFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/bilateralGuidedUpsample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/binaryWeightedRangeFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/bitconvert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/bitconvertDD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/blend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/boundaryReconstructionFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_Integral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_Integral_OnePass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_Naive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_OPSAT_AoS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_OPSAT_AoS_2Div.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_OPSAT_SoA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_OPSAT_SoA_2Div.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_HV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_HV_4x4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_HV_8x8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_HV_CacheBlocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_HtH.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_RowSumGather.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_SoA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_VH.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_VtV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_Separable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_Separable_Interleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/buildInformation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/checkSameImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/circleFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/color.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/concat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/consoleImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/contrast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/copyMakeBorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/correlationCoefficient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/costVolumeFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/crop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/crossBasedLocalFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/crossBasedLocalMultipointFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/csv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/dctFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/dct_simd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/depth2disparity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/depthUpsample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/depthfilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/detailEnhancement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/diff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/diffPixel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/disparityFitPlane.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/dithering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/domainTransformFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/downsample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/draw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/dualBilateralFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/dualExponentialSmoothing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/dxtDenoise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/fftFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/fftinfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/filterCore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/fitPlane.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Div.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_OnePass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_OnePass_2Div.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_OnePass_Fast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_Share.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_Share_Ex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_Share_Transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_Share_Transpose_Inverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_Transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_Transpose_Inverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_forTiling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_nonSplit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Naive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Naive_Share.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_SepVHI.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_SepVHI_Share.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_tiling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/guidedImageGaussianFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/guidedImageUpsampleAlt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/hadamard.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/hazeRemove.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/highDimensionalGaussianFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/highguiEx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/imqc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/imshowExtension.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/iterativeBackProjection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/jointBilateralFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/jointBilateralUpsample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/jointDualBilateralFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/jointNearestFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/jointNonLocalMeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/kmeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/filter_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/gaussian_conv_am.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/gaussian_conv_box.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/gaussian_conv_dct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/gaussian_conv_deriche.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/gaussian_conv_ebox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/gaussian_conv_fir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/gaussian_conv_sii.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/gaussian_conv_vyv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/gaussian_short_conv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libimq/delta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libimq/fourpyrtransf3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libimq/msad.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libimq/mse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libimq/mssim.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libimq/psnr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libimq/ssim.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libimq/wssim.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/localLUTUpsample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/localLaplacianFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/maskoperation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/matrixsimdutil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/mattingRendering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/mediancut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/metrics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/metricsDD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/noise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/nonLocalMeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/onelineCVFunctions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/opticalFlow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/patchPCA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/pixelization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/plot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/pointcloud.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/poissonDiskSampling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/postFilterSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/ppmx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/randomizedQueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/realtimeO1BilateralFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/rectifyMultiCollinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/recursiveBilateralFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/remappedDither.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/separableFilterCore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/shiftImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/shockFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/showmatInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/slic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/speckle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/stat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/statistic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/statisticalFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/stencil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/stereoDP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/stereoDisplay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/stereoEval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/stereo_core.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/threshold.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/tiling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/unnormalizedBilateralFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/updateCheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/upsample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/video.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/viewsynthesis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/webp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/weightedHistogramFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/windowFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/xmeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/OpenCP/yuvio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/GaussianFilterAM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/GaussianFilterDeriche.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/GaussianFilterFIRKahan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/GaussianFilterFIROpenCV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/GaussianFilterFIRSep2DOpenCV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/GaussianFilterOpenCV2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/GaussianFilterSepFIR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/GaussianFilterVYV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/SpatialFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/SpatialFilterBox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/SpatialFilterDCT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/SpatialFilterSlidingDCT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/SpatialFilterSlidingDCT1_AVX.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/SpatialFilterSlidingDCT7_AVX.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/SpatialFilterrSlidingDCT3_AVX.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/SpatialFilterrSlidingDCT5_AVX.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/stdafx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/tileDiv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GaussianFilter/GaussianFilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/benchStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/bilateralfilter/bilateralFilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/bilateralfilter/binalyWeightedRangeFilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/bilateralfilter/jointBilateralFilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/denoise/guiDenoiseTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/detailEnhancement/detailEnhancementTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/disparityRefinement/disparityRefinementTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/domainTransformFilter/domainTransformFilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/dualBilateralFilter/dualBilateralFilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/dualExponentialSmoothingTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/ffttest/fftTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/fitPlaneTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/guiBlendTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/guiConsoleTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/guiCrossBasedLocalFilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/guiDomainTransformTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/guiEPFWeightMapTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/guiEdgePreservingFilterOpenCV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/guiHazeRemoveTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/guiPixelizationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/guiUnnormalizedBilateralFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/guiUpsampleTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/guidedFilter/guidedFilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/hazeRemove/hazeRemoveTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/highDimentionalGaussianFilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/iterativeBackProjection/iterativeBackProjectionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/jointNearestFilter/jointNearestFilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/multiScaleFilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/nonlocalmeans/nonLocalMeansTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/plotTest/testPlot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/qualityMetricsTest/qualityMetricsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/realtimeO1BilateralFilter/realtimeO1BilateralFilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/shockFilterTest/coherenceEnhancingShockFilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/slic/guiSLICTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testAddNoise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testCalibration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testCheckSameImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testColorCorrection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testConcat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testCopyMakeBorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testCorrelationCoefficient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testCropZoom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testGuidedImageFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testHistogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testInpaint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testKMeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testMatInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testPSNR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testRGBHistogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testSpatialFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testSplitMerge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testStat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testStereo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testTiling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testTimer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testVideoSubtitle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testWebP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testWeightedHistogramFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testWindowFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/viewSynthesis/viewSynthesisTest.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/clusteringHDKF/simdexp_local.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/pch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/MultiScaleFilter/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilterBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_Integral.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_Integral_OnePass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_Naive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_OPSAT_AoS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_OPSAT_AoS_2Div.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_OPSAT_SoA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_OPSAT_SoA_2Div.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_HV.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_HV_4x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_HV_8x8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_HV_CacheBlocking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_HtH.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_RowSumGather.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_SoA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_VH.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_SSAT_VtV.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_Separable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/box/boxFilter_Separable_Interleave.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/debugcp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/filterCore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/filterengine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Div.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_Base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_OnePass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_OnePass_2Div.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_OnePath_Fast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_Share.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_Share_Ex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_Share_Transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_Share_Transpose_Inverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_Transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_Transpose_Inverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_forTiling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Merge_nonSplit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Naive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_Naive_Share.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_SepVHI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/gif/guidedFilter_SepVHI_Share.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/complex_arith.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/gaussian_conv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libimq/imq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/webp/decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/webp/demux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/webp/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/webp/mux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/webp/mux_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/OpenCP/webp/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/patchSIMDFunctions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/Calibrator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/GaussianBlurIPOL.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/GaussianFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/GaussianFilterSpectralRecursive.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/GaussianKDTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/IM2COL.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/L0Smoothing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/MultiCameraCalibrator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/NEDI.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/PermutohedralLattice.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/StereoBM2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/StereoBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/StereoEval.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/StereoEx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/StereoIterativeBM.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/StereoSGM2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/VideoSubtitle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/Wiener2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/arithmetic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/bilateralFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/bilateralGuidedUpsample.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/binaryWeightedRangeFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/bitconvert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/bitconvertDD.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/blend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/boundaryReconstructionFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/boxFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/buildInformation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/checkSameImage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/circleFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/color.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/concat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/consoleImage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/contrast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/copyMakeBorder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/correlationCoefficient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/costVolumeFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/count.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/crop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/crossBasedLocalFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/crossBasedLocalMultipointFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/csv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/dctFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/depth2disparity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/depthUpsample.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/depthfilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/detailEnhancement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/diffPixel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/disparityFitPlane.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/dithering.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/domainTransformFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/downsample.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/draw.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/dualBilateralFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/dualExponentialSmoothing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/dxtDenoise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/fftFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/fftinfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/fitPlane.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/fmath/fmath.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/fpplus/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/fpplus/dd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/fpplus/eft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/fpplus/fpaddre.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/fpplus/fpplus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/fpplus/polevl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/guidedFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/hazeRemove.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/highDimensionalGaussianFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/highdimensionalkernelfilter/ClusteringHDKF.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/highguiex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/imagediff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/imqc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/imshowExtension.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/inlineCVFunctions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/inlineMathFunctions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/inlineSIMDFunctions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/iterativeBackProjection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/jointBilateralFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/jointBilateralUpsample.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/jointDualBilateralFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/jointNearestFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/jointNonLocalMeans.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/kmeans.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/localLUTUpsample.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/maskoperation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/matinfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/mattingRendering.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/mediancut.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/metrics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/metricsDD.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/multiscalefilter/FourierSeriesExpansion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/multiscalefilter/MultiScaleFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/noise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/nonLocalMeans.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/onelineCVFunctions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/opencp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/opticalFlow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/parallel_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/patchPCA.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/pixelization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/plot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/pointcloud.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/poissonDiskSampling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/postFilterSet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/ppmx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/randomizedQueue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/realtimeO1BilateralFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/rectifyMultiCollinear.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/recursiveBilateralFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/remappedDither.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/search1D.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/separableFilterCore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/shiftImage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/shockFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/slic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/spatialfilter/SpatialFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/speckle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/sse_util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/stat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/statistic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/statisticalFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/stencil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/stereoDP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/stereoDisplay.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/stereo_core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/threshold.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/tiling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/unnormalizedBilateralFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/updateCheck.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/upsample.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/video.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/viewsynthesis.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/webp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/weightedHistogramFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/windowFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/xmeans.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/include/yuvio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/fmath.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/test.hpp" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/docs/stereo/docimg/outputimage_stereobase.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out0.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out1.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out10.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out11.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out12.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out13.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out2.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out3.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out4.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out5.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out6.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out7.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out8.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GIF/out9.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/bilateralfilter/birateral_time.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/bilateralfilter/fnof.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/bilateralfilter/jointbirateralfilter.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/bilateralfilter/range_interpolation.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/detailEnhancement/Detail_Enhancement.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim01.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim02.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim03.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim04.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim05.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim06.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim07.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim08.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim09.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim10.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim11.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim12.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim13.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim14.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim15.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim16.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim17.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim18.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim19.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim20.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim21.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim22.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim23.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Kodak/kodim24.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/Mandrill.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/barbara.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/cameraman.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/doumori.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/flash/cave-flash.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/flash/cave-noflash.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/flower.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/haze/forest.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/haze/swans.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/01.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/02.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/03.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/04.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/05.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/06.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/07.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/08.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/09.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/10.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/11.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/12.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/13.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/14.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/15.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/16.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/17.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/18.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/19.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/20.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/21.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/22.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/23.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/24.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/25.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/26.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/27.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/28.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/29.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/30.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/31.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/32.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/hsi/braga/33.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/lenna.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/meichan.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/stereo/Dolls/disp1.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/stereo/Dolls/disp1_est.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/stereo/Dolls/disp5.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/stereo/Dolls/view0.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/stereo/Dolls/view1.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/stereo/Dolls/view2.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/stereo/Dolls/view3.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/stereo/Dolls/view4.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/stereo/Dolls/view5.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/stereo/Dolls/view6.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/iterativeBackProjection/ibpBirateral.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/iterativeBackProjection/iterativeBackprojection.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/slic/SLIC_screenshot.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/slic/SLIC_screenshot2.png" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/HighDimensionalKernelFilter/HighDimensionalKernelFilter.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/MultiScaleFilter/MultiScaleFilter.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/MultiScaleFilter/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/OpenCP/OpenCP.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/BSD_simplified.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libGaussian/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/OpenCP/libimq/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/OpenCP/utility/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/OpenCP/webp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/OpenCP/webp/api.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/OpenCP/webp/tools.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/SpatialFilter/SpatialFilter.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/ConsoleImage_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/Stat_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/Timer_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/UpdateCheck_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/VideoSubtitle_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/checkSameImage.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/concat_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/copyMakeBorder_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/correlationCoefficient_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/count_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/crop_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/histogram_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/imshowExtension_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/kmeans_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/matInfo_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/noise_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/core/stream_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/filter/boxfilter.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/filter/guidedFilter_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/filter/nonLocalMeanFilter_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/filter/separableFilterCore_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/filter/weightedHistogramFilter_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/imgproc/blend_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/imgproc/contrast_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/imgproc/detailEnhancement_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/imgproc/metrics_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/imgproc/pixelization_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/inline/onelineCVFunctions_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/manual_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/spatialfilter/SpatialFilter_jp.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/stereo/StereoBase.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/stereo/StereoEval.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/docs/stereo/pointcloud.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/include/fpplus/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/GaussianFilter/memo(japanese).pptx" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/bilateralfilter/bilateralfilter.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/bilateralfilter/graph_birateral.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/denoise/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/detailEnhancement/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/disparityRefinement/disparityRefinement.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/domainTransformFilter/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/guidedFilter/guidedfilter.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/img/stereo/Dolls/dmin.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/iterativeBackProjection/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/jointNearestFilter/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/nonlocalmeans/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/slic/license" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/slic/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/testOpenCP.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/viewSynthesis/readme.md" />
+    <Xml Include="../../thirdparty/owemdjee/OpenCP/testOpenCP/planePoint.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

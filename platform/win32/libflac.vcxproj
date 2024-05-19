@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF5CF71}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLAC;FLAC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLAC;FLAC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLAC;FLAC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLAC;FLAC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLAC;FLAC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLAC;FLAC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLAC;FLAC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLAC;FLAC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLAC;FLAC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLAC;FLAC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLAC;FLAC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLAC;FLAC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/flac/examples/c/decode/file/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/examples/c/encode/file/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/examples/cpp/decode/file/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/examples/cpp/encode/file/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/microbench/benchmark_residual.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/microbench/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/flac/analyze.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/flac/decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/flac/encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/flac/foreign_metadata.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/flac/iffscan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/flac/local_string_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/flac/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/flac/utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/flac/vorbiscomment.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC++/metadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC++/stream_decoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC++/stream_encoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/bitmath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/bitreader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/bitwriter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/cpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/crc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/deduplication/bitreader_read_rice_signed_block.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/deduplication/lpc_compute_autocorrelation_intrin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/deduplication/lpc_compute_autocorrelation_intrin_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/deduplication/lpc_compute_autocorrelation_intrin_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/fixed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/fixed_intrin_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/fixed_intrin_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/fixed_intrin_sse42.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/fixed_intrin_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/float.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/format.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/lpc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/lpc_intrin_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/lpc_intrin_fma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/lpc_intrin_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/lpc_intrin_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/lpc_intrin_sse41.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/metadata_iterators.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/metadata_object.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/ogg_decoder_aspect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/ogg_encoder_aspect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/ogg_helper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/ogg_mapping.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/stream_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/stream_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/stream_encoder_framing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/stream_encoder_intrin_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/stream_encoder_intrin_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/stream_encoder_intrin_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/window.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/metaflac/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/metaflac/operations.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/metaflac/operations_shorthand_cuesheet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/metaflac/operations_shorthand_picture.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/metaflac/operations_shorthand_seektable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/metaflac/operations_shorthand_streaminfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/metaflac/operations_shorthand_vorbiscomment.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/metaflac/options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/metaflac/usage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/metaflac/utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/getopt/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/getopt/getopt1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/grabbag/alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/grabbag/cuesheet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/grabbag/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/grabbag/picture.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/grabbag/replaygain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/grabbag/seektable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/grabbag/snprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/replaygain_analysis/replaygain_analysis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/replaygain_synthesis/replaygain_synthesis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/utf8/charset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/utf8/charset_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/utf8/iconvert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/utf8/makemap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/utf8/utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/share/win_utf8_io/win_utf8_io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_grabbag/cuesheet/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_grabbag/picture/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC++/decoders.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC++/encoders.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC++/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC++/metadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC++/metadata_manip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC++/metadata_object.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/bitreader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/bitwriter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/crc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/decoders.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/encoders.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/endswap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/format.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/metadata.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/metadata_manip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/metadata_object.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libs_common/file_utils_flac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_libs_common/metadata_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_seeking/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/test_streams/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/utils/flacdiff/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flac/src/utils/flactimer/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC++/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC++/decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC++/encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC++/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC++/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC/assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC/callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC/format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC/ordinals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC/stream_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/FLAC/stream_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/endswap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/grabbag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/grabbag/cuesheet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/grabbag/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/grabbag/picture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/grabbag/replaygain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/grabbag/seektable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/replaygain_analysis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/replaygain_synthesis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/safe_str.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/share/win_utf8_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/test_libs_common/file_utils_flac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/include/test_libs_common/metadata_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/microbench/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/flac/analyze.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/flac/decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/flac/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/flac/foreign_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/flac/local_string_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/flac/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/flac/vorbiscomment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/bitmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/bitreader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/bitwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/cpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/crc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/fixed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/lpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/ogg_decoder_aspect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/ogg_encoder_aspect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/ogg_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/ogg_mapping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/stream_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/stream_encoder_framing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/protected/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/protected/stream_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/protected/stream_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/metaflac/operations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/metaflac/operations_shorthand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/metaflac/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/metaflac/usage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/metaflac/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/share/utf8/charmaps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/share/utf8/charset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/share/utf8/iconvert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/test_libFLAC++/decoders.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/test_libFLAC++/encoders.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/test_libFLAC++/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/bitreader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/bitwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/crc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/decoders.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/encoders.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/endswap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/metadata.h" />
+    <Image Include="../../thirdparty/owemdjee/flac/doc/images/logo130.gif" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/0.gif" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/0.jpg" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/0.png" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/1.gif" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/1.png" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/2.gif" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/2.png" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/3.png" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/4.png" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/5.png" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/6.png" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/7.png" />
+    <Image Include="../../thirdparty/owemdjee/flac/test/pictures/8.png" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/flac/src/flac/version.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC++/version.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/flac/src/libFLAC/version.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/flac/src/metaflac/version.rc" />
+    <Text Include="../../thirdparty/owemdjee/flac/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/flac/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/flac/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/flac/COPYING.FDL" />
+    <Text Include="../../thirdparty/owemdjee/flac/COPYING.GPL" />
+    <Text Include="../../thirdparty/owemdjee/flac/COPYING.LGPL" />
+    <Text Include="../../thirdparty/owemdjee/flac/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flac/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/flac/cmake/CheckA64NEON.c.in" />
+    <Text Include="../../thirdparty/owemdjee/flac/cmake/CheckA64NEON.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flac/cmake/CheckCPUArch.c.in" />
+    <Text Include="../../thirdparty/owemdjee/flac/cmake/CheckCPUArch.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flac/cmake/FindOgg.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flac/cmake/UseSystemExtensions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flac/config.cmake.h.in" />
+    <Text Include="../../thirdparty/owemdjee/flac/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/flac/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/doc/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/flac/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/doc/doxygen.footer.html" />
+    <Text Include="../../thirdparty/owemdjee/flac/doc/foreign_metadata_storage.md" />
+    <Text Include="../../thirdparty/owemdjee/flac/doc/images/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/doc/images/logo.svg" />
+    <Text Include="../../thirdparty/owemdjee/flac/doc/isoflac.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/doc/release_checklist.md" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/README" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/c/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/c/decode/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/c/decode/file/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/c/decode/file/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/c/encode/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/c/encode/file/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/c/encode/file/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/cpp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/cpp/decode/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/cpp/decode/file/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/cpp/decode/file/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/cpp/encode/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/cpp/encode/file/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/examples/cpp/encode/file/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/flac-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/flac/include/FLAC++/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/include/FLAC/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/include/share/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/include/share/grabbag/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/include/test_libs_common/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/add_cflags.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/add_cxxflags.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/ax_add_fortify_source.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/ax_check_compile_flag.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/ax_check_enable_debug.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/ax_pthread.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/bswap.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/c_attribute.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/clang.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/codeset.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/endian.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/gcc_version.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/iconv.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/lib-ld.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/lib-link.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/lib-prefix.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/ogg.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/really_gcc.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/m4/stack_protect.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/man/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/man/flac.md" />
+    <Text Include="../../thirdparty/owemdjee/flac/man/metaflac.md" />
+    <Text Include="../../thirdparty/owemdjee/flac/microbench/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/microbench/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/flac/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/flac/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/libFLAC++/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/libFLAC++/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/libFLAC++/flac++.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/libFLAC++/libFLAC++.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/libFLAC/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/libFLAC/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/libFLAC/flac.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/private/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/libFLAC/include/protected/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/libFLAC/libFLAC.m4" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/metaflac/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/metaflac/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/share/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/share/README" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/share/getopt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/share/grabbag/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/share/replaygain_analysis/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/share/replaygain_synthesis/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/share/utf8/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_grabbag/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_grabbag/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_grabbag/cuesheet/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_grabbag/cuesheet/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_grabbag/picture/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_grabbag/picture/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_libFLAC++/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_libFLAC++/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_libFLAC/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_libs_common/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_libs_common/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_libs_common/README" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_seeking/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_seeking/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_streams/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/test_streams/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/utils/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/utils/flacdiff/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/utils/flacdiff/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/utils/flactimer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/src/utils/flactimer/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/abi/README" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/common.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/cuesheets/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/flac-to-flac-metadata-test-files/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/flac-to-flac-metadata-test-files/Prøve.flac" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/flac-to-flac-metadata-test-files/input-SCPAP.flac" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/flac-to-flac-metadata-test-files/input-SCVA.flac" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/flac-to-flac-metadata-test-files/input-SCVAUP.flac" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/flac-to-flac-metadata-test-files/input-SCVPAP.flac" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/flac-to-flac-metadata-test-files/input-SVAUP.flac" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/flac-to-flac-metadata-test-files/input-VA.flac" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/flac-to-flac-metadata-test-files/שלום.flac" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/foreign-metadata-test-files/AIFF-ID3.aiff" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/foreign-metadata-test-files/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/generate_streams.sh" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/metaflac-test-files/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/metaflac.flac.in" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/pictures/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/test_compression.sh" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/test_flac.sh" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/test_grabbag.sh" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/test_libFLAC++.sh" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/test_libFLAC.sh" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/test_metaflac.sh" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/test_replaygain.sh" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/test_seeking.sh" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/test_streams.sh" />
+    <Text Include="../../thirdparty/owemdjee/flac/test/write_iff.pl" />
+    <Xml Include="../../thirdparty/owemdjee/flac/test/abi/abi-descriptor-libFLAC++-1.4.4.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flac/test/abi/abi-descriptor-libFLAC-1.4.4.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

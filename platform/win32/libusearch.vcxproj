@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF2B7E18}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUSEARCH;USEARCH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUSEARCH;USEARCH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUSEARCH;USEARCH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUSEARCH;USEARCH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUSEARCH;USEARCH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUSEARCH;USEARCH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUSEARCH;USEARCH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUSEARCH;USEARCH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUSEARCH;USEARCH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUSEARCH;USEARCH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUSEARCH;USEARCH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUSEARCH;USEARCH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/usearch/c/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/usearch/c/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/usearch/cpp/bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/usearch/cpp/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/usearch/java/cloud/unum/usearch/cloud_unum_usearch_Index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/usearch/javascript/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/usearch/python/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/usearch/rust/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/usearch/sqlite/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/usearch/wasm/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/usearch/wolfram/lib.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/usearch/c/usearch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/usearch/include/usearch/index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/usearch/include/usearch/index_dense.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/usearch/include/usearch/index_plugins.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/usearch/java/cloud/unum/usearch/cloud_unum_usearch_Index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/usearch/objc/include/USearchObjective.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/usearch/rust/lib.hpp" />
+    <Image Include="../../thirdparty/owemdjee/usearch/assets/unum.png" />
+    <Image Include="../../thirdparty/owemdjee/usearch/assets/usearch-approaches-transparent.png" />
+    <Image Include="../../thirdparty/owemdjee/usearch/assets/usearch-approaches-white.png" />
+    <Image Include="../../thirdparty/owemdjee/usearch/assets/usearch-neighbor-types.png" />
+    <Text Include="../../thirdparty/owemdjee/usearch/BENCHMARKS.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/CITATION.cff" />
+    <Text Include="../../thirdparty/owemdjee/usearch/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/usearch/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/usearch/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/usearch/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/build.rs" />
+    <Text Include="../../thirdparty/owemdjee/usearch/c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/usearch/c/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/cmake/clipp.cmake" />
+    <Text Include="../../thirdparty/owemdjee/usearch/cmake/config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/usearch/cmake/emscripten.cmake" />
+    <Text Include="../../thirdparty/owemdjee/usearch/cmake/jemalloc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/usearch/cmake/pkg-config.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/usearch/cmake/usearchConfigVersion.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/usearch/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/usearch/cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/csharp/Directory.Build.props" />
+    <Text Include="../../thirdparty/owemdjee/usearch/csharp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/csharp/nuget/nuget-package.props" />
+    <Text Include="../../thirdparty/owemdjee/usearch/csharp/src/Cloud.Unum.USearch.Tests/" />
+    <Text Include="../../thirdparty/owemdjee/usearch/csharp/src/Cloud.Unum.USearch.Tests/USearchIndexTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/usearch/csharp/src/Cloud.Unum.USearch.Tests/Usings.cs" />
+    <Text Include="../../thirdparty/owemdjee/usearch/csharp/src/Cloud.Unum.USearch/NativeMethods.cs" />
+    <Text Include="../../thirdparty/owemdjee/usearch/csharp/src/Cloud.Unum.USearch/USearchException.cs" />
+    <Text Include="../../thirdparty/owemdjee/usearch/csharp/src/Cloud.Unum.USearch/USearchIndex.cs" />
+    <Text Include="../../thirdparty/owemdjee/usearch/csharp/src/Cloud.Unum.USearch/USearchTypes.cs" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/_static/custom.css" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/_static/custom.js" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/benchmarks.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/c/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/c/reference.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/conf.dox" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/contributing.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/cpp/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/cpp/reference.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/csharp/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/format.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/format.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/golang/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/java/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/java/reference.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/javascript/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/javascript/reference.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/objc/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/objc/reference.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/python/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/python/reference.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/rust/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/sqlite/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/swift/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/swift/reference.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/docs/wolfram/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/usearch/golang/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/java/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/java/cloud/unum/usearch/Index.java" />
+    <Text Include="../../thirdparty/owemdjee/usearch/java/cloud/unum/usearch/NativeUtils.java" />
+    <Text Include="../../thirdparty/owemdjee/usearch/java/test/IndexTest.java" />
+    <Text Include="../../thirdparty/owemdjee/usearch/javascript/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/javascript/dist-package-cjs.json" />
+    <Text Include="../../thirdparty/owemdjee/usearch/javascript/dist-package-esm.json" />
+    <Text Include="../../thirdparty/owemdjee/usearch/javascript/node-gyp-build.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/usearch/javascript/tsconfig-base.json" />
+    <Text Include="../../thirdparty/owemdjee/usearch/javascript/tsconfig-cjs.json" />
+    <Text Include="../../thirdparty/owemdjee/usearch/javascript/tsconfig-esm.json" />
+    <Text Include="../../thirdparty/owemdjee/usearch/javascript/usearch.test.js" />
+    <Text Include="../../thirdparty/owemdjee/usearch/javascript/usearch.ts" />
+    <Text Include="../../thirdparty/owemdjee/usearch/objc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/package-ci.json" />
+    <Text Include="../../thirdparty/owemdjee/usearch/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/usearch/package.json" />
+    <Text Include="../../thirdparty/owemdjee/usearch/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/scripts/bench.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/scripts/bench_exact.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/scripts/index_faiss.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/scripts/join.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/scripts/test_distances.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/scripts/test_index.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/scripts/test_jit.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/scripts/test_sparse.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/scripts/test_sqlite.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/scripts/test_tooling.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/usearch/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/usearch/client.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/usearch/eval.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/usearch/index.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/usearch/io.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/usearch/numba.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/python/usearch/server.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/rust/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/rust/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/usearch/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/usearch/sqlite/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/usearch/sqlite/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/swift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/wasm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/usearch/wasm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/wasmer.toml" />
+    <Text Include="../../thirdparty/owemdjee/usearch/winlibinstaller.bat" />
+    <Text Include="../../thirdparty/owemdjee/usearch/wolfram/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/usearch/wolfram/README.md" />
+    <Text Include="../../thirdparty/owemdjee/usearch/wolfram/test.wls" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

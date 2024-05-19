@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF4340B8}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPEEX;SPEEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPEEX;SPEEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPEEX;SPEEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPEEX;SPEEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPEEX;SPEEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPEEX;SPEEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPEEX;SPEEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPEEX;SPEEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPEEX;SPEEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPEEX;SPEEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPEEX;SPEEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPEEX;SPEEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/speex/doc/nb_celp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/doc/sampledec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/doc/sampleenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/bits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/cb_search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/exc_10_16_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/exc_10_32_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/exc_20_32_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/exc_5_256_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/exc_5_64_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/exc_8_128_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/fftwrap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/filters.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/gain_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/gain_table_lbr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/hexc_10_32_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/hexc_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/high_lsp_tables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/kiss_fft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/kiss_fftr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/lpc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/lsp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/lsp_tables_nb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/ltp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/modes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/modes_wb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/nb_celp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/quant_lsp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/sb_celp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/smallft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/speex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/speex_callbacks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/speex_header.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/stereo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/testenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/testenc_uwb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/testenc_wb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/vbr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/vorbis_psy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/vq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/libspeex/window.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/speexclient/alsa_device.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/speexclient/speex_jitter_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/speexclient/speexclient.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/src/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/src/getopt1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/src/skeleton.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/src/speexdec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/src/speexenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/src/wav_io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/src/wave_out.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/ti/testenc-TI-C5x.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/speex/ti/testenc-TI-C64x.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/include/speex/speex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/include/speex/speex_bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/include/speex/speex_callbacks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/include/speex/speex_header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/include/speex/speex_stereo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/include/speex/speex_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/_kiss_fft_guts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/bfin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/cb_search.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/cb_search_arm4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/cb_search_bfin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/cb_search_sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/fftwrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/filters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/filters_arm4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/filters_bfin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/filters_sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/fixed_arm4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/fixed_arm5e.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/fixed_bfin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/fixed_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/fixed_generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/kiss_fft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/kiss_fftr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/lpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/lpc_bfin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/lsp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/lsp_bfin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/ltp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/ltp_arm4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/ltp_bfin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/ltp_sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/math_approx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/misc_bfin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/modes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/nb_celp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/os_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/quant_lsp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/quant_lsp_bfin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/sb_celp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/smallft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/stack_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/vbr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/vorbis_psy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/vq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/vq_arm4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/vq_bfin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/libspeex/vq_sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/speexclient/alsa_device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/speexclient/speex_jitter_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/src/getopt_win.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/src/skeleton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/src/wav_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/src/wave_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/symbian/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/ti/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/ti/os_support_custom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/_kiss_fft_guts_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/cb_search_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/fftwrap_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/filterbank_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/filters_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/fixed_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/kiss_fft_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/kiss_fftr_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/lpc_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/lsp_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/ltp_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/misc_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/profile_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/quant_lsp_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/speex_config_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/tmv/vq_tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/speex/win32/config.h" />
+    <Image Include="../../thirdparty/owemdjee/speex/html/speex.png" />
+    <Text Include="../../thirdparty/owemdjee/speex/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/speex/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/speex/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/speex/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/speex/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/speex/README" />
+    <Text Include="../../thirdparty/owemdjee/speex/README.TI-DSP" />
+    <Text Include="../../thirdparty/owemdjee/speex/README.Trimedia" />
+    <Text Include="../../thirdparty/owemdjee/speex/README.blackfin" />
+    <Text Include="../../thirdparty/owemdjee/speex/README.symbian" />
+    <Text Include="../../thirdparty/owemdjee/speex/README.win32" />
+    <Text Include="../../thirdparty/owemdjee/speex/Speex.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/speex/TODO" />
+    <Text Include="../../thirdparty/owemdjee/speex/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/speex/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/celp_decoder.eps" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/components.eps" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/draft-herlein-avt-rtp-speex-00.txt" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/draft-herlein-speex-rtp-profile-02.txt" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/draft-herlein-speex-rtp-profile-03.txt" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/draft-ietf-avt-rtp-speex-00.txt" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/draft-ietf-avt-rtp-speex-01-tmp.txt" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/draft-ietf-avt-rtp-speex-05-tmp.txt" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/echo_path.eps" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/manual.lyx" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/manual.pdf" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/programming.html" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/ref_shaping.eps" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/rtp.txt" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/speex_abs.eps" />
+    <Text Include="../../thirdparty/owemdjee/speex/doc/speex_analysis.eps" />
+    <Text Include="../../thirdparty/owemdjee/speex/html/index.html" />
+    <Text Include="../../thirdparty/owemdjee/speex/html/patents.html" />
+    <Text Include="../../thirdparty/owemdjee/speex/html/speex.webprj" />
+    <Text Include="../../thirdparty/owemdjee/speex/html/speex.xcf" />
+    <Text Include="../../thirdparty/owemdjee/speex/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/include/speex/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/include/speex/speex_config_types.h.in" />
+    <Text Include="../../thirdparty/owemdjee/speex/library.json" />
+    <Text Include="../../thirdparty/owemdjee/speex/libspeex/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/libspeex/speex.def" />
+    <Text Include="../../thirdparty/owemdjee/speex/m4/add_cflags.m4" />
+    <Text Include="../../thirdparty/owemdjee/speex/m4/pkg.m4" />
+    <Text Include="../../thirdparty/owemdjee/speex/macosx/English.lproj/InfoPlist.strings" />
+    <Text Include="../../thirdparty/owemdjee/speex/meson_options.txt" />
+    <Text Include="../../thirdparty/owemdjee/speex/speex.m4" />
+    <Text Include="../../thirdparty/owemdjee/speex/speex.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/speex/speexclient/README" />
+    <Text Include="../../thirdparty/owemdjee/speex/speexclient/compile.sh" />
+    <Text Include="../../thirdparty/owemdjee/speex/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/src/generate-samples.sh" />
+    <Text Include="../../thirdparty/owemdjee/speex/src/speexdec.1" />
+    <Text Include="../../thirdparty/owemdjee/speex/src/speexenc.1" />
+    <Text Include="../../thirdparty/owemdjee/speex/symbian/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/symbian/bld.inf" />
+    <Text Include="../../thirdparty/owemdjee/speex/ti/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/ti/speex_C54_test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/ti/speex_C54_test/speex_C54_test.cmd" />
+    <Text Include="../../thirdparty/owemdjee/speex/ti/speex_C55_test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/ti/speex_C55_test/speex_C55_test.cmd" />
+    <Text Include="../../thirdparty/owemdjee/speex/ti/speex_C64_test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/ti/speex_C64_test/speex_C64_test.cmd" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2003/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2003/libspeex/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2003/speexdec/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2003/speexenc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2003/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2005/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2005/libspeex/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2005/speexdec/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2005/speexenc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2005/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2008/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2008/libspeex/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2008/speexdec/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2008/speexenc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/VS2008/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/libspeex.def" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/libspeex/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/libspeex/libspeex.dsw" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/speex.iss" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/speexdec/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/speexdec/speexdec.dsw" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/speexenc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/speex/win32/speexenc/speexenc.dsw" />
+    <Xml Include="../../thirdparty/owemdjee/speex/doc/draft-herlein-speex-rtp-profile-03.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

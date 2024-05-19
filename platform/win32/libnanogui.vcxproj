@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFC1BBBD}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNANOGUI;NANOGUI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNANOGUI;NANOGUI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNANOGUI;NANOGUI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNANOGUI;NANOGUI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNANOGUI;NANOGUI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNANOGUI;NANOGUI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNANOGUI;NANOGUI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNANOGUI;NANOGUI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNANOGUI;NANOGUI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNANOGUI;NANOGUI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNANOGUI;NANOGUI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNANOGUI;NANOGUI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/ext/glad/src/glad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/button.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/canvas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/checkbox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/colorpicker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/colorwheel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/combobox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/example1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/example2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/example3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/example4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/example_icons.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/imagepanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/imageview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/label.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/layout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/messagedialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/opengl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/popup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/popupbutton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/progressbar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/arcball.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/basics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/button.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/canvas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/color.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/formhelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/glfw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/icons.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/layout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/nanovg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/render.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/tabs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/textarea.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/textbox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/theme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/python/widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/renderpass_gl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/screen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/shader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/shader_gl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/slider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/tabwidget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/textarea.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/textbox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/texture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/texture_gl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/theme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/vscrollpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanogui/src/window.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/ext/glad/include/KHR/khrplatform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/ext/glad/include/glad/glad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/button.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/canvas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/checkbox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/colorpicker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/colorwheel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/combobox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/formhelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/icons.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/imagepanel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/imageview.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/label.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/messagedialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/metal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/nanogui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/opengl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/popup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/popupbutton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/progressbar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/python.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/renderpass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/screen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/shader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/slider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/tabwidget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/textarea.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/textbox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/texture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/theme.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/toolbutton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/vscrollpanel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/include/nanogui/window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/src/opengl_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/src/python/py_doc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nanogui/src/python/python.h" />
+    <Font Include="../../thirdparty/owemdjee/nanogui/docs/_static/entypo.ttf" />
+    <Font Include="../../thirdparty/owemdjee/nanogui/resources/FontAwesome-Solid.ttf" />
+    <Font Include="../../thirdparty/owemdjee/nanogui/resources/Inconsolata-Regular.ttf" />
+    <Font Include="../../thirdparty/owemdjee/nanogui/resources/Roboto-Bold.ttf" />
+    <Font Include="../../thirdparty/owemdjee/nanogui/resources/Roboto-Regular.ttf" />
+    <Image Include="../../thirdparty/owemdjee/nanogui/resources/icons/icon1.png" />
+    <Image Include="../../thirdparty/owemdjee/nanogui/resources/icons/icon2.png" />
+    <Image Include="../../thirdparty/owemdjee/nanogui/resources/icons/icon3.png" />
+    <Image Include="../../thirdparty/owemdjee/nanogui/resources/icons/icon4.png" />
+    <Image Include="../../thirdparty/owemdjee/nanogui/resources/icons/icon5.png" />
+    <Image Include="../../thirdparty/owemdjee/nanogui/resources/icons/icon6.ico" />
+    <Image Include="../../thirdparty/owemdjee/nanogui/resources/icons/icon6.png" />
+    <Image Include="../../thirdparty/owemdjee/nanogui/resources/icons/icon7.png" />
+    <Image Include="../../thirdparty/owemdjee/nanogui/resources/icons/icon8.png" />
+    <Image Include="../../thirdparty/owemdjee/nanogui/resources/screenshot.png" />
+    <Image Include="../../thirdparty/owemdjee/nanogui/resources/screenshot2.png" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/CONTRIBUTING.rst" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/_static/entypo.css" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/_static/entypo.svg" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/_static/entypo.woff" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/_static/entypo.woff2" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/compilation.rst" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/contributing.rst" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/examples.rst" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/release.rst" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/docs/usage.rst" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/nanogui/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/resources/bin2c.cmake" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/resources/check-style.sh" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/resources/fa-import.py" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/resources/imageview_fragment.gl" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/resources/imageview_fragment.gles" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/resources/imageview_fragment.metal" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/resources/imageview_vertex.gl" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/resources/imageview_vertex.gles" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/resources/imageview_vertex.metal" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/resources/nanoguiConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/src/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/src/python/example1.py" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/src/python/example2.py" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/src/python/example3.py" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/src/python/example_icons.py" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/src/python/render_test_0.py" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/src/python/render_test_1.py" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/src/python/render_test_2.py" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/src/python/render_test_3.py" />
+    <Text Include="../../thirdparty/owemdjee/nanogui/src/python/render_test_4.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

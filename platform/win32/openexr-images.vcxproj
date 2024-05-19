@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745AD34142}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0001.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0002.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0003.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0004.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0005.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0006.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0007.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0008.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0001.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0002.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0003.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0004.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0005.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0006.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0007.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0008.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Chromaticities/Rec709.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Chromaticities/Rec709_YC.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Chromaticities/XYZ.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Chromaticities/XYZ_YC.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t01.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t02.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t03.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t04.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t05.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t06.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t07.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t08.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t09.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t10.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t11.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t12.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t13.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t14.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t15.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t16.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/LuminanceChroma/CrissyField.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/LuminanceChroma/Flowers.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/LuminanceChroma/Garden.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/LuminanceChroma/MtTamNorth.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/LuminanceChroma/StarField.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/Bonita.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/ColorCodedLevels.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/Kapaa.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/KernerEnvCube.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/KernerEnvLatLong.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/MirrorPattern.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/OrientationCube.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/OrientationLatLong.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/PeriodicPattern.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/StageEnvCube.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/StageEnvLatLong.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/WavyLinesCube.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/WavyLinesLatLong.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/WavyLinesSphere.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiView/Adjuster.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiView/Balls.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiView/Fog.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiView/Impact.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/MultiView/LosPadres.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/ScanLines/Blobbies.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/ScanLines/CandleGlass.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/ScanLines/Cannon.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/ScanLines/Carrots.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/ScanLines/Desk.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/ScanLines/MtTamWest.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/ScanLines/PrismsLenses.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/ScanLines/StillLife.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/ScanLines/Tree.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/TestImages/AllHalfValues.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/TestImages/BrightRings.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/TestImages/BrightRingsNanInf.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/TestImages/GammaChart.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/TestImages/GrayRampsDiagonal.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/TestImages/GrayRampsHorizontal.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/TestImages/RgbRampsDiagonal.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/TestImages/SquaresSwirls.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/TestImages/WideColorGamut.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/TestImages/WideFloatRange.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Tiles/GoldenGate.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Tiles/Ocean.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/Tiles/Spirals.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/LeftView/Balls.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/LeftView/Ground.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/LeftView/Leaves.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/LeftView/Trunks.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/LowResLeftView/Balls.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/LowResLeftView/Ground.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/LowResLeftView/Leaves.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/LowResLeftView/Trunks.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/LowResLeftView/composited.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/Stereo/Balls.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/Stereo/Ground.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/Stereo/Leaves.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/Stereo/Trunks.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openexr-images/v2/Stereo/composited.jpg" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0001.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0002.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0003.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0004.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0005.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0006.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0007.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/multipart.0008.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0001.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0002.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0003.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0004.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0005.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0006.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0007.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Beachball/singlepart.0008.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Chromaticities/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Chromaticities/Rec709.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Chromaticities/Rec709_YC.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Chromaticities/XYZ.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Chromaticities/XYZ_YC.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Damaged/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Damaged/memory_DOS_2.1" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Damaged/memory_DOS_2.2" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Damaged/openexr_2.2.0_heap_buffer_overflow_exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Damaged/openexr_2.2.0_memory_allocation_error_1_exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Damaged/openexr_2.2.0_memory_allocation_error_2_exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Damaged/openexr_2.2.0_memory_allocation_error_3_exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Damaged/openexr_2.5.1_null_deref_error" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Damaged/poc-4d912f49ddc13ff49f95543880d47c85a8918e563fb723c340264f1719057613.mini" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Damaged/poc-66e4d1f68a3112b9aaa93831afbf8e283fd39be5e4591708bad917e6886c0ebb.mini" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t01.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t02.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t03.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t04.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t05.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t06.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t07.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t08.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t09.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t10.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t11.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t12.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t13.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t14.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t15.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/DisplayWindow/t16.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/LuminanceChroma/CrissyField.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/LuminanceChroma/Flowers.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/LuminanceChroma/Garden.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/LuminanceChroma/MtTamNorth.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/LuminanceChroma/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/LuminanceChroma/StarField.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/Bonita.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/ColorCodedLevels.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/Kapaa.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/KernerEnvCube.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/KernerEnvLatLong.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/MirrorPattern.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/OrientationCube.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/OrientationLatLong.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/PeriodicPattern.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/StageEnvCube.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/StageEnvLatLong.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/WavyLinesCube.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/WavyLinesLatLong.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiResolution/WavyLinesSphere.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiView/Adjuster.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiView/Balls.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiView/Fog.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiView/Impact.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiView/LosPadres.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/MultiView/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/README.md" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/ScanLines/Blobbies.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/ScanLines/CandleGlass.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/ScanLines/Cannon.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/ScanLines/Carrots.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/ScanLines/Desk.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/ScanLines/MtTamWest.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/ScanLines/PrismsLenses.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/ScanLines/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/ScanLines/StillLife.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/ScanLines/Tree.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/TestImages/AllHalfValues.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/TestImages/BrightRings.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/TestImages/BrightRingsNanInf.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/TestImages/GammaChart.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/TestImages/GrayRampsDiagonal.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/TestImages/GrayRampsHorizontal.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/TestImages/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/TestImages/RgbRampsDiagonal.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/TestImages/SquaresSwirls.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/TestImages/WideColorGamut.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/TestImages/WideFloatRange.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Tiles/GoldenGate.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Tiles/Ocean.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Tiles/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/Tiles/Spirals.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/LeftView/Balls.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/LeftView/Ground.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/LeftView/Leaves.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/LeftView/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/LeftView/Trunks.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/LowResLeftView/Balls.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/LowResLeftView/Ground.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/LowResLeftView/Leaves.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/LowResLeftView/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/LowResLeftView/Trunks.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/LowResLeftView/composited.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/Stereo/Balls.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/Stereo/Ground.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/Stereo/Leaves.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/Stereo/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/Stereo/Trunks.exr" />
+    <Text Include="../../thirdparty/owemdjee/openexr-images/v2/Stereo/composited.exr" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
