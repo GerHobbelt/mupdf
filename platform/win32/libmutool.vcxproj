@@ -111,7 +111,7 @@
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/jbig2dec;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;HAVE_TESSERACT;HAVE_LEPTONICA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -127,7 +127,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/jbig2dec;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;HAVE_TESSERACT;HAVE_LEPTONICA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -141,7 +141,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/jbig2dec;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;HAVE_TESSERACT;HAVE_LEPTONICA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -157,7 +157,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/jbig2dec;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;HAVE_TESSERACT;HAVE_LEPTONICA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -170,100 +170,74 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../docs/examples/example.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../docs/examples/multi-threaded.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../docs/examples/storytest.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/base64test.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/cmapdump.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/muconvert.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/mudraw.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/muraster.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/murun.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/mutrace.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdfclean.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdfcreate.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdfextract.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdfinfo.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdfmerge.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdfmetadump.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdfpages.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdfposter.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdfrecolor.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdfshow.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdfsign.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdftrim.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdftagged.c" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="../../thirdparty/mujs/main.c" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/mujs/pp.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../source/tools/tesseract_tool.c" />
+    <ClCompile Include="../../docs/examples/example.c" />
+    <ClCompile Include="../../docs/examples/multi-threaded.c" />
+    <ClCompile Include="../../docs/examples/storytest.c" />
+    <Image Include="../../docs/examples/huntingofthesnark.png" />
+    <Text Include="../../docs/examples/SnarkFront.svg" />
+    <Text Include="../../docs/examples/bbox-device.js" />
+    <Text Include="../../docs/examples/copy-outline.js" />
+    <Text Include="../../docs/examples/create-thumbnail.js" />
+    <Text Include="../../docs/examples/dejavu.js" />
+    <Text Include="../../docs/examples/draw-device.js" />
+    <Text Include="../../docs/examples/draw-document.js" />
+    <Text Include="../../docs/examples/extract-images.js" />
+    <Text Include="../../docs/examples/fix-s22pdf.js" />
+    <Text Include="../../docs/examples/flatten.js" />
+    <Text Include="../../docs/examples/import-fdf.js" />
+    <Text Include="../../docs/examples/jpx-to-pdf.js" />
+    <Text Include="../../docs/examples/pdf-bake.js" />
+    <Text Include="../../docs/examples/pdf-create-lowlevel.js" />
+    <Text Include="../../docs/examples/pdf-create.js" />
+    <Text Include="../../docs/examples/pdf-dejpx.js" />
+    <Text Include="../../docs/examples/pdf-extract-jpeg.js" />
+    <Text Include="../../docs/examples/pdf-extract-rich-media.js" />
+    <Text Include="../../docs/examples/pdf-extract.js" />
+    <Text Include="../../docs/examples/pdf-info.js" />
+    <Text Include="../../docs/examples/pdf-merge.js" />
+    <Text Include="../../docs/examples/pdf-pages.js" />
+    <Text Include="../../docs/examples/pdf-portfolio.js" />
+    <Text Include="../../docs/examples/pdf-trace.js" />
+    <Text Include="../../docs/examples/reconvert-cmyk.js" />
+    <Text Include="../../docs/examples/storytest.js" />
+    <Text Include="../../docs/examples/testapi.js" />
+    <Text Include="../../docs/examples/trace-device.js" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../source/tools/muannot.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/mucontent.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/muserver.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdfbake.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../source/tools/pdfdump.c" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="../../source/tools/base64test.c" />
+    <ClCompile Include="../../source/tools/cmapdump.c" />
     <ClCompile Include="../../source/tools/extract_text.c" />
+    <ClCompile Include="../../source/tools/muannot.cpp" />
+    <ClCompile Include="../../source/tools/mucontent.cpp" />
+    <ClCompile Include="../../source/tools/muconvert.c" />
+    <ClCompile Include="../../source/tools/mudraw.c" />
+    <ClCompile Include="../../source/tools/muraster.c" />
+    <ClCompile Include="../../source/tools/murun.c" />
+    <ClCompile Include="../../source/tools/muserver.cpp" />
+    <ClCompile Include="../../source/tools/mutrace.c" />
+    <ClCompile Include="../../source/tools/pdfbake.c" />
+    <ClCompile Include="../../source/tools/pdfclean.c" />
+    <ClCompile Include="../../source/tools/pdfcreate.c" />
+    <ClCompile Include="../../source/tools/pdfdump.c" />
+    <ClCompile Include="../../source/tools/pdfextract.c" />
+    <ClCompile Include="../../source/tools/pdfinfo.c" />
+    <ClCompile Include="../../source/tools/pdfmerge.c" />
+    <ClCompile Include="../../source/tools/pdfmetadump.c" />
+    <ClCompile Include="../../source/tools/pdfpages.c" />
+    <ClCompile Include="../../source/tools/pdfposter.c" />
+    <ClCompile Include="../../source/tools/pdfrecolor.c" />
+    <ClCompile Include="../../source/tools/pdfshow.c" />
+    <ClCompile Include="../../source/tools/pdfsign.c" />
+    <ClCompile Include="../../source/tools/pdftag.c" />
+    <ClCompile Include="../../source/tools/pdftagged.c" />
+    <ClCompile Include="../../source/tools/pdftrim.c" />
+    <ClCompile Include="../../source/tools/tesseract_tool.c" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
