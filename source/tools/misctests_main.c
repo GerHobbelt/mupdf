@@ -9,17 +9,11 @@
 #include <string.h>
 #include <stdio.h>
 
-#ifdef _MSC_VER
-#define main main_utf8
-#endif
-
-int main(int argc, const char **argv)
+static int setup_ctx(void)
 {
-	fz_context* ctx = NULL;
-
 	if (!fz_has_global_context())
 	{
-		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		fz_context* ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 		if (!ctx)
 		{
 			fz_error(ctx, "cannot initialise MuPDF context");
@@ -27,8 +21,19 @@ int main(int argc, const char **argv)
 		}
 		fz_set_global_context(ctx);
 	}
+	return 0;
+}
 
-	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
+#ifdef _MSC_VER
+#define main main_utf8
+#endif
+
+int main(int argc, const char **argv)
+{
+	int rv = setup_ctx();
+	if (rv) return rv;
+
+	fz_context* ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
 	if (!ctx)
 	{
 		fz_error(ctx, "cannot initialise MuPDF context");
@@ -58,13 +63,17 @@ int main(int argc, const char **argv)
 }
 
 #ifdef _MSC_VER
-int wmain(int argc, const wchar_t *wargv[])
+int wmain(int argc, const wchar_t **wargv)
 {
-	const char **argv = fz_argv_from_wargv(argc, wargv);
+	int rv = setup_ctx();
+	if (rv) return rv;
+
+	fz_context* ctx = fz_get_global_context();
+	const char **argv = fz_argv_from_wargv(ctx, argc, wargv);
 	if (!argv)
 		return EXIT_FAILURE;
 	int ret = main(argc, argv);
-	fz_free_argv(argc, argv);
+	fz_free_argv(ctx, argc, argv);
 	return ret;
 }
 #endif
