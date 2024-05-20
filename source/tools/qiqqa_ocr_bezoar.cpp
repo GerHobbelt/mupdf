@@ -1,4 +1,4 @@
-﻿//
+//
 //
 //
 
@@ -50,9 +50,9 @@ static fz_stream* datafeed = NULL;
 static void usage(void)
 {
 	fz_info(ctx,
-		"muserver: Local web server for use as Qiqqa backend & generic (scripted?) access.\n"
+		"qbezoar: image processing tool for use with Qiqqa.\n"
 		"\n"
-		"Syntax: muserver [options]\n"
+		"Syntax: qbezoar [options]\n"
 		"\n"
 		"Options:\n"
 		"  -v      verbose (repeat to increase the chattiness of the application)\n"
@@ -167,6 +167,11 @@ static int fz_exec_cpp_code(const char *file)
 	{
 		return do_opencv_threshold_demo(file);
 	}
+	catch (cv::Exception &ex)
+	{
+		std::string msg = ex.what();
+		fz_throw(ctx, FZ_ERROR_GENERIC, msg.c_str());
+	}
 	catch (std::exception &ex)
 	{
 		std::string msg = ex.what();
@@ -219,7 +224,7 @@ qiqqa_ocr_bezoar_main(int argc, const char** argv)
 
 		case 'v': verbosity++; break;
 
-		case 'V': fz_info(ctx, "muserver version %s/%s", FZ_VERSION, "SHA1"); return EXIT_FAILURE;
+		case 'V': fz_info(ctx, "qbezoar version %s/%s", FZ_VERSION, "SHA1"); return EXIT_FAILURE;
 
 		default: usage(); return EXIT_FAILURE;
 		}
@@ -258,7 +263,7 @@ qiqqa_ocr_bezoar_main(int argc, const char** argv)
 			// load a datafile if we already have a script AND we're in "template mode".
 			datafilename = argv[fz_optind++];
 
-			errored = fz_exec_cpp_code(datafilename);
+			errored += (fz_exec_cpp_code(datafilename) != 0);
 		}
 	}
 	fz_catch(ctx)
@@ -269,9 +274,9 @@ qiqqa_ocr_bezoar_main(int argc, const char** argv)
 			datafeed = NULL;
 		}
 
-		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_caught_message(ctx));
+		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_convert_error(ctx, NULL));
 
-		errored = 1;
+		errored++;
 	}
 
 	fz_flush_warnings(ctx);
