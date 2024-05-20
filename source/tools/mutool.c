@@ -221,7 +221,7 @@ static struct tool_spec {
 	{ {.fa = qiqqa_ingest_main }, "ingest", "qiqqa::ingest tool" },
 	{ {.fa = qiqqa_meta_exporter_main }, "meta_exporter", "qiqqa::meta_exporter tool" },
 	{ {.fa = qiqqa_meta_importer_main }, "meta_import", "qiqqa::meta_import tool" },
-	{ {.fa = qiqqa_ocr_bezoar_main }, "ocr_bezoar", "qiqqa::ocr_bezoar tool" },
+	{ {.fa = qiqqa_ocr_bezoar_main }, "bezoar", "qiqqa::ocr_bezoar tool" },
 	{ {.fa = qiqqa_pdf_hound_main }, "pdf_hound", "qiqqa::pdf_hound tool" },
 	{ {.fa = qiqqa_safe_file_copier_main }, "safe_file_copier", "qiqqa::safe_file_copier tool" },
 	{ {.fa = qiqqa_snarfl_main }, "snarfl", "qiqqa::snarfl tool" },
@@ -1316,6 +1316,60 @@ mutool-options:\n\
 \n");
 }
 
+static uint16_t namehash(const char* name)
+{
+	uint32_t h = 1;
+	for (; *name; name++) {
+		h *= 4211;			// prime
+		uint8_t c = *name;
+		h += c + 1;
+		h ^= h >> 17;
+	}
+
+	// fold:
+	uint32_t h2 = h >> 11;     // 2048
+	h ^= h2;
+	h2 >>= 11;
+	h ^= h2;
+	h2 >>= 11;
+	h ^= h2;
+	h &= 2048 - 1;
+
+	return h;
+}
+
+// check to make sure the registered tool names are all unique!
+static int sanitycheck_tools_table(void)
+{
+	uint16_t checklist[2048] = { 0 };
+	for (int i = 0; i < (int)nelem(tools); i++) {
+		const char* name = tools[i].name;
+		uint16_t h = namehash(name);
+		if (!checklist[h]) {
+			checklist[h] = i + 1;
+		}
+		else {
+			// potential collision!
+			for (int j = 1; j < 2048; j++) {
+				int idx = (i + j);
+				idx &= 2048 - 1;
+				if (!checklist[idx]) {
+					// empty slot, no duplicate: plug it in.
+					checklist[idx] = i + 1;
+					break;
+				}
+				else if (!strcmp(tools[checklist[idx] - 1].name, name))
+				{
+					// collision!
+					fz_error(ctx, "mutool_ex sanity check: tools name collision for name '%s'.\n", name);
+					return 0;
+				}
+			}
+		}
+	}
+	return 1;
+}
+
 /* Print usage */
 static void usage(void)
 {
@@ -1424,7 +1478,7 @@ static struct found_t find_and_exec_tool(const char *start, const char *end, int
 
 	for (int i = 0; i < (int)nelem(tools); i++)
 	{
-		// test for variants: mupdf<NAME>, pdf<NAME>, mu<NAME> and <NAME>:
+		// test for variants: mupdf<NAME>, mu<NAME> and <NAME>:
 		strcpy(buf, "mupdf");
 		strcat(buf, tools[i].name);
 		assert(strlen(buf) < sizeof(buf));
@@ -1598,6 +1652,10 @@ int mutool_main(int argc, const char** argv)
         fz_error(ctx, "No command name found!");
         return EXIT_FAILURE;
     }
+		if (!sanitycheck_tools_table())
+		{
+			return EXIT_FAILURE;
+		}
 
 	int argstart = 1;
 	int time_the_run = 0;
