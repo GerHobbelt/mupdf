@@ -145,6 +145,7 @@ static struct tool_spec {
 	{ {.fa = mupdf_example_main }, "example", "muPDF docs::example: render a single page and print the result as a PPM to stdout" },
 	{ {.fa = mupdf_multithreaded_example_main }, "multithreaded_example", "muPDF multi-threaded rendering of all pages in a document to PNG images" },
 	{ {.fa = mupdf_storytest_main }, "story_test", "muPDF fz_story showcase for converting HTML input to a PDF file" },
+	{ {.fa = mupdf_cffdump_main }, "cffdump", "muPDF cffdump font info dump tool" },
 #endif
 
 #if defined(MUTOOL_EX)
