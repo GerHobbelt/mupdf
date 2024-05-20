@@ -2198,11 +2198,13 @@ static void pdf_set_annot_color_imp(fz_context *ctx, pdf_annot *annot, pdf_obj *
 static void
 do_pdf_annot_color(fz_context *ctx, pdf_annot *annot, int *n, float color[4], pdf_obj *name)
 {
+	pdf_obj *c;
+
 	pdf_annot_push_local_xref(ctx, annot);
 
 	fz_try(ctx)
 	{
-		pdf_obj *c = pdf_dict_get(ctx, annot->obj, name);
+		c = pdf_dict_get(ctx, annot->obj, name);
 		pdf_annot_color_imp(ctx, c, n, color);
 	}
 	fz_always(ctx)
@@ -2325,7 +2327,6 @@ static pdf_obj *interior_color_subtypes[] = {
 	PDF_NAME(Square),
 	NULL,
 };
-
 int
 pdf_annot_has_interior_color(fz_context *ctx, pdf_annot *annot)
 {
@@ -2335,6 +2336,7 @@ pdf_annot_has_interior_color(fz_context *ctx, pdf_annot *annot)
 void
 pdf_annot_interior_color(fz_context *ctx, pdf_annot *annot, int *n, float color[4])
 {
+	check_allowed_subtypes(ctx, annot, PDF_NAME(IC), interior_color_subtypes);
 	do_pdf_annot_color(ctx, annot, n, color, PDF_NAME(IC));
 }
 
@@ -3784,7 +3786,7 @@ void pdf_set_annot_stamp_image(fz_context *ctx, pdf_annot *annot, fz_image *img)
 
 	fz_try(ctx)
 	{
-		check_allowed_subtypes(ctx, annot, PDF_NAME(Rect), stamp_subtypes);
+		check_allowed_subtypes(ctx, annot, PDF_NAME(Stamp), stamp_subtypes);
 
 		// Shrink Rect to fit image, maintaining aspect ratio.
 		rect = pdf_bound_annot(ctx, annot);
