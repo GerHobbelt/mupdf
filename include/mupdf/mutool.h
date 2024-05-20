@@ -91,6 +91,7 @@ int jpegturbo_djpeg_main(int argc, const char** argv);
 int mupdf_example_main(int argc, const char** argv);
 int mupdf_multithreaded_example_main(int argc, const char** argv);
 int mupdf_storytest_main(int argc, const char** argv);
+int mupdf_cffdump_main(int argc, const char** argv);
 
 int pthw32_all_tests_main(int argc, const char** argv);
 

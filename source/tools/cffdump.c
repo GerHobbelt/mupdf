@@ -2,7 +2,11 @@
  * 2006 (C) Tor Andersson.
  */
 
+#ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
+#endif
+
+#include "mupdf/mutool.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -2012,7 +2016,12 @@ void readfontset(FILE *f)
  *
  */
 
-int main(int argc, char **argv)
+
+#if defined(BUILD_MONOLITHIC)
+#define main      mupdf_cffdump_main
+#endif
+
+int main(int argc, const char **argv)
 {
 	char magic[4];
 	FILE *fp;
@@ -2070,4 +2079,6 @@ int main(int argc, char **argv)
 	readfontset(fp);
 
 	fclose(fp);
+
+	return 0;
 }
