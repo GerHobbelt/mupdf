@@ -2174,7 +2174,7 @@ void pdfapp_postblit(pdfapp_t *app)
 	}
 }
 
-void pdfapp_load_profile(pdfapp_t *app, char *profile_name)
+void pdfapp_load_profile(pdfapp_t *app, const char *profile_name)
 {
 	fz_buffer *profile_data = NULL;
 	fz_var(profile_data);

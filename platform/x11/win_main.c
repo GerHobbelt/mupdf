@@ -1315,7 +1315,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
     MSG msg;
     int code;
     fz_context *ctx;
-	char *profile_name = NULL;
+    const char *profile_name = NULL;
     int kbps = 0;
     int displayRes = get_system_dpi();
     int c;

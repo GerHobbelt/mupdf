@@ -1103,6 +1103,7 @@ struct fz_document_handler
 	const char **extensions;
 	const char **mimetypes;
 	fz_document_recognize_content_fn *recognize_content;
+	int wants_dir;
 };
 
 #ifdef __cplusplus

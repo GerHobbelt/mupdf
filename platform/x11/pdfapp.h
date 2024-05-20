@@ -207,6 +207,6 @@ void pdfapp_postblit(pdfapp_t *app);
 void pdfapp_warn(pdfapp_t *app, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(2, 3);
 void pdfapp_error(pdfapp_t *app, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(2, 3);
 
-void pdfapp_load_profile(pdfapp_t *app, char *profile_name);
+void pdfapp_load_profile(pdfapp_t *app, const char *profile_name);
 
 #endif
