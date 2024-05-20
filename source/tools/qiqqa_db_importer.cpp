@@ -1,4 +1,4 @@
-﻿//
+//
 // Tool to import / export Qiqqa metadata databases.
 // Can mix multiple databases (with custom conflict resolution).
 // Can parse b0rked database dumps, which list PDF files and their associated bibtex records.
@@ -179,7 +179,7 @@ qiqqa_db_importer_main(int argc, const char** argv)
 			datafeed = NULL;
 		}
 
-		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_caught_message(ctx));
+		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_convert_error(ctx, NULL));
 
 		errored = 1;
 	}

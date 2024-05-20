@@ -3498,7 +3498,8 @@ int main(int argc, const char** argv)
 			}
 			fz_catch(ctx)
 			{
-				fz_error(ctx, "warning: tesseract OCR engine could not be initialized. Falling back to the non-OCR-ed output format! %s", fz_caught_message(ctx));
+				fz_error(ctx, "warning: tesseract OCR engine could not be initialized. Falling back to the non-OCR-ed output format! %s", fz_convert_error(ctx, NULL));
+
 				switch (output_format->format)
 				{
 				case OUT_OCR_TRACE:

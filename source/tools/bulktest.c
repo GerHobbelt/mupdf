@@ -1,4 +1,4 @@
-﻿
+
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
 #include "mupdf/assertions.h"
@@ -2639,8 +2639,8 @@ bulktest_main(int argc, const char **argv)
                             }
                             fz_catch(ctx)
                             {
-                                fz_error(ctx, "bulktest/mutool: caught otherwise unhandled exception when executing '%s': %s", scriptname, fz_caught_message(ctx));
-                                rv = 666;
+                                fz_error(ctx, "bulktest/mutool: caught otherwise unhandled exception when executing '%s': %s", scriptname, fz_convert_error(ctx, NULL));
+																rv = 666;
                             }
 
                             if (rv != EXIT_SUCCESS)
@@ -2839,7 +2839,7 @@ bulktest_main(int argc, const char **argv)
             script = NULL;
         }
 
-        fz_error(ctx, "Failure when executing '%s': %s", scriptname, fz_caught_message(ctx));
+        fz_error(ctx, "Failure when executing '%s': %s", scriptname, fz_convert_error(ctx, NULL));
 
         struct curltime now = Curl_now();
 

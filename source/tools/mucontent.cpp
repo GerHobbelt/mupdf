@@ -1,4 +1,4 @@
-﻿//
+//
 // Tool to extract content from PDF in Qiqqa usable format (HOCR-MOD)
 //
 // Tool should also be able to add text overlay to image-based, "OCR-ed" PDF.
@@ -179,7 +179,7 @@ qiqqa_mucontent_main(int argc, const char** argv)
 			datafeed = NULL;
 		}
 
-		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_caught_message(ctx));
+		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_convert_error(ctx, NULL));
 
 		errored = 1;
 	}

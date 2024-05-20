@@ -1,4 +1,4 @@
-﻿//
+//
 // Chop Shop: text/content processor/tokenizer.
 // 
 // tool which extracts text from PDFs (like the old Qiqqa extract tool 
@@ -208,7 +208,7 @@ qiqqa_chop_shop_main(int argc, const char** argv)
 			datafeed = NULL;
 		}
 
-		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_caught_message(ctx));
+		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_convert_error(ctx, NULL));
 
 		errored = 1;
 	}

@@ -1,4 +1,4 @@
-﻿//
+//
 // Create a Qiqqa v2 fingerprint hash for a given input file (PDF)
 //
 // Qiqqa's classic fingerprint was a b0rked variant use of SHA1, originally coded in C#/.NET.
@@ -231,7 +231,7 @@ qiqqa_fingerprint1_main(int argc, const char** argv)
 			datafeed = NULL;
 		}
 
-		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_caught_message(ctx));
+		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_convert_error(ctx, NULL));
 
 		errored = 1;
 	}

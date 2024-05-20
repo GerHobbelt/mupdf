@@ -114,7 +114,8 @@ typedef int64_t (fz_output_tell_fn)(fz_context *ctx, fz_output *out);
 	fz_catch(ctx)
 	{
 		// report the unexpected b0rk:
-		report_our_failure_to_deliver(fz_caught_message(ctx));
+		//report_our_failure_to_deliver(fz_caught_message(ctx));
+		fz_report_error(ctx);
 	}
 	```
 

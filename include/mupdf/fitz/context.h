@@ -176,6 +176,8 @@ void fz_info(fz_context* ctx, const char* fmt, ...);
 	string for the current exception.
 
 	This assumes no intervening use of fz_try/fz_catch.
+
+	See also fz_report_error() and fz_convert_error().
 */
 const char *fz_caught_message(fz_context *ctx);
 
@@ -252,6 +254,25 @@ void fz_vlog_error_printfFL(fz_context *ctx, const char *file, int line, const c
 void fz_log_errorFL(fz_context *ctx, const char *file, int line, const char *str);
 int fz_do_catchFL(fz_context *ctx, const char *file, int line);
 #endif
+
+/*
+* IMPORTANT NOTE:
+* 
+* The following calls do reset the error/exception error code and, as such, serve as
+* 'handlers' of any fitz/pdf exception:
+* 
+* - fz_report_error()
+* - fz_ignore_error()
+* - fz_convert_error()
+*
+* After an exception is caught using `fz_catch()` you MUST call any one of the above.
+* If you don't, the exception will remain marked as 'pending' and will be reported
+* as UNHANDLED by the time the context `ctx` is dropped by way of `fz_drop_context()`.
+*
+* Also note that these calls DO NOT erase the last exception/error message, which can
+* be accessed any time before or after by calling `fz_caught_message()` without
+* changing the 'pending/handled' state of the current exception/error.
+*/
 
 /* Report an error to the registered error callback. */
 void fz_report_error(fz_context *ctx);

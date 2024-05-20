@@ -1,4 +1,4 @@
-﻿//
+//
 // Local "web server" for use as Qiqqa backend & generic (scripted?) access
 //
 // This server should ultimately host the Qiqqa libraries' databases, OCR cache, etc.
@@ -181,7 +181,7 @@ qiqqa_web_api_server_main(int argc, const char** argv)
 			datafeed = NULL;
 		}
 
-		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_caught_message(ctx));
+		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_convert_error(ctx, NULL));
 
 		errored = 1;
 	}

@@ -1,4 +1,4 @@
-﻿//
+//
 //
 //
 
@@ -177,7 +177,7 @@ qiqqa_db_fts_search_main(int argc, const char** argv)
 			datafeed = NULL;
 		}
 
-		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_caught_message(ctx));
+		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_convert_error(ctx, NULL));
 
 		errored = 1;
 	}

@@ -496,8 +496,9 @@ static void save_history(void)
 	}
 	fz_always(ctx)
 		fz_drop_output(ctx, out);
-	fz_catch(ctx)
-		fz_warn(ctx, "Can't write history file. %s", fz_caught_message(ctx));
+	fz_catch(ctx) {
+		fz_warn(ctx, "Can't write history file. %s", fz_convert_error(ctx, NULL));
+	}
 
 	js_freestate(J);
 }

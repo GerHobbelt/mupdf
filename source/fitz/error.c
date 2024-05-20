@@ -1358,7 +1358,7 @@ void fz_report_error(fz_context *ctx)
 	}
 #endif
 	/* TODO: send errcode to fz_log_error instead of formatting it here */
-	fz_log_error_printf(ctx, "%s error: %s", fz_error_type_name(ctx->error.errcode), ctx->error.message);
+	fz_log_error_printf(ctx, "%s error: %s", fz_error_type_name(ctx->error.errcode), fz_caught_message(ctx));
 	ctx->error.errcode = FZ_ERROR_NONE;
 }
 

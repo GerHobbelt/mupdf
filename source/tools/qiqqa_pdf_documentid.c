@@ -1,4 +1,4 @@
-﻿//
+//
 // Create a non-zero *positive* 64-bit document id suitable for Manticore and other uses.
 // The source is assumed to be a Qiqqa v2 fingerprint hash for a given input file (PDF)
 //
@@ -313,7 +313,7 @@ int qiqqa_documentid62_main(int argc, const char** argv)
 			datafeed = NULL;
 		}
 
-		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_caught_message(ctx));
+		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_convert_error(ctx, NULL));
 
 		errored = 1;
 	}

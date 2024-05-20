@@ -4726,6 +4726,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 						{
 							char ex_msg[LONGLINE];
 							fz_strlcpy(ex_msg, fz_caught_message(ctx), sizeof(ex_msg));
+							fz_ignore_error(ctx);
 
 							fz_warn(ctx, "syntax error in XML stream data content: %s; retrying using HTML5 parser.", ex_msg);
 							fz_try(ctx)
@@ -4736,6 +4737,8 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 							{
 								if (recover)
 								{
+									fz_ignore_error(ctx);
+
 									// dump the raw data into the error channel, then attempt recovery as best we can:
 									fz_error(ctx, "syntax error in XML stream data content: %s. Will attempt recovery. Raw data dump:\n", ex_msg);
 									fz_error(ctx, "%.*c\n", -80, '=');
@@ -4775,8 +4778,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 									}
 									fz_catch(ctx)
 									{
-										i++;
-										i--;
+										fz_ignore_error(ctx);
 									}
 								}
 
@@ -4832,6 +4834,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 			{
 				// ignore error
 				const char* errmsg = fz_caught_message(ctx);
+				fz_ignore_error(ctx);
 				if (value_ex)
 				{
 					fmt_puts(ctx, fmt, "\n  null,");

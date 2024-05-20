@@ -520,7 +520,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 			}
 			fz_catch(ctx)
 			{
-				fz_error(ctx, "Error while processing PDF Outlines: %s\n", fz_caught_message(ctx));
+				fz_error(ctx, "Error while processing PDF Outlines: %s\n", fz_convert_error(ctx, NULL));
 			}
 		}
 
@@ -601,7 +601,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 		}
 		fz_catch(ctx)
 		{
-			fz_error(ctx, "Error while processing PDF Outlines: %s\n", fz_caught_message(ctx));
+			fz_error(ctx, "Error while processing PDF Outlines: %s\n", fz_convert_error(ctx, NULL));
 		}
 
 		// and dump a PDF internal aspects list while we're at it: use that
@@ -1784,7 +1784,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page, fz_gathered_statistic
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "Error while loading/processing page %d: %s\n", page, fz_caught_message(ctx));
+		fz_error(ctx, "Error while loading/processing page %d: %s\n", page, fz_convert_error(ctx, NULL));
 	}
 
 	write_level_guarantee_level(ctx, out, json_stack_level);
@@ -1974,7 +1974,7 @@ printtail(fz_context* ctx, globals* glo, const fz_gathered_statistics* stats)
 				{
 					write_level_guarantee_level(ctx, out, json_stack_sig_level + 1);
 					write_item(ctx, out, "Type", "Error");
-					write_item(ctx, out, "SignatureError", fz_caught_message(ctx));
+					write_item(ctx, out, "SignatureError", fz_convert_error(ctx, NULL));
 				}
 				write_level_end_guaranteed(ctx, out, '}', json_stack_sig_level);
 			}
@@ -2151,6 +2151,8 @@ showinfo(fz_context* ctx, globals* glo, int spage, int epage, fz_gathered_statis
 		}
 		fz_catch(ctx)
 		{
+			fz_ignore_error(ctx);
+
 			write_level_guarantee_level(ctx, out, json_stack_level + 1);
 
 			write_item(ctx, out, "PageError", fz_caught_message(ctx));
@@ -2316,7 +2318,7 @@ pdfinfo_info(fz_context* ctx, fz_output* out, const char* filename, const char* 
 	{
 		// exceptions landing here have prevalence over page errors:
 		fz_free(ctx, ex);
-		ex = fz_strdup(ctx, fz_caught_message(ctx));
+		ex = fz_strdup(ctx, fz_convert_error(ctx, NULL));
 		ret = EXIT_FAILURE;
 
 		write_level_guarantee_level(ctx, out, json_stack_outermost_level + 1);
@@ -2508,7 +2510,7 @@ int pdfmetadump_main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "%s", fz_caught_message(ctx));
+		fz_report_error(ctx);
 		ret = EXIT_FAILURE;
 	}
 

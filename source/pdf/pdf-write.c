@@ -1718,6 +1718,7 @@ static void preloadobjstms(fz_context *ctx, pdf_document *doc)
 			fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 			// fz_report_error(ctx) --> replaced by line below:
 			fz_warn(ctx, "(ignored) %s", fz_caught_message(ctx));
+			fz_ignore_error(ctx);
 		}
 	}
 }

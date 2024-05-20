@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2004-2024 Artifex Software Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -2299,7 +2299,7 @@ int main(int argc, const char** argv)
 		}
 		fz_catch(ctx)
 		{
-			fz_log_error(ctx, fz_caught_message(ctx));
+			fz_report_error(ctx);
 			fz_log_error_printf(ctx, "cannot draw '%s'", filename);
 			errored = 1;
 		}
@@ -2379,7 +2379,7 @@ int main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_report_error(ctx);
 		if (!errored) {
 			fz_error(ctx, "Rendering failed.");
 			errored = 1;

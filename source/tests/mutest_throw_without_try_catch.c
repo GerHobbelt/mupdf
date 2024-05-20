@@ -110,7 +110,7 @@ static void mu_drop_context_at_exit(void)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "TEST OK: Exception caught: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "TEST OK: Exception caught: %s\n", fz_convert_error(ctx, NULL));
 	}
 
 #if 01
@@ -142,7 +142,7 @@ static void f1(fz_context* global_ctx, fz_context* ctx)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "TEST OK: Exception caught: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "TEST OK: Exception caught: %s\n", fz_convert_error(ctx, NULL));
 	}
 }
 
@@ -156,7 +156,7 @@ static void f2sub(fz_context* global_ctx, fz_context* ctx)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "TEST OK: Exception caught: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "TEST OK: Exception caught: %s\n", fz_convert_error(ctx, NULL));
 	}
 
 	fz_throw(global_ctx, FZ_ERROR_GENERIC, "EXCEPTION #3: Testing %s within a try/catch environment.", "fz_throw()");
@@ -173,7 +173,7 @@ static void f2(fz_context* global_ctx, fz_context* ctx)
 	}
 	fz_catch(global_ctx)
 	{
-		fz_error(global_ctx, "TEST OK: Exception caught: %s\n", fz_caught_message(ctx));
+		fz_error(global_ctx, "TEST OK: Exception caught: %s\n", fz_convert_error(ctx, NULL));
 	}
 }
 
@@ -188,7 +188,7 @@ static void f3sub(fz_context* global_ctx, fz_context* ctx)
 	fz_catch(ctx)
 	{
 		ASSERT_AND_CONTINUE(!"Should never get here!");
-		fz_error(ctx, "TEST FAIL: Exception caught at inner layer: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "TEST FAIL: Exception caught at inner layer: %s\n", fz_convert_error(ctx, NULL));
 	}
 }
 
@@ -203,7 +203,7 @@ static void f3(fz_context* global_ctx, fz_context* ctx)
 	}
 	fz_catch(global_ctx)
 	{
-		fz_error(global_ctx, "TEST OK: Exception caught at outer layer: %s\n", fz_caught_message(ctx));
+		fz_error(global_ctx, "TEST OK: Exception caught at outer layer: %s\n", fz_convert_error(ctx, NULL));
 	}
 }
 
@@ -219,7 +219,7 @@ static void f4(fz_context* global_ctx, fz_context* ctx)
 	fz_catch(ctx)
 	{
 		ASSERT_AND_CONTINUE(!"Should never get here!");
-		fz_error(ctx, "TEST FAIL: Exception caught: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "TEST FAIL: Exception caught: %s\n", fz_convert_error(ctx, NULL));
 	}
 }
 

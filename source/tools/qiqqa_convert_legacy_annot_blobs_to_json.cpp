@@ -1,4 +1,4 @@
-﻿//
+//
 // Convert lecagy binary encoded annotation blobs from the database to generally usable JSON format.
 //
 // This tool is intended to be used as a test/support tool for the conversion of old Qiqqa libraries
@@ -789,7 +789,7 @@ qiqqa_convert_legacy_annot_blobs_main(int argc, const char** argv)
 			buf = NULL;
 		}
 
-		fz_error(ctx, "Failure while processing %q: %s.", datafilename, fz_caught_message(ctx));
+		fz_error(ctx, "Failure while processing %q: %s.", datafilename, fz_convert_error(ctx, NULL));
 
 		errored = 1;
 	}

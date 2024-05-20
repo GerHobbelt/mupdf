@@ -104,6 +104,7 @@ cmapdump_main(int argc, const char** argv)
 		return EXIT_FAILURE;
 	}
 
+	int rv = EXIT_FAILURE;
 	fz_output* out = NULL;
 	fz_try(ctx)
 	{
@@ -214,6 +215,7 @@ cmapdump_main(int argc, const char** argv)
 		}
 
 		fz_close_output(ctx, out);
+		rv = EXIT_SUCCESS;
 	}
 	fz_always(ctx)
 	{
@@ -221,8 +223,8 @@ cmapdump_main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "fatal: %s\n", fz_caught_message(ctx));
+		fz_error(ctx, "fatal: %s\n", fz_convert_error(ctx, NULL));
 	}
 	mu_drop_context();
-	return EXIT_SUCCESS;
+	return rv;
 }
