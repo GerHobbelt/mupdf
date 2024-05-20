@@ -214,20 +214,26 @@ write_color(fz_context *ctx, fz_buffer *buf, int n, float *color, int stroke)
 		fz_append_printf(ctx, buf, "%g %g %g %s\n", color[0], color[1], color[2], stroke ? "RG" : "rg");
 	else if (n == 1)
 		fz_append_printf(ctx, buf, "%g %c\n", color[0], stroke ? 'G' : 'g');
-	else if (n == 0)
-		fz_append_printf(ctx, buf, "0 %c\n", stroke ? 'G' : 'g');
 	else
 		return 0;
 	return 1;
 }
+
+static void
+write_color0(fz_context *ctx, fz_buffer *buf, int n, float *color, int stroke)
+{
+	if (n == 0)
+		fz_append_printf(ctx, buf, "0 %c\n", stroke ? 'G' : 'g');
+	else
+		write_color(ctx, buf, n, color, stroke);
+}
+
 
 static int pdf_write_stroke_color_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf)
 {
 	float color[4];
 	int n;
 	pdf_annot_color(ctx, annot, &n, color);
-	if (n == 0)
-		return 0;
 	return write_color(ctx, buf, n, color, 1);
 }
 
@@ -260,8 +266,6 @@ static int pdf_write_fill_color_appearance(fz_context *ctx, pdf_annot *annot, fz
 	float color[4];
 	int n;
 	pdf_annot_color(ctx, annot, &n, color);
-	if (n == 0)
-		return 0;
 	return write_color(ctx, buf, n, color, 0);
 }
 
@@ -270,8 +274,6 @@ static int pdf_write_interior_fill_color_appearance(fz_context *ctx, pdf_annot *
 	float color[4];
 	int n;
 	pdf_annot_interior_color(ctx, annot, &n, color);
-	if (n == 0)
-		return 0;
 	return write_color(ctx, buf, n, color, 0);
 }
 
@@ -280,8 +282,6 @@ static int pdf_write_MK_BG_appearance(fz_context *ctx, pdf_annot *annot, fz_buff
 	float color[4];
 	int n;
 	pdf_annot_MK_BG(ctx, annot, &n, color);
-	if (n == 0)
-		return 0;
 	return write_color(ctx, buf, n, color, 0);
 }
 
@@ -290,8 +290,6 @@ static int pdf_write_MK_BC_appearance(fz_context *ctx, pdf_annot *annot, fz_buff
 	float color[4];
 	int n;
 	pdf_annot_MK_BC(ctx, annot, &n, color);
-	if (n == 0)
-		return 0;
 	return write_color(ctx, buf, n, color, 1);
 }
 
@@ -2003,7 +2001,7 @@ write_variable_text(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, pdf_obj *
 		}
 
 		fz_append_string(ctx, buf, "BT\n");
-		write_color(ctx, buf, n, color, 0);
+		write_color0(ctx, buf, n, color, 0);
 		if (multiline)
 		{
 			fz_append_printf(ctx, buf, "%g %g Td\n", padding, padding+h-baseline+lineheight);
@@ -2110,24 +2108,36 @@ layout_variable_text(fz_context *ctx, fz_layout_block *out,
 
 #if FZ_ENABLE_HTML_ENGINE
 static void
-write_rich_content(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, pdf_obj **res, const char *rc, float size, float w, float h)
+write_rich_content(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, pdf_obj **res, const char *rc, const char *ds, float size, float w, float h, float b)
 {
+	/* rect is the actual rectangle that we are writing into. We use this to feed to
+	 * the pdfwriting device. */
 	fz_rect rect = { 0, 0, w, h };
+	/* rect2 is a slightly indented, and much taller rectangle that we fill into.
+	 * We know a clipping rectangle will have been set to the proper rectangle
+	 * so we can allow text to flow out the bottom of the rectangle rather than
+	 * just missing it out. This matches adobe. */
+	fz_rect rect2 = { b, b, w - b*2, h+100 };
 	fz_buffer *inbuf = fz_new_buffer_from_copied_data(ctx, (const unsigned char *)rc, strlen(rc)+1);
 	fz_story *story = NULL;
 	fz_device *dev = NULL;
 	fz_buffer *buf2 = NULL;
+	const char *default_css = "@page{margin:0} body{margin:0} p{margin:0}";
+	char *css = NULL;
 
 	fz_var(story);
 	fz_var(dev);
 	fz_var(res);
 	fz_var(buf2);
+	fz_var(css);
 
 	fz_try(ctx)
 	{
-		story = fz_new_story(ctx, inbuf, "@page{margin:0} body{margin:0} p{margin:0}", size, NULL);
+		if (ds)
+			css = fz_asprintf(ctx, "%s body{% s}", default_css, ds);
+		story = fz_new_story(ctx, inbuf, css ? css : default_css, size, NULL);
 		dev = pdf_page_write(ctx, annot->page->doc, rect, res, &buf2);
-		fz_place_story(ctx, story, rect, NULL);
+		fz_place_story(ctx, story, rect2, NULL);
 		fz_draw_story(ctx, story, dev, fz_identity);
 		fz_close_device(ctx, dev);
 
@@ -2139,11 +2149,64 @@ write_rich_content(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, pdf_obj **
 		fz_drop_buffer(ctx, buf2);
 		fz_drop_story(ctx, story);
 		fz_drop_buffer(ctx, inbuf);
+		fz_free(ctx, css);
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
 #endif
+
+static char *
+escape_text(fz_context *ctx, const char *s)
+{
+	size_t len = 1;
+	char c;
+	const char *s2;
+	char *d, *d2;
+
+	for (s2 = s; (c = *s2++) != 0; len++)
+	{
+		if (c == '<')
+			len += 3; /* &lt; */
+		else if (c == '>')
+			len += 3; /* &gt; */
+		else if (c == '&')
+			len += 4; /* &amp; */
+	}
+
+	d = d2 = fz_malloc(ctx, len);
+
+	for (s2 = s; (c = *s2++) != 0; )
+	{
+		if (c == '<')
+		{
+			*d++ = '&';
+			*d++ = 'l';
+			*d++ = 't';
+			*d++ = ';';
+		}
+		else if (c == '>')
+		{
+			*d++ = '&';
+			*d++ = 'g';
+			*d++ = 't';
+			*d++ = ';';
+		}
+		else if (c == '&')
+		{
+			*d++ = '&';
+			*d++ = 'a';
+			*d++ = 'm';
+			*d++ = 'p';
+			*d++ = ';';
+		}
+		else
+			*d++ = c;
+	}
+	*d++ = 0;
+
+	return d2;
+}
 
 static void
 pdf_write_free_text_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf,
@@ -2157,7 +2220,8 @@ pdf_write_free_text_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 	int lang;
 	fz_rect rd;
 #if FZ_ENABLE_HTML_ENGINE
-	const char *rc;
+	const char *rc, *ds;
+	char *free_rc = NULL;
 #endif
 
 	/* /Rotate is an undocumented annotation property supported by Adobe */
@@ -2228,7 +2292,7 @@ pdf_write_free_text_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 	b = pdf_write_border_appearance(ctx, annot, buf);
 	if (b > 0)
 	{
-		write_color(ctx, buf, n, color, 1);
+		write_color0(ctx, buf, n, color, 1);
 		fz_append_printf(ctx, buf, "%g %g %g %g re\nS\n", b / 2 + rd.x0, b / 2 + rd.y0, w - b - rd.x1 - rd.x0, h - b - rd.y1 - rd.y0);
 	}
 
@@ -2309,9 +2373,19 @@ pdf_write_free_text_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 	}
 
 #if FZ_ENABLE_HTML_ENGINE
+	ds = pdf_dict_get_text_string_opt(ctx, annot->obj, PDF_NAME(DS));
 	rc = pdf_dict_get_text_string_opt(ctx, annot->obj, PDF_NAME(RC));
+	if (!rc && ds && text)
+		rc = free_rc = escape_text(ctx, text);
 	if (rc)
-		write_rich_content(ctx, annot, buf, res, rc, size, w, h);
+	{
+		fz_try(ctx)
+			write_rich_content(ctx, annot, buf, res, rc ? rc : text, ds, size, w, h, b * 2);
+		fz_always(ctx)
+			fz_free(ctx, free_rc);
+		fz_catch(ctx)
+			fz_rethrow(ctx);
+	}
 	else
 #endif
 		write_variable_text(ctx, annot, buf, res, lang, text, font, size, textcolor_n, textcolor, q, w, h, b*2,
