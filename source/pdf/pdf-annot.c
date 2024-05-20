@@ -765,6 +765,7 @@ void pdf_set_annot_popup(fz_context *ctx, pdf_annot *annot, fz_rect rect)
 		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
 	}
+
 	pdf_dirty_annot(ctx, annot);
 }
 

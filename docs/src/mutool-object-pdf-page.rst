@@ -261,4 +261,16 @@ Extends :ref:`Page<mutool_run_js_api_page>`.
 
             var transform = pdfPage.getTransform();
 
+.. method:: createSignature(name)
 
+    Create a new signature widget with the given name as field label.
+
+    :arg name: `String` The desired field label.
+
+    :return: `PDFWidget`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var signatureWidget = pdfPage.createSignature("test");

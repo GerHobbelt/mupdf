@@ -1082,11 +1082,13 @@ pdf_create_signature_widget(fz_context *ctx, pdf_page *page, char *name)
 		pdf_array_push(ctx, fields, obj);
 		lock = pdf_dict_put_dict(ctx, obj, PDF_NAME(Lock), 1);
 		pdf_dict_put(ctx, lock, PDF_NAME(Action), PDF_NAME(All));
+		pdf_end_operation(ctx, page->doc);
 	}
 	fz_always(ctx)
 		pdf_end_operation(ctx, page->doc);
 	fz_catch(ctx)
 	{
+		pdf_abandon_operation(ctx, page->doc);
 		pdf_delete_annot(ctx, page, annot);
 	}
 	return (pdf_annot *)annot;
