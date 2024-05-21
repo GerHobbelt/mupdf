@@ -41,14 +41,14 @@
 /* #undef HAVE_CUFFT */
 
 /* DirectX */
-//#define HAVE_DIRECTX
-//#define HAVE_DIRECTX_NV12
-//#define HAVE_D3D11
-//#define HAVE_D3D10
-//#define HAVE_D3D9
+#define HAVE_DIRECTX
+#define HAVE_DIRECTX_NV12
+#define HAVE_D3D11
+#define HAVE_D3D10
+#define HAVE_D3D9
 
 /* Eigen Matrix & Linear Algebra Library */
-/* #undef HAVE_EIGEN */
+#define HAVE_EIGEN
 
 /* Geospatial Data Abstraction Library */
 /* #undef HAVE_GDAL */
@@ -114,8 +114,11 @@
 /* PNG codec */
 /* #undef HAVE_SPNG */
 
+/* WEBP codec */
+#define HAVE_WEBP
+
 /* Posix threads (pthreads) */
-/* #undef HAVE_PTHREAD */
+#define HAVE_PTHREAD
 
 /* parallel_for with pthreads */
 /* #undef HAVE_PTHREADS_PF */
