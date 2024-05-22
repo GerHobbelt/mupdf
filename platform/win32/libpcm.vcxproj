@@ -248,6 +248,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/msr.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/msrtest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pci.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-accel-common.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-accel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-core.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-iio.cpp" />
@@ -263,6 +264,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-raw.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-sensor-server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-sensor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-tpmi.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-tsx.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/readmem.cpp" />
@@ -291,7 +293,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-raw-win.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-tsx-win.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/restrictDriverAccess.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/stdafx.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/winpmem/winpmem.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/tests/daemon_alignment_test.cpp" />
@@ -321,6 +322,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/msr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/mutex.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/pci.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/pcm-accel-common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/pcm-pcie.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/resctrl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/threadpool.h" />
@@ -344,9 +346,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/winring0/OlsDef.h" />
     <Image Include="../../thirdparty/owemdjee/pcm/doc/run-as-administrator.png" />
     <Text Include="../../thirdparty/owemdjee/pcm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/pcm/Doxyfile" />
     <Text Include="../../thirdparty/owemdjee/pcm/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/pcm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pcm/SECURITY.md" />
     <Text Include="../../thirdparty/owemdjee/pcm/appveyor.yml" />
     <Text Include="../../thirdparty/owemdjee/pcm/doc/CUSTOM-COMPILE-OPTIONS.md" />
     <Text Include="../../thirdparty/owemdjee/pcm/doc/CXL_README.md" />
@@ -368,9 +372,13 @@
     <Text Include="../../thirdparty/owemdjee/pcm/doc/license.txt" />
     <Text Include="../../thirdparty/owemdjee/pcm/docker-compose.yml" />
     <Text Include="../../thirdparty/owemdjee/pcm/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/pcm-kubernetes.yaml.experimental" />
     <Text Include="../../thirdparty/owemdjee/pcm/pcm.spec" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/busy.sh" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/convert_edp_list.sh" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/cppcheck.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/debug-build.sh" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/filter.sh" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/find_field.awk" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/find_field.sh" />
@@ -379,6 +387,7 @@
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/grafana/README.md" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/grafana/automatic_influxdb.yml" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/grafana/automatic_prometheus.yml" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/grafana/clean.sh" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/grafana/provisioning/dashboards/pcm-provider.yml" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/grafana/start-prometheus.sh" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/grafana/start.sh" />
@@ -397,13 +406,11 @@
     <Text Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/kextunload.sh" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-4F-1.json" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-55-4.json" />
-    <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-55-7.json" />
-    <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-55-B.json" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-6A-6.json" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-86-5.json" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-8E-C.json" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-8F-6.json" />
-    <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-8F-8.json" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-CF-1.json" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/WinMSRDriver/MSR.inf" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/WinMSRDriver/makefile" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/freegetopt/ChangeLog" />
@@ -413,6 +420,7 @@
     <Text Include="../../thirdparty/owemdjee/pcm/src/opCode-134.txt" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/opCode-143-accel.txt" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/opCode-143.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/opCode-207.txt" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/opCode-85.txt" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/pcm-bw-histogram.sh" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/pcm-sensor-server.service.in" />

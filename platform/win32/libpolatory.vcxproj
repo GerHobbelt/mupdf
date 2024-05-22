@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -77,7 +77,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOLATORY;POLATORY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -131,7 +131,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOLATORY;POLATORY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/polatory/include;../../thirdparty/owemdjee/libeigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOLATORY;POLATORY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/polatory/include;../../thirdparty/owemdjee/libeigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,7 +186,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOLATORY;POLATORY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/polatory/include;../../thirdparty/owemdjee/libeigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOLATORY;POLATORY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/polatory/include;../../thirdparty/owemdjee/libeigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -226,37 +226,54 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/benchmark/accuracy.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/benchmark/points.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/benchmark/predict.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/examples/closed_normals/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/examples/common/common.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/examples/kriging_cross_validation/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/examples/kriging_fit/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/examples/kriging_predict/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/examples/kriging_variogram/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/examples/normals_sdf/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/examples/sdf_surface/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/examples/terrain_normals/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/examples/terrain_surface/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/fmm_evaluator_1d.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/fmm_evaluator_2d.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/fmm_evaluator_3d.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/fmm_symmetric_evaluator_1d.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/fmm_symmetric_evaluator_2d.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/fmm_symmetric_evaluator_3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/create_model_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/cross_validate_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/estimate_normals_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/evaluate_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/extract_model_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/fit_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/fit_model_to_variogram_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/isosurface_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/normals_to_sdf_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/show_model_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/show_variogram_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/surface_25d_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/unique_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/cli/variogram_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/examples/accuracy/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/examples/offset_surface/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/python/python_binding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/biharmonic2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/biharmonic3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/cov_cubic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/cov_exponential.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/cov_gaussian.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/cov_generalized_cauchy3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/cov_generalized_cauchy5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/cov_generalized_cauchy7.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/cov_generalized_cauchy9.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/cov_spherical.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/cov_spheroidal3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/cov_spheroidal5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/cov_spheroidal7.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/cov_spheroidal9.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/inverse_multiquadric1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/multiquadric1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/multiquadric3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/triharmonic2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/impl/triharmonic3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/fmm/make_fmm_evaluator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/src/isosurface/mesh_defects_finder.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/isosurface/rmt_node_list.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/isosurface/rmt_primitive_lattice.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/kriging/empirical_variogram.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/kriging/weight_function.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/kriging/variogram_calculator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/src/krylov/fgmres.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/src/krylov/gmres.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/src/krylov/gmres_base.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/src/krylov/minres.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/src/point_cloud/kdtree.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/src/point_cloud/normal_estimator.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/src/point_cloud/offset_points_generator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/src/point_cloud/plane_estimator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/src/point_cloud/random_points.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/src/point_cloud/sdf_data_generator.cpp" />
@@ -273,37 +290,32 @@
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/isosurface/test_bit.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/isosurface/test_isosurface.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/isosurface/test_rmt.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/test/kriging/test_empirical_variogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/test/kriging/test_detrend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/test/kriging/test_variogram_calculator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/krylov/test_krylov.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/test/numeric/test_roundtrip_string.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/test/numeric/test_sum_accumulator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/test/numeric/test_conv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/point_cloud/test_distance_filter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/point_cloud/test_kdtree.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/point_cloud/test_normal_estimator.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/polatory/test/point_cloud/test_offset_points_generator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/point_cloud/test_plane_estimator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/point_cloud/test_sdf_data_generator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/polynomial/test_lagrange_basis.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/polynomial/test_polynomial_basis_base.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/preconditioner/test_coarse_grid.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/preconditioner/test_domain_divider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/polatory/test/preconditioner/test_fine_grid.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/polatory/test/rbf/test_rbf.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/closed_normals/parse_options.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/common/common.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/kriging_cross_validation/parse_options.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/kriging_fit/parse_options.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/kriging_predict/parse_options.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/kriging_variogram/parse_options.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/normals_sdf/parse_options.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/sdf_surface/parse_options.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/terrain_normals/parse_options.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/terrain_surface/parse_options.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/cli/commands.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/accuracy/parse_options.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/common/bbox.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/common/make_model.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/common/model_options.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/examples/offset_surface/parse_options.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/common/complementary_indices.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/common/eigen_utility.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/common/io.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/common/macros.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/common/orthonormalize.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/common/types.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/common/zip_sort.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/fmm/fmm_evaluator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/fmm/fmm_symmetric_evaluator.hpp" />
@@ -311,6 +323,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/fmm/gradient_transpose_kernel.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/fmm/hessian_kernel.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/fmm/kernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/geometry/anisotropy.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/geometry/bbox3d.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/geometry/cuboid3d.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/geometry/point3d.hpp" />
@@ -333,16 +346,26 @@
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/mesh_defects_finder.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/rbf_field_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/rbf_field_function_25d.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/rmt_lattice.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/rmt_node.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/rmt_node_list.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/rmt_primitive_lattice.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/rmt_surface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/rmt/edge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/rmt/lattice.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/rmt/node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/rmt/node_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/rmt/primitive_lattice.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/rmt/surface_generator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/surface.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/isosurface/types.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/cross_validation.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/empirical_variogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/cross_validate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/detrend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/normal_score_transformation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/variogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/variogram_builder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/variogram_calculator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/variogram_fitting.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/variogram_fitting_1d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/variogram_fitting_2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/variogram_fitting_3d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/variogram_set.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/kriging/weight_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/krylov/fgmres.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/krylov/gmres.hpp" />
@@ -351,12 +374,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/krylov/linear_operator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/krylov/minres.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/model.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/numeric/roundtrip_string.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/numeric/sum_accumulator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/numeric/conv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/numeric/error.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/point_cloud/distance_filter.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/point_cloud/kdtree.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/point_cloud/normal_estimator.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/point_cloud/offset_points_generator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/point_cloud/plane_estimator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/point_cloud/random_points.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/point_cloud/sdf_data_generator.hpp" />
@@ -367,27 +389,38 @@
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/polynomial/polynomial_evaluator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/polynomial/unisolvent_point_set.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/precision.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/preconditioner/binary_cache.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/preconditioner/coarse_grid.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/preconditioner/domain.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/preconditioner/domain_divider.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/preconditioner/fine_grid.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/preconditioner/mat_a.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/preconditioner/ras_preconditioner.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/cov_cubic.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/cov_exponential.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/cov_gaussian.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/cov_generalized_cauchy3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/cov_generalized_cauchy5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/cov_generalized_cauchy7.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/cov_generalized_cauchy9.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/cov_spherical.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/cov_spheroidal3.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/cov_spheroidal5.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/cov_spheroidal7.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/cov_spheroidal9.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/covariance_function_base.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/inverse_multiquadric.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/make_rbf.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/multiquadric.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/polyharmonic_even.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/polyharmonic_odd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/rbf_base.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/reference/cov_gaussian.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/reference/cov_spherical.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/rbf_proxy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/rbf_proxy_io.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/table.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/include/polatory/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/src/fmm/direct_evaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/polatory/src/fmm/direct_symmetric_evaluator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/src/fmm/fmm_evaluator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/src/fmm/fmm_symmetric_evaluator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/polatory/src/fmm/utility.hpp" />
@@ -399,25 +432,24 @@
     <Text Include="../../thirdparty/owemdjee/polatory/benchmark/benchmark.sh" />
     <Text Include="../../thirdparty/owemdjee/polatory/benchmark/predict.R" />
     <Text Include="../../thirdparty/owemdjee/polatory/benchmark/simulate.R" />
+    <Text Include="../../thirdparty/owemdjee/polatory/cli/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/polatory/cmake/polatory_target_contents.cmake" />
-    <Text Include="../../thirdparty/owemdjee/polatory/docs/build-macos.md" />
-    <Text Include="../../thirdparty/owemdjee/polatory/docs/build-ubuntu.md" />
-    <Text Include="../../thirdparty/owemdjee/polatory/docs/build-windows.md" />
     <Text Include="../../thirdparty/owemdjee/polatory/examples/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/polatory/examples/closed_normals/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/polatory/examples/kriging_cross_validation/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/polatory/examples/kriging_fit/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/polatory/examples/kriging_predict/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/polatory/examples/kriging_variogram/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/polatory/examples/normals_sdf/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/polatory/examples/sdf_surface/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/polatory/examples/terrain_normals/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/polatory/examples/terrain_surface/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/polatory/include/polatory/rbf/reference/README.md" />
+    <Text Include="../../thirdparty/owemdjee/polatory/examples/accuracy/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/polatory/examples/offset_surface/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/polatory/ports/intel-mkl/copy-from-dmg.cmake" />
     <Text Include="../../thirdparty/owemdjee/polatory/ports/intel-mkl/portfile.cmake" />
     <Text Include="../../thirdparty/owemdjee/polatory/ports/intel-mkl/vcpkg.json" />
+    <Text Include="../../thirdparty/owemdjee/polatory/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/polatory/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/polatory/python/src/polatory/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/polatory/python/src/polatory/one/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/polatory/python/src/polatory/three/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/polatory/python/src/polatory/two/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/polatory/python/tests/test.py" />
     <Text Include="../../thirdparty/owemdjee/polatory/run.bat" />
+    <Text Include="../../thirdparty/owemdjee/polatory/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/polatory/setup.py" />
     <Text Include="../../thirdparty/owemdjee/polatory/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/polatory/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/polatory/tools/Exec.ps1" />
@@ -425,7 +457,8 @@
     <Text Include="../../thirdparty/owemdjee/polatory/vcpkg-configuration.json" />
     <Text Include="../../thirdparty/owemdjee/polatory/vcpkg.json" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

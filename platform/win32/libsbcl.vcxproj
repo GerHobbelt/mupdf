@@ -343,6 +343,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/os-provides-dlopen-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/os-provides-getprotoby-r-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/os-provides-poll-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/os-provides-posix-spawn-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/os-provides-suseconds-t-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/os-provides-wakebyaddr-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/where-is-mcontext.c" />
@@ -370,7 +371,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/sbcl/src/runtime/code.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sbcl/src/runtime/core.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sbcl/src/runtime/darwin-os.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sbcl/src/runtime/dynbind.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sbcl/src/runtime/forwarding-ptr.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/sbcl/src/runtime/gc-assert.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sbcl/src/runtime/gc-thread-pool.h" />
@@ -471,9 +471,11 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/finalize.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/find-symbol.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/grab-mutex.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/grab-mutex2.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/slot-value.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/threads-compile.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/binary-distribution.sh" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/build-all-cores.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/build-comparison.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/clean.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/cload-xc.lisp" />
@@ -587,6 +589,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/contrib/sb-mpfr/README.md" />
     <Text Include="../../thirdparty/owemdjee/sbcl/contrib/sb-mpfr/mpfr.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/contrib/sb-mpfr/tests.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/contrib/sb-perf/Makefile" />
     <Text Include="../../thirdparty/owemdjee/sbcl/contrib/sb-perf/README.md" />
     <Text Include="../../thirdparty/owemdjee/sbcl/contrib/sb-perf/export-syms.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/contrib/sb-posix/Makefile" />
@@ -708,15 +711,17 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/cross-make.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/Makefile" />
     <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/arm/stuff-groveled-from-headers.lisp" />
-    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/arm64/stuff-groveled-from-headers.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/arm64/darwin-headers.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/arm64/linux-headers.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/mips/stuff-groveled-from-headers.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/ppc/stuff-groveled-from-headers.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/ppc64/stuff-groveled-from-headers.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/riscv/stuff-groveled-from-headers.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/sparc/stuff-groveled-from-headers.lisp" />
-    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/x86-64/stuff-groveled-from-headers.lisp" />
-    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/x86/stuff-groveled-from-headers.lisp" />
-    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/build-all.sh" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/x86-64/posix-headers.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/x86-64/win32-headers.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/x86/posix-headers.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/x86/win32-headers.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/pass-1.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/pass-2.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/distclean.sh" />
@@ -816,7 +821,6 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/install.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/load-xc.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/loader.lisp" />
-    <Text Include="../../thirdparty/owemdjee/sbcl/make-all-targets.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/make-android.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/make-c-runtime.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/make-config.sh" />
@@ -930,10 +934,12 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-char.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-condition.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-early.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-float-reader.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-float.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-io.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-misc.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-modular.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-sxhash.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-type.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/deadline.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/debug-info.lisp" />
@@ -955,7 +961,6 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/early-constants.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/early-defmethod.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/early-extensions.lisp" />
-    <Text Include="../../thirdparty/owemdjee/sbcl/src/code/early-float.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/early-full-eval.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/early-impl.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/early-ntrace.lisp" />
@@ -985,7 +990,6 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/fdefinition.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/filesys.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/final.lisp" />
-    <Text Include="../../thirdparty/owemdjee/sbcl/src/code/float-inf-nan.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/float-trap.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/float.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/force-delayed-defbangstructs.lisp" />
@@ -1085,6 +1089,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/target-error.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/target-exception.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/target-extensions.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/src/code/target-float.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/target-format.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/target-hash-table.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/target-lfhash.lisp" />
@@ -1239,6 +1244,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/generic/pinned-objects.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/generic/primtype.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/generic/sanctify.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/generic/static-syms.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/generic/type-error.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/generic/type-vops.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/generic/utils.lisp" />
@@ -1611,6 +1617,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/case.pure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/ccase.pure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/character.pure.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/checkheap.test.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/chill.test.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/circ-tree-test.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/classoid-typep.impure.lisp" />
@@ -1620,6 +1627,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-call-next-method.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-ignore.interactive.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-interrupts.impure.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-method-combination-caches.pure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-method-combination-redefinition.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-typechecking.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos.impure-cload.lisp" />
@@ -1709,6 +1717,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/expect.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/extended-sequences.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/external-format.pure.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/fast-assoc.pure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/fast-eval.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/fcb-threads.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/filecompile.impure-cload.lisp" />
@@ -1739,6 +1748,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/gc-threads.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/gc.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/gcd.pure.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/gengc-barrier.pure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/genheaders.test.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/genmakefile.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/gethash-concurrency.pure.lisp" />
@@ -1776,6 +1786,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/iso-8859-2.pure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/iso-8859-3.pure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/join-thread-timeout.impure.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/jump-table.pure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/kill-non-lisp-thread.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/lambda-list.pure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/layouts.pure.lisp" />
@@ -1849,6 +1860,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/package-test-7.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/packages.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/packed-varints.pure.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/parallel-exec.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/parallel-exec.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/parallel-fasl-load-test.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/pathnames.pure.lisp" />
@@ -2019,11 +2031,12 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tools-for-build/readcore.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tools-for-build/rtf.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tools-for-build/ucd.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/tools-for-build/unicode-phash.lisp-expr" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tools-for-build/update-unicode-datafiles.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tools-for-build/wxs.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/validate-float.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/verify-header-parsing.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/wc.sh" />
-    <Text Include="../../thirdparty/owemdjee/sbcl/xfloat-math.lisp-expr" />
     <Text Include="../../thirdparty/owemdjee/sbcl/xperfecthash30.lisp-expr" />
     <Text Include="../../thirdparty/owemdjee/sbcl/xperfecthash61.lisp-expr" />
     <Text Include="../../thirdparty/owemdjee/sbcl/xperfecthash63.lisp-expr" />

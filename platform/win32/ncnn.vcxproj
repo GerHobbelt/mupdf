@@ -226,6 +226,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/benchmark/RankCards/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/benchmark/benchncnn.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/examples/fasterrcnn.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/examples/mobilenetssd.cpp" />
@@ -304,7 +305,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/gemm_arm_asimdhp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/gemm_arm_vfpv4.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/gru_arm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/gru_arm_asimddp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/gru_arm_asimdhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/gru_arm_vfpv4.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/hardsigmoid_arm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/hardsigmoid_arm_asimdhp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/hardswish_arm.cpp" />
@@ -319,7 +322,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/interp_arm_asimdhp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/lrn_arm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/lstm_arm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/lstm_arm_asimddp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/lstm_arm_asimdhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/lstm_arm_vfpv4.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/matmul_arm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/mish_arm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/mish_arm_asimdhp.cpp" />
@@ -338,7 +343,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/requantize_arm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/reshape_arm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/rnn_arm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/rnn_arm_asimddp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/rnn_arm_asimdhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/rnn_arm_vfpv4.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/scale_arm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/selu_arm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/shufflechannel_arm.cpp" />
@@ -588,6 +595,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/memorydata_vulkan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/mish_vulkan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/multiheadattention_vulkan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/noop_vulkan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/normalize_vulkan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/packing_vulkan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/padding_vulkan.cpp" />
@@ -604,6 +612,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/sigmoid_vulkan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/slice_vulkan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/softmax_vulkan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/split_vulkan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/swish_vulkan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/tanh_vulkan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/unaryop_vulkan.cpp" />
@@ -645,6 +654,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/layernorm_x86.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/lrn_x86.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/lstm_x86.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/lstm_x86_avx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/lstm_x86_avx512vnni.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/lstm_x86_avxvnni.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/lstm_x86_xop.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/matmul_x86.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/mish_x86.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/multiheadattention_x86.cpp" />
@@ -686,6 +699,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/simpleocv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/simpleomp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/simplestl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/src/simplevk.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/test_absval.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/test_batchnorm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/test_bias.cpp" />
@@ -723,6 +737,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/test_deconvolutiondepthwise.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/test_deconvolutiondepthwise1d.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/test_deconvolutiondepthwise3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/test_deconvolutiondepthwise_1.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/test_deepcopy.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/test_deformableconv2d.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/test_deformableconv2d_1.cpp" />
@@ -801,6 +816,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/test_unaryop.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/test_unfold.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/test_yolov3detectionoutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tests/testutil.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/caffe/caffe2ncnn.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/darknet/darknet2ncnn.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/mlir/mlir2ncnn.cpp" />
@@ -815,6 +831,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/ncnnoptimize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/onnx/onnx2ncnn.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/ir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/load_onnx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/load_torchscript.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level0.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level0/constant_unpooling.cpp" />
@@ -1065,6 +1083,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_lgamma.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_logsumexp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_lt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_masked_select.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_matmul.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_max.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_mean.cpp" />
@@ -1087,6 +1106,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_repeat_interleave.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_roll.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_scatter_add.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_slice_scatter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_split.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_squeeze.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level2/torch_stack.cpp" />
@@ -1166,6 +1186,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_batchnorm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_conv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_convtranspose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_embedding.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_groupnorm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_instancenorm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_layernorm.cpp" />
@@ -1231,11 +1252,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/Tensor_contiguous.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/Tensor_repeat.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/Tensor_reshape.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/Tensor_slice.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/Tensor_slice_copy.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/Tensor_view.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/chain_multi_output.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/convert_Tensor_select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/convert_Tensor_slice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/convert_Tensor_slice_copy.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/convert_attribute.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/convert_custom_op.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/convert_half_to_float.cpp" />
@@ -1354,20 +1375,43 @@
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/torch_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/torch_permute.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/torch_prod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/torch_slice_scatter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/torch_squeeze.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/torch_sum.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/torch_t.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/torch_transpose.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/torch_unsqueeze.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/torchvision_DeformConv2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/canonicalize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/dead_code_elimination.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/eliminate_noop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/fold_constants.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/inline_containers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/model_stat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_AdaptiveAvgPool2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_AdaptiveAvgPool3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_AvgPool2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_AvgPool3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_BatchNorm2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_BatchNorm3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_Conv2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_Conv3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_GELU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_LayerNorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_Linear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_MaxPool2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_MaxPool3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/nn_MultiheadAttention.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/shape_inference.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/save_ncnn.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/save_onnx.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/save_onnx_cxxabi_bridge.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/storezip.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/quantize/imreadwrite.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/quantize/ncnn2int8.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ncnn/tools/quantize/ncnn2table.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/benchmark/RankCards/Rcards.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/python/src/pybind11_allocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/python/src/pybind11_bind.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/python/src/pybind11_datareader.h" />
@@ -1432,13 +1476,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolution_im2col_gemm_bf16s_fp16s.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolution_im2col_gemm_fp16s.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolution_im2col_gemm_int8.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolution_int8.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolution_pack1to4_int8.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolution_pack8to1_int8.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolution_pack8to4_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolution_packed.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolution_packed_bf16s.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolution_packed_fp16s.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolution_packed_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolutiondepthwise_3x3.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolutiondepthwise_3x3_fp16s.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/convolutiondepthwise_3x3_int8.h" />
@@ -1467,6 +1508,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/gemm_bf16s_fp16s.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/gemm_fp16s.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/gru_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/gru_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/hardsigmoid_arm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/hardswish_arm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/innerproduct_arm.h" />
@@ -1490,6 +1532,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/interp_bilinear_pack8_fp16s.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/lrn_arm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/lstm_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/lstm_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/matmul_arm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/mish_arm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/multiheadattention_arm.h" />
@@ -1520,6 +1563,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/requantize_relu_pack8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/reshape_arm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/rnn_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/rnn_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/scale_arm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/selu_arm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/arm/shufflechannel_arm.h" />
@@ -1940,6 +1984,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/memorydata_vulkan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/mish_vulkan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/multiheadattention_vulkan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/noop_vulkan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/normalize_vulkan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/packing_vulkan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/padding_vulkan.h" />
@@ -1956,6 +2001,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/sigmoid_vulkan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/slice_vulkan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/softmax_vulkan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/split_vulkan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/swish_vulkan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/tanh_vulkan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/vulkan/unaryop_vulkan.h" />
@@ -1984,6 +2030,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/convolution_3x3_winograd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/convolution_3x3_winograd_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/convolution_5x5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/convolution_im2col_gemm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/convolution_im2col_gemm_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/convolution_packed.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/convolution_packed_int8.h" />
@@ -2063,6 +2110,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/interp_x86.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/layernorm_x86.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/lrn_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/lstm_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/lstm_x86.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/matmul_x86.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/layer/x86/mish_x86.h" />
@@ -2112,10 +2160,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/paramdict.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/pipeline.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/pipelinecache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/ruapu.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/simplemath.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/simpleocv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/simpleomp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/simplestl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/simplevk.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/stb_image.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/stb_image_write.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/src/vulkan_header_fix.h" />
@@ -2129,6 +2179,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/mlir/tf_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/modelwriter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/ir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/load_onnx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/load_torchscript.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level0.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level0/constant_unpooling.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level0/convert_half_to_float.h" />
@@ -2200,6 +2252,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_batchnorm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_conv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_convtranspose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_embedding.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_groupnorm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_instancenorm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_level5/fuse_static_layernorm.h" />
@@ -2209,6 +2262,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/chain_multi_output.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/convert_Tensor_select.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/convert_Tensor_slice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/convert_Tensor_slice_copy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/convert_attribute.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/convert_custom_op.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/convert_half_to_float.h" />
@@ -2241,6 +2296,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/insert_reshape_pooling.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/insert_split.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_ncnn/solve_batch_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/canonicalize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/dead_code_elimination.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/eliminate_noop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/fold_constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/inline_containers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/model_stat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/pass_onnx/shape_inference.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/save_ncnn.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/save_onnx.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/storezip.h" />
@@ -2263,6 +2326,8 @@
     <Text Include="../../thirdparty/owemdjee/ncnn/benchmark/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ncnn/benchmark/FastestDet.param" />
     <Text Include="../../thirdparty/owemdjee/ncnn/benchmark/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/benchmark/RankCards/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/benchmark/RankCards/README.md" />
     <Text Include="../../thirdparty/owemdjee/ncnn/benchmark/alexnet.param" />
     <Text Include="../../thirdparty/owemdjee/ncnn/benchmark/blazeface.param" />
     <Text Include="../../thirdparty/owemdjee/ncnn/benchmark/efficientnet_b0.param" />
@@ -2311,7 +2376,6 @@
     <Text Include="../../thirdparty/owemdjee/ncnn/cmake/ncnn_generate_msa_source.cmake" />
     <Text Include="../../thirdparty/owemdjee/ncnn/cmake/ncnn_generate_rvv_source.cmake" />
     <Text Include="../../thirdparty/owemdjee/ncnn/cmake/ncnn_generate_shader_comp_header.cmake" />
-    <Text Include="../../thirdparty/owemdjee/ncnn/cmake/ncnn_generate_shader_spv_header.cmake" />
     <Text Include="../../thirdparty/owemdjee/ncnn/cmake/run_test.cmake" />
     <Text Include="../../thirdparty/owemdjee/ncnn/codeformat.sh" />
     <Text Include="../../thirdparty/owemdjee/ncnn/docs/Home.md" />
@@ -2331,6 +2395,7 @@
     <Text Include="../../thirdparty/owemdjee/ncnn/docs/developer-guide/how-to-implement-custom-layer-step-by-step.md" />
     <Text Include="../../thirdparty/owemdjee/ncnn/docs/developer-guide/how-to-write-a-neon-optimized-op-kernel.md" />
     <Text Include="../../thirdparty/owemdjee/ncnn/docs/developer-guide/how-to-write-a-sse-optimized-op-kernel.zh.md" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/docs/developer-guide/layer-feat-mask.md" />
     <Text Include="../../thirdparty/owemdjee/ncnn/docs/developer-guide/low-level-operation-api.md" />
     <Text Include="../../thirdparty/owemdjee/ncnn/docs/developer-guide/ncnn-tips-and-tricks.zh.md" />
     <Text Include="../../thirdparty/owemdjee/ncnn/docs/developer-guide/new-model-load-api.md" />
@@ -2340,6 +2405,7 @@
     <Text Include="../../thirdparty/owemdjee/ncnn/docs/developer-guide/param-and-model-file-structure.md" />
     <Text Include="../../thirdparty/owemdjee/ncnn/docs/developer-guide/preload-practice.zh.md" />
     <Text Include="../../thirdparty/owemdjee/ncnn/docs/developer-guide/tensorflow-op-combination.md" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/docs/developer-guide/vulkan-driver-loader.md" />
     <Text Include="../../thirdparty/owemdjee/ncnn/docs/faq.en.md" />
     <Text Include="../../thirdparty/owemdjee/ncnn/docs/faq.md" />
     <Text Include="../../thirdparty/owemdjee/ncnn/docs/how-to-build/build-mlir2ncnn.md" />
@@ -2488,6 +2554,7 @@
     <Text Include="../../thirdparty/owemdjee/ncnn/toolchains/power8le-linux-gnu-vsx.toolchain.cmake" />
     <Text Include="../../thirdparty/owemdjee/ncnn/toolchains/power9le-linux-gnu-vsx.clang.toolchain.cmake" />
     <Text Include="../../thirdparty/owemdjee/ncnn/toolchains/power9le-linux-gnu-vsx.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/toolchains/powerpc-linux-gnu.toolchain.cmake" />
     <Text Include="../../thirdparty/owemdjee/ncnn/toolchains/powerpc64le-linux-gnu.toolchain.cmake" />
     <Text Include="../../thirdparty/owemdjee/ncnn/toolchains/qnx700.toolchain.cmake" />
     <Text Include="../../thirdparty/owemdjee/ncnn/toolchains/qnx710.toolchain.cmake" />
@@ -2514,6 +2581,22 @@
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/README.md" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/cmake/PNNXPyTorch.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/examples/convert.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/examples/export.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/pnnx/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/pnnx/utils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/pnnx/utils/convert.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/pnnx/utils/export.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/pnnx/utils/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/tests/test_convert.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/tests/test_dynamicinput_convert.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/tests/test_dynamicinput_export.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/tests/test_export.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/tests/test_naiveinput_convert.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/python/tests/test_naiveinput_export.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/CMakeLists.txt" />
@@ -2625,6 +2708,7 @@
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_nn_Hardsigmoid.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_nn_Hardswish.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_nn_Hardtanh.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_nn_Identity.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_nn_InstanceNorm2d.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_nn_LSTM.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_nn_LayerNorm.py" />
@@ -2702,6 +2786,7 @@
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_torch_round.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_torch_rsqrt.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_torch_sin.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_torch_slice_scatter.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_torch_sqrt.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_torch_square.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/ncnn/test_torch_squeeze.py" />
@@ -2851,6 +2936,7 @@
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_nn_Hardsigmoid.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_nn_Hardswish.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_nn_Hardtanh.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_nn_Identity.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_nn_InstanceNorm1d.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_nn_InstanceNorm2d.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_nn_InstanceNorm3d.py" />
@@ -2931,6 +3017,7 @@
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_addmm.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_amax.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_amin.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_arange.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_argmax.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_argmin.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_asin.py" />
@@ -2994,6 +3081,7 @@
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_log10.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_logsumexp.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_lt.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_masked_select.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_matmul.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_max.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_maximum.py" />
@@ -3021,6 +3109,7 @@
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_sign.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_sin.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_sinh.py" />
+    <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_slice_scatter.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_split.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_sqrt.py" />
     <Text Include="../../thirdparty/owemdjee/ncnn/tools/pnnx/tests/test_torch_square.py" />

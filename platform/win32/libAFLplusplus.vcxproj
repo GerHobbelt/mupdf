@@ -368,6 +368,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-sharedmem.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-showmap.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-tmin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/hashmap.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test-instr.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-cmplog.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-compcov.c" />
@@ -405,6 +406,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/aflpp_driver/aflpp_driver_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/aflpp_driver/aflpp_qemu_driver.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/aflpp_driver/aflpp_qemu_driver_hook.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/bench/hash.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/defork/defork.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/defork/forking_target.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/libdislocator/libdislocator.so.c" />
@@ -417,6 +419,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/qbdi_mode/template.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/qemu_persistent_hook/read_into_rdi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/qemu_persistent_hook/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/replay_record/persistent_demo_replay.c" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/hashmap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/test.h" />
@@ -445,7 +448,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/afl-as.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/afl-mutations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/afl-persistent-replay.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/afl-prealloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/afl-record-compat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/alloc-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/android-ashmem.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/cmplog.h" />
@@ -460,6 +465,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/list.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/sharedmem.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/snapshot-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/t1ha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/t1ha0_ia32aes_b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/t1ha_bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/t1ha_selfcheck.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/xxhash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-gcc-common.h" />
@@ -800,6 +809,8 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/strncmp-str.ql" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/strncmp-strings.py" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/strtool.ql" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/bench/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/bench/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/canvas_harness/canvas_harness.html" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/crash_triage/triage_crashes.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/defork/Makefile" />
@@ -817,6 +828,8 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/qbdi_mode/build.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/qemu_persistent_hook/Makefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/qemu_persistent_hook/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/replay_record/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/replay_record/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/target_intelligence/README.md" />
     <Xml Include="../../thirdparty/owemdjee/AFLplusplus/testcases/others/xml/small_document.xml" />
   </ItemGroup>

@@ -4,6 +4,5 @@ also-ignore:
 	/examples/
 	/tools/
 	/src/
-	
-	
+	/tmp/
 	

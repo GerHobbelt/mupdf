@@ -60,20 +60,29 @@
     <Filter Include="Misc Files\test">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\test\doc">
+    <Filter Include="Misc Files\test\architectures">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\test\test_wasm">
+    <Filter Include="Misc Files\test\doc">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0018}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test">
+    <Filter Include="Misc Files\test\test_wasm">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0019}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test\doc">
+    <Filter Include="Source Files\test">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\test\architectures">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0021}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\test\doc">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0022}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/architectures/dummy.cpp">
+      <Filter>Source Files\test\architectures</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/doc/explicit_use_of_an_instruction_set.cpp">
       <Filter>Source Files\test\doc</Filter>
     </ClCompile>
@@ -254,10 +263,34 @@
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512dq.hpp">
       <Filter>Header Files\include\xsimd\arch</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512er.hpp">
+      <Filter>Header Files\include\xsimd\arch</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512f.hpp">
       <Filter>Header Files\include\xsimd\arch</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512ifma.hpp">
+      <Filter>Header Files\include\xsimd\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512pf.hpp">
+      <Filter>Header Files\include\xsimd\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512vbmi.hpp">
+      <Filter>Header Files\include\xsimd\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512vnni_avx512bw.hpp">
+      <Filter>Header Files\include\xsimd\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx512vnni_avx512vbmi.hpp">
+      <Filter>Header Files\include\xsimd\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avxvnni.hpp">
+      <Filter>Header Files\include\xsimd\arch</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_constants.hpp">
+      <Filter>Header Files\include\xsimd\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_emulated.hpp">
       <Filter>Header Files\include\xsimd\arch</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_fma3_avx.hpp">
@@ -278,6 +311,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_generic_fwd.hpp">
       <Filter>Header Files\include\xsimd\arch</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_i8mm_neon64.hpp">
+      <Filter>Header Files\include\xsimd\arch</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_isa.hpp">
       <Filter>Header Files\include\xsimd\arch</Filter>
     </ClInclude>
@@ -285,6 +321,9 @@
       <Filter>Header Files\include\xsimd\arch</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_neon64.hpp">
+      <Filter>Header Files\include\xsimd\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_rvv.hpp">
       <Filter>Header Files\include\xsimd\arch</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_scalar.hpp">
@@ -320,6 +359,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/config/xsimd_cpuid.hpp">
       <Filter>Header Files\include\xsimd\config</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/config/xsimd_inline.hpp">
+      <Filter>Header Files\include\xsimd\config</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/math/xsimd_rem_pio2.hpp">
       <Filter>Header Files\include\xsimd\math</Filter>
     </ClInclude>
@@ -347,16 +389,40 @@
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512dq_register.hpp">
       <Filter>Header Files\include\xsimd\types</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512er_register.hpp">
+      <Filter>Header Files\include\xsimd\types</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512f_register.hpp">
       <Filter>Header Files\include\xsimd\types</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512ifma_register.hpp">
+      <Filter>Header Files\include\xsimd\types</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512pf_register.hpp">
+      <Filter>Header Files\include\xsimd\types</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512vbmi_register.hpp">
+      <Filter>Header Files\include\xsimd\types</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512vnni_avx512bw_register.hpp">
+      <Filter>Header Files\include\xsimd\types</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx512vnni_avx512vbmi_register.hpp">
+      <Filter>Header Files\include\xsimd\types</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avx_register.hpp">
+      <Filter>Header Files\include\xsimd\types</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_avxvnni_register.hpp">
       <Filter>Header Files\include\xsimd\types</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_batch.hpp">
       <Filter>Header Files\include\xsimd\types</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_batch_constant.hpp">
+      <Filter>Header Files\include\xsimd\types</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_emulated_register.hpp">
       <Filter>Header Files\include\xsimd\types</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_fma3_avx2_register.hpp">
@@ -374,6 +440,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_generic_arch.hpp">
       <Filter>Header Files\include\xsimd\types</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_i8mm_neon64_register.hpp">
+      <Filter>Header Files\include\xsimd\types</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_neon64_register.hpp">
       <Filter>Header Files\include\xsimd\types</Filter>
     </ClInclude>
@@ -381,6 +450,9 @@
       <Filter>Header Files\include\xsimd\types</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_register.hpp">
+      <Filter>Header Files\include\xsimd\types</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_rvv_register.hpp">
       <Filter>Header Files\include\xsimd\types</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_sse2_register.hpp">
@@ -556,6 +628,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/xsimd/test/CMakeLists.txt">
       <Filter>Misc Files\test</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/xsimd/test/architectures/CMakeLists.txt">
+      <Filter>Misc Files\test\architectures</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/xsimd/test/avx.sh">
       <Filter>Misc Files\test</Filter>

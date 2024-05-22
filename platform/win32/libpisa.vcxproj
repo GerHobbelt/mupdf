@@ -237,14 +237,15 @@
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/forward_index_builder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/invert.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/linear_quantizer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/memory_source.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/parser.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/parsing/html.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/progress.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/query/queries.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/query.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/query/query_parser.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/query/term_processor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/sharding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/string.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/temporary_directory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/term_map.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/text_analyzer.cpp" />
@@ -261,6 +262,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_bmw_queries.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_compact_elias_fano.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_compact_ranked_bitvector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_compress.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_cow_string.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_cursors.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_forward_index.cpp" />
@@ -270,6 +272,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_indexed_sequence.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_intersection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_invert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_linear_quantizer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_mapper.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_memory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_memory_source.cpp" />
@@ -277,8 +280,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_partitioned_sequence.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_payload_vector.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_positive_sequence.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_queries.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_query_stemmer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_ranked_queries.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_recursive_graph_bisection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_sample_inverted_index.cpp" />
@@ -350,7 +351,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/varintgb.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/compress.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/concepts.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/configuration.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/concepts/container.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/concepts/inverted_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/concepts/mapping.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/concepts/posting_cursor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/cow_string.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/cursor/block_max_scored_cursor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/cursor/cursor.hpp" />
@@ -377,6 +381,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/parser.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/parsing/html.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/payload_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/algorithm.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/algorithm/and_query.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/algorithm/block_max_maxscore_query.hpp" />
@@ -391,10 +396,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/algorithm/ranked_or_taat_query.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/algorithm/wand_query.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/aol_reader.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/queries.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/query_parser.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/query_stemmer.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/term_processor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/trec_topic_reader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/recursive_graph_bisection.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/reorder_docids.hpp" />
@@ -413,6 +415,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/sequence/uniform_partitioned_sequence.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/sequence_collection.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/sharding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/string.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/taily_stats.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/temporary_directory.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/term_map.hpp" />
@@ -509,6 +512,7 @@
     <Text Include="../../thirdparty/owemdjee/pisa/docs/book/css/variables.css" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/book/elasticlunr.min.js" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/book/favicon.svg" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/algorithms.html" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/compressing.html" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/indexing-pipeline.html" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/installation.html" />
@@ -519,6 +523,7 @@
     <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/requirements.html" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/sharding.html" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/threshold-estimation.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/wand_data.html" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/book/highlight.css" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/book/highlight.js" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/book/index.html" />
@@ -560,6 +565,7 @@
     <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/taily-thresholds.md" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/thresholds.md" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/topk_queue_bench.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/algorithms.md" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/compressing.md" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/indexing-pipeline.md" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/installation.md" />
@@ -570,6 +576,7 @@
     <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/requirements.md" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/sharding.md" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/threshold-estimation.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/wand_data.md" />
     <Text Include="../../thirdparty/owemdjee/pisa/docs/src/introduction.md" />
     <Text Include="../../thirdparty/owemdjee/pisa/external/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/pisa/include/pisa/accumulator/README.md" />
@@ -597,7 +604,13 @@
     <Text Include="../../thirdparty/owemdjee/pisa/test/cli/setup.sh" />
     <Text Include="../../thirdparty/owemdjee/pisa/test/cli/test_count_postings.sh" />
     <Text Include="../../thirdparty/owemdjee/pisa/test/cli/test_taily_stats.sh" />
+    <Text Include="../../thirdparty/owemdjee/pisa/test/cli/test_wand_data.sh" />
+    <Text Include="../../thirdparty/owemdjee/pisa/test/docker/benchmark/bench.sh" />
+    <Text Include="../../thirdparty/owemdjee/pisa/test/docker/benchmark/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/pisa/test/docker/benchmark/evaluate.sh" />
+    <Text Include="../../thirdparty/owemdjee/pisa/test/docker/benchmark/expected-eval.txt" />
     <Text Include="../../thirdparty/owemdjee/pisa/test/docker/benchmark/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/pisa/test/docker/benchmark/setup.sh" />
     <Text Include="../../thirdparty/owemdjee/pisa/test/docker/cmake-3.25.2-SHA-256.txt" />
     <Text Include="../../thirdparty/owemdjee/pisa/test/docker/coverage/cov.sh" />
     <Text Include="../../thirdparty/owemdjee/pisa/test/docker/install-clang.sh" />

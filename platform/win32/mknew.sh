@@ -1279,6 +1279,11 @@ xmunch
 yake
 yy_color_convertor
 zvec
+colm
+ragel
+libpostal
+simdcomp
+PDFGen
 
 EOT
 )
@@ -1339,6 +1344,7 @@ tray
 vcopy
 vcpkg
 visible-url-detector
+ragel
 
 EOT
 )

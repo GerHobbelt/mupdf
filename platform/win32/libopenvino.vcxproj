@@ -436,6 +436,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/rt_map.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/shape.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/strides.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/symbol.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/types/element_type.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/types/regmodule_graph_types.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/util.cpp" />
@@ -969,9 +970,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/common/transformations/src/transformations/smart_reshape/strided_slice_squeeze.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/common/transformations/src/transformations/symbolic_transformations/chained_maximum.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/common/transformations/src/transformations/symbolic_transformations/dereshape_matmul.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/common/transformations/src/transformations/symbolic_transformations/label_optimization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/common/transformations/src/transformations/symbolic_transformations/nop_broadcast.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/common/transformations/src/transformations/symbolic_transformations/reshape_optimizations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/common/transformations/src/transformations/symbolic_transformations/symbol_optimization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/common/transformations/src/transformations/symbolic_transformations/symbolic_optimizations.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/common/transformations/src/transformations/symbolic_transformations/utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/common/transformations/src/transformations/transpose_sinking/ts_base.cpp" />
@@ -1265,7 +1266,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/descriptor/output.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/descriptor/tensor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/dimension.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/dimension_tracker.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/except.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/extension.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/graph_util.cpp" />
@@ -1469,6 +1469,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/op/util/arithmetic_reductions_keep_dims.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/op/util/assign_base.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/op/util/attr_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/op/util/avg_pool_base.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/op/util/axes_util.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/op/util/binary_elementwise_arithmetic.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/op/util/binary_elementwise_bitwise.cpp" />
@@ -1553,6 +1554,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/shape_util.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/so_extension.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/strides.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/symbol.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/type.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/type/bfloat16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/src/type/element_type.cpp" />
@@ -1586,8 +1588,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/tests/element_type.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/tests/element_visitor_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/tests/eval.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/tests/evaluate_bound/concat.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/tests/evaluate_bound/transpose.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/tests/extension.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/tests/file_util.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/core/tests/float16.cpp" />
@@ -2418,6 +2418,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/batch_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/bitwise.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/bool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/bucketize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/cat.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/celu.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/clamp.cpp" />
@@ -2549,6 +2550,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/tuple_index.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/unflatten.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/unfold.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/unique.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/upsample.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/var_mean.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/pytorch/src/op/where.cpp" />
@@ -2651,6 +2653,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/tensorflow_common/src/helper_transforms/tensor_array_v3_replacer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/tensorflow_common/src/op/addN.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/tensorflow_common/src/op/adjust_contrast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/tensorflow_common/src/op/angle.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/tensorflow_common/src/op/approximate_equal_op.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/tensorflow_common/src/op/arg_min_max.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/frontends/tensorflow_common/src/op/argdef_ops.cpp" />
@@ -3078,6 +3081,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/bin_conv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/broadcast.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/bucketize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/causal_mask_preprocess.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/color_convert.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/common/arbitrary_order_desc_creator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/common/blocked_desc_creator.cpp" />
@@ -3114,6 +3118,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/executors/acl/acl_pooling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/executors/acl/acl_reduce.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/executors/acl/acl_transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/executors/acl/acl_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/executors/common/ref_convert.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/executors/common/ref_opt_transpose.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/executors/common/ref_transpose.cpp" />
@@ -3262,6 +3267,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/arm/pass/convert_group_conv1d.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/arm/pass/convert_reduce_multi_axis.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/arm/pass/mish_decomposition.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/op/causal_mask_preprocess.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/op/fully_connected.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/op/leaky_relu.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/op/ngram.cpp" />
@@ -3270,6 +3276,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/op/sdpa.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/op/swish_cpu.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/pass/align_matmul_input_ranks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/pass/causal_mask_preprocess_fusion.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/pass/convert_broadcast_to_tiles.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/pass/convert_fq_rnn_to_quantized_rnn.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/pass/convert_matmul_to_fc.cpp" />
@@ -3446,6 +3453,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/arm/convert_reduce_multi_axis.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/arm/eltwise_chain.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/broadcast_eltwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/causal_mask_preprocess.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/classes/eltwise_chain.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/common/eltwise_chain.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/concat_const_inplace.cpp" />
@@ -3481,6 +3489,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/fuse_transpose_reorder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/gather_add_avgpool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/gather_weights_decompression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/index_add_scatter_elements_update.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/init_state_inplace_conflicts.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/inplace_edge.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tests/functional/custom/subgraph_tests/src/inplace_resolve_io.cpp" />
@@ -4638,6 +4647,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/plugin/sync_infer_request.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/plugin/transformations/bcast_and_pad_zp_buffers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/plugin/transformations/binary_conv_to_conv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/plugin/transformations/broadcast_reshape_matmul_fusion.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/plugin/transformations/clamp_fp16_output.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/plugin/transformations/convert_convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/plugin/transformations/convert_fc_to_compressed.cpp" />
@@ -5036,6 +5046,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/passes/add_onednn_optimization_attributes_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/passes/add_required_reorders_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/passes/clamp_fp16_output_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/passes/fuse_primitives_with_layout.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/passes/handle_reshape.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/passes/kernels_cache_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/passes/mark_shape_of_subgraphs_test.cpp" />
@@ -5209,6 +5220,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/test_utils/conv_test_data.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/test_utils/test_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/transformations/bcast_and_pad_zp_buffers_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/transformations/broadcast_reshape_matmul_fusion_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/transformations/clamp_fp16_output_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/transformations/convert_binary_conv_to_conv_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/tests/unit/transformations/convert_convolution_test.cpp" />
@@ -6233,6 +6245,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/rt_map.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/shape.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/strides.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/symbol.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/types/element_type.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/types/regmodule_graph_types.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/bindings/python/src/pyopenvino/graph/util.hpp" />
@@ -6685,9 +6698,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/common/transformations/include/transformations/smart_reshape/strided_slice_squeeze.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/common/transformations/include/transformations/symbolic_transformations/chained_maximum.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/common/transformations/include/transformations/symbolic_transformations/dereshape_matmul.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/openvino/src/common/transformations/include/transformations/symbolic_transformations/label_optimization.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/common/transformations/include/transformations/symbolic_transformations/nop_broadcast.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/common/transformations/include/transformations/symbolic_transformations/reshape_optimizations.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/openvino/src/common/transformations/include/transformations/symbolic_transformations/symbol_optimization.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/common/transformations/include/transformations/symbolic_transformations/symbolic_optimizations.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/common/transformations/include/transformations/symbolic_transformations/utils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/common/transformations/include/transformations/transpose_sinking/ts_base.hpp" />
@@ -6728,7 +6741,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/dev_api/openvino/core/bound_evaluation_util.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/dev_api/openvino/core/constant_fold_utils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/dev_api/openvino/core/descriptor_tensor.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/dev_api/openvino/core/dimension_tracker.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/dev_api/openvino/core/meta_data.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/dev_api/openvino/core/shape_util.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/dev_api/openvino/core/so_extension.hpp" />
@@ -6787,6 +6799,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/core/runtime_attribute.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/core/shape.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/core/strides.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/core/symbol.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/core/type.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/core/type/bfloat16.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/core/type/element_type.hpp" />
@@ -6990,6 +7003,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/op/util/arithmetic_reductions_keep_dims.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/op/util/assign_base.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/op/util/attr_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/op/util/avg_pool_base.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/op/util/axes_util.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/op/util/binary_elementwise_arithmetic.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/core/include/openvino/op/util/binary_elementwise_bitwise.hpp" />
@@ -7998,6 +8012,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/bin_conv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/broadcast.h" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/bucketize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/causal_mask_preprocess.h" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/color_convert.h" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/common/arbitrary_order_desc_creator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/nodes/common/blocked_desc_creator.h" />
@@ -8213,6 +8228,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/arm/pass/convert_group_conv1d.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/arm/pass/convert_reduce_multi_axis.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/arm/pass/mish_decomposition.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/op/causal_mask_preprocess.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/op/fully_connected.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/op/leaky_relu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/op/ngram.hpp" />
@@ -8221,6 +8237,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/op/sdpa.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/op/swish_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/pass/align_matmul_input_ranks.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/pass/causal_mask_preprocess_fusion.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/pass/convert_broadcast_to_tiles.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/pass/convert_fq_rnn_to_quantized_rnn.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/src/transformations/cpu_opset/common/pass/convert_matmul_to_fc.hpp" />
@@ -8946,6 +8963,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/kernel_selector/weight_bias_params.h" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/plugin/transformations/bcast_and_pad_zp_buffers.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/plugin/transformations/binary_conv_to_conv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/plugin/transformations/broadcast_reshape_matmul_fusion.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/plugin/transformations/clamp_fp16_output.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/plugin/transformations/convert_convolution.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_gpu/src/plugin/transformations/convert_fc_to_compressed.hpp" />
@@ -11132,6 +11150,7 @@
     <Text Include="../../thirdparty/owemdjee/openvino/docs/sphinx_setup/_static/css/media/xls-icon.svg" />
     <Text Include="../../thirdparty/owemdjee/openvino/docs/sphinx_setup/_static/css/viewer.min.css" />
     <Text Include="../../thirdparty/owemdjee/openvino/docs/sphinx_setup/_static/design-tabs.js" />
+    <Text Include="../../thirdparty/owemdjee/openvino/docs/sphinx_setup/_static/download/OpenVINO_Quick_Start_Guide.pdf" />
     <Text Include="../../thirdparty/owemdjee/openvino/docs/sphinx_setup/_static/download/conformance_reports/opset_report_omz_dynamic.html" />
     <Text Include="../../thirdparty/owemdjee/openvino/docs/sphinx_setup/_static/download/conformance_reports/opset_report_omz_static.html" />
     <Text Include="../../thirdparty/owemdjee/openvino/docs/sphinx_setup/_static/download/conformance_reports/template/chosen.jquery.min.js" />
@@ -11375,6 +11394,7 @@
     <Text Include="../../thirdparty/owemdjee/openvino/src/bindings/js/node/package.json" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/bindings/js/node/scripts/download_runtime.js" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/bindings/js/node/tests/basic.test.js" />
+    <Text Include="../../thirdparty/owemdjee/openvino/src/bindings/js/node/tests/core.test.js" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/bindings/js/node/tests/infer_request.test.js" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/bindings/js/node/tests/partial_shape.test.js" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/bindings/js/node/tests/pre_post_processor.test.js" />
@@ -12849,16 +12869,20 @@
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/tests/tests_res/tests_res.json" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/break_validator.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/cfg.json" />
+    <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/cfg_manager.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/cfg_samples/blob_cmp.json" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/cfg_samples/bm_output.json" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/cfg_samples/bm_perf.json" />
+    <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/cfg_samples/bm_perf_for_CI.json" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/cfg_samples/e2e.json" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/common_mode.py" />
+    <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/e2e_preparator.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/helpers.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/log_parser.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/map_builder.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/modes.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/preprocess/replace.py" />
+    <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/commit_slider/utils/subscription.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/dump_check/README.md" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/dump_check/dump_check.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/src/plugins/intel_cpu/tools/dump_check/requirements.txt" />
@@ -13477,6 +13501,7 @@
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_bitwise_ops.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_bool.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_broadcast_tensors.py" />
+    <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_bucketize.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_cat.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_celu.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_chunk.py" />
@@ -13546,6 +13571,7 @@
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_lstm.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_masked_fill.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_masked_scatter.py" />
+    <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_matmul.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_mean.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_min_max.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_mm.py" />
@@ -13621,6 +13647,7 @@
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_unbind.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_unflatten.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_unfold.py" />
+    <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_unique.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_unsqueeze.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_upsample.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/pytorch_tests/test_var_mean.py" />
@@ -13910,6 +13937,7 @@
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/tensorflow_tests/test_tf_Xlog1py.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/tensorflow_tests/test_tf_Xlogy.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/tensorflow_tests/test_tf_ZerosLike.py" />
+    <Text Include="../../thirdparty/owemdjee/openvino/tests/layer_tests/tensorflow_tests/test_tf_angle.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/lib/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/lib/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/lib/src/CMakeLists.txt" />
@@ -13946,6 +13974,7 @@
     <Text Include="../../thirdparty/owemdjee/openvino/tests/model_hub_tests/pytorch/test_edsr.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/model_hub_tests/pytorch/test_gfpgan.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/model_hub_tests/pytorch/test_hf_transformers.py" />
+    <Text Include="../../thirdparty/owemdjee/openvino/tests/model_hub_tests/pytorch/test_lightglue.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/model_hub_tests/pytorch/test_speech-transformer.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/model_hub_tests/pytorch/test_timm.py" />
     <Text Include="../../thirdparty/owemdjee/openvino/tests/model_hub_tests/pytorch/test_torchbench.py" />

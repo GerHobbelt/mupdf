@@ -322,6 +322,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/is_string.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/is_structured.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/items.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/json_base_class_t.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/json_lines.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/json_pointer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/json_pointer__back.cpp" />
@@ -343,10 +344,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/meta.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/nlohmann_define_type_intrusive_explicit.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/nlohmann_define_type_intrusive_macro.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/nlohmann_define_type_intrusive_only_serialize_explicit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/nlohmann_define_type_intrusive_only_serialize_macro.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/nlohmann_define_type_intrusive_with_default_explicit.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/nlohmann_define_type_intrusive_with_default_macro.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/nlohmann_define_type_non_intrusive_explicit.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/nlohmann_define_type_non_intrusive_macro.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/nlohmann_define_type_non_intrusive_only_serialize_explicit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/nlohmann_define_type_non_intrusive_only_serialize_macro.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/nlohmann_define_type_non_intrusive_with_default_explicit.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/nlohmann_define_type_non_intrusive_with_default_macro.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/docs/examples/nlohmann_json_namespace.cpp" />
@@ -475,6 +480,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-constructor2.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-convenience.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-conversions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-custom-base-class.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-deserialization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-diagnostics.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-disabled_exceptions.cpp" />
@@ -492,6 +498,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-meta.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-modifiers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-msgpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-no-mem-leak-on-adl-serialize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-noexcept.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-ordered_json.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/json/tests/src/unit-ordered_map.cpp" />
@@ -538,6 +545,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/json/include/nlohmann/detail/iterators/iterator_traits.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/json/include/nlohmann/detail/iterators/json_reverse_iterator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/json/include/nlohmann/detail/iterators/primitive_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/json/include/nlohmann/detail/json_custom_base_class.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/json/include/nlohmann/detail/json_pointer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/json/include/nlohmann/detail/json_ref.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/json/include/nlohmann/detail/macro_scope.hpp" />
@@ -584,6 +592,7 @@
     <Image Include="../../thirdparty/owemdjee/json/tests/reports/2016-09-09-nativejson_benchmark/performance_Corei7-4980HQ@2.80GHz_mac64_clang7.0_3._Prettify_Time_(ms).png" />
     <Image Include="../../thirdparty/owemdjee/json/tests/reports/2016-09-09-nativejson_benchmark/performance_Corei7-4980HQ@2.80GHz_mac64_clang7.0_7._Code_size_FileSize_(byte).png" />
     <Image Include="../../thirdparty/owemdjee/json/tools/serve_header/demo.png" />
+    <Text Include="../../thirdparty/owemdjee/json/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/json/CITATION.cff" />
     <Text Include="../../thirdparty/owemdjee/json/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/json/ChangeLog.md" />
@@ -593,11 +602,13 @@
     <Text Include="../../thirdparty/owemdjee/json/LICENSES/MIT.txt" />
     <Text Include="../../thirdparty/owemdjee/json/Makefile" />
     <Text Include="../../thirdparty/owemdjee/json/README.md" />
+    <Text Include="../../thirdparty/owemdjee/json/WORKSPACE.bazel" />
     <Text Include="../../thirdparty/owemdjee/json/cmake/ci.cmake" />
     <Text Include="../../thirdparty/owemdjee/json/cmake/config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/json/cmake/download_test_data.cmake" />
     <Text Include="../../thirdparty/owemdjee/json/cmake/nlohmann_jsonConfigVersion.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/json/cmake/pkg-config.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/json/cmake/scripts/gen_bazel_build_file.cmake" />
     <Text Include="../../thirdparty/owemdjee/json/cmake/test.cmake" />
     <Text Include="../../thirdparty/owemdjee/json/docs/Makefile" />
     <Text Include="../../thirdparty/owemdjee/json/docs/README.md" />
@@ -670,6 +681,7 @@
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/basic_json/is_string.md" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/basic_json/is_structured.md" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/basic_json/items.md" />
+    <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/basic_json/json_base_class_t.md" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/basic_json/json_serializer.md" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/basic_json/max_size.md" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/basic_json/merge_patch.md" />
@@ -765,6 +777,7 @@
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/macros/json_has_cpp_11.md" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/macros/json_has_filesystem.md" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/macros/json_has_ranges.md" />
+    <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/macros/json_has_static_rtti.md" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/macros/json_has_three_way_comparison.md" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/macros/json_no_io.md" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/api/macros/json_noexception.md" />
@@ -831,6 +844,7 @@
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/integration/conan/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/integration/conan/Conanfile.txt" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/integration/index.md" />
+    <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/integration/migration_guide.md" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/integration/package_managers.md" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/integration/pkg-config.md" />
     <Text Include="../../thirdparty/owemdjee/json/docs/mkdocs/docs/integration/vcpkg/CMakeLists.txt" />
@@ -865,9 +879,6 @@
     <Text Include="../../thirdparty/owemdjee/json/tools/amalgamate/amalgamate.py" />
     <Text Include="../../thirdparty/owemdjee/json/tools/amalgamate/config_json.json" />
     <Text Include="../../thirdparty/owemdjee/json/tools/amalgamate/config_json_fwd.json" />
-    <Text Include="../../thirdparty/owemdjee/json/tools/cpplint/README.rst" />
-    <Text Include="../../thirdparty/owemdjee/json/tools/cpplint/cpplint.py" />
-    <Text Include="../../thirdparty/owemdjee/json/tools/cpplint/update.sh" />
     <Text Include="../../thirdparty/owemdjee/json/tools/gdb_pretty_printer/README.md" />
     <Text Include="../../thirdparty/owemdjee/json/tools/gdb_pretty_printer/nlohmann-json.py" />
     <Text Include="../../thirdparty/owemdjee/json/tools/generate_natvis/README.md" />

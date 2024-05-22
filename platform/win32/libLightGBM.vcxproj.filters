@@ -166,13 +166,13 @@
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0051}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\include">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0054}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files\include\LightGBM">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0053}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\include\LightGBM\cuda">
+    <Filter Include="Misc Files\include\LightGBM">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\include\LightGBM\cuda">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0054}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\pmml">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0055}</UniqueIdentifier>
@@ -285,11 +285,14 @@
     <Filter Include="Source Files\src\treelearner\cuda">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0091}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\utils">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0092}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\tests">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0093}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0094}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\tests\cpp_tests">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0092}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0093}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -434,6 +437,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/src/treelearner/data_parallel_tree_learner.cpp">
       <Filter>Source Files\src\treelearner</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/LightGBM/src/treelearner/feature_histogram.cpp">
+      <Filter>Source Files\src\treelearner</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/src/treelearner/feature_parallel_tree_learner.cpp">
       <Filter>Source Files\src\treelearner</Filter>
     </ClCompile>
@@ -455,7 +461,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/src/treelearner/voting_parallel_tree_learner.cpp">
       <Filter>Source Files\src\treelearner</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/LightGBM/src/utils/openmp_wrapper.cpp">
+      <Filter>Source Files\src\utils</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_array_args.cpp">
+      <Filter>Source Files\tests\cpp_tests</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_arrow.cpp">
       <Filter>Source Files\tests\cpp_tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_byte_buffer.cpp">
@@ -473,6 +485,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_serialize.cpp">
       <Filter>Source Files\tests\cpp_tests</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_single_row.cpp">
+      <Filter>Source Files\tests\cpp_tests</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_stream.cpp">
       <Filter>Source Files\tests\cpp_tests</Filter>
     </ClCompile>
@@ -483,6 +498,9 @@
       <Filter>Header Files\R-package\src</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/LightGBM/include/LightGBM/application.h">
+      <Filter>Header Files\include\LightGBM</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/LightGBM/include/LightGBM/arrow.h">
       <Filter>Header Files\include\LightGBM</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/LightGBM/include/LightGBM/bin.h">
@@ -992,10 +1010,7 @@
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/R/metrics.R">
       <Filter>Misc Files\R-package\R</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/R/readRDS.lgb.Booster.R">
-      <Filter>Misc Files\R-package\R</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/R/saveRDS.lgb.Booster.R">
+    <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/R/multithreading.R">
       <Filter>Misc Files\R-package\R</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/R/utils.R">
@@ -1103,6 +1118,9 @@
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_lgb.interprete.R">
       <Filter>Misc Files\R-package\tests\testthat</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_lgb.model.dt.tree.R">
+      <Filter>Misc Files\R-package\tests\testthat</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_lgb.plot.importance.R">
       <Filter>Misc Files\R-package\tests\testthat</Filter>
     </Text>
@@ -1110,6 +1128,9 @@
       <Filter>Misc Files\R-package\tests\testthat</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_metrics.R">
+      <Filter>Misc Files\R-package\tests\testthat</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_multithreading.R">
       <Filter>Misc Files\R-package\tests\testthat</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_parameters.R">
@@ -1421,6 +1442,9 @@
     <Text Include="../../thirdparty/owemdjee/LightGBM/helpers/parameter_generator.py">
       <Filter>Misc Files\helpers</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/LightGBM/include/LightGBM/arrow.tpp">
+      <Filter>Misc Files\include\LightGBM</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/LightGBM/include/LightGBM/cuda/cuda_utils.hu">
       <Filter>Misc Files\include\LightGBM\cuda</Filter>
     </Text>
@@ -1494,6 +1518,9 @@
       <Filter>Misc Files\tests\distributed</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/LightGBM/tests/python_package_test/__init__.py">
+      <Filter>Misc Files\tests\python_package_test</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/LightGBM/tests/python_package_test/test_arrow.py">
       <Filter>Misc Files\tests\python_package_test</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/LightGBM/tests/python_package_test/test_basic.py">

@@ -258,6 +258,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/core/tests/flags_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/core/tests/posix/permissions_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/core/tests/process_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/core/tests/query_performance_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/core/tests/query_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/core/tests/system_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/core/tests/tables_tests.cpp" />
@@ -427,6 +428,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/sql/sqlite_operations.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/sql/sqlite_string.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/sql/sqlite_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/sql/sqlite_version.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/sql/tests/sql.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/sql/tests/sql_test_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/sql/tests/sqlite_hashing_tests.cpp" />
@@ -441,7 +443,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/system/usersgroups/windows/tests/users_groups_cache.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/system/usersgroups/windows/users_groups_cache.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/system/usersgroups/windows/users_service.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/atom_packages.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/browser_firefox.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/chrome/chrome_extension_content_scripts.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/chrome/chrome_extensions.cpp" />
@@ -454,6 +455,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/posix/docker.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/posix/prometheus_metrics.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/posix/tests/prometheus_metrics_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/vscode_extensions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/windows/carbon_black.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/windows/office_mru.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/cloud/aws/ec2_instance_metadata.cpp" />
@@ -558,7 +560,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/darwin/processes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/darwin/quicklook_cache.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/darwin/sandboxes.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/darwin/secureboot.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/darwin/sharing_preferences.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/darwin/sip_config.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/darwin/smbios_tables.cpp" />
@@ -640,6 +641,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/darwin/certificates_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/darwin/extended_attributes_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/darwin/firewall_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/darwin/keychain_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/darwin/launchd_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/darwin/mdfind_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/darwin/packages_tests.cpp" />
@@ -676,6 +678,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/authenticode.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/autoexec.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/background_activities_moderator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/battery.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/bitlocker_info.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/certificates.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/chassis_info.cpp" />
@@ -821,12 +824,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/tests/windows/env.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/tests/windows/filetime.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/tests/windows/shellitems.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/tests/windows/shelllnk.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/versioning/semantic.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/versioning/tests/semantic.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/windows/lzxpress.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/windows/shellitem.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/windows/shelllnk.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/ycloud/tests/ycloud.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/ycloud/ycloud_util.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/worker/ipc/linux/linux_table_container_ipc.cpp" />
@@ -896,7 +895,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/apt_sources.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/arp_cache.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/asl.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/atom_packages.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/augeas.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/authenticode.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/authorization_mechanisms.cpp" />
@@ -1118,6 +1116,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/users.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/video_info.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/virtual_memory_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/vscode_extensions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/wifi_networks.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/wifi_status.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/wifi_survey.cpp" />
@@ -1373,6 +1372,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/conversions/windows/windows_time.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/darwin/iokit_helpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/darwin/plist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/darwin/system_profiler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/debug/debug_only.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/enum_class_hash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/error/error.h" />
@@ -1411,10 +1411,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/uptime.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/system.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/users_groups_helpers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/versioning/semantic.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/windows/lzxpress.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/windows/shellitem.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/windows/shelllnk.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/ycloud/ycloud_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/worker/ipc/include/platform_table_container_ipc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/worker/ipc/include/table_channel_base.h" />
@@ -1705,8 +1703,6 @@
     <Text Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/linux/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/linux/proc/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/linux/proc/tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/osquery/osquery/utils/versioning/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/osquery/osquery/utils/versioning/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osquery/osquery/utils/ycloud/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osquery/osquery/utils/ycloud/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osquery/osquery/worker/CMakeLists.txt" />

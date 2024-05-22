@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE83335}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAGEL;RAGEL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAGEL;RAGEL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAGEL;RAGEL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAGEL;RAGEL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAGEL;RAGEL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAGEL;RAGEL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAGEL;RAGEL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAGEL;RAGEL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAGEL;RAGEL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAGEL;RAGEL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAGEL;RAGEL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAGEL;RAGEL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/grammar/c++/input.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/allocgen.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/host-asm/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/host-c/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/host-crack/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/host-csharp/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/host-d/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/host-go/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/host-java/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/host-js/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/host-julia/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/host-ocaml/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/host-ruby/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/host-rust/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/inputdata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/load.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/longest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/ncommon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/parsedata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/parsetree.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/src/reducer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ragel/test/ragel.d/main.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/src/inputdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/src/load.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/src/nragel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/src/parsedata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/src/parsetree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/src/pcheck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/src/reducer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/src/rlscan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/test/ragel.d/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cppscan1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/test/ragel.d/eofact.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/test/ragel.d/import2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/test/ragel.d/mailbox1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ragel/test/ragel.d/strings2.h" />
+    <Text Include="../../thirdparty/owemdjee/ragel/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/README" />
+    <Text Include="../../thirdparty/owemdjee/ragel/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/ragel/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/ragel/contrib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/contrib/ragel.m4" />
+    <Text Include="../../thirdparty/owemdjee/ragel/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/doc/ragel/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/doc/ragel/extract.awk" />
+    <Text Include="../../thirdparty/owemdjee/ragel/doc/ragel/fixbackbox.awk" />
+    <Text Include="../../thirdparty/owemdjee/ragel/doc/ragel/genfigs.sh" />
+    <Text Include="../../thirdparty/owemdjee/ragel/doc/ragel/ragel-guide.tex" />
+    <Text Include="../../thirdparty/owemdjee/ragel/doc/ragel/ragel-guide.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/doc/ragel/ragel.1.in" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/README" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/atoi.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/awkemu.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/awkequiv.awk" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/clang.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/concurrent.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/cppscan.lex" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/cppscan.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/format.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/go/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/go/README" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/go/atoi.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/go/rpn.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/go/url.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/go/url_authority.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/gotocallret.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/mailbox.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/params.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/pullscan.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/rlscan.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/statechart.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/examples/uri.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/free-codes.sh" />
+    <Text Include="../../thirdparty/owemdjee/ragel/full.Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/ragel/grammar/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/ragel/grammar/c++/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/ragel/grammar/dns/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/ragel/grammar/dns/dns.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/grammar/go/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/ragel/grammar/pcre/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/ragel/grammar/pcre/pcre.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/grammar/python/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/ragel/grammar/python/input.py" />
+    <Text Include="../../thirdparty/owemdjee/ragel/grammar/rust/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/ragel/master.Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/ragel/release.Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/config.h.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-asm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-asm/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-c/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-crack/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-crack/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-csharp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-csharp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-d/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-go/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-go/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-java/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-java/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-js/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-js/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-julia/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-julia/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-ocaml/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-ocaml/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-ruby/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-ruby/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-rust/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/host-rust/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/ragel-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/rlparse.kl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/rlscan.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/src/version.h.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/dist.sh" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/README" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/any1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/args1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/args2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/argsinc.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/atoi1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/atoi2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/atoi3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/atoi4.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/atoi5.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/awkemu.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/builtin.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/call1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/call2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/call3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/call4.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/caseindep.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/clang1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/clang2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/clang3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/clang4.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/clang5.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cond1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cond10.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cond11.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cond2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cond3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cond4.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cond5.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cond6.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cond7.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cond8.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cond9.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/conderr1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/conderr2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/condrep1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/condrep2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/condrep3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/condrep4.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/condrep5.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cppscan1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cppscan2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cppscan3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cppscan4.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cppscan5.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/cppscan6.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/crack1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/curs1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/element1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/element2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/element3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/empty1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/eofact.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/eofcall1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/eofcall2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/eoffrom.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/eofgoto1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/eofgoto2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/eofret1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/erract1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/erract2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/erract3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/erract4.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/erract5.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/erract6.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/erract7.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/erract8.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/erract9.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/export1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/export2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/export3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/export4.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/fbreak1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/fnext1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/fnext2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/fnext3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/forder1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/forder2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/forder3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/genrep1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/genrep2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/genrep3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/genrep4.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/genrep5.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/genrep6.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/genrep7.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/genrep8.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/gentests.sh" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/goto1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/gotocallret1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/gotocallret2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/gotocallret3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/high1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/high2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/high3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/import1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/import2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/include1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/include2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/include3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/include3/smtp_addr_parser.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/include3/smtp_address.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/include3/smtp_ip.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/include3/smtp_whitespace.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/java1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/java2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/julia1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/keller1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/lmgoto.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/lmnfa1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/mailbox1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/mailbox2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/mailbox3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/minimize1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/ncall1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/next1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/next2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/nfa1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/nfa2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/nfa3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/noignore.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/patact.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/range.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/rangei.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/recdescent1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/recdescent2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/recdescent4.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/recdescent5.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/repetition.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/rlscan.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/rpn1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/ruby1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/rust1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/scan1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/scan2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/scan3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/scan4.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/scan5.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/scan6.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/scan7.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/stateact1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/statechart1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/strings1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/strings2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/strings3.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/targs1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/tofrom1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/tofrom2.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/tokstart1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/tsreset.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/union.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/url1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/xml.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/xmlcommon.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/ragel.d/zlen1.rl" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/runtests.sh" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/subject.mk.in" />
+    <Text Include="../../thirdparty/owemdjee/ragel/test/subject.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/ragel/version.mk" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

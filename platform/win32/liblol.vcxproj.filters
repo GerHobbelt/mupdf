@@ -21,50 +21,71 @@
     <Filter Include="Header Files\include\lol\private">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\include\lol\private\base">
+    <Filter Include="Header Files\include\lol\private\audio">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\include\lol\private\image">
+    <Filter Include="Header Files\include\lol\private\base">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\include\lol\private\math">
+    <Filter Include="Header Files\include\lol\private\image">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\include\lol\private\sys">
+    <Filter Include="Header Files\include\lol\private\math">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\include\lol\private\types">
+    <Filter Include="Header Files\include\lol\private\sys">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\legacy">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\legacy\lol">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\legacy\lol\algorithm">
+    <Filter Include="Header Files\include\lol\private\types">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\legacy\lol\base">
+    <Filter Include="Header Files\legacy">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\legacy\lol\image">
+    <Filter Include="Header Files\legacy\lol">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\legacy\lol\algorithm">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\legacy\lol\base">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\legacy\lol\math">
+    <Filter Include="Header Files\legacy\lol\image">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\legacy">
+    <Filter Include="Header Files\legacy\lol\math">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\t">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\legacy">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0018}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\legacy\math">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\t">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0019}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/lol/legacy/math/geometry.cpp">
       <Filter>Source Files\legacy\math</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/lol/t/audio-convert.cpp">
+      <Filter>Source Files\t</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/lol/t/audio-sadd.cpp">
+      <Filter>Source Files\t</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/lol/t/test.cpp">
+      <Filter>Source Files\t</Filter>
+    </ClCompile>
+    <ClInclude Include="../../thirdparty/owemdjee/lol/include/lol/private/audio/stream.h">
+      <Filter>Header Files\include\lol\private\audio</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/lol/include/lol/private/base/containers.h">
       <Filter>Header Files\include\lol\private\base</Filter>
     </ClInclude>
@@ -94,9 +115,6 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/lol/include/lol/private/image/pixel.h">
       <Filter>Header Files\include\lol\private\image</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/lol/include/lol/private/lolunit.h">
-      <Filter>Header Files\include\lol\private</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/lol/include/lol/private/math/constants.h">
       <Filter>Header Files\include\lol\private\math</Filter>
@@ -178,6 +196,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/lol/TODO.md">
       <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/lol/t/Makefile">
+      <Filter>Misc Files\t</Filter>
     </Text>
   </ItemGroup>
 </Project>

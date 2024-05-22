@@ -259,6 +259,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/core-net/transport-mux-common.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/core-net/transport-mux-proxy.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/core-net/vhost.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/core-net/wol.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/core-net/wsi-timeout.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/core-net/wsi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/core/alloc.c" />
@@ -378,6 +379,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/plat/unix/unix-service.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/plat/unix/unix-sockets.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/plat/unix/unix-spawn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/plat/unix/unix-systemd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/plat/windows/windows-fds.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/plat/windows/windows-file.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/lib/plat/windows/windows-init.c" />
@@ -590,6 +592,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-smp/minimal-http-server-smp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-sse-ring/minimal-http-server-sse-ring.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-sse/minimal-http-server-sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-systemd-socketact/minimal-http-server-systemd-socketact.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-tls-80/minimal-http-server-tls-80.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-tls-mem/minimal-http-server-tls-mem.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-tls/minimal-http-server-tls.c" />
@@ -607,6 +610,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/raw/minimal-raw-proxy/minimal-raw-proxy.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/raw/minimal-raw-serial/minimal-raw-file.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/raw/minimal-raw-vhost/minimal-raw-vhost.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/raw/minimal-raw-wol/minimal-raw-wol.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/secure-streams/minimal-secure-streams-alexa/alexa.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/secure-streams/minimal-secure-streams-alexa/audio.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/secure-streams/minimal-secure-streams-alexa/main.c" />
@@ -1179,6 +1183,7 @@
     <Image Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-smp/mount-origin/favicon.ico" />
     <Image Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-sse-ring/mount-origin/favicon.ico" />
     <Image Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-sse/mount-origin/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-systemd-socketact/mount-origin/favicon.ico" />
     <Image Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-tls-80/mount-origin/favicon.ico" />
     <Image Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-tls-80/mount-origin/http2.png" />
     <Image Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-tls-mem/mount-origin/favicon.ico" />
@@ -1286,8 +1291,8 @@
     <Text Include="../../thirdparty/owemdjee/libwebsockets/READMEs/README.tls-sessions.md" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/READMEs/README.udp.md" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/READMEs/README.unix-domain-reverse-proxy.md" />
-    <Text Include="../../thirdparty/owemdjee/libwebsockets/READMEs/README.vulnerability-reporting.md" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/READMEs/mainpage.md" />
+    <Text Include="../../thirdparty/owemdjee/libwebsockets/SECURITY.md" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/bug_report.md" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/changelog" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/cmake/FindGit.cmake" />
@@ -1687,6 +1692,12 @@
     <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-sse/mount-origin/index.html" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-sse/mount-origin/libwebsockets.org-logo.svg" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-sse/mount-origin/strict-csp.svg" />
+    <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-systemd-socketact/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-systemd-socketact/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-systemd-socketact/mount-origin/404.html" />
+    <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-systemd-socketact/mount-origin/index.html" />
+    <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-systemd-socketact/mount-origin/libwebsockets.org-logo.svg" />
+    <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-systemd-socketact/mount-origin/strict-csp.svg" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-tls-80/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-tls-80/README.md" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/http-server/minimal-http-server-tls-80/localhost-100y.key" />
@@ -1757,6 +1768,8 @@
     <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/raw/minimal-raw-vhost/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/raw/minimal-raw-vhost/README.md" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/raw/minimal-raw-vhost/localhost-100y.key" />
+    <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/raw/minimal-raw-wol/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/raw/minimal-raw-wol/README.md" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/secure-streams/README.md" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/secure-streams/minimal-secure-streams-alexa/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libwebsockets/minimal-examples-lowlevel/secure-streams/minimal-secure-streams-alexa/README.md" />

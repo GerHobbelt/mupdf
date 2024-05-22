@@ -307,7 +307,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/parse_equal.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/parse_jobid.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/parse_stage.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/pbs_json.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/prepare_path.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/set_attr.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/set_resource.c" />
@@ -440,6 +439,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/tcp_dis.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/tm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/xml_encode_decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libjson/cJSON/pbs_cjson.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblicensing/license_client.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblog/chk_file_sec.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblog/log_event.c" />
@@ -806,6 +806,7 @@
     <Text Include="../../thirdparty/owemdjee/openpbs/m4/pbs_systemd_unitdir.m4" />
     <Text Include="../../thirdparty/owemdjee/openpbs/m4/pbs_version.m4" />
     <Text Include="../../thirdparty/owemdjee/openpbs/m4/security_check.m4" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/m4/with_cjson.m4" />
     <Text Include="../../thirdparty/owemdjee/openpbs/m4/with_core_limit.m4" />
     <Text Include="../../thirdparty/owemdjee/openpbs/m4/with_database_dir.m4" />
     <Text Include="../../thirdparty/owemdjee/openpbs/m4/with_database_port.m4" />
@@ -881,6 +882,8 @@
     <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdb/pgsql/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdb/pgsql/pbs_db_schema.sql" />
     <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libjson/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libjson/cJSON/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblicensing/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblog/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libnet/Makefile.am" />
@@ -1014,6 +1017,7 @@
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_acl_groups.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_acl_host_moms.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_acl_host_queue.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_acl_host_server.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_admin_suspend.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_allpart.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_alps_inventory_check_hook.py" />
@@ -1062,6 +1066,7 @@
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_modifyvnode_state_changes.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_perf_stat.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_postqueuejob.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_set_attr.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_set_interrupt.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_set_jobenv.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_set_nonexist.py" />
@@ -1205,6 +1210,7 @@
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/resilience/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/resilience/pbs_hook_alarm_large_multinode_job.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/security/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/security/pbs_command_injection.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_config_sched.py" />
     <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_cycles_test.py" />

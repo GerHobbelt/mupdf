@@ -226,6 +226,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/archive/ar_wrap.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/TestComdb2RLE/testcrle.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/add.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/attr.c" />
@@ -298,6 +299,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_recno.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_rsearch.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_snaprec.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_split.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_stat.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_upgrade.c" />
@@ -336,6 +338,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_remove.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_rename.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_ret.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_snaprec.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_truncate.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_upg.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_upg_opd.c" />
@@ -398,6 +401,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_stat.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_sync.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_trickle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_vcache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_versioned.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mutex/mut_fcntl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mutex/mut_pthread.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mutex/mut_tas.c" />
@@ -473,6 +478,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/autoanalyze.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/block_internal.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/bpfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/clienthost.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2_ruleset.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2uuid.c" />
@@ -483,6 +489,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/db_fingerprint.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/db_metrics.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/db_query_plan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/db_sample_queries.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/db_tunables.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/db_util.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/dbglog_iface.c" />
@@ -644,6 +651,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/net/net.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/net/net_evbuffer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/net/sqlwriter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/net/ssl_evbuffer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/net/testnet.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/net/trace.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/dbqueuedb/dbqueuedb.c" />
@@ -679,6 +687,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/activelocks.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/activeosqls.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/appsock_handlers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/auto_analyze_tables.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/blkseq.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/clientstats.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/cluster.c" />
@@ -688,6 +697,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/crons.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/ezsystables.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/fdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/files.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/fingerprints.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/functions.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/indexuse.c" />
@@ -709,15 +719,21 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/queues.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/repl_stats.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/repnetqueue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/sample_queries.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/schemaversions.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/schistory.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/scstatus.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/sqlclientstats.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/sqlpoolqueue.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/stacks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/stringrefs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/systables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/table_metrics.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/table_properties.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/tables.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/tablesizes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/tag_columns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/tags.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/temporary_file_sizes.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/threadpools.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/timepartitions.c" />
@@ -895,6 +911,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/client_datetime.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/close_old_connections.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/comdb2_blobtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/copy_db_files.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/crle.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/cson_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/deadlock_load.c" />
@@ -904,6 +921,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/foreigndbconfig.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/hatest.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/ins_upd_del.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/insblob.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/inscntdel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/insert.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/insert_lots_mt.cpp" />
@@ -936,9 +954,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/stepper.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/stepper_client.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/strbuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/test_consistent_hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/test_consistent_hash_bench.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/test_threadpool.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/testutil.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/updater.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/updblob.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/utf8.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/verify_atomics_work.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2_dump/cdb2_dump.c" />
@@ -953,9 +974,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2sockpool/settings.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2sql/cdb2sql.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/appsock.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/chksum.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/comdb2ar.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/db_wrap.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/deserialise.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/error.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/fdostream.cpp" />
@@ -964,6 +983,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/incr_manifest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/increment.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/logholder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/logmsg.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/lrlerror.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/repopnewlrl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/riia.cpp" />
@@ -982,6 +1002,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/comdb2_pthread_create.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/comdb2file.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/compat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/consistent_hash.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/ctrace.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/debug_switches.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/flibc.c" />
@@ -993,7 +1014,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/logmsg.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/memdup.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/misc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/nodemap.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/object_pool.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/parse_lsn.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/pb_alloc.c" />
@@ -1028,6 +1048,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/tohex.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/utilmisc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/walkback.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/archive/ar_glue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/archive/ar_page.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/archive/ar_wrap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/averager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/bb_inttypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/bb_oscompat.h" />
@@ -1047,6 +1070,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/comdb2_query_preparer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/comdb2_ruleset.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/compile_time_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/consistent_hash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/ctrace.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/debug_switches.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/dynschematypes.h" />
@@ -1072,7 +1096,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/marshal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/memdup.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/memory_sync.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/nodemap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/object_pool.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/plbitlib.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/plhash_glue.h" />
@@ -1124,6 +1147,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_queuedb.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_schemachange.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdbglue.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/compress.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/cursor_ll.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/genid.h" />
@@ -1204,6 +1228,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/autoanalyze.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/block_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/bpfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/clienthost.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2_dbinfo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2_queue.h" />
@@ -1345,6 +1370,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/net/net_int.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/net/net_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/net/sqlwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/net/ssl_evbuffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/newsql/newsql.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/reversesql/reversesql.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/protobuf/pb_alloc.h" />
@@ -1424,14 +1450,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2sockpool/cdb2sockpool.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2sockpool/settings.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/appsock.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/chksum.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/comdb2ar.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/db_page.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/db_wrap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/error.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/fdostream.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/file_info.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/glue.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/increment.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/logholder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/lrlerror.h" />
@@ -1558,6 +1580,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/PULL_REQUEST_TEMPLATE.md" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/README.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/archive/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/plhash.in" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/build_recfiles.sh" />
@@ -1616,6 +1639,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/src/main/java/com/bloomberg/comdb2/jdbc/Driver.java" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/src/main/java/com/bloomberg/comdb2/jdbc/HealthChecker.java" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/src/main/java/com/bloomberg/comdb2/jdbc/IO.java" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/src/main/java/com/bloomberg/comdb2/jdbc/IdentityCreator.java" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/src/main/java/com/bloomberg/comdb2/jdbc/NewSqlHeader.java" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/src/main/java/com/bloomberg/comdb2/jdbc/NoDbHostFoundException.java" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/src/main/java/com/bloomberg/comdb2/jdbc/ProtobufProtocol.java" />
@@ -1642,6 +1666,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/src/test/java/com/bloomberg/comdb2/jdbc/UnpooledDataSourceTest.java" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/src/test/java/com/bloomberg/comdb2/jdbc/VerifyRetryTest.java" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/src/test/java/com/bloomberg/comdb2/jdbc/WithAndGetAreReadTest.java" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cmake/FindArchive.cmake" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cmake/FindLZ4.cmake" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cmake/FindLibEvent.cmake" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cmake/FindProtobuf_C.cmake" />
@@ -1835,6 +1860,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/linearizable/ctest/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/lua/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/lua/configure_syssp_c.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/lua/default_consumer_v1.1.lua" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/lua/default_consumer_v1.lua" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lib/physrep_get_reverse_hosts.lua" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lib/physrep_keepalive.lua" />
@@ -1875,7 +1901,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sockpool/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/definitions.cmake" />
-    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/default_consumer_v1.h.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/default_consumer.h.in" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/in-operator.md" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/parse.y" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/shell.c.in" />
@@ -1918,6 +1944,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/analyze.test/t10_01.sh" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/analyze.test/t13.sh" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/analyze.test/t13.tool" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/analyze.test/t14.req.tool" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/analyze.test/t14.sh" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/analyze.test/t2.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/analyze.test/t3.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/analyze_exit.test/Makefile" />
@@ -2081,6 +2109,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/clientstats_leaks.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/close_old_connections.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/close_old_connections.test/lrl.options" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/comdb2_files.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/comdb2expert.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/comdb2expert.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/comdb2expert.test/dummy.csc2" />
@@ -2106,12 +2135,17 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/comdb2sys.test/t8.args" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/comdb2sys.test/t8.tool" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/comdb2sys.test/update.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/comdb2sys_sc_history.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/commit_delay_on_copy.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/commit_delay_on_copy.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/commit_delay_on_copy.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/commit_lsn_map.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/commit_lsn_map.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/concurrent_sql.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/consistent_hash.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/consistent_hash.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/consistent_hash_bench.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/consistent_hash_bench.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/constraints.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/constraints.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/constraints.test/fk.csc2" />
@@ -2139,6 +2173,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/consumer.test/t01.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/consumer.test/t02.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/consumer.test/t03.sql" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/consumer.test/t04.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/copyschema_timepart.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/copyschema_timepart.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/copyschema_timepart.test/clonedb.sh" />
@@ -2204,6 +2239,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/datetime.test/t20.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/datetime.test/t21.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/datetime.test/t22.sql" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/datetime.test/t23.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/datetime_mifid2.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/datetime_mifid2.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/datetime_mifid2.test/t1.csc2" />
@@ -2233,8 +2269,10 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ddl_csc2.test/t00_create_table.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ddl_csc2.test/t01_create_table.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ddl_csc2.test/t02_dbpad_check.sql" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ddl_csc2.test/t03_tags.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ddl_csc2.test/t1.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ddl_csc2.test/t2.csc2" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ddl_csc2.test/t3.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ddl_dryrun.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ddl_dryrun.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ddl_dryrun.test/lrl.options" />
@@ -2299,6 +2337,9 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/delfile_block.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/delfile_block.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/delfile_block.test/reproleak.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/diskspace_nollmeta.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/diskspace_nollmeta.test/lrl.options" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/diskspace_nollmeta.test/nostripe.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/docker/Dockerfile.install" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/dohsql_leaks.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/dohsql_leaks.test/lrl.options" />
@@ -2313,6 +2354,9 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/dohsql_race.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/downgrade.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/downgrade.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/downgrade_loop.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/downgrade_loop.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/downgrade_loop.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/drop_tblnum.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/drop_tblnum.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/drop_tblnum.test/t.csc2" />
@@ -2330,6 +2374,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/electbug.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/electbug.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/electbug.test/lrl.options" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/electbug2.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/electbug2.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/emit_timeout.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/enospc.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/enospc.test/README" />
@@ -2341,9 +2387,13 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/explain.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/explain.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/explain.test/lrl.options" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/fdb_compare.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/fdb_compare.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/fdb_compare.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/fdb_push.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/fdb_push.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/fdb_push.test/lrl.options" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/fdb_push.test/redirect.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/fdb_push.test/t.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/fdb_push.test/t2.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/fdb_push.test/test_fdb_push.sh" />
@@ -2364,6 +2414,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/func.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/func.test/t00_group_concat.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/func.test/t01_regexp.sql" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/func.test/t02_compress.sql" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/func.test/t03_compress_gzip.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/genid48.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/genid48.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/genid48snapisol.test/Makefile" />
@@ -2398,6 +2450,9 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/incoh_remsql.test/t1.insrecs" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/incoh_remsql.test/t2.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/incoh_remsql.test/t2.insrecs" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/incoherent_slow.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/incoherent_slow.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/incoherent_slow.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/incremental_backup.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/incremental_backup.test/load.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/incremental_backup.test/t1.csc2" />
@@ -2471,6 +2526,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/intervalds.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ioerror_remsql.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ioerror_remsql.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ioerror_remsql.test/fdbpush.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ioerror_remsql.test/fdbpushredirect.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ioerror_remsql.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ioerror_remsql.test/ordercounts.sh" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ioerror_remsql.test/remsql_curmoves.sh" />
@@ -2555,6 +2612,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/load_cache.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/load_remsql.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/load_remsql.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/load_remsql.test/fdbpush.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/load_remsql.test/fdbpushredirect.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/load_remsql.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/load_remsql.test/t.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/lock_maxid.test/Makefile" />
@@ -2612,6 +2671,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/mem_tracker.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/mismatch_class_remsql.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/mismatch_class_remsql.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/mismatch_class_remsql.test/fdbpush.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/mismatch_class_remsql.test/fdbpushredirect.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/mismatch_class_remsql.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/mismatch_class_remsql.test/remsql.sh" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/mismatch_class_remsql.test/t.csc2" />
@@ -2628,6 +2689,9 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/netloss.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/netloss.test/docker-compose.yml" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/netmem.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/newsi_on_master.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/newsi_on_master.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/newsi_on_master.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/newsi_temptables.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/newsi_temptables.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/newsqlreplay.test/Makefile" />
@@ -2644,12 +2708,20 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nextsequence.test/seqnonull.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nextsequence.test/seqnoseq.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nextsequence.test/seqshort.csc2" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nightmare_recovery.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nightmare_recovery.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nightmare_recovery.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nodeadlock_table.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nodeadlock_table.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nodeadlock_table.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nodeadlock_table.test/manystripes.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nodeadlock_table.test/noreorder.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nophyswrite.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nophyswrite.test/audit.csc2" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nophyswrite.test/audit.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nophyswrite.test/cons.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nophyswrite.test/dontignore.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nophyswrite.test/foraudit.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nophyswrite.test/register_replicant.lua" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/nowritetimeout.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/objpool.test/Makefile" />
@@ -2665,6 +2737,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/oflowaddrem.test/largerecs.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/oflowaddrem.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/oflowaddrem.test/t1.csc2" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/onconflict.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/onconflict.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/one_pass_delete_update.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/one_pass_delete_update.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/online_compaction.test/Makefile" />
@@ -2748,6 +2822,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep.test/generate_tests.sh" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep.test/register_replicant.lua" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep.test/t1.csc2" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep.test/via_comdb2_files.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep_tiered.test/1-create-table.src.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep_tiered.test/2-insert.query.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep_tiered.test/2-update.query.sql" />
@@ -2760,6 +2835,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep_tiered.test/alltypes_full.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep_tiered.test/generate_tests.sh" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep_tiered.test/lrl.options" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep_tiered.test/nosource.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep_tiered.test/register_replicant.lua" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep_tiered.test/t1.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/physrep_ignore_table.test/Makefile" />
@@ -2769,6 +2845,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/pmux.test/portmux.py" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/pmux.test/sqlite_file.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/pmux.test/sqlite_memory.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/pmux_secure_route.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/prefix_foreign_keys_rev.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/prefix_foreign_keys_rev.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/prefix_foreign_keys_rev.test/lrl.options" />
@@ -2807,6 +2884,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/qget_curtran.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queue_depth.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queue_depth.test/lrl.options" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_locks.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/dml_consumer.lua" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/foraudit.csc2" />
@@ -2971,6 +3049,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/register_linearizable.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/remsql.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/remsql.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/remsql.test/fdbpush.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/remsql.test/fdbpushredirect.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/remsql.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/remsql.test/t.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/renametable.test/Makefile" />
@@ -2998,6 +3078,9 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/reorder_updates.test/t2.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/rep_blocker.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/rep_blocker.test/lrl.options" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/rep_log_write.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/rep_log_write.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/rep_log_write.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/repeated_downgrades.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/repeated_downgrades.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/repeated_downgrades.test/lrl.options" />
@@ -3009,6 +3092,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/replay_history.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/replay_history.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/replay_history.test/lrl.options" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/replay_trans.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/replay_trans.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/repopulate_queues.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/repopulate_queues.test/twofiles.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/reqlog_fingerprints.test/Makefile" />
@@ -3054,6 +3139,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_add_vutf8.test/t1_2.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_addcolumn_remsql.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_addcolumn_remsql.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_addcolumn_remsql.test/fdbpush.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_addcolumn_remsql.test/fdbpushredirect.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_addcolumn_remsql.test/logicalsc.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_addcolumn_remsql.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_addcolumn_remsql.test/t1.csc2" />
@@ -3153,6 +3240,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_multitable.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_multitable.test/new.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_multitable.test/t.csc2" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_multitable.test/t2.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_newuniq.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_newuniq.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_newuniq.test/logicalsc.testopts" />
@@ -3189,6 +3277,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_remsql.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_remsql.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_remsql.test/fdbpush.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_remsql.test/fdbpushredirect.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_remsql.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_remsql.test/output.log.fdbpush" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_remsql.test/t.csc2" />
@@ -3206,6 +3295,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_resume.test/t1_1.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_resume.test/t1_2.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_resume.test/t1_3.csc2" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_resume.test/t2.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_swapfields.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_swapfields.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_swapfields.test/logicalsc.testopts" />
@@ -3296,6 +3386,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/schemalk.test/extralock.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/schemalk.test/logicalsc.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/schemalk.test/lrl.options" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/schemaversions.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/scindex.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/scindex.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/scindex.test/logicalsc.testopts" />
@@ -3523,6 +3614,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/silogdel.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/simple_remsql.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/simple_remsql.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/simple_remsql.test/fdbpush.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/simple_remsql.test/fdbpushredirect.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/simple_remsql.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/simple_remsql.test/ordercounts.sh" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/simple_remsql.test/remsql_curmoves.sh" />
@@ -3588,6 +3681,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/partial_index_off.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/t.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/t1.runstepper" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/t10.runstepper" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/t11.runstepper" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/t2.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/t2.fastinit" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/t3.fastinit" />
@@ -3598,8 +3693,11 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/t7.runstepper" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/t8.runstepper" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/t9.runstepper" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol_noblob.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sockpool_remsql.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sockpool_remsql.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sockpool_remsql.test/fdbpush.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sockpool_remsql.test/fdbpushredirect.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sockpool_remsql.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sockpool_remsql.test/t.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/socksql.test/Makefile" />
@@ -3615,6 +3713,7 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sorese_tran.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sorese_tran.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sorese_tran.test/t.csc2" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sorter_tmpdir_race.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/audit.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/audit.lua" />
@@ -3709,6 +3808,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ssl_prefer.test/nossl.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ssl_remsql.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ssl_remsql.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ssl_remsql.test/fdbpush.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ssl_remsql.test/fdbpushredirect.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ssl_remsql.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ssl_remsql.test/t.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ssl_remsql.test/test_ssl.sh" />
@@ -3729,6 +3830,9 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/strict_dbl_quotes.test/t02.req.args" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/strict_dbl_quotes.test/t02.req.tool" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/strict_dbl_quotes.test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/stringrefs.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/stringrefs.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/stringrefs.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/stripe_order_inserts.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/stripe_order_inserts.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/stripe_order_inserts.test/addrecs.lua" />
@@ -3761,6 +3865,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/temp_table_cursor_leak.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/temp_table_truncate_leak.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/temp_table_truncate_leak.test/lrl.options" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/temptable-truncate.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/temptable-truncate.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/testcase.mk" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/threadpool.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/threadpool.test/README" />
@@ -3868,6 +3974,9 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/waitmach.sh" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/write_prompt.sh" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/writesql.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tpcrash.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tpcrash.test/lrl.options" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/trangrace.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/trans.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/trans.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/trans.test/lrl.options" />
@@ -3887,6 +3996,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/transchunk_tablelocks.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/transchunk_tablelocks.test/t.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/trigger.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/trigger_lock_inversion.test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/trigger_lock_inversion.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/triggersc_latency.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/triggersc_latency.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/triggersc_latency.test/lrl.options" />
@@ -3912,6 +4023,8 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/typessql.test/t01.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/typessql.test/t02.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/typessql.test/t03.sql" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/typessql.test/t04.sql" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/typessql.test/t2.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/udf.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/udf.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ufid_recovery.test/Makefile" />
@@ -4005,14 +4118,19 @@
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/window.test/README" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/window.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/window.test/t00.sql" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/window.test/t01.sql" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql.test/fdbpush.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql.test/fdbpushredirect.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql.test/partial_index_off.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql.test/t.csc2" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql.test/test_writes.sh" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql_names.test/Makefile" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql_names.test/README" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql_names.test/fdbpush.testopts" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql_names.test/fdbpushredirect.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql_names.test/lrl.options" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql_names.test/negativerowid.testopts" />
     <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql_names.test/partial_index_off.testopts" />

@@ -5,4 +5,5 @@ also-ignore:
 	egl/
 	wayland/
 	x11/
+	ogc/
 	

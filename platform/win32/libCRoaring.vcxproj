@@ -240,8 +240,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/benchmarks/real_bitmaps_benchmark.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/benchmarks/real_bitmaps_contains_benchmark.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/benchmarks/run_container_benchmark.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CRoaring/benchmarks/sparse_cases_benchmark.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/microbenchmarks/bench.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/src/array_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CRoaring/src/art/art.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/src/bitset.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/src/bitset_util.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/src/containers/array.c" />
@@ -259,10 +261,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/src/isadetection.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/src/memory.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/src/roaring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CRoaring/src/roaring64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/src/roaring_array.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/src/roaring_priority_queue.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/add_offset.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/array_container_unit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/art_unit.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/bitset_container_unit.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/c_example1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/cbitset_unit.c" />
@@ -275,6 +279,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/format_portability_unit.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/mixed_container_unit.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/realdata_unit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/roaring64_serialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/roaring64_unit.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/robust_deserialization_unit.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/run_container_unit.c" />
     <ClCompile Include="../../thirdparty/owemdjee/CRoaring/tests/threads_unit.cpp" />
@@ -287,6 +293,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/CRoaring/cpp/roaring.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/CRoaring/cpp/roaring64map.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/CRoaring/include/roaring/array_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CRoaring/include/roaring/art/art.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CRoaring/include/roaring/bitset/bitset.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CRoaring/include/roaring/bitset_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CRoaring/include/roaring/containers/array.h" />
@@ -308,6 +315,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/CRoaring/include/roaring/misc/configreport.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CRoaring/include/roaring/portability.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CRoaring/include/roaring/roaring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CRoaring/include/roaring/roaring64.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CRoaring/include/roaring/roaring_array.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CRoaring/include/roaring/roaring_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CRoaring/include/roaring/roaring_version.h" />
@@ -2130,7 +2138,7 @@
     <Text Include="../../thirdparty/owemdjee/CRoaring/benchmarks/realdata/wikileaks-noquotes_srt/wikileaks-noquotes_srt.csv97.txt" />
     <Text Include="../../thirdparty/owemdjee/CRoaring/benchmarks/realdata/wikileaks-noquotes_srt/wikileaks-noquotes_srt.csv98.txt" />
     <Text Include="../../thirdparty/owemdjee/CRoaring/benchmarks/realdata/wikileaks-noquotes_srt/wikileaks-noquotes_srt.csv99.txt" />
-    <Text Include="../../thirdparty/owemdjee/CRoaring/cmake/import.cmake" />
+    <Text Include="../../thirdparty/owemdjee/CRoaring/cmake/CPM.cmake" />
     <Text Include="../../thirdparty/owemdjee/CRoaring/microbenchmarks/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/CRoaring/roaring.pc.in" />
     <Text Include="../../thirdparty/owemdjee/CRoaring/src/CMakeLists.txt" />
@@ -2146,6 +2154,7 @@
     <Text Include="../../thirdparty/owemdjee/CRoaring/tests/testdata/64mapsizetoosmall.bin" />
     <Text Include="../../thirdparty/owemdjee/CRoaring/tests/testdata/64mapspreadvals.bin" />
     <Text Include="../../thirdparty/owemdjee/CRoaring/tests/testdata/README.md" />
+    <Text Include="../../thirdparty/owemdjee/CRoaring/tests/testdata/addoffsetinput.bin" />
     <Text Include="../../thirdparty/owemdjee/CRoaring/tests/testdata/bitmapwithoutruns.bin" />
     <Text Include="../../thirdparty/owemdjee/CRoaring/tests/testdata/bitmapwithruns.bin" />
     <Text Include="../../thirdparty/owemdjee/CRoaring/tests/testdata/crashproneinput1.bin" />
@@ -2165,6 +2174,7 @@
     <Text Include="../../thirdparty/owemdjee/CRoaring/tools/prepare_doxygen.sh" />
     <Text Include="../../thirdparty/owemdjee/CRoaring/tools/prereleasetests.sh" />
     <Text Include="../../thirdparty/owemdjee/CRoaring/tools/release.py" />
+    <Text Include="../../thirdparty/owemdjee/CRoaring/tools/run-clangcldocker.sh" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

@@ -351,6 +351,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/docs/examples/folly/Format.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/docs/examples/folly/Function.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/docs/examples/folly/Likely.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/folly/folly/docs/examples/folly/MapUtil.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/docs/examples/folly/ScopeGuard.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/docs/examples/folly/ScopeGuard2.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/docs/examples/folly/ScopedEventBaseThread.cpp" />
@@ -434,13 +435,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/bser/Dump.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/bser/Load.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/bser/test/BserTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/RateLimiter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/MaxConcurrentRateLimiter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/detail/test/AtomicQueueTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/detail/test/PointerVariantTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/test/ChannelProcessorTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/test/ChannelTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/test/FanoutChannelTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/test/FanoutSenderTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/test/MaxConcurrentRateLimiterTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/test/MergeChannelTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/test/MergeTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/test/MultiplexChannelTest.cpp" />
@@ -526,6 +528,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/IoUringBackend.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/IoUringEvent.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/IoUringEventBaseLocal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/MuxIOThreadPoolExecutor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/SimpleAsyncIO.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/test/AsyncBaseTestLib.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/test/AsyncIOTest.cpp" />
@@ -541,6 +544,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/test/IoUringEventBaseLocalTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/test/IoUringEventTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/test/IoUringTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/test/MuxIOThreadPoolExecutorTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/test/RegisteredFdBenchmark.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/test/SimpleAsyncIOTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/experimental/io/tool/HugePageUtil.cpp" />
@@ -1119,6 +1123,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/test/ExceptionWrapperBenchmark.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/test/ExceptionWrapperTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/test/ExecutorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/folly/folly/test/ExpectedCoroutinesBench.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/test/ExpectedCoroutinesTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/test/ExpectedTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/folly/folly/test/FBStringBenchmark.cpp" />
@@ -1550,6 +1555,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/FanoutChannel.h" />
     <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/FanoutSender-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/FanoutSender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/MaxConcurrentRateLimiter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/Merge-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/Merge.h" />
     <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/channels/MergeChannel-inl.h" />
@@ -1656,6 +1662,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/io/IoUringEvent.h" />
     <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/io/IoUringEventBaseLocal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/io/Liburing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/io/MuxIOThreadPoolExecutor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/io/SimpleAsyncIO.h" />
     <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/io/test/AsyncBaseTestLib.h" />
     <ClInclude Include="../../thirdparty/owemdjee/folly/folly/experimental/io/test/IoTestTempFileUtil.h" />
@@ -2206,6 +2213,7 @@
     <Text Include="../../thirdparty/owemdjee/folly/build/fbcode_builder/CMake/FindGMock.cmake" />
     <Text Include="../../thirdparty/owemdjee/folly/build/fbcode_builder/CMake/FindGflags.cmake" />
     <Text Include="../../thirdparty/owemdjee/folly/build/fbcode_builder/CMake/FindGlog.cmake" />
+    <Text Include="../../thirdparty/owemdjee/folly/build/fbcode_builder/CMake/FindLMDB.cmake" />
     <Text Include="../../thirdparty/owemdjee/folly/build/fbcode_builder/CMake/FindLibEvent.cmake" />
     <Text Include="../../thirdparty/owemdjee/folly/build/fbcode_builder/CMake/FindLibUnwind.cmake" />
     <Text Include="../../thirdparty/owemdjee/folly/build/fbcode_builder/CMake/FindPCRE.cmake" />

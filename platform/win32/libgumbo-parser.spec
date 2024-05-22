@@ -4,4 +4,5 @@ also-ignore:
 	/tests/
 	/benchmarks/
 	/tools/
+	/tmp/
 	

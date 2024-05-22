@@ -285,6 +285,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libdip/dependencies/libjpeg/jquant1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/dependencies/libjpeg/jquant2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/dependencies/libjpeg/jutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/dependencies/libspng/spng/spng.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/dependencies/libtiff/libtiff/mkg3states.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/dependencies/libtiff/libtiff/mkspans.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/dependencies/libtiff/libtiff/tif_aux.c" />
@@ -446,6 +447,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/file_io/ics.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/file_io/jpeg.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/file_io/npy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/file_io/png.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/file_io/tiff_read.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/file_io/tiff_write.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/generation/coordinates.cpp" />
@@ -471,6 +473,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/datatype.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/framework.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/framework_full.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/framework_projection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/framework_scan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/framework_separable.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/graph.cpp" />
@@ -559,6 +562,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/support/numeric.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/support/thin_plate_spline.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/transform/dft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/transform/dft_optimal_size.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/transform/fourier.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/transform/haar.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/transform/riesz.cpp" />
@@ -901,6 +905,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/libjpeg/jpegint.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/libjpeg/jpeglib.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/libjpeg/jversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/libspng/spng/spng.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/libtiff/libtiff/t4.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/libtiff/libtiff/tif_dir.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/libtiff/libtiff/tif_fax3.h" />
@@ -925,10 +930,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/detail/type_caster_base.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/detail/typeid.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/eigen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/eigen/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/eigen/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/eigen/tensor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/embed.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/eval.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/functional.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/gil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/gil_safe_call_once.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/iostream.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/numpy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/operators.h" />
@@ -938,6 +947,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/stl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/stl/filesystem.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/stl_bind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/type_caster_pyobject_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/include/pybind11/typing.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/zlib/crc32.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/zlib/deflate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/dependencies/zlib/gzguts.h" />
@@ -1051,11 +1062,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/rgb.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/wavelength.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/xyz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/ycbcr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/deconvolution/common_deconv_utility.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/distance/separable_dt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/file_io/file_io_support.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/generation/draw_support.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/geometry/interpolation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/library/framework_support.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_aspect_ratio_feret.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_bending_energy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_cartesian_box.h" />
@@ -1135,6 +1148,8 @@
     <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.3.0.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.4.0.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.4.1.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.4.2.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.4.3.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_next.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/changelogs/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/libdip/changelogs/template.md" />
@@ -1148,6 +1163,11 @@
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/libics/TODO" />
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/libjpeg/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/libjpeg/README" />
+    <Text Include="../../thirdparty/owemdjee/libdip/dependencies/libspng/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/dependencies/libspng/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/dependencies/libspng/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libdip/dependencies/libspng/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/dependencies/libspng/SECURITY.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/libtiff/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/libtiff/libtiff/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/libtiff/libtiff/tif_config.h.cmake.in" />
@@ -1159,6 +1179,7 @@
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/MANIFEST.in" />
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/SECURITY.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/noxfile.py" />
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/pybind11/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/pybind11/__main__.py" />
@@ -1187,7 +1208,7 @@
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/pybind11/tools/setup_main.py.in" />
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/zlib/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libdip/dependencies/zlib/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/dependencies/zlib/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/libdip/dependencies/zlib/zconf.h.cmakein" />
     <Text Include="../../thirdparty/owemdjee/libdip/dipimage/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libdip/dipimage/DIPimageViewer_Mfiles.cmake" />
@@ -1285,6 +1306,8 @@
     <Text Include="../../thirdparty/owemdjee/libdip/pydip/src/PyDIP_py.py" />
     <Text Include="../../thirdparty/owemdjee/libdip/pydip/src/__init__.py.in" />
     <Text Include="../../thirdparty/owemdjee/libdip/pydip/src/__main__.py" />
+    <Text Include="../../thirdparty/owemdjee/libdip/pydip/src/dipview.py" />
+    <Text Include="../../thirdparty/owemdjee/libdip/pydip/src/javaio.py" />
     <Text Include="../../thirdparty/owemdjee/libdip/pydip/src/loadjvm.py" />
     <Text Include="../../thirdparty/owemdjee/libdip/pydip/test/basics.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/pydip/test/filtering.md" />
@@ -1301,15 +1324,14 @@
     <Text Include="../../thirdparty/owemdjee/libdip/tools/FindMatlab.cmake" />
     <Text Include="../../thirdparty/owemdjee/libdip/tools/build/cmake_windows_2017a.bat" />
     <Text Include="../../thirdparty/owemdjee/libdip/tools/build/cmake_windows_2018b.bat" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/build/deploy_linux.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/build/deploy_macos.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/build/deploy_windows.bat" />
     <Text Include="../../thirdparty/owemdjee/libdip/tools/build/dip3.nsi" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/build/manylinux.sh" />
     <Text Include="../../thirdparty/owemdjee/libdip/tools/compiler_flags.cmake" />
     <Text Include="../../thirdparty/owemdjee/libdip/tools/count_lines.sh" />
     <Text Include="../../thirdparty/owemdjee/libdip/tools/generate_tiff_tests.sh" />
-    <Text Include="../../thirdparty/owemdjee/libdip/tools/travis/deploy_linux.sh" />
-    <Text Include="../../thirdparty/owemdjee/libdip/tools/travis/deploy_macos.sh" />
-    <Text Include="../../thirdparty/owemdjee/libdip/tools/travis/deploy_macos_m1.sh" />
-    <Text Include="../../thirdparty/owemdjee/libdip/tools/travis/deploy_windows.bat" />
-    <Text Include="../../thirdparty/owemdjee/libdip/tools/travis/manylinux.sh" />
     <Text Include="../../thirdparty/owemdjee/libdip/tools/update_deps_file.cmake" />
     <Text Include="../../thirdparty/owemdjee/libdip/viewer/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libdip/viewer/DIPviewer_sources.cmake" />

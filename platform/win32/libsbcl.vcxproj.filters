@@ -653,6 +653,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/os-provides-poll-test.c">
       <Filter>Source Files\tools-for-build</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/os-provides-posix-spawn-test.c">
+      <Filter>Source Files\tools-for-build</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/os-provides-suseconds-t-test.c">
       <Filter>Source Files\tools-for-build</Filter>
     </ClCompile>
@@ -732,9 +735,6 @@
       <Filter>Header Files\src\runtime</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/sbcl/src/runtime/darwin-os.h">
-      <Filter>Header Files\src\runtime</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/sbcl/src/runtime/dynbind.h">
       <Filter>Header Files\src\runtime</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/sbcl/src/runtime/forwarding-ptr.inc">
@@ -1037,6 +1037,9 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/grab-mutex.lisp">
       <Filter>Misc Files\benchmarks</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/grab-mutex2.lisp">
+      <Filter>Misc Files\benchmarks</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/slot-value.lisp">
       <Filter>Misc Files\benchmarks</Filter>
     </Text>
@@ -1044,6 +1047,9 @@
       <Filter>Misc Files\benchmarks</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/binary-distribution.sh">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/build-all-cores.sh">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/build-comparison.sh">
@@ -1384,6 +1390,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/contrib/sb-mpfr/tests.lisp">
       <Filter>Misc Files\contrib\sb-mpfr</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/contrib/sb-perf/Makefile">
+      <Filter>Misc Files\contrib\sb-perf</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/contrib/sb-perf/README.md">
       <Filter>Misc Files\contrib\sb-perf</Filter>
@@ -1748,7 +1757,10 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/arm/stuff-groveled-from-headers.lisp">
       <Filter>Misc Files\crossbuild-runner\backends\arm</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/arm64/stuff-groveled-from-headers.lisp">
+    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/arm64/darwin-headers.lisp">
+      <Filter>Misc Files\crossbuild-runner\backends\arm64</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/arm64/linux-headers.lisp">
       <Filter>Misc Files\crossbuild-runner\backends\arm64</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/mips/stuff-groveled-from-headers.lisp">
@@ -1766,14 +1778,17 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/sparc/stuff-groveled-from-headers.lisp">
       <Filter>Misc Files\crossbuild-runner\backends\sparc</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/x86-64/stuff-groveled-from-headers.lisp">
+    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/x86-64/posix-headers.lisp">
       <Filter>Misc Files\crossbuild-runner\backends\x86-64</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/x86/stuff-groveled-from-headers.lisp">
+    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/x86-64/win32-headers.lisp">
+      <Filter>Misc Files\crossbuild-runner\backends\x86-64</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/x86/posix-headers.lisp">
       <Filter>Misc Files\crossbuild-runner\backends\x86</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/build-all.sh">
-      <Filter>Misc Files\crossbuild-runner</Filter>
+    <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/backends/x86/win32-headers.lisp">
+      <Filter>Misc Files\crossbuild-runner\backends\x86</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/crossbuild-runner/pass-1.lisp">
       <Filter>Misc Files\crossbuild-runner</Filter>
@@ -2070,9 +2085,6 @@
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/loader.lisp">
-      <Filter>Misc Files</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/sbcl/make-all-targets.sh">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/make-android.sh">
@@ -2414,6 +2426,9 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-early.lisp">
       <Filter>Misc Files\src\code</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-float-reader.lisp">
+      <Filter>Misc Files\src\code</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-float.lisp">
       <Filter>Misc Files\src\code</Filter>
     </Text>
@@ -2424,6 +2439,9 @@
       <Filter>Misc Files\src\code</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-modular.lisp">
+      <Filter>Misc Files\src\code</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-sxhash.lisp">
       <Filter>Misc Files\src\code</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/cross-type.lisp">
@@ -2487,9 +2505,6 @@
       <Filter>Misc Files\src\code</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/early-extensions.lisp">
-      <Filter>Misc Files\src\code</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/sbcl/src/code/early-float.lisp">
       <Filter>Misc Files\src\code</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/early-full-eval.lisp">
@@ -2577,9 +2592,6 @@
       <Filter>Misc Files\src\code</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/final.lisp">
-      <Filter>Misc Files\src\code</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/sbcl/src/code/float-inf-nan.lisp">
       <Filter>Misc Files\src\code</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/float-trap.lisp">
@@ -2877,6 +2889,9 @@
       <Filter>Misc Files\src\code</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/target-extensions.lisp">
+      <Filter>Misc Files\src\code</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/src/code/target-float.lisp">
       <Filter>Misc Files\src\code</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/target-format.lisp">
@@ -3339,6 +3354,9 @@
       <Filter>Misc Files\src\compiler\generic</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/generic/sanctify.lisp">
+      <Filter>Misc Files\src\compiler\generic</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/generic/static-syms.lisp">
       <Filter>Misc Files\src\compiler\generic</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/generic/type-error.lisp">
@@ -4457,6 +4475,9 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/character.pure.lisp">
       <Filter>Misc Files\tests</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/checkheap.test.sh">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/chill.test.sh">
       <Filter>Misc Files\tests</Filter>
     </Text>
@@ -4482,6 +4503,9 @@
       <Filter>Misc Files\tests</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-interrupts.impure.lisp">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-method-combination-caches.pure.lisp">
       <Filter>Misc Files\tests</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-method-combination-redefinition.impure.lisp">
@@ -4751,6 +4775,9 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/external-format.pure.lisp">
       <Filter>Misc Files\tests</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/fast-assoc.pure.lisp">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/fast-eval.impure.lisp">
       <Filter>Misc Files\tests</Filter>
     </Text>
@@ -4839,6 +4866,9 @@
       <Filter>Misc Files\tests</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/gcd.pure.lisp">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/gengc-barrier.pure.lisp">
       <Filter>Misc Files\tests</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/genheaders.test.sh">
@@ -4950,6 +4980,9 @@
       <Filter>Misc Files\tests</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/join-thread-timeout.impure.lisp">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/jump-table.pure.lisp">
       <Filter>Misc Files\tests</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/kill-non-lisp-thread.impure.lisp">
@@ -5169,6 +5202,9 @@
       <Filter>Misc Files\tests</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/packed-varints.pure.lisp">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/parallel-exec.lisp">
       <Filter>Misc Files\tests</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/parallel-exec.sh">
@@ -5681,19 +5717,22 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tools-for-build/ucd.lisp">
       <Filter>Misc Files\tools-for-build</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/tools-for-build/unicode-phash.lisp-expr">
+      <Filter>Misc Files\tools-for-build</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/tools-for-build/update-unicode-datafiles.sh">
       <Filter>Misc Files\tools-for-build</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/tools-for-build/wxs.lisp">
       <Filter>Misc Files\tools-for-build</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/sbcl/validate-float.lisp">
+      <Filter>Misc Files</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/verify-header-parsing.sh">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/wc.sh">
-      <Filter>Misc Files</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/sbcl/xfloat-math.lisp-expr">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/sbcl/xperfecthash30.lisp-expr">

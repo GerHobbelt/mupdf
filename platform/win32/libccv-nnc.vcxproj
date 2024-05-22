@@ -303,6 +303,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/ccv_cnnp_model.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/ccv_cnnp_model_addons.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/ccv_cnnp_model_core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/ccv_cnnp_model_gradient_checkpointing.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/ccv_cnnp_model_io.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/ccv_nnc_cmd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/ccv_nnc_dynamic_graph.c" />
@@ -341,6 +342,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/adam/ccv_nnc_adamw_cpu_ref.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/blas/ccv_nnc_add_cpu_ref.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/blas/ccv_nnc_blas.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/blas/ccv_nnc_cmul_cpu_ref.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/blas/ccv_nnc_gemm_cpu_opt.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/blas/ccv_nnc_gemm_cpu_ref.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/blas/ccv_nnc_mul_cpu_ref.c" />
@@ -354,6 +356,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/compression/ccv_nnc_lssc_cpu_ref.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/convolution/ccv_nnc_conv_cpu_opt.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/convolution/ccv_nnc_conv_cpu_ref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/convolution/ccv_nnc_conv_transpose_cpu_ref.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/convolution/ccv_nnc_convolution.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/convolution/cpu_opt/_ccv_nnc_conv_cpu_4x4_3x3_winograd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/convolution/cpu_opt/_ccv_nnc_conv_cpu_fft.c" />
@@ -389,6 +392,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/norm/ccv_nnc_group_norm_cpu_ref.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/norm/ccv_nnc_layer_norm_cpu_ref.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/norm/ccv_nnc_norm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/norm/ccv_nnc_rmsnorm_cpu_ref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/pad/ccv_nnc_pad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/pad/ccv_nnc_pad_cpu_ref.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/pool/ccv_nnc_avg_pool_cpu_ref.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/pool/ccv_nnc_max_pool_cpu_ref.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/cmd/pool/ccv_nnc_pool.c" />
@@ -436,9 +442,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_adam.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_attention.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_cmul.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_depalettize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_error.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_gemm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_gemv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_normalization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/serve/async.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/serve/bbf.c" />
@@ -480,6 +488,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/int/nnc/mpsdnn.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/int/nnc/nccl.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/int/nnc/nms.tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/int/nnc/pad.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/int/nnc/palettize.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/int/nnc/parallel.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/int/nnc/random.tests.c" />
@@ -513,6 +522,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/cblas.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/cnnp.core.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/compare.tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/complex.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/compression.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/concat.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/crossentropy.tests.c" />
@@ -536,10 +546,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/minimize.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/nms.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/numa.tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/pad.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/palettize.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/parallel.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/rand.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/reduce.tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/rmsnorm.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/roi_align.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/simplify.tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/nnc/smooth_l1.tests.c" />
@@ -600,10 +612,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_adam.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_attention.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_cmul.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_defines.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_depalettize.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_error.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_gemm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_gemv.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_hash.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/ccv_nnc_mfa_normalization.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ccv-nnc/lib/nnc/mfa/libmfa.inc" />
@@ -822,6 +836,10 @@
     <Text Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/data/blackbox.canny.bin" />
     <Text Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/data/chessbox.decimal.slice.bin" />
+    <Text Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/data/chessbox.dilate_3x3.bin" />
+    <Text Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/data/chessbox.dilate_5x5.bin" />
+    <Text Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/data/chessbox.erode_3x3.bin" />
+    <Text Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/data/chessbox.erode_5x5.bin" />
     <Text Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/data/chessbox.flip_x.bin" />
     <Text Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/data/chessbox.flip_xy.bin" />
     <Text Include="../../thirdparty/owemdjee/ccv-nnc/test/unit/data/chessbox.flip_y.bin" />

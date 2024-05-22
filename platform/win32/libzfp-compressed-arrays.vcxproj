@@ -621,17 +621,17 @@
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/docs/source/references.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/docs/source/serialization.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/docs/source/views.inc" />
-    <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/examples/array2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/examples/array2d.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/array.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/array.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/array1.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/array2.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/array3.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/array4.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/bitstream.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/cfp.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/codec/generic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/codec/gencodec.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/codec/zfpcodec.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/constarray1.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/constarray2.hpp" />
@@ -645,7 +645,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/array/cache3.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/array/cache4.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/array/exception.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/array/genheader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/array/handle1.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/array/handle2.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/array/handle3.hpp" />
@@ -674,7 +673,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/array/view2.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/array/view3.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/array/view4.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/array/zfpheader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/cfp/array1d.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/cfp/array1f.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/cfp/array2d.h" />
@@ -684,6 +682,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/cfp/array4d.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/cfp/array4f.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/cfp/header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/codec/genheader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/codec/zfpheader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/zfp/inline.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/zfp/macros.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zfp-compressed-arrays/include/zfp/internal/zfp/system.h" />
@@ -783,6 +783,7 @@
     <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/codecov.yml" />
     <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/docs/Makefile" />
     <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/docs/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/docs/source/algorithm.rst" />
     <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/docs/source/arrays.rst" />
     <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/docs/source/bit-stream.rst" />
@@ -826,6 +827,7 @@
     <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/python/scikit-build-cmake/FindPythonExtensions.cmake" />
     <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/python/scikit-build-cmake/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/python/scikit-build-cmake/UseCython.cmake" />
+    <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/python/scikit-build-cmake/UsePythonExtensions.cmake" />
     <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/python/scikit-build-cmake/targetLinkLibrariesWithDynamicLookup.cmake" />
     <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/python/zfpy.pyx" />
     <Text Include="../../thirdparty/owemdjee/zfp-compressed-arrays/setup.py" />

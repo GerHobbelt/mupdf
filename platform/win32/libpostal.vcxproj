@@ -1,0 +1,1831 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF462F2C}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOSTAL;POSTAL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOSTAL;POSTAL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOSTAL;POSTAL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOSTAL;POSTAL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOSTAL;POSTAL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOSTAL;POSTAL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOSTAL;POSTAL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOSTAL;POSTAL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOSTAL;POSTAL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOSTAL;POSTAL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOSTAL;POSTAL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPOSTAL;POSTAL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/text/pynormalize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/text/pytokenize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/acronyms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/address_dictionary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/address_dictionary_builder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/address_expansion_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/address_parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/address_parser_cli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/address_parser_io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/address_parser_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/address_parser_train.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/averaged_perceptron.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/averaged_perceptron_tagger.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/averaged_perceptron_trainer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/bench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/bloom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/cartesian_product.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/cmp/cmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/crf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/crf_context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/crf_trainer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/crf_trainer_averaged_perceptron.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/dedupe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/double_metaphone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/expand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/features.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/file_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/float_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/ftrl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/gazetteer_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/geo_disambiguation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/geodb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/geodb_builder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/geohash/geohash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/geonames.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/graph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/graph_builder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/jaccard.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/json_encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/klib/drand48.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/language_classifier.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/language_classifier_cli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/language_classifier_io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/language_classifier_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/language_classifier_train.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/language_features.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/libpostal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/linenoise/linenoise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/logistic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/logistic_regression.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/logistic_regression_trainer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/minibatch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/msgpack_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/murmur/murmur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/near_dupe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/near_dupe_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/ngrams.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/normalize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/numex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/numex_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/numex_table_builder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/place.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/regularization.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/scanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/shuffle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/soft_tfidf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparkey/MurmurHash3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparkey/buf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparkey/endiantools.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparkey/hashalgorithms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparkey/hashheader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparkey/hashiter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparkey/hashreader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparkey/hashwriter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparkey/logheader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparkey/logreader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparkey/logwriter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparkey/returncodes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparkey/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparse_matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/sparse_matrix_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/stochastic_gradient_descent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/string_similarity.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/string_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/strndup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/tokens.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/transliterate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/transliteration_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/transliteration_scripts_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/transliteration_table_builder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/trie.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/trie_search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/trie_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/unicode_scripts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/unicode_scripts_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/utf8proc/utf8proc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/src/utf8proc/utf8proc_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/test/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/test/test_crf_context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/test/test_expand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/test/test_numex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/test/test_parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/test/test_string_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/test/test_transliterate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpostal/test/test_trie.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/acronyms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/address_dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/address_expansion_rule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/address_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/address_parser_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/averaged_perceptron.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/averaged_perceptron_tagger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/averaged_perceptron_trainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/bloom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/cartesian_product.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/cmp/cmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/collections.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/crf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/crf_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/crf_trainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/crf_trainer_averaged_perceptron.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/dedupe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/double_metaphone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/expand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/file_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/float_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/ftrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/gazetteers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/geo_disambiguation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/geodb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/geohash/geohash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/geonames.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/geonames_fields.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/graph_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/jaccard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/json_encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/klib/drand48.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/klib/khash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/klib/klist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/klib/ksort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/klib/kvec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/language_classifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/language_classifier_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/language_features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/libpostal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/libpostal_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/linenoise/linenoise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/log/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/logistic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/logistic_regression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/logistic_regression_trainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/minibatch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/msgpack_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/murmur/murmur.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/near_dupe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/ngrams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/normalize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/numex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/numex_rule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/place.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/postal_fields.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/regularization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/scanner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/shuffle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/soft_tfidf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/sparkey/MurmurHash3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/sparkey/buf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/sparkey/endiantools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/sparkey/hashalgorithms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/sparkey/hashheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/sparkey/hashiter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/sparkey/logheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/sparkey/sparkey-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/sparkey/sparkey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/sparkey/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/sparse_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/sparse_matrix_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/sse2neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/stochastic_gradient_descent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/string_similarity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/string_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/strndup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/tagger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/token_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/transliterate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/transliteration_rule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/trie.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/trie_search.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/trie_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/unicode_script_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/unicode_scripts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/utf8proc/utf8proc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/src/vector_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpostal/test/greatest.h" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/ISSUE_TEMPLATE.md" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/bootstrap.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/libpostal.def" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/libpostal.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/m4/ax_cblas.m4" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/bg.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/bs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/ca.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/cs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/da.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/de.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/el.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/en.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/es.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/et.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/eu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/fi.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/fr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/he.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/hr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/hu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/is.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/it.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/ja.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/ja_rm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/ko.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/ko_rm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/lt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/lv.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/nb.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/nl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/pl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/pt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/ro.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/ru.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/sk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/sl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/sr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/sv.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/tr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/uk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/zh.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/addresses/zh_pinyin.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/ad.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/ar.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/at.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/au.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/ax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/bd.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/be.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/bg.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/br.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/ca.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/ch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/cz.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/de.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/dk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/do.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/dz.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/es.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/fi.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/fo.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/fr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/gb.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/gt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/gu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/hr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/hu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/ie.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/im.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/in.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/is.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/it.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/je.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/jp.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/li.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/lk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/lt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/lu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/md.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/mp.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/mt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/mx.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/my.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/nl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/no.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/nz.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/ph.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/pk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/pl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/pr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/pt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/ro.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/ru.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/se.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/si.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/sk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/sm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/th.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/tr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/us.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/yt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/geonames/za.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/names/global.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/names/languages/de.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/names/languages/en.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/names/languages/es.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/names/languages/fr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/names/languages/ja.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ad.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ae.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/af.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ag.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ai.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/al.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/am.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ao.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ar.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/as.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/at.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/au.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/aw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/az.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ba.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bb.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bd.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/be.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bf.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bg.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bh.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bi.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bj.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bn.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bo.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bq.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/br.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bv.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/by.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/bz.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ca.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cc.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cd.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cf.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cg.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ci.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ck.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cn.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/co.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cv.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cx.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cy.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/cz.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/de.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/dj.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/dk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/dm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/do.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/dz.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ec.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ee.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/eg.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/er.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/es.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/et.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/fi.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/fj.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/fk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/fm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/fo.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/fr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ga.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gb.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gd.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ge.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gf.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gg.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gh.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gi.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gn.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gp.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gq.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/gy.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/hk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/hm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/hn.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/hr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ht.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/hu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/id.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ie.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/il.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/im.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/in.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/io.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/iq.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ir.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/is.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/it.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/je.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/jm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/jo.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/jp.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ke.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/kg.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/kh.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ki.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/km.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/kn.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/kp.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/kr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/kw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ky.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/kz.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/la.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/lb.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/lc.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/li.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/lk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/lr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ls.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/lt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/lu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/lv.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ly.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ma.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mc.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/md.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/me.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mf.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mg.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mh.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ml.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mn.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mo.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mp.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mq.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ms.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mv.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mx.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/my.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/mz.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/na.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/nc.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ne.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/nf.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ng.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ni.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/nl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/no.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/np.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/nr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/nu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/nz.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/om.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/pa.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/pe.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/pf.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/pg.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ph.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/pk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/pl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/pm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/pn.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/pr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ps.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/pt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/pw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/py.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/qa.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/re.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ro.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/rs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ru.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/rw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sa.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sb.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sc.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sd.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/se.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sg.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sh.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/si.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sj.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sn.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/so.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ss.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/st.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sv.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sx.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sy.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/sz.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/tc.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/td.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/tf.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/tg.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/th.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/tj.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/tk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/tl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/tm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/tn.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/to.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/tr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/tt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/tv.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/tw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/tz.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ua.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ug.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/um.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/us.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/uy.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/uz.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/va.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/vc.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ve.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/vg.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/vi.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/vn.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/vu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/wf.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ws.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/ye.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/yt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/za.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/zm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/boundaries/osm/zw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/af/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/af/concatenated_suffixes_inseparable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/af/concatenated_suffixes_separable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/af/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/af/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/af/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/af/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/af/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/af/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/all/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/all/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/all/given_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/all/people.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/all/surnames.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ar/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ar/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ar/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ast/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ast/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ast/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/az/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/az/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/az/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/az/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/az/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/be/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/be/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/be/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/be/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/be/house_numbers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/be/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/be/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/be/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/be/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bg/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/br/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/br/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/br/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/br/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/br/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/level_types_mezzanine.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/no_number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/bs/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/elisions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/given_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/level_types_mezzanine.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/level_types_sub_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/no_number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/postcodes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ca/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/house_numbers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cs/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cy/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cy/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cy/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cy/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cy/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cy/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/cy/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/academic_degrees.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/concatenated_suffixes_inseparable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/concatenated_suffixes_separable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/da/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/academic_degrees.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/company_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/concatenated_prefixes_separable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/concatenated_suffixes_inseparable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/concatenated_suffixes_separable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/house_numbers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/personal_suffixes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/toponyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/de/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/given_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/level_types_mezzanine.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/postcodes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/toponyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/el/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/academic_degrees.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/company_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/given_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/level_types_mezzanine.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/level_types_sub_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/no_number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/nulls.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/personal_suffixes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/street_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/toponyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/en/unit_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/academic_degrees.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/company_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/given_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/house_numbers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/level_types_mezzanine.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/level_types_sub_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/no_number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/personal_suffixes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/postcodes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/surnames.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/toponyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/es/unit_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/company_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/toponyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/et/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/no_number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/postcodes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/eu/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fa/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fa/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fa/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/concatenated_suffixes_separable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fi/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fil/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/company_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/elisions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/level_types_mezzanine.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/level_types_sub_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/no_number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/people.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/toponyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/fr/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ga/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ga/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ga/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ga/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ga/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ga/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gd/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gd/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gd/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gd/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gd/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gd/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gl/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gl/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gl/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gl/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gl/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gl/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gsw/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gsw/concatenated_suffixes_separable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/gsw/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/he/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/he/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/he/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/he/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/he/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/he/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/he/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/he/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hi/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/level_types_mezzanine.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/no_number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hr/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/level_types_mezzanine.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/hu/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/academic_degrees.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/company_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/toponyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/id/unit_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/concatenated_suffixes_inseparable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/is/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/academic_degrees.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/company_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/elisions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/no_number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/toponyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/it/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ja/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ja/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ja/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ja/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ja/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ja/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ja/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ja/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ja/postcodes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ja/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ja/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ka/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ka/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ka/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ka/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ka/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ko/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ko/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ko/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ko/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ko/postcodes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ko/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ko/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lb/concatenated_suffixes_separable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lb/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lt/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/lv/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ms/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ms/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ms/company_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ms/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ms/given_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ms/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ms/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ms/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ms/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ms/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ms/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ms/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ms/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/mt/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/mt/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/mt/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/mt/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/mt/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/mt/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/concatenated_suffixes_inseparable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/concatenated_suffixes_separable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nb/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/concatenated_suffixes_inseparable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/concatenated_suffixes_separable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/nl/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/oc/elisions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/oc/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/oc/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pap/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pap/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/academic_degrees.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/company_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/house_numbers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/personal_suffixes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/toponyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pl/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/company_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/elisions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/level_types_mezzanine.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/level_types_sub_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/no_number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/personal_suffixes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/postcodes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/toponyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/pt/unit_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/no_number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ro/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/company_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/house_numbers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/no_number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ru/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/si/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/si/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/si/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/house_numbers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/toponyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sk/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/no_number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sl/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sr/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/company_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/concatenated_suffixes_inseparable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/concatenated_suffixes_separable.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/synonyms.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/sv/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/th/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/th/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/level_types_mezzanine.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/tr/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/cross_streets.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/entrances.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/house_numbers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/level_types_basement.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/level_types_standalone.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/near.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/staircases.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/unit_directions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/uk/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/ur/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/vi/ambiguous_expansions.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/vi/personal_titles.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/vi/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/vi/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/vi/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/zh/building_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/zh/chains.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/zh/directionals.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/zh/level_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/zh/number.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/zh/place_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/zh/post_office.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/zh/postcodes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/zh/qualifiers.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/zh/stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/zh/street_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/dictionaries/zh/unit_types_numbered.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/formatting/global.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/neighborhoods/click_that_hood.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/be.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/bg.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/bs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/ca.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/cs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/cy.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/da.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/de.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/el.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/en.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/es.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/et.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/eu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/fi.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/fr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/ga.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/hr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/hu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/is.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/it.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/ja.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/ko.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/la.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/lt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/lv.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/mt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/nb.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/nl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/pl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/pt.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/ro.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/ru.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/sk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/sl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/sr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/sv.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/tr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/uk.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/numex/zh.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/parser/data_sets/openaddresses.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/parser/data_sets/osm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/parser/default.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/places/countries/global.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/postal_codes/config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/states/au.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/states/br.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/states/ca.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/states/ch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/states/mx.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/resources/states/us.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/address_expansions/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/address_expansions/abbreviations.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/address_expansions/address_dictionaries.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/address_expansions/equivalence.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/address_expansions/gazetteers.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/address_formatting/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/address_formatting/aliases.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/address_formatting/formatter.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/blocks.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/components.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/config.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/conjunctions.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/conscription_numbers.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/dependencies.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/directions.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/entrances.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/floors.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/house_numbers.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/metro_stations.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/numbering.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/po_boxes.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/postcodes.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/staircases.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/addresses/units.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/boundaries/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/boundaries/names.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/categories/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/categories/config.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/categories/preposition.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/categories/query.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/categories/scrape_nominatim_special_phrases.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/chains/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/chains/chains.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/chains/chains_tsv.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/chains/query.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/configs/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/configs/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/coordinates/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/coordinates/conversion.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/countries/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/countries/constants.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/countries/names.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/csv_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/distance/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/distance/haversine.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/encoding.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/enum.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/file_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/geonames/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/geonames/create_geonames_tsv.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/geonames/db.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/geonames/geonames_sqlite.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/geonames/paths.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/geoplanet/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/geoplanet/cleanup_geoplanet_db.sql" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/geoplanet/create_geoplanet_db.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/geoplanet/geoplanet_training_data.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/graph/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/graph/scc.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/graph/topsort.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/i18n/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/i18n/cldr_languages.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/i18n/download_cldr.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/i18n/google.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/i18n/languages.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/i18n/normalize.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/i18n/scanner.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/i18n/transliteration_rules.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/i18n/unicode_data.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/i18n/unicode_paths.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/i18n/unicode_properties.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/i18n/word_breaks.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/intersections/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/intersections/query.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/language_id/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/language_id/create_language_training_data.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/language_id/disambiguation.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/language_id/sample.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/log.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/math/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/math/floats.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/math/sampling.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/metro_stations/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/metro_stations/reverse_geocode.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/names/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/names/deduping.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/names/normalization.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/names/similarity.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/neighborhoods/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/neighborhoods/reverse_geocode.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/numbers/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/numbers/numex.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/numbers/ordinals.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/numbers/spellout.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/openaddresses/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/openaddresses/config.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/openaddresses/download_openaddresses.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/openaddresses/formatter.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/openaddresses/openaddresses_training_data.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/openaddresses_uk/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/openaddresses_uk/download_openaddresses_uk.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/openaddresses_uk/openaddresses_uk_training_data.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/osm/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/osm/admin_boundaries.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/osm/components.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/osm/definitions.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/osm/extract.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/osm/fetch_osm_address_data.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/osm/formatter.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/osm/intersections.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/osm/osm_address_training_data.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/phrases/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/phrases/extract_phrases.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/phrases/extraction.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/places/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/places/config.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/places/reverse_geocode.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/points/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/points/index.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/polygons/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/polygons/area.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/polygons/index.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/polygons/language_polys.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/polygons/reverse_geocode.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/postal_codes/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/postal_codes/config.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/postal_codes/phrases.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/postal_codes/validation.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/quattroshapes/download_quattroshapes.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/states/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/states/state_abbreviations.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/statistics/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/statistics/tf_idf.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/string_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/tests/test_address_configs.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/tests/test_disambiguation.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/text/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/text/normalize.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/text/phrases.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/text/token_types.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/text/tokenize.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/text/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/whosonfirst/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/whosonfirst/client.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/whosonfirst/crawl.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/geodata/whosonfirst/download_wof_postal_codes.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/requirements-simple.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/scripts/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/src/libpostal_data.in" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/src/sparkey/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/src/sparkey/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libpostal/windows/configure.ac" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

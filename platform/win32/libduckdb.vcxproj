@@ -781,6 +781,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/execution/operator/csv_scanner/util/csv_reader_options.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/execution/operator/filter/physical_filter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/execution/operator/helper/physical_batch_collector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/execution/operator/helper/physical_buffered_collector.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/execution/operator/helper/physical_create_secret.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/execution/operator/helper/physical_execute.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/execution/operator/helper/physical_explain_analyze.cpp" />
@@ -979,8 +980,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/checkpoint.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/copy_csv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/glob.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/pragma_detailed_profiling_output.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/pragma_last_profiling_output.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/range.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/read_csv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/read_file.cpp" />
@@ -996,6 +995,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/system/duckdb_functions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/system/duckdb_indexes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/system/duckdb_keywords.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/system/duckdb_memory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/system/duckdb_optimizers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/system/duckdb_schemas.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/table/system/duckdb_secrets.cpp" />
@@ -1022,6 +1022,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/function/udf_function.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/main/appender.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/main/attached_database.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/main/buffered_data/simple_buffered_data.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/main/capi/appender-c.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/main/capi/arrow-c.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/main/capi/cast/from_decimal-c.cpp" />
@@ -1234,6 +1235,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/parsed_data/alter_table_function_info.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/parsed_data/alter_table_info.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/parsed_data/attach_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/parsed_data/comment_on_info.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/parsed_data/create_aggregate_function_info.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/parsed_data/create_collation_info.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/parsed_data/create_copy_function_info.cpp" />
@@ -1329,6 +1331,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/transform/statement/transform_attach.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/transform/statement/transform_call.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/transform/statement/transform_checkpoint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/transform/statement/transform_comment_on.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/transform/statement/transform_copy.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/transform/statement/transform_copy_database.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/parser/transform/statement/transform_create_function.cpp" />
@@ -1541,6 +1544,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/planner/subquery/flatten_dependent_join.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/planner/subquery/has_correlated_expressions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/planner/subquery/rewrite_correlated_expressions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/planner/subquery/rewrite_cte_scan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/planner/table_binding.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/planner/table_filter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/storage/arena_allocator.cpp" />
@@ -1841,7 +1845,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/src/python_udf.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/src/typing/pytype.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/src/typing/typing.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise/highlighting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise/history.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise/linenoise-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise/linenoise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise/rendering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise/terminal.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/tools/shell/shell.c" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/tools/sqlite3_api_wrapper/shell_extension.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/tools/sqlite3_api_wrapper/sqlite3/os_win.c" />
@@ -2258,6 +2267,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/common/enums/join_type.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/common/enums/joinref_type.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/common/enums/logical_operator_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/common/enums/memory_tag.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/common/enums/on_create_conflict.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/common/enums/on_entry_not_found.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/common/enums/operator_result_type.hpp" />
@@ -2545,6 +2555,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/execution/operator/csv_scanner/util/csv_error.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/execution/operator/filter/physical_filter.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/execution/operator/helper/physical_batch_collector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/execution/operator/helper/physical_buffered_collector.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/execution/operator/helper/physical_create_secret.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/execution/operator/helper/physical_execute.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/execution/operator/helper/physical_explain_analyze.hpp" />
@@ -2667,6 +2678,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/function/udf_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/appender.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/attached_database.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/buffered_data/buffered_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/buffered_data/simple_buffered_data.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/capi/capi_internal.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/capi/cast/from_decimal.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/capi/cast/generic.hpp" />
@@ -2677,6 +2690,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/client_config.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/client_context.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/client_context_file_opener.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/client_context_state.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/client_data.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/client_properties.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/main/config.hpp" />
@@ -2842,6 +2856,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/parser/parsed_data/alter_table_info.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/parser/parsed_data/attach_info.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/parser/parsed_data/bound_pragma_info.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/parser/parsed_data/comment_on_info.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/parser/parsed_data/copy_info.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/parser/parsed_data/create_aggregate_function_info.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/parser/parsed_data/create_collation_info.hpp" />
@@ -3054,6 +3069,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/planner/subquery/has_correlated_expressions.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/planner/subquery/recursive_dependent_join_planner.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/planner/subquery/rewrite_correlated_expressions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/planner/subquery/rewrite_cte_scan.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/planner/table_binding.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/planner/table_filter.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/planner/tableref/bound_basetableref.hpp" />
@@ -3293,7 +3309,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/src/include/duckdb_python/pytype.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/src/include/duckdb_python/pyutil.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/src/include/duckdb_python/typing.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/duckdb/tools/shell/include/linenoise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise/include/highlighting.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise/include/history.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise/include/linenoise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise/include/linenoise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise/include/terminal.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/tools/sqlite3_api_wrapper/include/duckdb_shell_wrapper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/tools/sqlite3_api_wrapper/include/shell_extension.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/tools/sqlite3_api_wrapper/include/sqlite3.h" />
@@ -3760,6 +3780,8 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/big_number.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/blank_line.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/borked_date.csv" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/bug_10273.csv" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/bug_10283.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/bug_7578.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/bug_9005/teste1.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/bug_9005/teste2.csv" />
@@ -3774,8 +3796,10 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/decimal_separators/mixed_format_fail.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/dim0.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/dirty_line.csv" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/double_quoted_header.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/empty.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/empty_first_line.csv" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/empty_space_start_value.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/error/csv_error.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/error/date.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/error/mixedtypes.csv" />
@@ -3805,6 +3829,7 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/hive-partitioning/types/part=1000/date=2012-01-01/test.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/hive-partitioning/types/part=9000/date=2013-01-01/test.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/inconsistent_cells.csv" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/integer_exponent.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/invalid_utf8.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/issue2471.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/issue2628_中文.csv" />
@@ -3818,9 +3843,11 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/locations_row_trailing_comma.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/missing_column.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/no_opt.csv" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/null_mismatch.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/null_string.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/nullbyte.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/nullbyte_header.csv" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/nullpadding.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/nullpadding_big_mixed.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/nullpadding_commas.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/nullpadding_header.csv" />
@@ -3836,6 +3863,8 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/tpcds_14.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/tpcds_59.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/union-by-name/mismatching/test.csv" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/union-by-name/null_padding/np1.csv" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/union-by-name/null_padding/np2.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/union-by-name/part=a/test.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/union-by-name/part=b/test.csv" />
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/union-by-name/ubn1.csv" />
@@ -4577,6 +4606,7 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/storage/serialization/tableref.json" />
     <Text Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/storage/serialization/types.json" />
     <Text Include="../../thirdparty/owemdjee/duckdb/src/main/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/src/main/buffered_data/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/duckdb/src/main/capi/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/duckdb/src/main/capi/cast/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/duckdb/src/main/chunk_scan_state/CMakeLists.txt" />
@@ -4725,6 +4755,7 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/copy/csv/batched_write/batch_csv_mixed_batches.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/copy/csv/batched_write/batch_json_mixed_batches.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/copy/csv/batched_write/csv_write_memory_limit.test_slow" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/copy/csv/csv_memory_management.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/copy/csv/csv_write_gz.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/copy/csv/csv_write_zstd.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/copy/csv/data/auto/backslash_escape.csv" />
@@ -5189,7 +5220,6 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/parallelism/intraquery/test_list_parallelism.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/pg_catalog/pg_proc.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/pivot/pivot_tpch.test_slow" />
-    <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/pragma/test_pragma_output.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/pragma/test_table_info_many_columns.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/prepared/test_prepare_insert.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/progress_bar/test_parquet.test_slow" />
@@ -5369,6 +5399,7 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/types/list/list_index_abort.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/types/list/list_index_abort_nested.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/types/list/many_lists.test_slow" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/types/nested/array/array_compression.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/types/nested/array/array_string_heap_gather.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/types/nested/list/lineitem_list.test_slow" />
     <Text Include="../../thirdparty/owemdjee/duckdb/test/sql/types/nested/list/list.test_slow" />
@@ -5421,6 +5452,7 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/jdbc/src/main/java/org/duckdb/DuckDBColumnTypeMetaData.java" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/jdbc/src/main/java/org/duckdb/DuckDBConnection.java" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/jdbc/src/main/java/org/duckdb/DuckDBDatabaseMetaData.java" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/tools/jdbc/src/main/java/org/duckdb/DuckDBDate.java" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/jdbc/src/main/java/org/duckdb/DuckDBDriver.java" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/jdbc/src/main/java/org/duckdb/DuckDBNative.java" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/jdbc/src/main/java/org/duckdb/DuckDBParameterMetaData.java" />
@@ -5614,6 +5646,7 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/api/test_native_tz.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/api/test_query_interrupt.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/api/test_read_csv.py" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/api/test_relation_to_view.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/api/test_streaming_result.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/api/test_to_csv.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/api/test_to_parquet.py" />
@@ -5626,6 +5659,7 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/arrow/test_7652.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/arrow/test_7699.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/arrow/test_8522.py" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/arrow/test_9443.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/arrow/test_arrow_batch_index.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/arrow/test_arrow_case_sensitive.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/fast/arrow/test_arrow_fetch.py" />
@@ -5797,7 +5831,8 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/pythonpkg/tests/stubs/test_stubs.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/release-pip.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/shell/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise_LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/duckdb/tools/shell/linenoise/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/shell/tests/conftest.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/shell/tests/test_autocomplete.py" />
     <Text Include="../../thirdparty/owemdjee/duckdb/tools/shell/tests/test_backwards_compatibility.py" />
