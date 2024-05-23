@@ -5706,6 +5706,12 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Path_walk
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_artifex_mupdf_fitz_Pixmap_DESKEW_INCREASE_BORDER
+#define com_artifex_mupdf_fitz_Pixmap_DESKEW_INCREASE_BORDER 0L
+#undef com_artifex_mupdf_fitz_Pixmap_DESKEW_MAINTAIN_BORDER
+#define com_artifex_mupdf_fitz_Pixmap_DESKEW_MAINTAIN_BORDER 1L
+#undef com_artifex_mupdf_fitz_Pixmap_DESKEW_DECREASE_BORDER
+#define com_artifex_mupdf_fitz_Pixmap_DESKEW_DECREASE_BORDER 2L
 /*
  * Class:     com_artifex_mupdf_fitz_Pixmap
  * Method:    finalize
@@ -5729,6 +5735,14 @@ JNIEXPORT jlong JNICALL Java_com_artifex_mupdf_fitz_Pixmap_newNative
  */
 JNIEXPORT jlong JNICALL Java_com_artifex_mupdf_fitz_Pixmap_newNativeFromColorAndMask
   (JNIEnv *, jobject, jobject, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Pixmap
+ * Method:    newNativeDeskew
+ * Signature: (FI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_artifex_mupdf_fitz_Pixmap_newNativeDeskew
+  (JNIEnv *, jobject, jfloat, jint);
 
 /*
  * Class:     com_artifex_mupdf_fitz_Pixmap
@@ -5952,6 +5966,14 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_Pixmap_convertToColorSpace
  * Signature: ()[B
  */
 JNIEXPORT jbyteArray JNICALL Java_com_artifex_mupdf_fitz_Pixmap_computeMD5
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Pixmap
+ * Method:    skewDetect
+ * Signature: ()F
+ */
+JNIEXPORT jfloat JNICALL Java_com_artifex_mupdf_fitz_Pixmap_skewDetect
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
