@@ -1,6 +1,8 @@
 #ifndef HAD_CONFIG_H
 #define HAD_CONFIG_H
+
 #include "zipconf.h"
+
 /* BEGIN DEFINES */
 /* #undef HAVE___PROGNAME */
 #define HAVE__CLOSE
@@ -44,10 +46,10 @@
 #define HAVE_STRTOULL
 /* #undef HAVE_STRUCT_TM_TM_ZONE */
 #define HAVE_STDBOOL_H
-/* #undef HAVE_STRINGS_H */
+#undef HAVE_STRINGS_H
 /* #undef HAVE_UNISTD_H */
 #define HAVE_WINDOWS_CRYPTO
-#define SIZEOF_OFF_T 4
+#define SIZEOF_OFF_T 4        // 4 bytes for both Win32 and Win64 !
 #define SIZEOF_SIZE_T 8
 /* #undef HAVE_DIRENT_H */
 /* #undef HAVE_FTS_H */
@@ -61,6 +63,7 @@
 /* #undef WORDS_BIGENDIAN */
 #define HAVE_SHARED
 /* END DEFINES */
+
 #define PACKAGE "libzip"
 #define VERSION "1.8.1"
 
