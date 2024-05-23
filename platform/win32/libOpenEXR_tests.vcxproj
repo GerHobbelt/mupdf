@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF4A0863}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/DtexToExr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxDeepUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/IexTest/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/IexTest/mathFuncs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/IexTest/testBaseExc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/IexTest/testMathExc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/base_units.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/compression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/deep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/general_attr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/performance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/write.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRFuzzTest/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRFuzzTest/testFuzzDeepScanLines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRFuzzTest/testFuzzDeepTiles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRFuzzTest/testFuzzScanLines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRFuzzTest/testFuzzTiles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/compareB44.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/compareDwa.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/compareFloat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testAttributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testB44ExpLogTable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testBackwardCompatibility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testBadTypeAttributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testChannels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCompositeDeepScanLine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCompression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCompressionApi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testConversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCopyDeepScanLine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCopyDeepTiled.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCopyMultiPartFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCopyPixels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCpuId.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCustomAttributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepScanLineBasic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepScanLineHuge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepScanLineMultipleRead.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepTiledBasic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDwaCompressorSimd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDwaLookups.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testExistingStreams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testFutureProofing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testHeader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testHuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testIDManifest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testInputPart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testIsComplete.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testLargeDataWindowOffsets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testLineOrder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testLut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMagic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMalformedImages.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiPartApi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiPartFileMixingBasic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiPartSharedAttributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiPartThreading.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiScanlinePartThreading.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiTiledPartThreading.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testNativeFormat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testOptimized.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testOptimizedInterleavePatterns.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testPartHelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testPreviewImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testRgba.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testRgbaThreading.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testRle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testSampleImages.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testScanLineApi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testSharedFrameBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testStandardAttributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testTiledCompression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testTiledCopyPixels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testTiledLineOrder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testTiledRgba.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testTiledYa.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testWav.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testXdr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testYca.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRUtilTest/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRUtilTest/testDeepImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRUtilTest/testFlatImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRUtilTest/testIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/C_IStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/C_IStream_clear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/C_IStream_read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/C_IStream_seekg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/C_IStream_tellg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/IStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/MemoryMappedIStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/MemoryMappedIStream_constructor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/MemoryMappedIStream_destructor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/MemoryMappedIStream_isMemoryMapped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/MemoryMappedIStream_read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/MemoryMappedIStream_readMemoryMapped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/compression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/envmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/exrreader/exrreader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/exrwriter/exrwriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/mergeOverlappingSamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/multithreading.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/previewImageExamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/readChannelsAndLayers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/readDeepScanLineFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/readDeepTiledFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/readGZ1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/readGZ2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/readHeader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/readRgba1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/readRgba2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/readRgbaFILE.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/readTiled1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/readTiledRgba1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/splitVolumeSample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/structDefinitions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/tileDescription.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/validExrFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeDeepScanLineFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeDeepTiledFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeGZ1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeGZ2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeRgba1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeRgba2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeRgba3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeRgbaMT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeRgbaWithPreview1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeRgbaWithPreview2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeTiled1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeTiledRgbaMIP1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeTiledRgbaMIP2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeTiledRgbaONE1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeTiledRgbaONE2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/website/src/writeTiledRgbaRIP1.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxBaseDeepHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxDeepOutPixel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxDeepOutRow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxDeepUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxFourChanDeepRgba.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxOneChanDeepAlpha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxOneChanDeepOpacity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/IexTest/mathFuncs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/IexTest/testBaseExc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/IexTest/testMathExc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/base_units.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/compression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/deep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/general_attr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/read.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/test_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/write.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRFuzzTest/testFuzzDeepScanLines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRFuzzTest/testFuzzDeepTiles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRFuzzTest/testFuzzScanLines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRFuzzTest/testFuzzTiles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/TestUtilFStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/bswap_32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/compareB44.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/compareDwa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/compareFloat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testAttributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testB44ExpLogTable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testBackwardCompatibility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testBadTypeAttributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testChannels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCompositeDeepScanLine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCompression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCompressionApi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testConversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCopyDeepScanLine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCopyDeepTiled.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCopyMultiPartFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCopyPixels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCpuId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCustomAttributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepScanLineBasic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepScanLineHuge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepScanLineMultipleRead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepTiledBasic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDwaCompressorSimd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDwaLookups.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testExistingStreams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testFutureProofing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testHeader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testHuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testIDManifest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testInputPart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testIsComplete.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testLargeDataWindowOffsets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testLineOrder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testLut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMagic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMalformedImages.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiPartApi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiPartFileMixingBasic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiPartSharedAttributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiPartThreading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiScanlinePartThreading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiTiledPartThreading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testMultiView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testNativeFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testOptimized.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testOptimizedInterleavePatterns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testPartHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testPreviewImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testRgba.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testRgbaThreading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testRle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testSampleImages.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testScanLineApi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testSharedFrameBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testStandardAttributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testTiledCompression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testTiledCopyPixels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testTiledLineOrder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testTiledRgba.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testTiledYa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testWav.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testXdr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testYca.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/tmpDir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRUtilTest/testDeepImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRUtilTest/testFlatImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRUtilTest/testIO.h" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/ASWF/images/aswf.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/ASWF/images/openexr-logo.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/InterpretingDeepPixels1.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/InterpretingDeepPixels2.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/InterpretingDeepPixels3.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/OpenEXR_Reel_2020.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/cubeMap.big.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/cubeMap.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/drawing.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/envcube.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/imageprocessing.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/latlong.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/latlongMap.big.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/latlongMap.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/mapped.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/news.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/openexr-fav.ico" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/openexr-horizontal-color.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/openexr-logo.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/openexr-stacked-color.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/raw.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/screenwin.big.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/screenwin.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/tiles.big.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/tiles.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/twosamples.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/windowExample1.big.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/windowExample1.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/windowExample1.small.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/windowExample2.big.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenEXR/website/images/windowExample2.png" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/ASWF/charter/OpenEXR-Technical-Charter.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/ASWF/proposal/OpenEXR-Adoption-Proposal.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/CONTRIBUTORS.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/README" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/m4/compilelinkrun.m4" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/m4/path.pkgconfig.m4" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/m4/threads.m4" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/NuGet/OpenEXR-msvc-x64-build.nuget.bat" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/NuGet/OpenEXR-msvc-x64.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/NuGet/OpenEXR-msvc-x64.targets" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/NuGet/OpenEXR-msvc-x86-build.nuget.bat" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/NuGet/OpenEXR-msvc-x86.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/NuGet/OpenEXR-msvc-x86.targets" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/GOVERNANCE.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/FindPythonPackage.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/FindSphinx.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/IexConfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/IexConfigInternal.h.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/IlmThreadConfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/JoinPaths.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/LibraryDefine.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/OpenEXR.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/OpenEXRConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/OpenEXRConfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/OpenEXRConfigInternal.h.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/OpenEXRLibraryDefine.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/OpenEXRSetup.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/SampleCTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/Toolchain-Linux-VFX_Platform15.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/Toolchain-mingw.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/clang-format.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/share/ci/scripts/linux/install_valgrind.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/share/ci/scripts/linux/log_valgrind.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/share/ci/scripts/linux/run_gcov.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/share/ci/scripts/linux/validate_openexr_libs.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/share/util/abi_checker.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/share/util/clang_coverage.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/share/util/reformat.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/sonar-project.properties" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/IexTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRFuzzTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_b44.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_b44_piz.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_bad_bounds_piz.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_bad_neg_bounds_pxr24.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_bad_pos_bounds_piz.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_bad_pos_bounds_pxr24.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_dwaa_piz.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_dwaa_v1.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_dwaa_v2.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_dwab_piz.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_dwab_v1.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_dwab_v2.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_early_eof_piz.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_invalid_unknown.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_none.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_piz.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_rle.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_short_decode_piz.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_zip.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/comp_zips.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/invalid.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/invalid_shared_attrs_multipart.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/lineOrder_decreasing.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/lineOrder_increasing.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/scanline_with_deepscanline_type.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/scanline_with_deeptiled_type.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/scanline_with_tiledimage_type.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/test_native1.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/test_native2.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/tiled.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/tiled_with_deepscanline_type.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/tiled_with_deeptile_type.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/tiled_with_scanlineimage_type.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/v1.7.test.1.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/v1.7.test.interleaved.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/v1.7.test.planar.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/v1.7.test.tiled.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRUtilTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exr2aces.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrcheck.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrenvmap.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrheader.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrinfo.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrmakepreview.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrmaketiled.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrmanifest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrmultipart.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrmultiview.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrstdattr.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_images/11.deep.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_images/11.deep.exr.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_images/42.deep.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_images/42.deep.exr.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_images/64.deep.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_images/64.deep.exr.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_images/multivariate.deep.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_images/multivariate.deep.exr.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_images/objectid.deep.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_images/objectid.deep.exr.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/API.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/DeepIDsSpecification.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/HelloWorld.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/InterpretingDeepPixels.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/MultiViewOpenEXR.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/OpenEXRCoreAPI.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/OpenEXRFileLayout.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/PortingGuide.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/ReadingAndWritingImageFiles.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/SceneLinear.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/StandardAttributes.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/SymbolVisibility.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/TechnicalIntroduction.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/TheoryDeepPixels.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/_templates/layout.html" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/about.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/bin/exr2aces.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/bin/exrcheck.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/bin/exrenvmap.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/bin/exrheader.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/bin/exrinfo.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/bin/exrmakepreview.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/bin/exrmaketiled.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/bin/exrmanifest.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/bin/exrmultipart.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/bin/exrmultiview.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/bin/exrstdattr.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/concepts.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/downloads/sample.exr" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/imageprocessing.dot" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/install.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/license.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/news.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/scripts/install_doxygen.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/scripts/test_images.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/src/exrreader/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/src/exrreader/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/src/exrwriter/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/src/exrwriter/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/multipart.0001.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/multipart.0002.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/multipart.0003.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/multipart.0004.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/multipart.0005.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/multipart.0006.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/multipart.0007.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/multipart.0008.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/singlepart.0001.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/singlepart.0002.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/singlepart.0003.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/singlepart.0004.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/singlepart.0005.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/singlepart.0006.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/singlepart.0007.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Beachball/singlepart.0008.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Chromaticities/Rec709.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Chromaticities/Rec709_YC.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Chromaticities/XYZ.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Chromaticities/XYZ_YC.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t01.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t02.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t03.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t04.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t05.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t06.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t07.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t08.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t09.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t10.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t11.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t12.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t13.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t14.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t15.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/DisplayWindow/t16.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/LuminanceChroma/CrissyField.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/LuminanceChroma/Flowers.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/LuminanceChroma/Garden.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/LuminanceChroma/MtTamNorth.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/LuminanceChroma/StarField.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/Bonita.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/ColorCodedLevels.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/Kapaa.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/KernerEnvCube.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/KernerEnvLatLong.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/MirrorPattern.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/OrientationCube.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/OrientationLatLong.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/PeriodicPattern.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/StageEnvCube.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/StageEnvLatLong.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/WavyLinesCube.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/WavyLinesLatLong.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiResolution/WavyLinesSphere.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiView/Adjuster.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiView/Balls.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiView/Fog.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiView/Impact.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/MultiView/LosPadres.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/ScanLines/Blobbies.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/ScanLines/CandleGlass.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/ScanLines/Cannon.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/ScanLines/Carrots.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/ScanLines/Desk.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/ScanLines/MtTamWest.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/ScanLines/PrismsLenses.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/ScanLines/StillLife.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/ScanLines/Tree.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/TestImages/AllHalfValues.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/TestImages/BrightRings.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/TestImages/BrightRingsNanInf.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/TestImages/GammaChart.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/TestImages/GrayRampsDiagonal.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/TestImages/GrayRampsHorizontal.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/TestImages/RgbRampsDiagonal.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/TestImages/SquaresSwirls.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/TestImages/WideColorGamut.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/TestImages/WideFloatRange.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Tiles/GoldenGate.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Tiles/Ocean.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/Tiles/Spirals.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/toctree.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/LeftView/Balls.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/LeftView/Ground.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/LeftView/Leaves.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/LeftView/Trunks.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/LowResLeftView/Balls.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/LowResLeftView/Ground.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/LowResLeftView/Leaves.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/LowResLeftView/Trunks.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/LowResLeftView/composited.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/Stereo/Balls.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/Stereo/Ground.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/Stereo/Leaves.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/Stereo/Trunks.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/test_images/v2/Stereo/composited.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/toc_redirect.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/tools.rst" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

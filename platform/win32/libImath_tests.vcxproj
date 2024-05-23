@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBBA437}</ProjectGuid>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBBA431}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -77,7 +77,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIMATH;IMATH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -226,47 +226,102 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathColorAlgo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathFun.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathMatrixAlgo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathRandom.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/Imath/half.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/Imath/toFloat.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathBox.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathBoxAlgo.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathColor.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathColorAlgo.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathEuler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathExport.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathForward.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathFrame.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathFrustum.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathFrustumTest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathFun.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathGL.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathGLU.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathInt64.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathInterval.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathLine.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathLineAlgo.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathMath.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathMatrix.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathMatrixAlgo.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathNamespace.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathPlane.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathPlatform.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathQuat.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathRandom.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathRoots.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathShear.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathSphere.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathTypeTraits.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathVec.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/ImathVecAlgo.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/half.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/halfFunction.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/halfLimits.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/Imath/toFloat.h" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/half_c_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/half_perf_test.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\Imath\src\ImathTest\test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testArithmetic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testBitPatterns.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testBox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testBoxAlgo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testClassification.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testColor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testError.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testExtractEuler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testExtractSHRT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testFrustum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testFrustumTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testFun.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testInterop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testInterval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testInvert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testJacobiEigenSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testLimits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testLineAlgo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testMiscMatrixAlgo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testNoInterop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testProcrustes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testQuat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testQuatSetRotation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testQuatSlerp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testRandom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testRoots.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testShear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testSize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testTinySVD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testToFloat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testVec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Box.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Color3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Color4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Euler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Frustum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Interval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Line3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Matrix22.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Matrix33.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Matrix44.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Plane3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Quat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Shear6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Sphere3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Vec2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Vec3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/Vec4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/gl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/half.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/half.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/intro.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Imath/website/examples/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/eLut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testArithmetic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testBitPatterns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testBox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testBoxAlgo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testClassification.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testColor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testError.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testExtractEuler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testExtractSHRT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testFrustum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testFrustumTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testFun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testInterop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testInterval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testInvert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testJacobiEigenSolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testLimits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testLineAlgo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testMatrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testMiscMatrixAlgo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testNoInterop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testProcrustes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testQuat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testQuatSetRotation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testQuatSlerp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testRandom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testRoots.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testShear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testSize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testTinySVD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testToFloat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Imath/src/ImathTest/testVec.h" />
+    <Image Include="../../thirdparty/owemdjee/Imath/website/images/imath-fav.ico" />
+    <Image Include="../../thirdparty/owemdjee/Imath/website/images/imath-logo-black.png" />
+    <Image Include="../../thirdparty/owemdjee/Imath/website/images/imath-logo-blue.png" />
+    <Image Include="../../thirdparty/owemdjee/Imath/website/images/imath-logo-white.png" />
     <Text Include="../../thirdparty/owemdjee/Imath/CHANGES.md" />
     <Text Include="../../thirdparty/owemdjee/Imath/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/Imath/CODE_OF_CONDUCT.md" />
@@ -303,10 +358,61 @@
     <Text Include="../../thirdparty/owemdjee/Imath/share/ci/scripts/windows/install_cmake.ps1" />
     <Text Include="../../thirdparty/owemdjee/Imath/share/ci/scripts/windows/install_python.ps1" />
     <Text Include="../../thirdparty/owemdjee/Imath/sonar-project.properties" />
-    <Text Include="../../thirdparty/owemdjee/Imath/src/Imath/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Imath/src/ImathTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/PortingGuide.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/SymbolVisibility.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/_templates/layout.html" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/about.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Box.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Color3.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Color4.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Euler.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Frustum.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Interval.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Line3.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Matrix22.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Matrix33.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Matrix44.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Plane3.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Quat.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Rand32.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Rand48.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Shear6.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Sphere3.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Vec2.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Vec3.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/Vec4.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/float.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/half.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/half_c.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/half_class.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/half_conversion.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/classes/half_limits.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/concepts.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/fixmanpages.sh" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/functions.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/functions/box.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/functions/color.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/functions/frame.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/functions/gl.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/functions/glu.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/functions/line.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/functions/matrix.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/functions/random.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/functions/roots.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/functions/vec.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/install.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/license.rst" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/Imath/website/toc_redirect.rst" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
