@@ -50,6 +50,14 @@
 #define IMATH_LIB_VERSION_STRING "29.0.0"
 
 
+#define IMATH_USE_NOEXCEPT    1
+#if IMATH_USE_NOEXCEPT
+#    define IMATH_NOEXCEPT noexcept
+#else
+#    define IMATH_NOEXCEPT
+#endif
+
+
 //
 // By default, opt into the interoparability constructors and assignments.
 // If this causes problems, it can be disabled by defining this symbol to
