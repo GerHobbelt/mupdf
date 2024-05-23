@@ -1292,6 +1292,15 @@ static void dealloc_gumbo(void *ctx, void *ptr)
 	/* nothing */
 }
 
+static void* realloc_gumbo(void* ctx, void *ptr, size_t new_num_bytes, size_t old_num_bytes)
+{
+	struct mem_gumbo* mem = ctx;
+	void *p = fz_pool_alloc(mem->ctx, mem->pool, new_num_bytes);
+	memcpy(p, ptr, old_num_bytes);
+	/* no free: see dealloc_jumbo() */
+	return p;
+}
+
 static void xml_from_gumbo(fz_context *ctx, struct parser *parser, GumboNode *node)
 {
 	unsigned int i;
@@ -1395,6 +1404,7 @@ fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf, int dont_throw_on_error
 		memset(&opts, 0, sizeof opts);
 		opts.allocator = alloc_gumbo;
 		opts.deallocator = dealloc_gumbo;
+		opts.reallocator = realloc_gumbo;
 		opts.userdata = &mem;
 		opts.tab_stop = 8;
 		opts.stop_on_first_error = 0;

@@ -71,8 +71,10 @@
 #include "../../thirdparty/owemdjee/edit-distance/src/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/spdlog/include/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libchaos/include/chaos/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/gumbo-query/example/monolithic_examples.h"
 #include "../../source/fitz/tessocr.h"
 #include "../../thirdparty/gumbo-parser/src/gumbo.h"
+#include "../../thirdparty/owemdjee/gumbo-libxml/gumbo_libxml.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -844,7 +846,17 @@ static struct tool_spec {
 	{ {.fa = gumbo_positions_of_class_main }, "gumbo_positions_of_class", "gumbo positions_of_class demo/test/tool" },
 	{ {.fa = gumbo_prettyprint_main }, "gumbo_prettyprint", "gumbo prettyprint demo/test/tool" },
 	{ {.fa = gumbo_serialize_main }, "gumbo_serialize", "gumbo serialize demo/test/tool" },
+	{ {.fa = gumbo_eval_xpath_main }, "gumbo_eval_xpath", "gumbo eval_xpath demo/test/tool" },
 	{ {.fa = gumbo_print_main }, "gumbo_print", "gumbo print demo/test/tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.f = gumboquery_example_main }, "gumboquery_example", "gumbo-query example" },
+	{ {.f = gumboquery_test_main }, "gumboquery_test", "gumbo-query test" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = gumbo_libxml_example_main }, "gumbo_libxml_example", "gumbo-libxml example" },
 #endif
 
 #if 0 
