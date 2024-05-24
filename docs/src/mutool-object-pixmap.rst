@@ -483,7 +483,7 @@ so that they can easily be used to represent tiles of a page.
         var angle = pixmap.skewDetect();
 
 
-.. method:: deskew(float angle, int border)
+.. method:: deskew(angle, border)
 
     |wasm_tag|
 

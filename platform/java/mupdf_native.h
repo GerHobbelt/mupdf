@@ -5706,12 +5706,12 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Path_walk
 #ifdef __cplusplus
 extern "C" {
 #endif
-#undef com_artifex_mupdf_fitz_Pixmap_DESKEW_INCREASE_BORDER
-#define com_artifex_mupdf_fitz_Pixmap_DESKEW_INCREASE_BORDER 0L
-#undef com_artifex_mupdf_fitz_Pixmap_DESKEW_MAINTAIN_BORDER
-#define com_artifex_mupdf_fitz_Pixmap_DESKEW_MAINTAIN_BORDER 1L
-#undef com_artifex_mupdf_fitz_Pixmap_DESKEW_DECREASE_BORDER
-#define com_artifex_mupdf_fitz_Pixmap_DESKEW_DECREASE_BORDER 2L
+#undef com_artifex_mupdf_fitz_Pixmap_DESKEW_BORDER_INCREASE
+#define com_artifex_mupdf_fitz_Pixmap_DESKEW_BORDER_INCREASE 0L
+#undef com_artifex_mupdf_fitz_Pixmap_DESKEW_BORDER_MAINTAIN
+#define com_artifex_mupdf_fitz_Pixmap_DESKEW_BORDER_MAINTAIN 1L
+#undef com_artifex_mupdf_fitz_Pixmap_DESKEW_BORDER_DECREASE
+#define com_artifex_mupdf_fitz_Pixmap_DESKEW_BORDER_DECREASE 2L
 /*
  * Class:     com_artifex_mupdf_fitz_Pixmap
  * Method:    finalize
