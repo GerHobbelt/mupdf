@@ -1284,6 +1284,11 @@ ragel
 libpostal
 simdcomp
 PDFGen
+lmfit
+cv-VanishingPoint
+FFME
+InversePerspectiveMapping
+libchiaroscuramente
 
 EOT
 )
@@ -1411,6 +1416,8 @@ local_adaptive_binarization
 Awesome-Image-Quality-Assessment
 Awesome-Document-Image-Rectification
 IMGUR5K-Handwriting-Dataset
+tesseract-ocr-mailing-list-archive
+tesseract-dev-mailing-list-archive
 
 EOT
 )
