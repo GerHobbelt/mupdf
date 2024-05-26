@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include <math.h>
 #include <assert.h>
 #include <limits.h>
@@ -264,3 +266,5 @@ double fz_skew_detect(fz_context *ctx, fz_pixmap *pix)
 
 	return angle;
 }
+
+#endif

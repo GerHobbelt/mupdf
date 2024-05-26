@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include <math.h>
 
 #ifndef M_PI
@@ -1196,5 +1198,6 @@ fz_pixmap *fz_deskew_pixmap(fz_context *ctx,
 	}
 
 	return dst;
-
 }
+
+#endif

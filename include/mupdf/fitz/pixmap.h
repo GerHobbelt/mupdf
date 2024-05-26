@@ -26,6 +26,7 @@
 #include "mupdf/fitz/system.h"
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/geometry.h"
+#include "mupdf/fitz/color.h"
 #include "mupdf/fitz/store.h"
 #include "mupdf/fitz/separation.h"
 
