@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -88,6 +88,8 @@
 #include "mupdf/fitz/story.h"
 #include "mupdf/fitz/story-writer.h"
 #include "mupdf/fitz/encode-jbig2.h"
+
+#include "mupdf/fitz/deskew.h"
 
 #include "../../source/fitz/leptonica-wrap.h"
 

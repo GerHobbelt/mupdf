@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -405,6 +405,10 @@ static int layer_off[1000];
 static int layer_on_len;
 static int layer_off_len;
 
+static int skew_correct;
+static float skew_angle;
+static int skew_border;
+
 static const char ocr_language_default[] = "eng";
 static const char *ocr_language = ocr_language_default;
 static const char *ocr_datadir = NULL;
@@ -584,9 +588,11 @@ static int usage(void)
 #if FZ_ENABLE_OCR
 		"  -t -  Specify language/script for OCR (default: eng)\n"
 		"  -d -  Specify path for OCR files (default: rely on TESSDATA_PREFIX environment variable)\n"
+		"  -k -{,-}  Skew correction options. auto or angle {0=increase size, 1=maintain size, 2=decrease size}\n"
 #else
 		"  -t -  OCR language    (the OCR feature is not available in this build)\n"
 		"  -d -  OCR datafiles   (the OCR feature is not available in this build)\n"
+		"  -k -{,-}  Skew correction options. auto or angle {0=increase size, 1=maintain size, 2=decrease size} (disabled)\n"
 #endif
 		"\n"
 		"  -y l  List the layer configs to stderr\n"
@@ -690,6 +696,9 @@ file_level_headers(fz_context *ctx, const char *filename)
 			fz_strlcat(options, ocr_datadir, sizeof (options));
 		}
 		fz_parse_pdfocr_options(ctx, &opts, options);
+		opts.skew_correct = skew_correct;
+		opts.skew_border = skew_border;
+		opts.skew_angle = skew_angle;
 		bander = fz_new_pdfocr_band_writer(ctx, out, &opts);
 	}
 #endif
@@ -2881,7 +2890,7 @@ int main(int argc, const char** argv)
 	atexit(mu_drop_context);
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qQp:o:F:R:r:w:h:fB:c:e:gG:Is:A:DiW:H:S:T:t:d:U:LvVPl:y:Yz:Z:NO:am:x:Xhj:J:Kb:")) != -1)
+	while ((c = fz_getopt(argc, argv, "qQp:o:F:R:r:w:h:fB:c:e:gG:Is:A:DiW:H:S:T:t:d:U:LvVPl:y:Yz:Z:NO:am:x:Xhj:J:Kb:k:")) != -1)
 	{
 		switch (c)
 		{
@@ -3026,6 +3035,19 @@ int main(int argc, const char** argv)
 		case 'z': layer_off[layer_off_len++] = !strcmp(fz_optarg, "all") ? -1 : fz_atoi(fz_optarg); break;
 		case 'Z': layer_on[layer_on_len++] = !strcmp(fz_optarg, "all") ? -1 : fz_atoi(fz_optarg); break;
 		case 'a': useaccel = 0; break;
+		case 'k':
+		{
+			const char *a;
+			if (fz_optarg[0] == 'a')
+				skew_correct = 1;
+			else
+				skew_correct = 2, skew_angle = fz_atof(fz_optarg);
+			a = strchr(fz_optarg, ',');
+			if (a != NULL)
+				skew_border = fz_atoi(fz_optarg+1);
+			break;
+		}
+
 		case 'x': txtdraw_options = fz_optarg; break;
 
 		case 'V': fz_info(ctx, "mudraw version %s", FZ_VERSION); return EXIT_FAILURE;

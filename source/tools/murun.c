@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -4557,6 +4557,44 @@ static void ffi_Pixmap_warp(js_State *J)
 	ffi_pushpixmap(J, dest);
 }
 
+static void ffi_Pixmap_skewDetect(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_pixmap *pixmap = ffi_topixmap(J, 0);
+	double angle;
+
+	fz_try(ctx)
+		angle = fz_skew_detect(ctx, pixmap);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_pushnumber(J, angle);
+}
+
+static int deskew_border_from_string(const char *str)
+{
+	if (!strcmp(str, "increase")) return FZ_DESKEW_BORDER_INCREASE;
+	if (!strcmp(str, "decrease")) return FZ_DESKEW_BORDER_DECREASE;
+	if (!strcmp(str, "maintain")) return FZ_DESKEW_BORDER_MAINTAIN;
+	return FZ_DESKEW_BORDER_INCREASE;
+}
+
+static void ffi_Pixmap_deskew(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_pixmap *pixmap = ffi_topixmap(J, 0);
+	float degrees = js_tonumber(J, 1);
+	int border = deskew_border_from_string(js_tostring(J, 2));
+	fz_pixmap *dest = NULL;
+
+	fz_try(ctx)
+		dest = fz_deskew_pixmap(ctx, pixmap, degrees, border);
+	fz_catch(ctx)
+		rethrow(J);
+
+	ffi_pushpixmap(J, dest);
+}
+
 static void ffi_Pixmap_autowarp(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -4604,7 +4642,6 @@ static void ffi_Pixmap_detect_document(js_State *J)
 		js_setindex(J, -2, (int)i);
 	}
 }
-
 
 static void ffi_Pixmap_asPNG(js_State *J)
 {
@@ -11126,6 +11163,8 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Pixmap.gamma", ffi_Pixmap_gamma, 1);
 		jsB_propfun(J, "Pixmap.tint", ffi_Pixmap_tint, 2);
 		jsB_propfun(J, "Pixmap.warp", ffi_Pixmap_warp, 3);
+		jsB_propfun(J, "Pixmap.skewDetect", ffi_Pixmap_skewDetect, 0);
+		jsB_propfun(J, "Pixmap.deskew", ffi_Pixmap_deskew, 2);
 		jsB_propfun(J, "Pixmap.autowarp", ffi_Pixmap_autowarp, 1);
 		jsB_propfun(J, "Pixmap.detectdocument", ffi_Pixmap_detect_document, 0);
 		jsB_propfun(J, "Pixmap.convertToColorSpace", ffi_Pixmap_convertToColorSpace, 5);
