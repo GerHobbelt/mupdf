@@ -715,7 +715,6 @@ pdf_add_popup_annot(fz_context *ctx, pdf_annot *annot)
 
 static pdf_obj *popup_subtypes[] = {
 	PDF_NAME(Text),
-	PDF_NAME(FreeText),
 	PDF_NAME(Line),
 	PDF_NAME(Square),
 	PDF_NAME(Circle),
@@ -729,7 +728,6 @@ static pdf_obj *popup_subtypes[] = {
 	PDF_NAME(Caret),
 	PDF_NAME(Ink),
 	PDF_NAME(FileAttachment),
-	PDF_NAME(Sound),
 	PDF_NAME(Redact),
 	NULL,
 };
