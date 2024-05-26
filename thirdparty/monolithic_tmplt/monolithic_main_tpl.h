@@ -186,6 +186,133 @@ static int parse_one_command_from_set(const char* source, const struct cmd_info 
 }
 
 
+static int ambig_parse_one_command_from_set(const char* source, const struct cmd_info *commands1, size_t command_count1, const struct cmd_info *commands2, size_t command_count2)
+{
+	size_t max_command_count = command_count1 + command_count2;
+	struct hit_info {
+		struct cmd_info cmd;
+		size_t offset;
+	} *hits = calloc(max_command_count, sizeof(hits[0]));
+	size_t hit_count = 0;
+
+	size_t arg1_start = strcspn(source, " \t\r\n");
+	char *cmd = malloc(arg1_start + 1);
+	memcpy(cmd, source, arg1_start);
+	cmd[arg1_start] = 0;
+
+	// heuristic: do not attempt to match single-character commands: a command particle must at least be size 2:
+	if (arg1_start > 1)
+	{
+		for (int i = 0; i < command_count1; i++)
+		{
+			struct cmd_info el = commands1[i];
+			size_t cmd_len = strlen(el.cmd);
+
+			// when user-specified cmd is longer than the one we're intent on checking now, we can simply skip it: it won't be a hit any way.
+			if (strlen(cmd) > cmd_len)
+				continue;
+
+			const char *match = strstr(el.cmd, cmd);
+			if (match)
+			{
+				size_t offset = match - el.cmd;
+				// score!
+				struct hit_info record = {
+					el,
+					offset
+				};
+				hits[hit_count++] = record;
+			}
+		}
+
+		for (int i = 0; i < command_count2; i++)
+		{
+			struct cmd_info el = commands2[i];
+			size_t cmd_len = strlen(el.cmd);
+
+			// when user-specified cmd is longer than the one we're intent on checking now, we can simply skip it: it won't be a hit any way.
+			if (strlen(cmd) > cmd_len)
+				continue;
+
+			const char *match = strstr(el.cmd, cmd);
+			if (match)
+			{
+				size_t offset = match - el.cmd;
+				// score!
+				struct hit_info record = {
+					el,
+					offset
+				};
+				hits[hit_count++] = record;
+			}
+		}
+	}
+
+	int rv = -4242;
+
+	// did we get an unambguous hit?
+	if (hit_count == 1)
+	{
+			int argc_count;
+			const char** argv_list = (const char**)calloc(strlen(source) / 2 + 2, sizeof(char*)); // worst-case heuristic for the argv[] array size itself
+			char* argv_strbuf = (char*)malloc(strlen(source) + 2);
+			const char* p = source + arg1_start;
+			while (isspace(*p))
+				p++;
+			strcpy(argv_strbuf, p);
+
+			struct cmd_info el = hits[0].cmd;
+
+			fprintf(stderr, "\nInvoking disambiguated command:\n  %s %s\n\n", el.cmd, argv_strbuf);
+
+			argc_count = 0;
+			argv_list[argc_count++] = el.cmd;  // argv[0] == command
+
+			p = strtok(argv_strbuf, " \t\r\n");
+			while (p != NULL)
+			{
+				argv_list[argc_count++] = p;
+				p = strtok(NULL, " \t\r\n");
+			}
+			argv_list[argc_count] = NULL;
+
+			rv = el.f.fa(argc_count, argv_list);
+			free((void *)argv_list);
+			free(argv_strbuf);
+			fprintf(stderr, "\n--> exit code: %d\n", rv);
+			if (rv == -4242)
+				rv = 666;
+	}
+	else if (hit_count > 1)
+	{
+		int sanity_limit = hit_count;
+		if (sanity_limit > 8)
+			sanity_limit = 7;    // so we can report "at least 2 more..."
+
+		int i;
+		for (i = 0; i < sanity_limit; i++)
+		{
+			struct cmd_info el = hits[i].cmd;
+			const char *name = el.cmd;
+			int offset = hits[i].offset;
+			int cmd_len = strlen(cmd);
+
+			fprintf(stderr, "Ambiguous match: %.*s*%.*s*%s.\n", offset, name, cmd_len, name + offset, name + offset + cmd_len);
+		}
+		if (i < hit_count)
+		{
+			fprintf(stderr, "(... %d more ambiguous matches)\n\nPlease enter a longer command name particle to help us produce an umambiguous command match. Use 'h' or 'help' command to get a list of supported commands.\n", (int)hit_count - i);
+		}
+		rv = -4242 - 1;
+	}
+
+	free(cmd);
+	free(hits);
+
+	return rv;
+}
+
+
 static int parse(const char* source)
 {
 	size_t count = sizeof(commands) / sizeof(commands[0]);
@@ -203,13 +330,18 @@ static int parse(const char* source)
 			{"-h", {.f = usage }},
 			{"--help", {.f = usage }},
 		};
-		count = sizeof(dflt_commands) / sizeof(dflt_commands[0]);
-		rv = parse_one_command_from_set(source, dflt_commands, count);
+		size_t count2 = sizeof(dflt_commands) / sizeof(dflt_commands[0]);
+		rv = parse_one_command_from_set(source, dflt_commands, count2);
 
 		if (rv == -4242)
 		{
-			fprintf(stderr, "Unknown command '%s'.\n\nUse 'h' or 'help' command to get a list of supported commands.\n", source);
-			rv = 6;
+			// before we yak about "unknown command", see if the user typed an **unambiguous prefix or midfix** sufficient to identify any command uniquely:
+			int rv = ambig_parse_one_command_from_set(source, commands, count, dflt_commands, count2);
+			if (rv == -4242)
+			{
+				fprintf(stderr, "Unknown command '%s'.\n\nUse 'h' or 'help' command to get a list of supported commands.\n", source);
+				rv = 6;
+			}
 		}
 	}
 	return rv;
