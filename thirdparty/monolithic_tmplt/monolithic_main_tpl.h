@@ -192,11 +192,11 @@ static int ambig_parse_one_command_from_set(const char* source, const struct cmd
 	struct hit_info {
 		struct cmd_info cmd;
 		size_t offset;
-	} *hits = calloc(max_command_count, sizeof(hits[0]));
+	} *hits = (struct hit_info *)calloc(max_command_count, sizeof(hits[0]));
 	size_t hit_count = 0;
 
 	size_t arg1_start = strcspn(source, " \t\r\n");
-	char *cmd = malloc(arg1_start + 1);
+	char *cmd = (char *)malloc(arg1_start + 1);
 	memcpy(cmd, source, arg1_start);
 	cmd[arg1_start] = 0;
 
