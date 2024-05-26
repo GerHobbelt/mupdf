@@ -3279,7 +3279,7 @@ pdf_annot_push_local_xref(fz_context *ctx, pdf_annot *annot)
 	pdf_document *doc;
 
 	if (!annot->page)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "annotation not bound to any page");
 
 	doc = annot->page->doc;
 
@@ -3589,7 +3589,7 @@ pdf_update_annot(fz_context *ctx, pdf_annot *annot)
 	int changed;
 
 	if (!annot->page)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "annotation not bound to any page");
 
 	if (annot->page->doc->resynth_required)
 		update_all_appearances(ctx, annot->page);
