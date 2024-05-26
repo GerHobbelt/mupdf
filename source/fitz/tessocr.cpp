@@ -143,9 +143,6 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 	if (api->InitFullWithReader(datadir, 
 		language,
 		tesseract::OcrEngineMode::OEM_DEFAULT,
-		nil, /* configs, */
-		nil, nil, /* vars_vec */
-		false, /* set_only_non_debug_params */
 		&tess_file_reader))
 	{
 		delete api;
