@@ -447,7 +447,7 @@ static struct tool_spec {
 	{ {.fa = lept_maketile_main }, "lept_maketile", "leptonica maketile test/tool" },
 	{ {.fa = lept_maptest_main }, "lept_maptest", "leptonica maptest test/tool" },
 	{ {.fa = lept_maze_reg_main }, "lept_maze", "leptonica maze_reg test/tool" },
-	{ {.fa = lept_misctest1_main }, "lept_misctest1", "leptonica misctest1 test/tool" },
+	{ {.fa = lept_misctest1_main }, "lept_misc1", "leptonica misc1 test/tool" },
 	{ {.fa = lept_modifyhuesat_main }, "lept_modifyhuesat", "leptonica modifyhuesat test/tool" },
 	{ {.fa = lept_morphseq_reg_main }, "lept_morphseq", "leptonica morphseq_reg test/tool" },
 	{ {.fa = lept_morphtest1_main }, "lept_morphtest1", "leptonica morphtest1 test/tool" },
@@ -576,6 +576,8 @@ static struct tool_spec {
 	{ {.fa = lept_xformbox_reg_main }, "lept_xformbox", "leptonica xformbox_reg test/tool" },
 	{ {.fa = lept_yuvtest_main }, "lept_yuvtest", "leptonica yuvtest test/tool" },
 	{ {.fa = lept_issue675_check_main }, "lept_issue675", "leptonica BMP test for leptonica issue #675" },
+	{ {.f = lept_message_test_main }, "lept_messagetest", "leptonica message test/tool" },
+	{ {.fa = lept_misctest2_main }, "lept_misc2", "leptonica misc2 test/tool" },
 #endif
 
 #if defined(MUTOOL_EX)
