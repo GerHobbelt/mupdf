@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF22FA70}</ProjectGuid>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA364CD}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -77,7 +77,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,10 +111,10 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINY_PROCESS_LIBRARY;TINY_PROCESS_LIBRARY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBR8BRAIN_FREE_SRC;R8BRAIN_FREE_SRC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -124,12 +124,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tiny-process-library;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINY_PROCESS_LIBRARY;TINY_PROCESS_LIBRARY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBR8BRAIN_FREE_SRC;R8BRAIN_FREE_SRC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINY_PROCESS_LIBRARY;TINY_PROCESS_LIBRARY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBR8BRAIN_FREE_SRC;R8BRAIN_FREE_SRC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINY_PROCESS_LIBRARY;TINY_PROCESS_LIBRARY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBR8BRAIN_FREE_SRC;R8BRAIN_FREE_SRC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -150,13 +150,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tiny-process-library;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINY_PROCESS_LIBRARY;TINY_PROCESS_LIBRARY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBR8BRAIN_FREE_SRC;R8BRAIN_FREE_SRC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINY_PROCESS_LIBRARY;TINY_PROCESS_LIBRARY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBR8BRAIN_FREE_SRC;R8BRAIN_FREE_SRC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -169,7 +169,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINY_PROCESS_LIBRARY;TINY_PROCESS_LIBRARY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBR8BRAIN_FREE_SRC;R8BRAIN_FREE_SRC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -179,12 +179,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tiny-process-library;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINY_PROCESS_LIBRARY;TINY_PROCESS_LIBRARY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBR8BRAIN_FREE_SRC;R8BRAIN_FREE_SRC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINY_PROCESS_LIBRARY;TINY_PROCESS_LIBRARY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBR8BRAIN_FREE_SRC;R8BRAIN_FREE_SRC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -197,7 +197,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINY_PROCESS_LIBRARY;TINY_PROCESS_LIBRARY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBR8BRAIN_FREE_SRC;R8BRAIN_FREE_SRC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -205,13 +205,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tiny-process-library;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINY_PROCESS_LIBRARY;TINY_PROCESS_LIBRARY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBR8BRAIN_FREE_SRC;R8BRAIN_FREE_SRC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINY_PROCESS_LIBRARY;TINY_PROCESS_LIBRARY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBR8BRAIN_FREE_SRC;R8BRAIN_FREE_SRC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -226,22 +226,63 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/tiny-process-library/examples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tiny-process-library/process.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tiny-process-library/process_unix.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tiny-process-library/process_win.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tiny-process-library/tests/io_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tiny-process-library/tests/multithread_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tiny-process-library/tests/open_close_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tiny-process-library/tests/path_test.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tiny-process-library/process.hpp" />
-    <Text Include="../../thirdparty/owemdjee/tiny-process-library/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/tiny-process-library/LICENSE" />
-    <Text Include="../../thirdparty/owemdjee/tiny-process-library/README.md" />
-    <Text Include="../../thirdparty/owemdjee/tiny-process-library/meson_options.txt" />
-    <Text Include="../../thirdparty/owemdjee/tiny-process-library/tests/CMakeLists.txt" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/DLL/r8bsrc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/bench/masstest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/bench/r8bfreesrc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/bench/rmscompare.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/bench/sacd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/bench/snrtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/bench/zerotest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/other/calcCorrTable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/other/calcErrorTable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/other/flttest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/other/genhbc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/other/hbopt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/other/winopt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/pffft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/pffft_double.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/r8bbase.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/CDSPBlockConvolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/CDSPFIRFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/CDSPFracInterpolator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/CDSPHBDownsampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/CDSPHBDownsampler.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/CDSPHBUpsampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/CDSPHBUpsampler.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/CDSPProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/CDSPRealFFT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/CDSPResampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/CDSPSincFilterGen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/DLL/r8bsrc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/fft4g.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/pffft_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/pffft_priv_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/simd/pf_avx_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/simd/pf_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/simd/pf_neon_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/simd/pf_neon_double_from_avx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/simd/pf_scalar_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/simd/pf_sse2_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/r8bbase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/r8bconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/r8butil.h" />
+    <Image Include="../../thirdparty/owemdjee/r8brain-free-src/other/icon.png" />
+    <Text Include="../../thirdparty/owemdjee/r8brain-free-src/DLL/Win32/r8bsrc.dll" />
+    <Text Include="../../thirdparty/owemdjee/r8brain-free-src/DLL/Win64/r8bsrc.dll" />
+    <Text Include="../../thirdparty/owemdjee/r8brain-free-src/DLL/r8bsrc.pas" />
+    <Text Include="../../thirdparty/owemdjee/r8brain-free-src/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/r8brain-free-src/README.md" />
+    <Text Include="../../thirdparty/owemdjee/r8brain-free-src/android30.mk" />
+    <Text Include="../../thirdparty/owemdjee/r8brain-free-src/bench/README.md" />
+    <Text Include="../../thirdparty/owemdjee/r8brain-free-src/linux-x64.mk" />
+    <Text Include="../../thirdparty/owemdjee/r8brain-free-src/macos.mk" />
+    <Text Include="../../thirdparty/owemdjee/r8brain-free-src/other/r8bdoxy.txt" />
+    <Text Include="../../thirdparty/owemdjee/r8brain-free-src/rpi.mk" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

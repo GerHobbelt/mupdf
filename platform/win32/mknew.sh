@@ -1290,6 +1290,35 @@ FFME
 InversePerspectiveMapping
 libchiaroscuramente
 
+QALSH
+QALSH_Mem
+RandomizedRedundantDCTDenoising
+amd-fftw
+butteraugli
+efftw
+epeg
+ffts
+hilbert_hpp
+icer_compression
+ikd-Tree
+imagehash
+jpeg2dct
+kissfft
+learnopencv
+libInterpolate
+libjpegqs
+libkdtree
+libzint
+nanoflann_dbscan
+nfft
+pico_tree
+piposort
+r8brain-free-src
+wolfsort
+hilbert_curves
+libhilbert
+tiny-dnn
+
 EOT
 )
 

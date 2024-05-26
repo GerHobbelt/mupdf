@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF66D7BB}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNFFT;NFFT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNFFT;NFFT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNFFT;NFFT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNFFT;NFFT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNFFT;NFFT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNFFT;NFFT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNFFT;NFFT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNFFT;NFFT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNFFT;NFFT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNFFT;NFFT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNFFT;NFFT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNFFT;NFFT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/doxygen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/fastsum/fastsum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/fastsum/fastsum_benchomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/fastsum/fastsum_benchomp_createdataset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/fastsum/fastsum_benchomp_detail.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/fastsum/fastsum_matlab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/fastsum/fastsum_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/fastsum/kernels.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/fastsumS2/fastsumS2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/iterS2/iterS2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/doxygen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri2d/construct_data_2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri2d/construct_data_inh_2d1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri2d/construct_data_inh_3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri2d/reconstruct_data_2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri2d/reconstruct_data_gridding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri2d/reconstruct_data_inh_2d1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri2d/reconstruct_data_inh_3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri2d/reconstruct_data_inh_nnfft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri3d/construct_data_2d1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri3d/construct_data_3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri3d/reconstruct_data_2d1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri3d/reconstruct_data_3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri3d/reconstruct_data_gridding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/quadratureS2/quadratureS2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/doxygen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/fpt/simple_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfft/flags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfft/ndft_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfft/nfft_benchomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfft/nfft_benchomp_createdataset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfft/nfft_benchomp_detail.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfft/nfft_times.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfft/taylor_nfft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfsft/nfsft_benchomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfsft/nfsft_benchomp_createdataset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfsft/nfsft_benchomp_detail.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfsft/simple_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfsft/simple_test_threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfsoft/simple_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nnfft/accuracy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nnfft/simple_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nsfft/nsfft_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nsfft/simple_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/julia/fastsum/libfastsumjulia.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/julia/nfct/libnfctjulia.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/julia/nfft/libnfftjulia.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/julia/nfst/libnfstjulia.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/fpt/fpt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/mri/mri.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/nfct/nfct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/nfft/nfft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/nfsft/legendre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/nfsft/nfsft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/nfsoft/nfsoft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/nfsoft/wigner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/nfst/nfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/nnfft/nnfft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/nsfft/nsfft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/solver/solver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/assert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/bessel_i0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/bspline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/damp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/float.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/int.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/lambda.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/sinc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/vector1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/vector2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/vector3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/voronoi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/util/window.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/matlab/args.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/matlab/fastsum/fastsummex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/matlab/fpt/fptmex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/matlab/malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/matlab/nfct/nfctmex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/matlab/nfft/nfftmex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/matlab/nfsft/nfsftmex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/matlab/nfsoft/nfsoftmex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/matlab/nfst/nfstmex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/matlab/nnfft/nnfftmex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/tests/bessel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/tests/bspline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/tests/check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/tests/check_nfsft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/tests/nfct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/tests/nfft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/tests/nfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/tests/reflect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/tests/util.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/applications/fastsum/fastsum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/applications/fastsum/kernels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/applications/fastsumS2/doxygen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/applications/iterS2/doxygen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/applications/mri/mri2d/doxygen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/applications/mri/mri3d/doxygen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/applications/polarFFT/doxygen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/applications/quadratureS2/doxygen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/examples/solver/doxygen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/include/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/include/cycle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/include/infft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/include/nfft3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/include/nfft3mp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/include/solver_adjoint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/kernel/fpt/fpt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/kernel/nfsft/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/kernel/nfsft/legendre.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/kernel/nfsoft/wigner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/matlab/imex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/tests/bessel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/tests/bspline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/tests/nfct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/tests/nfft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/tests/nfst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/tests/reflect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/tests/util.h" />
+    <Image Include="../../thirdparty/owemdjee/nfft/doc/assets/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/nfft/doc/assets/sphere.png" />
+    <Text Include="../../thirdparty/owemdjee/nfft/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/nfft/CONVENTIONS.md" />
+    <Text Include="../../thirdparty/owemdjee/nfft/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/nfft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/nfft/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/README.md" />
+    <Text Include="../../thirdparty/owemdjee/nfft/aminclude.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/fastgauss/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/fastgauss/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/fastgauss/fastgauss.c.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/fastsum/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/fastsum/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/fastsumS2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/fastsumS2/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/fastsumS2/example.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/iterS2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/iterS2/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/mri/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/mri/mri2d/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/mri/mri2d/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/mri/mri3d/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/mri/mri3d/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/polarFFT/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/polarFFT/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/polarFFT/linogram_fft_test.c.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/polarFFT/mpolar_fft_test.c.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/polarFFT/polar_fft_test.c.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/quadratureS2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/quadratureS2/example.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/radon/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/radon/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/radon/inverse_radon.c.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/applications/radon/radon.c.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/bootstrap.sh" />
+    <Text Include="../../thirdparty/owemdjee/nfft/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/nfft/doc/assets/sphere.pdf" />
+    <Text Include="../../thirdparty/owemdjee/nfft/doxygen.dox" />
+    <Text Include="../../thirdparty/owemdjee/nfft/doxygen/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/doxygen/doxygen.Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/doxygen/doxygen.css" />
+    <Text Include="../../thirdparty/owemdjee/nfft/doxygen/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/nfft/doxygen/header.html" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/fpt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/mri/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nfct/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nfct/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nfct/simple_test.c.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nfft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nfft/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nfft/simple_test.c.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nfft/simple_test_threads.c.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nfsft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nfsoft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nfsoft/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nfst/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nfst/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nfst/simple_test.c.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nnfft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nnfft/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nsfft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/nsfft/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/solver/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/solver/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/solver/glacier.c.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/examples/solver/simple_test.c.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/include/doxygen.dox" />
+    <Text Include="../../thirdparty/owemdjee/nfft/include/ticks.h.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/README.md" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/fastsum/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/fastsum/fastsum.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/fastsum/simple_test.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfct/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfct/NFCT.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfct/simple_test_1d.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfct/simple_test_2d.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfct/simple_test_3d.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfft/NFFT.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfft/README.md" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfft/simple_test_1d.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfft/simple_test_2d.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfft/simple_test_3d.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfst/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfst/NFST.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfst/simple_test_1d.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfst/simple_test_2d.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfst/simple_test_3d.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/kernel/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/kernel/fpt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/kernel/mri/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/kernel/nfct/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/kernel/nfft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/kernel/nfsft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/kernel/nfsoft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/kernel/nfst/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/kernel/nnfft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/kernel/nsfft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/kernel/solver/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/kernel/util/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/linux-build-mex.sh" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/amx_prog_as.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_cc_blocks.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_cc_maxopt.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_check_compiler_flags.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_check_dir.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_compiler_vendor.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_count_cpus.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_cunit.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_gcc_aligns_stack.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_gcc_archflag.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_gcc_version.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_gcc_x86_cpuid.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_lib_fftw3.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_nfft_module.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_openmp.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_prog_doxygen.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_prog_matlab.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/macos-build-mex.sh" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/fastsum/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/fpt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/infft1d/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/infft1d/README" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/nfct/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/nfft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/nfsft/@f_hat/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/nfsft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/nfsoft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/nfst/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/nnfft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/tests/check_nfft_matlab.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/tests/check_nfft_octave.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/tests/check_nfsft_matlab.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/tests/check_nfsft_octave.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/tests/check_nfsoft_matlab.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/tests/check_nfsoft_octave.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/tests/nfftUnitTests.m.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/matlab/tests/nfsftUnitTests.m.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/nfft3.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/copyright.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/copyright_m4.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/copyright_matlab.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/copyright_matlab_single_line.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/fpt.dox" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/mri.dox" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/nfct.dox" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/nfft.dox" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/nfsft.dox" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/nfsoft.dox" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/nfst.dox" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/nnfft.dox" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/nsfft.dox" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/solver.dox" />
+    <Text Include="../../thirdparty/owemdjee/nfft/support/update_copyright.sh" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/cunit2junit.xsl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_10_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_10_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_10_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_1_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_1_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_1_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_1_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_25_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_25_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_25_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_25_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_2_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_2_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_2_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_2_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_4_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_4_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_4_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_4_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_50_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_50_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_50_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_1d_50_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_2d_10_10_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_2d_10_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_2d_10_25_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_2d_10_25_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_2d_25_10_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_2d_25_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_2d_25_25_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_2d_25_25_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_3d_10_10_10_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_10_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_10_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_10_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_1_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_1_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_1_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_1_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_25_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_25_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_25_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_25_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_2_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_2_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_2_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_2_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_4_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_4_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_4_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_4_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_50_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_50_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_50_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_1d_50_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_2d_10_10_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_2d_10_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_2d_10_25_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_2d_10_25_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_2d_25_10_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_2d_25_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_2d_25_25_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_2d_25_25_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfct_adjoint_3d_10_10_10_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_10_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_10_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_10_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_1_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_1_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_1_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_1_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_20_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_20_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_20_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_20_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_2_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_2_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_2_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_2_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_4_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_4_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_4_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_4_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_50_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_50_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_50_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_1d_50_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_2d_10_10_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_2d_10_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_2d_10_20_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_2d_10_20_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_2d_20_10_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_2d_20_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_2d_20_20_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_2d_20_20_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_3d_10_10_10_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_10_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_10_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_10_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_1_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_1_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_1_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_1_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_20_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_20_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_20_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_20_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_2_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_2_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_2_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_2_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_4_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_4_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_4_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_4_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_50_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_50_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_50_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_1d_50_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_2d_10_10_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_2d_10_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_2d_10_20_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_2d_10_20_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_2d_20_10_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_2d_20_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_2d_20_20_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_2d_20_20_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfft_adjoint_3d_10_10_10_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_10_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_10_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_10_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_25_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_25_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_25_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_25_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_2_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_2_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_2_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_2_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_4_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_4_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_4_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_4_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_50_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_50_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_50_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_1d_50_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_2d_10_10_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_2d_10_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_2d_10_25_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_2d_10_25_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_2d_25_10_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_2d_25_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_2d_25_25_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_2d_25_25_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_3d_10_10_10_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_10_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_10_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_10_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_25_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_25_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_25_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_25_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_2_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_2_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_2_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_2_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_4_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_4_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_4_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_4_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_50_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_50_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_50_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_1d_50_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_2d_10_10_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_2d_10_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_2d_10_25_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_2d_10_25_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_2d_25_10_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_2d_25_10_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_2d_25_25_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_2d_25_25_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/tests/data/nfst_adjoint_3d_10_10_10_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/nfft/windows-build-dll.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

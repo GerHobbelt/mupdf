@@ -1,0 +1,1046 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF5256A7}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/2of5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/auspost.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/aztec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/bc412.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/bmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/codablock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/code.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/code1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/code128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/code16k.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/code49.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/composite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/dllversion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/dmatrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/dotcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/eci.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/emf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/filemem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/general_field.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/gif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/gridmtx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/gs1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/hanxin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/imail.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/large.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/library.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/mailmark.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/maxicode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/medical.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/output.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/pcx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/pdf417.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/plessey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/postal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/ps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/qr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/raster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/reedsol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/rss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/svg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/telepen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_2of5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_auspost.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_aztec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_bc412.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_big5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_bmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_channel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_codablock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_code.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_code1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_code128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_code16k.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_code49.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_composite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_dmatrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_dotcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_eci.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_emf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_filemem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_gb18030.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_gb2312.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_gif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_gridmtx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_gs1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_hanxin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_imail.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_iso3166.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_iso4217.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_ksx1001.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_large.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_library.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_mailmark.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_maxicode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_medical.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_output.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_pcx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_pdf417.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_plessey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_postal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_ps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_qr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_raster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_reedsol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_rss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_sjis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_svg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_telepen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_tif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_ultra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_upcean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/testcommon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/ultra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/upcean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend_qt/qzint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend_qt/tests/test_qzint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend_tcl/zint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/extras/cuecat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/extras/daft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/extras/ida_2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/extras/kartrak.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/extras/stroke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/extras/sunburst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/extras/zebu_pdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend/tests/test_args.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/barcodeitem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/cliwindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/datawindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/exportwindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/mainwindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/scalewindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/sequencewindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/getopt/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/getopt/getopt1.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/aztec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/big5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/bmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/channel_precalcs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/code1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/code128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/code49.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/composite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/dmatrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/dmatrix_trace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/eci.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/eci_sb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/emf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/filemem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/fonts/normal_ttf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/fonts/normal_woff2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/fonts/upcean_ttf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/fonts/upcean_woff2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/gb18030.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/gb2312.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/gbk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/general_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/gridmtx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/gs1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/gs1_lint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/hanxin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/iso3166.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/iso4217.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/ksx1001.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/large.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/maxicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/pcx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/pdf417.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/pdf417_tabs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/pdf417_trace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/qr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/raster_font.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/reedsol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/reedsol_logs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/rss.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/sjis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/tests/test_big5_tab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/tests/test_gb18030_tab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/tests/test_gb2312_tab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/tests/test_gbk_tab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/tests/test_ksx1001_tab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/tests/test_sjis_tab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/tests/testcommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/tif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/tif_lzw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/zfiletypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/zint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/zintconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend_qt/qzint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/barcodeitem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/cliwindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/datawindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/exportwindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/mainwindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/scalewindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/sequencewindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/getopt/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libzint/win32/zint_cmdline_vc6/resource.h" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/bmp/pdf417_fg_bg.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/bmp/pdf417comp_hvwsp2.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/bmp/ultracode_fg_bg.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/bmp/ultracode_fg_bg_hvwsp1_box1.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/code16k_height0.5_wsp3_vwsp5.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/code16k_height1.5_wsp3_vwsp5.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/datamatrix_seq2of9.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_1.0.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_1.0_ds0.1.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_1.0_ds1.1.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_1.5.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_1.5_ds0.4.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_1.5_ds1.1.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_1.5_ds2.1.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_2.0.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_2.0_ds0.9.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_2.0_ds1.1.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_3.0.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_3.0_ds0.4.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_3.0_ds1.1.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_3.5.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_3.5_ds0.4.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_3.5_ds1.1.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_5.0.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_5.0_ds0.2.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_5.0_ds1.1.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_5.0_ds1.7.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_bgfgalpha.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_bgfgtrans.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_bgtrans.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_cmyk_fg.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dotcode_fgtrans.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/dpd_compliant.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/itf14_height0.5_1.1.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/itf14_height0.5_box0_0.5.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/itf14_height61.8_bind4_wsp24_3.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/ultra_fgbg_hvwsp1_box1.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/ultra_fgbg_hvwsp1_box1_bgfgtrans.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/ultra_fgbg_hvwsp1_box1_bgtrans.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/ultra_fgbg_hvwsp1_box1_fgtrans.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/gif/ultra_rev2.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/aztec.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/aztec_z1_seq4of7.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/channel_cmyk_nobg.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/codablockf_3rows.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/codablockf_hvwsp2.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/codablockf_hvwsp2_box2.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/code128_egrave_bold.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/code128_egrave_bold_box3.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/code128_egrave_bold_hvwsp2_box2.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/code39_small.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/datamatrix_2.0_bind1_dotty.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/datamatrix_2.0_hvwsp1_bind1_dotty.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/dbar_ltd.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/dpd_compliant.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean13_2addon_ggs_5.2.2.5.1-2.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean13_2addon_ggs_5.2.2.5.1-2_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean13_5addon_ggs_5.2.2.5.2-2.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean13_5addon_ggs_5.2.2.5.2-2_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean13_cc_2addon_cca_4x4.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean13_cc_2addon_cca_4x4_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean13_cc_5addon_ccb_3x4.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean13_cc_5addon_ccb_3x4_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean13_cc_5addon_ccb_3x4_notext.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean13_cc_cca_5x4.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean13_cc_cca_5x4_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean13_ggs_5.2.2.1-1.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean13_ggs_5.2.2.1-1_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean2.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean2_box1.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean2_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean5.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean5_bind2.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean5_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean8_2addon.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean8_2addon_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean8_5addon.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean8_5addon_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean8_cc_2addon_cca_4x3.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean8_cc_2addon_cca_4x3_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean8_cc_5addon_ccb_8x3.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean8_cc_5addon_ccb_8x3_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean8_gss_5.2.2.2-1.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ean8_gss_5.2.2.2-1_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/gs1_128_cc_fig12.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/imail_height7.75.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/maxicode_0.5.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/maxicode_0.7_wsp3_box1.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/maxicode_1.4_bgfgalpha.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/maxicode_2.1.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/maxicode_hvwsp1_box2.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/maxicode_vwsp1_bind1.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/pdf417_#204.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/pdf417_bgalpha.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/pdf417_bgfgalpha.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/pdf417_fgalpha.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/pdf417_height5.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/postnet_zip.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ultra_bgalpha.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ultra_bgfgalpha.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ultra_fgalpha.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ultra_fgalpha_hvwsp1_bindtop1.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ultra_fgalpha_hvwsp1_box1.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ultra_fgalpha_nobg.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ultra_hvwsp1_box1.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/ultra_odd.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upca_2addon_ggs_5.2.6.6-5.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upca_2addon_ggs_5.2.6.6-5_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upca_5addon.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upca_5addon_bind3.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upca_5addon_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upca_5addon_notext.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upca_cc_2addon_cca_3x4.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upca_cc_2addon_cca_3x4_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upca_cc_5addon_ccb_4x4.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upca_cc_5addon_ccb_4x4_bind3.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upca_cc_5addon_ccb_4x4_notext.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upce_2addon.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upce_2addon_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upce_5addon.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upce_5addon_small.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upce_5addon_small_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upce_cc_2addon_cca_5x2.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upce_cc_2addon_cca_5x2_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upce_cc_5addon_ccb_8x2.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upce_cc_5addon_ccb_8x2_gws.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/png/upce_cc_5addon_ccb_8x2_notext.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/bmp/code128_aim.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/bmp/dotcode_aim_fig7.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/bmp/maxicode_fig_2.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/bmp/qr_v1_m.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/bmp/ultracode_a.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/gif/code128_aim.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/gif/dotcode_aim_fig7.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/gif/maxicode_fig_2.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/gif/qr_v1_m.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/gif/ultracode_a.gif" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/png/code128_aim.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/png/dotcode_aim_fig7.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/png/maxicode_fig_2.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/png/qr_v1_m.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/png/ultracode_a.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/qr/okapi/version-01.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/qr/okapi/version-02.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/qr/okapi/version-10.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_appearance.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_aztec.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_black_eye.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_c25inter.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_cli_equivalent.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_colour.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_composite.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_data_dialog.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_delete.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_export.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_main.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_menus.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_scaling.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_segs.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_sequence.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_set_printing_scale.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_swap.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_white_eye.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/gui_zap.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/tcl_demo.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/zint-qt.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/docs/images/zint.png" />
+    <Image Include="../../thirdparty/owemdjee/libzint/frontend/zint_black.ico" />
+    <Image Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/zint-qt.ico" />
+    <Image Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/zint_black.ico" />
+    <Image Include="../../thirdparty/owemdjee/libzint/win32/zint_cmdline_vc6/zint_black_vc6.ico" />
+    <Image Include="../../thirdparty/owemdjee/libzint/zint-qt.png" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libzint/backend/libzint.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libzint/frontend/zint.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/qtZint.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libzint/win32/zint_cmdline_vc6/zint.rc" />
+    <Text Include="../../thirdparty/owemdjee/libzint/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libzint/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libzint/README" />
+    <Text Include="../../thirdparty/owemdjee/libzint/README.bsd" />
+    <Text Include="../../thirdparty/owemdjee/libzint/README.clang-tidy" />
+    <Text Include="../../thirdparty/owemdjee/libzint/README.linux" />
+    <Text Include="../../thirdparty/owemdjee/libzint/README.macos" />
+    <Text Include="../../thirdparty/owemdjee/libzint/README.windows" />
+    <Text Include="../../thirdparty/owemdjee/libzint/SetPaths.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libzint/TODO" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/Makefile.mingw" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/fonts/OCRB-16.bdf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/fonts/OCRB-18.bdf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/README" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/cmake/Modules/FindLibZint.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/code128_egrave_bold.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/code128_egrave_bold_100dpi.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/code128_egrave_bold_1200dpi.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/code128_egrave_bold_150dpi.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/code128_egrave_bold_300dpi.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/code128_egrave_bold_400dpi.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/code39_rotate_180.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/code39_rotate_270.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/code39_rotate_90.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/code39_rotate_90_300dpi.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/ean13_5addon_#185.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/ean13_5addon_ggs_5.2.2.5.2-2.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/ean13_5addon_ggs_5.2.2.5.2-2_gws.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/ean13_ggs_5.2.2.1-1.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/ean13_ggs_5.2.2.1-1_gws.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/ean8_gss_5.2.2.2-1.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/ean8_gss_5.2.2.2-1_gws.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/ean8_gss_5.2.2.2-1_gws_sc2_5.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/ean8_gss_5.2.2.2-1_gws_wsw3.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/itf14_bold.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/itf14_bold_600dpi.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/maxicode_#185.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/maxicode_#185_150dpi.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/maxicode_#185_600dpi.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/maxicode_rotate_90_nobg.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/maxicode_rotate_90_nobg_300dpi.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/telenum_fg_bg.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/telenum_fg_bg_150dpi.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/ultracode_fg_bg.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/ultracode_fg_bg_box2.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/ultracode_fg_bg_box2_600dpi.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/upca_2addon_ggs_5.2.6.6-5.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/upca_2addon_ggs_5.2.6.6-5_gws.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/upca_2addon_ggs_5.2.6.6-5_gws_wsw1h2.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/upce_2addon.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/upce_2addon_150dpi.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/upce_2addon_gws.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/upce_2addon_small_bold.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/upce_2addon_small_bold_gws.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/emf/upu_s10_cmyk_nobg.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/code128_egrave_bold.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/code128_egrave_bold_rotate_180.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/code128_egrave_bold_rotate_270.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/code128_egrave_bold_rotate_90.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/code128_escape_latin1.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/code39_fg_bg.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/code39_fgalpha_bg_cmyk.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/code39_nobg_cmyk.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/code39_small.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dbar_ltd_24724_fig7_bold.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_0.1.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_1.0.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_1.0_ds0.1.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_1.0_ds1.1.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_1.5.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_1.5_ds0.4.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_1.5_ds1.1.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_1.5_ds2.1.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_2.0.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_2.0_ds0.9.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_2.0_ds1.1.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_3.0.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_3.0_ds0.4.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_3.0_ds1.1.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_3.5.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_3.5_ds0.4.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_3.5_ds1.1.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_5.0.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_5.0_ds0.2.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_5.0_ds1.1.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_5.0_ds1.7.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/dotcode_no_bg.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/ean13_2addon_ggs_5.2.2.5.1-2.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/ean13_2addon_ggs_5.2.2.5.1-2_gws.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/ean13_ggs_5.2.2.1-1.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/ean13_ggs_5.2.2.1-1_gws.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/ean5.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/ean5_gws.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/ean8_gss_5.2.2.2-1.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/ean8_gss_5.2.2.2-1_gws.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/ean8_gss_5.2.2.2-1_gws_wsw3.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/maxicode_2.4_rotate_90.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/maxicode_no_bg_hwsp3_rotate_180.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/maxicode_rotate_270_cmyk.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/ultra_fg_bg.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/ultra_fg_bg_box.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/ultra_fg_bg_box_cmyk.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/upca_2addon_ggs_5.2.6.6-5.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/upca_2addon_ggs_5.2.6.6-5_gws.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/upca_2addon_ggs_5.2.6.6-5_gws_rotate_180.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/upca_2addon_ggs_5.2.6.6-5_gws_rotate_270_wsw4.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/upca_2addon_ggs_5.2.6.6-5_gws_wsw1h3.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/upca_2addon_ggs_5.2.6.6-5_rotate_90.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/upce_5addon.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/upce_5addon_gws.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/upce_5addon_rotate_270.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/upce_5addon_small_bold.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/eps/upce_5addon_small_bold_gws.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/imail/usps/uspsIMbEncoderTestCases.csv" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/pcx/code11_fgbgtrans.pcx" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/pcx/codeblockf_reverse.pcx" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/pcx/gridmatrix_fg_0.75.pcx" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/pcx/qr_bg.pcx" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/pcx/ultra_fg_bg_hvwsp1_box1.pcx" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/emf/code128_aim.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/emf/dotcode_aim_fig7.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/emf/maxicode_fig_2.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/emf/qr_v1_m.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/emf/ultracode_a.emf" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/eps/code128_aim.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/eps/dotcode_aim_fig7.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/eps/maxicode_fig_2.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/eps/qr_v1_m.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/eps/ultracode_a.eps" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/pcx/code128_aim.pcx" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/pcx/dotcode_aim_fig7.pcx" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/pcx/maxicode_fig_2.pcx" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/pcx/qr_v1_m.pcx" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/pcx/ultracode_a.pcx" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/svg/code128_aim.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/svg/dotcode_aim_fig7.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/svg/maxicode_fig_2.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/svg/qr_v1_m.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/svg/ultracode_a.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/tif/code128_aim.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/tif/dotcode_aim_fig7.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/tif/maxicode_fig_2.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/tif/qr_v1_m.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/tif/ultracode_a.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/txt/code128_aim.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/txt/dotcode_aim_fig7.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/txt/maxicode_fig_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/txt/qr_v1_m.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/print/txt/ultracode_a.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/channel_cmyk_nobg.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/codablockf_3rows.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/codablockf_comph_sep2_fgbgalpha.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/codablockf_hvwsp2.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/codablockf_hvwsp2_box2.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/code128_amperands.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/code128_egrave_bold.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/code128_egrave_bold_box3.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/code128_egrave_bold_embed.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/code128_egrave_bold_hvwsp2_box2.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/code128_egrave_bold_hvwsp3.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/code39_small.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/code49_comph_fgalpha.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/datamatrix_hvwsp1_bind1_dotty.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/datamatrix_vwsp1_bind1_dotty.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/dbar_ltd.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/dpd_compliant.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_2addon_ggs_5.2.2.5.1-2.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_2addon_ggs_5.2.2.5.1-2_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_5addon_ggs_5.2.2.5.2-2.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_5addon_ggs_5.2.2.5.2-2_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_cc_2addon_cca_4x4.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_cc_2addon_cca_4x4_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_cc_5addon_ccb_3x4.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_cc_5addon_ccb_3x4_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_cc_5addon_ccb_3x4_notext.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_cc_cca_5x4.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_cc_cca_5x4_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_ggs_5.2.2.1-1.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_ggs_5.2.2.1-1_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean13_ggs_5.2.2.1-1_gws_embed.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean2.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean2_box1.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean2_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean5.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean5_bind2.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean5_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean8_2addon.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean8_2addon_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean8_5addon.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean8_5addon_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean8_cc_2addon_cca_4x3.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean8_cc_2addon_cca_4x3_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean8_cc_5addon_ccb_8x3.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean8_cc_5addon_ccb_8x3_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean8_gss_5.2.2.2-1.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ean8_gss_5.2.2.2-1_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/gs1_128_cc_fig12.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/imail_height7.75.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/maxicode_box2.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/maxicode_fgbg_rotate_90.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/maxicode_vwsp1_bind1.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/pdf417_height5.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/postnet_zip.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/telepen_height0.4_rotate_180.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/ultra_fgbg_hvwsp2_box3.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upca_2addon_ggs_5.2.6.6-5.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upca_2addon_ggs_5.2.6.6-5_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upca_5addon.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upca_5addon_bind3.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upca_5addon_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upca_5addon_small_bold.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upca_cc_2addon_cca_3x4.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upca_cc_2addon_cca_3x4_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upca_cc_5addon_ccb_4x4.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upca_cc_5addon_ccb_4x4_bind3.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upca_cc_5addon_ccb_4x4_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upca_cc_5addon_ccb_4x4_notext.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_2addon.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_2addon_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_5addon.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_5addon_notext.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_5addon_small.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_5addon_small_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_cc_2addon_cca_5x2.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_cc_2addon_cca_5x2_fgbgalpha.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_cc_2addon_cca_5x2_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_cc_2addon_cca_5x2_nobg.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_cc_2addon_cca_5x2_rotate_270.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_cc_5addon_ccb_8x2.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_cc_5addon_ccb_8x2_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/svg/upce_cc_5addon_ccb_8x2_notext.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/aztec_v32_fg.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/code128_bgalpha.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/code128_cmyk.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/code128_cmyk_fgbg.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/code128_cmyk_fgbgalpha.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/code128_cmyk_fgbgcmyk.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/code128_fgalpha.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/code128_fgbg.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/code128_fgbgalpha.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/code128_reverse.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/daft_height1_scale0.5.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/daft_height8_scale0.5.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/ean8_gss_5.2.2.2-1.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/ean8_gss_5.2.2.2-1_gws.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/hanxin_v84_l4_scale2.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/ultra_bgalpha.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/ultra_bgalpha_nofg.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/ultra_cmyk.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/ultra_cmyk_bgalpha.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/ultra_fgalpha.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/ultra_fgalpha_nobg.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/ultra_fgbg_hvwsp1_box1.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/ultra_fgbgalpha.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/data/tif/ultra_odd.tif" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/tools/run_bwipp_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/tools/run_zxingcpp_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tools/data/GB18030.TXT.README" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tools/data/GB2312.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend/tools/data/GB2312.TXT.README" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_qt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_qt/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/aclocal.m4" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/demo/demo.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/lib/zint/pkgIndex.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/licence.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/pkgIndex.tcl.in" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/tclconfig/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/tclconfig/tcl.m4" />
+    <Text Include="../../thirdparty/owemdjee/libzint/cmake/zint_add_test.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libzint/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libzint/debian/changelog" />
+    <Text Include="../../thirdparty/owemdjee/libzint/debian/zint-devel.install" />
+    <Text Include="../../thirdparty/owemdjee/libzint/debian/zint-qt-devel.install" />
+    <Text Include="../../thirdparty/owemdjee/libzint/debian/zint-qt.install" />
+    <Text Include="../../thirdparty/owemdjee/libzint/debian/zint.install" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/README" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/auspost.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/ausredirect.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/ausreply.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/ausroute.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/azrune.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/aztec.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/aztec_segs.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/bc412.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/c25iata.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/c25ind.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/c25inter.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/c25logic.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/c25standard.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/cepnet.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/channel.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/codabar.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/codablockf.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code11.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code128.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code128_box.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code128_embedfont.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code128_green.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code128_green_alpha.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code128_rotate90.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code128_small_bold.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code128_stacked.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code128_stacked_sep2.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code128_textgap.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code128ab.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code16k.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code32.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code39.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code49.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/code93.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/codeone.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/codeone_s_dotty.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/daft_rm4scc.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/datamatrix_big5.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/datamatrix_euro.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/datamatrix_structapp.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dbar_exp.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dbar_expstk.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dbar_ltd.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dbar_omn.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dbar_omnstk.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dbar_stk.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dbar_truncated.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dotcode.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dpd.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dpident.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dpleit.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/ean14.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/eanx13.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/eanx5.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/eanx8_5.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/eanx8_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/eanx_cc_a.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/eanx_cc_b.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/excode39.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/fim.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/flat.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/gridmatrix.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/gs1_128.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/gs1_128_cc_c.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/hanxin.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/hibc_128.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/hibc_39.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/hibc_dm.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/isbnx.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/isbnx_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/itf14.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/itf14_border0.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/japanpost.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/kix.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/koreapost.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/logmars.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/mailmark_2d.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/mailmark_4s.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/maxicode.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/micropdf417.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/microqr.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/msi_plessey.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/nve18.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/pdf417.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/pdf417_heightperrow.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/pdf417comp.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/pharma.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/pharma_two.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/planet.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/plessey.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/postnet.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/pzn.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/qrcode.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/qrcode_binary_utf8.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/qrcode_box.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/rm4scc.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/rmqr.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/telepen.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/telepen_num.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/ultra.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/upca.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/upca_5.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/upca_5_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/upce.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/upce_2_gws.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/upnqr.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/upu_s10.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/usps_imail.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/vin.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/zint-qt.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/zint.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/inc_before_body_html.html" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/inc_before_body_pdf.tex" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/inc_header_pdf.tex" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/inc_header_txt.tex" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/manual.html" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/manual.pmd" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/manual.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/templates/default.html" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/templates/styles.html" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/zint.1" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/zint.1.pmd" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/zint_images.sh" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/zint_org_uk.py" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/zint_org_uk.sh" />
+    <Text Include="../../thirdparty/owemdjee/libzint/extras/README" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend/Makefile.mingw" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend/isotest.sh" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend/tests/README" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend/tests/cmake/Modules/FindLibZint.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/Inno_Setup_qtzint.iss" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/howto_build_qzint_using_msvs2015.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/images/scalable/zint-qt.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/mac_icons.sh" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/black-eye.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/check.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/copy.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/delete.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/download.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/folder.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/help-circle.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/menu.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/monitor-bg.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/scaling.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/shuffle.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/white-eye.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/x.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/zap.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/zint-qt.icns" />
+    <Text Include="../../thirdparty/owemdjee/libzint/getopt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/win32/README" />
+    <Text Include="../../thirdparty/owemdjee/libzint/win32/test.bat" />
+    <Text Include="../../thirdparty/owemdjee/libzint/win32/vs2017/SetWindowsTargetPlatformVersion.props" />
+    <Text Include="../../thirdparty/owemdjee/libzint/win32/zint_cmdline_vc6/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/win32/zint_cmdline_vc6/zint_black.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/win32/zint_cmdline_vc6/zint_cmdline_vc6.dsw" />
+    <Text Include="../../thirdparty/owemdjee/libzint/zint-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libzint/zint.nsi" />
+    <Text Include="../../thirdparty/owemdjee/libzint/zint.spec" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
