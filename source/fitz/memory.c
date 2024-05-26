@@ -193,8 +193,9 @@ fz_free(fz_context *ctx, const void *p)
 	}
 }
 
+#undef fz_malloc_aligned
 /* align is assumed to be a power of 2. */
-void *fz_malloc_aligned(fz_context *ctx, size_t size, int align)
+void *fz_malloc_aligned(fz_context *ctx, size_t size, int align   FZDBG_DECL_ARGS)
 {
 	uint8_t *block;
 	uint8_t *aligned;
@@ -207,7 +208,7 @@ void *fz_malloc_aligned(fz_context *ctx, size_t size, int align)
 	if ((align & (align-1)) != 0)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Alignment must be a power of 2");
 
-	block = fz_malloc(ctx, size + align);
+	block = fz_malloc(ctx, size + align   FZDBG_PASS);
 
 	aligned = (void *)((intptr_t)(block + align-1) & ~(align-1));
 	if (aligned == block)

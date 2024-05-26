@@ -975,7 +975,11 @@ void *fz_realloc_no_throw(fz_context *ctx, void *p, size_t size   FZDBG_DECL_ARG
 	fz_malloc equivalent, except that the block is guaranteed aligned.
 	Block must be freed later using fz_free_aligned.
 */
-void *fz_malloc_aligned(fz_context *ctx, size_t size, int align);
+void *fz_malloc_aligned(fz_context *ctx, size_t size, int align   FZDBG_DECL_ARGS);
+#if defined(FZDBG_HAS_TRACING)
+#define fz_malloc_aligned(ctx, size, align)					\
+    fz_malloc_aligned(ctx, size, align, __FILE__, __LINE__)
+#endif
 
 /**
 	fz_free equivalent, for blocks allocated via fz_malloc_aligned.
