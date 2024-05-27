@@ -1318,6 +1318,8 @@ wolfsort
 hilbert_curves
 libhilbert
 tiny-dnn
+1D-RGB-color-gradient
+2D-color-gradient-or-Procedural-texture
 
 EOT
 )
@@ -1388,8 +1390,6 @@ EOT
 misclist=$(
 grep -v '#' <<EOT
 
-1D-RGB-color-gradient
-2D-color-gradient-or-Procedural-texture
 LeptonicaDocsSite
 UnofficialLeptDocs
 archive-hocr-tools
