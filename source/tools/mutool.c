@@ -74,6 +74,8 @@
 #include "../../thirdparty/owemdjee/gumbo-query/example/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/linenoise/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/replxx/examples/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/fph-table/tests/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/cpptoml/examples/monolithic_examples.h"
 #include "../../source/fitz/tessocr.h"
 #include "../../thirdparty/gumbo-parser/src/gumbo.h"
 #include "../../thirdparty/owemdjee/gumbo-libxml/gumbo_libxml.h"
@@ -892,6 +894,19 @@ static struct tool_spec {
 	{ {.fa = libbf_bench_main }, "bf_bench", "libbf benchmark tool" },
 	{ {.fa = libbf_test_main }, "bf_test", "libbf test tool" },
 	{ {.fa = libbf_tinypi_main }, "bf_tinypi", "libbf tiny PI demo" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.f = fph_bits_array_test_main }, "fph_bits_array_test", "fph bits array test" },
+	{ {.f = fph_sample_test_main }, "fph_sample_test", "fph sample test" },
+	{ {.f = fph_tests_main }, "fph_tests", "fph tests" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = cpptoml_build_toml_example_main }, "cpptoml_build_toml_example", "cpptoml build_toml example" },
+	{ {.fa = cpptoml_parse_example_main }, "cpptoml_parse_example", "cpptoml parse example" },
+	{ {.f = cpptoml_conversions_example_main }, "cpptoml_conversions_example", "cpptoml conversions example" },
+	{ {.f = cpptoml_parse_stdin_example_main }, "cpptoml_parse_stdin_example", "cpptoml parse_stdin example" },
 #endif
 
 #if defined(MUTOOL_EX)
