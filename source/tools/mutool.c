@@ -72,6 +72,8 @@
 #include "../../thirdparty/owemdjee/spdlog/include/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libchaos/include/chaos/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/gumbo-query/example/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/linenoise/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/replxx/examples/monolithic_examples.h"
 #include "../../source/fitz/tessocr.h"
 #include "../../thirdparty/gumbo-parser/src/gumbo.h"
 #include "../../thirdparty/owemdjee/gumbo-libxml/gumbo_libxml.h"
@@ -946,6 +948,15 @@ static struct tool_spec {
 	{ {.fa = csv2_bench_main }, "csv2_bench", "libcsv2 benchmark tool" },
 	{ {.fa = csv2_csv_count_main }, "csv_count", "libcsv2 csv_count row count tool" },
 	{ {.fa = csv2_fieldcount_main }, "csv_fieldcount", "libcsv2 fieldcount tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.f = linenoise_example_main }, "linenoise_example", "linenoise example" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = replxx_c_api_main }, "replxx_c_api", "replxx C API demo" },
+	{ {.fa = replxx_cpp_api_main }, "replxx_cpp_api", "replxx C++ API demo" },
 #endif
 
 #if defined(MUTOOL_EX)
