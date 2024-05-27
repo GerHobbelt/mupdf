@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -77,7 +77,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF;HEIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -124,14 +124,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF;HEIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libheif/srcs/api-cpp;../../thirdparty/owemdjee/libheif/srcs/api/common;../../thirdparty/owemdjee/libheif/srcs/common;../../thirdparty/owemdjee/libheif/srcs/api/reader;../../thirdparty/owemdjee/libheif/srcs/api/writer;../../thirdparty/owemdjee/libheif/srcs/buildinfo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HEIF_BUILDING_LIB;HEIF_WRITER_LIB;HEIF_READER_LIB;BUILD_MONOLITHIC;BUILDING_LIBHEIF;HEIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF;HEIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libheif/srcs/api-cpp;../../thirdparty/owemdjee/libheif/srcs/api/common;../../thirdparty/owemdjee/libheif/srcs/common;../../thirdparty/owemdjee/libheif/srcs/api/reader;../../thirdparty/owemdjee/libheif/srcs/api/writer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -150,15 +150,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF;HEIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libheif/srcs/api-cpp;../../thirdparty/owemdjee/libheif/srcs/api/common;../../thirdparty/owemdjee/libheif/srcs/common;../../thirdparty/owemdjee/libheif/srcs/api/reader;../../thirdparty/owemdjee/libheif/srcs/api/writer;../../thirdparty/owemdjee/libheif/srcs/buildinfo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HEIF_BUILDING_LIB;HEIF_WRITER_LIB;HEIF_READER_LIB;BUILD_MONOLITHIC;BUILDING_LIBHEIF;HEIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF;HEIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libheif/srcs/api-cpp;../../thirdparty/owemdjee/libheif/srcs/api/common;../../thirdparty/owemdjee/libheif/srcs/common;../../thirdparty/owemdjee/libheif/srcs/api/reader;../../thirdparty/owemdjee/libheif/srcs/api/writer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -179,14 +179,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF;HEIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libheif/srcs/api-cpp;../../thirdparty/owemdjee/libheif/srcs/api/common;../../thirdparty/owemdjee/libheif/srcs/common;../../thirdparty/owemdjee/libheif/srcs/api/reader;../../thirdparty/owemdjee/libheif/srcs/api/writer;../../thirdparty/owemdjee/libheif/srcs/buildinfo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HEIF_BUILDING_LIB;HEIF_WRITER_LIB;HEIF_READER_LIB;BUILD_MONOLITHIC;BUILDING_LIBHEIF;HEIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF;HEIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libheif/srcs/api-cpp;../../thirdparty/owemdjee/libheif/srcs/api/common;../../thirdparty/owemdjee/libheif/srcs/common;../../thirdparty/owemdjee/libheif/srcs/api/reader;../../thirdparty/owemdjee/libheif/srcs/api/writer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -205,15 +205,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF;HEIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libheif/srcs/api-cpp;../../thirdparty/owemdjee/libheif/srcs/api/common;../../thirdparty/owemdjee/libheif/srcs/common;../../thirdparty/owemdjee/libheif/srcs/api/reader;../../thirdparty/owemdjee/libheif/srcs/api/writer;../../thirdparty/owemdjee/libheif/srcs/buildinfo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HEIF_BUILDING_LIB;HEIF_WRITER_LIB;HEIF_READER_LIB;BUILD_MONOLITHIC;BUILDING_LIBHEIF;HEIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF;HEIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libheif/srcs/api-cpp;../../thirdparty/owemdjee/libheif/srcs/api/common;../../thirdparty/owemdjee/libheif/srcs/common;../../thirdparty/owemdjee/libheif/srcs/api/reader;../../thirdparty/owemdjee/libheif/srcs/api/writer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -265,53 +265,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-cpp/VideoTrack.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-cpp/XMPItem.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-cpp/helpers.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/AACDecoderConfigJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/AACSampleJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/AVCDecoderConfigJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/AVCImageItemJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/AVCSampleJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/AlternateGroupJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/AlternativeTrackGroupJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/AudioTrackJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/AuxiliaryPropertyJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/CleanAperturePropertyJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/CodedImageItemJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/ColourInformationPropertyJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/DecoderConfigJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/DerivedImageItemJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/EntityGroupJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/EquivalenceGroupJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/ExifItemJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/GridImageItemJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/HEIFJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/HEVCDecoderConfigJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/HEVCImageItemJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/HEVCSampleJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/Helpers.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/IdentityImageItemJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/ImageItemJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/ImageSequenceJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/InputStream.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/ItemJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/ItemPropertyJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/JPEGDecoderConfigJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/JPEGImageItemJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/MPEG7ItemJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/MimeItemJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/MirrorPropertyJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/OutputStream.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/OverlayImageItemJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/PixelAspectRatioJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/PixelInformationPropertyJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/RawPropertyJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/RelativeLocationPropertyJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/RotatePropertyJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/SampleJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/StereoPairGroupJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/TrackJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/VideoSampleJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/VideoTrackJNI.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/XMPItemJNI.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/common/accessibilitytext.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/common/arraydatatype.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif/srcs/common/audiosampleentrybox.cpp" />
@@ -480,9 +433,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libheif/srcs/api-cpp/VideoTrack.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif/srcs/api-cpp/XMPItem.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif/srcs/api-cpp/helpers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/Helpers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/InputStream.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/OutputStream.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif/srcs/api/common/OutputStreamInterface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif/srcs/api/common/heifallocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif/srcs/api/common/heifcommondatatypes.h" />
@@ -635,76 +585,13 @@
     <Text Include="../../thirdparty/owemdjee/libheif/docs/Doxyfile.in" />
     <Text Include="../../thirdparty/owemdjee/libheif/srcs/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-cpp/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/cpp/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/AACDecoderConfig.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/AACSample.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/AVCDecoderConfig.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/AVCImageItem.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/AVCSample.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/AlternateGroup.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/AlternativeTrackGroup.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/AudioSample.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/AudioTrack.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/AuxiliaryProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/Base.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/CleanApertureProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/CodedImageItem.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/ColourInformationProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/DecoderConfig.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/DerivedImageItem.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/DescriptiveProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/EntityGroup.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/EquivalenceGroup.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/ErrorHandler.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/Exception.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/ExifItem.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/FourCC.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/GridImageItem.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/HEIF.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/HEVCDecoderConfig.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/HEVCImageItem.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/HEVCSample.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/ICCColourProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/IdentityImageItem.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/ImageItem.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/ImageSequence.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/Item.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/ItemProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/JPEGDecoderConfig.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/JPEGImageItem.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/MPEG7Item.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/MetaItem.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/MimeItem.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/MirrorProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/NCLXColourProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/OverlayImageItem.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/PixelAspectRatioProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/PixelInformationProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/RawProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/RelativeLocationProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/RotateProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/Sample.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/Size.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/StereoPairGroup.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/Track.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/TransformativeProperty.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/VideoSample.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/VideoTrack.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/XMPItem.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/example/HEIFExample.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/io/ByteArrayInputStream.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/io/ByteArrayOutputStream.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/io/InputStream.java" />
-    <Text Include="../../thirdparty/owemdjee/libheif/srcs/api-java/java/com/nokia/heif/io/OutputStream.java" />
     <Text Include="../../thirdparty/owemdjee/libheif/srcs/buildinfo/buildinfo.hpp.in" />
     <Text Include="../../thirdparty/owemdjee/libheif/srcs/common/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libheif/srcs/examples/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libheif/srcs/reader/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libheif/srcs/writer/CMakeLists.txt" />
-    <Xml Include="../../thirdparty/owemdjee/libheif/build/android/api-java/src/main/AndroidManifest.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
