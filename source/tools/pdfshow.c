@@ -42,7 +42,7 @@ static int showcolumn;
 static int usage(void)
 {
 	fprintf(stderr,
-		"usage: mutool show [options] file.pdf ( trailer | xref | pages | grep | outline | js | form | <path> ) *\n"
+		"usage: mutool show [options] file.pdf ( trailer | xref | pages | grep | outline | js | form | <path> | streams ) *\n"
 		"\t-p -\tpassword\n"
 		"\t-o -\toutput file\n"
 		"\t-e\tleave stream contents in their original form\n"
@@ -227,6 +227,26 @@ static void showgrep(void)
 	fz_write_printf(ctx, out, "trailer ");
 	pdf_print_obj(ctx, out, pdf_trailer(ctx, doc), 1, 1);
 	fz_write_printf(ctx, out, "\n");
+}
+
+static void showstreams(void)
+{
+	int i, len;
+
+	len = pdf_count_objects(ctx, doc);
+	for (i = 0; i < len; i++)
+	{
+		pdf_xref_entry *entry = pdf_get_xref_entry_no_null(ctx, doc, i);
+		if (entry->type == 'n' || entry->type == 'o')
+		{
+			if (pdf_obj_num_is_stream(ctx, doc, i))
+			{
+				fz_write_printf(ctx, out, "%d 0 stream ", i);
+				showstream(i);
+				fz_write_printf(ctx, out, "\n");
+			}
+		}
+	}
 }
 
 static void
@@ -579,6 +599,8 @@ static void show(char *sel)
 		showpages();
 	else if (!strcmp(sel, "grep"))
 		showgrep();
+	else if (!strcmp(sel, "streams"))
+		showstreams();
 	else if (!strcmp(sel, "outline"))
 		showoutline();
 	else if (!strcmp(sel, "js"))
