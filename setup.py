@@ -514,6 +514,14 @@ def get_requires_for_build_wheel(config_settings=None):
     '''
     ret = list()
     ret.append('setuptools')
+    log(f'{ret=}')
+    def platform_release_tuple():
+        r = platform.release()
+        r = r.split('.')
+        r = tuple(int(i) for i in r)
+        log(f'platform_release_tuple() returning {r=}.')
+        return r
+
     if openbsd():
         #print(f'OpenBSD: libclang not available via pip; assuming `pkg_add py3-llvm`.')
         pass
@@ -524,8 +532,13 @@ def get_requires_for_build_wheel(config_settings=None):
         #       f' `clang.cindex.TranslationUnitLoadError: Error parsing translation unit.`'
         #       )
         ret.append('libclang==16.0.6')
+        log(f'{ret=}')
+    elif macos() and platform_release_tuple() < (18,):
+        ret.append('libclang==14.0.6')
+        log(f'{ret=}')
     else:
         ret.append('libclang')
+        log(f'{ret=}')
     if msys2():
         #print(f'msys2: pip install of swig does not build; assuming `pacman -S swig`.')
         pass
@@ -534,6 +547,7 @@ def get_requires_for_build_wheel(config_settings=None):
         pass
     else:
         ret.append( 'swig')
+    log(f'{ret=}')
     return ret
 
 
