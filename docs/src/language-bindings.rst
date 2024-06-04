@@ -1258,7 +1258,7 @@ All generated files are within the MuPDF checkout.
                 mupdfcpp_swig.i
 
             csharp/  [SWIG C# input/output files.]
-                mupdf.cs
+                mupdf.cs    # From SWIG, does not include out-params helpers.
                 mupdfcpp_swig.cpp
                 mupdfcpp_swig.i
 
