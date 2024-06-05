@@ -31,6 +31,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define SWITCH(x) switch ((intptr_t)(x))
+#define CASE(x) case ((intptr_t)(x))
+
 typedef enum
 {
 	AUDIT_UNKNOWN = 0,
@@ -46,12 +49,12 @@ typedef enum
 	AUDIT_COMMENTS,
 	AUDIT_3DCONTENT,
 	AUDIT_NAMED_DESTINATIONS,
-	AUDIT_DOCUMENT_OVERHEAD,
+	AUDIT_DOCUMENT_OVERHEAD, // FIXME
 	AUDIT_COLORSPACES,
 	AUDIT_FORM_XOBJ,
 	AUDIT_EXTGS,
 	AUDIT_PIECE_INFORMATION,
-	AUDIT_EMBEDDED_FILES,
+	AUDIT_EMBEDDED_FILES, // FIXME
 	AUDIT_TRAILER,
 	AUDIT_RESOURCES,
 	AUDIT_OBJSTM,
@@ -1907,17 +1910,17 @@ filter_file(fz_context *ctx, fz_output *out, const char *filename)
 						oi[i].overhead = strlen(text);
 					}
 					type = pdf_dict_get(ctx, entry->obj, PDF_NAME(Type));
-					switch ((intptr_t)type)
+					SWITCH (type)
 					{
-					case (intptr_t)PDF_NAME(ObjStm):
+					CASE(PDF_NAME(ObjStm)):
 						oi[i].type = AUDIT_OBJSTM;
 						break;
 
 					}
 					subtype = pdf_dict_get(ctx, entry->obj, PDF_NAME(Subtype));
-					switch ((intptr_t)subtype)
+					SWITCH (subtype)
 					{
-					case (intptr_t)PDF_NAME(Image):
+					CASE(PDF_NAME(Image)):
 						oi[i].type = AUDIT_IMAGES;
 						break;
 					}
@@ -2075,8 +2078,9 @@ int pdfaudit_main(int argc, char **argv)
 		case 'o': outfile = fz_optarg; break;
 		case 0:
 		{
-			switch((int)(intptr_t)fz_optlong->opaque)
+			SWITCH(fz_optlong->opaque)
 			{
+			// Any future long options go here.
 			default:
 			case 0:
 				assert(!"Never happens");
