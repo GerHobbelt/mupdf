@@ -1937,3 +1937,141 @@ def test_swig():
                 test.i
             ''').replace( '\n', ' \\\n')
             )
+
+def _command_lines( command):
+    '''
+    Process multiline command by running through `textwrap.dedent()`, removes
+    comments (lines starting with `#` or ` #` until end of line), removes
+    entirely blank lines.
+
+    Returns list of lines.
+    '''
+    command = textwrap.dedent( command)
+    lines = []
+    for line in command.split( '\n'):
+        if line.startswith( '#'):
+            h = 0
+        else:
+            h = line.find( ' #')
+        if h >= 0:
+            line = line[:h]
+        if line.strip():
+            line = line.rstrip()
+            jlib.log(f'Appending {line=}.')
+            lines.append(line)
+        else:
+            jlib.log(f'Ignoring empty line: {line=}.')
+    return lines
+
+def run(command):
+    lines = _command_lines( command)
+    import platform
+    sep = ' ' if platform.system() == 'Windows' else '\\\n'
+    command2 = sep.join( lines)
+    return jlib.system(command2)
+
+
+def test_swig():
+    test_i = textwrap.dedent('''
+            int foo(const char* text);
+            %{
+            int foo(const char* text)
+            {
+                printf("foo: %s\\n", text);
+                int l = strlen(text);
+                printf("foo: %i: %s\\n", l, text);
+                for (int i=0; i<l; ++i)
+                {
+                    printf(" %02x", text[i]);
+                }
+                printf("\\n");
+                return l;
+            }
+            %}
+            ''')
+    jlib.fs_update( test_i, 'test.i')
+
+    command = textwrap.dedent(
+            '''
+            swig
+                -Wall
+                -c++
+                -csharp
+                -module test
+                -outdir .
+                -o test.cpp
+                test.i
+            ''')
+    if 0:
+        command = command.replace( '\n', ' \\\n')
+    else:
+        command = command.replace('\n', ' ')
+    run(command)
+
+    import wdev
+    vs = wdev.WindowsVS()
+    cc = f'"{vs.vcvars}"&&"{vs.cl}"'
+    debug = 0
+    path_cpp = 'test.cpp'
+    path_obj = 'test.cpp.obj'
+    includes_text = ''
+    optimise2 = ''
+    debug2 = ''
+    permissive = '/permissive-'
+    defines_text = ''
+    compiler_extra = ''
+    cpp = 1
+    T = '/Tp' if cpp else '/Tc'
+    command = textwrap.dedent(f'''
+            {cc}
+                /c                          # Compiles without linking.
+                /EHsc                       # Enable "Standard C++ exception handling".
+
+                #/MD                         # Creates a multithreaded DLL using MSVCRT.lib.
+                {'/MDd' if debug else '/MD'}
+
+                # Input/output files:
+                {T}{path_cpp}               # /Tp specifies C++ source file.
+                /Fo{path_obj}               # Output file.
+
+                # Include paths:
+                {includes_text}
+
+                # Code generation:
+                {optimise2}
+                {debug2}
+                {permissive}                # Set standard-conformance mode.
+
+                # Diagnostics:
+                #/FC                         # Display full path of source code files passed to cl.exe in diagnostic text.
+                /W3                         # Sets which warning level to output. /W3 is IDE default.
+                /diagnostics:caret          # Controls the format of diagnostic messages.
+                /nologo                     #
+
+                {defines_text}
+                {compiler_extra}
+            ''')
+    #command = command.replace('\n', ' ')
+    run(command)
+
+    libpaths_text = ''
+    path_so = 'foo.dll'
+    debug2 = ''
+    libs_text = ''
+    libpaths_text = ''
+    linker_extra = ''
+    linker = f'"{vs.vcvars}"&&"{vs.link}"'
+    base = 'foo'
+    command = textwrap.dedent(f'''
+            {linker}
+                /DLL
+                /IMPLIB:{base}.lib      # Overrides the default import library name.
+                {libpaths_text}
+                /OUT:{path_so}          # Specifies the output file name.
+                {debug2}
+                /nologo
+                {libs_text}
+                {path_obj}
+                {linker_extra}
+            ''')
+    run(command)
