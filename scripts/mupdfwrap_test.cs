@@ -16,6 +16,20 @@ public class HelloWorld
             throw new System.Exception("rect ToString() is broken: '" + rect + "' != '" + rect.to_string() + "'");
         }
 
+        // Check we can load a document with utf filename. This will have been
+        // set up by scripts/wrap/__main__.py.
+        //byte[] infix_utf8 = {0xef, 0xbf, 0xbd, 0xef, 0xbf, 0xbd, 0xef, 0xbf, 0xbd, 0xef, 0xbf, 0xbd, 0xef, 0xbf, 0xbd};
+        byte[] infix_utf8 = {0xc3, 0xaa, 0xc3, 0x9f, 0xc3, 0xb6, 0xc3, 0xa4, 0xc3, 0xbc} ;
+        string infix = System.Text.Encoding.UTF8.GetString(infix_utf8);
+        string path = "zlib.3." + infix + ".pdf";
+        //System.Console.WriteLine("non-ascii path: zlib.3.êßöäü.pdf");
+        //string path = "zlib.3.êßöäü.pdf";
+
+        System.Console.OutputEncoding = System.Text.Encoding.UTF8;
+        System.Console.WriteLine("Opening non-ascii path: " + path);
+
+        mupdf.FzDocument document2 = new mupdf.FzDocument(path);
+
         // Test conversion to html using docx device.
         var buffer = page.fz_new_buffer_from_page_with_format(
                 "docx",
