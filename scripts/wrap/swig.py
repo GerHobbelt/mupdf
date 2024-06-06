@@ -2010,43 +2010,52 @@ def csharp_settings():
     return csc, mono
 
 def test_swig():
+
     test_i = textwrap.dedent('''
             %module test
+
+            #include <stdio.h>
+            int foo(const char* text);
+
             %{
             int foo(const char* text)
             {
+
                 printf("foo: %s\\n", text);
                 int l = strlen(text);
                 printf("foo: %i: %s\\n", l, text);
                 for (int i=0; i<l; ++i)
                 {
-                    printf(" %02x", text[i]);
+                    const unsigned char* text2 = (const unsigned char*) text;
+                    printf(" %02x", text2[i]);
                 }
                 printf("\\n");
+                fflush(stdout);
                 return l;
             }
             %}
-            int foo(const char* text);
             ''')
     jlib.fs_update( test_i, 'test.i')
     dllimport = 'test.dll'
-    command = textwrap.dedent(
-            f'''
-            swig
-                -D_WIN32
-                -c++
-                -csharp
-                -Wextra
-                -Wall
-                #-module test
-                # -namespace test
-                -dllimport {dllimport}
-                -outdir .
-                -outfile test.cs
-                -o test.cpp
-                test.i
-            ''')
-    run(command)
+
+    if 1:
+        command = textwrap.dedent(
+                f'''
+                swig
+                    -D_WIN32
+                    -c++
+                    -csharp
+                    -Wextra
+                    -Wall
+                    #-module test
+                    # -namespace test
+                    -dllimport {dllimport}
+                    -outdir .
+                    -outfile test.cs
+                    -o test.cpp
+                    test.i
+                ''')
+        run(command)
 
     import wdev
     vs = wdev.WindowsVS()
@@ -2091,7 +2100,8 @@ def test_swig():
                 {defines_text}
                 {compiler_extra}
             ''')
-    run(command)
+    if 1:
+        run(command)
 
     libpaths_text = ''
     path_so = 'test.dll'
@@ -2114,7 +2124,8 @@ def test_swig():
                 {path_obj}
                 {linker_extra}
             ''')
-    run(command)
+    if 1:
+        run(command)
 
     cs = textwrap.dedent('''
             public class HelloWorld
@@ -2122,7 +2133,45 @@ def test_swig():
                 public static void Main(string[] args)
                 {
                     System.Console.WriteLine("MuPDF C# test starting.");
+                    //System.Console.WriteLine("êßöäü");
                     test.foo("hello");
+
+                    byte[] aa = {
+                            0xff,
+                            0xfe,
+                            0xea,
+                            0x00,
+                            0xdf,
+                            0x00,
+                            0xf6,
+                            0x00,
+                            0xe4,
+                            0x00,
+                            0xfc,
+                            0x00,
+                            };
+                    string aaa = System.Text.Encoding.Unicode.GetString(aa);
+                    test.foo("aaa:");
+                    test.foo(aaa);
+                    System.Console.OutputEncoding = System.Text.Encoding.UTF8;
+                    System.Console.WriteLine("aaa: " + aaa);
+
+                    byte[] infix_utf8 = {
+                            0xc3, 0xaa,
+                            0xcf, 0x80,
+                            0xc3, 0x9f,
+                            0xc3, 0xb6,
+                            0xc3, 0xa4,
+                            0xc3, 0xbc
+                            };
+                    string infix = System.Text.Encoding.UTF8.GetString(infix_utf8);
+
+                    System.Console.OutputEncoding = System.Text.Encoding.UTF8;
+                    System.Console.WriteLine("infix: " + infix);
+
+                    test.foo("infix:");
+                    test.foo(infix);
+
                     System.Console.WriteLine("MuPDF C# test finished.");
                 }
             }
