@@ -1971,6 +1971,44 @@ def run(command):
     return jlib.system(command2)
 
 
+def csharp_settings():
+    '''
+    Returns (csc, mono, mupdf_cs).
+
+    csc: C# compiler.
+    mono: C# interpreter ("" on Windows).
+    mupdf_cs: MuPDF C# code.
+
+    E.g. on Windows `csc` can be: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/Roslyn/csc.exe
+    '''
+    # On linux requires:
+    #   sudo apt install mono-devel
+    #
+    # OpenBSD:
+    #   pkg_add mono
+    # but we get runtime error when exiting:
+    #   mono:build/shared-release/libmupdfcpp.so: undefined symbol '_ZdlPv'
+    # which might be because of mixing gcc and clang?
+    #
+    if state.state_.windows:
+        import wdev
+        vs = wdev.WindowsVS()
+        jlib.log('{vs.description_ml()=}')
+        csc = vs.csc
+        jlib.log('{csc=}')
+        assert csc, f'Unable to find csc.exe'
+        mono = ''
+    else:
+        mono = 'mono'
+        if state.state_.linux:
+            csc = 'mono-csc'
+        elif state.state_.openbsd:
+            csc = 'csc'
+        else:
+            assert 0, f'Do not know where to find mono. {platform.platform()=}'
+
+    return csc, mono
+
 def test_swig():
     test_i = textwrap.dedent('''
             int foo(const char* text);
@@ -1990,16 +2028,21 @@ def test_swig():
             %}
             ''')
     jlib.fs_update( test_i, 'test.i')
-
+    dllimport = 'foo.dll'
     command = textwrap.dedent(
-            '''
+            f'''
             swig
+                -D_WIN32
                 -Wall
+                -Wextra
                 -c++
                 -csharp
                 -module test
+                -namespace test
+                -dllimport {dllimport}
                 -outdir .
                 -o test.cpp
+                -outfile test.cs
                 test.i
             ''')
     if 0:
@@ -2051,7 +2094,6 @@ def test_swig():
                 {defines_text}
                 {compiler_extra}
             ''')
-    #command = command.replace('\n', ' ')
     run(command)
 
     libpaths_text = ''
@@ -2062,10 +2104,11 @@ def test_swig():
     linker_extra = ''
     linker = f'"{vs.vcvars}"&&"{vs.link}"'
     base = 'foo'
+    foo_lib = f'{base}.lib'
     command = textwrap.dedent(f'''
             {linker}
                 /DLL
-                /IMPLIB:{base}.lib      # Overrides the default import library name.
+                /IMPLIB:{foo_lib}      # Overrides the default import library name.
                 {libpaths_text}
                 /OUT:{path_so}          # Specifies the output file name.
                 {debug2}
@@ -2075,3 +2118,21 @@ def test_swig():
                 {linker_extra}
             ''')
     run(command)
+
+    cs = textwrap.dedent('''
+            public class HelloWorld
+            {
+                public static void Main(string[] args)
+                {
+                    System.Console.WriteLine("MuPDF C# test starting.");
+
+                    System.Console.WriteLine("MuPDF C# test finished.");
+                }
+            }
+            ''')
+    jlib.fs_write('testfoo.cs', cs)
+
+    csc, mono = csharp_settings()
+    out = 'testfoo.exe'
+    run(f'"{csc}" -out:{out} testfoo.cs test.cs')
+    run(f'{out}')
