@@ -2011,7 +2011,7 @@ def csharp_settings():
 
 def test_swig():
     test_i = textwrap.dedent('''
-            int foo(const char* text);
+            %module test
             %{
             int foo(const char* text)
             {
@@ -2026,29 +2026,37 @@ def test_swig():
                 return l;
             }
             %}
+            int foo(const char* text)
+            {
+                printf("foo: %s\\n", text);
+                int l = strlen(text);
+                printf("foo: %i: %s\\n", l, text);
+                for (int i=0; i<l; ++i)
+                {
+                    printf(" %02x", text[i]);
+                }
+                printf("\\n");
+                return l;
+            }
             ''')
     jlib.fs_update( test_i, 'test.i')
-    dllimport = 'foo.dll'
+    dllimport = 'test.dll'
     command = textwrap.dedent(
             f'''
             swig
                 -D_WIN32
-                -Wall
-                -Wextra
                 -c++
                 -csharp
+                -Wextra
+                -Wall
                 -module test
-                -namespace test
+                # -namespace test
                 -dllimport {dllimport}
                 -outdir .
-                -o test.cpp
                 -outfile test.cs
+                -o test.cpp
                 test.i
             ''')
-    if 0:
-        command = command.replace( '\n', ' \\\n')
-    else:
-        command = command.replace('\n', ' ')
     run(command)
 
     import wdev
@@ -2097,18 +2105,18 @@ def test_swig():
     run(command)
 
     libpaths_text = ''
-    path_so = 'foo.dll'
+    path_so = 'test.dll'
     debug2 = ''
     libs_text = ''
     libpaths_text = ''
     linker_extra = ''
     linker = f'"{vs.vcvars}"&&"{vs.link}"'
-    base = 'foo'
-    foo_lib = f'{base}.lib'
+    base = 'test'
+    test_lib = f'{base}.lib'
     command = textwrap.dedent(f'''
             {linker}
                 /DLL
-                /IMPLIB:{foo_lib}      # Overrides the default import library name.
+                /IMPLIB:{test_lib}      # Overrides the default import library name.
                 {libpaths_text}
                 /OUT:{path_so}          # Specifies the output file name.
                 {debug2}
@@ -2125,7 +2133,7 @@ def test_swig():
                 public static void Main(string[] args)
                 {
                     System.Console.WriteLine("MuPDF C# test starting.");
-
+                    test.foo("hello");
                     System.Console.WriteLine("MuPDF C# test finished.");
                 }
             }
@@ -2134,5 +2142,5 @@ def test_swig():
 
     csc, mono = csharp_settings()
     out = 'testfoo.exe'
-    run(f'"{csc}" -out:{out} testfoo.cs test.cs')
+    run(f'"{csc}" -out:{out} test.cs testfoo.cs')
     run(f'{out}')
