@@ -2026,18 +2026,7 @@ def test_swig():
                 return l;
             }
             %}
-            int foo(const char* text)
-            {
-                printf("foo: %s\\n", text);
-                int l = strlen(text);
-                printf("foo: %i: %s\\n", l, text);
-                for (int i=0; i<l; ++i)
-                {
-                    printf(" %02x", text[i]);
-                }
-                printf("\\n");
-                return l;
-            }
+            int foo(const char* text);
             ''')
     jlib.fs_update( test_i, 'test.i')
     dllimport = 'test.dll'
@@ -2049,7 +2038,7 @@ def test_swig():
                 -csharp
                 -Wextra
                 -Wall
-                -module test
+                #-module test
                 # -namespace test
                 -dllimport {dllimport}
                 -outdir .
