@@ -2133,28 +2133,28 @@ def test_swig():
                 public static void Main(string[] args)
                 {
                     System.Console.WriteLine("MuPDF C# test starting.");
-                    //System.Console.WriteLine("êßöäü");
+                    System.Console.OutputEncoding = System.Text.Encoding.UTF8;
+
                     test.foo("hello");
 
-                    byte[] aa = {
-                            0xff,
-                            0xfe,
-                            0xea,
-                            0x00,
-                            0xdf,
-                            0x00,
-                            0xf6,
-                            0x00,
-                            0xe4,
-                            0x00,
-                            0xfc,
-                            0x00,
+                    byte[] a = {
+                            0xcf,
+                            0x80,
+                            0xc3,
+                            0xaa,
+                            0xc3,
+                            0x9f,
+                            0xc3,
+                            0xb6,
+                            0xc3,
+                            0xa4,
+                            0xc3,
+                            0xbc,
                             };
-                    string aaa = System.Text.Encoding.Unicode.GetString(aa);
-                    test.foo("aaa:");
-                    test.foo(aaa);
-                    System.Console.OutputEncoding = System.Text.Encoding.UTF8;
-                    System.Console.WriteLine("aaa: " + aaa);
+                    string aa = System.Text.Encoding.UTF8.GetString(a);
+                    System.Console.WriteLine("aa: " + aa);
+                    test.foo("aa:");
+                    test.foo(aa);
 
                     byte[] infix_utf8 = {
                             0xc3, 0xaa,
