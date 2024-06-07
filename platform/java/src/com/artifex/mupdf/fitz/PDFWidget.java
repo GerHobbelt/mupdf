@@ -95,7 +95,8 @@ public class PDFWidget extends PDFAnnotation
 	public static final int SIGNATURE_ERROR_SELF_SIGNED = 4;
 	public static final int SIGNATURE_ERROR_SELF_SIGNED_IN_CHAIN = 5;
 	public static final int SIGNATURE_ERROR_NOT_TRUSTED = 6;
-	public static final int SIGNATURE_ERROR_UNKNOWN = 7;
+	public static final int SIGNATURE_ERROR_NOT_SIGNED = 7;
+	public static final int SIGNATURE_ERROR_UNKNOWN = 8;
 
 	// These don't change after creation, so are cached in java fields.
 	private int fieldType;
@@ -251,13 +252,16 @@ public class PDFWidget extends PDFAnnotation
 	}
 	public native int checkCertificate(PKCS7Verifier verifier);
 	public native int checkDigest(PKCS7Verifier verifier);
-	public native boolean incrementalChangeAfterSigning();
+	public native boolean incrementalChangeSinceSigning();
+	public boolean incrementalChangeAfterSigning() {
+		return incrementalChangeSinceSigning();
+	}
 	public boolean verify(PKCS7Verifier verifier) {
 		if (checkDigest(verifier) != PKCS7Verifier.PKCS7VerifierOK)
 			return false;
 		if (checkCertificate(verifier) != PKCS7Verifier.PKCS7VerifierOK)
 			return false;
-		return !incrementalChangeAfterSigning();
+		return !incrementalChangeSinceSigning();
 	}
 	public native PKCS7DistinguishedName getDistinguishedName(PKCS7Verifier verifier);
 	public native boolean incrementalChangesSinceSigning();

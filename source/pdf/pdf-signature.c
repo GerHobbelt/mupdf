@@ -50,6 +50,12 @@ end_annot_op(fz_context *ctx, pdf_annot *annot)
 	pdf_end_operation(ctx, annot->page->doc);
 }
 
+static void
+abandon_annot_op(fz_context *ctx, pdf_annot *annot)
+{
+	pdf_abandon_operation(ctx, annot->page->doc);
+}
+
 void pdf_write_digest(fz_context *ctx, fz_output *out, pdf_obj *byte_range, pdf_obj *field, size_t hexdigest_offset, size_t hexdigest_length, pdf_pkcs7_signer *signer)
 {
 	fz_stream *stm = NULL;
@@ -278,7 +284,7 @@ pdf_sign_signature_with_appearance(fz_context *ctx, pdf_annot *widget, pdf_pkcs7
 	}
 	fz_catch(ctx)
 	{
-		pdf_abandon_operation(ctx, doc);
+		abandon_annot_op(ctx, widget);
 		fz_rethrow(ctx);
 	}
 }
@@ -473,7 +479,7 @@ void pdf_clear_signature(fz_context *ctx, pdf_annot *widget)
 	}
 	fz_catch(ctx)
 	{
-		pdf_abandon_operation(ctx, widget->page->doc);
+		abandon_annot_op(ctx, widget);
 		fz_rethrow(ctx);
 	}
 }
