@@ -113,10 +113,149 @@ static int xgetopt(int argc, const char** argv, const char* optstring)
 #include <readline/readline.h>
 #include <readline/history.h>
 #else
+#include <fcntl.h>     /* for _O_TEXT and _O_BINARY */
+#include <stdlib.h>
+#include <stdio.h>
+
 static void using_history(void) { }
 static void add_history(const char* string) { }
 static void rl_bind_key(int key, void (*fun)(void)) { }
 static void rl_insert(void) { }
+
+#if 0
+
+static int TurnOffEcho()
+{
+	int ttyDevice = STDOUT_FILENO;
+	struct termios termAttributes;
+
+	/* Make sure file descriptor is for a TTY device.         */
+	if (!isatty(ttyDevice))
+		return EXIT_FAILURE;
+
+	/* Get terminal attributes and then determine if terminal */
+	/* echo is enabled. If ECHO is on, turn it off  */
+	/* and call tcsetattr.                                    */
+	else
+	{
+		if (tcgetattr(ttyDevice, &termAttributes) != 0)
+		{
+			perror("tcgetattr error");
+			return(EXIT_FAILURE);
+		} else
+		{
+			if (termAttributes.c_iflag & ECHO)
+			{
+				termAttributes.c_iflag = termAttributes.c_iflag ^ ECHO;
+				if (tcsetattr(ttyDevice, TCSANOW, &termAttributes) != 0)
+				{
+					perror("tcsetattr error");
+					return(EXIT_FAILURE);
+				}
+
+				printf("ECHO disabled.\n");
+			} else
+				printf("ECHO was already set to 0\n");
+		}
+	}
+
+	return EXIT_SUCCESS;
+}
+
+#endif
+
+/**
+ * fgets() but slightly modified to suit our use: the terminating CR/LF is always converted to
+ * a '\n' LF as part of the returned string!
+ *
+ * We use this instead of regular fgets() as we ran into an issue when running this code as part of our
+ * outer REPL in the qjs_repl monolithic test tool: running the QJS repl (written in JavaScript) would
+ * clobber our own outer REPL line reader here, so we make sure to reset the console/tty to echo mode
+ * instead of RAW mode, as it was changed to that by QJS.
+ *
+ * The curious artifact this produced that you would not only not see anything you typed any more, but
+ * hitting the RETURN key would NOT terminate the call to standard fgets() as that one is '\r' instead
+ * of '\n', at least on Windows! A nasty bug that took a while to uncover...
+ */
+static char *
+fgets_rl(char *dst, int max, FILE *fp)
+{
+	int c;
+	char *p;
+
+	// reset console to TEXT (non-RAW) mode first!
+	{
+		int fd = _fileno(fp);
+		int is_a_tty = isatty(fd);
+
+		//_set_fmode(_O_TEXT);
+		const int STDIN_BUFSIZE = 2048;
+
+		// flush stdin by twiddling the buffer. This also ensures the subsequent fgetc() has a line buffer working for it.
+		int rv = setvbuf(stdin, NULL, _IONBF, 0);
+		rv = setvbuf(stdin, NULL, _IOFBF, STDIN_BUFSIZE);
+		rv = setvbuf(stdin, NULL, _IOLBF, STDIN_BUFSIZE);
+
+#if defined(_WIN32)
+		HANDLE handle;
+		DWORD old_mode = 0;
+
+		handle = (HANDLE)_get_osfhandle(fd);
+		rv = GetConsoleMode(handle, &old_mode);  // --> 0x01F7 (503)
+		rv = SetConsoleMode(handle, ENABLE_WINDOW_INPUT | ENABLE_PROCESSED_INPUT | ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT | ENABLE_WINDOW_INPUT | ENABLE_INSERT_MODE | ENABLE_QUICK_EDIT_MODE | ENABLE_MOUSE_INPUT | ENABLE_AUTO_POSITION | ENABLE_VIRTUAL_TERMINAL_INPUT);
+		_setmode(fd, _O_TEXT);
+		if (fd == 0) {
+			handle = (HANDLE)_get_osfhandle(1); /* corresponding output */
+			old_mode = 0;
+			rv = GetConsoleMode(handle, &old_mode);  // --> 3
+			rv = SetConsoleMode(handle, ENABLE_PROCESSED_OUTPUT | ENABLE_WRAP_AT_EOL_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+		}
+#else
+		tcsetattr(0, TCSANOW, &oldtty);
+
+		static int tty_set = 0;
+		static struct termios old_tty = {0};
+		if (!tty_set) {
+			tcgetattr(fd, &old_tty);
+			tty_set = 1;
+		}
+
+#if 0
+		// set RAW mode...
+		struct termios tty = {0};
+		tty.c_iflag &= ~(IGNBRK|BRKINT|PARMRK|ISTRIP
+													|INLCR|IGNCR|ICRNL|IXON);
+		tty.c_oflag |= OPOST;
+		tty.c_lflag &= ~(ECHO|ECHONL|ICANON|IEXTEN);
+		tty.c_cflag &= ~(CSIZE|PARENB);
+		tty.c_cflag |= CS8;
+		tty.c_cc[VMIN] = 1;
+		tty.c_cc[VTIME] = 0;
+
+		tcsetattr(fd, TCSANOW, &tty);
+#endif
+		tcsetattr(fd, TCSANOW, &old_tty);
+#endif /* !_WIN32 */
+	}
+
+	// get max bytes or upto a newline...
+	for (p = dst, max--; max > 0; max--) {
+		c = fgetc(fp);
+		if (c == EOF)
+			break;
+		*p++ = c;
+		// Windows RAW mode STDIN produces '\r' instead of '\n' from fgetc() when console was set up in RAW mode, despite _O_TEXT on stdin.
+		if (c == '\n' || c == '\r') {
+			p[-1] = '\n';
+			break;
+		}
+	}
+	*p = 0;
+	if (p == dst)
+		return NULL;
+	return p;
+}
+
 static char* readline(const char* prompt)
 {
 	static char line[500], * p;
@@ -124,7 +263,8 @@ static char* readline(const char* prompt)
 	fflush(stderr);
 	fputs(prompt, stdout);
 	fflush(stdout);
-	p = fgets(line, sizeof line, stdin);
+
+	p = fgets_rl(line, sizeof line, stdin);
 	if (p) {
 		n = strlen(line);
 		if (n > 0 && line[n - 1] == '\n')
