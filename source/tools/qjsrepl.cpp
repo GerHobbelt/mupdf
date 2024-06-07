@@ -18,6 +18,7 @@ MONOLITHIC_CMD_TABLE_START()
 	{"qjscompress", {.fa = qjscompress_main}},
 	{"qjs", {.fa = qjs_main}},
 	{"qjsc", {.fa = qjsc_main}},
+	{"qjsd", {.fa = qjsd_main}},
 	{"qjs_unicode_gen", {.fa = qjs_unicode_gen_main}},
 	{"qjs_test262", {.fa = qjs_test262_main}},
 
