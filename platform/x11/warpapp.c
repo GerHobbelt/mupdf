@@ -639,7 +639,7 @@ static void warpapp_showpage(warpapp_t *app, int loadpage, int drawpage, int rep
 		fz_always(app->ctx)
 			fz_drop_device(app->ctx, idev);
 		fz_catch(app->ctx)
-			cookie.errors++;
+			cookie.d.errors++;
 	}
 
 	if (repaint)

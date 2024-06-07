@@ -751,7 +751,7 @@ void wintitle(warpapp_t *app, char *title)
 	sp = title;
 	while (*sp && dp < wide + 255)
 	{
-		sp += fz_chartorune(&rune, sp);
+		sp += fz_chartorune_unsafe(&rune, sp);
 		*dp++ = rune;
 	}
 	*dp = 0;
@@ -1220,7 +1220,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 	}
 	warpapp_init(ctx, &gapp);
 
-	argv = fz_argv_from_wargv(argc, wargv);
+	argv = fz_argv_from_wargv(ctx, argc, wargv);
 
 	while ((c = fz_getopt(argc, argv, "r:")) != -1)
 	{
@@ -1259,7 +1259,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 		DispatchMessage(&msg);
 	}
 
-	fz_free_argv(argc, argv);
+	fz_free_argv(ctx, argc, argv);
 
 	do_close(&gapp);
 
