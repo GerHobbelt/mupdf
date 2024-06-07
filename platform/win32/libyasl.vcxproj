@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -77,7 +77,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYASL;YASL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -131,7 +131,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYASL;YASL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yasl;../../thirdparty/owemdjee/yasl/util;../../thirdparty/owemdjee/yasl/interpreter;../../thirdparty/owemdjee/yasl/compiler;../../thirdparty/owemdjee/yasl/test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYASL;YASL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yasl;../../thirdparty/owemdjee/yasl/util;../../thirdparty/owemdjee/yasl/interpreter;../../thirdparty/owemdjee/yasl/compiler;../../thirdparty/owemdjee/yasl/test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,7 +186,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYASL;YASL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yasl;../../thirdparty/owemdjee/yasl/util;../../thirdparty/owemdjee/yasl/interpreter;../../thirdparty/owemdjee/yasl/compiler;../../thirdparty/owemdjee/yasl/test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYASL;YASL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yasl;../../thirdparty/owemdjee/yasl/util;../../thirdparty/owemdjee/yasl/interpreter;../../thirdparty/owemdjee/yasl/compiler;../../thirdparty/owemdjee/yasl/test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -226,41 +226,53 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/compiler/ast.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/compiler/compiler.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/compiler/env.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/compiler/lexer.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/compiler/lexinput.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/compiler/middleend.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/compiler/parser.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/data-structures/YASL_Buffer.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/data-structures/YASL_ByteBuffer.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/data-structures/YASL_List.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/data-structures/YASL_Set.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/data-structures/YASL_String.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/data-structures/YASL_Table.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/VM.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/YASL_Object.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/bool_methods.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/builtins.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/closure.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/float_methods.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/int_methods.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/list_methods.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/refcount.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/str_methods.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/table_methods.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/undef_methods.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/upvalue.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/interpreter/userdata.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/std/yasl-std-collections.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/std/yasl-std-error.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/std/yasl-std-io.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/std/yasl-std-math.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/std/yasl-std-mt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/std/yasl-std-require.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/compiler/ast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/compiler/compiler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/compiler/env.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/compiler/lexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/compiler/lexinput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/compiler/middleend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/compiler/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/data-structures/LString.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_Buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_ByteBuffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_List.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_Set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_String.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_StringSet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_Table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/VM.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/YASL_Object.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/bool_methods.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/builtins.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/closure.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/float_methods.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/int_methods.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/list_methods.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/refcount.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/str_methods.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/table_methods.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/undef_methods.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/upvalue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/interpreter/userdata.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-collections.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-mt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-os.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-require.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-try.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/util/IO.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/util/hash_function.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/util/prime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/util/varint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/util/yasl_float.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/yasl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/src/yasl_aux.c" />
     <ClCompile Include="../../thirdparty/owemdjee/yasl/test/integration_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/yasl/test/test_module.c" />
     <ClCompile Include="../../thirdparty/owemdjee/yasl/test/unit_tests/test_api/apitest.c" />
     <ClCompile Include="../../thirdparty/owemdjee/yasl/test/unit_tests/test_api/deltest.c" />
     <ClCompile Include="../../thirdparty/owemdjee/yasl/test/unit_tests/test_api/fntest.c" />
@@ -293,49 +305,60 @@
     <ClCompile Include="../../thirdparty/owemdjee/yasl/test/unit_tests/test_vm/vmtest.c" />
     <ClCompile Include="../../thirdparty/owemdjee/yasl/test/yasl_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/yasl/test/yats.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/util/IO.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/util/hash_function.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/util/prime.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/util/varint.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/util/yasl_float.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/yasl.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/yasl/yasl_aux.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/compiler/ast.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/compiler/compiler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/compiler/env.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/compiler/lexer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/compiler/lexinput.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/compiler/middleend.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/compiler/parser.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/data-structures/YASL_Buffer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/data-structures/YASL_ByteBuffer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/data-structures/YASL_List.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/data-structures/YASL_Set.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/data-structures/YASL_String.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/data-structures/YASL_Table.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/debug.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/VM.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/YASL_Object.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/bool_methods.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/builtins.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/closure.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/float_methods.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/int_methods.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/list_methods.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/operator_names.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/refcount.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/str_methods.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/table_methods.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/undef_methods.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/upvalue.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/interpreter/userdata.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/opcode.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/std/yasl-std-collections.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/std/yasl-std-error.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/std/yasl-std-io.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/std/yasl-std-math.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/std/yasl-std-mt.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/std/yasl-std-require.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/common/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/common/opcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/compiler/ast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/compiler/compiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/compiler/env.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/compiler/lexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/compiler/lexinput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/compiler/middleend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/compiler/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/data-structures/LString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_Buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_ByteBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_List.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_Set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_String.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_StringSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/data-structures/YASL_Table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/VM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/YASL_Object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/bool_methods.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/builtins.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/closure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/float_methods.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/int_methods.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/list_methods.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/operator_names.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/refcount.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/str_methods.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/table_methods.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/undef_methods.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/upvalue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/userdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/interpreter/yasl_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-collections.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-mt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-require.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/std/yasl-std-try.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/util/IO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/util/hash_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/util/prime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/util/varint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/util/yapp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/util/yasl_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/yasl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/yasl_aux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/yasl_conf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/yasl_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/yasl_include.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/yasl_plat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yasl/src/yasl_state.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yasl/test/unit_tests/test_api/apitest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yasl/test/unit_tests/test_api/deltest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yasl/test/unit_tests/test_api/fntest.h" />
@@ -368,20 +391,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/yasl/test/unit_tests/test_vm/vmtest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yasl/test/yasl_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yasl/test/yats.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/util/IO.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/util/hash_function.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/util/prime.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/util/varint.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/util/yasl_float.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/yapp.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/yasl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/yasl_aux.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/yasl_conf.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/yasl_error.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/yasl_include.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/yasl_plat.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/yasl_state.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yasl/yasl_types.h" />
     <Text Include="../../thirdparty/owemdjee/yasl/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/yasl/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/yasl/README.md" />
@@ -391,21 +400,22 @@
     <Text Include="../../thirdparty/owemdjee/yasl/benchmarks/fib_rec/fib_rec.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/benchmarks/list_push/list_push.py" />
     <Text Include="../../thirdparty/owemdjee/yasl/benchmarks/list_push/list_push.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/compiler/exprnodetype.x" />
-    <Text Include="../../thirdparty/owemdjee/yasl/compiler/nodetype.x" />
-    <Text Include="../../thirdparty/owemdjee/yasl/compiler/pattnodetype.x" />
-    <Text Include="../../thirdparty/owemdjee/yasl/compiler/reservedwords.x" />
-    <Text Include="../../thirdparty/owemdjee/yasl/compiler/stmtnodetype.x" />
-    <Text Include="../../thirdparty/owemdjee/yasl/compiler/tokentype.x" />
     <Text Include="../../thirdparty/owemdjee/yasl/configure_tests.sh" />
-    <Text Include="../../thirdparty/owemdjee/yasl/data-structures/README.md" />
-    <Text Include="../../thirdparty/owemdjee/yasl/escapes.x" />
     <Text Include="../../thirdparty/owemdjee/yasl/install.sh" />
-    <Text Include="../../thirdparty/owemdjee/yasl/specialstrings.x" />
+    <Text Include="../../thirdparty/owemdjee/yasl/src/common/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/yasl/src/common/escapes.x" />
+    <Text Include="../../thirdparty/owemdjee/yasl/src/compiler/exprnodetype.x" />
+    <Text Include="../../thirdparty/owemdjee/yasl/src/compiler/nodetype.x" />
+    <Text Include="../../thirdparty/owemdjee/yasl/src/compiler/pattnodetype.x" />
+    <Text Include="../../thirdparty/owemdjee/yasl/src/compiler/reservedwords.x" />
+    <Text Include="../../thirdparty/owemdjee/yasl/src/compiler/stmtnodetype.x" />
+    <Text Include="../../thirdparty/owemdjee/yasl/src/compiler/tokentype.x" />
+    <Text Include="../../thirdparty/owemdjee/yasl/src/data-structures/README.md" />
+    <Text Include="../../thirdparty/owemdjee/yasl/src/data-structures/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/yasl/src/std/README.txt" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/README" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/assert_errors.inl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/divisionbyzero_errors.inl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/error_errors.inl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/assert/assert.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/assert/assert.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/assert/assert_in_fn.yasl" />
@@ -438,10 +448,6 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/divisionbyzero/__idiv.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/divisionbyzero/__mod.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/divisionbyzero/__mod.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/error/error.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/error/error.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/error/error_default.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/error/error_default.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/stackoverflow/fib.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/stackoverflow/fib.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/stackoverflow/list_eq.yasl" />
@@ -468,42 +474,6 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/syntax/undeclared_var.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/syntax/undeclared_var_outside_for.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/syntax/undeclared_var_outside_for.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__add.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__add.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__band.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__band.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__bandnot.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__bandnot.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__bor.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__bor.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__bshl.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__bshl.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__bshr.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__bshr.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__bxor.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__bxor.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__exp.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__exp.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__fdiv.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__fdiv.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__ge.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__ge.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__gt.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__gt.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__idiv.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__idiv.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__le.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__le.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__lt.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__lt.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__mul.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__mul.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__sub.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/binary_operators/__sub.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/bool/tobool.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/bool/tobool.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/bool/tostr.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/bool/tostr.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/callable.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/callable.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/collections/set/__band.yasl" />
@@ -586,26 +556,6 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/collections/set/tostr.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/collections/table.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/collections/table.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/float/tobool.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/float/tobool.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/float/tofloat.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/float/tofloat.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/float/toint.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/float/toint.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/float/tostr.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/float/tostr.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/int/tobool.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/int/tobool.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/int/tochar.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/int/tochar.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/int/tofloat.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/int/tofloat.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/int/toint.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/int/toint.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/int/tostr-format.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/int/tostr-format.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/int/tostr.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/int/tostr.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/io/flush.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/io/flush.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/io/open1.yasl" />
@@ -632,46 +582,6 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/io/write3.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/io/write4.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/io/write4.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/__add1.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/__add1.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/__add2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/__add2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/__add3.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/__add3.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/__add4.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/__add4.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/__len.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/__len.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/clear.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/clear.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/copy.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/copy.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/count.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/count.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/insert.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/insert.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/insert2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/insert2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/join.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/join.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/join2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/join2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/join3.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/join3.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/push.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/push.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/remove.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/remove.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/reverse.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/reverse.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/search.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/search.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/sort.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/sort.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/spread.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/spread.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/tostr.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/list/tostr.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/math/abs.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/math/abs.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/math/acos.yasl" />
@@ -736,156 +646,6 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/mt/setmt2.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/nomt.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/nomt.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/count1.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/count1.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/count2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/count2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/count3.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/count3.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/count4.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/count4.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/endswith1.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/endswith1.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/endswith2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/endswith2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/endswith3.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/endswith3.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/endswith4.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/endswith4.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/isal.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/isal.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/isalnum.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/isalnum.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/isnum.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/isnum.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/isspace.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/isspace.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/ltrim1.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/ltrim1.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/ltrim2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/ltrim2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/ltrim3.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/ltrim3.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/ltrim4.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/ltrim4.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rep1.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rep1.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rep2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rep2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rep3.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rep3.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rep4.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rep4.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace1.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace1.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace3.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace3.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace4.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace4.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace5.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace5.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace6.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace6.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace7.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/replace7.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rtrim1.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rtrim1.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rtrim2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rtrim2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rtrim3.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rtrim3.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rtrim4.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/rtrim4.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/search.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/search.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/search2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/search2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/search3.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/search3.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/search4.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/search4.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/split1.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/split1.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/split2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/split2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/split3.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/split3.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/split4.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/split4.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/spread.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/spread.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/startswith.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/startswith.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/startswith2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/startswith2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/startswith3.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/startswith3.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/startswith4.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/startswith4.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/tobool.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/tobool.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/tobyte.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/tobyte.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/tofloat.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/tofloat.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/toint.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/toint.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/tolower.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/tolower.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/tostr-format.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/tostr-format.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/tostr.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/tostr.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/toupper.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/toupper.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/trim1.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/trim1.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/trim2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/trim2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/trim3.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/trim3.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/trim4.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/str/trim4.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/__len.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/__len.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/clear.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/clear.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/copy.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/copy.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/keys.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/keys.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/mutable_key.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/mutable_key.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/mutable_key2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/mutable_key2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/remove.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/remove.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/tostr.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/tostr.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/values.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/table/values.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/unary_operators/__bnot.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/unary_operators/__bnot.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/unary_operators/__len.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/unary_operators/__len.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/unary_operators/__neg.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/unary_operators/__neg.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/unary_operators/__pos.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/unary_operators/__pos.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/undef/tobool.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/undef/tobool.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/undef/tostr.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/type/undef/tostr.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/int/tochar.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/int/tochar.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/int/tochar2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/int/tochar2.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/int/tostr-format.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/int/tostr-format.yasl.err" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/int/tostr-format2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/int/tostr-format2.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/io/open1.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/io/open1.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/io/open2.yasl" />
@@ -918,6 +678,8 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/str/replace.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/str/split.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/str/split.yasl.err" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/str/split_empty_max.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/str/split_empty_max.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/str/tobyte.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/str/tobyte.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/errors/value/str/tobyte2.yasl" />
@@ -932,9 +694,83 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/__call.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/assert.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/binops.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/bool/operators.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/bool/tobool.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/bool/tostr.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/bool/operators.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/bool/tostr.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/float/float.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/float/floats.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/float/operators.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/float/tobool.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/float/toint.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/float/tostr.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/int/binary.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/int/concat_3.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/int/conversions.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/int/decimal.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/int/hex.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/int/literals.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/int/operators.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/int/smallints.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/int/tostr-format.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/__add.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/__eq.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/__get.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/__len.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/__set.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/clear.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/copy.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/count.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/extend.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/insert.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/join.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/pop.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/push.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/remove.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/reverse.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/search.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/slice.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/sort.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/list/tostr.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/__get.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/concat.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/count.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/dot.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/endswith.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/interpolation.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/is.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/literals.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/ltrim.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/operators.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/rep.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/replace.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/rtrim.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/search.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/slice.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/slice_mt.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/split.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/spread.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/startswith.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/strings.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/to.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/tostr.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/trim.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/str/withnull.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/__bor.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/__eq.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/__len.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/__set.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/clear.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/comp_op_overloading.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/comp_op_overloading_right.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/copy.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/iadd.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/keys.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/memberfn.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/operator_overloading.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/operator_overloading_right.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/remove.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/tables.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/tostr.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/builtin-types/table/values.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/clear.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/closures/assign.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/closures/deep.yasl" />
@@ -947,22 +783,8 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/closures/multi.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/closures/simple.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/closures/two.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/collections/contains.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/collections/list.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/collections/set.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/collections/set_cartesian.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/collections/set_comp.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/collections/set_fromlist.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/collections/set_iter.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/collections/table.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/dead_code_elimination.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/empty.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/float/float.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/float/floats.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/float/operators.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/float/tobool.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/float/toint.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/float/tostr.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/fn/add.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/fn/cvarfn.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/fn/empty.yasl" />
@@ -973,41 +795,10 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/fn/nested.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/fn/rest.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/fn/spread.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/int/binary.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/int/concat_3.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/int/conversions.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/int/decimal.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/int/hex.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/int/literals.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/int/operators.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/int/smallints.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/int/tostr-format.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/lambdas/ambiguous.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/lambdas/basic.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/lambdas/emptyreturn.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/lambdas/nested.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/__add.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/__eq.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/__get.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/__len.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/__set.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/__set2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/clear.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/copy.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/count.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/extend.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/insert.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/join.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/join_default.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/join_empty.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/pop.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/push.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/remove.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/reverse.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/search.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/slice.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/sort.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/list/tostr.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/match/alt/alt.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/match/alt/alt_multi.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/match/alt/alt_nested_left.yasl" />
@@ -1018,6 +809,7 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/match/bind/let.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/match/bool.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/match/empty.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/match/fallthrough.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/match/float.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/match/float_smallint.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/match/guard/basic_guard.yasl" />
@@ -1039,15 +831,9 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/match/types.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/match/undef.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/math.yam" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/math/math.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/math/min-max.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/method.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/mt/mt.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/mt/setmt.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/multiset.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/refcount.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/require/ifdef.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/require/require.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/scripts/AOC2022-3.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/scripts/CTCI1-1.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/scripts/CTCI1-4.yasl" />
@@ -1065,41 +851,25 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/scripts/fib_iter.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/scripts/fib_match.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/scripts/heap.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/scripts/quine.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/scripts/str_to_json.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/scripts/twosum.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/__get.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/concat.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/count.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/dot.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/endswith.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/interpolation.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/isal.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/isalnum.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/isnum.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/isspace.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/literals.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/ltrim.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/operators.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/rep.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/replace.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/rtrim.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/search.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/slice.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/slice_mt.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/split.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/spread.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/startswith.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/strings.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/tobool.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/tobyte.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/tolist.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/tolist2.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/tolower.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/tostr-format.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/tostr.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/toupper.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/trim.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/str/withnull.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/collections/contains.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/collections/list.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/collections/set.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/collections/set_cartesian.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/collections/set_comp.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/collections/set_fromlist.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/collections/set_iter.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/collections/table.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/io.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/math/math.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/math/min-max.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/mt/mt.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/mt/setmt.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/require/ifdef.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/require/require.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/std/try.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/submodule.yam" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/syntax/augmented_assign.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/syntax/complicated_comprehension.yasl" />
@@ -1127,23 +897,6 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/syntax/while.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/syntax/while_break.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/syntax/while_continue.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/__bor.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/__eq.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/__len.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/__set.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/clear.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/comp_op_overloading.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/comp_op_overloading_right.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/copy.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/iadd.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/keys.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/memberfn.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/operator_overloading.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/operator_overloading_right.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/remove.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/tables.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/tostr.yasl" />
-    <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/table/values.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/ternary.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/unary.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/vargs/closure.yasl" />
@@ -1177,12 +930,36 @@
     <Text Include="../../thirdparty/owemdjee/yasl/test/inputs/yasl_iter.yasl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/stackoverflow_errors.inl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/syntax_errors.inl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/test.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors.inl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/binary-operators.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/binary-operators.yasl.err" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/bool.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/bool.yasl.err" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/error.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/error.yasl.err" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/float.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/float.yasl.err" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/int.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/int.yasl.err" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/list.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/list.yasl.err" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/str.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/str.yasl.err" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/table.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/table.yasl.err" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/unary-operators.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/unary-operators.yasl.err" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/undef.yasl" />
+    <Text Include="../../thirdparty/owemdjee/yasl/test/try_fail_errors/undef.yasl.err" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/type_errors.inl" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/unit_tests/test_vm/sample.txt" />
     <Text Include="../../thirdparty/owemdjee/yasl/test/value_errors.inl" />
     <Text Include="../../thirdparty/owemdjee/yasl/tests.sh" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

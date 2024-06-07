@@ -362,6 +362,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/plugins/containers/containers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/plugins/forms/forms.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/plugins/layout/layout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/common/xmlutils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/forms/wizard.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/forms/wizardbase.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/plugin.cpp" />
@@ -418,7 +419,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/stringutils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/typeconv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/wxfbipc.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/xmlutils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/test/app.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/test/event_GUI.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/test/main.cpp" />
@@ -428,6 +428,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/test/wxFBEventsApp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/test/wxfbTest_GUI.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/plugins/containers/bookutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/common/xmlutils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/component.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/fontcontainer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/forms/wizard.h" />
@@ -485,13 +486,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/annoyingdialog.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/debug.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/filetocarray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/scopeexit.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/stringutils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/typeconv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/wxfbdefs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/wxfbexception.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/wxfbipc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/wxlogstring.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/src/utils/xmlutils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/test/app.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/test/event_GUI.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxFormBuilder/test/main.h" />
@@ -504,6 +505,8 @@
     <Image Include="../../thirdparty/owemdjee/wxFormBuilder/data/artwork/images/splash.png" />
     <Image Include="../../thirdparty/owemdjee/wxFormBuilder/data/artwork/images/wxFormBuilder_Banner.png" />
     <Image Include="../../thirdparty/owemdjee/wxFormBuilder/data/packaging/windows/support/wxFormBuilder.ico" />
+    <Image Include="../../thirdparty/owemdjee/wxFormBuilder/data/platform/linux/share/icons/hicolor/128x128/apps/org.wxformbuilder.wxFormBuilder.png" />
+    <Image Include="../../thirdparty/owemdjee/wxFormBuilder/data/platform/linux/share/icons/hicolor/128x128/mimetypes/org.wxformbuilder.wxFormBuilder.application-x-wxformbuilder.png" />
     <Image Include="../../thirdparty/owemdjee/wxFormBuilder/data/platform/linux/share/icons/hicolor/48x48/apps/org.wxformbuilder.wxFormBuilder.png" />
     <Image Include="../../thirdparty/owemdjee/wxFormBuilder/data/platform/linux/share/icons/hicolor/48x48/mimetypes/org.wxformbuilder.wxFormBuilder.application-x-wxformbuilder.png" />
     <Image Include="../../thirdparty/owemdjee/wxFormBuilder/data/platform/windows/wxFormBuilder.ico" />
@@ -540,8 +543,8 @@
     <Image Include="../../thirdparty/owemdjee/wxFormBuilder/test/wxfbTest.ico" />
     <ResourceCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/wxFormBuilder.rc" />
     <ResourceCompile Include="../../thirdparty/owemdjee/wxFormBuilder/test/wxfbTest.rc" />
+    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/wxFormBuilder/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/Changelog.txt" />
     <Text Include="../../thirdparty/owemdjee/wxFormBuilder/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/wxFormBuilder/README.md" />
     <Text Include="../../thirdparty/owemdjee/wxFormBuilder/cmake/functions.cmake" />
@@ -735,7 +738,6 @@
     <Text Include="../../thirdparty/owemdjee/wxFormBuilder/resources/xml/properties.pythoncode" />
     <Text Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/README.md" />
-    <Text Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface/default.xpm" />
     <Text Include="../../thirdparty/owemdjee/wxFormBuilder/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/revision.cpp.in" />

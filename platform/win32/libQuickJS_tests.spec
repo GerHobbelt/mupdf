@@ -10,6 +10,7 @@ also-ignore:
 	/thirdparty/uint128_t
 	/examples/
 	/sample_app/
+	test-closefrom.c
 
 	/get[^/]+[.]c
 	/lib[^/]+[.]c

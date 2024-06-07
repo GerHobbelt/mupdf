@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -77,7 +77,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -131,7 +131,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,7 +186,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -242,16 +242,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/dicom.imageio/dicominput.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/dpx.imageio/dpxinput.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/dpx.imageio/dpxoutput.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\oiio\src\dpx.imageio\libdpx\dpx_Codec.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/dpx.imageio/libdpx/DPX.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/dpx.imageio/libdpx/DPXColorConverter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/dpx.imageio/libdpx/DPXHeader.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\oiio\src\dpx.imageio\libdpx\dpx_ElementReadStream.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\oiio\src\dpx.imageio\libdpx\dpx_InStream.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\oiio\src\dpx.imageio\libdpx\dpx_OutStream.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\oiio\src\dpx.imageio\libdpx\dpx_Reader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/dpx.imageio/libdpx/RunLengthEncoding.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\oiio\src\dpx.imageio\libdpx\dpx_Writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oiio/src/dpx.imageio/libdpx/dpx_Codec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oiio/src/dpx.imageio/libdpx/dpx_ElementReadStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oiio/src/dpx.imageio/libdpx/dpx_InStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oiio/src/dpx.imageio/libdpx/dpx_OutStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oiio/src/dpx.imageio/libdpx/dpx_Reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oiio/src/dpx.imageio/libdpx/dpx_Writer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/ffmpeg.imageio/ffmpeginput.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/fits.imageio/fits_pvt.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/fits.imageio/fitsinput.cpp" />
@@ -323,8 +323,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/libOpenImageIO/imagespec_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/libOpenImageIO/imagespeed_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/libOpenImageIO/iptc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oiio/src/libOpenImageIO/lib_printinfo.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/libOpenImageIO/maketexture.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\oiio\src\libOpenImageIO\lib_printinfo.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/libOpenImageIO/xmp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/libtexture/environment.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/libtexture/imagecache.cpp" />
@@ -1605,7 +1605,8 @@
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/zfile/ref/out.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/zfile/run.py" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

@@ -297,6 +297,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclBinary.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclCkalloc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclClock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclClockFmt.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclCmdAH.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclCmdIL.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclCmdMZ.c" />
@@ -360,6 +361,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclResolve.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclResult.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclScan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclStrIdxTree.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclStrToD.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclStringObj.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclStubCall.c" />
@@ -407,14 +409,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_div.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_div_2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_div_2d.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_div_3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_div_d.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_dr_is_modulus.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_dr_reduce.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_dr_setup.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_error_to_string.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_exch.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_expt_u32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_expt_n.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_exptmod.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_exteuclid.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_fread.c" />
@@ -426,11 +427,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_i32.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_i64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_l.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_ll.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_mag_u32.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_mag_u64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_mag_ul.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_mag_ull.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_grow.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_incr.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init.c" />
@@ -438,21 +437,19 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_i32.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_i64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_l.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_ll.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_multi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_set.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_size.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_u32.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_u64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_ul.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_ull.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_invmod.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_is_square.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_iseven.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_isodd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_kronecker.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_lcm.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_log_u32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_log_n.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_lshd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_mod.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_mod_2d.c" />
@@ -489,7 +486,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_reduce_is_2k.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_reduce_is_2k_l.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_reduce_setup.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_root_u32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_root_n.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_rshd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_sbin_size.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set.c" />
@@ -497,11 +494,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_i32.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_i64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_l.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_ll.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_u32.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_u64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_ul.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_ull.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_shrink.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_signed_rsh.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_sqr.c" />
@@ -521,6 +516,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_prime_tab.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_add.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_balance_mul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_div_3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_exptmod.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_exptmod_fast.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_get_bit.c" />
@@ -528,6 +524,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_invmod_slow.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_karatsuba_mul.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_karatsuba_sqr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_log_2expt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_log_d.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_montgomery_reduce_fast.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_mul_digs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_mul_digs_fast.c" />
@@ -641,6 +640,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/regguts.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tcl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclCompile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclDate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclDecls.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclFileSystem.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclIO.h" />
@@ -656,6 +656,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclPlatDecls.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclPort.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclRegexp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclStrIdxTree.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclStringRep.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclStringTrim.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclTomMath.h" />
@@ -683,7 +684,7 @@
     <ResourceCompile Include="../../thirdparty/owemdjee/tcl/win/tclsh.rc" />
     <ResourceCompile Include="../../thirdparty/owemdjee/tcl/win/tcltest.rc" />
     <Text Include="../../thirdparty/owemdjee/tcl/README.md" />
-    <Text Include="../../thirdparty/owemdjee/tcl/changes" />
+    <Text Include="../../thirdparty/owemdjee/tcl/changes.md" />
     <Text Include="../../thirdparty/owemdjee/tcl/compat/README" />
     <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/ChangeLog" />
@@ -1065,6 +1066,7 @@
     <Text Include="../../thirdparty/owemdjee/tcl/library/tm.tcl" />
     <Text Include="../../thirdparty/owemdjee/tcl/library/word.tcl" />
     <Text Include="../../thirdparty/owemdjee/tcl/library/writefile.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/libtommath/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tcl/libtommath/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/tcl/libtommath/README.md" />
     <Text Include="../../thirdparty/owemdjee/tcl/libtommath/appveyor.yml" />
@@ -1076,6 +1078,7 @@
     <Text Include="../../thirdparty/owemdjee/tcl/libtommath/makefile.msvc" />
     <Text Include="../../thirdparty/owemdjee/tcl/libtommath/makefile.unix" />
     <Text Include="../../thirdparty/owemdjee/tcl/libtommath/makefile_include.mk" />
+    <Text Include="../../thirdparty/owemdjee/tcl/libtommath/sources.cmake" />
     <Text Include="../../thirdparty/owemdjee/tcl/libtommath/tommath.def" />
     <Text Include="../../thirdparty/owemdjee/tcl/libtommath/win32/libtommath.dll" />
     <Text Include="../../thirdparty/owemdjee/tcl/libtommath/win64-arm/libtommath.dll" />
@@ -1095,6 +1098,7 @@
     <Text Include="../../thirdparty/owemdjee/tcl/tests-perf/chan.perf.tcl" />
     <Text Include="../../thirdparty/owemdjee/tcl/tests-perf/clock.perf.tcl" />
     <Text Include="../../thirdparty/owemdjee/tcl/tests-perf/comparePerf.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests-perf/list.perf.tcl" />
     <Text Include="../../thirdparty/owemdjee/tcl/tests-perf/listPerf.tcl" />
     <Text Include="../../thirdparty/owemdjee/tcl/tests-perf/test-performance.tcl" />
     <Text Include="../../thirdparty/owemdjee/tcl/tests-perf/timer-event.perf.tcl" />
