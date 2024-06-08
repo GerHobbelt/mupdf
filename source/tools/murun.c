@@ -6930,7 +6930,7 @@ static void ffi_pushembeddedfileparams(js_State *J, pdf_embedded_file_params *pa
 	js_setproperty(J, -2, "modificationDate");
 }
 
-static void ffi_PDFDocument_getEmbeddedFileParams(js_State *J)
+static void ffi_PDFDocument_getFilespecParams(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
@@ -6945,6 +6945,11 @@ static void ffi_PDFDocument_getEmbeddedFileParams(js_State *J)
 		rethrow(J);
 
 	ffi_pushembeddedfileparams(J, &params);
+}
+
+static void ffi_PDFDocument_getEmbeddedFileParams(js_State *J)
+{
+	ffi_PDFDocument_getFilespecParams(J);
 }
 
 static void ffi_PDFDocument_getEmbeddedFileContents(js_State *J)
@@ -7757,6 +7762,31 @@ static void ffi_PDFDocument_deletePageLabels(js_State *J)
 		rethrow(J);
 }
 
+static void ffi_PDFDocument_countAssociatedFiles(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
+	int n;
+	fz_try(ctx)
+		n = pdf_count_document_associated_files(ctx, pdf);
+	fz_catch(ctx)
+		rethrow(J);
+	js_pushnumber(J, n);
+}
+
+static void ffi_PDFDocument_associatedFile(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
+	int idx = js_tointeger(J, 1);
+	pdf_obj *obj;
+	fz_try(ctx)
+		obj = pdf_document_associated_file(ctx, pdf, idx);
+	fz_catch(ctx)
+		rethrow(J);
+	ffi_pushobj(J, obj);
+}
+
 static void ffi_appendDestToURI(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -8411,6 +8441,18 @@ static void ffi_PDFObject_compare(js_State *J)
 	js_pushboolean(J, result);
 }
 
+static void ffi_PDFObject_isFilespec(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_obj *obj = js_touserdata(J, 0, "pdf_obj");
+	int b = 0;
+	fz_try(ctx)
+		b = pdf_is_filespec(ctx, obj);
+	fz_catch(ctx)
+		rethrow(J);
+	js_pushboolean(J, b);
+}
+
 static void ffi_PDFPage_getObject(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -8623,6 +8665,30 @@ static void ffi_PDFPage_setPageBox(js_State *J)
 		rethrow(J);
 }
 
+static void ffi_PDFPage_countAssociatedFiles(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_page *pdf = js_touserdata(J, 0, "pdf_page");
+	int n;
+	fz_try(ctx)
+		n = pdf_count_page_associated_files(ctx, pdf);
+	fz_catch(ctx)
+		rethrow(J);
+	js_pushnumber(J, n);
+}
+
+static void ffi_PDFPage_associatedFile(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_page *pdf = js_touserdata(J, 0, "pdf_page");
+	int idx = js_tointeger(J, 1);
+	pdf_obj *obj;
+	fz_try(ctx)
+		obj = pdf_page_associated_file(ctx, pdf, idx);
+	fz_catch(ctx)
+		rethrow(J);
+	ffi_pushobj(J, obj);
+}
 
 static void ffi_PDFAnnotation_getBounds(js_State *J)
 {
@@ -11226,6 +11292,7 @@ int murun_main(int argc, const char** argv)
 
 		jsB_propfun(J, "PDFDocument.addEmbeddedFile", ffi_PDFDocument_addEmbeddedFile, 6);
 		jsB_propfun(J, "PDFDocument.getEmbeddedFileParams", ffi_PDFDocument_getEmbeddedFileParams, 1);
+		jsB_propfun(J, "PDFDocument.getFilespecParams", ffi_PDFDocument_getFilespecParams, 1);
 		jsB_propfun(J, "PDFDocument.getEmbeddedFileContents", ffi_PDFDocument_getEmbeddedFileContents, 1);
 		jsB_propfun(J, "PDFDocument.verifyEmbeddedFileChecksum", ffi_PDFDocument_verifyEmbeddedFileChecksum, 1);
 
@@ -11281,6 +11348,9 @@ int murun_main(int argc, const char** argv)
 
 		jsB_propfun(J, "PDFDocument.setPageLabels", ffi_PDFDocument_setPageLabels, 4);
 		jsB_propfun(J, "PDFDocument.deletePageLabels", ffi_PDFDocument_deletePageLabels, 1);
+
+		jsB_propfun(J, "PDFDocument.countAssociatedFiles", ffi_PDFDocument_countAssociatedFiles, 0);
+		jsB_propfun(J, "PDFDocument.associatedFile", ffi_PDFDocument_associatedFile, 1);
 	}
 	js_setregistry(J, "pdf_document");
 
@@ -11299,6 +11369,8 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "PDFPage.toPixmap", ffi_PDFPage_toPixmap, 6);
 		jsB_propfun(J, "PDFPage.getTransform", ffi_PDFPage_getTransform, 0);
 		jsB_propfun(J, "PDFPage.setPageBox", ffi_PDFPage_setPageBox, 2);
+		jsB_propfun(J, "PDFPage.countAssociatedFiles", ffi_PDFPage_countAssociatedFiles, 0);
+		jsB_propfun(J, "PDFPage.associatedFile", ffi_PDFPage_associatedFile, 1);
 	}
 	js_setregistry(J, "pdf_page");
 
@@ -11511,6 +11583,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "PDFObject.writeRawStream", ffi_PDFObject_writeRawStream, 1);
 		jsB_propfun(J, "PDFObject.forEach", ffi_PDFObject_forEach, 1);
 		jsB_propfun(J, "PDFObject.compare", ffi_PDFObject_compare, 1);
+		jsB_propfun(J, "PDFObject.isFilespec", ffi_PDFObject_isFilespec, 0);
 	}
 	js_setregistry(J, "pdf_obj");
 

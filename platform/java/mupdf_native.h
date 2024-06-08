@@ -4488,6 +4488,14 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_getEmbeddedFil
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFDocument
+ * Method:    getFilespecParams
+ * Signature: (Lcom/artifex/mupdf/fitz/PDFObject;)Lcom/artifex/mupdf/fitz/PDFDocument/PDFFilespecParams;
+ */
+JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_getFilespecParams
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFDocument
  * Method:    loadEmbeddedFileContents
  * Signature: (Lcom/artifex/mupdf/fitz/PDFObject;)Lcom/artifex/mupdf/fitz/Buffer;
  */
@@ -4501,6 +4509,22 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_loadEmbeddedFi
  */
 JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_verifyEmbeddedFileChecksum
   (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFDocument
+ * Method:    countAssociatedFiles
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_countAssociatedFiles
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFDocument
+ * Method:    associatedFile
+ * Signature: (I)Lcom/artifex/mupdf/fitz/PDFObject;
+ */
+JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_associatedFile
+  (JNIEnv *, jobject, jint);
 
 #ifdef __cplusplus
 }
@@ -5040,6 +5064,14 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFObject_pushString
 JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFObject_pushPDFObject
   (JNIEnv *, jobject, jobject);
 
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFObject
+ * Method:    isFilespec
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFObject_isFilespec
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
@@ -5170,6 +5202,22 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFPage_getTransform
  */
 JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFPage_setPageBox
   (JNIEnv *, jobject, jint, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFPage
+ * Method:    countAssociatedFiles
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_artifex_mupdf_fitz_PDFPage_countAssociatedFiles
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFPage
+ * Method:    associatedFile
+ * Signature: (I)Lcom/artifex/mupdf/fitz/PDFObject;
+ */
+JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFPage_associatedFile
+  (JNIEnv *, jobject, jint);
 
 #ifdef __cplusplus
 }
