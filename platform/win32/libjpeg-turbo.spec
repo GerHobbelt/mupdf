@@ -8,6 +8,8 @@ also-ignore:
 	/simd/mips/
 	/simd/mips64/
 	/simd/powerpc/
+	/simd/rvv/
+	/simd/rvv_andes/
 	-jni[.]c$
 	/java/
 	example.c
