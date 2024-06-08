@@ -501,7 +501,8 @@ static void warpapp_loadpage(warpapp_t *app)
 
 	fz_try(app->ctx)
 	{
-		app->full_pix = fz_new_pixmap_from_page(app->ctx, app->page, fz_identity, fz_device_rgb(app->ctx), 0);
+		fz_matrix mat = { 96.0/72, 0, 0, 96.0/72, 0, 0 };
+		app->full_pix = fz_new_pixmap_from_page(app->ctx, app->page, mat, fz_device_rgb(app->ctx), 0);
 		app->disp_pix = fz_scale_pixmap(app->ctx, app->full_pix, 0, 0, w, h, NULL);
 	}
 	fz_always(app->ctx)
