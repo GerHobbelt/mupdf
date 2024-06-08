@@ -152,6 +152,7 @@ void fz_morph_error(fz_context *ctx, int fromcode, int tocode);
 */
 void fz_verror(fz_context* ctx, const char* fmt, va_list ap);
 void fz_error(fz_context* ctx, const char* fmt, ...);
+void fz_write_error_line(fz_context* ctx, const char* line);
 
 /**
 	Log a warning.
@@ -161,6 +162,7 @@ void fz_error(fz_context* ctx, const char* fmt, ...);
 */
 void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap);
 void fz_warn(fz_context *ctx, const char *fmt, ...);
+void fz_write_warn_line(fz_context* ctx, const char* line);
 
 /**
 	Log an informational notice.
@@ -170,6 +172,17 @@ void fz_warn(fz_context *ctx, const char *fmt, ...);
 */
 void fz_vinfo(fz_context* ctx, const char* fmt, va_list ap);
 void fz_info(fz_context* ctx, const char* fmt, ...);
+void fz_write_info_line(fz_context* ctx, const char* line);
+
+/**
+	Log a debug message.
+
+	This goes to the registered debug stream (stderr by
+	default).
+*/
+void fz_vdebug(fz_context* ctx, const char* fmt, va_list ap);
+void fz_debug(fz_context* ctx, const char* fmt, ...);
+void fz_write_debug_line(fz_context* ctx, const char* line);
 
 /**
 	Within an fz_catch() block, retrieve the formatted message

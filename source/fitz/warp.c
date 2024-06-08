@@ -50,17 +50,7 @@
 #undef SLOW_WARPING
 
 #ifdef WARP_DEBUG
-static void
-debug_printf(fz_context *ctx, const char *fmt, ...)
-{
-	char text[1024];
-	va_list list;
-	va_start(list, fmt);
-	vsnprintf(text, sizeof(text), fmt, list);
-	va_end(list);
-
-	fz_write_string(ctx, ODS, "%s", text);
-}
+#define debug_printf(CTX, FMT, ...) fz_info(CTX, FMT, __VA_ARGS__)
 #else
 #define debug_printf(CTX, FMT, ...) do {} while (0)
 #endif
@@ -2080,7 +2070,8 @@ make_hough(fz_context *ctx, const fz_pixmap *src, fz_point *corners)
 #ifdef WARP_DEBUG
 	/* Mark up the src (again, for debugging) */
 	{
-		fz_device *dev = fz_new_draw_device(ctx, fz_identity, src);
+		fz_pixmap* marksrc = fz_clone_pixmap(ctx, src);
+		fz_device *dev = fz_new_draw_device(ctx, fz_identity, marksrc);
 		fz_stroke_state *stroke = fz_new_stroke_state(ctx);
 		float col = 1;
 		fz_color_params params = { FZ_RI_PERCEPTUAL };
@@ -2115,6 +2106,7 @@ make_hough(fz_context *ctx, const fz_pixmap *src, fz_point *corners)
 		fz_drop_stroke_state(ctx, stroke);
 		fz_close_device(ctx, dev);
 		fz_drop_device(ctx, dev);
+		fz_drop_pixmap(ctx, marksrc);
 	}
 #endif
 
@@ -2273,9 +2265,9 @@ fz_detect_document(fz_context *ctx, fz_point *points, fz_pixmap *orig_src)
 			histeq(g);
 			histeq(b);
 #endif
-			grad(ctx, r);
-			grad(ctx, g);
-			grad(ctx, b);
+			grad(ctx, r, pregrad(ctx, r));
+			grad(ctx, g, pregrad(ctx, g));
+			grad(ctx, b, pregrad(ctx, b));
 #ifdef WARP_DEBUG
 			fz_save_pixmap_as_png(ctx, r, "r.png");
 			fz_save_pixmap_as_png(ctx, g, "g.png");

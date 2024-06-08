@@ -371,7 +371,48 @@ static void prepare_append_message(char* buf, size_t bufsize, const char *joinst
 
 #define prepaddmsg(buf, join, msg)   prepare_append_message(buf, sizeof(buf), join, msg)
 
-void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap)
+void fz_write_warn_line(fz_context *ctx, const char *line)
+{
+	if (!ctx)
+	{
+		ctx = __fz_get_RAW_global_context();
+	}
+
+	if (!ctx)
+	{
+		fz_default_warning_callback(NULL, NULL, line);
+	}
+	else
+	{
+		if (!strcmp(line, ctx->warn.message))
+		{
+			ctx->warn.count++;
+		}
+		else
+		{
+			fz_flush_warnings(ctx);
+			if (ctx->warn.print)
+				ctx->warn.print(ctx, ctx->warn.print_user, line);
+			else
+				fz_default_warning_callback(ctx, NULL, line);
+
+			size_t srclen = strlen(line);
+			if (srclen >= sizeof ctx->warn.message)
+			{
+				// overlarge messages won't match anyway, so fill the buffer with bogus that won't match anything.
+				ctx->warn.message[0] = 0xE0;
+				ctx->warn.message[1] = 0;
+			}
+			else
+			{
+				strcpy(ctx->warn.message, line);
+				ctx->warn.count = 1;
+			}
+		}
+	}
+}
+
+void fz_vwarn(fz_context* ctx, const char* fmt, va_list ap)
 {
 	if (!ctx)
 	{
@@ -382,28 +423,7 @@ void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap)
 
 	prepmsg(buf, fmt, ap);
 
-	if (!ctx)
-	{
-		fz_default_warning_callback(NULL, NULL, buf);
-	}
-	else
-	{
-		if (!strcmp(buf, ctx->warn.message))
-		{
-			ctx->warn.count++;
-		}
-		else
-		{
-			fz_flush_warnings(ctx);
-			if (ctx->warn.print)
-				ctx->warn.print(ctx, ctx->warn.print_user, buf);
-			else
-				fz_default_warning_callback(ctx, NULL, buf);
-
-			strcpy(ctx->warn.message, buf);
-			ctx->warn.count = 1;
-		}
-	}
+	fz_write_warn_line(ctx, buf);
 }
 
 void fz_warn(fz_context *ctx, const char *fmt, ...)
@@ -445,6 +465,21 @@ void fz_warnFL(fz_context *ctx, const char *file, int line, const char *fmt, ...
 }
 #endif
 
+void fz_write_info_line(fz_context* ctx, const char* line)
+{
+	if (!ctx && fz_has_global_context())
+	{
+		ctx = fz_get_global_context();
+	}
+
+	fz_flush_warnings(ctx);
+
+	if (ctx && ctx->info.print)
+		ctx->info.print(ctx, ctx->info.print_user, line);
+	else
+		fz_default_info_callback(ctx, NULL, line);
+}
+
 void fz_vinfo(fz_context* ctx, const char* fmt, va_list ap)
 {
 	if (!ctx && fz_has_global_context())
@@ -454,14 +489,9 @@ void fz_vinfo(fz_context* ctx, const char* fmt, va_list ap)
 
 	char buf[sizeof ctx->warn.message];
 
-	fz_flush_warnings(ctx);
-
 	prepmsg(buf, fmt, ap);
 
-	if (ctx && ctx->info.print)
-		ctx->info.print(ctx, ctx->info.print_user, buf);
-	else
-		fz_default_info_callback(ctx, NULL, buf);
+	fz_write_info_line(ctx, buf);
 }
 
 void fz_info(fz_context* ctx, const char* fmt, ...)
@@ -472,6 +502,22 @@ void fz_info(fz_context* ctx, const char* fmt, ...)
 	va_end(ap);
 }
 
+void fz_write_error_line(fz_context* ctx, const char* line)
+{
+	if (!ctx && fz_has_global_context())
+	{
+		ctx = fz_get_global_context();
+	}
+
+	fz_flush_warnings(ctx);
+
+	if (ctx && ctx->error.print)
+		ctx->error.print(ctx, ctx->error.print_user, line);
+	else
+		fz_default_error_callback(ctx, NULL, line);
+}
+
+
 void fz_verror(fz_context* ctx, const char* fmt, va_list ap)
 {
 	if (!ctx && fz_has_global_context())
@@ -481,14 +527,9 @@ void fz_verror(fz_context* ctx, const char* fmt, va_list ap)
 
 	char buf[sizeof ctx->error.message];
 
-	fz_flush_warnings(ctx);
-
 	prepmsg(buf, fmt, ap);
 
-	if (ctx && ctx->error.print)
-		ctx->error.print(ctx, ctx->error.print_user, buf);
-	else
-		fz_default_error_callback(ctx, NULL, buf);
+	fz_write_error_line(ctx, buf);
 }
 
 void fz_error(fz_context* ctx, const char* fmt, ...)
