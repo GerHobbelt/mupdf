@@ -1937,3 +1937,248 @@ def test_swig():
                 test.i
             ''').replace( '\n', ' \\\n')
             )
+
+def _command_lines( command):
+    '''
+    Process multiline command by running through `textwrap.dedent()`, removes
+    comments (lines starting with `#` or ` #` until end of line), removes
+    entirely blank lines.
+
+    Returns list of lines.
+    '''
+    command = textwrap.dedent( command)
+    lines = []
+    for line in command.split( '\n'):
+        if line.startswith( '#'):
+            h = 0
+        else:
+            h = line.find( ' #')
+        if h >= 0:
+            line = line[:h]
+        if line.strip():
+            line = line.rstrip()
+            jlib.log(f'Appending {line=}.')
+            lines.append(line)
+        else:
+            jlib.log(f'Ignoring empty line: {line=}.')
+    return lines
+
+def run(command):
+    lines = _command_lines( command)
+    import platform
+    sep = ' ' if platform.system() == 'Windows' else '\\\n'
+    command2 = sep.join( lines)
+    return jlib.system(command2)
+
+
+def csharp_settings():
+    '''
+    Returns (csc, mono, mupdf_cs).
+
+    csc: C# compiler.
+    mono: C# interpreter ("" on Windows).
+    mupdf_cs: MuPDF C# code.
+
+    E.g. on Windows `csc` can be: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/Roslyn/csc.exe
+    '''
+    # On linux requires:
+    #   sudo apt install mono-devel
+    #
+    # OpenBSD:
+    #   pkg_add mono
+    # but we get runtime error when exiting:
+    #   mono:build/shared-release/libmupdfcpp.so: undefined symbol '_ZdlPv'
+    # which might be because of mixing gcc and clang?
+    #
+    if state.state_.windows:
+        import wdev
+        vs = wdev.WindowsVS()
+        jlib.log('{vs.description_ml()=}')
+        csc = vs.csc
+        jlib.log('{csc=}')
+        assert csc, f'Unable to find csc.exe'
+        mono = ''
+    else:
+        mono = 'mono'
+        if state.state_.linux:
+            csc = 'mono-csc'
+        elif state.state_.openbsd:
+            csc = 'csc'
+        else:
+            assert 0, f'Do not know where to find mono. {platform.platform()=}'
+
+    return csc, mono
+
+def test_swig():
+
+    test_i = textwrap.dedent('''
+            %module test
+
+            #include <stdio.h>
+            int foo(const char* text);
+
+            %{
+            int foo(const char* text)
+            {
+
+                printf("foo: %s\\n", text);
+                int l = strlen(text);
+                printf("foo: %i: %s\\n", l, text);
+                for (int i=0; i<l; ++i)
+                {
+                    const unsigned char* text2 = (const unsigned char*) text;
+                    printf(" %02x", text2[i]);
+                }
+                printf("\\n");
+                fflush(stdout);
+                return l;
+            }
+            %}
+            ''')
+    jlib.fs_update( test_i, 'test.i')
+    dllimport = 'test.dll'
+
+    if 1:
+        command = textwrap.dedent(
+                f'''
+                swig
+                    -D_WIN32
+                    -c++
+                    -csharp
+                    -Wextra
+                    -Wall
+                    #-module test
+                    # -namespace test
+                    -dllimport {dllimport}
+                    -outdir .
+                    -outfile test.cs
+                    -o test.cpp
+                    test.i
+                ''')
+        run(command)
+
+    import wdev
+    vs = wdev.WindowsVS()
+    cc = f'"{vs.vcvars}"&&"{vs.cl}"'
+    debug = 0
+    path_cpp = 'test.cpp'
+    path_obj = 'test.cpp.obj'
+    includes_text = ''
+    optimise2 = ''
+    debug2 = ''
+    permissive = '/permissive-'
+    defines_text = ''
+    compiler_extra = ''
+    cpp = 1
+    T = '/Tp' if cpp else '/Tc'
+    command = textwrap.dedent(f'''
+            {cc}
+                /c                          # Compiles without linking.
+                /EHsc                       # Enable "Standard C++ exception handling".
+
+                #/MD                         # Creates a multithreaded DLL using MSVCRT.lib.
+                {'/MDd' if debug else '/MD'}
+
+                # Input/output files:
+                {T}{path_cpp}               # /Tp specifies C++ source file.
+                /Fo{path_obj}               # Output file.
+
+                # Include paths:
+                {includes_text}
+
+                # Code generation:
+                {optimise2}
+                {debug2}
+                {permissive}                # Set standard-conformance mode.
+
+                # Diagnostics:
+                #/FC                         # Display full path of source code files passed to cl.exe in diagnostic text.
+                /W3                         # Sets which warning level to output. /W3 is IDE default.
+                /diagnostics:caret          # Controls the format of diagnostic messages.
+                /nologo                     #
+
+                {defines_text}
+                {compiler_extra}
+            ''')
+    if 1:
+        run(command)
+
+    libpaths_text = ''
+    path_so = 'test.dll'
+    debug2 = ''
+    libs_text = ''
+    libpaths_text = ''
+    linker_extra = ''
+    linker = f'"{vs.vcvars}"&&"{vs.link}"'
+    base = 'test'
+    test_lib = f'{base}.lib'
+    command = textwrap.dedent(f'''
+            {linker}
+                /DLL
+                /IMPLIB:{test_lib}      # Overrides the default import library name.
+                {libpaths_text}
+                /OUT:{path_so}          # Specifies the output file name.
+                {debug2}
+                /nologo
+                {libs_text}
+                {path_obj}
+                {linker_extra}
+            ''')
+    if 1:
+        run(command)
+
+    cs = textwrap.dedent('''
+            public class HelloWorld
+            {
+                public static void Main(string[] args)
+                {
+                    System.Console.WriteLine("MuPDF C# test starting.");
+                    System.Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+                    test.foo("hello");
+
+                    byte[] a = {
+                            0xcf,
+                            0x80,
+                            0xc3,
+                            0xaa,
+                            0xc3,
+                            0x9f,
+                            0xc3,
+                            0xb6,
+                            0xc3,
+                            0xa4,
+                            0xc3,
+                            0xbc,
+                            };
+                    string aa = System.Text.Encoding.UTF8.GetString(a);
+                    System.Console.WriteLine("aa: " + aa);
+                    test.foo("aa:");
+                    test.foo(aa);
+
+                    byte[] infix_utf8 = {
+                            0xc3, 0xaa,
+                            0xcf, 0x80,
+                            0xc3, 0x9f,
+                            0xc3, 0xb6,
+                            0xc3, 0xa4,
+                            0xc3, 0xbc
+                            };
+                    string infix = System.Text.Encoding.UTF8.GetString(infix_utf8);
+
+                    System.Console.OutputEncoding = System.Text.Encoding.UTF8;
+                    System.Console.WriteLine("infix: " + infix);
+
+                    test.foo("infix:");
+                    test.foo(infix);
+
+                    System.Console.WriteLine("MuPDF C# test finished.");
+                }
+            }
+            ''')
+    jlib.fs_write('testfoo.cs', cs)
+
+    csc, mono = csharp_settings()
+    out = 'testfoo.exe'
+    run(f'"{csc}" -out:{out} test.cs testfoo.cs')
+    run(f'{out}')

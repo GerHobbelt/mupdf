@@ -2876,6 +2876,12 @@ def main2():
                         f'{build_dirs.dir_mupdf}/thirdparty/zlib/zlib.3.pdf',
                         f'{build_dirs.dir_so}/zlib.3.pdf' if state.state_.windows else 'zlib.3.pdf'
                         )
+                leaf_infix = b'\xc3\xaa\xc3\x9f\xc3\xb6\xc3\xa4\xc3\xbc'.decode()
+                leaf = 'zlib.3.{leaf_infix}.pdf'
+                jlib.fs_copy(
+                        f'{build_dirs.dir_mupdf}/thirdparty/zlib/zlib.3.pdf',
+                        f'{build_dirs.dir_so}/{leaf}' if state.state_.windows else leaf
+                        )
 
                 if 1:
                     # Build and run simple test.
