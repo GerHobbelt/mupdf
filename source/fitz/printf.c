@@ -1216,7 +1216,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				if (bits == 64)
 				{
 					uint64_t i64 = va_arg(args, uint64_t);
-					fmtuint64(&out, i64, 0, z, w, c == 'X' ? -16 : 16);
+					fmtuint64(&out, i64, 0, z, w, c == 'X' ? -16 : 16, q);
 				}
 				else
 				{
@@ -1232,7 +1232,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 						iv = va_arg(args, unsigned int);
 					}
 
-					fmtuint32(&out, iv, 0, z, w, c == 'X' ? -16 : 16);
+					fmtuint32(&out, iv, 0, z, w, c == 'X' ? -16 : 16, q);
 				}
 				if (j)
 					fmtputc(&out, '"');
@@ -1245,7 +1245,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				if (bits == 64)
 				{
 					int64_t i64 = va_arg(args, int64_t);
-					fmtint64(&out, i64, s, z, w, 10);
+					fmtint64(&out, i64, s, z, w, 10, q);
 				}
 				else
 				{
@@ -1261,7 +1261,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 						iv = va_arg(args, int);
 					}
 
-					fmtint32(&out, iv, s, z, w, 10);
+					fmtint32(&out, iv, s, z, w, 10, q);
 				}
 				if (j)
 					fmtputc(&out, '"');
@@ -1273,7 +1273,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				if (bits == 64)
 				{
 					uint64_t u64 = va_arg(args, uint64_t);
-					fmtuint64(&out, u64, 0, z, w, 10);
+					fmtuint64(&out, u64, 0, z, w, 10, q);
 				}
 				else
 				{
@@ -1289,7 +1289,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 						iv = va_arg(args, unsigned int);
 					}
 
-					fmtuint32(&out, iv, 0, z, w, 10);
+					fmtuint32(&out, iv, 0, z, w, 10, q);
 				}
 				if (j)
 					fmtputc(&out, '"');
@@ -1301,7 +1301,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				if (bits == 64)
 				{
 					uint64_t u64 = va_arg(args, uint64_t);
-					fmtuint64(&out, u64, 0, z, w, 2);
+					fmtuint64(&out, u64, 0, z, w, 2, q);
 				}
 				else
 				{
@@ -1317,7 +1317,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 						iv = va_arg(args, unsigned int);
 					}
 
-					fmtuint32(&out, iv, 0, z, w, 2);
+					fmtuint32(&out, iv, 0, z, w, 2, q);
 				}
 				if (j)
 					fmtputc(&out, '"');

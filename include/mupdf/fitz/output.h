@@ -615,7 +615,7 @@ extern const char* fz_hex_digits;
     Next to that, these POSIX thousands separator modifiers are recognized:
 	- `'` indicates that `'` should be inserted into integers as thousands separators.
 	- `,` indicates that `,` should be inserted into integers as thousands separators.
-	- `_` indicates that `,` should be inserted into integers as thousands separators.
+	- `_` indicates that `_` should be inserted into integers as thousands separators.
 	Note however that POSIX chooses the thousand separator in a locale specific way -- we do not. 
 	We always apply it every 3 characters for the positive part of integers, so other styles, 
 	such as Indian (123,456,78) are not	supported.
