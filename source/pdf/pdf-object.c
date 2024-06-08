@@ -3949,7 +3949,7 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 	}
 	else if (pdf_is_int(ctx, obj))
 	{
-		fmt_printf(ctx, fmt, "%d", pdf_to_int(ctx, obj));
+		fmt_printf(ctx, fmt, "%ld", pdf_to_int64(ctx, obj));
 		fmt->sep = 1;
 	}
 	else if (pdf_is_real(ctx, obj))
