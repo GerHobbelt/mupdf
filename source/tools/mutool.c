@@ -144,6 +144,7 @@ static struct tool_spec {
 #if defined(MUTOOL_EX)
 	{ {.fa = cmapdump_main }, "cmapdump", "dump CMap resource as C source file" },
 #endif
+	{ {.fa = pdfaudit_main }, "audit", "Produce usage stats from PDF files" },
 #endif
 #endif
 #if defined(MUTOOL_EX)

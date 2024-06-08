@@ -40,7 +40,7 @@ static int usage(void)
 		"\t-F\tkeep forms\n"
 		"\t-O -\tcomma separated list of output options\n"
 	);
-	return 1;
+	return EXIT_FAILURE;
 }
 
 int pdfbake_main(int argc, const char **argv)
@@ -54,6 +54,7 @@ int pdfbake_main(int argc, const char **argv)
 	const char *flags = "garbage";
 	const char *input;
 	int c;
+	int errors = 0;
 
 	while ((c = fz_getopt(argc, argv, "AFO:")) != -1)
 	{
@@ -84,7 +85,7 @@ int pdfbake_main(int argc, const char **argv)
 	if (!ctx)
 	{
 		fprintf(stderr, "error: Cannot initialize MuPDF context.\n");
-		exit(1);
+		return EXIT_FAILURE;
 	}
 
 	fz_try(ctx)
@@ -99,11 +100,12 @@ int pdfbake_main(int argc, const char **argv)
 	fz_catch(ctx)
 	{
 		fz_report_error(ctx);
-		return 1;
+		errors++;
 	}
 
 	pdf_drop_document(ctx, doc);
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
-	return 0;
+
+	return errors != 0;
 }
