@@ -138,8 +138,8 @@ static void fmtfloat_e(struct fmtbuf *out, double f, int w, int p, char fmt)
 static void fmtuint32(struct fmtbuf *out, unsigned int a, int s, int z, int w, int base, int q)
 {
 	char buf[100];
-	int i;
-	const char *hex_digits = fz_hex_digits;
+	int i, qw;
+	const char* hex_digits = fz_hex_digits;
 
 	if (base < 0)
 	{
@@ -162,10 +162,21 @@ static void fmtuint32(struct fmtbuf *out, unsigned int a, int s, int z, int w, i
 	}
 	while (i < w)
 		buf[i++] = z;
+	if (!q) {
+		qw = 0;
+	}
+	else {
+		if (base != 10) {
+			qw = 4;		// one separator per 4 (hex) nibbles or 4 binary bits
+		}
+		else {
+			qw = 3;
+		}
+	}
 	while (i > 0)
 	{
 		fmtputc(out, buf[--i]);
-		if (q && i != 0 && i % 3 == 0)
+		if (q && i != 0 && i % qw == 0)
 			fmtputc(out, q);
 	}
 }
@@ -173,7 +184,7 @@ static void fmtuint32(struct fmtbuf *out, unsigned int a, int s, int z, int w, i
 static void fmtuint64(struct fmtbuf *out, uint64_t a, int s, int z, int w, int base, int q)
 {
 	char buf[100];
-	int i;
+	int i, qw;
 	const char *hex_digits = fz_hex_digits;
 
 	if (base < 0)
@@ -197,10 +208,21 @@ static void fmtuint64(struct fmtbuf *out, uint64_t a, int s, int z, int w, int b
 	}
 	while (i < w)
 		buf[i++] = z;
+	if (!q) {
+		qw = 0;
+	}
+	else {
+		if (base != 10) {
+			qw = 4;		// one separator per 4 (hex) nibbles or 4 binary bits
+		}
+		else {
+			qw = 3;
+		}
+	}
 	while (i > 0)
 	{
 		fmtputc(out, buf[--i]);
-		if (q && i != 0 && i % 3 == 0)
+		if (q && i != 0 && i % qw == 0)
 			fmtputc(out, q);
 	}
 }
@@ -1201,7 +1223,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 			case 'p':
 				bits = 8 * sizeof(void *);
 				z = '0';
-				q = 0;
+				// q = 0;
 				hexprefix = 1;
 				/* fallthrough */
 			case 'x':

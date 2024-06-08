@@ -618,7 +618,9 @@ extern const char* fz_hex_digits;
 	- `_` indicates that `_` should be inserted into integers as thousands separators.
 	Note however that POSIX chooses the thousand separator in a locale specific way -- we do not. 
 	We always apply it every 3 characters for the positive part of integers, so other styles, 
-	such as Indian (123,456,78) are not	supported.
+	such as Indian (123,456,78) are not	supported. The other exception is when printing hexadecimal
+	or binary values (including pointer values): in that case a separator is printed
+	once every 4 nibbles/bits, e.g. `"%_p"` --> `"0x1234_5678_abcd_ef48"`.
 
 	The 'precision' modifier is also supported, both static precision
 	(e.g. `%.2f`) and dynamic precision (e.g. `%.*f`), where the latter
