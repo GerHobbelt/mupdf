@@ -188,7 +188,7 @@
 /**
 	Choose whether to make font rendering APIs available.
 */
-#if BUILDING_MUPDF_MINIMAL_CORE == 1
+#if BUILDING_MUPDF_MINIMAL_CORE <= 1
 #define FZ_ENABLE_RENDER_CORE 1       // (Cost: ~1MB)
 #else
 #define FZ_ENABLE_RENDER_CORE 0

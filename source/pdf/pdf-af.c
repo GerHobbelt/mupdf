@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_PDF
+
 int pdf_count_document_associated_files(fz_context *ctx, pdf_document *doc)
 {
 	pdf_obj *af = pdf_dict_getl(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root), PDF_NAME(AF), NULL);
@@ -50,3 +52,5 @@ pdf_obj *pdf_page_associated_file(fz_context *ctx, pdf_page *page, int idx)
 
 	return pdf_array_get(ctx, af, idx);
 }
+
+#endif

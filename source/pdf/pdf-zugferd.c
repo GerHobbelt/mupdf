@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_PDF
+
 static const char *
 tag_or_text(fz_xml *x, const char *find)
 {
@@ -275,3 +277,5 @@ pdf_zugferd_profile_to_string(fz_context *ctx, enum pdf_zugferd_profile profile)
 
 	return strings[profile];
 }
+
+#endif
