@@ -207,7 +207,7 @@ fz_colorspace *fz_new_cal_rgb_colorspace(fz_context *ctx, float wp[3], float bp[
 /**
 	Query the type of colorspace.
 */
-enum fz_colorspace_type fz_colorspace_type(fz_context *ctx, fz_colorspace *cs);
+enum fz_colorspace_type fz_colorspace_type(fz_context *ctx, const fz_colorspace *cs);
 
 /**
 	Query the name of a colorspace.
@@ -215,48 +215,48 @@ enum fz_colorspace_type fz_colorspace_type(fz_context *ctx, fz_colorspace *cs);
 	The returned string has the same lifespan as the colorspace
 	does. Caller should not free it.
 */
-const char *fz_colorspace_name(fz_context *ctx, fz_colorspace *cs);
+const char *fz_colorspace_name(fz_context *ctx, const fz_colorspace *cs);
 
 /**
 	Query the number of colorants in a colorspace.
 */
-int fz_colorspace_n(fz_context *ctx, fz_colorspace *cs);
+int fz_colorspace_n(fz_context *ctx, const fz_colorspace *cs);
 
 /**
 	True for CMYK, Separation and DeviceN colorspaces.
 */
-int fz_colorspace_is_subtractive(fz_context *ctx, fz_colorspace *cs);
+int fz_colorspace_is_subtractive(fz_context *ctx, const fz_colorspace *cs);
 
 /**
 	True if DeviceN color space has only colorants from the CMYK set.
 */
-int fz_colorspace_device_n_has_only_cmyk(fz_context *ctx, fz_colorspace *cs);
+int fz_colorspace_device_n_has_only_cmyk(fz_context *ctx, const fz_colorspace *cs);
 
 /**
 	True if DeviceN color space has cyan magenta yellow or black as
 	one of its colorants.
 */
-int fz_colorspace_device_n_has_cmyk(fz_context *ctx, fz_colorspace *cs);
+int fz_colorspace_device_n_has_cmyk(fz_context *ctx, const fz_colorspace *cs);
 
 /**
 	Tests for particular types of colorspaces
 */
-int fz_colorspace_is_gray(fz_context *ctx, fz_colorspace *cs);
-int fz_colorspace_is_rgb(fz_context *ctx, fz_colorspace *cs);
-int fz_colorspace_is_cmyk(fz_context *ctx, fz_colorspace *cs);
-int fz_colorspace_is_lab(fz_context *ctx, fz_colorspace *cs);
-int fz_colorspace_is_indexed(fz_context *ctx, fz_colorspace *cs);
-int fz_colorspace_is_device_n(fz_context *ctx, fz_colorspace *cs);
-int fz_colorspace_is_device(fz_context *ctx, fz_colorspace *cs);
-int fz_colorspace_is_device_gray(fz_context *ctx, fz_colorspace *cs);
-int fz_colorspace_is_device_cmyk(fz_context *ctx, fz_colorspace *cs);
-int fz_colorspace_is_lab_icc(fz_context *ctx, fz_colorspace *cs);
+int fz_colorspace_is_gray(fz_context *ctx, const fz_colorspace *cs);
+int fz_colorspace_is_rgb(fz_context *ctx, const fz_colorspace *cs);
+int fz_colorspace_is_cmyk(fz_context *ctx, const fz_colorspace *cs);
+int fz_colorspace_is_lab(fz_context *ctx, const fz_colorspace *cs);
+int fz_colorspace_is_indexed(fz_context *ctx, const fz_colorspace *cs);
+int fz_colorspace_is_device_n(fz_context *ctx, const fz_colorspace *cs);
+int fz_colorspace_is_device(fz_context *ctx, const fz_colorspace *cs);
+int fz_colorspace_is_device_gray(fz_context *ctx, const fz_colorspace *cs);
+int fz_colorspace_is_device_cmyk(fz_context *ctx, const fz_colorspace *cs);
+int fz_colorspace_is_lab_icc(fz_context *ctx, const fz_colorspace *cs);
 
 /**
 	Check to see that a colorspace is appropriate to be used as
 	a blending space (i.e. only grey, rgb or cmyk).
 */
-int fz_is_valid_blend_colorspace(fz_context *ctx, fz_colorspace *cs);
+int fz_is_valid_blend_colorspace(fz_context *ctx, const fz_colorspace *cs);
 
 /**
 	Get the 'base' colorspace for a colorspace.

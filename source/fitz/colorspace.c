@@ -222,87 +222,87 @@ const char *fz_rendering_intent_name(int ri)
 
 /* Colorspace feature tests */
 
-const char *fz_colorspace_name(fz_context *ctx, fz_colorspace *cs)
+const char *fz_colorspace_name(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs ? cs->name : "None";
 }
 
-enum fz_colorspace_type fz_colorspace_type(fz_context *ctx, fz_colorspace *cs)
+enum fz_colorspace_type fz_colorspace_type(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs ? cs->type : FZ_COLORSPACE_NONE;
 }
 
-int fz_colorspace_n(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_n(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs ? cs->n : 0;
 }
 
-int fz_colorspace_is_gray(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_is_gray(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs && cs->type == FZ_COLORSPACE_GRAY;
 }
 
-int fz_colorspace_is_rgb(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_is_rgb(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs && cs->type == FZ_COLORSPACE_RGB;
 }
 
-int fz_colorspace_is_cmyk(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_is_cmyk(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs && cs->type == FZ_COLORSPACE_CMYK;
 }
 
-int fz_colorspace_is_lab(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_is_lab(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs && cs->type == FZ_COLORSPACE_LAB;
 }
 
-int fz_colorspace_is_indexed(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_is_indexed(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs && (cs->type == FZ_COLORSPACE_INDEXED);
 }
 
-int fz_colorspace_is_device_n(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_is_device_n(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs && (cs->type == FZ_COLORSPACE_SEPARATION);
 }
 
-int fz_colorspace_is_subtractive(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_is_subtractive(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs && (cs->type == FZ_COLORSPACE_CMYK || cs->type == FZ_COLORSPACE_SEPARATION);
 }
 
-int fz_colorspace_is_device(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_is_device(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs && (cs->flags & FZ_COLORSPACE_IS_DEVICE);
 }
 
-int fz_colorspace_is_lab_icc(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_is_lab_icc(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs && (cs->type == FZ_COLORSPACE_LAB) && (cs->flags & FZ_COLORSPACE_IS_ICC);
 }
 
-int fz_colorspace_is_device_gray(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_is_device_gray(fz_context *ctx, const fz_colorspace *cs)
 {
 	return fz_colorspace_is_device(ctx, cs) && fz_colorspace_is_gray(ctx, cs);
 }
 
-int fz_colorspace_is_device_cmyk(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_is_device_cmyk(fz_context *ctx, const fz_colorspace *cs)
 {
 	return fz_colorspace_is_device(ctx, cs) && fz_colorspace_is_cmyk(ctx, cs);
 }
 
-int fz_colorspace_device_n_has_only_cmyk(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_device_n_has_only_cmyk(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs && ((cs->flags & FZ_COLORSPACE_HAS_CMYK_AND_SPOTS) == FZ_COLORSPACE_HAS_CMYK);
 }
 
-int fz_colorspace_device_n_has_cmyk(fz_context *ctx, fz_colorspace *cs)
+int fz_colorspace_device_n_has_cmyk(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs && (cs->flags & FZ_COLORSPACE_HAS_CMYK);
 }
 
-int fz_is_valid_blend_colorspace(fz_context *ctx, fz_colorspace *cs)
+int fz_is_valid_blend_colorspace(fz_context *ctx, const fz_colorspace *cs)
 {
 	return cs == NULL ||
 		cs->type == FZ_COLORSPACE_GRAY ||
