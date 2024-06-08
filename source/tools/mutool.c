@@ -140,12 +140,10 @@ static struct tool_spec {
 #endif
 #if FZ_ENABLE_PDF
 	{ {.fa = pdfshow_main }, "show", "show internal pdf objects" },
-#ifndef NDEBUG
 #if defined(MUTOOL_EX)
 	{ {.fa = cmapdump_main }, "cmapdump", "dump CMap resource as C source file" },
 #endif
 	{ {.fa = pdfaudit_main }, "audit", "Produce usage stats from PDF files" },
-#endif
 #endif
 #if defined(MUTOOL_EX)
 	{ {.fa = mupdf_base64_test_main }, "base64_test", "muPDF base64 fringe case tests" },

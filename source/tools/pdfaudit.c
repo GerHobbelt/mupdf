@@ -59,6 +59,7 @@ typedef enum
 	AUDIT_TRAILER,
 	AUDIT_RESOURCES,
 	AUDIT_OBJSTM,
+	AUDIT_METADATA,
 	AUDIT__MAX
 } audit_type_t;
 
@@ -77,7 +78,7 @@ const char *audit_type[] =
 	"COMMENTS",
 	"3DCONTENT",
 	"NAMED_DESTINATIONS",
-	"DOCUMENT_OVERHEAD",
+	//"DOCUMENT_OVERHEAD",
 	"COLORSPACES",
 	"FORM_XOBJ",
 	"EXTGS",
@@ -85,7 +86,8 @@ const char *audit_type[] =
 	"EMBEDDED_FILES",
 	"TRAILER",
 	"RESOURCES",
-	"OBJSTM"
+	"OBJSTM",
+	"METADATA"
 };
 
 typedef struct
@@ -1750,13 +1752,11 @@ walk(fz_context *ctx, walk_stack_t *ws, obj_info_t *oi, pdf_obj *obj, audit_type
 					type = AUDIT_FORM_XOBJ;
 			}
 			else if (pdf_name_eq(ctx, otype, PDF_NAME(Page)))
-			{
 				type = AUDIT_PAGE_OBJECTS;
-			}
 			else if (pdf_name_eq(ctx, otype, PDF_NAME(Pages)))
-			{
 				type = AUDIT_PAGE_OBJECTS;
-			}
+			else if (pdf_name_eq(ctx, otype, PDF_NAME(Metadata)))
+				type = AUDIT_METADATA;
 		}
 		ws->stack[ws->len].obj = obj;
 		ws->stack[ws->len].pos = 0;
@@ -1805,6 +1805,10 @@ step_next_dict_child:
 				type = AUDIT_EXTGS;
 			else if (pdf_name_eq(ctx, key, PDF_NAME(Resources)))
 				type = AUDIT_RESOURCES;
+			else if (pdf_name_eq(ctx, key, PDF_NAME(EmbeddedFile)))
+				type = AUDIT_EMBEDDED_FILES;
+			else if (pdf_name_eq(ctx, key, PDF_NAME(Metadata)))
+				type = AUDIT_METADATA;
 
 			/* OK. step onto the val. */
 			obj = pdf_dict_get_val(ctx, ws->stack[ws->len-1].obj, ws->stack[ws->len-1].pos-1);
@@ -2089,6 +2093,7 @@ int pdfaudit_main(int argc, const char **argv)
 				assert(!"Never happens");
 				break;
 			}
+			break;
 		}
 		default:
 			return usage();
