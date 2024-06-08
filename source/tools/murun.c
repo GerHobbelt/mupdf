@@ -4634,8 +4634,7 @@ static void ffi_Pixmap_autowarp(js_State *J)
 	fz_catch(ctx)
 		rethrow(J);
 
-	js_getregistry(J, "fz_pixmap");
-	js_newuserdata(J, "fz_pixmap", dest, ffi_gc_fz_pixmap);
+	ffi_pushpixmap(J, dest);
 }
 
 static void ffi_Pixmap_detect_document(js_State *J)
@@ -4659,6 +4658,9 @@ static void ffi_Pixmap_detect_document(js_State *J)
 		}
 	} else {
 		js_pushnull(J);
+		/* Do nothing and Javascript will put undefined.
+		 * Apparently this is the kind of thing Javascript
+		 * does. */
 	}
 }
 
