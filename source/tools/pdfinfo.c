@@ -46,7 +46,8 @@ enum
 	PATTERNS = 0x10,
 	XOBJS = 0x20,
 	LAYERS = 0x40,
-	ALL = DIMENSIONS | FONTS | IMAGES | SHADINGS | PATTERNS | XOBJS | LAYERS
+	ZUGFERD = 0x80,
+	ALL = DIMENSIONS | FONTS | IMAGES | SHADINGS | PATTERNS | XOBJS | LAYERS | ZUGFERD
 };
 
 struct info
@@ -199,6 +200,8 @@ usage(void)
 		"\t-P\tlist patterns\n"
 		"\t-S\tlist shadings\n"
 		"\t-X\tlist form and postscript xobjects\n"
+		"\t-S\tlist layers\n"
+		"\t-Z\tlist ZUGFeRD info\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 	);
 	
@@ -785,9 +788,10 @@ gatherresourceinfo(fz_context *ctx, pdf_mark_list *mark_list, globals *glo, int 
 		{
 			gatherresourceinfo(ctx, mark_list, glo, page, pdf_dict_get_val(ctx, pattern, i), show);
 		}
-
-		gatherlayersinfo(ctx, glo);
 	}
+	
+	if (show & LAYERS)
+		gatherlayersinfo(ctx, glo);
 }
 
 static void
@@ -1085,6 +1089,30 @@ showinfo(fz_context *ctx, globals *glo, int show, const char *pagelist)
 }
 
 static void
+showzugferd(fz_context *ctx, globals *glo)
+{
+	float version;
+	fz_output *out = glo->out;
+	enum pdf_zugferd_profile profile = pdf_zugferd_profile(ctx, glo->doc, &version);
+	fz_buffer *buf;
+
+	if (profile == PDF_NOT_ZUGFERD)
+	{
+		fz_write_printf(ctx, out, "Not a ZUGFeRD file.\n");
+		return;
+	}
+
+	fz_write_printf(ctx, out, "ZUGFeRD version %g\n", version);
+	fz_write_printf(ctx, out, "%s profile\n", pdf_zugferd_profile_to_string(ctx, profile));
+
+	fz_write_printf(ctx, out, "Embedded XML:\n");
+	buf = pdf_zugferd_xml(ctx, glo->doc);
+	fz_write_buffer(ctx, out, buf);
+	fz_drop_buffer(ctx, buf);
+	fz_write_printf(ctx, out, "\n\n");
+}
+
+static void
 pdfinfo_info(fz_context *ctx, fz_output *out, const char *password, int show, const char *argv[], int argc)
 {
 	enum { NO_FILE_OPENED, NO_INFO_GATHERED, INFO_SHOWN } state;
@@ -1123,6 +1151,9 @@ pdfinfo_info(fz_context *ctx, fz_output *out, const char *password, int show, co
 
 				showglobalinfo(ctx, &glo);
 				state = NO_INFO_GATHERED;
+
+				if (show & ZUGFERD)
+					showzugferd(ctx, &glo);
 			}
 			else
 			{
@@ -1154,7 +1185,7 @@ int pdfinfo_main(int argc, const char** argv)
 	ctx = NULL;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "FISPXyMo:p:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "FISPXyMZo:p:h")) != -1)
 	{
 		switch (c)
 		{
@@ -1165,6 +1196,7 @@ int pdfinfo_main(int argc, const char** argv)
 		case 'X': if (show == ALL) show = XOBJS; else show |= XOBJS; break;
 		case 'y': if (show == ALL) show = LAYERS; else show |= LAYERS; break;
 		case 'M': if (show == ALL) show = DIMENSIONS; else show |= DIMENSIONS; break;
+		case 'Z': if (show == ALL) show = ZUGFERD; else show |= ZUGFERD; break;
 		case 'o': output = fz_optarg; break;
 		case 'p': password = fz_optarg; break;
 		default:
