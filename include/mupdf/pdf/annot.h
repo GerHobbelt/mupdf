@@ -992,7 +992,7 @@ fz_buffer *pdf_load_embedded_file_contents(fz_context *ctx, pdf_obj *fs);
 */
 int pdf_verify_embedded_file_checksum(fz_context *ctx, pdf_obj *fs);
 
-pdf_obj* pdf_embedded_file_stream(fz_context* ctx, pdf_obj* fs);
+pdf_obj *get_file_stream_and_name(fz_context *ctx, pdf_obj *fs, pdf_obj **namep);
 
 pdf_obj *pdf_lookup_dest(fz_context *ctx, pdf_document *doc, pdf_obj *needle);
 fz_link *pdf_load_link_annots(fz_context *ctx, pdf_document *, pdf_page *, pdf_obj *annots, int pagenum, fz_matrix page_ctm);

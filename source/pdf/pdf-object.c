@@ -4403,7 +4403,8 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 				fmt_printf(ctx, fmt, "%q: %d,\n", "EmbeddedFileIndex", pdf_to_int(ctx, ci_index));
 			}
 
-			pdf_obj* file = pdf_embedded_file_stream(ctx, obj);
+			pdf_obj* file = get_file_stream_and_name(ctx, obj, NULL);
+			assert(pdf_is_stream(ctx, file));
 			pdf_obj* elen = pdf_dict_get(ctx, file, PDF_NAME(Length));
 			if (elen) {
 				fmt_indent(ctx, fmt);

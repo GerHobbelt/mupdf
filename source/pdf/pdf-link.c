@@ -216,7 +216,8 @@ pdf_parse_link_dest_to_file_with_path(fz_context *ctx, pdf_document *doc, const 
 	}
 }
 
-/* Look at an FS object, and find a name. Find any embedded
+/**
+ * Look at an FS object, and find a name. Find any embedded
  * file stream object that corresponds to that and return it.
  * Optionally return the name.
  *
@@ -225,7 +226,7 @@ pdf_parse_link_dest_to_file_with_path(fz_context *ctx, pdf_document *doc, const 
  *
  * We will never return a file unless we also found a name.
  */
-static pdf_obj *
+pdf_obj *
 get_file_stream_and_name(fz_context *ctx, pdf_obj *fs, pdf_obj **namep)
 {
 	pdf_obj *ef = pdf_dict_get(ctx, fs, PDF_NAME(EF));
