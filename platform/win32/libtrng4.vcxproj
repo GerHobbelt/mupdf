@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB3CD45}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRNG4;TRNG4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRNG4;TRNG4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRNG4;TRNG4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRNG4;TRNG4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRNG4;TRNG4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRNG4;TRNG4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRNG4;TRNG4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRNG4;TRNG4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRNG4;TRNG4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRNG4;TRNG4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRNG4;TRNG4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTRNG4;TRNG4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/Ising_model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/bernoulli_dist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/correlated_normal_dist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/cpp11.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/discrete_dist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/discrete_dist_c_style.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/distributions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/hello_world.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/pi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/pi_block_mpi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/pi_block_openmp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/pi_block_tbb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/pi_leap_mpi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/pi_leap_openmp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/plausibility_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/sample_output.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/stl_container.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/examples/time.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/lcg64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/lcg64_shift.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/minstd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/mrg2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/mrg3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/mrg3s.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/mrg4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/mrg5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/mrg5s.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/mt19937.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/mt19937_64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/yarn2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/yarn3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/yarn3s.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/yarn4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/yarn5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/trng4/src/yarn5s.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/bernoulli_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/beta_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/binomial_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/cauchy_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/chi_square_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/constants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/correlated_normal_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/cuda.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/discrete_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/exponential_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/extreme_value_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/fast_discrete_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/gamma_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/generate_canonical.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/geometric_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/hypergeometric_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/int_math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/int_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/lagfib2plus.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/lagfib2xor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/lagfib4plus.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/lagfib4xor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/lcg64.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/lcg64_shift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/limits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/logistic_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/lognormal_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/maxwell_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/minstd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/mrg2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/mrg3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/mrg3s.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/mrg4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/mrg5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/mrg5s.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/mt19937.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/mt19937_64.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/negative_binomial_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/normal_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/pareto_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/poisson_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/powerlaw_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/rayleigh_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/snedecor_f_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/special_functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/static_assertion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/student_t_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/tent_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/truncated_normal_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/twosided_exponential_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/uniform01_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/uniform_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/uniform_int_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/uniformxx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/weibull_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/yarn2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/yarn3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/yarn3s.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/yarn4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/yarn5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/yarn5s.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/trng4/src/zero_truncated_poisson_dist.hpp" />
+    <Text Include="../../thirdparty/owemdjee/trng4/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/trng4/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/trng4/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/trng4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/trng4/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/trng4/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/trng4/README" />
+    <Text Include="../../thirdparty/owemdjee/trng4/TODO" />
+    <Text Include="../../thirdparty/owemdjee/trng4/acinclude.m4" />
+    <Text Include="../../thirdparty/owemdjee/trng4/aclocal.m4" />
+    <Text Include="../../thirdparty/owemdjee/trng4/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/trng4/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/trng4/doc/trng.pdf" />
+    <Text Include="../../thirdparty/owemdjee/trng4/examples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/trng4/examples/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/trng4/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/trng4/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/trng4/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/trng4/src/config.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/trng4/trng/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/trng4/trng/Makefile.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

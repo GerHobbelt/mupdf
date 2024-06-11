@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7DA3E2}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENALPR;OPENALPR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENALPR;OPENALPR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENALPR;OPENALPR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENALPR;OPENALPR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENALPR;OPENALPR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENALPR;OPENALPR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENALPR;OPENALPR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENALPR;OPENALPR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENALPR;OPENALPR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENALPR;OPENALPR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENALPR;OPENALPR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENALPR;OPENALPR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/bindings/go/openalprgo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/openalprjni.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/bindings/python/openalprpy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/daemon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/daemon/beanstalk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/daemon/beanstalk.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/daemon/daemonconfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/misc_utilities/benchmarks/benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/misc_utilities/benchmarks/benchmark_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/misc_utilities/benchmarks/endtoendtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/misc_utilities/binarizefontsheet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/misc_utilities/calibrate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/misc_utilities/classifychars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/misc_utilities/prepcharsfortraining.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/misc_utilities/sortstate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/misc_utilities/tagplates.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/alpr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/alpr_c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/alpr_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/binarize_wolf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/cjson.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/colorfilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/config_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detectorcpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detectorcuda.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detectorfactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detectormask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detectormorph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detectorocl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/edges/edgefinder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/edges/platecorners.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/edges/platelines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/edges/scorekeeper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/edges/textlinecollection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/licenseplatecandidate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/motiondetector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/ocr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/ocrfactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/segmentation/charactersegmenter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/segmentation/histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/segmentation/histogramhorizontal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/segmentation/histogramvertical.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/segmentation/segment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/segmentation/segmentationgroup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/tesseract_ocr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/pipeline_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/postprocess/postprocess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/postprocess/regexrule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/prewarp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/result_aggregator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/simpleini/ConvertUTF.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/simpleini/snippets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/filesystem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/bitstate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/compile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/dfa.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/filtered_re2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/mimics_pcre.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/nfa.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/onepass.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/parse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/perl_groups.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/prefilter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/prefilter_tree.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/prog.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/re2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/regexp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/simplify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/stringpiece.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/tostring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/unicode_casefold.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/unicode_groups.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/hash.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/rune.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/stringprintf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/strutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/valgrind.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/timing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/tinythread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/version.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/textdetection/characteranalysis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/textdetection/linefinder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/textdetection/platemask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/textdetection/textcontours.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/textdetection/textline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/transformation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/openalpr/utility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/statedetection/featurematcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/statedetection/line_segment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/statedetection/state_detector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/statedetection/state_detector_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/tests/test_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/tests/test_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/tests/test_regex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/tests/test_utility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openalpr/src/video/videobuffer.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/bindings/go/openalprgo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/com_openalpr_jni_Alpr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/daemon/beanstalk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/daemon/beanstalk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/daemon/daemonconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/inc/safequeue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/misc_utilities/benchmarks/benchmark_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/misc_utilities/benchmarks/endtoendtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/TRexpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/alpr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/alpr_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/alpr_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/binarize_wolf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/cjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/colorfilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/config_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detector_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detectorcpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detectorcuda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detectorfactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detectormask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detectormorph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/detection/detectorocl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/edges/edgefinder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/edges/platecorners.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/edges/platelines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/edges/scorekeeper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/edges/textlinecollection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/licenseplatecandidate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/motiondetector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/ocr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/ocrfactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/segmentation/charactersegmenter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/segmentation/histogram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/segmentation/histogramhorizontal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/segmentation/histogramvertical.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/segmentation/segment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/segmentation/segmentationgroup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/ocr/tesseract_ocr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/pipeline_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/postprocess/postprocess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/postprocess/regexrule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/prewarp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/result_aggregator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/simpleini/ConvertUTF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/simpleini/simpleini.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/fast_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/filesystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/filtered_re2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/prefilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/prefilter_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/prog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/regexp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/stringpiece.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/unicode_casefold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/unicode_groups.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/atomicops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/pcre.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/sparse_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/sparse_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/utf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/util/valgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/variadic_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/re2/walker-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/timing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/tinydir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/tinythread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/utf8/checked.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/utf8/core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/utf8/unchecked.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/windows/dirent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/windows/unistd_partial.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/windows/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/textdetection/characteranalysis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/textdetection/linefinder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/textdetection/platemask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/textdetection/textcontours.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/textdetection/textline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/transformation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/openalpr/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/statedetection/featurematcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/statedetection/line_segment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/statedetection/state_detector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/statedetection/state_detector_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/Arg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/ArgException.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/ArgTraits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/CmdLine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/CmdLineInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/CmdLineOutput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/Constraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/DocBookOutput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/HelpVisitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/IgnoreRestVisitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/MultiArg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/MultiSwitchArg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/OptionalUnlabeledTracker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/StandardTraits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/StdOutput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/SwitchArg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/UnlabeledMultiArg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/UnlabeledValueArg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/ValueArg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/ValuesConstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/VersionVisitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/Visitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/XorHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tclap/ZshCompletionOutput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/tests/catch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/video/logging_videobuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openalpr/src/video/videobuffer.h" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ak2008.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/al2002.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ar2006.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/az1996.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ca1993.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/co2000.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ct2000.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/dc2003.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/de1970.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/fl2004.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ga2007.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/hi1991.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ia1997.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/id2006.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/il2002.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/in2009.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ks2007b.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ky2005.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/la2006.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ma1987.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/md2006.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/md2006b.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/md2006c.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/me1999.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/me1999b.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/mi2007.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/mn2000.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/mo2006b.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/mo2009.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ms2003.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/mt2010.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/nc1982.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/nd1993.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ne2005.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/nh1999.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/nj1993.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/nm2010.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/nv2001.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ny2010.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/oh2004.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ok2009.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/or1990.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/pa2004.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ri1996.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/sc2008.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/sd2007.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/tn2007.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/tx2009.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/ut2009.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/va2003.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/vt1985.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/wa1998.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/wi2007.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/wv1995.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/runtime_data/keypoints/us/wy2000.jpg" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetGuiTest/appicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetGuiTest/appicon.png" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/cla.txt" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/config/alprd.conf.defaults" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/config/alprd.conf.user" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/config/openalpr.conf.defaults" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/config/openalpr.conf.user" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/distros/centos/openalpr.spec" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/distros/debian/README.source" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/distros/debian/changelog" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/distros/debian/libopenalpr-data.install" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/distros/debian/libopenalpr-dev.install" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/distros/debian/libopenalpr2.install" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/distros/debian/openalpr-daemon.dirs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/distros/debian/openalpr-daemon.init" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/distros/debian/openalpr-daemon.install" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/distros/debian/openalpr-utils.install" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/distros/debian/openalpr.install" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/distros/debian/openalpr.manpages" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/distros/debian/python-openalpr.install" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/doc/man/alpr.1" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/cameras.yaml" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/au.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/auwide.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/br.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/br2.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/eu.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/fr.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/gb.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/in.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/kr.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/kr2.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/mx.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/sg.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/us.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/config/vn2.conf" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/ocr/tessdata/lau.traineddata" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/ocr/tessdata/lbr.traineddata" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/ocr/tessdata/leu.traineddata" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/ocr/tessdata/lfr.traineddata" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/ocr/tessdata/lgb.traineddata" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/ocr/tessdata/lin.traineddata" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/ocr/tessdata/lkr.traineddata" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/ocr/tessdata/lkr2.traineddata" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/ocr/tessdata/lsg.traineddata" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/ocr/tessdata/lus.traineddata" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/postprocess/au.patterns" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/postprocess/br.patterns" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/postprocess/eu.patterns" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/postprocess/gb.patterns" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/postprocess/in.patterns" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/postprocess/kr.patterns" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/postprocess/mx.patterns" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/postprocess/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/postprocess/sg.patterns" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/runtime_data/postprocess/us.patterns" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetGuiTest/Form1.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetGuiTest/Form1.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetGuiTest/Form1.resx" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetGuiTest/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetGuiTest/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetGuiTest/Properties/Resources.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetGuiTest/Properties/Resources.resx" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetGuiTest/Properties/Settings.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetGuiTest/Properties/Settings.settings" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetGuiTest/app.config" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetTest/App.config" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetTest/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/AlprNetTest/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/alprnet/Alpr.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/alprnet/Models/AlprResponse.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/alprnet/Models/AlprResult.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/alprnet/Models/Candidate.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/alprnet/Models/Coordinate.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/alprnet/Models/RegionOfInterest.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/alprnet/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/alprnet/packages.config" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/csharp/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/go/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/go/make.sh" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/make.sh" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/Main.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/com/openalpr/jni/Alpr.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/com/openalpr/jni/AlprCoordinate.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/com/openalpr/jni/AlprException.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/com/openalpr/jni/AlprPlate.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/com/openalpr/jni/AlprPlateResult.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/com/openalpr/jni/AlprRegionOfInterest.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/com/openalpr/jni/AlprResults.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/com/openalpr/jni/json/JSON.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/com/openalpr/jni/json/JSONArray.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/com/openalpr/jni/json/JSONException.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/com/openalpr/jni/json/JSONObject.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/com/openalpr/jni/json/JSONStringer.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/java/src/com/openalpr/jni/json/JSONTokener.java" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/python/make.sh" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/python/openalpr/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/python/openalpr/openalpr.py" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/bindings/python/test.py" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/cmake_modules/FindTesseract.cmake" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/cmake_modules/Findlog4cplus.cmake" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/cmake_modules/LibFindMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/cmake_modules/templates/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/cmake_modules/templates/openalpr.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/misc_utilities/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/openalpr/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/openalpr/simpleini/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/openalpr/simpleini/LICENCE.txt" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/openalpr/simpleini/README.md" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/openalpr/simpleini/simpleini.doxy" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/openalpr/support/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/plate_push.py" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/statedetection/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/openalpr/src/video/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/openalpr/runtime_data/region/au.xml" />
+    <Xml Include="../../thirdparty/owemdjee/openalpr/runtime_data/region/br.xml" />
+    <Xml Include="../../thirdparty/owemdjee/openalpr/runtime_data/region/br2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/openalpr/runtime_data/region/eu.xml" />
+    <Xml Include="../../thirdparty/owemdjee/openalpr/runtime_data/region/in.xml" />
+    <Xml Include="../../thirdparty/owemdjee/openalpr/runtime_data/region/kr2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/openalpr/runtime_data/region/us.xml" />
+    <Xml Include="../../thirdparty/owemdjee/openalpr/runtime_data/region/vn2.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

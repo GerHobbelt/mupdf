@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFFCF5A6}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_GENAI;ONNXRUNTIME_GENAI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_GENAI;ONNXRUNTIME_GENAI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_GENAI;ONNXRUNTIME_GENAI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_GENAI;ONNXRUNTIME_GENAI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_GENAI;ONNXRUNTIME_GENAI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_GENAI;ONNXRUNTIME_GENAI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_GENAI;ONNXRUNTIME_GENAI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_GENAI;ONNXRUNTIME_GENAI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_GENAI;ONNXRUNTIME_GENAI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_GENAI;ONNXRUNTIME_GENAI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_GENAI;ONNXRUNTIME_GENAI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_GENAI;ONNXRUNTIME_GENAI_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/benchmark/c/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/benchmark/c/options.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/benchmark/c/posix/resource_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/benchmark/c/windows/resource_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/c/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/c/src/phi3v.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/beam_search_scorer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/beam_search_scorer_cuda.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_adapter_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_adapter_selection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_command_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_command_recorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_descriptor_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_execution_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_increment_values_kernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_pooled_upload_heap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_readback_heap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_update_mask_kernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/generators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/native/ai_onnxruntime_genai_Generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/native/ai_onnxruntime_genai_GeneratorParams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/native/ai_onnxruntime_genai_Model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/native/ai_onnxruntime_genai_Sequences.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/native/ai_onnxruntime_genai_Tokenizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/native/ai_onnxruntime_genai_TokenizerStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/native/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/captured_graph_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/debugging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/decoder_only.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/embeddings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/extra_inputs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/input_ids.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/kv_cache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/logits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/multi_modal_vision_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/position_inputs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/prompt_image_processor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/static_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/whisper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/ort_genai_c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/python/python.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/search_cuda.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/sequences.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/sequences_cuda.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/softmax_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/top_k_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/test/c_api_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/test/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/test/model_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/test/sampling_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/test/sampling_tests.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/benchmark/c/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/benchmark/c/resource_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/beam_search_scorer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/beam_search_scorer_cuda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/beam_search_topk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/cuda_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_adapter_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_adapter_selection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_command_allocator_ring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_command_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_command_recorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_descriptor_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_execution_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_gpu_event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_increment_values_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_pooled_upload_heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_readback_heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_update_mask_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/generated_dml_shaders/increment_values_int32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/generated_dml_shaders/increment_values_int64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/generated_dml_shaders/update_mask_int32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/generated_dml_shaders/update_mask_int64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/filesystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/generators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/native/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/captured_graph_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/debugging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/decoder_only.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/embeddings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/extra_inputs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/gpt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/input_ids.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/kernels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/kv_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/logits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/multi_modal_vision_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/onnxruntime_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/onnxruntime_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/position_inputs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/prompt_image_processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/static_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/whisper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/ort_genai.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/ort_genai_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/search.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/search_cuda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/sequences.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/sequences_cuda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/smartptrs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/softmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/tensor.h" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/image.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/vision_UI_interface.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Assets/Screenshot1.PNG" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Assets/Screenshot2.PNG" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Images/robot.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Images/user.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/ThirdPartyNotices.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/benchmark/c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/benchmark/python/README" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/benchmark/python/benchmark_e2e.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/benchmark/python/benchmark_multimodal.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/build.bat" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/build.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cgmanifests/generate_cgmanifest.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cgmanifests/generated/cgmanifest.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cgmanifests/print_submodule_info.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/check_cuda.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/check_dml.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/cxx_standard.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/deps.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/external/helper_functions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/external/onnxruntime_external_deps.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/genai_ios.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/global_variables.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/options.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/package.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/presets/CMakeLinuxBuildPresets.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/presets/CMakeLinuxClangConfigPresets.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/presets/CMakeLinuxDefaultConfigPresets.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/presets/CMakeLinuxGccConfigPresets.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/presets/CMakeMacOSBuildPresets.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/presets/CMakeMacOSConfigPresets.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/presets/CMakeWinBuildPresets.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/cmake/presets/CMakeWinConfigPresets.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/c/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/app.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/app_modules/overwrites.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/app_modules/presets.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/app_modules/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/assets/custom.css" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/assets/custom.js" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/consts.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/interface/hddr_llm_onnx_interface.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/interface/multimodal_onnx_interface.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/chat_app/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/App.xaml" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/App.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Controls/SearchOptionsControl.xaml" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Controls/SearchOptionsControl.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Extensions.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/MainWindow.xaml" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/MainWindow.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Utils/AutoScrollBehavior.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Utils/RelayCommand.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Utils/ShiftEnterBehavior.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/ViewModel/ConfigurationModel.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/ViewModel/ModelOptionsModel.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/ViewModel/ResultModel.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/ViewModel/SearchOptionsModel.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/ViewModel/TokenModel.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Views/StatefulView.xaml" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Views/StatefulView.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Views/StatelessView.xaml" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Views/StatelessView.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Views/TokenizerView.xaml" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/Genny/Views/TokenizerView.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/Genny/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/HelloPhi/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/HelloPhi/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/csharp/HelloPhi3V/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/generate-e2e-example.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/model-generate.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/model-qa.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/phi-3-tutorial.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/phi3-qa.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/phi3v.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/qa-e2e-example.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/generate_dml_shaders.bat" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/nuget.config" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/nuget/Microsoft.ML.OnnxRuntimeGenAI.Managed.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/nuget/Microsoft.ML.OnnxRuntimeGenAI.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/nuget/targets/Microsoft.ML.OnnxRuntimeGenAI.Managed.targets" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/nuget/targets/Microsoft.ML.OnnxRuntimeGenAI.props" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/nuget/targets/Microsoft.ML.OnnxRuntimeGenAI.targets" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/packages.config" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/csharp/Exceptions.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/csharp/Generator.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/csharp/GeneratorParams.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/csharp/Images.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/csharp/Model.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/csharp/MultiModalProcessor.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/csharp/NativeMethods.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/csharp/Result.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/csharp/Sequences.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/csharp/Tensor.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/csharp/Tokenizer.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/csharp/TokenizerStream.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/csharp/Utils.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_shaders/dml_increment_values.hlsl" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_shaders/dml_update_attention_mask.hlsl" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/Debugging.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/java/ai/onnxruntime/genai/GenAI.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/java/ai/onnxruntime/genai/GenAIException.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/java/ai/onnxruntime/genai/Generator.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/java/ai/onnxruntime/genai/GeneratorParams.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/java/ai/onnxruntime/genai/Model.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/java/ai/onnxruntime/genai/Sequences.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/java/ai/onnxruntime/genai/SimpleGenAI.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/java/ai/onnxruntime/genai/Tokenizer.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/java/ai/onnxruntime/genai/TokenizerStream.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/java/ai/onnxruntime/genai/package-info.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/java/ai/onnxruntime/genai/GenerationTest.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/java/ai/onnxruntime/genai/GeneratorParamsTest.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/java/ai/onnxruntime/genai/TestUtils.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/java/ai/onnxruntime/genai/TokenizerTest.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/windows-unittests.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/python/__init__.py.in" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/python/package_description.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/python/py/_dll_directory.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/python/py/models/DESIGN.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/python/py/models/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/python/py/models/builder.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/python/py/models/gguf_model.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/src/python/setup.py.in" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/csharp/TestOnnxRuntimeGenAIAPI.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/python/_test_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/python/conftest.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/python/requirements-cuda.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/python/requirements-nightly-cpu.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/python/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/python/test_onnxruntime_genai.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/python/test_onnxruntime_genai_api.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/python/test_onnxruntime_genai_e2e.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/test_models/hf-internal-testing/tiny-random-gpt2-fp16-cuda/genai_config.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/test_models/hf-internal-testing/tiny-random-gpt2-fp16-cuda/past.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/test_models/hf-internal-testing/tiny-random-gpt2-fp32-cuda/genai_config.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/test_models/hf-internal-testing/tiny-random-gpt2-fp32-cuda/past.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/test_models/hf-internal-testing/tiny-random-gpt2-fp32/genai_config.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/test_models/hf-internal-testing/tiny-random-gpt2-fp32/past.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/test_models/hf-internal-testing/tiny-random-gpt2-fp32/tokenizer.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/test_models/hf-internal-testing/tiny-random-gpt2-fp32/tokenizer_config.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/test/test_models/hf-internal-testing/tiny-random-gpt2-fp32/vocab.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/ci_build/get_docker_image.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/ci_build/github/linux/docker/inference/aarch64/default/cpu/scripts/install_centos.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/ci_build/github/linux/docker/inference/aarch64/default/cpu/scripts/install_deps.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/ci_build/github/linux/docker/manylinux/Dockerfile.manylinux2_28_cuda_11.8" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/ci_build/github/linux/docker/manylinux/Dockerfile.manylinux2_28_cuda_12.2" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/ci_build/github/linux/docker/manylinux/scripts/install_centos.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/ci_build/github/linux/docker/manylinux/scripts/install_centos_gcc12.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/ci_build/github/linux/docker/manylinux/scripts/install_deps.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/ci_build/github/linux/docker/manylinux/scripts/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/ci_build/logger.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/python/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/python/util/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/python/util/android.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/python/util/logger.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/python/util/platform_helpers.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/tools/python/util/run.py" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/drawable/ic_launcher_background.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/layout/activity_main.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/values-night/themes.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/values/colors.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/values/strings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-genai/src/java/src/test/android/app/src/main/res/values/themes.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB7FF48}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_EXTENSIONS;ONNXRUNTIME_EXTENSIONS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_EXTENSIONS;ONNXRUNTIME_EXTENSIONS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_EXTENSIONS;ONNXRUNTIME_EXTENSIONS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_EXTENSIONS;ONNXRUNTIME_EXTENSIONS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_EXTENSIONS;ONNXRUNTIME_EXTENSIONS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_EXTENSIONS;ONNXRUNTIME_EXTENSIONS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_EXTENSIONS;ONNXRUNTIME_EXTENSIONS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_EXTENSIONS;ONNXRUNTIME_EXTENSIONS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_EXTENSIONS;ONNXRUNTIME_EXTENSIONS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_EXTENSIONS;ONNXRUNTIME_EXTENSIONS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_EXTENSIONS;ONNXRUNTIME_EXTENSIONS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONNXRUNTIME_EXTENSIONS;ONNXRUNTIME_EXTENSIONS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/base/base64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/base/ocos.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/base/string_tensor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/base/string_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/basics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/f.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/farmhashcc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/farmhashmk.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/farmhashna.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/farmhashns.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/farmhashnt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/farmhashsa.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/farmhashsu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/farmhashte.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/farmhashuo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/farmhashxo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/platform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/self-test-skeleton.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/src/farm-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/src/farmhash.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/main/native/ai_onnxruntime_extensions_OrtxLibrary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/audio/audio.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/azure/azure_invokers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/azure/azure_triton_invoker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/azure/cloud_base_kernel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/azure/cloud_ops_registration.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/azure/curl_invoker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/azure/openai_invokers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/attention_lib/flash_attention/flash_api.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/cuda_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cv2/opencv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/cuda/negpos_def.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/math.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/segment_extraction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/segment_sum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/ocos_operators_placeholder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/masked_fill.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/op_ragged_tensor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/re2_strings/string_regex_replace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/re2_strings/string_regex_split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_ecmaregex_replace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_ecmaregex_split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_equal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_hash.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_join.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_length.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_lower.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_mapping.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_strip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_to_vector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_upper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/text.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/vector_to_string.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/basic_tokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/bert_tokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/bert_tokenizer_decoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/blingfire_sentencebreaker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/bpe_kernels.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/sentencepiece_tokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/tokenizers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/unicode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/wordpiece_tokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/vision/decode_image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/vision/draw_bounding_box.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/vision/encode_image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/vision/vision.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/pyop/pyfunc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/c_api_processor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/c_api_tokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/c_api_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/image_processor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/tokenizer_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/extensions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/lib/ops_registry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/pp_api_test/c_only_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/pp_api_test/test_processor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/pp_api_test/test_tokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/register_ext_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/test_exceptions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/test_ortops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/test_ortops_azure.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/test_ortops_cuda.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/test_ortops_hfberttokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/test_ortops_math.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/test_ortops_strings.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/test_ortops_tokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/test_ortops_vision.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_base64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_cuda_eager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_math.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_sampling.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_strings.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_tenor_api.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_tokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_ustring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/unittest_main/test_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/ortx_api/src/main.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/base/base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/base/file_sys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/base/narrow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/base/ortx_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/base/string_tensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/base/string_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/base/ustring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/dev/farmhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/src/farmhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/custom_op/custom_op_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/custom_op/kernel_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/custom_op/onnxruntime_f16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/custom_op/tensor_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/custom_op/tensor_tuple.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/ext_status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/ocos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/onnxruntime_extensions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/op_def_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/ort_c_to_cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/ortx_processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/ortx_tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/ortx_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/include/ortx_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/audio/audio_decoder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/audio/sampling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/azure/azure_invokers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/azure/azure_triton_invoker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/azure/cloud_base_kernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/azure/curl_invoker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/azure/logger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/azure/openai_invokers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/add_mul.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/attention_lib/cutlass_fmha/fmha_launch_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/attention_lib/cutlass_fmha/memory_efficient_attention.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/attention_lib/flash_attention/block_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/attention_lib/flash_attention/flash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/attention_lib/flash_attention/flash_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/attention_lib/flash_attention/flash_fwd_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/attention_lib/flash_attention/flash_fwd_launch_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/attention_lib/flash_attention/kernel_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/attention_lib/flash_attention/softmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/attention_lib/flash_attention/static_switch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/attention_lib/flash_attention/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/cuda_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/fast_gelu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/negxplus1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/transpose_cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cv2/imgcodecs/imdecode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cv2/imgcodecs/imread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cv2/imgproc/gaussian_blur.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/cuda/negpos_def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/dlib/inverse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/dlib/stft_norm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/negpos.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/segment_extraction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/segment_sum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/op_ragged_tensor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/re2_strings/string_regex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/re2_strings/string_regex_split_re.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_ecmaregex_replace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_ecmaregex_split.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_mapping.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/string_to_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/text/vector_to_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/basic_tokenizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/bert_tokenizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/bert_tokenizer_decoder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/blingfire_sentencebreaker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/bpe_decoder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/bpe_json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/bpe_kernels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/bpe_streaming.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/bpe_tokenizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/bpe_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/bpe_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/sentencepiece_decoder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/sentencepiece_tokenizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/trie_tokenizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/trietree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/unescape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/unicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/tokenizer/wordpiece_tokenizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/vision/decode_image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/vision/draw_bounding_box.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/vision/encode_image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/pyop/pykernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/c_api_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/image_processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/image_transforms.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/runner.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/tokenizer_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtClient/OrtClient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsMacOSUsage/OrtExtensionsMacOSUsage-Bridging-Header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsUsage/OrtExtensionsUsage-Bridging-Header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/pp_api_test/c_only_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/register_ext_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/test_kernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/shared_test/utils.hpp" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/docs/python/ONNX_Runtime_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/ORT_icon_for_light_bg.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/pineapple.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/test_superresolution.expected.opset18.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/test_superresolution.expected.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/test_superresolution.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/wolves.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/processor/australia.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/processor/exceltable.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/processor/standard_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_colors.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/wolves_with_box_crop.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/wolves_with_box_more_box_than_colors.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/wolves_with_box_more_box_than_colors_score.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/wolves_with_box_off_boundary_box.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/wolves_with_box_overlapping.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/wolves_with_box_pad.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/wolves_with_box_share_borders.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/wolves_with_fastestDet.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/wolves_with_solid_box.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsUsage/r32_g64_b128_32x32.png" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/data/bus.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/data/cat_224x224.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/data/stormtroopers.jpg" />
+    <Image Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/data/super_res_input.png" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/ThirdPartyNotices.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/build.bat" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/build_lib.bat" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/build_lib.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cgmanifest.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/apple/Info.plist.in" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/apple/framework_info.json.in" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/ext_apple_framework.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/ext_cuda.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/ext_java.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/ext_ortlib.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/ext_python.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/ext_tests.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/blingfire.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/curl.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/cutlass.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/dlib.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/dr_libs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/README" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/aclocal.m4" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/m4/libtool.m4" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/m4/ltoptions.m4" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/m4/ltsugar.m4" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/m4/ltversion.m4" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/m4/lt~obsolete.m4" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/farmhash/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/git.Win32.2.41.03.patch/msys-2.0.dll" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/git.Win32.2.41.03.patch/msys-gcc_s-1.dll" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/googlere2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/googletest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/gsl.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/json.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/opencv.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/opencv/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/opencv/ortextensions_readme.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/opencv/platforms/ios/cmake/Modules/Platform/iOS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/opencv/platforms/ios/cmake/Toolchains/Toolchain-Catalyst_Xcode.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/opencv/platforms/ios/cmake/Toolchains/Toolchain-iPhoneOS_Xcode.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/opencv/platforms/ios/cmake/Toolchains/Toolchain-iPhoneSimulator_Xcode.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/opencv/platforms/ios/cmake/Toolchains/common-ios-toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/opencv/platforms/ios/cmake/Toolchains/xcodebuild_wrapper.in" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/pybind11.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/sentencepieceproject.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/externals/triton.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/ortext_ios.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/presets/no_ops.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/presets/ort_genai.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/cmake/presets/token_api_only.cmake" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/docs/ci_matrix.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/docs/custom_build.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/docs/custom_ops.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/docs/development.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/docs/new_operator.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/docs/pyop.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/docs/python/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/docs/python/examples/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/docs/python/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/docs/python/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/main/java/ai/onnxruntime/extensions/OrtxLibrary.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/main/java/ai/onnxruntime/extensions/OrtxPackage.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/androidTest/java/ai/onnxruntime/extensions/apptest/BertTokenizerTest.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/java/ai/onnxruntime/extensions/apptest/MainActivity.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/res/raw/test_bert_tokenizer.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/test/java/ai/onnxruntime/extensions/apptest/ExampleUnitTest.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/java/ai/onnxruntime/extensions/OrtxTest.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/DummyNativeNuget.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/NativeNuget.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/WinOnlyNuget.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/targets/monoandroid11.0/" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/targets/monoandroid11.0/Microsoft.ML.OnnxRuntime.Extensions.targets" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/targets/net6.0-android/Microsoft.ML.OnnxRuntime.Extensions.targets" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/targets/net6.0-ios/" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/targets/net6.0-ios/Microsoft.ML.OnnxRuntime.Extensions.targets" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/targets/net6.0-macos/" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/targets/net6.0-macos/Microsoft.ML.OnnxRuntime.Extensions.targets" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/targets/netstandard/Microsoft.ML.OnnxRuntime.Extensions.props" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/targets/netstandard/Microsoft.ML.OnnxRuntime.Extensions.targets" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/nuget/targets/xamarinios10/Microsoft.ML.OnnxRuntime.Extensions.targets" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/_cuops.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/_hf_cvt.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/_ocos.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/_ortapi2.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/_torch_cvt.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/cmd.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/cvt.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/onnxprocess/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/onnxprocess/_builder.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/onnxprocess/_onnx_ops.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/onnxprocess/_session.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/onnxprocess/_tensor.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/onnxprocess/torch_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/pnp/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/pnp/_base.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/pnp/_imagenet.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/pnp/_nlp.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/pnp/_onnx_ops.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/pnp/_torchext.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/pnp/_unifier.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/pnp/_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/Example usage of the PrePostProcessor.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/add_HuggingFace_CLIPImageProcessor_to_model.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/add_pre_post_processing_to_model.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/docs/pdoc/index.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/docs/pre_post_processing/index.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/docs/pre_post_processing/pre_post_processor.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/docs/pre_post_processing/step.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/docs/pre_post_processing/steps/general.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/docs/pre_post_processing/steps/index.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/docs/pre_post_processing/steps/nlp.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/docs/pre_post_processing/steps/vision.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/docs/pre_post_processing/utils.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/pre_post_processor.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/step.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/steps/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/steps/general.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/steps/nlp.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/steps/vision.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/tools/pre_post_processing/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/onnxruntime_extensions/util.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/prebuild/build_curl_for_android.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/prebuild/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/pyop/extensions_pydll.def" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/requirements-dev.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/extensions_c.def" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/ortcustomops.def" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/ortcustomops.lds" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/ortcustomops.ver" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/codeconv.runsettings" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/cuda/test_cudaops.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/1272-141231-0002.flac" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/1272-141231-0002.mp3" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/1272-141231-0002.npy" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/azure_chat.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/be-a-man-take-some-pepto-bismol-get-dressed-and-come-on-over-here.mp3" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/create_basic_models.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/create_openai_whisper_transcriptions.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/create_triton.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/get_certs_for_model.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/openai_audio.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/openai_chat.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/openai_whisper_transcriptions.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/triton_addf.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/triton_addf8.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/triton_addi4.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/triton_and.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/azure/triton_str.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/bert-large-uncased-whole-word-masking-finetuned-squad-tokenizer.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/bert_basic_cased_vocab.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/bert_qa_decoder_base.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/clip/tokenizer.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/clip/tokenizer_config.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/cuda/test_fastgelu.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/cuda/test_fastgelu_f16.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/cuda/test_negpos.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/custom_op_negpos.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/custom_op_str_attr_missing_test.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/custom_op_str_attr_test.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/custom_op_string_join.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/custom_op_string_lower.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/custom_op_test.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/default_sentence_break_model.bin" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/en.wiki.bpe.vs100000.model" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/exceptional_custom_op1.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/exceptional_custom_op2.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/falcon-tokenizer/tokenizer.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/gemma/special_tokens_map.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/gemma/tokenizer.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/gemma/tokenizer_config.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/gpt2.merges.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/imagenet1000_clsidx_to_labels.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/jfk.flac" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/llama2/special_tokens_map.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/llama2/tokenizer.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/llama2/tokenizer_config.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/mobilev2.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/phi-2/tokenizer.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/phi-2/tokenizer_config.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/phi-3/tokenizer.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/phi-3/tokenizer_config.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/FastestDet.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/TF.ImageNetLabels.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/create_boxdrawing_model.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/create_decode_encode_test_model.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/decode_encode_decode_test.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/pytorch_mobilenet_v2.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/pytorch_super_resolution.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/tflite_mobilenet_v2.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/processor/image_processor.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/rwkv_vocab_v20230424.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/sentencepiece.bpe.model" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/string_mapping.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test.op.config" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_bert_tokenizer.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_bert_tokenizer_decoder_with_indices.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_bert_tokenizer_decoder_without_indices.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_bert_tokenizer_scalar.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_hf_bert_tokenizer_optional_output.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_masked_fill.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_regex_split_with_offsets.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_segment_extraction.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_sentencepiece_ops_model__6.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_string_ecmaregex_replace.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_string_ecmaregex_replace_ignore_case_and_except_global_replace.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_string_mapping.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_string_to_vector.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_string_to_vector_scalar.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_vector_to_string_scalar_input.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_vector_to_string_scalar_map.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/test_vector_to_string_vector_map.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/tiktoken/tokenizer.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/tiktoken/tokenizer_config.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsMacOSUsage/Assets.xcassets/" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsMacOSUsage/Assets.xcassets/AccentColor.colorset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsMacOSUsage/Assets.xcassets/AppIcon.appiconset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsMacOSUsage/Assets.xcassets/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsMacOSUsage/Preview Content/Preview Assets.xcassets/" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsMacOSUsage/Preview Content/Preview Assets.xcassets/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsUsage/Assets.xcassets/" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsUsage/Assets.xcassets/AccentColor.colorset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsUsage/Assets.xcassets/AppIcon.appiconset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsUsage/Assets.xcassets/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsUsage/Preview Content/Preview Assets.xcassets/" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsUsage/Preview Content/Preview Assets.xcassets/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsUsage/decode_image.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/ios/OrtExtensionsUsage/OrtExtensionsUsage/gen_model.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/packages.config" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_audio_codec.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_audio_signal.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_autotokenizer.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_azure_ops.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_bert_tokenizer.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_bert_tokenizer_decoder.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_bert_tokenizer_op.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_blingfire_sentencebreaker.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_bpe_tokenizer.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_cliptok.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_cv2.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_fast_tokenizer.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_gpt2tok.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_masked_fill.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_math_ops.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_onnxprocess.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_processing.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_pyops.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_robertatok.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_segment_extraction.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_sentencepiece_ops.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_string_concat.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_string_ecma_regex.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_string_length.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_string_mapping.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_string_ops.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_string_to_vector.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_tools_add_pre_post_processing_to_model.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_tools_customop_template.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_torch_ops.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_trie_tokenizer.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_vector_to_string.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/test_whisper.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/android/build_aar.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/android/package_ops.config" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/android/run_android_emulator.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/build.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/ci_build/extract_nuget_files.ps1" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/ci_build/github/azure-pipeline/templates/get-docker-image-steps.yml" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/ci_build/github/azure-pipeline/templates/with-container-registry-steps.yml" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/ci_build/github/linux/docker/Dockerfile.ubi8_cuda11_8_tensorrt8_6" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/ci_build/github/linux/docker/Dockerfile.ubuntu_cuda11_8_tensorrt8_6" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/ci_build/no_ops.config" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/ci_build/update_nuspec_for_native_nuget.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/gen_customop_template.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/gen_selectedops.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/generate_unicode_category_table.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/get_vsdevcmd.ps1" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/install_deps.bat" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/install_deps.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/ios/assemble_pod_package.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/ios/build_xcframework.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/ios/get_simulator_device_info.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/ios/package_ops.config" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/test_cibuildwheel.bat" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/test_cibuildwheel.sh" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/utils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/utils/android.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/utils/get_docker_image.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/utils/logger.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/utils/platform_helpers.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tools/utils/run.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/bert_cls.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/bert_e2e.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/bert_qna.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/bert_sentiment.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/cpp_custom_ops_tutorial.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/data/gpt-2/gpt2_tok.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/demo4dotnet/ClipTokenizerTest/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/demo4dotnet/ClipTokenizerTest/cliptok.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/demo4dotnet/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/demo4j/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/demo4j/app/src/main/java/demo4j/App.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/demo4j/app/src/main/resources/test_bert_tokenizer.onnx" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/demo4j/app/src/test/java/demo4j/AppTest.java" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/gpt2bs.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/ortx_api/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/ortx_api/README.md" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/superresolution_e2e.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/whisper_e2e.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/yolo_e2e.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/tutorials/yolov8_pose_e2e.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/version.txt" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/res/drawable/ic_launcher_background.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/res/layout/activity_main.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/res/values-night/themes.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/res/values/colors.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/res/values/strings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/res/values/themes.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/res/xml/backup_rules.xml" />
+    <Xml Include="../../thirdparty/owemdjee/onnxruntime-extensions/java/src/test/android/app/src/main/res/xml/data_extraction_rules.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
