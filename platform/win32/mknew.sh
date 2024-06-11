@@ -15,12 +15,12 @@ else
 	# The brutal fix we employ here is to nuke everything at or after the first regex operator
 	#
 	#echo "$2" | sed -E -e 's/[ \t\r\n.*+\[\]\(\)?].*$//'    -- somehow barfs on the ] in the [..] set no matter what I try for escapes   :-S
-	FILTER=$( echo "$2" | sed -E -e 'sX[.*+?()\[].*$XX' )
+	FILTER=$( echo "$2" | sed -E -e 'sX[.*+?()\[].*$XX' -e 's/-?lib$//i' )
 fi
 
 
 mknewproj() {
-	libname=$( echo lib$1 | sed -E -e 's/^liblib/lib/' -e 's/-?lib$//i' )
+	libname=$( echo lib$1 | sed -E -e 's/^liblib/lib/i' -e 's/-?lib$//i' )
 	if ! test -f $1.vcxproj ; then
 		if ! test -f $libname.vcxproj ; then
 			echo "mknewproj: $libname"
@@ -58,7 +58,7 @@ delnewproj() {
 	libname=$1
 	echo "delnewproj: $libname"
 	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   ${libname}_demos.vcxproj*   2> /dev/null
-	libname=$( echo lib$1 | sed -e 's/^liblib/lib/' -e 's/-?lib$//i' )
+	libname=$( echo lib$1 | sed -e 's/^liblib/lib/i' -e 's/-?lib$//i' )
 	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   ${libname}_demos.vcxproj*   2> /dev/null
 }
 
@@ -72,6 +72,7 @@ delnewproj2() {
 # Anything that would, should or could (partly) serve as a library from our monolithic build perspective:
 
 mylist=$(
+(
 grep -v '#' <<EOT
 
 ###### djvulibre -- already exists as libdjvu
@@ -1321,12 +1322,35 @@ tiny-dnn
 1D-RGB-color-gradient
 2D-color-gradient-or-Procedural-texture
 
+ModernCppStarter
+QuantLib
+Quant
+
+WinToast
+clp
+design-patterns-cpp
+djvulibre
+html2openxml
+libharry
+mcmd
+onnxruntime-extensions
+onnxruntime-genai
+oof
+openalpr
+ormpp
+tab
+trng4
+u8g2
+uvw
+
 EOT
+) | grep -e "$FILTER"
 )
 
 # Anything that will end up as an application, even when regarded from our monolithic buil perspective
 
 myapplist=$(
+(
 grep -v '#' <<EOT
 
 #sdcc
@@ -1382,12 +1406,19 @@ vcpkg
 visible-url-detector
 ragel
 
+binary_bakery
+mcmd
+sdcc
+remake
+
 EOT
+) | grep -e "$FILTER"
 )
 
 # Anything else, that's not really code we'll be incorporating in the form of a library or application. Data, documentation, etc.:
 
 misclist=$(
+(
 grep -v '#' <<EOT
 
 LeptonicaDocsSite
@@ -1449,6 +1480,7 @@ tesseract-ocr-mailing-list-archive
 tesseract-dev-mailing-list-archive
 
 EOT
+) | grep -e "$FILTER"
 )
 
 # projects which use names different from their actual storage directory; see also update-cvxproj.js script's mapping table:
@@ -1515,6 +1547,7 @@ zotero-translators
 zotero-web-library
 zotero-word-for-windows-integration
 zotero-zotfile
+oiio
 
 EOT
 )
@@ -1547,32 +1580,40 @@ if false ; then
 fi
 
 
+if [ "$FILTER" = "." ] ; then
+	WILDCARD="*"
+else
+	WILDCARD="*$FILTER*"
+fi
+
+
 # debugging:
 if false ; then
 	echo "FILTER: $FILTER"
+	echo "WILDCARD: $WILDCARD"
 	echo "ARG: $ARG"
 fi
 
 
 if [[ "$ARG" =~ [1] ]] ; then
 	for f in  $mylist  ; do
-		if ( shopt -s nocasematch ; [[ $f =~ $FILTER ]] ) ; then
+		#if ( shopt -s nocasematch ; [[ $f =~ $FILTER ]] ) ; then
 			mknewproj $f
-		fi
+		#fi
 	done
 fi
 
 if [[ "$ARG" =~ [2] ]] ; then
 	for f in  $myapplist  ; do
-		if ( shopt -s nocasematch ; [[ $f =~ $FILTER ]] ) ; then
+		#if ( shopt -s nocasematch ; [[ $f =~ $FILTER ]] ) ; then
 			mknewAPPproj $f
-		fi
+		#fi
 	done
 
 	for f in  $misclist  ; do
-		if ( shopt -s nocasematch ; [[ $f =~ $FILTER ]] ) ; then
+		#if ( shopt -s nocasematch ; [[ $f =~ $FILTER ]] ) ; then
 			mknewMISCproj $f
-		fi
+		#fi
 	done
 fi
 
@@ -1580,31 +1621,25 @@ if [[ "$ARG" =~ [12] ]] ; then
 	# and only now do we add all those generated project files to the overview solution!
 	# we do this brute-force by simply adding ALL projects to that solution again; the next
 	# load by Visual Studio will clean up the .sln file for us.
-	echo "augment MSVC solution 'm-dev-list.sln' by adding all known projects..."
+	echo "augment MSVC solution 'm-dev-list.sln' by adding all known *$FILTER* projects..."
 	(
-		for f in *.vcxproj ; do
-			if ( shopt -s nocasematch ; [[ $f =~ $FILTER ]] ) ; then
-				node ./mk_project_line_for_sln.js $f
-			fi
+		for f in $( ls *.vcxproj | tr -d '\r' | grep -i -e "$FILTER" ) ; do
+			node ./mk_project_line_for_sln.js $f
 		done
 	) >> m-dev-list.sln
 fi
 
 if [[ "$ARG" =~ [3] ]] ; then
-	for f in *.vcxproj ; do
-		if ( shopt -s nocasematch ; [[ $f =~ $FILTER ]] ) ; then
-			echo "Updating $f..."
-			./update-vcxproj.sh $f
-		fi
+	for f in $( ls *.vcxproj | tr -d '\r' | grep -i -e "$FILTER" ) ; do
+		echo "Updating $f..."
+		./update-vcxproj.sh $f
 	done
 fi
 
 if [[ "$ARG" =~ [4] ]] ; then
-	for f in *.vcxproj ; do
-		if ( shopt -s nocasematch ; [[ $f =~ $FILTER ]] ) ; then
-			echo "Refilling $f..."
-			./refill-vcxproj.sh $f
-		fi
+	for f in $( ls *.vcxproj | tr -d '\r' | grep -i -e "$FILTER" ) ; do
+		echo "Refilling $f..."
+		./refill-vcxproj.sh $f
 	done
 fi
 
