@@ -19,7 +19,9 @@
 
 #if defined(FZDBG_HAS_TRACING)
 
+#if !defined(_MSC_VER)
 #pragma init_seg(compiler)
+#endif
 
 static struct memPurposeRange
 {
