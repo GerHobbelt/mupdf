@@ -1342,6 +1342,7 @@ tab
 trng4
 u8g2
 uvw
+nodesoup
 
 EOT
 ) | grep -e "$FILTER"
