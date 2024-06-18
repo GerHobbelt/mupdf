@@ -303,7 +303,7 @@ let compiler_settings = `
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
 `;
@@ -764,7 +764,7 @@ const dupliBlockbase = `
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
 `
@@ -773,6 +773,7 @@ const dupliBlockbaseReParticle = dupliBlockbase
 .replace(/([\/()])/g, '\\$1')
 .replace(/\\\/bigobj /g, '(?:\\/bigobj )?')
 .replace(/\\\/Zc:__cplusplus /g, '(?:\\/Zc:__cplusplus )?')
+.replace(/\\\/Zc:preprocessor /g, '(?:\\/Zc:preprocessor )?')
 .replace(/[\s\r\n]+/g, '[\\s\\r\\n]*')
 
 const dupliBlockre = new RegExp(`(?:${ dupliBlockbaseReParticle }[\\s\\r\\n]*){2,}`, 'g');

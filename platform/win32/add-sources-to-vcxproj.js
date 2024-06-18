@@ -81,7 +81,7 @@ function xmlEncode(path) {
 
 let filepath = process.argv[2];
 if (!fs.existsSync(filepath)) {
-    console.error("must specify valid vcxproj file");
+    console.error("ERROR: must specify valid vcxproj file");
     console.error("call:\n  add-sources-to-vcxproj.js xyz.vcxproj directory-of-sourcefiles");
     process.exit(1);
 }
@@ -226,7 +226,7 @@ if (DEBUG > 2) console.error({spec})
 
 
 if (spec.sources.length + spec.directories.length === 0) {
-  console.error("Missing sources directory argument or spec file.");
+  console.error("ERROR: Missing sources directory argument or spec file.");
   console.error("call:\n  add-sources-to-vcxproj.js xyz.vcxproj directory-of-sourcefiles");
   console.error("\n\nCould not infer source/submodule directory for given MSVC vcxproj.");
   process.exit(1);
@@ -392,14 +392,14 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
   }
 
   let a = files.map((f) => {
-    if (DEBUG > 2) console.error("files.map:", {f, dst: f.replace(rootDir, ''), sourcesPath, rootDir })
+    //if (DEBUG > 2) console.error("files.map:", {f, dst: f.replace(rootDir, ''), sourcesPath, rootDir })
     return f.replace(rootDir, '');
   })
   .filter((f) => {
     let f4f = '/' + f;
     if (spec.ignores.length > 0) {
       for (const sp of spec.ignores) {
-        if (DEBUG > 2) console.log('??IGNORE??:', {f, f4f, sp, DO_IGNORE: sp.test(f4f)});
+        //if (DEBUG > 2) console.log('??IGNORE??:', {f, f4f, sp, DO_IGNORE: sp.test(f4f)});
         if (sp.test(f4f)) {
           if (DEBUG > 1) console.log('IGNORE:', {f, f4f, sp});
           ignoreCount++;
@@ -411,7 +411,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     return true;
   })
   .filter((f) => {
-    if (DEBUG > 2) console.error("files.filter:", {f})
+    if (DEBUG > 2) console.error("files.filter:", {f, ext: path.extname(f).toLowerCase()})
     let base;
     switch (path.extname(f).toLowerCase()) {
     case '.c':
@@ -875,6 +875,8 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
   filesToAdd.sort();
   filesToAddToProj.sort();
 
+  if (DEBUG > 1) console.error("Project file entry counts: ", { extraFilters: extraFilters.length, filesToAdd: filesToAdd.length, filesToAddToProj: filesToAddToProj.length })
+
   // merge it all into the target file(s):
   let fsrc2 = `
   <ItemGroup>
@@ -896,6 +898,8 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
 
   fsrc1_arr.push(fsrc1);
   fsrc2_arr.push(fsrc2);
+
+  if (DEBUG > 1) console.error("VCPROJ source chunks count: ", { fsrc1_arr: fsrc1_arr.length, fsrc2_arr: fsrc2_arr.length })
 }
 
 
@@ -909,7 +913,7 @@ function process_path(rawSourcesPath, is_dir) {
   let sourcesPath = unixify(path.resolve(rawSourcesPath.trim()));
   if (DEBUG > 1) console.error("process_path NORMALIZED:", {rawSourcesPath, sourcesPath, is_dir});
   if (!fs.existsSync(sourcesPath)) {
-    console.error("Non-existing path specified:", sourcesPath);
+    console.error("ERROR: Non-existing path specified:", sourcesPath);
     process.exit(1);
   }
 
@@ -945,6 +949,7 @@ for (let f of spec.sources) {
 for (let f of spec.directories) {
   process_path(f, true);
 }
+//if (DEBUG > 1) console.error("The gathered collection:", {fsrc1_arr});
 
 
 filterSrc = filterSrc.replace(/<\/Project>[\s\r\n]*$/, fsrc2_arr.join('\n') + `
