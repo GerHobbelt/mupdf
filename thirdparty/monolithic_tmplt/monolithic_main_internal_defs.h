@@ -4,6 +4,11 @@
 
 #pragma once
 
+#ifdef __cplusplus
+#include <string>
+#include <exception>
+#include <stdexcept>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -32,16 +37,16 @@ static int usage(void);
 
 struct cmd_info
 {
-    const char* cmd;
-    union
-    {
-        tool_f* f;
-        tool_fa* fa;
+	const char* cmd;
+	union
+	{
+		tool_f* f;
+		tool_fa* fa;
 		tool_f_cpp* fpp;
 	} f;
 };
 
-#define MONOLITHIC_CMD_TABLE_START()	    \
+#define MONOLITHIC_CMD_TABLE_START()				\
 static const struct cmd_info commands[] = 	\
 {
 

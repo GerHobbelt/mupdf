@@ -312,7 +312,22 @@ static int parse_one_command_from_set(const char* source, const struct cmd_info 
 			}
 			argv_list[argc_count] = NULL;
 
+#ifdef __cplusplus
+			int rv = -1;
+			try {
+				rv = el.f.fa(argc_count, argv_list);
+			}
+			catch (const std::exception &ex) {
+				fprintf(stderr, "\n--> exception thrown (not caught in application code) --> error: %s\n", ex.what());
+				rv = 666;
+			}
+			catch (...) {
+				fprintf(stderr, "\n--> exception thrown (not caught in application code); unidentifiable error.\n");
+				rv = 666;
+			}
+#else
 			int rv = el.f.fa(argc_count, argv_list);
+#endif
 			free((void *)argv_list);
 			free(argv_strbuf);
 			fprintf(stderr, "\n--> exit code: %d\n", rv);
@@ -416,7 +431,22 @@ static int ambig_parse_one_command_from_set(const char* source, const struct cmd
 			}
 			argv_list[argc_count] = NULL;
 
-			rv = el.f.fa(argc_count, argv_list);
+#ifdef __cplusplus
+			int rv = -1;
+			try {
+				rv = el.f.fa(argc_count, argv_list);
+			}
+			catch (std::exception &ex) {
+				fprintf(stderr, "\n--> exception thrown (not caught in application code) --> error: %s\n", ex.what());
+				rv = 666;
+			}
+			catch (...) {
+				fprintf(stderr, "\n--> exception thrown (not caught in application code); unidentifiable error.\n");
+				rv = 666;
+			}
+#else
+			int rv = el.f.fa(argc_count, argv_list);
+#endif
 			free((void *)argv_list);
 			free(argv_strbuf);
 			fprintf(stderr, "\n--> exit code: %d\n", rv);
