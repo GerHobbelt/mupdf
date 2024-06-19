@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -77,7 +77,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -109,10 +109,10 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPSL;PSL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -228,12 +228,14 @@
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/libpsl/src/lookup_string_in_fixed_set.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpsl/src/psl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpsl/tests/common.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpsl/tests/test-is-cookie-domain-acceptable.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpsl/tests/test-is-public-all.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpsl/tests/test-is-public-builtin.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpsl/tests/test-is-public.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpsl/tests/test-registrable-domain.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libpsl\tools\psl_tool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpsl/tools/psl_tool.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpsl/tests/common.h" />
     <Text Include="../../thirdparty/owemdjee/libpsl/AUTHORS" />
     <Text Include="../../thirdparty/owemdjee/libpsl/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/libpsl/Makefile.am" />
@@ -252,7 +254,9 @@
     <Text Include="../../thirdparty/owemdjee/libpsl/include/libpsl.h.in" />
     <Text Include="../../thirdparty/owemdjee/libpsl/libpsl.pc.in" />
     <Text Include="../../thirdparty/owemdjee/libpsl/libtool_version_info.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpsl/m4/absolute-header.m4" />
     <Text Include="../../thirdparty/owemdjee/libpsl/m4/ax_check_compile_flag.m4" />
+    <Text Include="../../thirdparty/owemdjee/libpsl/m4/libunistring.m4" />
     <Text Include="../../thirdparty/owemdjee/libpsl/m4/visibility.m4" />
     <Text Include="../../thirdparty/owemdjee/libpsl/meson_options.txt" />
     <Text Include="../../thirdparty/owemdjee/libpsl/msvc/Makefile.am" />
@@ -272,7 +276,8 @@
     <Text Include="../../thirdparty/owemdjee/libpsl/tools/psl.1" />
     <Text Include="../../thirdparty/owemdjee/libpsl/version.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

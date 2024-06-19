@@ -9,9 +9,9 @@
  * https://www.openssl.org/source/license.html
  */
 
-{-
+/*{-
 use OpenSSL::stackhash qw(generate_stack_macros generate_lhash_macros);
--}
+-}*/
 
 #ifndef  OPENSSL_CONF_H
 # define OPENSSL_CONF_H
@@ -28,6 +28,9 @@ use OpenSSL::stackhash qw(generate_stack_macros generate_lhash_macros);
 # include <openssl/e_os2.h>
 # include <openssl/types.h>
 # include <openssl/conferr.h>
+# ifndef OPENSSL_NO_STDIO
+#  include <stdio.h>
+# endif
 
 #ifdef  __cplusplus
 extern "C" {

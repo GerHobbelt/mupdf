@@ -1343,6 +1343,7 @@ trng4
 u8g2
 uvw
 nodesoup
+quirc
 
 EOT
 ) | grep -e "$FILTER"

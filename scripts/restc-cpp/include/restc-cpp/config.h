@@ -1,0 +1,34 @@
+#pragma once
+
+/* Edit the template file, not the generated header-file.
+*/
+
+#ifndef RESTC_CPP_CONFIG_H
+#define RESTC_CPP_CONFIG_H
+
+#ifndef BOOST_COROUTINES_NO_DEPRECATION_WARNING
+#   define BOOST_COROUTINES_NO_DEPRECATION_WARNING 1
+#endif
+
+#define RESTC_CPP_WITH_UNIT_TESTS 1
+#define RESTC_CPP_WITH_TLS 1
+#define RESTC_CPP_LOG_WITH_INTERNAL_LOG 1
+#define RESTC_CPP_LOG_WITH_LOGFAULT 1
+#define RESTC_CPP_LOG_WITH_BOOST_LOG 1
+#define RESTC_CPP_LOG_WITH_CLOG 1
+#define RESTC_CPP_WITH_ZLIB 1
+#define RESTC_CPP_HAVE_BOOST_TYPEINDEX 1
+#define RESTC_CPP_LOG_JSON_SERIALIZATION 1
+#define RESTC_CPP_USE_CPP17 1
+#define RESTC_CPP_THREADED_CTX 1
+
+#define RESTC_CPP_LOG_LEVEL    5
+#define RESTC_CPP_MAX_INPUT_BUFFER_LENGTH  (100 * 1024 * 1024)   // old / unlimited setting: 0x7fffffff
+
+#if defined(_WIN32)
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT  0x0601
+#endif
+#endif
+
+#endif // RESTC_CPP_CONFIG_H

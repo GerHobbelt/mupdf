@@ -361,6 +361,7 @@ src = src
     .replace(/<FavorSizeOrSpeed>[^]*?<\/FavorSizeOrSpeed>/g, '')
     .replace(/<RuntimeTypeInfo>[^]*?<\/RuntimeTypeInfo>/g, '')
     .replace(/<AdditionalOptions>\/bigobj \/utf-8 \/Zc:__cplusplus %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
+    .replace(/<AdditionalOptions>\/bigobj \/utf-8 \/Zc:__cplusplus \/Zc:preprocessor %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
     .replace(/<AdditionalOptions>\/bigobj \/utf-8 %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
     .replace(/<AdditionalOptions>\/bigobj %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
     .replace(/<AdditionalOptions>\/utf-8 %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
@@ -634,7 +635,10 @@ if (/\/owemdjee\/opencv\//.test(include_paths) || /\/scripts\/OpenCV\//.test(inc
     ../../scripts/OpenCV/modules/core
     ../../scripts/OpenCV/modules/imgproc
     ../../scripts/OpenCV/modules/stitching
+	../../scripts/OpenCV/modules/objdetect
+	../../scripts/OpenCV/modules/photo
     ../../thirdparty/owemdjee/libeigen
+	../../thirdparty/owemdjee/quirc/include
     ../../thirdparty/owemdjee/opencv/3rdparty/openvx/include
     ../../thirdparty/owemdjee/opencv/include
     ../../thirdparty/owemdjee/opencv/modules/calib3d/include

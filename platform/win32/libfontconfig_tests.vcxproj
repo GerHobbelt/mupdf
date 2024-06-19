@@ -109,7 +109,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -236,7 +236,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/fc-scan/fc-scan.c" />
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/fc-validate/fc-validate.c" />
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/meson-cc-tests/flexible-array-member-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/meson-cc-tests/freetype-pcf-long-family-names.c" />
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/meson-cc-tests/intel-atomic-primitives-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/meson-cc-tests/pthread-prio-inherit-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/meson-cc-tests/solaris-atomic-operations.c" />
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/meson-cc-tests/stdatomic-primitives-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/src/fcarch.c" />
@@ -346,6 +348,8 @@
     <Text Include="../../thirdparty/owemdjee/fontconfig/conf.d/65-khmer.conf" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/conf.d/65-nonlatin.conf" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/conf.d/69-unifont.conf" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/conf.d/70-no-bitmaps-and-emoji.conf" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/conf.d/70-no-bitmaps-except-emoji.conf" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/conf.d/70-no-bitmaps.conf" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/conf.d/70-yes-bitmaps.conf" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/conf.d/80-delicious.conf" />
@@ -356,6 +360,7 @@
     <Text Include="../../thirdparty/owemdjee/fontconfig/conf.d/write-35-lang-normalize-conf.py" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/doc/check-whitespace-in-args.py" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/doc/confdir.sgml.in" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/doc/edit-sgml.py" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/doc/extract-man-list.py" />
@@ -453,6 +458,8 @@
     <Text Include="../../thirdparty/owemdjee/fontconfig/test/run-test.sh" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/test/test-45-generic.json" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/test/test-60-generic.json" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/test-70-no-bitmaps-and-emoji.json" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/test-70-no-bitmaps-except-emoji.json" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/test/test-90-synthetic.json" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/test/test-issue-286.json" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/test/test-namedinstance.json" />

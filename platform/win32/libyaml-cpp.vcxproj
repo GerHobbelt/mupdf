@@ -109,7 +109,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -124,14 +124,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML_CPP;YAML_CPP_STATIC_DEFINE;YAML_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yaml-cpp/src;../../thirdparty/owemdjee/yaml-cpp/test;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YAML_CPP_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBYAML_CPP;YAML_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML_CPP;YAML_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yaml-cpp/src;../../thirdparty/owemdjee/yaml-cpp/test;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -150,15 +150,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML_CPP;YAML_CPP_STATIC_DEFINE;YAML_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yaml-cpp/src;../../thirdparty/owemdjee/yaml-cpp/test;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YAML_CPP_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBYAML_CPP;YAML_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML_CPP;YAML_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yaml-cpp/src;../../thirdparty/owemdjee/yaml-cpp/test;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -179,14 +179,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML_CPP;YAML_CPP_STATIC_DEFINE;YAML_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yaml-cpp/src;../../thirdparty/owemdjee/yaml-cpp/test;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YAML_CPP_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBYAML_CPP;YAML_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML_CPP;YAML_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yaml-cpp/src;../../thirdparty/owemdjee/yaml-cpp/test;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -205,15 +205,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML_CPP;YAML_CPP_STATIC_DEFINE;YAML_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yaml-cpp/src;../../thirdparty/owemdjee/yaml-cpp/test;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YAML_CPP_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBYAML_CPP;YAML_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML_CPP;YAML_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yaml-cpp/src;../../thirdparty/owemdjee/yaml-cpp/test;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -257,21 +257,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/src/singledocparser.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/src/stream.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/src/tag.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/binary_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/cmake/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/integration/emitter_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/integration/encoding_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/integration/error_messages_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/integration/gen_emitter_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/integration/handler_spec_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/integration/handler_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/integration/load_node_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/integration/node_spec_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/node/node_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/ostream_wrapper_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/parser_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/test/regex_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/util/api.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/util/parse_util.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/yaml-cpp/util/read.cpp" />
@@ -335,9 +320,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/yaml-cpp/src/stringsource.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yaml-cpp/src/tag.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yaml-cpp/src/token.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yaml-cpp/test/handler_test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yaml-cpp/test/mock_event_handler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yaml-cpp/test/specexamples.h" />
     <Text Include="../../thirdparty/owemdjee/yaml-cpp/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/yaml-cpp/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/yaml-cpp/CONTRIBUTING.md" />
@@ -356,10 +338,6 @@
     <Text Include="../../thirdparty/owemdjee/yaml-cpp/install.txt" />
     <Text Include="../../thirdparty/owemdjee/yaml-cpp/src/contrib/yaml-cpp.natvis" />
     <Text Include="../../thirdparty/owemdjee/yaml-cpp/src/contrib/yaml-cpp.natvis.md" />
-    <Text Include="../../thirdparty/owemdjee/yaml-cpp/test/BUILD.bazel" />
-    <Text Include="../../thirdparty/owemdjee/yaml-cpp/test/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/yaml-cpp/test/cmake/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/yaml-cpp/test/create-emitter-tests.py" />
     <Text Include="../../thirdparty/owemdjee/yaml-cpp/util/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/yaml-cpp/yaml-cpp-config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/yaml-cpp/yaml-cpp.pc.in" />

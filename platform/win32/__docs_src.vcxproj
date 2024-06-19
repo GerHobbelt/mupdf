@@ -109,7 +109,15 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -596,7 +604,9 @@
     <Text Include="../../../docs-src/Notes/Aside/Installing and using Grafana for monitoring Qiqqa backend processes.md" />
     <Text Include="../../../docs-src/Notes/Aside/Links of interest.md" />
     <Text Include="../../../docs-src/Notes/Aside/Mounting arbitrary disks and filesystems on Linux without having to hand-edit fstab every time.md" />
+    <Text Include="../../../docs-src/Notes/Aside/R bookdown - installing and using different fonts in your documents.md" />
     <Text Include="../../../docs-src/Notes/Aside/Searching PDFs on archive.org anno 2023,2024 after the bloody publishers&apos; lawsuit(s).md" />
+    <Text Include="../../../docs-src/Notes/Aside/Testing - nasty filenames - also on UNIX.md" />
     <Text Include="../../../docs-src/Notes/Aside/The World of Data Extraction and Re-use/Data collecting via web scraping - JSON, JSONlines, etc.md" />
     <Text Include="../../../docs-src/Notes/Aside/The World of Data Extraction and Re-use/PDF Reading, Annotating and Content Extraction.md" />
     <Text Include="../../../docs-src/Notes/Aside/The World of Data Extraction and Re-use/PDFs Considered Harmful.md" />

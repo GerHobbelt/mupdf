@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -77,7 +77,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -109,10 +109,10 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREPROC;REPROC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -124,7 +124,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reproc/reproc++/include;../../thirdparty/owemdjee/reproc/reproc/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREPROC;REPROC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -150,7 +150,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reproc/reproc++/include;../../thirdparty/owemdjee/reproc/reproc/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREPROC;REPROC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -179,7 +179,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reproc/reproc++/include;../../thirdparty/owemdjee/reproc/reproc/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREPROC;REPROC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -205,7 +205,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reproc/reproc++/include;../../thirdparty/owemdjee/reproc/reproc/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREPROC;REPROC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -231,22 +231,22 @@
     <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc++/examples/forward.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc++/examples/run.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc++/src/reproc.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/examples/drain.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/examples/env.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/examples/parent.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/examples/path.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/examples/poll.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/examples/read.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/examples/run.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/resources/argv.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/resources/deadline.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/resources/env.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/resources/io.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/resources/overflow.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/resources/path.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/resources/pid.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/resources/stop.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/resources/working-directory.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\examples\example_drain.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\examples\example_env.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\examples\example_parent.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\examples\example_path.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\examples\example_poll.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\examples\example_read.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\examples\example_run.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\resources\resource_argv.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\resources\resource_deadline.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\resources\resource_env.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\resources\resource_io.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\resources\resource_overflow.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\resources\resource_path.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\resources\resource_pid.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\resources\resource_stop.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reproc\reproc\resources\resource_working_directory.c" />
     <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/src/clock.posix.c" />
     <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/src/clock.windows.c" />
     <ClCompile Include="../../thirdparty/owemdjee/reproc/reproc/src/drain.c" />
@@ -317,8 +317,7 @@
     <Text Include="../../thirdparty/owemdjee/reproc/reproc/reproc-config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/reproc/reproc/reproc.pc.in" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
