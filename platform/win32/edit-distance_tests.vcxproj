@@ -112,14 +112,6 @@
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
-<ItemDefinitionGroup>
-    <ClCompile>
-      <Optimization>Custom</Optimization>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
-</ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EDIT_DISTANCE_TESTS;EDIT_DISTANCE_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -235,7 +227,6 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/edit-distance/src/levenstein-fast-meyers/_editdistance.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/edit-distance/src/levenstein-fast-meyers/bycython.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/edit-distance/src/levenstein-fast-meyers/_editdistance.h" />
     <ClInclude Include="../../thirdparty/owemdjee/edit-distance/src/levenstein-fast-meyers/def.h" />
     <ClInclude Include="../../thirdparty/owemdjee/edit-distance/src/monolithic_examples.h" />
@@ -243,7 +234,6 @@
     <Text Include="../../thirdparty/owemdjee/edit-distance/README.md" />
     <Text Include="../../thirdparty/owemdjee/edit-distance/pdm_build.py" />
     <Text Include="../../thirdparty/owemdjee/edit-distance/src/levenstein-fast-meyers/__init__.py" />
-    <Text Include="../../thirdparty/owemdjee/edit-distance/src/levenstein-fast-meyers/bycython.pyx" />
     <Text Include="../../thirdparty/owemdjee/edit-distance/src/levenstein-fast-meyers/pyproject.toml" />
     <Text Include="../../thirdparty/owemdjee/edit-distance/test/test_editdistance.py" />
   </ItemGroup>

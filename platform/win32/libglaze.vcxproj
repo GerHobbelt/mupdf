@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0E1D1D}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLAZE;GLAZE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLAZE;GLAZE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLAZE;GLAZE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLAZE;GLAZE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLAZE;GLAZE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLAZE;GLAZE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLAZE;GLAZE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLAZE;GLAZE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLAZE;GLAZE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLAZE;GLAZE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLAZE;GLAZE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLAZE;GLAZE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/api_test/api_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/asio_repe/client/repe_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/asio_repe/server/repe_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/binary_test/binary_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/cli_menu_test/cli_menu_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/compare_test/compare_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/csv_test/csv_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/eigen_test/eigen_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/exceptions_test/exceptions_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/find_package/src/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/json_conformance/json_conformance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/json_performance/json_performance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/json_test/json_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/json_test/jsonschema_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/jsonrpc_test/jsonrpc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/lib_test/lib_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/lib_test/test_lib/test_lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/mock_json_test/mock_json_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/reflection_test/reflection_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/repe_test/repe_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/stencil_test/stencil_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/api.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/hash.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/lib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/deque.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/functional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/optional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/shared_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/span.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/unique_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/unordered_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/unordered_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/std/vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/trait.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/tuplet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/type_support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/xxh64.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/binary/beve_to_json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/binary/custom.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/binary/header.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/binary/ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/binary/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/binary/skip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/binary/wrappers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/binary/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/compare/approx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/compare/compare.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/concepts/container_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/opts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/reflection_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/seek.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/wrappers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/write_chars.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/csv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/csv/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/csv/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/exceptions/binary_exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/exceptions/core_exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/exceptions/csv_exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/exceptions/json_exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/exceptions/json_schema_exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/ext/cli_menu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/ext/eigen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/ext/glaze_asio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/ext/jsonrpc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/file/file_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/file/file_watch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/file/hostname_include.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/file/raw_or_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/format/format_to.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/glaze.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/glaze_exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/hardware/volatile_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/custom.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/invoke.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/json_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/json_format.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/json_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/json_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/manage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/max_write_precision.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/minify.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/ndjson.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/prettify.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/raw_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/schema.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/skip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/study.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/wrappers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/json/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/mustache/mustache.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/mustache/stencilcount.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/record/recorder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/reflection/get_name.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/reflection/reflect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/reflection/to_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/rpc/repe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/thread/threadpool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/trace/trace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/tuplet/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/any.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/bit_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/comment.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/compare.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/dtoa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/dump.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/expected.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/for_each.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/hash_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/help.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/inline.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/itoa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/murmur.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/parse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/poly.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/progress_bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/stoui64.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/string_literal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/strod.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/validate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/tests/find_package/include/example.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/tests/lib_test/interface.hpp" />
+    <Text Include="../../thirdparty/owemdjee/glaze/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/glaze/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/glaze/README.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/cmake/code-coverage.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glaze/cmake/dev-mode.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glaze/cmake/install-config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glaze/cmake/install-rules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glaze/cmake/prelude.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glaze/cmake/project-is-top-level.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glaze/cmake/variables.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/binary.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/cli-menu.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/csv.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/custom-serialization.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/custom-wrappers.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/exceptions.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/generic-json.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/glaze-interfaces.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/json-include.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/json-pointer-syntax.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/json-schema.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/max-float-precision.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/partial-read.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/partial-write.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/pure-reflection.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/ranges.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/recorder.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/rpc/json-rpc.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/rpc/repe-rpc.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/stl-support.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/thread-pool.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/time-trace.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/unknown-keys.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/variant-handling.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/volatile-support.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/wrappers.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/include/glaze/ext/README.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/api_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/asio_repe/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/asio_repe/client/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/asio_repe/server/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/binary_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/cli_menu_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/compare_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/csv_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/eigen_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/exceptions_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/find_package/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/json_conformance/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/json_performance/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/json_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/jsonrpc_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/lib_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/lib_test/test_lib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/mock_json_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/mock_json_test/json/fantasy_nations.json" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/mock_json_test/json/stock_trades.json" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/mock_json_test/json/twitter.json" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/reflection_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/repe_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/stencil_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/util/run_clang-format.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1344,6 +1344,9 @@ u8g2
 uvw
 nodesoup
 quirc
+arrow
+glaze
+sqlite-parquet-vtable
 
 EOT
 ) | grep -e "$FILTER"
