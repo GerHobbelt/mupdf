@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -528,7 +528,10 @@ void pdfapp_open_progressive(pdfapp_t *app, const char *filename, int reload, in
 	{
 		fz_report_error(ctx);
 		if (!reload || make_fake_doc(app))
-			pdfapp_error(app, "cannot open document. %s", fz_caught_message(ctx));
+		{
+			fz_report_error(ctx);
+			pdfapp_error(app, "cannot open document");
+		}
 	}
 
 	idoc = pdf_specifics(app->ctx, app->doc);
@@ -542,7 +545,7 @@ void pdfapp_open_progressive(pdfapp_t *app, const char *filename, int reload, in
 		fz_catch(ctx)
 		{
 			fz_report_error(ctx);
-			pdfapp_error(app, "cannot load javascript embedded in document. %s", fz_caught_message(ctx));
+			pdfapp_error(app, "cannot load javascript embedded in document");
 		}
 	}
 
@@ -604,7 +607,7 @@ void pdfapp_open_progressive(pdfapp_t *app, const char *filename, int reload, in
 				else
 				{
 					fz_report_error(ctx);
-					pdfapp_warn(app, "Failed to load outline. %s", fz_caught_message(ctx));
+					pdfapp_warn(app, "Failed to load outline.");
 				}
 			}
 			break;
@@ -629,7 +632,7 @@ void pdfapp_open_progressive(pdfapp_t *app, const char *filename, int reload, in
 	fz_catch(ctx)
 	{
 		fz_report_error(ctx);
-		pdfapp_error(app, "cannot open document. %s", fz_caught_message(ctx));
+		pdfapp_error(app, "cannot open document");
 	}
 
 	if (app->pageno < 1)
@@ -873,7 +876,7 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 		else
 		{
 			fz_report_error(app->ctx);
-			pdfapp_warn(app, "Failed to load page. %s", fz_caught_message(app->ctx));
+			pdfapp_warn(app, "Failed to load page.");
 		}
 		return;
 	}
@@ -920,7 +923,7 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 			else
 			{
 				fz_report_error(app->ctx);
-				pdfapp_warn(app, "Failed to load page. %s", fz_caught_message(app->ctx));
+				pdfapp_warn(app, "Failed to load page.");
 			}
 			errored = 1;
 		}
@@ -965,7 +968,7 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 		else
 		{
 			fz_report_error(app->ctx);
-			pdfapp_warn(app, "Failed to load page. %s", fz_caught_message(app->ctx));
+			pdfapp_warn(app, "Failed to load page.");
 		}
 		errored = 1;
 	}
