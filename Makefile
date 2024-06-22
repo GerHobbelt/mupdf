@@ -522,9 +522,6 @@ install-docs-html:
 	install -d $(DESTDIR)$(docdir)
 	install -d $(DESTDIR)$(docdir)/_images
 	install -d $(DESTDIR)$(docdir)/_static
-	install -d $(DESTDIR)$(docdir)/_static/js
-	install -d $(DESTDIR)$(docdir)/_static/css
-	install -d $(DESTDIR)$(docdir)/_static/css/fonts
 	install -m 644 build/docs/html/*.html $(DESTDIR)$(docdir)
 	install -m 644 build/docs/html/*.inv $(DESTDIR)$(docdir)
 	install -m 644 build/docs/html/*.js $(DESTDIR)$(docdir)
