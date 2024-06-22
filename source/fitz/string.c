@@ -1447,21 +1447,39 @@ fz_utf8_from_wchar(fz_context *ctx, const wchar_t *s)
 }
 
 wchar_t *
-fz_wchar_from_utf8(fz_context *ctx, const char *s)
+fz_wchar_from_utf8(fz_context *ctx, const char *path)
 {
-	wchar_t *d, *r;
-	int c;
-	r = d = fz_malloc(ctx, (strlen(s) + 1) * sizeof(wchar_t));
-	if (!r)
+	size_t z = 0;
+	const char *p = path;
+	wchar_t *wpath, *w;
+
+	if (!path)
 		return NULL;
-	while (*s) {
-		s += fz_chartorune_unsafe(&c, s);
-		/* Truncating c to a wchar_t can be problematic if c
-		 * is 0x10000. */
+
+	while (*p)
+	{
+		int c;
+		p += fz_chartorune_unsafe(&c, p);
+		z++;
 		if (c >= 0x10000)
-			c = FZ_REPLACEMENT_CHARACTER;
-		*d++ = c;
+			z++;
 	}
-	*d = 0;
-	return r;
+
+	w = wpath = fz_malloc(ctx, 2*(z+1));
+	while (*path)
+	{
+		int c;
+		path += fz_chartorune_unsafe(&c, path);
+		if (c >= 0x10000)
+		{
+			c -= 0x10000;
+			*w++ = 0xd800 + (c>>10);
+			*w++ = 0xdc00 + (c&1023);
+		}
+		else
+			*w++ = c;
+	}
+	*w = 0;
+
+	return wpath;
 }
