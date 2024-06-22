@@ -11,6 +11,7 @@ import textwrap
 import jlib
 
 from . import cpp
+from . import csharp
 from . import rename
 from . import state
 from . import util
@@ -35,6 +36,59 @@ def translate_ucdn_macros( build_dirs):
     out.write( '\n')
     assert n
     return out.getvalue()
+
+def _csharp_unicode_prefix():
+    '''
+    Returns typemaps that automatically convert C# strings (which are utf16)
+    into utf8 when calling MuPDF, and convert strings returned by MuPDF (which
+    are utf8) into utf16.
+
+    We return empty string if not on Windows, because Mono appears to already
+    work.
+    '''
+    if not state.state_.windows:
+        # Mono on Linux already seems to use utf8.
+        return ''
+
+    text = textwrap.dedent('''
+            // This ensures that our code below overrides whatever is defined
+            // in std_string.i and any later `%include "std_string.i"` is
+            // ignored.
+            %include "std_string.i"
+
+            // See https://github.com/swig/swig/pull/2364. We also add typemaps
+            // for `const char*`.
+
+            %{
+            #include <string>
+            %}
+
+            namespace std
+            {
+                %typemap(imtype,
+                         inattributes="[global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         outattributes="[return: global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         directorinattributes="[global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         directoroutattributes="[return: global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]"
+                         ) string "string"
+
+
+                %typemap(imtype,
+                         inattributes="[global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         outattributes="[return: global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         directorinattributes="[global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         directoroutattributes="[return: global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]"
+                         ) const string & "string"
+
+                %typemap(imtype,
+                         inattributes="[global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         outattributes="[return: global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         directorinattributes="[global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         directoroutattributes="[return: global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]"
+                         ) const char* "string"
+            }
+            ''')
+    return text
 
 
 def build_swig(
@@ -590,6 +644,15 @@ def build_swig(
     text = ''
 
     text += '%module(directors="1") mupdf\n'
+
+    # https://www.mono-project.com/docs/advanced/pinvoke/
+    #
+    # > Mono on all platforms currently uses UTF-8 encoding for all string
+    # > marshaling operations.
+    #
+    if language == 'csharp':
+        text += _csharp_unicode_prefix()
+
     for i in generated.virtual_fnptrs:
         text += f'%feature("director") {i};\n'
 
@@ -1933,247 +1996,264 @@ def test_swig():
             ''').replace( '\n', ' \\\n')
             )
 
-def _command_lines( command):
+
+def test_swig_csharp():
     '''
-    Process multiline command by running through `textwrap.dedent()`, removes
-    comments (lines starting with `#` or ` #` until end of line), removes
-    entirely blank lines.
-
-    Returns list of lines.
+    Checks behaviour with and without our custom string marshalling code from
+    _csharp_unicode_prefix().
     '''
-    command = textwrap.dedent( command)
-    lines = []
-    for line in command.split( '\n'):
-        if line.startswith( '#'):
-            h = 0
-        else:
-            h = line.find( ' #')
-        if h >= 0:
-            line = line[:h]
-        if line.strip():
-            line = line.rstrip()
-            jlib.log(f'Appending {line=}.')
-            lines.append(line)
-        else:
-            jlib.log(f'Ignoring empty line: {line=}.')
-    return lines
-
-def run(command):
-    lines = _command_lines( command)
-    import platform
-    sep = ' ' if platform.system() == 'Windows' else '\\\n'
-    command2 = sep.join( lines)
-    return jlib.system(command2)
+    test_swig_csharp_internal(fix=0)
+    test_swig_csharp_internal(fix=1)
 
 
-def csharp_settings():
+def test_swig_csharp_internal(fix):
     '''
-    Returns (csc, mono, mupdf_cs).
-
-    csc: C# compiler.
-    mono: C# interpreter ("" on Windows).
-    mupdf_cs: MuPDF C# code.
-
-    E.g. on Windows `csc` can be: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/Roslyn/csc.exe
+    Test utf8 string handling, with/without use of _csharp_unicode_prefix().
     '''
-    # On linux requires:
-    #   sudo apt install mono-devel
+    # We create C++/C# source directly from this function, and explicitly run
+    # C++ and .NET/Mono build commands.
     #
-    # OpenBSD:
-    #   pkg_add mono
-    # but we get runtime error when exiting:
-    #   mono:build/shared-release/libmupdfcpp.so: undefined symbol '_ZdlPv'
-    # which might be because of mixing gcc and clang?
+
+    build_dir = f'test_swig_{fix}'
+    os.makedirs( build_dir, exist_ok=True)
+
+    print('')
+    print(f'### test_swig_internal(): {fix=}', flush=1)
+
+    # Create SWIG input file `test.i`.
+    #
+    test_i = '%module test\n'
+
+    if fix:
+        test_i += _csharp_unicode_prefix()
+
+    test_i += textwrap.dedent(f'''
+            %include "std_string.i"
+
+            // Returns escaped representation of `text`.
+            const char* foo1(const char* text);
+
+            // Returns escaped representation of `text`.
+            std::string foo2(const std::string& text);
+
+            // Returns 4-byte string `0xf0 0x90 0x90 0xb7`, which decodes as
+            // utf8 to a 4-byte utf16 character.
+            const char* bar();
+
+            // Returns 4-byte string `0xf0 0x90 0x90 0xb7`, which decodes as
+            // utf8 to a 4-byte utf16 character.
+            std::string bar2();
+
+            %{{
+                // Returns string containing escaped description of `text`.
+                std::string foo2(const std::string& text)
+                {{
+                    std::string ret;
+                    for (int i=0; i<text.size(); ++i)
+                    {{
+                        char buffer[8];
+                        snprintf(buffer, sizeof(buffer), " \\\\x%02x", (unsigned char) text[i]);
+                        ret += buffer;
+                    }}
+                    return ret;
+                }}
+
+                // Returns pointer to static buffer containing escaped
+                // description of `text`.
+                const char* foo1(const char* text)
+                {{
+                    std::string text2 = text;
+                    static std::string ret;
+                    ret = foo2(text2);
+                    return ret.c_str();
+                }}
+
+                // Returns pointer to static buffer containing a utf8 string.
+                const char* bar()
+                {{
+                    static char ret[] =
+                    {{
+                            (char) 0xf0,
+                            (char) 0x90,
+                            (char) 0x90,
+                            (char) 0xb7,
+                            0,
+                    }};
+                    return ret;
+                }}
+
+                // Returns a std::string containing a utf8 string.
+                std::string bar2()
+                {{
+                    const char* ret = bar();
+                    return std::string(ret);
+                }}
+            %}}
+            ''')
+    with open(f'{build_dir}/test.i', 'w') as f:
+        f.write(test_i)
+
+    # Run swig on `test.i` to generate `test.cs` and `test.cpp`.
+    #
+    jlib.system(
+            f'''
+            cd {build_dir} && swig
+                {'-DSWIG_CSHARP_NO_STRING_HELPER=1 -DSWIG_CSHARP_NO_EXCEPTION_HELPER=1' if 0 and fix else ''}
+                -D_WIN32
+                -c++
+                -csharp
+                -Wextra
+                -Wall
+                -dllimport test.dll
+                -outdir .
+                -outfile test.cs
+                -o test.cpp
+                test.i
+            ''')
+
+    # Compile/link test.cpp to create test.dll.
     #
     if state.state_.windows:
         import wdev
         vs = wdev.WindowsVS()
-        jlib.log('{vs.description_ml()=}')
-        csc = vs.csc
-        jlib.log('{csc=}')
-        assert csc, f'Unable to find csc.exe'
-        mono = ''
-    else:
-        mono = 'mono'
-        if state.state_.linux:
-            csc = 'mono-csc'
-        elif state.state_.openbsd:
-            csc = 'csc'
-        else:
-            assert 0, f'Do not know where to find mono. {platform.platform()=}'
-
-    return csc, mono
-
-def test_swig():
-
-    test_i = textwrap.dedent('''
-            %module test
-
-            #include <stdio.h>
-            int foo(const char* text);
-
-            %{
-            int foo(const char* text)
-            {
-
-                printf("foo: %s\\n", text);
-                int l = strlen(text);
-                printf("foo: %i: %s\\n", l, text);
-                for (int i=0; i<l; ++i)
-                {
-                    const unsigned char* text2 = (const unsigned char*) text;
-                    printf(" %02x", text2[i]);
-                }
-                printf("\\n");
-                fflush(stdout);
-                return l;
-            }
-            %}
-            ''')
-    jlib.fs_update( test_i, 'test.i')
-    dllimport = 'test.dll'
-
-    if 1:
-        command = textwrap.dedent(
+        jlib.system(
                 f'''
-                swig
-                    -D_WIN32
-                    -c++
-                    -csharp
-                    -Wextra
-                    -Wall
-                    #-module test
-                    # -namespace test
-                    -dllimport {dllimport}
-                    -outdir .
-                    -outfile test.cs
-                    -o test.cpp
-                    test.i
+                cd {build_dir} && "{vs.vcvars}"&&"{vs.cl}"
+                    /nologo                     #
+                    /c                          # Compiles without linking.
+                    /EHsc                       # Enable "Standard C++ exception handling".
+                    /MD
+                    /Tptest.cpp                 # /Tp specifies C++ source file.
+                    /Fotest.cpp.obj             # Output file.
+                    /permissive-                # Set standard-conformance mode.
+                    /FC                         # Display full path of source code files passed to cl.exe in diagnostic text.
+                    /W3                         # Sets which warning level to output. /W3 is IDE default.
+                    /diagnostics:caret          # Controls the format of diagnostic messages.
                 ''')
-        run(command)
 
-    import wdev
-    vs = wdev.WindowsVS()
-    cc = f'"{vs.vcvars}"&&"{vs.cl}"'
-    debug = 0
-    path_cpp = 'test.cpp'
-    path_obj = 'test.cpp.obj'
-    includes_text = ''
-    optimise2 = ''
-    debug2 = ''
-    permissive = '/permissive-'
-    defines_text = ''
-    compiler_extra = ''
-    cpp = 1
-    T = '/Tp' if cpp else '/Tc'
-    command = textwrap.dedent(f'''
-            {cc}
-                /c                          # Compiles without linking.
-                /EHsc                       # Enable "Standard C++ exception handling".
+        jlib.system(
+                f'''
+                cd {build_dir} && "{vs.vcvars}"&&"{vs.link}"
+                    /nologo                     #
+                    /DLL
+                    /IMPLIB:test.lib        # Overrides the default import library name.
+                    /OUT:test.dll           # Specifies the output file name.
+                    /nologo
+                    test.cpp.obj
+                ''')
+    else:
+        jlib.system(
+                f'''
+                cd {build_dir} && c++
+                    -fPIC
+                    --shared
+                    -o test.dll
+                    test.cpp
+                ''')
 
-                #/MD                         # Creates a multithreaded DLL using MSVCRT.lib.
-                {'/MDd' if debug else '/MD'}
-
-                # Input/output files:
-                {T}{path_cpp}               # /Tp specifies C++ source file.
-                /Fo{path_obj}               # Output file.
-
-                # Include paths:
-                {includes_text}
-
-                # Code generation:
-                {optimise2}
-                {debug2}
-                {permissive}                # Set standard-conformance mode.
-
-                # Diagnostics:
-                #/FC                         # Display full path of source code files passed to cl.exe in diagnostic text.
-                /W3                         # Sets which warning level to output. /W3 is IDE default.
-                /diagnostics:caret          # Controls the format of diagnostic messages.
-                /nologo                     #
-
-                {defines_text}
-                {compiler_extra}
-            ''')
-    if 1:
-        run(command)
-
-    libpaths_text = ''
-    path_so = 'test.dll'
-    debug2 = ''
-    libs_text = ''
-    libpaths_text = ''
-    linker_extra = ''
-    linker = f'"{vs.vcvars}"&&"{vs.link}"'
-    base = 'test'
-    test_lib = f'{base}.lib'
-    command = textwrap.dedent(f'''
-            {linker}
-                /DLL
-                /IMPLIB:{test_lib}      # Overrides the default import library name.
-                {libpaths_text}
-                /OUT:{path_so}          # Specifies the output file name.
-                {debug2}
-                /nologo
-                {libs_text}
-                {path_obj}
-                {linker_extra}
-            ''')
-    if 1:
-        run(command)
-
-    cs = textwrap.dedent('''
+    # Create C# test programme `testfoo.cs`.
+    #
+    cs = textwrap.dedent(f'''
             public class HelloWorld
-            {
+            {{
                 public static void Main(string[] args)
-                {
-                    System.Console.WriteLine("MuPDF C# test starting.");
-                    System.Console.OutputEncoding = System.Text.Encoding.UTF8;
+                {{
+                    bool expect_fix = ({fix if state.state_.windows else 1} != 0);
 
-                    test.foo("hello");
+                    // Utf8 for our string with 4-byte utf16 character.
+                    //
+                    byte[] text_utf8 = {{ 0xf0, 0x90, 0x90, 0xb7, }};
+                    string text = System.Text.Encoding.UTF8.GetString(text_utf8);
 
-                    byte[] a = {
-                            0xcf,
-                            0x80,
-                            0xc3,
-                            0xaa,
-                            0xc3,
-                            0x9f,
-                            0xc3,
-                            0xb6,
-                            0xc3,
-                            0xa4,
-                            0xc3,
-                            0xbc,
-                            };
-                    string aa = System.Text.Encoding.UTF8.GetString(a);
-                    System.Console.WriteLine("aa: " + aa);
-                    test.foo("aa:");
-                    test.foo(aa);
+                    // Escaped representation of text_utf8, as returned by
+                    // calls of test.foo1() and test.foo2() below.
+                    //
+                    string text_utf8_escaped = " \\\\xf0 \\\\x90 \\\\x90 \\\\xb7";
+                    string incorrect_utf8_escaped = " \\\\x3f \\\\x3f";
 
-                    byte[] infix_utf8 = {
-                            0xc3, 0xaa,
-                            0xcf, 0x80,
-                            0xc3, 0x9f,
-                            0xc3, 0xb6,
-                            0xc3, 0xa4,
-                            0xc3, 0xbc
-                            };
-                    string infix = System.Text.Encoding.UTF8.GetString(infix_utf8);
+                    // test.foo1()/test.foo2() return a `const
+                    // char*`/`std::string` containing an escaped
+                    // representation of the string that they were given. If
+                    // things are working correctly, this will be an escaped
+                    // representation of `text_utf8`.
+                    //
 
-                    System.Console.OutputEncoding = System.Text.Encoding.UTF8;
-                    System.Console.WriteLine("infix: " + infix);
+                    string foo1 = test.foo1(text);
+                    System.Console.WriteLine("foo1: " + foo1);
+                    string foo_expected_escaped = (expect_fix) ? text_utf8_escaped : incorrect_utf8_escaped;
+                    if (foo1 != foo_expected_escaped)
+                    {{
+                        throw new System.Exception(
+                                "foo1 incorrect: '" + foo1 + "'"
+                                + " - foo_expected_escaped: '" + foo_expected_escaped + "'"
+                                );
+                    }}
 
-                    test.foo("infix:");
-                    test.foo(infix);
+                    string foo2 = test.foo2(text);
+                    System.Console.WriteLine("foo2: " + foo2);
+                    if (foo2 != foo_expected_escaped)
+                    {{
+                        throw new System.Exception(
+                                "foo2 incorrect: '" + foo2 + "'"
+                                + " - foo_expected_escaped: '" + foo_expected_escaped + "'"
+                                );
+                    }}
 
-                    System.Console.WriteLine("MuPDF C# test finished.");
-                }
-            }
+                    // test.bar1() and test.bar2() return a `const
+                    // char*`/`std::string` containing the bytes of
+                    // `text_utf8`. If things are working correctly we will see
+                    // exactly these bytes.
+                    //
+                    byte[] bar_expected_utf8_incorrect = {{ 0xc3, 0xb0, 0xc2, 0x90, 0xc2, 0x90, 0xc2, 0xb7, }};
+                    byte[] bar_expected_utf8 = (expect_fix) ? text_utf8 : bar_expected_utf8_incorrect;
+
+                    string ret3 = test.bar();
+                    byte[] ret3_utf8 = System.Text.Encoding.UTF8.GetBytes(ret3);
+                    print_bytes_as_string("ret3_utf8:", ret3_utf8);
+                    if (!equal(ret3_utf8, bar_expected_utf8))
+                    {{
+                        throw new System.Exception("ret3 != bar_expected_utf8");
+                    }}
+
+                    string ret4 = test.bar2();
+                    byte[] ret4_utf8 = System.Text.Encoding.UTF8.GetBytes(ret4);
+                    print_bytes_as_string("ret4_utf8:", ret4_utf8);
+                    if (!equal(ret4_utf8, bar_expected_utf8))
+                    {{
+                        throw new System.Exception("ret4_utf8 != bar_expected_utf8");
+                    }}
+                }}
+
+                static bool equal(byte[] a, byte[] b)
+                {{
+                    if (a.Length != b.Length)   return false;
+                    for (int i=0; i<a.Length; ++i)
+                    {{
+                        if (a[i] != b[i])   return false;
+                    }}
+                    return true;
+                }}
+
+                static void print_bytes_as_string(string prefix, byte[] a)
+                {{
+                    System.Console.Write(prefix);
+                    System.Console.Write("[");
+                    foreach (var b in a)
+                    {{
+                        System.Console.Write(" {{0:x2}}", b);
+                    }}
+                    System.Console.WriteLine("]");
+                }}
+            }}
             ''')
-    jlib.fs_write('testfoo.cs', cs)
+    with open(f'{build_dir}/testfoo.cs', 'w') as f:
+        f.write(cs)
 
-    csc, mono = csharp_settings()
-    out = 'testfoo.exe'
-    run(f'"{csc}" -out:{out} test.cs testfoo.cs')
-    run(f'{out}')
+    # Use `csc` to compile `testfoo.cs` and create `testfoo.exe`.
+    #
+    csc, mono, _ = csharp.csharp_settings(None)
+    jlib.system(f'cd {build_dir} && "{csc}" -out:testfoo.exe testfoo.cs test.cs')
+
+    # Run `testfoo.exe`.
+    #
+    jlib.system(f'cd {build_dir} && {mono} testfoo.exe')
