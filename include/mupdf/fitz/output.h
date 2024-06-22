@@ -595,6 +595,11 @@ void fz_write_bits(fz_context *ctx, fz_output *out, unsigned int data, int num_b
 void fz_write_bits_sync(fz_context *ctx, fz_output *out);
 
 /**
+	Copy the stream contents to the output.
+*/
+void fz_write_stream(fz_context *ctx, fz_output *out, fz_stream *in);
+
+/**
 	HEX nibble conversion lookup table. Used internally by fz_printf() et al.
 */
 extern const char* fz_hex_digits;
