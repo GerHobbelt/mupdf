@@ -611,7 +611,7 @@ file_as_stream(fz_context *ctx, fz_output* out)
 	FILE *file = out->state;
 	ASSERT(file);
 	fflush(file);
-	return fz_open_file_ptr_no_close(ctx, file);
+	return fz_open_file_ptr_no_close(ctx, file, out->filepath, 0 /* del_on_drop TODO? */);
 }
 
 static int file_truncate(fz_context* ctx, fz_output* out)

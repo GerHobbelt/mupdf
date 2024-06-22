@@ -32,6 +32,12 @@
 #include <errno.h>
 #include <stdio.h>
 
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif
+
 int
 fz_file_exists(fz_context *ctx, const char *path)
 {
@@ -110,6 +116,8 @@ fz_drop_stream(fz_context *ctx, fz_stream *stm)
 typedef struct
 {
 	FILE *file;
+	char *filename;
+	int del_on_drop;
 	unsigned char buffer[4096];
 } fz_file_stream;
 
@@ -160,30 +168,72 @@ static void seek_file(fz_context *ctx, fz_stream *stm, int64_t offset, int whenc
 static void drop_file(fz_context *ctx, fz_stream *stm)
 {
 	fz_file_stream* state = stm->state;
-	if (state->file)
+	if (state->filename && state->del_on_drop)
 	{
-		int n = fclose(state->file);
+		unlink(state->filename);
+		// TODO: *warn* about failed file delete operation? Do we consider that failure to perform Captain's Last Act a benign error?
+	}
+	fz_free(ctx, state->filename);
+	fz_free(ctx, state);
+	state->filename = NULL;
+	stm->state = NULL;
+}
+
+static void close_and_drop_file(fz_context *ctx, fz_stream *stm)
+{
+	fz_file_stream* state = stm->state;
+	int n = fclose(state->file);
+	if (n < 0)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_warn(ctx, "close error: %s", fz_ctx_get_system_errormsg(ctx));
+	}
+	state->file = NULL;
+
+	drop_file(ctx, stm);
+}
+
+static fz_stream *
+fz_open_file_ptr(fz_context *ctx, FILE *file, const char *name, int del_on_drop)
+{
+	fz_stream *stm;
+	fz_file_stream *state = NULL;
+
+	fz_var(state);
+
+	fz_try(ctx)
+	{
+		state = fz_malloc_struct(ctx, fz_file_stream);
+		state->file = file;
+		state->filename = fz_strdup(ctx, name);
+		state->del_on_drop = del_on_drop;
+
+		stm = fz_new_stream(ctx, state, next_file, close_and_drop_file);
+		stm->seek = seek_file;
+	}
+	fz_catch(ctx)
+	{
+		int n = fclose(file);
 		if (n < 0)
 		{
 			fz_copy_ephemeral_errno(ctx);
 			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 			fz_warn(ctx, "close error: %s", fz_ctx_get_system_errormsg(ctx));
 		}
-		state->file = NULL;
+
+		if (del_on_drop)
+		{
+			unlink(name);
+		}
+		if (state && state->filename)
+		{
+			fz_free(ctx, state->filename);
+		}
+		fz_free(ctx, state);
+
+		fz_rethrow(ctx);
 	}
-	fz_free(ctx, state);
-	stm->state = NULL;
-}
-
-static fz_stream *
-fz_open_file_ptr(fz_context *ctx, FILE *file)
-{
-	fz_stream *stm;
-	fz_file_stream *state = fz_malloc_struct(ctx, fz_file_stream);
-	state->file = file;
-
-	stm = fz_new_stream(ctx, state, next_file, drop_file);
-	stm->seek = seek_file;
 
 	return stm;
 }
@@ -196,13 +246,14 @@ static void dont_drop_file(fz_context* ctx, fz_stream* stm)
 		/* We don't own the file ptr. Ensure we don't close it */
 		state->file = NULL;
 	}
+	fz_free(ctx, state->filename);
 	fz_free(ctx, state);
 	stm->state = NULL;
 }
 
-fz_stream *fz_open_file_ptr_no_close(fz_context *ctx, FILE *file)
+fz_stream *fz_open_file_ptr_no_close(fz_context *ctx, FILE *file, const char* name, int del_on_drop)
 {
-	fz_stream *stm = fz_open_file_ptr(ctx, file);
+	fz_stream *stm = fz_open_file_ptr(ctx, file, name, del_on_drop);
 	/* We don't own the file ptr. Ensure we don't close it */
 	stm->drop = dont_drop_file;
 	return stm;
@@ -211,11 +262,19 @@ fz_stream *fz_open_file_ptr_no_close(fz_context *ctx, FILE *file)
 fz_stream *
 fz_open_file(fz_context *ctx, const char *name)
 {
-	FILE *file;
-	file = fz_fopen_utf8(ctx, name, "rb");
+	FILE *file = fz_fopen_utf8(ctx, name, "rb");
 	if (file == NULL)
 		fz_throw(ctx, FZ_ERROR_SYSTEM, "cannot open %s: %s", name, fz_ctx_pop_system_errormsg(ctx));
-	return fz_open_file_ptr(ctx, file);
+	return fz_open_file_ptr(ctx, file, name, 0);
+}
+
+fz_stream *
+fz_open_file_autodelete(fz_context *ctx, const char *name)
+{
+	FILE *file = fz_fopen_utf8(ctx, name, "rb");
+	if (file == NULL)
+		fz_throw(ctx, FZ_ERROR_SYSTEM, "cannot open %s: %s", name, fz_ctx_pop_system_errormsg(ctx));
+	return fz_open_file_ptr(ctx, file, name, 1);
 }
 
 fz_stream *
@@ -225,23 +284,18 @@ fz_try_open_file(fz_context *ctx, const char *name)
 	file = fz_fopen_utf8(ctx, name, "rb");
 	if (file == NULL)
 		return NULL;
-	return fz_open_file_ptr(ctx, file);
+	return fz_open_file_ptr(ctx, file, name, 0);
 }
 
-#ifdef _WIN32
-fz_stream *
-fz_open_file_w(fz_context *ctx, const wchar_t *name)
+const char *
+fz_stream_filename(fz_context *ctx, fz_stream *stm)
 {
-	FILE *file = _wfopen(name, L"rb");
-	if (file == NULL)
-	{
-		fz_copy_ephemeral_errno(ctx);
-		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-		fz_throw(ctx, FZ_ERROR_SYSTEM, "cannot open file %ls: %s", name, fz_ctx_pop_system_errormsg(ctx));
-	}
-	return fz_open_file_ptr(ctx, file);
+	if (!stm || stm->next != next_file)
+		return NULL;
+
+	fz_file_stream* state = stm->state;
+	return state->filename;
 }
-#endif
 
 /* Memory stream */
 
