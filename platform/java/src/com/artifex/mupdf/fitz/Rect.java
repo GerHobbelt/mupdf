@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -28,10 +28,10 @@ public class Rect
 		Context.init();
 	}
 
-	public final float x0;
-	public final float y0;
-	public final float x1;
-	public final float y1;
+	public float x0;
+	public float y0;
+	public float x1;
+	public float y1;
 
 	// Minimum and Maximum values that can survive round trip
 	// from int to float.
@@ -56,10 +56,23 @@ public class Rect
 
 	public Rect(Quad q)
 	{
-		this.x0 = Math.min(Math.min(q.ul_x, q.ur_x), Math.min(q.ll_x, q.lr_x));
-		this.y0 = Math.min(Math.min(q.ul_y, q.ur_y), Math.min(q.ll_y, q.lr_y));
-		this.x1 = Math.max(Math.max(q.ul_x, q.ur_x), Math.max(q.ll_x, q.lr_x));
-		this.y1 = Math.max(Math.max(q.ul_y, q.ur_y), Math.max(q.ll_y, q.lr_y));
+		if (!q.isValid())
+		{
+			this.x0 = this.y0 = MAX_INF_RECT;
+			this.x1 = this.y1 = MIN_INF_RECT;
+		}
+		else if (!q.isInfinite())
+		{
+			this.x0 = this.y0 = MIN_INF_RECT;
+			this.x1 = this.y1 = MAX_INF_RECT;
+		}
+		else
+		{
+			this.x0 = q.ll_x;
+			this.y0 = q.ll_y;
+			this.x1 = q.ur_x;
+			this.y1 = q.ur_y;
+		}
 	}
 
 	public Rect(Rect r)
@@ -87,7 +100,7 @@ public class Rect
 			this.y1 == MAX_INF_RECT;
 	}
 
-	public Rect transformed(Matrix tm)
+	public Rect transform(Matrix tm)
 	{
 		if (this.isInfinite())
 			return this;
@@ -138,7 +151,12 @@ public class Rect
 		bx0 += dy0 + tm.f;
 		bx1 += dy1 + tm.f;
 
-		return new Rect(ax0, bx0, ax1, bx1);
+		x0 = ax0;
+		x1 = ax1;
+		y0 = bx0;
+		y1 = bx1;
+
+		return this;
 	}
 
 	public boolean contains(float x, float y)
@@ -172,142 +190,63 @@ public class Rect
 		return (x0 <= x1 && y0 <= y1);
 	}
 
-	public Rect unioned(Rect r)
+	public void union(Rect r)
 	{
 		if (!r.isValid() || this.isInfinite())
-			return new Rect(this);
+			return;
 		if (!this.isValid() || r.isInfinite())
-			return new Rect(r);
-		return new Rect(
-			r.x0 < x0 ? r.x0 : x0,
-			r.y0 < y0 ? r.y0 : y0,
-			r.x1 > x1 ? r.x1 : x1,
-			r.y1 > y1 ? r.y1 : y1
-		);
-	}
-
-	public Rect insetted(float dx, float dy) {
-		if (!isValid() || isInfinite() || isEmpty())
-			return new Rect(this);
-		return new Rect(x0 + dx, y0 + dy, x1 - dx, y1 - dy);
-	}
-
-	public Rect insetted(float left, float top, float right, float bottom) {
-		if (!isValid() || isInfinite() || isEmpty())
-			return new Rect(this);
-		return new Rect(x0 + left, y0 + top, x1 - right, y1 - bottom);
-	}
-
-	public Rect offsetted(float dx, float dy) {
-		if (!isValid() || isInfinite() || isEmpty())
-			return new Rect(this);
-		return new Rect(x0 + dx, y0 + dy, x1 + dx, y1 + dy);
-	}
-
-	public Rect offsettedTo(float left, float top) {
-		if (!isValid() || isInfinite() || isEmpty())
-			return new Rect(this);
-		return new Rect(left, top, left + x1 - x0, top + y1 - y0);
-	}
-
-	public static Rect Infinite() {
-		return new Rect(MIN_INF_RECT, MIN_INF_RECT, MAX_INF_RECT, MAX_INF_RECT);
-	}
-
-	public static Rect Transformed(Rect r, Matrix tm) {
-		if (r.isInfinite() || !r.isValid())
-			return new Rect(r);
-
-		float ax0 = r.x0 * tm.a;
-		float ax1 = r.x1 * tm.a;
-
-		if (ax0 > ax1)
 		{
-			float t = ax0;
-			ax0 = ax1;
-			ax1 = t;
+			x0 = r.x0;
+			y0 = r.y0;
+			x1 = r.x1;
+			y1 = r.y1;
+			return;
 		}
 
-		float cy0 = r.y0 * tm.c;
-		float cy1 = r.y1 * tm.c;
-
-		if (cy0 > cy1)
-		{
-			float t = cy0;
-			cy0 = cy1;
-			cy1 = t;
-		}
-		ax0 += cy0 + tm.e;
-		ax1 += cy1 + tm.e;
-
-		float bx0 = r.x0 * tm.b;
-		float bx1 = r.x1 * tm.b;
-
-		if (bx0 > bx1)
-		{
-			float t = bx0;
-			bx0 = bx1;
-			bx1 = t;
-		}
-
-		float dy0 = r.y0 * tm.d;
-		float dy1 = r.y1 * tm.d;
-
-		if (dy0 > dy1)
-		{
-			float t = dy0;
-			dy0 = dy1;
-			dy1 = t;
-		}
-		bx0 += dy0 + tm.f;
-		bx1 += dy1 + tm.f;
-
-		return new Rect(ax0, bx0, ax1, bx1);
+		if (r.x0 < x0)
+			x0 = r.x0;
+		if (r.y0 < y0)
+			y0 = r.y0;
+		if (r.x1 > x1)
+			x1 = r.x1;
+		if (r.y1 > y1)
+			y1 = r.y1;
 	}
 
-	public static Rect Unioned(Rect r1, Rect r2)
-	{
-		if (!r2.isValid() || r1.isInfinite())
-			return new Rect(r1);
-		if (!r1.isValid() || r2.isInfinite())
-			return new Rect(r2);
-		return new Rect(
-			r2.x0 < r1.x0 ? r2.x0 : r1.x0,
-			r2.y0 < r1.y0 ? r2.y0 : r1.y0,
-			r2.x1 > r1.x1 ? r2.x1 : r1.x1,
-			r2.y1 > r1.y1 ? r2.y1 : r1.y1
-		);
+	public void inset(float dx, float dy) {
+		if (!isValid() || isInfinite() || isEmpty())
+			return;
+		x0 += dx;
+		y0 += dy;
+		x1 -= dx;
+		y1 -= dy;
 	}
 
-	public static Rect Insetted(Rect r, float dx, float dy) {
-		if (!r.isValid() || r.isInfinite() || r.isEmpty())
-			return new Rect(r);
-		return new Rect(r.x0 + dx, r.y0 + dy, r.x1 - dx, r.y1 - dy);
+	public void inset(float left, float top, float right, float bottom) {
+		if (!isValid() || isInfinite() || isEmpty())
+			return;
+		x0 += left;
+		y0 += top;
+		x1 -= right;
+		y1 -= bottom;
 	}
 
-	public static Rect Insetted(Rect r, float left, float top, float right, float bottom) {
-		if (!r.isValid() || r.isInfinite() || r.isEmpty())
-			return new Rect(r);
-		return new Rect(r.x0 + left, r.y0 + top, r.x1 - right, r.y1 - bottom);
+	public void offset(float dx, float dy) {
+		if (!isValid() || isInfinite() || isEmpty())
+			return;
+		x0 += dx;
+		y0 += dy;
+		x1 += dx;
+		y1 += dy;
 	}
 
-	public static Rect Offsetted(Rect r, float dx, float dy) {
-		if (!r.isValid() || r.isInfinite() || r.isEmpty())
-			return new Rect(r);
-		return new Rect(r.x0 + dx, r.y0 + dy, r.x1 + dx, r.y1 + dy);
+	public void offsetTo(float left, float top) {
+		if (!isValid() || isInfinite() || isEmpty())
+			return;
+		x1 += left - x0;
+		y1 += top - y0;
+		x0 = left;
+		y0 = top;
 	}
 
-	public static Rect OffsettedTo(Rect r, float left, float top) {
-		if (!r.isValid() || r.isInfinite() || r.isEmpty())
-			return new Rect(r);
-		return new Rect(left, top, left + r.x1 - r.x0, top + r.y1 - r.y0);
-	}
-
-	public static Rect Infinite() {
-		return new Rect(MIN_INF_RECT, MIN_INF_RECT, MAX_INF_RECT, MAX_INF_RECT);
-	}
-
-	public static Rect Empty() {
-		return new Rect(MAX_INF_RECT, MAX_INF_RECT, MIN_INF_RECT, MIN_INF_RECT);
-	}
 }

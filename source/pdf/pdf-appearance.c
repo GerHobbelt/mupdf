@@ -2213,6 +2213,7 @@ write_rich_content(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, pdf_obj **
 }
 #endif
 
+#if FZ_ENABLE_HTML_ENGINE
 static char *
 escape_text(fz_context *ctx, const char *s)
 {
@@ -2264,6 +2265,7 @@ escape_text(fz_context *ctx, const char *s)
 
 	return d2;
 }
+#endif
 
 static void
 pdf_write_free_text_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf,
