@@ -276,7 +276,7 @@ fz_output *fz_new_output_with_path(fz_context *, const char *filename, int appen
 	file: The file pointers to write to. NULL is interpreted as effectively
 	meaning /dev/null or similar.
 */
-fz_output *fz_new_output_with_file_ptr(fz_context *ctx, FILE *file);
+fz_output *fz_new_output_with_file_ptr(fz_context *ctx, FILE *file, const char *filename);
 
 /**
 	Open an output stream that appends

@@ -868,6 +868,7 @@ fz_output *
 fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 {
 	FILE *file;
+	fz_output *out;
 
 	if (filename == NULL)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "no output to write to");
@@ -929,11 +930,11 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	if (!file)
 		fz_throw(ctx, FZ_ERROR_SYSTEM, "cannot open file '%s': %s", filename, fz_ctx_pop_system_errormsg(ctx));
 
-	return fz_new_output_with_file_ptr(ctx, file);
+	return fz_new_output_with_file_ptr(ctx, file, filename);
 }
 
 fz_output *
-fz_new_output_with_file_ptr(fz_context *ctx, FILE *file)
+fz_new_output_with_file_ptr(fz_context *ctx, FILE *file, const char* filename)
 {
 	fz_output *out;
 

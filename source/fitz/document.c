@@ -82,7 +82,7 @@ fz_new_output_to_tempfile(fz_context *ctx, char **namep)
 		file = fdopen(fd, "w");
 		if (file == NULL)
 			fz_throw(ctx, FZ_ERROR_SYSTEM, "Failed to open temporary file");
-		out = fz_new_output_with_file_ptr(ctx, file);
+		out = fz_new_output_with_file_ptr(ctx, file, namebuf);
 	}
 #endif
 
