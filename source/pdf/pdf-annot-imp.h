@@ -70,6 +70,9 @@ pdf_obj *pdf_add_url_filespec(fz_context *ctx, pdf_document *doc, const char *ur
 char *pdf_parse_link_dest(fz_context *ctx, pdf_document *doc, pdf_obj *dest);
 char *pdf_parse_link_action(fz_context *ctx, pdf_document *doc, pdf_obj *obj, int pagenum);
 
+/* Rect diff is not really a rect! Just returned as such for convenience. */
+fz_rect pdf_annot_rect_diff(fz_context *ctx, pdf_annot *annot);
+
 int pdf_set_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *text, int is_being_edited);
 
 fz_rect pdf_bound_page_imp(fz_context* ctx, fz_page* _page, fz_box_type box);

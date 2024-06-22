@@ -273,7 +273,7 @@ static int isws(int c)
 	return c == 32 || c == 9 || c == 10 || c == 13 || c == 12;
 }
 
-int htdoc_recognize_html_content(fz_context *ctx, fz_stream *stream, fz_archive *dir)
+int htdoc_recognize_html_content(fz_context *ctx, const fz_document_handler *handler, fz_stream *stream, fz_archive *dir)
 {
 	uint8_t buffer[4096];
 	size_t i, n, m;
@@ -440,7 +440,7 @@ static const fz_htdoc_format_t fz_htdoc_html5 =
 };
 
 static fz_document *
-htdoc_open_document(fz_context *ctx, fz_stream *file, fz_stream *accel, fz_archive *dir)
+htdoc_open_document(fz_context *ctx, const fz_document_handler *handler, fz_stream *file, fz_stream *accel, fz_archive *dir)
 {
 	return fz_htdoc_open_document_with_stream_and_dir(ctx, file, dir, &fz_htdoc_html5);
 }
@@ -478,7 +478,7 @@ static const fz_htdoc_format_t fz_htdoc_xhtml =
 };
 
 static fz_document *
-xhtdoc_open_document(fz_context *ctx, fz_stream *file, fz_stream *accel, fz_archive *dir)
+xhtdoc_open_document(fz_context *ctx, const fz_document_handler *handler, fz_stream *file, fz_stream *accel, fz_archive *dir)
 {
 	return fz_htdoc_open_document_with_stream_and_dir(ctx, file, dir, &fz_htdoc_xhtml);
 }
@@ -515,7 +515,7 @@ static const fz_htdoc_format_t fz_htdoc_fb2 =
 };
 
 static fz_document *
-fb2doc_open_document(fz_context *ctx, fz_stream *file, fz_stream *accel, fz_archive *dir)
+fb2doc_open_document(fz_context *ctx, const fz_document_handler *handler, fz_stream *file, fz_stream *accel, fz_archive *dir)
 {
 	return fz_htdoc_open_document_with_stream_and_dir(ctx, file, dir, &fz_htdoc_fb2);
 }
@@ -578,7 +578,7 @@ mobi_open_document_with_buffer(fz_context *ctx, fz_buffer *mobi)
 }
 
 static fz_document *
-mobi_open_document(fz_context *ctx, fz_stream *file, fz_stream *accel, fz_archive *dir)
+mobi_open_document(fz_context *ctx, const fz_document_handler *handler, fz_stream *file, fz_stream *accel, fz_archive *dir)
 {
 	return mobi_open_document_with_buffer(ctx, fz_read_all(ctx, file, 0));
 }

@@ -46,6 +46,10 @@
 
 #include "../fitz/tessocr.h"
 
+#ifdef HAVE_SMARTOFFICE
+#include "sodochandler.h"
+#endif
+
 #include <string.h>
 #include <limits.h>
 #include <stdlib.h>
@@ -3584,6 +3588,12 @@ int main(int argc, const char** argv)
 			if (!output_file_per_page)
 				file_level_headers(ctx, fz_optind < argc ? argv[fz_optind] : "-");
 			fz_register_document_handlers(ctx);
+#ifdef HAVE_SMARTOFFICE
+			{
+				void *cfg = so_doc_handler_enable(ctx, "en-gb");
+				so_doc_handler_configure(ctx, cfg, SO_DOC_HANDLER_MODE, SO_DOC_HANDLER_MODE_HTML);
+			}
+#endif
 
 			while (fz_optind < argc)
 			{
