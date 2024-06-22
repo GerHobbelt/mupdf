@@ -300,7 +300,7 @@ match_att_has_condition(fz_xml *node, const char *att, const char *needle, int c
 		if (case_sensitive)
 			ss = strstr(haystack, needle);
 		else
-			ss = fz_strcasestr(haystack, needle);
+			ss = fz_strcasestr((char *)haystack, needle);
 		if (ss)
 		{
 			n = strlen(needle);
