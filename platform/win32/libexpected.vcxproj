@@ -19,19 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF44898F}</ProjectGuid>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF337A8A}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -114,7 +114,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EXPECTED_LITE;EXPECTED_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPECTED;EXPECTED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -124,14 +124,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/expected-lite/include;../../thirdparty/owemdjee/expected-lite/test/lest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EXPECTED_LITE;EXPECTED_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPECTED;EXPECTED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EXPECTED_LITE;EXPECTED_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPECTED;EXPECTED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/expected-lite/include;../../thirdparty/owemdjee/expected-lite/test/lest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EXPECTED_LITE;EXPECTED_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPECTED;EXPECTED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -150,15 +150,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/expected-lite/include;../../thirdparty/owemdjee/expected-lite/test/lest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EXPECTED_LITE;EXPECTED_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPECTED;EXPECTED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EXPECTED_LITE;EXPECTED_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPECTED;EXPECTED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/expected-lite/include;../../thirdparty/owemdjee/expected-lite/test/lest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -169,7 +169,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EXPECTED_LITE;EXPECTED_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPECTED;EXPECTED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -179,14 +179,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/expected-lite/include;../../thirdparty/owemdjee/expected-lite/test/lest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EXPECTED_LITE;EXPECTED_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPECTED;EXPECTED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EXPECTED_LITE;EXPECTED_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPECTED;EXPECTED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/expected-lite/include;../../thirdparty/owemdjee/expected-lite/test/lest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -197,7 +197,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EXPECTED_LITE;EXPECTED_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPECTED;EXPECTED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -205,15 +205,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/expected-lite/include;../../thirdparty/owemdjee/expected-lite/test/lest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EXPECTED_LITE;EXPECTED_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPECTED;EXPECTED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EXPECTED_LITE;EXPECTED_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXPECTED;EXPECTED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/expected-lite/include;../../thirdparty/owemdjee/expected-lite/test/lest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -226,41 +226,24 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/expected-lite/example/01-basic.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/expected-lite/example/02-required.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/expected-lite/example/03-no-exceptions.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/expected-lite/test/expected-main.t.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/expected-lite/test/expected-noexcept.t.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/expected-lite/test/expected.t.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/expected-lite/test/odr.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/expected-lite/include/nonstd/expected.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/expected-lite/test/expected-main.t.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/expected-lite/test/lest/lest.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/expected-lite/test/nonstd/expected.tweak.hpp" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/CHANGES.txt" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/LICENSE.txt" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/Notes.md" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/README.md" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/appveyor.yml" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/cmake/expected-lite-config-version.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/cmake/expected-lite-config.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/conanfile.py" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/example/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/script/create-cov-rpt.py" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/script/create-vcpkg.py" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/script/update-version.py" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/script/upload-conan.py" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/test/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/test/t-noexcept.bat" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/test/t-odr.bat" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/test/t.bat" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/test/tc-cl.bat" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/test/tc-noexcept.bat" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/test/tc.bat" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/test/tg-all.bat" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/test/tg-noexcept.bat" />
-    <Text Include="../../thirdparty/owemdjee/expected-lite/test/tg.bat" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/assertions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/assignment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/bases.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/constexpr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/constructors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/emplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/extensions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/issues.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/noexcept.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/observers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/relops.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/swap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/expected/tests/test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/expected/include/tl/expected.hpp" />
+    <Text Include="../../thirdparty/owemdjee/expected/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/expected/README.md" />
+    <Text Include="../../thirdparty/owemdjee/expected/cmake/tl-expected-config.cmake.in" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

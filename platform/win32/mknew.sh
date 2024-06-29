@@ -1347,6 +1347,8 @@ quirc
 arrow
 glaze
 sqlite-parquet-vtable
+colorm
+expected
 
 EOT
 ) | grep -e "$FILTER"

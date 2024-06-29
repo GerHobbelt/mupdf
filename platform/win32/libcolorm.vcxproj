@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF138E96}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORM;COLORM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORM;COLORM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORM;COLORM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORM;COLORM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORM;COLORM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORM;COLORM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORM;COLORM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORM;COLORM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORM;COLORM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORM;COLORM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORM;COLORM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORM;COLORM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/example/colorstr/colorstr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/example/discolored/discolored.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/example/pastel/pastel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/matrix/matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/test/readme/pch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/test/readme/readme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/test/test/accessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/test/test/blending.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/test/test/color_strings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/test/test/colorscale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/test/test/conversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/test/test/manipulation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/test/test/operator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/test/test/pch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/colorm/test/test/test_module.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/colorm/colorm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colorm/test/readme/pch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colorm/test/test/pch.h" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__000000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__100713.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__15454e.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__17574a.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__18314a.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__19112a.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__1a1f3d.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__206740.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__337336.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__4e792f.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__6e7b31.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__907a3e.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__ae7956.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__c2d5f3.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__c3c2f2.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__c57a76.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__c9aeea.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__c9e5f0.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__d09bd7.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__d1809a.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__d48bbc.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__d7f1ef.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__ebf9f3.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/T__ffffff.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/V_invert_0a3264.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_backdrop_993366.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_color_2e6194.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_colorburn_000000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_colordodge_bf55ff.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_darken_333366.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_difference_663333.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_exclusion_8f7085.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_hardlight_3d2985.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_hue_2e6194.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_lighten_996699.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_luminosity_9e386b.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_multiply_1f143d.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_normal_336699.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_overlay_5c297a.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_saturation_993366.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_screen_ad85c2.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_softlight_742b72.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/W_source_336699.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__000000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__00737d.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__0d8a2d.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__110000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__3451a4.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__3b0000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__550000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__6b0000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__6f4db0.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__8f2d00.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__a17a00.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__a249a6.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__aa0000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__af5600.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__c88100.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__ce4785.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__e4a851.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__ed514e.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__f3d49b.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__ff0000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__ff3700.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__ff6e00.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__ffa500.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__ffc34b.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__ffe195.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/X__ffffe0.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_--0z00_808000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_--0z00_ffa500.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_--0z17_fbbe00.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_--0z25_dede00.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_--0z33_eaca00.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_--0z50_ccc900.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_--0z50_fff06a.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_--0z67_a1bc00.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_--0z75_ffd9a2.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_--0z83_68a400.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_--1z00_008000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_--1z00_ffc0cb.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_c-0_808000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_c-0_ffa500.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_c-1_dede00.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_c-1_fbbe00.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_c-2_eaca00.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_c-2_fff06a.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_c-3_ccc900.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_c-3_ffd9a2.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_c-4_a1bc00.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_c-4_ffc0cb.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_c-5_68a400.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_c-6_008000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_clip_ff6400.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_color1_ffa500.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_color2_808000.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_color3_dc9e00.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_color4_bc9500.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_color5_9d8b00.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_fit_ff9371.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_gray_bbbbbb.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_orange_ffa500.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_rgb1_bdb76b.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_rgb1_ff6400.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_rgb2_fff9ab.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Y_rgb_f5cd9b.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Z_brighten_bdebff.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Z_corrected_ffffff.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Z_darken_67aeca.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Z_decreasing_ffffff.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Z_desaturate_a7c9d7.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Z_flip_adcf99.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Z_increasing_ffffff.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Z_longer_ffffff.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Z_original_87ceeb.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Z_original_ffffff.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Z_rotate_a5c3f8.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Z_saturate_5cd2fe.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/Z_shorter_ffffff.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/screen/A_html.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/images/screen/B_html.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/test/test/html/img/336699.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/test/test/html/img/336699_66.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/test/test/html/img/3696_9369_mul.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/test/test/html/img/3696_9369_nor.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/test/test/html/img/669933.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/test/test/html/img/993366.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/test/test/html/img/993366_99.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/test/test/html/img/99CCFF.png" />
+    <Image Include="../../thirdparty/owemdjee/colorm/test/test/html/img/CC33CC.png" />
+    <Text Include="../../thirdparty/owemdjee/colorm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/colorm/UNLICENSE" />
+    <Text Include="../../thirdparty/owemdjee/colorm/example/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/colorm/example/colorstr/colorstr.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/colorm/example/discolored/discolored.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/colorm/example/pastel/A.html" />
+    <Text Include="../../thirdparty/owemdjee/colorm/example/pastel/B.html" />
+    <Text Include="../../thirdparty/owemdjee/colorm/example/pastel/pastel.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/colorm/images/images.py" />
+    <Text Include="../../thirdparty/owemdjee/colorm/matrix/matrix.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/colorm/test/readme/" />
+    <Text Include="../../thirdparty/owemdjee/colorm/test/readme/readme.vcxproj" />
+    <Text Include="../../thirdparty/owemdjee/colorm/test/readme/readme.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/colorm/test/test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/colorm/test/test/html/_blending.html" />
+    <Text Include="../../thirdparty/owemdjee/colorm/test/test/html/_conv.html" />
+    <Text Include="../../thirdparty/owemdjee/colorm/test/test/test.vcxproj.filters" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
