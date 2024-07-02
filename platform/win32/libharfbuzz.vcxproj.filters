@@ -51,31 +51,31 @@
     <Filter Include="Header Files\src\OT\Layout\GSUB">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\src\OT\glyf">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\src\OT\name">
+    <Filter Include="Header Files\src\OT\Var">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\src\graph">
+    <Filter Include="Header Files\src\OT\Var\VARC">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\src\OT\glyf">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\util">
+    <Filter Include="Header Files\src\OT\name">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\docs">
+    <Filter Include="Header Files\src\graph">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0018}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\m4">
+    <Filter Include="Header Files\util">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0019}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\src">
+    <Filter Include="Misc Files\docs">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0020}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\src\ms-use">
+    <Filter Include="Misc Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0021}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\util">
+    <Filter Include="Misc Files\src\ms-use">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0022}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files">
@@ -87,14 +87,26 @@
     <Filter Include="Source Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0025}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\graph">
+    <Filter Include="Source Files\src\OT">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\OT\Var">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0027}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\OT\Var\VARC">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0026}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\graph">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0029}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\util">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0027}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0030}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/harfbuzz/src/OT/Var/VARC/VARC.cc">
+      <Filter>Source Files\src\OT\Var\VARC</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/harfbuzz/src/failing-alloc.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -554,6 +566,12 @@
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Layout/types.hh">
       <Filter>Header Files\src\OT\Layout</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Var/VARC/VARC.hh">
+      <Filter>Header Files\src\OT\Var\VARC</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Var/VARC/coord-setter.hh">
+      <Filter>Header Files\src\OT\Var\VARC</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/CompositeGlyph.hh">
       <Filter>Header Files\src\OT\glyf</Filter>
     </ClInclude>
@@ -569,13 +587,7 @@
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/SubsetGlyph.hh">
       <Filter>Header Files\src\OT\glyf</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/VarCompositeGlyph.hh">
-      <Filter>Header Files\src\OT\glyf</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/composite-iter.hh">
-      <Filter>Header Files\src\OT\glyf</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/coord-setter.hh">
       <Filter>Header Files\src\OT\glyf</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/glyf-helpers.hh">
@@ -777,6 +789,9 @@
       <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-gdi.h">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-geometry.hh">
       <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-glib.h">
@@ -1055,6 +1070,9 @@
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var-mvar-table.hh">
       <Filter>Header Files\src</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var-varc-table.hh">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var.h">
       <Filter>Header Files\src</Filter>
     </ClInclude>
@@ -1286,16 +1304,10 @@
     <Text Include="../../thirdparty/harfbuzz/CONFIG.md">
       <Filter>Misc Files</Filter>
     </Text>
-    <Text Include="../../thirdparty/harfbuzz/Makefile.am">
-      <Filter>Misc Files</Filter>
-    </Text>
     <Text Include="../../thirdparty/harfbuzz/NEWS">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/harfbuzz/README.md">
-      <Filter>Misc Files</Filter>
-    </Text>
-    <Text Include="../../thirdparty/harfbuzz/README.mingw.md">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/harfbuzz/README.python.md">
@@ -1310,16 +1322,7 @@
     <Text Include="../../thirdparty/harfbuzz/TESTING.md">
       <Filter>Misc Files</Filter>
     </Text>
-    <Text Include="../../thirdparty/harfbuzz/autogen.sh">
-      <Filter>Misc Files</Filter>
-    </Text>
-    <Text Include="../../thirdparty/harfbuzz/configure.ac">
-      <Filter>Misc Files</Filter>
-    </Text>
     <Text Include="../../thirdparty/harfbuzz/docs/HarfBuzz.svg">
-      <Filter>Misc Files\docs</Filter>
-    </Text>
-    <Text Include="../../thirdparty/harfbuzz/docs/Makefile.am">
       <Filter>Misc Files\docs</Filter>
     </Text>
     <Text Include="../../thirdparty/harfbuzz/docs/features.dot">
@@ -1346,25 +1349,7 @@
     <Text Include="../../thirdparty/harfbuzz/docs/wasm-shaper.md">
       <Filter>Misc Files\docs</Filter>
     </Text>
-    <Text Include="../../thirdparty/harfbuzz/git.mk">
-      <Filter>Misc Files</Filter>
-    </Text>
-    <Text Include="../../thirdparty/harfbuzz/m4/ax_check_link_flag.m4">
-      <Filter>Misc Files\m4</Filter>
-    </Text>
-    <Text Include="../../thirdparty/harfbuzz/m4/ax_code_coverage.m4">
-      <Filter>Misc Files\m4</Filter>
-    </Text>
-    <Text Include="../../thirdparty/harfbuzz/m4/ax_cxx_compile_stdcxx.m4">
-      <Filter>Misc Files\m4</Filter>
-    </Text>
-    <Text Include="../../thirdparty/harfbuzz/m4/ax_pthread.m4">
-      <Filter>Misc Files\m4</Filter>
-    </Text>
     <Text Include="../../thirdparty/harfbuzz/meson_options.txt">
-      <Filter>Misc Files</Filter>
-    </Text>
-    <Text Include="../../thirdparty/harfbuzz/mingw-configure.sh">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/harfbuzz/replace-enum-strings.cmake">
@@ -1374,12 +1359,6 @@
       <Filter>Misc Files\src</Filter>
     </Text>
     <Text Include="../../thirdparty/harfbuzz/src/ArabicPUATraditional.txt">
-      <Filter>Misc Files\src</Filter>
-    </Text>
-    <Text Include="../../thirdparty/harfbuzz/src/Makefile.am">
-      <Filter>Misc Files\src</Filter>
-    </Text>
-    <Text Include="../../thirdparty/harfbuzz/src/Makefile.sources">
       <Filter>Misc Files\src</Filter>
     </Text>
     <Text Include="../../thirdparty/harfbuzz/src/addTable.py">
@@ -1522,12 +1501,6 @@
     </Text>
     <Text Include="../../thirdparty/harfbuzz/src/sample.py">
       <Filter>Misc Files\src</Filter>
-    </Text>
-    <Text Include="../../thirdparty/harfbuzz/util/Makefile.am">
-      <Filter>Misc Files\util</Filter>
-    </Text>
-    <Text Include="../../thirdparty/harfbuzz/util/Makefile.sources">
-      <Filter>Misc Files\util</Filter>
     </Text>
     <Xml Include="../../thirdparty/harfbuzz/docs/harfbuzz-docs.xml">
       <Filter>Misc Files\docs</Filter>

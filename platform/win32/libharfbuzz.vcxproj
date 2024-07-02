@@ -154,6 +154,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/harfbuzz/src/OT/Var/VARC/VARC.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/failing-alloc.c" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/graph/gsubgpos-context.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/harfbuzz-subset.cc" />
@@ -307,14 +308,14 @@
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Layout/GSUB/SubstLookup.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Layout/GSUB/SubstLookupSubTable.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Layout/types.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Var/VARC/VARC.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Var/VARC/coord-setter.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/CompositeGlyph.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/Glyph.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/GlyphHeader.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/SimpleGlyph.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/SubsetGlyph.hh" />
-    <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/VarCompositeGlyph.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/composite-iter.hh" />
-    <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/coord-setter.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/glyf-helpers.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/glyf.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/loca.hh" />
@@ -382,6 +383,7 @@
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ft-colr.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ft.h" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-gdi.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-geometry.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-glib.h" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-gobject-structs.h" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-gobject.h" />
@@ -474,6 +476,7 @@
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var-gvar-table.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var-hvar-table.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var-mvar-table.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var-varc-table.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var.h" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-vorg-table.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot.h" />
@@ -551,18 +554,13 @@
     <Text Include="../../thirdparty/harfbuzz/BUILD.md" />
     <Text Include="../../thirdparty/harfbuzz/CMakeLists.txt" />
     <Text Include="../../thirdparty/harfbuzz/CONFIG.md" />
-    <Text Include="../../thirdparty/harfbuzz/Makefile.am" />
     <Text Include="../../thirdparty/harfbuzz/NEWS" />
     <Text Include="../../thirdparty/harfbuzz/README.md" />
-    <Text Include="../../thirdparty/harfbuzz/README.mingw.md" />
     <Text Include="../../thirdparty/harfbuzz/README.python.md" />
     <Text Include="../../thirdparty/harfbuzz/RELEASING.md" />
     <Text Include="../../thirdparty/harfbuzz/SECURITY.md" />
     <Text Include="../../thirdparty/harfbuzz/TESTING.md" />
-    <Text Include="../../thirdparty/harfbuzz/autogen.sh" />
-    <Text Include="../../thirdparty/harfbuzz/configure.ac" />
     <Text Include="../../thirdparty/harfbuzz/docs/HarfBuzz.svg" />
-    <Text Include="../../thirdparty/harfbuzz/docs/Makefile.am" />
     <Text Include="../../thirdparty/harfbuzz/docs/features.dot" />
     <Text Include="../../thirdparty/harfbuzz/docs/harfbuzz-overrides.txt" />
     <Text Include="../../thirdparty/harfbuzz/docs/harfbuzz-sections.txt" />
@@ -571,18 +569,10 @@
     <Text Include="../../thirdparty/harfbuzz/docs/subset-preprocessing.md" />
     <Text Include="../../thirdparty/harfbuzz/docs/version.xml.in" />
     <Text Include="../../thirdparty/harfbuzz/docs/wasm-shaper.md" />
-    <Text Include="../../thirdparty/harfbuzz/git.mk" />
-    <Text Include="../../thirdparty/harfbuzz/m4/ax_check_link_flag.m4" />
-    <Text Include="../../thirdparty/harfbuzz/m4/ax_code_coverage.m4" />
-    <Text Include="../../thirdparty/harfbuzz/m4/ax_cxx_compile_stdcxx.m4" />
-    <Text Include="../../thirdparty/harfbuzz/m4/ax_pthread.m4" />
     <Text Include="../../thirdparty/harfbuzz/meson_options.txt" />
-    <Text Include="../../thirdparty/harfbuzz/mingw-configure.sh" />
     <Text Include="../../thirdparty/harfbuzz/replace-enum-strings.cmake" />
     <Text Include="../../thirdparty/harfbuzz/src/ArabicPUASimplified.txt" />
     <Text Include="../../thirdparty/harfbuzz/src/ArabicPUATraditional.txt" />
-    <Text Include="../../thirdparty/harfbuzz/src/Makefile.am" />
-    <Text Include="../../thirdparty/harfbuzz/src/Makefile.sources" />
     <Text Include="../../thirdparty/harfbuzz/src/addTable.py" />
     <Text Include="../../thirdparty/harfbuzz/src/check-c-linkage-decls.py" />
     <Text Include="../../thirdparty/harfbuzz/src/check-externs.py" />
@@ -630,8 +620,6 @@
     <Text Include="../../thirdparty/harfbuzz/src/ms-use/IndicSyllabicCategory-Additional.txt" />
     <Text Include="../../thirdparty/harfbuzz/src/relative_to.py" />
     <Text Include="../../thirdparty/harfbuzz/src/sample.py" />
-    <Text Include="../../thirdparty/harfbuzz/util/Makefile.am" />
-    <Text Include="../../thirdparty/harfbuzz/util/Makefile.sources" />
     <Xml Include="../../thirdparty/harfbuzz/docs/harfbuzz-docs.xml" />
     <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-buffers-language-script-and-direction.xml" />
     <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-clusters.xml" />
