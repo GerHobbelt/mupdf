@@ -1368,7 +1368,7 @@ svg_dev_begin_layer(fz_context *ctx, fz_device *dev, const char *name)
 	layer->prev = NULL;
 	sdev->current_layers = layer;
 
-	fz_append_printf(ctx, out, "<g id=\"layer_%d\" data-name=\"%s\">\n", dict->number, name);
+	fz_append_printf(ctx, out, "<g id=\"layer_%d\" data-name=\"%s\" inkscape:groupmode=\"layer\" inkscape:label=\"%s\">\n", dict->number, name, name);
 }
 
 static void
@@ -1413,6 +1413,7 @@ svg_dev_close_device(fz_context *ctx, fz_device *dev)
 	fz_write_string(ctx, out, "<svg");
 	fz_write_string(ctx, out, " xmlns=\"http://www.w3.org/2000/svg\"");
 	fz_write_string(ctx, out, " xmlns:xlink=\"http://www.w3.org/1999/xlink\"");
+	fz_write_string(ctx, out, " xmlns:inkscape=\"http://www.inkscape.org/namespaces/inkscape\"");
 	fz_write_string(ctx, out, " version=\"1.1\"");
 	fz_write_printf(ctx, out, " width=\"%g\" height=\"%g\" viewBox=\"0 0 %g %g\">\n",
 		sdev->page_width, sdev->page_height, sdev->page_width, sdev->page_height);
