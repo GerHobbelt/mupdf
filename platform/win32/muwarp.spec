@@ -8,5 +8,5 @@ ignore:
 
     /x11_image.c
     /x11_main.c
-	/warpapp.c
-	/win_warp.c
+	/pdfapp.c
+	/win_main.c

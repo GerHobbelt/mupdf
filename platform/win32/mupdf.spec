@@ -10,3 +10,5 @@ ignore:
     /x11_main.c
     /curl_stream.c
     /prog_stream.c
+	/warpapp.c
+	/win_warp.c

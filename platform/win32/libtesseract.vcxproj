@@ -431,7 +431,6 @@
     <ClCompile Include="../../thirdparty/tesseract/src/ccutil/elst.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/ccutil/elst2.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/ccutil/errcode.cpp" />
-    <ClCompile Include="../../thirdparty/tesseract/src/ccutil/filepath.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/ccutil/fopenutf8.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/ccutil/indexmapbidi.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/ccutil/mainblk.cpp" />
@@ -484,7 +483,6 @@
     <ClCompile Include="../../thirdparty/tesseract/src/dict/permdawg.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/dict/stopper.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/dict/trie.cpp" />
-    <ClCompile Include="../../thirdparty/tesseract/src/examples/basic-example.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/examples/get-page-gradient.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/examples/issue-845.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/examples/issue-ML-1bba6c.cpp" />
@@ -506,6 +504,7 @@
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/stridemap.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/tfnetwork.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/weightmatrix.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/opencl/openclwrapper.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/svpaint.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/tesseract.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/textord/alignedblob.cpp" />
@@ -625,19 +624,15 @@
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/capi_training_tools.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/debugheap.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/export.h" />
-    <ClInclude Include="../../thirdparty/tesseract/include/tesseract/filepath.h" />
-    <ClInclude Include="../../thirdparty/tesseract/include/tesseract/fileptr.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/fmt-support.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/ltrresultiterator.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/memcost_estimate.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/ocrclass.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/osdetect.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/pageiterator.h" />
-    <ClInclude Include="../../thirdparty/tesseract/include/tesseract/params.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/publictypes.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/renderer.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/resultiterator.h" />
-    <ClInclude Include="../../thirdparty/tesseract/include/tesseract/tprintf.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/unichar.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/api/pdf_ttf.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/arch/dotproduct.h" />
@@ -712,7 +707,6 @@
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/fopenutf8.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/genericheap.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/genericvector.h" />
-    <ClInclude Include="../../thirdparty/tesseract/src/ccutil/global_params.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/helpers.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/host.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/indexmapbidi.h" />
@@ -721,8 +715,6 @@
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/lsterr.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/object_cache.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/params.h" />
-    <ClInclude Include="../../thirdparty/tesseract/src/ccutil/pathutils.h" />
-    <ClInclude Include="../../thirdparty/tesseract/src/ccutil/porting.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/qrsequence.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/scanutils.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/serialis.h" />
@@ -730,6 +722,7 @@
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/tessdatamanager.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/tesstypes.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/tesseract/src/ccutil/tprintf.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/unicharcompress.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/unicharmap.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccutil/unicharset.h" />
@@ -791,6 +784,8 @@
     <ClInclude Include="../../thirdparty/tesseract/src/lstm/tfnetwork.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/lstm/tfnetwork.pb.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/lstm/weightmatrix.h" />
+    <ClInclude Include="../../thirdparty/tesseract/src/opencl/oclkernels.h" />
+    <ClInclude Include="../../thirdparty/tesseract/src/opencl/openclwrapper.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/textord/alignedblob.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/textord/baselinedetect.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/textord/bbgrid.h" />
