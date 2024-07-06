@@ -1085,12 +1085,23 @@ err:
 		fz_free(ctx, wpath);
 		return NULL;
 	}
-	if (!GetFullPathNameW(wpath, wlen - 4, wbuf + 4, NULL))
-	{
-		fz_copy_ephemeral_system_error(ctx, GetLastError(), NULL);
-		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-		goto err;
+	for (;;) {
+		size_t reqd_len = GetFullPathNameW(wpath, wlen - 4, wbuf + 4, NULL);
+
+		if (!reqd_len)
+		{
+			fz_copy_ephemeral_system_error(ctx, GetLastError(), NULL);
+			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+			goto err;
+		}
+		if (reqd_len < wlen - 4) {
+			// buffer was large enough; path has been rewritten in wbuf[4]+
+			break;
+		}
+		wlen = reqd_len + 7;
+		wbuf = fz_realloc(ctx, wbuf, wlen * sizeof(wbuf[0]));
 	}
+
 	const wchar_t* fp = wbuf + 4;
 	// Is full path an UNC path already? If not, make it so:
 	if (!fz_is_UNC_path(wbuf + 4))
