@@ -1361,6 +1361,7 @@ grep -v '#' <<EOT
 
 bbe
 bebop
+bin2cpp
 binary_bakery
 calibre
 capnproto

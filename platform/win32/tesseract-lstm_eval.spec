@@ -11,4 +11,5 @@ also-ignore:
 	/src/
 	sw.cpp
 	/nsis/
+	/tessdata/html-styling/
 	

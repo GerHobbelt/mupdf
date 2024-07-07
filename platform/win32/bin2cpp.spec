@@ -1,0 +1,6 @@
+
+ignore:
+	/samples/
+	test/
+	client/
+	

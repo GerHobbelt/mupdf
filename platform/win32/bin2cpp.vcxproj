@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-2190785A9321}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include;../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src;../../thirdparty/owemdjee/bin2cpp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BIN2CPP;BIN2CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include;../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src;../../thirdparty/owemdjee/bin2cpp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BIN2CPP;BIN2CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include;../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src;../../thirdparty/owemdjee/bin2cpp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BIN2CPP;BIN2CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include;../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src;../../thirdparty/owemdjee/bin2cpp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BIN2CPP;BIN2CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/ArrayGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/BaseGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/SegmentGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/StringGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/Win32ResourceGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/crc32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/code_cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/console.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/environment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/environment_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/errors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/filesystem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/filesystem_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/process.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/process_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/propertiesfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/strings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/testing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/testing_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/timing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/unicode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/user.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/user_utf8.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/ArrayGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/BaseGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/IGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/SegmentGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/StringGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/Win32ResourceGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/crc32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/LICENSE.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/cli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/code_cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/console.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/environment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/environment_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/filesystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/filesystem_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/generics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/process.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/process_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/propertiesfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/testing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/testing_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/timing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/undef_windows_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/unicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/user.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include/rapidassist/user_utf8.h" />
+    <Image Include="../../thirdparty/owemdjee/bin2cpp/docs/Flat Color Icons by Icons8.png" />
+    <Image Include="../../thirdparty/owemdjee/bin2cpp/docs/bin2cpp-splashscreen.png" />
+    <Image Include="../../thirdparty/owemdjee/bin2cpp/docs/bin2cpp-v2.0.0-sample.png" />
+    <Image Include="../../thirdparty/owemdjee/bin2cpp/docs/bin2cpp-v2.4.0-sample.png" />
+    <Image Include="../../thirdparty/owemdjee/bin2cpp/docs/bin2cpp.icon.128x128.png" />
+    <Image Include="../../thirdparty/owemdjee/bin2cpp/docs/bin2cpp.icon.256x256.png" />
+    <Image Include="../../thirdparty/owemdjee/bin2cpp/docs/bin2cpp.icon.380x380.png" />
+    <Image Include="../../thirdparty/owemdjee/bin2cpp/docs/bin2cpp.icon.64x64.png" />
+    <Image Include="../../thirdparty/owemdjee/bin2cpp/docs/demo-extraction-sample.png" />
+    <Image Include="../../thirdparty/owemdjee/bin2cpp/docs/icon.ico" />
+    <Image Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/docs/RapidAssist-splashscreen.jpg" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/CHANGES" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/appveyor/UploadJUnitFiles.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/appveyor/UploadJUnitFiles.ps1" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/appveyor/emulate_appveyor.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/appveyor/install_bin2cpp.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/appveyor/install_googletest.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/appveyor/install_rapidassist.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/appveyor/test_script.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/github/install_bin2cpp.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/github/install_bin2cpp.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/github/install_googletest.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/github/install_googletest.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/github/install_rapidassist.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/github/install_rapidassist.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/github/maketestbadge.py" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/github/test_script.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/github/test_script.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/github/tests_not_available.badge.json" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/linux/build_all_debug.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/linux/build_all_release.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/linux/install_bin2cpp.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/linux/install_googletest.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/linux/install_rapidassist.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/linux/test_script.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/travis/emulate_travis.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/travis/install_bin2cpp.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/travis/install_googletest.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/travis/install_rapidassist.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/travis/test_script.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/windows/build_all_debug.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/windows/build_all_release.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/windows/install_bin2cpp.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/windows/install_googletest.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/windows/install_rapidassist.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/ci/windows/test_script.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/cmake/FindNSIS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/cmake/FindWIX.cmake" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/cmake/GetOsReleaseInfo.cmake" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/cmake/MakeCplusplusHeader.cmake" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/cmake/bin2cpp-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/cmake/bin2cpp-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/docs/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/docs/MacOSXBundleInfo.plist.in" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/docs/bin2cpp.icon.128x128.icns" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/docs/bin2cpp.icon.256x256.icns" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/docs/icon.xcf" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/docs/icon_v2.xcf" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/docs/splashscreen.xcf" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/docs/wix_license_template.rtf" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/licenses/Flat Color Icons LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/licenses/Google C++ Testing Framework LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/licenses/RapidAssist LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/bin2cpp.samples.txt" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/CHANGES" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/appveyor/UploadJUnitFiles.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/appveyor/UploadJUnitFiles.ps1" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/appveyor/build_client.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/appveyor/build_library.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/appveyor/emulate_appveyor.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/appveyor/install_googletest.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/appveyor/install_sysinternals.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/appveyor/install_sysinternals.ps1" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/appveyor/test_script.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/github/build_client.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/github/build_client.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/github/build_library.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/github/build_library.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/github/install_googletest.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/github/install_googletest.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/github/install_sysinternals.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/github/install_sysinternals.ps1" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/github/maketestbadge.py" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/github/test_script.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/github/test_script.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/github/tests_not_available.badge.json" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/linux/build_all_debug.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/linux/build_all_release.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/linux/build_client.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/linux/build_library.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/linux/install_googletest.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/linux/test_script.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/travis/build_client.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/travis/build_library.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/travis/emulate_travis.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/travis/install_googletest.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/travis/test_script.sh" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/windows/build_all_debug.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/windows/build_all_release.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/windows/build_client.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/windows/build_library.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/windows/install_googletest.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/ci/windows/test_script.bat" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/cmake/rapidassist-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/cmake/rapidassist-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/docs/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/docs/RapidAssist.xcf" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/version.h.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
