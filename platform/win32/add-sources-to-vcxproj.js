@@ -142,7 +142,7 @@ if (fs.existsSync(specPath)) {
   if (/^ignore:/m.test(rawSpec)) {
     if (DEBUG > 0) console.log("SPEC include [ignore] section...");
     spec.ignores = rawSpec.replace(/^.*\nignore:(.*?)\n(?:[^\s].*)?$/s, '$1')
-    // .replace(/\\/g, '/')   -- some backslashes are quitee relevant in here as some lines will specify REGEXES, so we'll have to apply this path conversion later!
+    // .replace(/\\/g, '/')   -- some backslashes are quite relevant in here as some lines will specify REGEXES, so we'll have to apply this path conversion later!
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line.trim().length > 0);
@@ -150,7 +150,7 @@ if (fs.existsSync(specPath)) {
   if (/^also-ignore:/m.test(rawSpec)) {
     if (DEBUG > 0) console.log("SPEC include [also-ignore] section...");
     let a = rawSpec.replace(/^.*\nalso-ignore:(.*?)\n(?:[^\s].*)?$/s, '$1')
-    // .replace(/\\/g, '/')   -- some backslashes are quitee relevant in here as some lines will specify REGEXES, so we'll have to apply this path conversion later!
+    // .replace(/\\/g, '/')   -- some backslashes are quite relevant in here as some lines will specify REGEXES, so we'll have to apply this path conversion later!
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line.trim().length > 0);
