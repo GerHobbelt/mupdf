@@ -3,7 +3,8 @@
 
 using namespace system_override;
 
-
+// Mandatory or MSVC will optimize this entire endeavour to Kingdom Come and we won't have our debugger breakpoints at start and end...
+#pragma optimize("", off)
 
 // these two are defined at the very bottom of this source file as for them to work we must undo some override stuff first,and all bets are off after we've done *that*!
 
@@ -30,7 +31,7 @@ static void BreakIntoDebugger(void);
 // For the 'easily patched' feature to work, both strings should have the same length: you only want to
 // flip a single byte in the hex editor when you want to switch this behaviour.
 #define DO_INVOKE_DEBUGGER_MARKER_STRING             "marker:do.invoke.debugger"
-#if !defined(NDEBUG)
+#if !defined(NDEBUG) || 1  // always on
 #define ACTIVE_INVOKE_DEBUGGER_MARKER_STRING         DO_INVOKE_DEBUGGER_MARKER_STRING
 #else
 #define ACTIVE_INVOKE_DEBUGGER_MARKER_STRING         "marker:No.invoke.debugger"
@@ -246,7 +247,8 @@ void BreakIntoDebugger(void)
 {
 	if (IsDebuggerPresent())
 	{
-#if defined(_CrtDbgBreak)
+// MSVC only has a reasonable (= active) define for _CrtDbgBreak in debug build mode...
+#if defined(_CrtDbgBreak) && defined(_DEBUG)
 		_CrtDbgBreak();
 #else
 		DebugBreak();
@@ -258,7 +260,8 @@ void BreakIntoDebugger(void)
 
 void BreakIntoDebugger(void)
 {
-#if defined(_CrtDbgBreak)
+// MSVC only has a reasonable (= active) define for _CrtDbgBreak in debug build mode...
+#if defined(_CrtDbgBreak) && defined(_DEBUG)
 	_CrtDbgBreak();
 #endif
 	__debugbreak();
