@@ -89,10 +89,6 @@ void updateHeapDbgPurpose(long requestNumber)
 		info->start_reqnum = requestNumber;
 	// keep updating the end marker until we POP the slot:
 	info->end_reqnum = requestNumber;
-	if (requestNumber == 1338112 || requestNumber == 1338108 || requestNumber == 531321 || requestNumber == 531199) {
-		int r = 1;
-		r++;
-	}
 }
 
 // _CRT_ALLOC_HOOK

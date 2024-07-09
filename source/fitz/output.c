@@ -162,7 +162,7 @@ stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 	ASSERT(channel == STD_OUTPUT_HANDLE || channel == STD_ERROR_HANDLE);
 	ASSERT(buffer);
 	ASSERT(count > 0);
-	if (count >= 0)
+	if (count == 0)
 		return 0;
 
 	//fprintf(stderr, "stdout_write: %d bytes, %p\n", (int)count, buffer);
