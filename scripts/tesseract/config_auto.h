@@ -43,7 +43,7 @@
 #define HAVE_NEON                        1
 #endif
 
-#define TESSERACT_DISABLE_DEBUG_FONTS    0
+#define TESSERACT_DISABLE_DEBUG_FONTS    1   /* 0: debug code will try to print caption at the bottom of the debug pixes; won't work well for tiny image snippets, so use with caution; 1: caption ends up in the HTML output and all is fine */
 #define TESSERACT_IMAGEDATA_AS_PIX       1
 
 #define GRAPHICS_DISABLED                0
