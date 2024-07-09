@@ -1,8 +1,6 @@
 // define stubs for the possibly missing APIs:
 
-#ifdef HAVE_TESSERACT_CONFIG_H
-#  include "config_auto.h" // DISABLED_LEGACY_ENGINE
-#endif
+#include <tesseract/preparation.h>    // compiler config, etc.
 
 #include "mupdf/fitz.h"
 
