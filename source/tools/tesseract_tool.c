@@ -61,6 +61,10 @@ int main(int argc, const char** argv)
 
 	fz_drop_context(ctx);
 
+	fprintf(stderr, "\n\n -= Tesseract: The Very End =-\n\n");
+	fflush(stdout);
+	fflush(stderr);
+
 	return rv;
 }
 
@@ -75,6 +79,11 @@ int wmain(int argc, const wchar_t *wargv[])
 		return EXIT_FAILURE;
 	int ret = main(argc, argv);
 	fz_free_argv(ctx, argc, argv);
+
+	fprintf(stderr, "\n\n -= Tesseract: The Extreme End =-\n\n");
+	fflush(stdout);
+	fflush(stderr);
+
 	return ret;
 }
 

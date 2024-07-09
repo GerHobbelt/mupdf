@@ -89,6 +89,10 @@ void updateHeapDbgPurpose(long requestNumber)
 		info->start_reqnum = requestNumber;
 	// keep updating the end marker until we POP the slot:
 	info->end_reqnum = requestNumber;
+	if (requestNumber == 1338112 || requestNumber == 1338108 || requestNumber == 531321 || requestNumber == 531199) {
+		int r = 1;
+		r++;
+	}
 }
 
 // _CRT_ALLOC_HOOK
@@ -227,7 +231,7 @@ static int EnableMemLeakChecking(void)
 
 	//_CrtSetBreakAlloc(744);  /* Break at memalloc{744}, or 'watch' _crtBreakAlloc */
 	 
-	const int desired_flags = (_CRTDBG_ALLOC_MEM_DF | _CRTDBG_DELAY_FREE_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	const int desired_flags = (_CRTDBG_ALLOC_MEM_DF | _CRTDBG_DELAY_FREE_MEM_DF | _CRTDBG_LEAK_CHECK_DF | /* _CRTDBG_CHECK_ALWAYS_DF | */ /* _CRTDBG_CHECK_EVERY_16_DF | */ 0 );
 	//const int desired_flags = (_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	//const int desired_flags = (_CRTDBG_ALLOC_MEM_DF);
 	int flags = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
