@@ -83,7 +83,7 @@ struct pdf_processor
 	void (*op_gs_ca)(fz_context *ctx, pdf_processor *proc, float alpha);
 	void (*op_gs_CA)(fz_context *ctx, pdf_processor *proc, float alpha);
 	void (*op_gs_TK)(fz_context *ctx, pdf_processor *proc, int tk);
-	void (*op_gs_SMask)(fz_context *ctx, pdf_processor *proc, pdf_obj *smask, float *bc, int luminosity, pdf_obj *tr);
+	void (*op_gs_SMask)(fz_context *ctx, pdf_processor *proc, pdf_obj *smask, fz_colorspace *smask_cs, float *bc, int luminosity, pdf_obj *tr);
 	void (*op_gs_end)(fz_context *ctx, pdf_processor *proc);
 
 	/* special graphics state */
