@@ -71,33 +71,44 @@ int pdf_xobject_transparency(fz_context *ctx, pdf_obj *xobj)
 fz_colorspace *
 pdf_xobject_colorspace(fz_context *ctx, pdf_obj *xobj)
 {
-	pdf_obj *group = pdf_dict_get(ctx, xobj, PDF_NAME(Group));
-	if (pdf_is_dict(ctx, group))
+	fz_colorspace *colorspace = NULL;
+
+	fz_var(colorspace);
+
+retry:
+	fz_start_throw_on_repair(ctx);
+	fz_try(ctx)
 	{
-		pdf_obj *cs = pdf_dict_get(ctx, group, PDF_NAME(CS));
-		if (pdf_is_name(ctx, cs) || pdf_is_array(ctx, cs) || pdf_is_dict(ctx, cs))
-		{
-			fz_colorspace *colorspace = NULL;
-			fz_try(ctx)
-				colorspace = pdf_load_colorspace(ctx, cs);
-			fz_catch(ctx)
-			{
-				fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
-				fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
-				fz_report_error(ctx);
-				fz_warn(ctx, "Ignoring XObject blending colorspace.");
-			}
-			assert(colorspace != NULL);
-			if (!fz_is_valid_blend_colorspace(ctx, colorspace))
-			{
-				fz_warn(ctx, "Ignoring invalid XObject blending colorspace: %s.", fz_colorspace_name(ctx, colorspace));
-				fz_drop_colorspace(ctx, colorspace);
-				return NULL;
-			}
-			return colorspace;
-		}
+		pdf_obj *cs;
+		pdf_obj *group = pdf_dict_get(ctx, xobj, PDF_NAME(Group));
+		if (!pdf_is_dict(ctx, group))
+			break;
+		cs = pdf_dict_get(ctx, group, PDF_NAME(CS));
+		if (!pdf_is_name(ctx, cs) && !pdf_is_array(ctx, cs) && !pdf_is_dict(ctx, cs))
+			break;
+
+		colorspace = pdf_load_colorspace(ctx, cs);
 	}
-	return NULL;
+	fz_always(ctx)
+		fz_end_throw_on_repair(ctx);
+	fz_catch(ctx)
+	{
+		if (fz_caught(ctx) == FZ_ERROR_REPAIRED)
+			goto retry;
+		fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+		fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
+		fz_report_error(ctx);
+		fz_warn(ctx, "Ignoring XObject blending colorspace.");
+	}
+
+	if (colorspace && !fz_is_valid_blend_colorspace(ctx, colorspace))
+	{
+		fz_warn(ctx, "Ignoring invalid XObject blending colorspace: %s.", fz_colorspace_name(ctx, colorspace));
+		fz_drop_colorspace(ctx, colorspace);
+		return NULL;
+	}
+
+	return colorspace;
 }
 
 pdf_obj *
