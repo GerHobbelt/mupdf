@@ -2504,6 +2504,7 @@ static void pdf_run_gs_SMask(fz_context *ctx, pdf_processor *proc, pdf_obj *smas
 
 	if (smask)
 	{
+		int cs_n = fz_colorspace_n(ctx, smask_cs);
 		gstate->softmask_ctm = gstate->ctm;
 		gstate->softmask = pdf_keep_obj(ctx, smask);
 		gstate->softmask_resources = pdf_keep_obj(ctx, pr->rstack->resources);
@@ -2512,7 +2513,7 @@ static void pdf_run_gs_SMask(fz_context *ctx, pdf_processor *proc, pdf_obj *smas
 			pdf_drop_obj(ctx, gstate->softmask_tr);
 			gstate->softmask_tr = pdf_keep_obj(ctx, tr);
 		}
-		for (i = 0; i < fz_colorspace_n(ctx, smask_cs); ++i)
+		for (i = 0; i < cs_n; ++i)
 			gstate->softmask_bc[i] = bc[i];
 		gstate->softmask_cs = fz_keep_colorspace(ctx, smask_cs);
 		gstate->luminosity = luminosity;
