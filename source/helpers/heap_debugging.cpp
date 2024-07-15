@@ -89,8 +89,8 @@ void updateHeapDbgPurpose(long requestNumber)
 		info->start_reqnum = requestNumber;
 	// keep updating the end marker until we POP the slot:
 	info->end_reqnum = requestNumber;
-#if 0
-	if (requestNumber == 522013) {
+#if 01
+	if (requestNumber == 522045) {
 		int r = 1;
 		r++;
 	}
