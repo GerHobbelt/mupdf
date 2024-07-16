@@ -149,7 +149,7 @@ typedef struct
 } fz_stext_device;
 
 const char *fz_stext_options_usage =
-	"Text output options:\n"
+	"Structured text output options:\n"
 	"  inhibit-spaces:       don't add spaces between gaps in the text\n"
 	"  preserve-images:      keep images in output\n"
 	"  reference-images[=filepath_template]\n"

@@ -335,6 +335,14 @@ static int output_file_per_page = 0;
 static const char *format = NULL;
 static const suffix_t *output_format = NULL;
 
+static const char *format_opts = NULL;
+static fz_stext_options stext_opts = { 0 };
+static fz_pcl_options pcl_opts = { 0 };
+static fz_pclm_options pclm_opts = { 0 };
+static fz_pdfocr_options pdfocr_opts = { 0 };
+static fz_pwg_options pwg_opts = { 0 };
+static pdf_write_options pdf_opts = { 0 };
+
 static int rotation = -1;			// actual ~ calculated values
 static float resolution = -1;
 
@@ -500,6 +508,7 @@ static int usage(void)
 		"        (ocr'd text is disabled in this build)\n"
 #endif
 		"        bitmap-wrapped-as-pdf: pclm, ocr.pdf\n"
+		"  -n -  output format specific options:\n"
 		"\n"
 		"  -q    be quiet (don't print progress messages)\n"
 		"  -v    verbose ~ not quiet (repeat to increase the chattiness of the application)\n"
@@ -577,7 +586,7 @@ static int usage(void)
 		"  -J -  set PNG output compression level: 0 (none), 1 (fast)..9 (best)\n"
 		"  -i    ignore errors\n"
 		"  -L    low memory mode (avoid caching, clear objects after each page)\n"
-		"  -n    enable making hyperlinks (html output only)\n"
+		"  -C    enable making hyperlinks (html output only)\n"
 		"  -N    disable ICC workflow (\"N\"o color management)\n"
 		"  -O -  Control spot/overprint rendering\n"
 #if FZ_ENABLE_SPOT_RENDERING
@@ -616,14 +625,23 @@ static int usage(void)
 		"    -z -   Hide individual layer\n"
 		"    -Z -   Show individual layer\n"
 		"\n"
-		"  pages  comma separated list of page numbers and ranges\n",
+		"  pages  comma separated list of page numbers and ranges\n"
+		"\n",
 #if FZ_ENABLE_PDF
 		annot_type_list
 #else
 		"..."
 #endif
 		);
-
+#if FZ_ENABLE_PDF
+	fputs(fz_pdf_write_options_usage, stderr);
+	fputs(fz_pdfocr_write_options_usage, stderr);
+#endif
+	fputs(fz_pcl_write_options_usage, stderr);
+	fputs(fz_pclm_write_options_usage, stderr);
+	fputs(fz_pwg_write_options_usage, stderr);
+	fputs(fz_stext_options_usage, stderr);
+	fputs(fz_svg_write_options_usage, stderr);
 	return EXIT_FAILURE;
 }
 
@@ -684,26 +702,15 @@ file_level_headers(fz_context *ctx, const char *filename)
 
 	else if (output_format->format == OUT_PCLM)
 	{
-		fz_pclm_options opts = { 0 };
-		fz_parse_pclm_options(ctx, &opts, "compression=flate");
-		bander = fz_new_pclm_band_writer(ctx, out, &opts);
+		bander = fz_new_pclm_band_writer(ctx, out, &pclm_opts);
 	}
 #if FZ_ENABLE_OCR_OUTPUT
 	else if (output_format->format == OUT_OCR_PDF)
 	{
-		char options[300];
-		fz_pdfocr_options opts = { 0 };
-		fz_snprintf(options, sizeof(options), "compression=flate,ocr-language=%s", ocr_language);
-		if (ocr_datadir)
-		{
-			fz_strlcat(options, ",ocr-datadir=", sizeof (options));
-			fz_strlcat(options, ocr_datadir, sizeof (options));
-		}
-		fz_parse_pdfocr_options(ctx, &opts, options);
-		opts.skew_correct = skew_correct;
-		opts.skew_border = skew_border;
-		opts.skew_angle = skew_angle;
-		bander = fz_new_pdfocr_band_writer(ctx, out, &opts);
+		pdfocr_opts.skew_correct = skew_correct;
+		pdfocr_opts.skew_border = skew_border;
+		pdfocr_opts.skew_angle = skew_angle;
+		bander = fz_new_pdfocr_band_writer(ctx, out, &pdfocr_opts);
 	}
 #endif
 }
@@ -1363,9 +1370,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			else if (output_format->format == OUT_PCL)
 			{
 				if (out_cs == CS_MONO)
-					bander = fz_new_mono_pcl_band_writer(ctx, out, NULL);
+						bander = fz_new_mono_pcl_band_writer(ctx, out, &pcl_opts);
 				else
-					bander = fz_new_color_pcl_band_writer(ctx, out, NULL);
+						bander = fz_new_color_pcl_band_writer(ctx, out, &pcl_opts);
 			}
 			else if (output_format->format == OUT_PCLM || output_format->format == OUT_OCR_PDF)
 			{
@@ -2765,6 +2772,14 @@ int main(int argc, const char** argv)
 	format = NULL;
 	output_format = NULL;
 
+	format_opts = NULL;
+	memset(&stext_opts, 0, sizeof(stext_opts));
+	memset(&pcl_opts, 0, sizeof(pcl_opts));
+	memset(&pclm_opts, 0, sizeof(pclm_opts));
+	memset(&pdfocr_opts, 0, sizeof(pdfocr_opts));
+	memset(&pwg_opts, 0, sizeof(pwg_opts));
+	memset(&pdf_opts, 0, sizeof(pdf_opts));
+
 	user_specified_rotation = -1;
 	user_specified_resolution = 72;
 	rotation = -1;
@@ -2894,7 +2909,7 @@ int main(int argc, const char** argv)
 	atexit(mu_drop_context);
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qQp:o:F:R:r:w:h:fB:c:e:gG:Is:A:DiW:H:S:T:t:d:U:LvVPl:y:Yz:Z:NO:am:x:Xhj:J:Kb:k:")) != -1)
+	while ((c = fz_getopt(argc, argv, "qQp:o:F:R:r:w:h:fB:c:e:gG:Is:A:DiW:H:S:T:t:d:U:LvVPl:y:Yz:Z:NO:am:x:Xhj:J:Kb:k:n:C")) != -1)
 	{
 		switch (c)
 		{
@@ -2907,6 +2922,7 @@ int main(int argc, const char** argv)
 
 		case 'o': output = fz_optarg; break;
 		case 'F': format = fz_optarg; break;
+		case 'n': format_opts = fz_optarg; break;
 
 		case 'R': user_specified_rotation = read_rotation(fz_optarg); break;
 		case 'r': user_specified_resolution = fz_atof(fz_optarg); res_specified = 1; break;
@@ -2993,7 +3009,7 @@ int main(int argc, const char** argv)
 		case 'D': uselist = 0; break;
 		case 'l': min_line_width = fz_atof(fz_optarg); break;
 		case 'i': ignore_errors = 1; break;
-		case 'n': make_hyperlinks = 1; break;
+		case 'C': make_hyperlinks = 1; break;
 		case 'N': no_icc = 1; break;
 
 		case 'T':
@@ -3319,6 +3335,76 @@ int main(int argc, const char** argv)
 			{
 				fz_error(ctx, "Unable to make hyperlinks if non-default resolution is specified\n");
 				make_hyperlinks = 0;
+			}
+		}
+
+		if (format_opts)
+		{
+			if (output_format->format == OUT_PDF)
+			{
+				pdf_parse_write_options(ctx, &pdf_opts, format_opts);
+			}
+			else if (output_format->format == OUT_STEXT_XML || output_format->format == OUT_OCR_STEXT_XML
+				|| output_format->format == OUT_STEXT_JSON || output_format->format == OUT_OCR_STEXT_JSON
+				|| output_format->format == OUT_HTML || output_format->format == OUT_OCR_HTML
+				|| output_format->format == OUT_XHTML || output_format->format == OUT_OCR_XHTML)
+			{
+				fz_parse_stext_options(ctx, &stext_opts, format_opts);
+			}
+			else if (output_format->format == OUT_PCL)
+			{
+				fz_parse_pcl_options(ctx, &pcl_opts, format_opts);
+			}
+			else if (output_format->format == OUT_PCLM)
+			{
+				fz_parse_pclm_options(ctx, &pclm_opts, format_opts);
+			}
+			else if (output_format->format == OUT_OCR_PDF)
+			{
+				fz_parse_pdfocr_options(ctx, &pdfocr_opts, format_opts);
+			}
+			else if (output_format->format == OUT_PWG)
+			{
+				fz_parse_pwg_options(ctx, &pwg_opts, format_opts);
+			}
+		}
+		else
+		{
+			if (output_format->format == OUT_PDF)
+			{
+				pdf_opts = pdf_default_write_options;
+			}
+			else if (output_format->format == OUT_STEXT_XML || output_format->format == OUT_OCR_STEXT_XML
+				|| output_format->format == OUT_STEXT_JSON || output_format->format == OUT_OCR_STEXT_JSON
+				|| output_format->format == OUT_HTML || output_format->format == OUT_OCR_HTML
+				|| output_format->format == OUT_XHTML || output_format->format == OUT_OCR_XHTML)
+			{
+				stext_opts.flags = (output_format->format == OUT_HTML ||
+							output_format->format == OUT_XHTML ||
+							output_format->format == OUT_OCR_HTML ||
+							output_format->format == OUT_OCR_XHTML
+							) ? FZ_STEXT_PRESERVE_IMAGES : 0;
+				stext_opts.flags |= FZ_STEXT_MEDIABOX_CLIP;
+				if (output_format->format == OUT_STEXT_JSON || output_format->format == OUT_OCR_STEXT_JSON)
+					stext_opts.flags |= FZ_STEXT_PRESERVE_SPANS;
+			}
+			else if (output_format->format == OUT_PCLM)
+			{
+				fz_parse_pclm_options(ctx, &pclm_opts, "compression=flate");
+			}
+			else if (output_format->format == OUT_OCR_PDF)
+			{
+				char options[300];
+				fz_snprintf(options, sizeof(options), "compression=flate,ocr-language=%s", ocr_language);
+				if (ocr_datadir)
+				{
+					fz_strlcat(options, ",ocr-datadir=", sizeof (options));
+					fz_strlcat(options, ocr_datadir, sizeof (options));
+				}
+				fz_parse_pdfocr_options(ctx, &pdfocr_opts, options);
+			}
+			else if (output_format->format == OUT_PWG)
+			{
 			}
 		}
 
@@ -3767,7 +3853,7 @@ int main(int argc, const char** argv)
 			fz_normalize_path(ctx, file_path, sizeof file_path, file_path);
 			fz_sanitize_path(ctx, file_path, sizeof file_path, file_path);
 
-			pdf_save_document(ctx, pdfout, file_path, NULL);
+			pdf_save_document(ctx, pdfout, file_path, &pdf_opts);
 			pdf_drop_document(ctx, pdfout);
 			pdfout = NULL;
 		}

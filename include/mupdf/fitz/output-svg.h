@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -38,6 +38,14 @@ enum {
 	FZ_SVG_TEXT_AS_PATH = 0,
 	FZ_SVG_TEXT_AS_TEXT = 1,
 };
+
+typedef struct
+{
+	int text_format;
+	int reuse_images;
+} fz_svg_options;
+
+fz_svg_options *fz_parse_svg_options(fz_context *ctx, fz_svg_options *opts, const char *options);
 
 /**
 	Create a device that outputs (single page) SVG files to

@@ -585,6 +585,11 @@ typedef struct
 	char page_size_name[64];
 } fz_pwg_options;
 
+/*
+	Parse PWG options.
+*/
+fz_pwg_options *fz_parse_pwg_options(fz_context *ctx, fz_pwg_options *opts, const char *args);
+
 /**
 	Save a pixmap as a PWG.
 */
