@@ -851,8 +851,16 @@ def function_wrapper(
 
     # Copy any comment into .h file before declaration.
     if cursor.raw_comment:
-        out_h.write( f'{cursor.raw_comment}')
-        if not cursor.raw_comment.endswith( '\n'):
+        # On Windows, carriage returns can appear in cursor.raw_comment on
+        # due to line ending inconsistencies in our generated extra.cpp and
+        # extra.h, and can cause spurious differences in our generated C++
+        # code, which in turn causes unnecessary rebuilds.
+        #
+        # It would probably better to fix line endings in our generation of
+        # extra.*.
+        raw_comment = cursor.raw_comment.replace('\r', '')
+        out_h.write(raw_comment)
+        if not raw_comment.endswith( '\n'):
             out_h.write( '\n')
 
     # Write declaration and definition.
@@ -3226,7 +3234,8 @@ def function_wrapper_class_aware(
     # Copy any comment (indented) into class definition above method
     # declaration.
     if fn_cursor.raw_comment:
-        for line in fn_cursor.raw_comment.split( '\n'):
+        raw_comment = fn_cursor.raw_comment.replace('\r', '')
+        for line in raw_comment.split( '\n'):
             out_h.write( f'    {line}\n')
 
     if duplicate_type:
@@ -3328,9 +3337,13 @@ def class_custom_method(
         return_space = ''
         comment = 'Custom destructor.'
         is_destructor = True
+    elif extramethod.name_args.startswith('operator '):
+        name_args = extramethod.name_args
+        comment = 'Custom operator.'
+        return_space = ''
     else:
         # Constructor.
-        assert extramethod.name_args.startswith( '('), f'bad constructor/destructor in classname={classname}'
+        assert extramethod.name_args.startswith( '('), f'bad constructor/destructor in {classname=}: {extramethod.name_args=}'
         name_args = f'{classname}{extramethod.name_args}'
         return_space = ''
         comment = 'Custom constructor.'
@@ -4241,8 +4254,9 @@ def class_wrapper(
     else:
         out_h.write( f'/** Wrapper class for struct `{struct_name}`. Not copyable or assignable. */\n')
     if struct_cursor.raw_comment:
-        out_h.write( f'{struct_cursor.raw_comment}')
-        if not struct_cursor.raw_comment.endswith( '\n'):
+        raw_comment = struct_cursor.raw_comment.replace('\r', '')
+        out_h.write(raw_comment)
+        if not raw_comment.endswith( '\n'):
             out_h.write( '\n')
     out_h.write( f'struct {classname}\n{{')
 
@@ -4531,7 +4545,7 @@ def class_wrapper(
                 )
 
     # If class has '{structname}* m_internal;', provide access to m_iternal as
-    # an integer, for use by python etc.
+    # an integer, for use by python etc, and provide `operator bool()`.
     if not extras.pod:
         class_custom_method(
                 tu,
@@ -4552,6 +4566,35 @@ def class_wrapper(
                 out_cpp,
                 refcheck_if,
                 )
+        class_custom_method(
+                tu,
+                register_fn_use,
+                struct_cursor,
+                classname,
+                classes.ExtraMethod(
+                    '',
+                    'operator bool()',
+                    f'''
+                    {{
+                        {refcheck_if}
+                        if (s_trace)
+                        {{
+                            std::cerr << __FILE__ << ":" << __LINE__ << ":"
+                                    << " {classname}::operator bool() called,"
+                                    << " m_internal=" << m_internal << "."
+                                    << "\\n";
+                        }}
+                        #endif
+                        return m_internal ? true : false;
+                    }}
+                    ''',
+                    '/** Return true iff `m_internal` is not null. */',
+                    ),
+                out_h,
+                out_cpp,
+                refcheck_if,
+                )
+
     # Class members.
     #
     out_h.write( '\n')
