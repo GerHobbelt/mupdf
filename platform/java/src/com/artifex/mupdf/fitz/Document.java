@@ -245,5 +245,7 @@ public class Document
 		return false;
 	}
 
+	public native PDFDocument asPDF();
+
 	public native Document toReflowedDocument(String options);
 }
