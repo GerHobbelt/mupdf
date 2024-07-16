@@ -1005,7 +1005,6 @@ static struct tool_spec {
 
 #if defined(MUTOOL_EX)
 	{ {.fa = xml_gio_bread_example_main }, "xml_gio_bread_example", "libxml gio_bread_example demo/tool" },
-	{ {.fa = xml_nanoftp_main }, "xml_nanoftp", "libxml nanoftp demo/tool" },
 	{ {.fa = xml_nanohttp_main }, "xml_nanohttp", "libxml nanohttp demo/tool" },
 	{ {.fa = xml_runsuite_tests_main }, "xml_runsuite_tests", "libxml runsuite_tests demo/tool" },
 	{ {.fa = xml_runtest_main }, "xml_runtest", "libxml runtest demo/tool" },
@@ -1028,9 +1027,6 @@ static struct tool_spec {
 	{ {.fa = xml_xmlcatalog_main }, "xmlcatalog", "libxml xmlcatalog demo/tool" },
 	{ {.fa = xml_xmllint_main }, "xmllint", "libxml xmllint demo/tool" },
 	{ {.fa = xml_test_xmlreader_main }, "xml_test_xmlreader", "libxml test_xmlreader demo/tool" },
-
-	{ {.f = xml_testthreads_main }, "xml_testthreads", "libxml testthreads demo/tool" },
-	// { {.f = xml_trionan_main }, "xml_trionan", "libxml trionan demo/tool" },
 	{ {.f = xml_testchar_main }, "xml_testchar", "libxml testchar demo/tool" },
 #endif
 
