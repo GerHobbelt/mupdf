@@ -6898,7 +6898,11 @@ static void ffi_PDFDocument_addEmbeddedFile(js_State *J)
 	fz_always(ctx)
 		fz_drop_buffer(ctx, contents);
 	fz_catch(ctx)
+	{
+		pdf_drop_obj(ctx, ind);
 		rethrow(J);
+	}
+
 	ffi_pushobj(J, ind);
 }
 
@@ -9994,7 +9998,7 @@ static void ffi_PDFAnnotation_getFilespec(js_State *J)
 	fz_catch(ctx)
 		rethrow(J);
 
-	ffi_pushobj(J, fs);
+	ffi_pushobj(J, pdf_keep_obj(ctx, fs));
 }
 
 static void ffi_PDFAnnotation_setFilespec(js_State *J)
@@ -10633,7 +10637,7 @@ static void ffi_PDFWidget_previewSignature(js_State *J)
 		fz_rect rect = pdf_annot_rect(ctx, widget);
 		fz_text_language lang = pdf_annot_language(ctx, widget);
 
-		if (pdf_dict_get(ctx, pdf_annot_obj(ctx, widget), PDF_NAME(FT)) != PDF_NAME(Sig))
+		if (pdf_dict_get_inheritable(ctx, pdf_annot_obj(ctx, widget), PDF_NAME(FT)) != PDF_NAME(Sig))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "annotation is not a signature widget");
 
 		pixmap = pdf_preview_signature_as_pixmap(ctx,
