@@ -372,7 +372,7 @@ pdf_process_extgstate(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, pdf_ob
 					luminosity = 0;
 
 				tr = pdf_dict_get(ctx, obj, PDF_NAME(TR));
-				if (!pdf_is_null(ctx, tr) && !pdf_name_eq(ctx, tr, PDF_NAME(Identity)))
+				if (!pdf_is_null(ctx, tr) && pdf_name_eq(ctx, tr, PDF_NAME(Identity)))
 					tr = NULL;
 
 				proc->op_gs_SMask(ctx, proc, xobj, softmask_cs, softmask_bc, luminosity, tr);
