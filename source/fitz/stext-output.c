@@ -877,7 +877,7 @@ fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *page,
 /* JSON dump */
 
 static void
-as_json(fz_context *ctx, fz_stext_block *block, fz_output *out, float scale)
+as_json(fz_context *ctx, fz_stext_block *block, fz_output *out)
 {
 	fz_stext_line *line;
 	fz_stext_char *ch;
@@ -894,10 +894,10 @@ as_json(fz_context *ctx, fz_stext_block *block, fz_output *out, float scale)
 		case FZ_STEXT_BLOCK_TEXT:
 			fz_write_printf(ctx, out, "{%q:%q,", "type", "text");
 			fz_write_printf(ctx, out, "%q:{", "bbox");
-			fz_write_printf(ctx, out, "%q:%g,", "x", block->bbox.x0 * scale);
-			fz_write_printf(ctx, out, "%q:%g,", "y", block->bbox.y0 * scale);
-			fz_write_printf(ctx, out, "%q:%g,", "w", (block->bbox.x1 - block->bbox.x0) * scale);
-			fz_write_printf(ctx, out, "%q:%g},", "h", (block->bbox.y1 - block->bbox.y0) * scale);
+			fz_write_printf(ctx, out, "%q:%g,", "x", block->bbox.x0);
+			fz_write_printf(ctx, out, "%q:%g,", "y", block->bbox.y0);
+			fz_write_printf(ctx, out, "%q:%g,", "w", (block->bbox.x1 - block->bbox.x0));
+			fz_write_printf(ctx, out, "%q:%g},", "h", (block->bbox.y1 - block->bbox.y0));
 			fz_write_printf(ctx, out, "%q:[", "lines");
 
 			for (line = block->u.t.first_line; line; line = line->next)
@@ -906,10 +906,10 @@ as_json(fz_context *ctx, fz_stext_block *block, fz_output *out, float scale)
 					fz_write_string(ctx, out, ",");
 				fz_write_printf(ctx, out, "{%q:%d,", "wmode", line->wmode);
 				fz_write_printf(ctx, out, "%q:{", "bbox");
-				fz_write_printf(ctx, out, "%q:%g,", "x", line->bbox.x0 * scale);
-				fz_write_printf(ctx, out, "%q:%g,", "y", line->bbox.y0 * scale);
-				fz_write_printf(ctx, out, "%q:%g,", "w", (line->bbox.x1 - line->bbox.x0) * scale);
-				fz_write_printf(ctx, out, "%q:%g},", "h", (line->bbox.y1 - line->bbox.y0) * scale);
+				fz_write_printf(ctx, out, "%q:%g,", "x", line->bbox.x0);
+				fz_write_printf(ctx, out, "%q:%g,", "y", line->bbox.y0);
+				fz_write_printf(ctx, out, "%q:%g,", "w", (line->bbox.x1 - line->bbox.x0));
+				fz_write_printf(ctx, out, "%q:%g},", "h", (line->bbox.y1 - line->bbox.y0));
 
 				/* Since we force preserve-spans, the first char has the style for the entire line. */
 				if (line->first_char)
@@ -927,9 +927,9 @@ as_json(fz_context *ctx, fz_stext_block *block, fz_output *out, float scale)
 					fz_write_printf(ctx, out, "%q:%q,", "family", font_family);
 					fz_write_printf(ctx, out, "%q:%q,", "weight", font_weight);
 					fz_write_printf(ctx, out, "%q:%q,", "style", font_style);
-					fz_write_printf(ctx, out, "%q:%g},", "size", line->first_char->size * scale);
-					fz_write_printf(ctx, out, "%q:%g,", "x", line->first_char->origin.x * scale);
-					fz_write_printf(ctx, out, "%q:%g,", "y", line->first_char->origin.y * scale);
+					fz_write_printf(ctx, out, "%q:%g},", "size", line->first_char->size);
+					fz_write_printf(ctx, out, "%q:%g,", "x", line->first_char->origin.x);
+					fz_write_printf(ctx, out, "%q:%g,", "y", line->first_char->origin.y);
 				}
 
 				fz_write_printf(ctx, out, "%q:\"", "text");
@@ -950,10 +950,10 @@ as_json(fz_context *ctx, fz_stext_block *block, fz_output *out, float scale)
 		case FZ_STEXT_BLOCK_IMAGE:
 			fz_write_printf(ctx, out, "{%q:%q,", "type", "image");
 			fz_write_printf(ctx, out, "%q:{", "bbox");
-			fz_write_printf(ctx, out, "%q:%g,", "x", block->bbox.x0 * scale);
-			fz_write_printf(ctx, out, "%q:%g,", "y", block->bbox.y0 * scale);
-			fz_write_printf(ctx, out, "%q:%g,", "w", (block->bbox.x1 - block->bbox.x0) * scale);
-			fz_write_printf(ctx, out, "%q:%g}}", "h", (block->bbox.y1 - block->bbox.y0) * scale);
+			fz_write_printf(ctx, out, "%q:%g,", "x", block->bbox.x0);
+			fz_write_printf(ctx, out, "%q:%g,", "y", block->bbox.y0);
+			fz_write_printf(ctx, out, "%q:%g,", "w", (block->bbox.x1 - block->bbox.x0));
+			fz_write_printf(ctx, out, "%q:%g}}", "h", (block->bbox.y1 - block->bbox.y0));
 			break;
 
 		case FZ_STEXT_BLOCK_STRUCT:
@@ -964,7 +964,7 @@ as_json(fz_context *ctx, fz_stext_block *block, fz_output *out, float scale)
 				fz_write_printf(ctx, out, ",%q:%q", "raw", block->u.s.down->raw);
 				fz_write_printf(ctx, out, ",%q:%q", "std", fz_structure_to_string(block->u.s.down->standard));
 				fz_write_printf(ctx, out, ",%q:[", "contents");
-				as_json(ctx, block->u.s.down->first_block, out, scale);
+				as_json(ctx, block->u.s.down->first_block, out);
 				fz_write_printf(ctx, out, "]");
 			}
 			fz_write_printf(ctx, out, "}");
@@ -976,17 +976,16 @@ as_json(fz_context *ctx, fz_stext_block *block, fz_output *out, float scale)
 }
 
 void
-fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page, float scale, int id, fz_matrix ctm)
+fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm)
 {
 	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
 	float w = mediabox.x1 - mediabox.x0;
 	float h = mediabox.y1 - mediabox.y0;
 
-	fz_write_printf(ctx, out, "{%q:%d, %q:%g, %q:%g, %q:%g, %q:{%q:%g, %q:%g, %q:%g, %q:%g}, %q:[",
+	fz_write_printf(ctx, out, "{%q:%d, %q:%g, %q:%g, %q:{%q:%g, %q:%g, %q:%g, %q:%g}, %q:[",
 		"page_id", id,
 		"width", w,
 		"height", h,
-		"scale", scale,
 		"mediabox",
 		"x0", page->mediabox.x0,
 		"y0", page->mediabox.y0,
@@ -994,7 +993,7 @@ fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page
 		"y1", page->mediabox.y1,
 		"blocks");
 
-	as_json(ctx, page->first_block, out, scale);
+	as_json(ctx, page->first_block, out);
 
 	fz_write_string(ctx, out, "]}");
 }
@@ -1195,7 +1194,7 @@ text_end_page(fz_context *ctx, fz_document_writer *wri_, fz_device *dev)
 		case FZ_FORMAT_STEXT_JSON:
 			if (wri->number > 1)
 				fz_write_string(ctx, wri->out, ",");
-			fz_print_stext_page_as_json(ctx, wri->out, wri->page, 1, wri->number, fz_identity);
+			fz_print_stext_page_as_json(ctx, wri->out, wri->page, wri->number, fz_identity);
 			break;
 		}
 	}

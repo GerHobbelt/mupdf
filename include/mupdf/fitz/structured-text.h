@@ -467,7 +467,7 @@ void fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *
 /**
 	Output structured text to a file in JSON format.
 */
-void fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page, float scale, int id, fz_matrix ctm);
+void fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm);
 
 /**
 	Output structured text to a file in plain-text UTF-8 format.
