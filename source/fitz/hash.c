@@ -175,7 +175,7 @@ fz_resize_hash(fz_context *ctx, fz_hash_table *table, int newsize)
 
 	if (break_atomicity)
 		fz_unlock(ctx, table->lock);
-	newents = fz_malloc_no_throw(ctx, newsize * sizeof (fz_hash_entry));
+	newents = Memento_label(fz_malloc_no_throw(ctx, newsize * sizeof (fz_hash_entry)), "hash_entries");
 	if (break_atomicity)
 		fz_lock(ctx, table->lock);
 	if (table->lock >= 0)
