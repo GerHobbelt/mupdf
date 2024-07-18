@@ -16,7 +16,7 @@
 #include "qiqqa_monolithic_examples.h"
 
 
-#pragma message(FZPM_TODO "implement this tool")
+//#pragma message(FZPM_TODO "implement this tool")
 
 
 static inline void memclr(void* ptr, size_t size)

@@ -32,7 +32,7 @@
 #endif
 
 
-#pragma message(FZPM_TODO "implement this tool")
+//#pragma message(FZPM_TODO "implement this tool")
 
 
 using namespace std;
