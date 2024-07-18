@@ -492,7 +492,6 @@ static int usage(void)
 	fz_info(ctx,
 		"usage: mudraw [options] file [pages]\n"
 		"  -p -  password\n"
-		"\n"
 		"  -o -  output file name (%%d or ### for page number, '-' for stdout)\n"
 		"  -F -  output format (default inferred from output file name)\n"
 		"        raster: png, pgm, ppm, pnm, pam, pbm, pkm, pwg, pcl, psd, ps, muraw, pdf, j2k\n"
@@ -508,8 +507,7 @@ static int usage(void)
 		"        (ocr'd text is disabled in this build)\n"
 #endif
 		"        bitmap-wrapped-as-pdf: pclm, ocr.pdf\n"
-		"  -n -  output format specific options:\n"
-		"\n"
+		"  -n -  output format specific options\n"
 		"  -q    be quiet (don't print progress messages)\n"
 		"  -v    verbose ~ not quiet (repeat to increase the chattiness of the application)\n"
 		"  -s -  show extra information:\n"
@@ -546,7 +544,6 @@ static int usage(void)
 #else
 		"  -P    parallel interpretation/rendering (disabled in this non-threading build)\n"
 #endif
-		"\n"
 		"  -W -  page width for EPUB layout\n"
 		"  -H -  page height for EPUB layout\n"
 		"  -S -  font size for EPUB layout\n"
@@ -574,6 +571,7 @@ static int usage(void)
 		"  -A g/t/s  number of bits of antialiasing (0 to 8) (graphics, text)\n"
 		"            + subpix preset: 0 = default, 1 = reduced\n"
 		"  -A g/t/x/y  ditto, with x/y subpix positioning power-of-2 level (0..8)\n"
+		"\n"
 		"  -l -  minimum stroked line width (in pixels)\n"
 		"  -K    do not draw text\n"
 		"  -KK   only draw text\n"
@@ -598,6 +596,7 @@ static int usage(void)
 		"     1 = Overprint simulation (Disabled in this build)\n"
 		"     2 = Full spot rendering (Disabled in this build)\n"
 #endif
+			"\n"
 #if FZ_ENABLE_OCR
 		"  -t -  Specify language/script for OCR (default: eng)\n"
 		"  -d -  Specify path for OCR files (default: rely on TESSDATA_PREFIX environment variable)\n"
@@ -621,9 +620,9 @@ static int usage(void)
 		"\n"
 		"  -v    display the version of this application and terminate\n"
 		"\n"
-		"    -Y     List individual layers to stderr\n"
-		"    -z -   Hide individual layer\n"
-		"    -Z -   Show individual layer\n"
+		"  -Y    List individual layers to stderr\n"
+		"  -z -  Hide individual layer\n"
+		"  -Z -  Show individual layer\n"
 		"\n"
 		"  pages  comma separated list of page numbers and ranges\n"
 		"\n",
