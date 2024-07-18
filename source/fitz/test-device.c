@@ -147,7 +147,7 @@ prepare_vertex(fz_context *ctx, void *arg_, fz_vertex *v, const float *color)
 	struct shadearg *arg = arg_;
 	fz_test_device *dev = arg->dev;
 	fz_shade *shade = arg->shade;
-	if (!shade->use_function)
+	if (shade->function_stride == 0)
 		fz_test_color(ctx, dev, shade->colorspace, color, arg->color_params);
 }
 
@@ -172,11 +172,12 @@ fz_test_fill_shade(fz_context *ctx, fz_device *dev_, fz_shade *shade, fz_matrix 
 		}
 		else
 		{
-			if (shade->use_function)
+			int stride = shade->function_stride;
+			if (stride)
 			{
 				int i;
 				for (i = 0; i < 256; i++)
-					fz_test_color(ctx, dev, shade->colorspace, shade->function[i], color_params);
+					fz_test_color(ctx, dev, shade->colorspace, &shade->function[i*stride], color_params);
 			}
 			else
 			{

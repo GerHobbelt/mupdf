@@ -134,11 +134,9 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 		fz_throw(ctx, FZ_ERROR_LIBRARY, "Tesseract initialisation failed");
 	}
 
+	// Initialize tesseract-ocr with English, without specifying tessdata path
 	if (language == NULL || language[0] == 0)
 		language = "eng";  // "eng+rus+chi_sim+chi_tra+deu+fra+por+jpn+hin+urd+vie+osd"
-
-	// Initialize tesseract-ocr with English, without specifying tessdata path
-	std::vector<std::string> nil;
 
 	if (api->InitOem(datadir,
 		language,
@@ -221,7 +219,7 @@ typedef struct {
 } progress_arg;
 
 static bool
-do_cancel(void *arg, int dummy)
+do_cancel(tesseract::ETEXT_DESC *monitor, int word_count)
 {
 	return true;
 }
@@ -229,7 +227,9 @@ do_cancel(void *arg, int dummy)
 static bool
 progress_callback(tesseract::ETEXT_DESC *monitor, int l, int r, int t, int b)
 {
-	progress_arg *details = (progress_arg *)monitor->cancel_this;
+	// TODO: rewrite the monitor for the new interface
+
+	progress_arg *details = nullptr; // (progress_arg *)monitor->cancel_this;
 	int cancel;
 
 	if (!details->progress)
@@ -276,13 +276,13 @@ void ocr_recognise(fz_context *ctx,
 	image = ocr_set_image(ctx, api, pix);
 
 	monitor.cancel = nullptr;
-	monitor.cancel_this = &details;
+	//monitor.cancel_this = &details;
 	details.ctx = ctx;
 	details.arg = arg;
 	details.progress = progress;
-	monitor.progress_callback2 = progress_callback;
+	//monitor.progress_callback2 = progress_callback;
 
-	code = api->Recognize(&monitor);
+	code = api->Recognize();
 	if (code < 0)
 	{
 		ocr_clear_image(ctx, image);
@@ -333,7 +333,7 @@ void ocr_recognise(fz_context *ctx,
 							&pointsize,
 							&font_id);
 #if defined(_DEBUG)
-			fz_write_printf(ctx, fz_stddbg(ctx), "OCR: %d %d %d %d:", word_bbox[0], word_bbox[1], word_bbox[2], word_bbox[3]);
+			fz_write_printf(ctx, fz_stddbg(ctx), "OCR: word_box: %d %d %d %d:", word_bbox[0], word_bbox[1], word_bbox[2], word_bbox[3]);
 #endif			
 			do
 			{
@@ -344,10 +344,14 @@ void ocr_recognise(fz_context *ctx,
 					res_it->BoundingBox(tesseract::RIL_SYMBOL,
 							char_bbox, char_bbox+1,
 							char_bbox+2, char_bbox+3);
-#if defined(_DEBUG)
-					fz_write_printf(ctx, fz_stddbg(ctx), " %c(%02X)", (graph[0] >= '\t' ? graph[0] : '.'), graph[0]);
-#endif
 					fz_chartorune_unsafe(&unicode, graph);
+#if defined(_DEBUG)
+					if (unicode == graph[0]) {
+						fz_write_printf(ctx, fz_stddbg(ctx), " %c(%02X)", (graph[0] >= '\t' ? graph[0] : '.'), graph[0]);
+					} else {
+						fz_write_printf(ctx, fz_stddbg(ctx), " %c(U%04X)", (unicode >= '\t' ? unicode : '.'), unicode);
+					}
+#endif
 					callback(ctx, arg, unicode, font_name, line_bbox, word_bbox, char_bbox, pointsize);
 				}
 				delete[] graph;

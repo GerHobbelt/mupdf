@@ -682,7 +682,7 @@ pdf_structure_to_xml(fz_context *ctx, pdf_document *doc, const char *tagfile, in
 			for (i = 0; i < n; i++)
 			{
 				page = pdf_load_page(ctx, doc, i);
-				fz_run_page(ctx, (fz_page *)page, dev, fz_identity, NULL);
+				fz_run_page(ctx, (fz_page *)page, dev, fz_identity);
 				pdf_drop_page(ctx, page);
 				page = NULL;
 			}

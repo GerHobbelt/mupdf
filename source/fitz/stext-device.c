@@ -285,7 +285,7 @@ add_block_to_page(fz_context *ctx, fz_stext_page *page)
 	block->prev = page->last_block;
 	if (page->last_struct)
 	{
-		if (page->last_struct->first_block)
+		if (page->last_struct->last_block)
 		{
 			block->prev = page->last_struct->last_block;
 			block->prev->next = block;
@@ -1692,8 +1692,8 @@ fz_stext_fill_path(fz_context *ctx, fz_device *dev, const fz_path *path, int eve
 	fz_stext_stroke_path(ctx, dev, path, NULL, ctm, cs, color, alpha, cp);
 }
 
-static fz_stext_struct *
-new_stext_struct(fz_context *ctx, fz_pool *pool, fz_structure standard, const char *raw, fz_stext_struct *up)
+static void
+new_stext_struct(fz_context *ctx, fz_stext_page *page, fz_stext_block *block, fz_structure standard, const char *raw)
 {
 	fz_stext_struct *str;
 	size_t z;
@@ -1702,14 +1702,15 @@ new_stext_struct(fz_context *ctx, fz_pool *pool, fz_structure standard, const ch
 		raw = "";
 	z = strlen(raw);
 
-	str = fz_pool_alloc(ctx, pool, sizeof(*str) + z);
+	str = fz_pool_alloc(ctx, page->pool, sizeof(*str) + z);
 	str->first_block = NULL;
 	str->last_block = NULL;
 	str->standard = standard;
-	str->up = up;
+	str->parent = page->last_struct;
+	str->up = block;
 	memcpy(str->raw, raw, z+1);
 
-	return str;
+	block->u.s.down = str;
 }
 
 static void
@@ -1778,22 +1779,17 @@ fz_stext_begin_structure(fz_context *ctx, fz_device *dev, fz_structure standard,
 	{
 		/* We want to move down into the le block. Does it have a struct
 		 * attached yet? */
-		if (le->u.s.down)
+		if (le->u.s.down == NULL)
 		{
-			/* Yes! Easy case */
-			if (le->u.s.down->standard != standard ||
+			/* No. We need to create a new struct node. */
+			new_stext_struct(ctx, page, le, standard, raw);
+		}
+		else if (le->u.s.down->standard != standard ||
 				(raw == NULL && le->u.s.down->raw[0] != 0) ||
 				(raw != NULL && strcmp(raw, le->u.s.down->raw) != 0))
-			{
-				fz_warn(ctx, "Mismatched structure type!");
-			}
-			return;
-		}
-		else
 		{
-			/* We need to create a new struct node. */
-			le->u.s.down = new_stext_struct(ctx, page->pool, standard, raw, page->last_struct);
-			le->u.s.down->owner = le;
+			/* Yes, but it doesn't match the one we expect! */
+			fz_warn(ctx, "Mismatched structure type!");
 		}
 		page->last_struct = le->u.s.down;
 		page->last_block = le->u.s.down->last_block;
@@ -1810,8 +1806,7 @@ fz_stext_begin_structure(fz_context *ctx, fz_device *dev, fz_structure standard,
 	newblock->u.s.index = idx;
 	newblock->u.s.down = NULL;
 	/* If this throws, we leak newblock but it's within the pool, so it doesn't matter. */
-	newblock->u.s.down = new_stext_struct(ctx, page->pool, standard, raw, page->last_struct);
-	newblock->u.s.down->owner = newblock;
+	new_stext_struct(ctx, page, newblock, standard, raw);
 
 	/* So now we just need to link it in somewhere. */
 	if (gt)
@@ -1858,7 +1853,7 @@ fz_stext_end_structure(fz_context *ctx, fz_device *dev)
 		return;
 	}
 
-	page->last_struct = str->up;
+	page->last_struct = str->parent;
 	if (page->last_struct == NULL)
 	{
 		page->last_block = page->first_block;

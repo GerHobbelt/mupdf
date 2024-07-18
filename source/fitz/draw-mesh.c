@@ -203,7 +203,7 @@ prepare_mesh_vertex(fz_context *ctx, void *arg, fz_vertex *v, const float *input
 	float *output = v->c;
 	int i;
 
-	if (shade->use_function)
+	if (shade->function_stride)
 	{
 		float f = input[0];
 		if (shade->type >= 4 && shade->type <= 7)
@@ -288,6 +288,7 @@ fz_paint_shade(fz_context *ctx, fz_shade *shade, fz_colorspace *colorspace, fz_m
 	fz_shade_color_cache *cache = NULL;
 	int recache = 0;
 	int recache2 = 0;
+	int stride = shade->function_stride;
 
 	fz_var(temp);
 	fz_var(conv);
@@ -309,7 +310,7 @@ fz_paint_shade(fz_context *ctx, fz_shade *shade, fz_colorspace *colorspace, fz_m
 	{
 		local_ctm = fz_concat(shade->matrix, ctm);
 
-		if (shade->use_function)
+		if (stride)
 		{
 			/* We need to use alpha = 1 here, because the shade might not fill the bbox. */
 			temp = fz_new_pixmap_with_bbox(ctx, fz_device_gray(ctx), bbox, NULL, 1);
@@ -355,7 +356,7 @@ fz_paint_shade(fz_context *ctx, fz_shade *shade, fz_colorspace *colorspace, fz_m
 
 		fz_process_shade(ctx, shade, local_ctm, fz_rect_from_irect(bbox), prepare_mesh_vertex, &do_paint_tri, &ptd);
 
-		if (shade->use_function)
+		if (stride)
 		{
 			/* If the shade is defined in a deviceN (or separation,
 			 * which is the same internally to MuPDF) space, then
@@ -388,7 +389,7 @@ fz_paint_shade(fz_context *ctx, fz_shade *shade, fz_colorspace *colorspace, fz_m
 					{
 						int v = *s++;
 						int a = *s++;
-						const float *f = shade->function[v];
+						const float *f = &shade->function[v*stride];
 						for (k = 0; k < n; k++)
 							*d++ = fz_clampi(255 * f[k], 0, 255);
 						*d++ = a;
@@ -443,12 +444,12 @@ fz_paint_shade(fz_context *ctx, fz_shade *shade, fz_colorspace *colorspace, fz_m
 					}
 					for (i = 0; i < 256; i++)
 					{
-						cc.convert(ctx, &cc, shade->function[i], color);
+						cc.convert(ctx, &cc, &shade->function[i*stride], color);
 						for (k = 0; k < n; k++)
 							clut[i][k] = color[k] * 255;
 						for (; k < m; k++)
 							clut[i][k] = 0;
-						clut[i][k] = shade->function[i][cn] * 255;
+						clut[i][k] = shade->function[i*stride + cn] * 255;
 					}
 				}
 				else
@@ -457,7 +458,7 @@ fz_paint_shade(fz_context *ctx, fz_shade *shade, fz_colorspace *colorspace, fz_m
 					{
 						for (k = 0; k < m; k++)
 							clut[i][k] = 0;
-						clut[i][k] = shade->function[i][cn] * 255;
+						clut[i][k] = shade->function[i*stride + cn] * 255;
 					}
 				}
 
@@ -498,7 +499,7 @@ fz_paint_shade(fz_context *ctx, fz_shade *shade, fz_colorspace *colorspace, fz_m
 		}
 		else
 			fz_fin_cached_color_converter(ctx, &ptd.cc);
-		if (shade->use_function)
+		if (stride)
 		{
 			assert((recache2 != 0 && cache != NULL) || recache2 == 0);
 			if (recache2)

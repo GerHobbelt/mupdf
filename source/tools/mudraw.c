@@ -1150,7 +1150,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				int first = (inc_page_counter() == 0);
 				if (!first)
 					fz_write_string(ctx, out, ",");
-				fz_print_stext_page_as_json(ctx, out, text, pagenum, ctm);
+				fz_print_stext_page_as_json(ctx, out, text, 1, pagenum, ctm);
 			}
 			else if (output_format->format == OUT_HTML || output_format->format == OUT_OCR_HTML)
 			{

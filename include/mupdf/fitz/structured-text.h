@@ -287,8 +287,9 @@ typedef struct
 	fz_stext_block *first_block;
 
 	/* The following fields are only of use to the routines that
-	 * build an fz_stext_page, and their meaning is subject to
-	 * change. */
+	 * build an fz_stext_page. They change during page construction
+	 * and their meaning is subject to change. These values should
+	 * not be used by anything outside of the stext device. */
 	fz_stext_block *last_block;
 	fz_stext_struct *last_struct;
 } fz_stext_page;
@@ -356,13 +357,55 @@ struct fz_stext_char
 */
 struct fz_stext_struct
 {
-	fz_stext_block *owner;
-	fz_stext_struct *up;
-	fz_structure standard;
+	/* up points to the block that contains this fz_stext_struct. */
+	fz_stext_block *up;
+	/* parent points to the struct that has up as one of its children.
+	 * parent is useful for doing depth first traversal without having
+	 * to store the entire chain of structs in the iterator. */
+	fz_stext_struct *parent;
+
+	/* first_block points to the first child of this node (or NULL
+	 * if there are none). */
 	fz_stext_block *first_block;
+	/* last_block points to the last child of this node (or NULL
+	 * if there are none). */
 	fz_stext_block *last_block;
+
+	/* We have a set of 'standard' structure types. Every structure
+	 * element should correspond to one of these. */
+	fz_structure standard;
+	/* Documents can use their own non-standard structure types, which
+	 * are held as 'raw' strings. */
 	char raw[1];
 };
+
+/* An example to show how fz_stext_blocks and fz_stext_structs interact:
+ *
+ *         [fz_stext_page]
+ *             |
+ *  first_block|
+ *             |
+ *            \|/
+ *  [fz_stext_block:TEXT]<->[fz_stext_block:STRUCT]<->[fz_stext_block:IMG]
+ *                           u.s.down|   /|\
+ *                                   |    |
+ *                                  \|/   |up
+ *                             [fz_stext_struct]<---------.
+ *                                |       |               |
+ *                     first_block|       |last_block     |
+ *         _______________________|       |               |
+ *        |                               |               |
+ *        |                               |               |
+ *       \|/                             \|/              |
+ *  [fz_stext_block:...]<->...<->[fz_stext_block:STRUCT]  |
+ *                                  |  /|\                |
+ *                          u.s.down|   |up               |
+ *                                 \|/  |           parent|
+ *                               [fz_stext_struct]--------'
+ *                                  |   |
+ *                       first_block|   |last_block
+ *                                  :   :
+ */
 
 FZ_DATA extern const char *fz_stext_options_usage;
 
@@ -424,7 +467,7 @@ void fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *
 /**
 	Output structured text to a file in JSON format.
 */
-void fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm);
+void fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page, float scale, int id, fz_matrix ctm);
 
 /**
 	Output structured text to a file in plain-text UTF-8 format.
