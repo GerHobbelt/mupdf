@@ -89,8 +89,60 @@ void updateHeapDbgPurpose(long requestNumber)
 		info->start_reqnum = requestNumber;
 	// keep updating the end marker until we POP the slot:
 	info->end_reqnum = requestNumber;
-#if 0
-	if (requestNumber == 522045) {
+#if 01
+	/*
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(369) : {522813} normal block at 0x000001A4BED76070, 9686516 bytes long.
+ Data: <                > FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(556) : {522812} normal block at 0x000001A4938FDDF0, 64 bytes long.
+ Data: <                > 91 0A 00 00 F9 0D 00 00 08 00 00 00 01 00 00 00
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(369) : {522809} normal block at 0x000001A4BBF3C070, 9686516 bytes long.
+ Data: <                > FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(556) : {522808} normal block at 0x000001A4938FC970, 64 bytes long.
+ Data: <                > 91 0A 00 00 F9 0D 00 00 08 00 00 00 01 00 00 00
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(369) : {522798} normal block at 0x000001A4B7547070, 9686516 bytes long.
+ Data: <                > FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(556) : {522797} normal block at 0x000001A4938FC9F0, 64 bytes long.
+ Data: <                > 91 0A 00 00 F9 0D 00 00 08 00 00 00 01 00 00 00
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(369) : {522794} normal block at 0x000001A4B46F5070, 9686516 bytes long.
+ Data: <                > FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(556) : {522793} normal block at 0x000001A4938FD6F0, 64 bytes long.
+ Data: <                > 91 0A 00 00 F9 0D 00 00 08 00 00 00 01 00 00 00
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(369) : {522786} normal block at 0x000001A4B0648070, 9686516 bytes long.
+ Data: <                > DE DE DE DE DE DE DE DE DE DE DE DE DE DE DE DE
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(556) : {522785} normal block at 0x000001A4938FD070, 64 bytes long.
+ Data: <                > 91 0A 00 00 F9 0D 00 00 08 00 00 00 01 00 00 00
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(369) : {522782} normal block at 0x000001A4AD7F9070, 9686516 bytes long.
+ Data: <                > DE DE DE DE DE DE DE DE DE DE DE DE DE DE DE DE
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(556) : {522781} normal block at 0x000001A4938FA2F0, 64 bytes long.
+ Data: <                > 91 0A 00 00 F9 0D 00 00 08 00 00 00 01 00 00 00
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(369) : {522774} normal block at 0x000001A4A974B070, 9686516 bytes long.
+ Data: <                > DE DE DE DE DE DE DE DE DE DE DE DE DE DE DE DE
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(556) : {522773} normal block at 0x000001A4938FC070, 64 bytes long.
+ Data: <                > 91 0A 00 00 F9 0D 00 00 08 00 00 00 01 00 00 00
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(369) : {522770} normal block at 0x000001A4A68FD070, 9686516 bytes long.
+ Data: <                > DE DE DE DE DE DE DE DE DE DE DE DE DE DE DE DE
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(556) : {522769} normal block at 0x000001A4938FB670, 64 bytes long.
+
+
+
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(369) : {522813} normal block at 0x0000029A22303070, 9686516 bytes long.
+ Data: <                > FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(556) : {522812} normal block at 0x0000029A76E44F70, 64 bytes long.
+ Data: <                > 91 0A 00 00 F9 0D 00 00 08 00 00 00 01 00 00 00
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(369) : {522798} normal block at 0x0000029A1AACB070, 9686516 bytes long.
+ Data: <                > FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(556) : {522797} normal block at 0x0000029A76E45570, 64 bytes long.
+ Data: <                > 91 0A 00 00 F9 0D 00 00 08 00 00 00 01 00 00 00
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(369) : {522786} normal block at 0x0000029A13BBF070, 9686516 bytes long.
+ Data: <                > DE DE DE DE DE DE DE DE DE DE DE DE DE DE DE DE
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(556) : {522785} normal block at 0x0000029A76E45970, 64 bytes long.
+ Data: <                > 91 0A 00 00 F9 0D 00 00 08 00 00 00 01 00 00 00
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(369) : {522774} normal block at 0x0000029A0CCAC070, 9686516 bytes long.
+ Data: <                > DE DE DE DE DE DE DE DE DE DE DE DE DE DE DE DE
+Z:\lib\tooling\qiqqa\MuPDF\thirdparty\leptonica\src\pix1.c(556) : {522773} normal block at 0x0000029A76E429F0, 64 bytes long.
+ Data: <                > 91 0A 00 00 F9 0D 00 00 08 00 00 00 01 00 00 00
+ */
+	if (requestNumber == 522813 || requestNumber == 522798 || requestNumber == 522786 || requestNumber == 522774) {
 		int r = 1;
 		r++;
 	}
