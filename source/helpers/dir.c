@@ -1616,6 +1616,7 @@ fz_mkdirp_utf8(fz_context* ctx, const char* path)
 			d += wcslen(d);  // make sure the sentinel-patching doesn't damage the last part of the original path spec
 	}
 
+	fz_free(ctx, wpath);
 	return rv;
 #else
 	char* pname;
