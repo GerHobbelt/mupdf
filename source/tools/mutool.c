@@ -130,6 +130,7 @@ static struct tool_spec {
 	{ {.fa = pdfbake_main }, "bake", "bake PDF form into static content" },
 	{ {.fa = pdftagged_main }, "tagged", "extract Tagged PDF content" },
 	{ {.fa = pdftag_main }, "tag", "perform operations on PDF tags" },
+	{ {.fa = pdfstamp_main }, "stamp", "Add a stamp onto PDF pages" },
 	{ {.fa = mutextextract_main }, "extextract", "Generates a .docx file from mudraw XML output" },
 #endif
 #endif

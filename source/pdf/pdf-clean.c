@@ -407,7 +407,7 @@ void pdf_filter_page_contents(fz_context *ctx, pdf_document *doc, pdf_page *page
 	fz_try(ctx)
 	{
 		if (options->complete)
-			options->complete(ctx, buffer, options->opaque);
+			options->complete(ctx, buffer, new_res, options->opaque);
 		if (!options->no_update)
 		{
 			/* If contents is not a stream it's an array of streams or missing. */
@@ -460,7 +460,7 @@ struct redact_filter_state {
 };
 
 static void
-pdf_redact_end_page(fz_context *ctx, fz_buffer *buf, void *opaque)
+pdf_redact_end_page(fz_context *ctx, fz_buffer *buf, pdf_obj* res, void *opaque)
 {
 	struct redact_filter_state *red = opaque;
 	pdf_page *page = red->page;
