@@ -170,7 +170,7 @@ const char *fz_stext_options_usage =
 	"  structured=no:        don't collect structure data\n"
 	"  text-as-path:         (SVG: default) output text as curves\n"
 	"  external-styles       store the CSS page styles in a separate file instead of inlining\n"
-	"  resolution=<scale>    render and position everything at the specified scale\n"
+	"  resolution=<scale>    render and position everything at the specified scale (in pixels per inch)\n"
 	"                        (HTML base resolution is 96ppi)\n"
     "\n";
 
