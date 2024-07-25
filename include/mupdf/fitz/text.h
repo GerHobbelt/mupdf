@@ -55,8 +55,9 @@ typedef struct
 	int cid; /* CID for CJK fonts, raw character code for other fonts; or unicode for non-PDF formats. */
 } fz_text_item;
 
-#define FZ_LANG_TAG2(c1,c2) ((c1-'a'+1) + ((c2-'a'+1)*27))
-#define FZ_LANG_TAG3(c1,c2,c3) ((c1-'a'+1) + ((c2-'a'+1)*27) + ((c3-'a'+1)*27*27))
+// V1003 The macro 'FZ_LANG_TAG2' is a dangerous expression. The parameters 'c1', 'c2' must be surrounded by parentheses. text.h 58
+#define FZ_LANG_TAG2(c1,c2) (((c1)-'a'+1) + (((c2)-'a'+1)*27))
+#define FZ_LANG_TAG3(c1,c2,c3) (((c1)-'a'+1) + (((c2)-'a'+1)*27) + (((c3)-'a'+1)*27*27))
 
 typedef enum
 {
