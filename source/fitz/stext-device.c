@@ -127,6 +127,7 @@ typedef struct
 	fz_point lag_pen;
 	fz_matrix trm;
 	fz_stext_options opts;
+	int delayed_new_line;
 	int new_obj;
 	int lastchar;
 	int lastbidi;
@@ -467,6 +468,11 @@ static int is_hyphen(int c)
 	return (c == '-' || c == 0xAD || c == 0x2010 || c == 0x2011);
 }
 
+static int is_space(int c)
+{
+	return (c == ' ');
+}
+
 static float
 vec_dot(const fz_point *a, const fz_point *b)
 {
@@ -730,8 +736,10 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 
 	if (new_line && (dev->opts.flags & FZ_STEXT_DEHYPHENATE) && is_hyphen(dev->lastchar))
 	{
+		/* remove hyphen and remember to break line at new space. */
 		remove_last_char(ctx, cur_line);
 		new_line = 0;
+		dev->delayed_new_line = 1;
 	}
 
 	/* Start a new line */
@@ -739,13 +747,31 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	{
 		cur_line = add_line_to_block(ctx, page, cur_block, &ndir, wmode, bidi);
 		dev->start = p;
+		dev->delayed_new_line = 0;
 	}
 
 	/* Add synthetic space */
 	if (add_space && !(dev->opts.flags & FZ_STEXT_INHIBIT_SPACES))
+	{
 		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, ' ', -1, &dev->pen, &p, bidi, dev->color);
+		if (dev->delayed_new_line)
+		{
+			/* this is after dehyphenation and the next synthetic space, so break to new line. */
+			cur_line = add_line_to_block(ctx, page, cur_block, &ndir, wmode, bidi);
+			dev->start = p;
+			dev->delayed_new_line = 0;
+		}
+	}
 
 	add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, glyph, &p, &q, bidi, dev->color);
+	if (dev->delayed_new_line && is_space(c))
+	{
+		/* this is after dehyphenation and the next actual space, so break to new line. */
+		cur_line = add_line_to_block(ctx, page, cur_block, &ndir, wmode, bidi);
+		dev->start = p;
+		dev->delayed_new_line = 0;
+	}
+
 	dev->lastchar = c;
 	dev->lastbidi = bidi;
 	dev->lag_pen = p;
