@@ -91,7 +91,7 @@ void fz_add_layout_char(fz_context *ctx, fz_layout_block *block, float x, float 
 
 /* Extract text into blocks and lines. */
 
-#define PARAGRAPH_DIST 1.5f
+#define PARAGRAPH_DIST 1.8f
 #define SPACE_DIST 0.15f
 #define SPACE_MAX_DIST 0.8f
 #define BASE_MAX_DIST 0.8f
