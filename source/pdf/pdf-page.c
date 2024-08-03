@@ -49,7 +49,7 @@ pdf_count_pages(fz_context *ctx, pdf_document *doc)
 	return pages;
 }
 
-int pdf_count_pages_imp(fz_context *ctx, fz_document *doc, int chapter)
+/* static */ int pdf_count_pages_imp(fz_context* ctx, fz_document* doc, int chapter)
 {
 	return pdf_count_pages(ctx, pdf_document_from_fz_document(ctx, doc));
 }
@@ -734,6 +734,12 @@ pdf_bound_page(fz_context *ctx, pdf_page *page, fz_box_type box)
 	return fz_transform_rect(rect, page_ctm);
 }
 
+/* static */ fz_rect
+pdf_bound_page_imp(fz_context *ctx, fz_page *page, fz_box_type box)
+{
+	return pdf_bound_page(ctx, pdf_page_from_fz_page(ctx, page), box);
+}
+
 void
 pdf_set_page_box(fz_context *ctx, pdf_page *page, fz_box_type box, fz_rect rect)
 {
@@ -769,6 +775,12 @@ fz_link *
 pdf_load_links(fz_context *ctx, pdf_page *page)
 {
 	return fz_keep_link(ctx, page->links);
+}
+
+static fz_link *
+pdf_load_links_imp(fz_context *ctx, fz_page *page)
+{
+	return pdf_load_links(ctx, pdf_page_from_fz_page(ctx, page));
 }
 
 pdf_obj *
@@ -1112,14 +1124,14 @@ pdf_page_separations(fz_context *ctx, pdf_page *page)
 int
 pdf_page_uses_overprint(fz_context *ctx, fz_page *_page)
 {
-	pdf_page* page = (pdf_page*)_page;
+	pdf_page* page = pdf_page_from_fz_page(ctx, _page);
 	return page ? page->overprint : 0;
 }
 
 static void
 pdf_drop_page_imp(fz_context *ctx, fz_page *_page)
 {
-	pdf_page* page = (pdf_page*)_page;
+	pdf_page* page = pdf_page_from_fz_page(ctx, _page);
 	pdf_annot *annot;
 	pdf_link *link;
 
@@ -1145,56 +1157,51 @@ pdf_drop_page_imp(fz_context *ctx, fz_page *_page)
 static
 fz_link* pdf_page_create_link_imp(fz_context* ctx, fz_page* _page, fz_rect bbox, const char* uri)
 {
-	pdf_page* page = (pdf_page*)_page;
+	pdf_page* page = pdf_page_from_fz_page(ctx, _page);
 	return pdf_create_link(ctx, page, bbox, uri);
 }
 
 static
 void pdf_page_delete_link_imp(fz_context* ctx, fz_page* _page, fz_link* link)
 {
-	pdf_page* page = (pdf_page*)_page;
+	pdf_page* page = pdf_page_from_fz_page(ctx, _page);
 	pdf_delete_link(ctx, page, link);
-}
-
-static
-fz_link* pdf_load_links_imp(fz_context* ctx, fz_page* _page)
-{
-	pdf_page* page = (pdf_page*)_page;
-	return pdf_load_links(ctx, page);
 }
 
 static
 fz_transition* pdf_page_presentation_imp(fz_context* ctx, fz_page* _page, fz_transition* transition, float* duration)
 {
-	pdf_page* page = (pdf_page*)_page;
+	pdf_page* page = pdf_page_from_fz_page(ctx, _page);
 	return pdf_page_presentation(ctx, page, transition, duration);
 }
 
 static
 fz_separations *pdf_page_separations_imp(fz_context* ctx, fz_page* _page)
 {
-	pdf_page* page = (pdf_page*)_page;
+	pdf_page* page = pdf_page_from_fz_page(ctx, _page);
 	return pdf_page_separations(ctx, page);
 }
 
-fz_rect pdf_bound_page_imp(fz_context* ctx, fz_page* _page, fz_box_type box)
+static void pdf_run_page_contents_imp(fz_context* ctx, fz_page* _page, fz_device* dev, fz_matrix ctm)
 {
-	pdf_page* page = (pdf_page*)_page;
-	return pdf_bound_page(ctx, page, box);
-}
-
-static
-void pdf_run_page_contents_cb_imp(fz_context* ctx, fz_page* _page, fz_device* dev, fz_matrix ctm)
-{
-	pdf_page* page = (pdf_page*)_page;
+	pdf_page* page = pdf_page_from_fz_page(ctx, _page);
 	pdf_run_page_contents(ctx, page, dev, ctm);
 }
 
-static
-void pdf_run_page_annots_cb_imp(fz_context* ctx, fz_page* _page, fz_device* dev, fz_matrix ctm)
+static void pdf_run_page_annots_imp(fz_context* ctx, fz_page* _page, fz_device* dev, fz_matrix ctm)
 {
-	pdf_page* page = (pdf_page*)_page;
+	pdf_page* page = pdf_page_from_fz_page(ctx, _page);
 	pdf_run_page_annots(ctx, page, dev, ctm);
+}
+
+static fz_link * pdf_create_link_imp(fz_context *ctx, fz_page *page, fz_rect bbox, const char *uri)
+{
+	return pdf_create_link(ctx, pdf_page_from_fz_page(ctx, page), bbox, uri);
+}
+
+static void pdf_delete_link_imp(fz_context *ctx, fz_page *page, fz_link *link)
+{
+	pdf_delete_link(ctx, pdf_page_from_fz_page(ctx, page), link);
 }
 
 static pdf_page *
@@ -1207,13 +1214,13 @@ pdf_new_page(fz_context *ctx, pdf_document *doc)
 	page->super.drop_page = pdf_drop_page_imp;
 	page->super.load_links = pdf_load_links_imp;
 	page->super.bound_page = pdf_bound_page_imp;
-	page->super.run_page_contents = pdf_run_page_contents_cb_imp;
-	page->super.run_page_annots = pdf_run_page_annots_cb_imp;
+	page->super.run_page_contents = pdf_run_page_contents_imp;
+	page->super.run_page_annots = pdf_run_page_annots_imp;
 	page->super.page_presentation = pdf_page_presentation_imp;
 	page->super.separations = pdf_page_separations_imp;
 	page->super.overprint = pdf_page_uses_overprint;
-	page->super.create_link = pdf_page_create_link_imp;
-	page->super.delete_link = pdf_page_delete_link_imp;
+	page->super.create_link = pdf_create_link_imp;
+	page->super.delete_link = pdf_delete_link_imp;
 
 	page->obj = NULL;
 

@@ -2035,8 +2035,9 @@ pdf_invalidate_xfa(fz_context *ctx, pdf_document *doc)
 }
 
 static void
-pdf_drop_document_imp(fz_context *ctx, pdf_document *doc)
+pdf_drop_document_imp(fz_context *ctx, fz_document *doc_)
 {
+	pdf_document *doc = pdf_document_from_fz_document(ctx, doc_);
 	int i;
 
 #if 0
@@ -3032,7 +3033,7 @@ pdf_update_stream(fz_context *ctx, pdf_document *doc, pdf_obj *obj, fz_buffer *n
 }
 
 int
-pdf_lookup_metadata(fz_context *ctx, pdf_document *doc, const char *key, char *buf, int size)
+pdf_lookup_metadata(fz_context *ctx, pdf_document *doc, const char *key, char *buf, size_t size)
 {
 	if (!strcmp(key, FZ_META_FORMAT))
 	{
@@ -3150,7 +3151,7 @@ pdf_resolve_link_imp(fz_context *ctx, fz_document *doc_, const char *uri)
 	return pdf_resolve_link_dest(ctx, doc, uri);
 }
 
-char *pdf_format_link_uri_imp(fz_context *ctx, fz_document *doc, fz_link_dest dest)
+static char *pdf_format_link_uri_imp(fz_context *ctx, fz_document *doc, fz_link_dest dest)
 {
 	return pdf_new_uri_from_explicit_dest(ctx, dest);
 }
@@ -3159,48 +3160,6 @@ static fz_document *
 as_pdf(fz_context *ctx, fz_document *doc)
 {
 	return doc;
-}
-
-
-
-/*
-	Wrappers used to silence the C compilers due to type conversions
-*/
-static void __pdf_drop_document_imp(fz_context* ctx, fz_document* doc)
-{
-	pdf_drop_document_imp(ctx, pdf_document_from_fz_document(ctx, doc));
-}
-static fz_colorspace* __pdf_document_output_intent(fz_context* ctx, fz_document* doc)
-{
-	return pdf_document_output_intent(ctx, pdf_document_from_fz_document(ctx, doc));
-}
-static int __pdf_needs_password(fz_context* ctx, fz_document* doc)
-{
-	return pdf_needs_password(ctx, pdf_document_from_fz_document(ctx, doc));
-}
-static int __pdf_authenticate_password(fz_context* ctx, fz_document* doc, const char* password)
-{
-	return pdf_authenticate_password(ctx, pdf_document_from_fz_document(ctx, doc), password);
-}
-static int __pdf_has_permission(fz_context* ctx, fz_document* doc, fz_permission permission)
-{
-	return pdf_has_permission(ctx, pdf_document_from_fz_document(ctx, doc), permission);
-}
-static fz_outline_iterator* __pdf_new_outline_iterator(fz_context* ctx, fz_document* doc)
-{
-	return pdf_new_outline_iterator(ctx, pdf_document_from_fz_document(ctx, doc));
-}
-static int __pdf_lookup_metadata(fz_context* ctx, fz_document* doc, const char* key, char* buf, size_t size)
-{
-	return pdf_lookup_metadata(ctx, pdf_document_from_fz_document(ctx, doc), key, buf, size);
-}
-static void __pdf_document_set_metadata(fz_context* ctx, fz_document* doc, const char* key, const char* value)
-{
-	pdf_set_metadata(ctx, pdf_document_from_fz_document(ctx, doc), key, value);
-}
-static void __pdf_run_document_structure(fz_context* ctx, fz_document* doc, fz_device* dev, fz_cookie* cookie)
-{
-	pdf_run_document_structure(ctx, pdf_document_from_fz_document(ctx, doc), dev, cookie);
 }
 
 
@@ -3214,6 +3173,47 @@ static void __pdf_run_document_structure(fz_context* ctx, fz_document* doc, fz_d
 	saves roughly 6MB of space.
 */
 
+static fz_colorspace *pdf_document_output_intent_imp(fz_context *ctx, fz_document *doc)
+{
+	return pdf_document_output_intent(ctx, pdf_document_from_fz_document(ctx, doc));
+}
+
+static int pdf_needs_password_imp(fz_context *ctx, fz_document *doc)
+{
+	return pdf_needs_password(ctx, pdf_document_from_fz_document(ctx, doc));
+}
+
+static int pdf_authenticate_password_imp(fz_context *ctx, fz_document *doc, const char *pw)
+{
+	return pdf_authenticate_password(ctx, pdf_document_from_fz_document(ctx, doc), pw);
+}
+
+static int pdf_has_permission_imp(fz_context *ctx, fz_document *doc, fz_permission p)
+{
+	return pdf_has_permission(ctx, pdf_document_from_fz_document(ctx, doc), p);
+}
+
+static fz_outline_iterator *pdf_new_outline_iterator_imp(fz_context *ctx, fz_document *doc)
+{
+	return pdf_new_outline_iterator(ctx, pdf_document_from_fz_document(ctx, doc));
+}
+
+static int pdf_lookup_metadata_imp(fz_context *ctx, fz_document *doc, const char *key, char *ptr, size_t size)
+{
+	return pdf_lookup_metadata(ctx, pdf_document_from_fz_document(ctx, doc), key, ptr, size);
+}
+
+static void pdf_set_metadata_imp(fz_context *ctx, fz_document *doc, const char *key, const char *value)
+{
+	pdf_set_metadata(ctx, pdf_document_from_fz_document(ctx, doc), key, value);
+}
+
+static void pdf_run_document_structure_imp(fz_context *ctx, fz_document *doc, fz_device *dev, fz_cookie *cookie)
+{
+	pdf_run_document_structure(ctx, pdf_document_from_fz_document(ctx, doc), dev, cookie);
+}
+
+
 static pdf_document *
 pdf_new_document(fz_context *ctx, fz_stream *file)
 {
@@ -3223,21 +3223,21 @@ pdf_new_document(fz_context *ctx, fz_stream *file)
 	pdf_verify_name_table_sanity(ctx);
 #endif
 
-	doc->super.drop_document = __pdf_drop_document_imp;
-	doc->super.get_output_intent = __pdf_document_output_intent;
-	doc->super.needs_password = __pdf_needs_password;
-	doc->super.authenticate_password = __pdf_authenticate_password;
-	doc->super.has_permission = __pdf_has_permission;
-	doc->super.outline_iterator = __pdf_new_outline_iterator;
+	doc->super.drop_document = pdf_drop_document_imp;
+	doc->super.get_output_intent = pdf_document_output_intent_imp;
+	doc->super.needs_password = pdf_needs_password_imp;
+	doc->super.authenticate_password = pdf_authenticate_password_imp;
+	doc->super.has_permission = pdf_has_permission_imp;
+	doc->super.outline_iterator = pdf_new_outline_iterator_imp;
 	doc->super.resolve_link_dest = pdf_resolve_link_imp;
 	doc->super.format_link_uri = pdf_format_link_uri_imp;
 	doc->super.count_pages = pdf_count_pages_imp;
 	doc->super.load_page = pdf_load_page_imp;
 	doc->super.page_label = pdf_page_label_imp;
-	doc->super.lookup_metadata = __pdf_lookup_metadata;
-	doc->super.set_metadata = __pdf_document_set_metadata;
-	doc->super.run_structure = __pdf_run_document_structure;
-	doc->super.as_pdf = (fz_document_as_pdf_fn *)as_pdf;
+	doc->super.lookup_metadata = pdf_lookup_metadata_imp;
+	doc->super.set_metadata = pdf_set_metadata_imp;
+	doc->super.run_structure = pdf_run_document_structure_imp;
+	doc->super.as_pdf = as_pdf;
 
 	pdf_lexbuf_init(ctx, &doc->lexbuf.base, PDF_LEXBUF_LARGE);
 	doc->file = fz_keep_stream(ctx, file);
@@ -3663,7 +3663,7 @@ pdf_obj *pdf_progressive_advance(fz_context *ctx, pdf_document *doc, int pagenum
 	return doc->linear_page_refs[pagenum];
 }
 
-pdf_document *fz_document_as_pdf(fz_context *ctx, fz_document *ptr)
+pdf_document *fz_new_pdf_document_from_fz_document(fz_context *ctx, fz_document *ptr)
 {
 	if (!ptr || !ptr->as_pdf)
 		return NULL;
@@ -3675,9 +3675,12 @@ pdf_document *pdf_document_from_fz_document(fz_context *ctx, fz_document *ptr)
 	return (pdf_document *)((ptr && ptr->count_pages == pdf_count_pages_imp) ? ptr : NULL);
 }
 
-pdf_page *pdf_page_from_fz_page(fz_context *ctx, fz_page *ptr)
+pdf_page *pdf_page_from_fz_page(fz_context *ctx, fz_page *page)
 {
-	return (pdf_page *)((ptr && ptr->bound_page == pdf_bound_page_imp) ? ptr : NULL);
+	//return (pdf_page *)((ptr && ptr->bound_page == pdf_bound_page_imp) ? ptr : NULL);
+	if (pdf_document_from_fz_document(ctx, page->doc))
+		return (pdf_page*) page;
+	return NULL;
 }
 
 fz_document* fz_document_from_pdf_document(fz_context* ctx, pdf_document* ptr)

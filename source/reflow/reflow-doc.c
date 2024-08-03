@@ -166,7 +166,7 @@ reflow_load_page(fz_context *ctx, fz_document *_doc, int chapter, int pagenum)
 	if (!opts)
 		opts = &default_opts;
 
-	page = fz_new_derived_page(ctx, reflow_page, (fz_document *)doc);
+	page = fz_new_derived_page(ctx, reflow_page, _doc);
 	page->base.bound_page = reflow_bound_page;
 	page->base.drop_page = reflow_drop_page;
 	page->base.run_page_contents = reflow_run_page_contents;

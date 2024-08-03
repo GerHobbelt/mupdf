@@ -232,7 +232,7 @@ fz_page* fz_page_from_pdf_page(fz_context* ctx, pdf_page* ptr);
 	Note that this returns a kept pointer that the caller is responsible
 	for freeing, unlike pdf_specifics or pdf_document_from_fz_document.
 */
-pdf_document *fz_document_as_pdf(fz_context *ctx, fz_document *ptr);
+pdf_document *fz_new_pdf_document_from_fz_document(fz_context *ctx, fz_document *ptr);
 
 int pdf_needs_password(fz_context *ctx, pdf_document *doc);
 
@@ -250,7 +250,7 @@ int pdf_needs_password(fz_context *ctx, pdf_document *doc);
 int pdf_authenticate_password(fz_context *ctx, pdf_document *doc, const char *pw);
 
 int pdf_has_permission(fz_context *ctx, pdf_document *doc, fz_permission p);
-int pdf_lookup_metadata(fz_context *ctx, pdf_document *doc, const char *key, char *ptr, int size);
+int pdf_lookup_metadata(fz_context *ctx, pdf_document *doc, const char *key, char *ptr, size_t size);
 
 #if 0
 // TODO: re-introduce this one.
