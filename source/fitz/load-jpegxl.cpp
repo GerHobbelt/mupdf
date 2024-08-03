@@ -86,7 +86,6 @@ fz_load_jpegxl(fz_context *ctx, const unsigned char *rbuf, size_t rlen)
 
 			case JXL_DEC_COLOR_ENCODING:
 				err = JxlDecoderGetICCProfileSize(decoder,
-								&format,
 								JXL_COLOR_PROFILE_TARGET_DATA,
 								&profile_size);
 
@@ -95,7 +94,6 @@ fz_load_jpegxl(fz_context *ctx, const unsigned char *rbuf, size_t rlen)
 				profile = fz_new_buffer(ctx, profile_size);
 
 				err = JxlDecoderGetColorAsICCProfile(decoder,
-								&format,
 								JXL_COLOR_PROFILE_TARGET_DATA,
 								profile->data,
 								profile_size);
@@ -207,7 +205,6 @@ fz_load_jpegxl_info(fz_context *ctx, const unsigned char *rbuf, size_t rlen, int
 
 			case JXL_DEC_COLOR_ENCODING:
 				err = JxlDecoderGetICCProfileSize(decoder,
-								&format,
 								JXL_COLOR_PROFILE_TARGET_DATA,
 								&profile_size);
 
@@ -216,7 +213,6 @@ fz_load_jpegxl_info(fz_context *ctx, const unsigned char *rbuf, size_t rlen, int
 				profile = fz_new_buffer(ctx, profile_size);
 
 				err = JxlDecoderGetColorAsICCProfile(decoder,
-								&format,
 								JXL_COLOR_PROFILE_TARGET_DATA,
 								profile->data,
 								profile_size);
