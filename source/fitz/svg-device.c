@@ -1344,7 +1344,7 @@ svg_dev_begin_layer(fz_context *ctx, fz_device *dev, const char *name)
 	svg_layer *layer;
 
 	if (name == NULL)
-		name = "";
+		name = "null";
 
 	/* Have we seen this layer name before? */
 	for (dict = sdev->layer_dict; dict; dict = dict->next)

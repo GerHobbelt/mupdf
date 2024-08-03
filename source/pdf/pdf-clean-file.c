@@ -308,7 +308,7 @@ static void pdf_rearrange_pages_imp(fz_context *ctx, pdf_document *doc, int coun
 		root = pdf_new_dict(ctx, doc, 3);
 		pdf_dict_put(ctx, root, PDF_NAME(Type), pdf_dict_get(ctx, oldroot, PDF_NAME(Type)));
 		pdf_dict_put(ctx, root, PDF_NAME(Pages), pdf_dict_get(ctx, oldroot, PDF_NAME(Pages)));
-		if (structtreeroot)
+		if (pdf_is_dict(ctx, structtreeroot))
 		{
 			pdf_dict_put(ctx, root, PDF_NAME(StructTreeRoot), structtreeroot);
 			pdf_dict_put(ctx, structtreeroot, PDF_NAME(ParentTree), structparents);
