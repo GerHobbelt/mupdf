@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF8D7C2D}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTURBO_RANGE_CODER;TURBO_RANGE_CODER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTURBO_RANGE_CODER;TURBO_RANGE_CODER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTURBO_RANGE_CODER;TURBO_RANGE_CODER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTURBO_RANGE_CODER;TURBO_RANGE_CODER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTURBO_RANGE_CODER;TURBO_RANGE_CODER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTURBO_RANGE_CODER;TURBO_RANGE_CODER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTURBO_RANGE_CODER;TURBO_RANGE_CODER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTURBO_RANGE_CODER;TURBO_RANGE_CODER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTURBO_RANGE_CODER;TURBO_RANGE_CODER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTURBO_RANGE_CODER;TURBO_RANGE_CODER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTURBO_RANGE_CODER;TURBO_RANGE_CODER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTURBO_RANGE_CODER;TURBO_RANGE_CODER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/anscdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/bec_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/bec_b.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/lib/daware.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/lib/divsufsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/lib/sssort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/lib/utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/unbwt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rc_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rc_s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rc_sf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rc_ss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rcbwt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rccdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rccm_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rccm_s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rccm_sf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rccm_ss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rcqlfc_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rcqlfc_s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rcqlfc_sf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rcqlfc_ss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rcutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/transpose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/transpose_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/turborc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/vs/anscdf_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/vs/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Turbo-Range-Coder/vs/transpose_avx2.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/anscdf_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/bec_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/bec_bstm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/bectab12_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/cdf_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/include/anscdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/include/turborc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/include_/bec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/include_/bitutil_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/include_/conf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/include_/rcutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/include_/sse_neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/include_/time_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/include_/transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/include_/vlcbit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/include_/vlcbyte.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/include/divsufsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/include/divsufsort_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/include/sort/copy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/include/sort/detail/inplace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/include/sort/detail/misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/include/sort/detail/suffix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/include/sort/inplace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/include/sort/suffix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/unbwt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/mb_o0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/mb_on.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/mb_vint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/mbc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/mbc_s.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/mbc_sf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/mbc_ss.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rccdf_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/rcutil_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/turborc_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/vs/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/vs/inttypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Turbo-Range-Coder/vs/stdint.h" />
+    <Text Include="../../thirdparty/owemdjee/Turbo-Range-Coder/FSM0.txt" />
+    <Text Include="../../thirdparty/owemdjee/Turbo-Range-Coder/FSM1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Turbo-Range-Coder/FSM9.txt" />
+    <Text Include="../../thirdparty/owemdjee/Turbo-Range-Coder/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/Turbo-Range-Coder/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/Turbo-Range-Coder/libdivsufsort/include/sort/LICENCE.md" />
+    <Text Include="../../thirdparty/owemdjee/Turbo-Range-Coder/makefile" />
+    <Text Include="../../thirdparty/owemdjee/Turbo-Range-Coder/makefile.vs" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

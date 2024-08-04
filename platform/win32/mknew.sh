@@ -1348,6 +1348,18 @@ zsv
 zsync2
 zvec
 zxing-cpp
+ink-stroke-modeler
+libnatspec
+bzip2
+bzip3
+Turbo-Range-Coder
+libbsc
+easylzma
+xz
+7zip
+lzma
+libsais
+bxzstr
 
 EOT
 ) | grep -e "$FILTER"
