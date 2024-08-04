@@ -1,6 +1,5 @@
 
 also-ignore:
 	version.rc
-	tests/
-	
+	tests/[^.]*[.]c
 	
