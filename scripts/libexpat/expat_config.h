@@ -48,6 +48,9 @@
 /* Define to 1 if you have `syscall' and `SYS_getrandom'. */
 /* #undef HAVE_SYSCALL_GETRANDOM */
 
+/* Define to 1 if you have the <sys/param.h> header file. */
+/* #undef HAVE_SYS_PARAM_H */
+
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H
 
@@ -99,6 +102,9 @@
 
 /* Define to make parameter entity parsing functionality available. */
 #define XML_DTD
+
+/* Define as 1/0 to enable/disable support for general entities. */
+#define XML_GE   1
 
 /* Define to make XML Namespaces functionality available. */
 #define XML_NS
