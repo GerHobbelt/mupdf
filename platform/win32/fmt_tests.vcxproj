@@ -112,14 +112,6 @@
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
-<ItemDefinitionGroup>
-    <ClCompile>
-      <Optimization>Custom</Optimization>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
-</ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -263,6 +255,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/noexception-test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/os-test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/ostream-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/perf-sanity.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/posix-mock-test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/printf-test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/ranges-odr-test.cc" />
@@ -298,101 +291,20 @@
     <ClInclude Include="../../thirdparty/owemdjee/fmt/test/scan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/fmt/test/test-assert.h" />
     <ClInclude Include="../../thirdparty/owemdjee/fmt/test/util.h" />
-    <Font Include="../../thirdparty/owemdjee/fmt/doc/_static/fonts/glyphicons-halflings-regular.ttf" />
     <Text Include="../../thirdparty/owemdjee/fmt/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/fmt/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/fmt/ChangeLog.md" />
     <Text Include="../../thirdparty/owemdjee/fmt/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/fmt/README.md" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/_static/bootstrap.min.js" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/_static/breathe.css" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/_static/fonts/glyphicons-halflings-regular.svg" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/_static/fonts/glyphicons-halflings-regular.woff" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/_templates/layout.html" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/_templates/search.html" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/api.rst" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/basic-bootstrap/README" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/basic-bootstrap/layout.html" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/basic-bootstrap/theme.conf" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/alerts.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/badges.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/bootstrap.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/breadcrumbs.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/button-groups.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/buttons.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/carousel.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/close.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/code.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/component-animations.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/dropdowns.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/forms.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/glyphicons.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/grid.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/input-groups.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/jumbotron.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/labels.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/list-group.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/media.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/alerts.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/background-variant.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/border-radius.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/buttons.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/center-block.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/clearfix.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/forms.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/gradients.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/grid-framework.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/grid.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/hide-text.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/image.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/labels.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/list-group.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/nav-divider.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/nav-vertical-align.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/opacity.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/pagination.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/panels.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/progress-bar.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/reset-filter.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/resize.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/responsive-visibility.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/size.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/tab-focus.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/table-row.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/text-emphasis.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/text-overflow.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/mixins/vendor-prefixes.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/modals.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/navbar.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/navs.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/normalize.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/pager.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/pagination.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/panels.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/popovers.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/print.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/progress-bars.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/responsive-embed.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/responsive-utilities.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/scaffolding.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/tables.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/theme.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/thumbnails.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/tooltip.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/type.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/utilities.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/variables.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/bootstrap/wells.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/build.py" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/conf.py" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/contents.rst" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/fmt.less" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/fmt/doc/ChangeLog-old.md" />
+    <Text Include="../../thirdparty/owemdjee/fmt/doc/api.md" />
+    <Text Include="../../thirdparty/owemdjee/fmt/doc/fmt.css" />
+    <Text Include="../../thirdparty/owemdjee/fmt/doc/fmt.js" />
+    <Text Include="../../thirdparty/owemdjee/fmt/doc/get-started.md" />
+    <Text Include="../../thirdparty/owemdjee/fmt/doc/index.md" />
+    <Text Include="../../thirdparty/owemdjee/fmt/doc/perf.svg" />
     <Text Include="../../thirdparty/owemdjee/fmt/doc/python-license.txt" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/syntax.rst" />
-    <Text Include="../../thirdparty/owemdjee/fmt/doc/usage.rst" />
+    <Text Include="../../thirdparty/owemdjee/fmt/doc/syntax.md" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/Android.mk" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/C++.sublime-syntax" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/README" />
@@ -400,20 +312,17 @@
     <Text Include="../../thirdparty/owemdjee/fmt/support/bazel/MODULE.bazel" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/bazel/README.md" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/bazel/WORKSPACE.bazel" />
-    <Text Include="../../thirdparty/owemdjee/fmt/support/build-docs.py" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/cmake/FindSetEnv.cmake" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/cmake/JoinPaths.cmake" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/cmake/cxx14.cmake" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/cmake/fmt-config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/cmake/fmt.pc.in" />
-    <Text Include="../../thirdparty/owemdjee/fmt/support/compute-powers.py" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/docopt.py" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/manage.py" />
+    <Text Include="../../thirdparty/owemdjee/fmt/support/mkdocs.yml" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/printable.py" />
-    <Text Include="../../thirdparty/owemdjee/fmt/support/rtd/conf.py" />
-    <Text Include="../../thirdparty/owemdjee/fmt/support/rtd/index.rst" />
-    <Text Include="../../thirdparty/owemdjee/fmt/support/rtd/theme/layout.html" />
-    <Text Include="../../thirdparty/owemdjee/fmt/support/rtd/theme/theme.conf" />
+    <Text Include="../../thirdparty/owemdjee/fmt/support/python/mkdocstrings_handlers/cxx/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/fmt/support/python/mkdocstrings_handlers/cxx/templates/README" />
     <Text Include="../../thirdparty/owemdjee/fmt/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/fmt/test/add-subdirectory-test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/fmt/test/compile-error-test/CMakeLists.txt" />

@@ -112,14 +112,6 @@
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
-<ItemDefinitionGroup>
-    <ClCompile>
-      <Optimization>Custom</Optimization>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
-</ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAOM;AOM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -351,6 +343,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/variance_impl_avx2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/variance_impl_ssse3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/variance_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/variance_ssse3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_mem/aom_mem.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_ports/aarch32_cpudetect.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_ports/aarch64_cpudetect.c" />
@@ -956,6 +949,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/av1_temporal_denoiser.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/bitstream.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/blockiness.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/cnn.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/compound_type.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/context_tree.h" />
@@ -1062,7 +1056,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libaom/test/acm_random.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/test/av1_txfm_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/test/codec_factory.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/comp_avg_pred_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/test/datarate_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/test/decode_test_driver.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/test/encode_test_driver.h" />
@@ -1072,7 +1065,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libaom/test/ivf_video_source.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/test/md5_helper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/test/register_state_check.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/simd_cmp_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/simd_cmp_impl.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/test/simd_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/test/test_vectors.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/test/transform_test_base.h" />

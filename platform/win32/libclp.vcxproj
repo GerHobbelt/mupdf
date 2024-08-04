@@ -228,6 +228,7 @@
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/BufferReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/BufferedFileReader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/CurlDownloadHandler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/EncodedVariableInterpreter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/FileReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/FileWriter.cpp" />
@@ -244,6 +245,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/MySQLDB.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/MySQLParamBindings.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/MySQLPreparedStatement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/NetworkReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ParsedMessage.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/Profiler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/Query.cpp" />
@@ -274,6 +276,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/clp/utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/database_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/dictionary_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/SchemaTree.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/encoding_methods.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/ir_stream/decoding_methods.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/ir_stream/encoding_methods.cpp" />
@@ -284,6 +287,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/search/WildcardToken.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/search/query_methods.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ir/LogEventDeserializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ir/LogEventSerializer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ir/parsing.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ir/utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/make_dictionaries_readable/CommandLineArguments.cpp" />
@@ -448,6 +452,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-BufferedFileReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-EncodedVariableInterpreter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-Grep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-NetworkReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-ParserWithUserSchema.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-SQLiteDB.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-Segment.cpp" />
@@ -456,6 +461,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-TimestampPattern.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-Utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-encoding_methods.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-ffi_SchemaTree.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-ir_encoding_methods.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-ir_parsing.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-kql.cpp" />
@@ -467,6 +473,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/BufferReader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/BufferedFileReader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/CommandLineArgumentsBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/CurlDownloadHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/CurlEasyHandle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/CurlOperationFailed.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/CurlStringList.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/Defs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/DictionaryEntry.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/DictionaryReader.hpp" />
@@ -490,6 +500,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/MySQLDB.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/MySQLParamBindings.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/MySQLPreparedStatement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/NetworkReader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/PageAllocatedVector.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ParsedMessage.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/Platform.hpp" />
@@ -522,6 +533,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/clp/utils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/database_utils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/dictionary_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/SchemaTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/SchemaTreeNode.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/encoding_methods.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/encoding_methods.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/ir_stream/byteswap.hpp" />
@@ -539,6 +552,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/search/query_methods.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ir/LogEvent.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ir/LogEventDeserializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ir/LogEventSerializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ir/constants.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ir/parsing.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ir/parsing.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ir/types.hpp" />
@@ -569,6 +584,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/zstd/Constants.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/zstd/Decompressor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/string_utils/string_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/time_types.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/type_utils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/version.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ArchiveReader.hpp" />
@@ -863,6 +879,7 @@
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/fmtlib.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/install-boost.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/install-cmake.sh" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/install-curl.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/libarchive.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/lz4.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/macos-12/install-all.sh" />

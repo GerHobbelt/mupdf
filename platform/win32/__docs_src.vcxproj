@@ -112,14 +112,6 @@
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
-<ItemDefinitionGroup>
-    <ClCompile>
-      <Optimization>Custom</Optimization>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
-</ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING___DOCS_SRC;__DOCS_SRC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -269,15 +261,27 @@
   <ItemGroup>
     <Image Include="../../docs/ecosystem.png" />
     <Image Include="../../docs/examples/huntingofthesnark.png" />
-    <Image Include="../../docs/logo/mupdf-icon.png" />
-    <Image Include="../../docs/logo/mupdf-simplified-logo.png" />
-    <Image Include="../../docs/logo/mupdf.png" />
+    <Image Include="../../docs/logo/mupdf-icon-128.png" />
+    <Image Include="../../docs/logo/mupdf-icon-16.png" />
+    <Image Include="../../docs/logo/mupdf-icon-24.png" />
+    <Image Include="../../docs/logo/mupdf-icon-256.png" />
+    <Image Include="../../docs/logo/mupdf-icon-32.png" />
+    <Image Include="../../docs/logo/mupdf-icon-48.png" />
+    <Image Include="../../docs/logo/mupdf-icon-512.png" />
+    <Image Include="../../docs/logo/mupdf-icon-72.png" />
+    <Image Include="../../docs/logo/mupdf-icon.ico" />
+    <Image Include="../../docs/logo/playstore-feature-1024.png" />
+    <Image Include="../../docs/logo/playstore-feature-512.png" />
+    <Image Include="../../docs/logo/playstore-feature-old.png" />
+    <Image Include="../../docs/logo/playstore-feature.png" />
+    <Image Include="../../docs/logo/playstore-feature2.png" />
+    <Image Include="../../docs/logo/playstore-icon-old.png" />
+    <Image Include="../../docs/logo/playstore-icon.png" />
     <Image Include="../../docs/src/_static/favicon.ico" />
     <Image Include="../../docs/src/_static/mupdf-sidebar-logo-dark.png" />
     <Image Include="../../docs/src/_static/mupdf-sidebar-logo-light.png" />
     <Image Include="../../docs/src/images/isolated-and-knockout.png" />
-    <Image Include="../../docs/src/images/mupdf-icon.png" />
-    <Image Include="../../docs/src/images/mupdf-sidebar-logo.png" />
+    <Image Include="../../docs/src/images/mupdf-web-icon.png" />
     <Text Include="../../docs/Notes/Compiling-Building/Known Issues when compiling,building.md" />
     <Text Include="../../docs/Notes/Compiling-Building/When you start with this stuff.md" />
     <Text Include="../../docs/Notes/Compiling-Building/When you want to produce a public release.md" />
@@ -356,10 +360,16 @@
     <Text Include="../../docs/examples/storytest.js" />
     <Text Include="../../docs/examples/testapi.js" />
     <Text Include="../../docs/examples/trace-device.js" />
+    <Text Include="../../docs/logo/mupdf-icon.svg" />
+    <Text Include="../../docs/logo/mupdf-icon.xpm" />
     <Text Include="../../docs/logo/mupdf-logo.svg" />
-    <Text Include="../../docs/logo/mupdf-simplified-logo.xcf.bz2" />
-    <Text Include="../../docs/logo/mupdf.xpm" />
-    <Text Include="../../docs/logo/new-mupdf-icon.svg" />
+    <Text Include="../../docs/logo/mupdf-mono-icon.svg" />
+    <Text Include="../../docs/logo/playstore-feature-compare-with-old.svg" />
+    <Text Include="../../docs/logo/playstore-feature-editable.svg" />
+    <Text Include="../../docs/logo/playstore-feature.svg" />
+    <Text Include="../../docs/logo/playstore-feature.xcf" />
+    <Text Include="../../docs/logo/playstore-feature2.svg" />
+    <Text Include="../../docs/logo/playstore-icon.xcf" />
     <Text Include="../../docs/man/mupdf.1" />
     <Text Include="../../docs/man/mutool.1" />
     <Text Include="../../docs/src/C-API-core.rst" />
@@ -368,7 +378,6 @@
     <Text Include="../../docs/src/C-API.rst" />
     <Text Include="../../docs/src/README.md" />
     <Text Include="../../docs/src/_static/custom.css" />
-    <Text Include="../../docs/src/_static/mupdf-logo.svg" />
     <Text Include="../../docs/src/android-library.rst" />
     <Text Include="../../docs/src/changes.rst" />
     <Text Include="../../docs/src/conf.py" />
@@ -432,6 +441,7 @@
     <Text Include="../../docs/src/third-party.rst" />
     <Text Include="../../docs/src/using-mupdf.rst" />
     <Text Include="../../docs/template.html" />
+    <Xml Include="../../docs/logo/mupdf_icon.xml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="../../../docs-src/Notes/Progress in Development/Considering the Way Forward/assets/clip1.png" />
@@ -600,6 +610,7 @@
     <Text Include="../../../docs-src/Notes/Aside/C++ std.unique_ptr for array type auto-delete.md" />
     <Text Include="../../../docs-src/Notes/Aside/Creating git patches from repo commits.md" />
     <Text Include="../../../docs-src/Notes/Aside/Fast integer division by transforming it into a multiplication plus corrections.md" />
+    <Text Include="../../../docs-src/Notes/Aside/How to get the page images for google books.md" />
     <Text Include="../../../docs-src/Notes/Aside/Installing R + TeX-live + R bookdown for producing documentation.md" />
     <Text Include="../../../docs-src/Notes/Aside/Installing and using Grafana for monitoring Qiqqa backend processes.md" />
     <Text Include="../../../docs-src/Notes/Aside/Links of interest.md" />
@@ -607,6 +618,7 @@
     <Text Include="../../../docs-src/Notes/Aside/R bookdown - installing and using different fonts in your documents.md" />
     <Text Include="../../../docs-src/Notes/Aside/Searching PDFs on archive.org anno 2023,2024 after the bloody publishers&apos; lawsuit(s).md" />
     <Text Include="../../../docs-src/Notes/Aside/Testing - nasty filenames - also on UNIX.md" />
+    <Text Include="../../../docs-src/Notes/Aside/Testing - retry connections after a while as user may be running application firewall.md" />
     <Text Include="../../../docs-src/Notes/Aside/The World of Data Extraction and Re-use/Data collecting via web scraping - JSON, JSONlines, etc.md" />
     <Text Include="../../../docs-src/Notes/Aside/The World of Data Extraction and Re-use/PDF Reading, Annotating and Content Extraction.md" />
     <Text Include="../../../docs-src/Notes/Aside/The World of Data Extraction and Re-use/PDFs Considered Harmful.md" />
