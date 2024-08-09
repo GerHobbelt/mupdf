@@ -209,13 +209,14 @@ fz_image *fz_new_image_of_size(fz_context *ctx,
 		const float *decode,
 		const int *colorkey,
 		fz_image *mask,
+		const int *matte,
 		size_t size,
 		fz_image_get_pixmap_fn *get_pixmap,
 		fz_image_get_size_fn *get_size,
 		fz_drop_image_fn *drop);
 
-#define fz_new_derived_image(CTX,W,H,B,CS,X,Y,I,IM,D,C,M,T,G,S,Z) \
-	((T*)Memento_label(fz_new_image_of_size(CTX,W,H,B,CS,X,Y,I,IM,D,C,M,sizeof(T),G,S,Z),#T))
+#define fz_new_derived_image(CTX,W,H,B,CS,X,Y,I,IM,D,C,M,MM,T,G,S,Z) \
+	((T*)Memento_label(fz_new_image_of_size(CTX,W,H,B,CS,X,Y,I,IM,D,C,M,MM,sizeof(T),G,S,Z),#T))
 
 /**
 	Create an image based on
@@ -250,7 +251,7 @@ fz_image *fz_new_image_of_size(fz_context *ctx,
 	A new reference is taken to this image. Supplying a masked
 	image as a mask to another image is illegal!
 */
-fz_image *fz_new_image_from_compressed_buffer(fz_context *ctx, int w, int h, int bpc, fz_colorspace *colorspace, int xres, int yres, int interpolate, int imagemask, const float *decode, const int *colorkey, fz_compressed_buffer *buffer, fz_image *mask);
+fz_image *fz_new_image_from_compressed_buffer(fz_context *ctx, int w, int h, int bpc, fz_colorspace *colorspace, int xres, int yres, int interpolate, int imagemask, const float *decode, const int *colorkey, fz_compressed_buffer *buffer, fz_image *mask, const int *matte);
 
 /**
 	Create an image from the given
@@ -349,6 +350,7 @@ struct fz_image
 	unsigned int imagemask:1;
 	unsigned int interpolate:1;
 	unsigned int use_colorkey:1;
+	unsigned int use_matte:1;
 	unsigned int use_decode:1;
 	unsigned int decoded:1;
 	unsigned int scalable:1;
@@ -361,6 +363,7 @@ struct fz_image
 	fz_image_get_pixmap_fn *get_pixmap;
 	fz_image_get_size_fn *get_size;
 	int colorkey[FZ_MAX_COLORS * 2];
+	int matte[FZ_MAX_COLORS * 2];
 	float decode[FZ_MAX_COLORS * 2];
 };
 

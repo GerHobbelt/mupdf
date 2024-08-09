@@ -68,9 +68,11 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 	int indexed;
 	fz_image *mask = NULL; /* explicit mask/soft mask image */
 	int use_colorkey = 0;
+	int use_matte = 0;
 	fz_colorspace *colorspace = NULL;
 	float decode[FZ_MAX_COLORS * 2];
 	int colorkey[FZ_MAX_COLORS * 2];
+	int matte[FZ_MAX_COLORS * 2];
 	int stride;
 	int is_jpx;
 
@@ -90,6 +92,7 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 
 	indexed = 0;
 	use_colorkey = 0;
+	use_matte = 0;
 
 	if (imagemask)
 		bpc = 1;
@@ -175,9 +178,9 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 				obj = pdf_dict_get(ctx, obj, PDF_NAME(Matte));
 				if (pdf_is_array(ctx, obj))
 				{
-					use_colorkey = 1;
+					use_matte = 1;
 					for (i = 0; i < n; i++)
-						colorkey[i] = fz_clamp(pdf_array_get_real(ctx, obj, i), 0, 1) * 255;
+						matte[i] = fz_clamp(pdf_array_get_real(ctx, obj, i), 0, 1) * 255;
 				}
 			}
 		}
@@ -219,13 +222,13 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 			if (colorspace)
 				worst_case *= colorspace->n;
 			buffer = pdf_load_compressed_stream(ctx, doc, pdf_to_num(ctx, dict), worst_case);
-			image = fz_new_image_from_compressed_buffer(ctx, w, h, bpc, colorspace, 96, 96, interpolate, imagemask, decode, use_colorkey ? colorkey : NULL, buffer, mask);
+			image = fz_new_image_from_compressed_buffer(ctx, w, h, bpc, colorspace, 96, 96, interpolate, imagemask, decode, use_colorkey ? colorkey : NULL, buffer, mask, use_matte ? matte : NULL);
 		}
 		else
 		{
 			/* Inline stream */
 			stride = (w * n * bpc + 7) / 8;
-			image = fz_new_image_from_compressed_buffer(ctx, w, h, bpc, colorspace, 96, 96, interpolate, imagemask, decode, use_colorkey ? colorkey : NULL, NULL, mask);
+			image = fz_new_image_from_compressed_buffer(ctx, w, h, bpc, colorspace, 96, 96, interpolate, imagemask, decode, use_colorkey ? colorkey : NULL, NULL, mask, use_matte ? matte : NULL);
 			pdf_load_compressed_inline_image(ctx, doc, dict, stride * h, cstm, indexed, (fz_compressed_image *)image);
 		}
 	}
