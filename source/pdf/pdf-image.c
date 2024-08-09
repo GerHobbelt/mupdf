@@ -156,7 +156,9 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 				decode[i] = i & 1 ? maxval : 0;
 		}
 
-		obj = pdf_dict_geta(ctx, dict, PDF_NAME(SMask), PDF_NAME(Mask));
+		obj = pdf_dict_get(ctx, dict, PDF_NAME(SMask));
+		if (!pdf_is_dict(ctx, obj))
+			obj = pdf_dict_get(ctx, dict, PDF_NAME(Mask));
 		if (pdf_is_dict(ctx, obj))
 		{
 			/* Not allowed for inline images or soft masks */
@@ -176,7 +178,9 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 				}
 			}
 		}
-		else if (pdf_is_array(ctx, obj))
+
+		obj = pdf_dict_get(ctx, dict, PDF_NAME(Mask));
+		if (pdf_is_array(ctx, obj))
 		{
 			use_colorkey = 1;
 			for (i = 0; i < n * 2; i++)
