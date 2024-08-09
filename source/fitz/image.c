@@ -301,10 +301,10 @@ fz_unblend_masked_tile(fz_context *ctx, fz_pixmap *tile, fz_image *image, const 
 			{
 				if (*s == 0)
 					for (k = 0; k < image->n; k++)
-						d[k] = image->colorkey[k];
+						d[k] = image->matte[k];
 				else
 					for (k = 0; k < image->n; k++)
-						d[k] = fz_clampi(image->colorkey[k] + (d[k] - image->colorkey[k]) * 255 / *s, 0, 255);
+						d[k] = fz_clampi(image->matte[k] + (d[k] - image->matte[k]) * 255 / *s, 0, 255);
 				s++;
 				d += n;
 			}
@@ -609,7 +609,7 @@ fz_decomp_image_from_stream(fz_context *ctx, fz_stream *stm, fz_compressed_image
 	int f = 1<<l2factor;
 	int w = image->w;
 	int h = image->h;
-	int matte = image->use_colorkey && image->mask;
+	int matte = image->use_matte;
 	fz_stream *read_stream = stm;
 	fz_stream *sstream = NULL;
 	fz_stream *l2stream = NULL;
@@ -775,7 +775,7 @@ compressed_image_get_pixmap(fz_context *ctx, fz_image *image_, fz_irect *subarea
 	/* If we are using matte, then the decode code requires both image and tile sizes
 	 * to match. The simplest way to ensure this is to do no native l2factor decoding.
 	 */
-	if (image->super.use_colorkey && image->super.mask)
+	if (image->super.use_matte)
 	{
 		local_l2factor = 0;
 		l2factor = &local_l2factor;
@@ -1104,7 +1104,7 @@ fz_new_image_from_pixmap(fz_context *ctx, fz_pixmap *pixmap, fz_image *mask)
 
 	image = fz_new_derived_image(ctx, pixmap->w, pixmap->h, 8, pixmap->colorspace,
 				pixmap->xres, pixmap->yres, 0, 0,
-				NULL, NULL, mask, fz_pixmap_image,
+				NULL, NULL, mask, NULL, fz_pixmap_image,
 				pixmap_image_get_pixmap,
 				pixmap_image_get_size,
 				drop_pixmap_image);
@@ -1117,7 +1117,8 @@ fz_new_image_from_pixmap(fz_context *ctx, fz_pixmap *pixmap, fz_image *mask)
 fz_image *
 fz_new_image_of_size(fz_context *ctx, int w, int h, int bpc, fz_colorspace *colorspace,
 		int xres, int yres, int interpolate, int imagemask, const float *decode,
-		const int *colorkey, fz_image *mask, size_t size,
+		const int *colorkey, fz_image *mask, const int *matte,
+		size_t size,
 		fz_image_get_pixmap_fn *get_pixmap,
 		fz_image_get_size_fn *get_size,
 		fz_drop_image_fn *drop)
@@ -1145,6 +1146,9 @@ fz_new_image_of_size(fz_context *ctx, int w, int h, int bpc, fz_colorspace *colo
 	image->use_colorkey = (colorkey != NULL);
 	if (colorkey)
 		memcpy(image->colorkey, colorkey, sizeof(int)*image->n*2);
+	image->use_matte = (matte != NULL);
+	if (matte)
+		memcpy(image->matte, matte, sizeof(int)*image->n*2);
 	image->use_decode = 0;
 	if (decode)
 	{
@@ -1199,7 +1203,8 @@ fz_image *
 fz_new_image_from_compressed_buffer(fz_context *ctx, int w, int h,
 	int bpc, fz_colorspace *colorspace,
 	int xres, int yres, int interpolate, int imagemask, const float *decode,
-	const int *colorkey, fz_compressed_buffer *buffer, fz_image *mask)
+	const int *colorkey, fz_compressed_buffer *buffer, fz_image *mask,
+	const int *matte)
 {
 	fz_compressed_image *image;
 
@@ -1208,7 +1213,8 @@ fz_new_image_from_compressed_buffer(fz_context *ctx, int w, int h,
 		image = fz_new_derived_image(ctx, w, h, bpc,
 					colorspace, xres, yres,
 					interpolate, imagemask, decode,
-					colorkey, mask, fz_compressed_image,
+					colorkey, mask, matte,
+					fz_compressed_image,
 					compressed_image_get_pixmap,
 					compressed_image_get_size,
 					drop_compressed_image);
@@ -1396,7 +1402,7 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 			bc->params.u.jpeg.color_transform = -1;
 			bc->params.u.jpeg.invert_cmyk = 1;
 		}
-		image = fz_new_image_from_compressed_buffer(ctx, w, h, bpc, cspace, xres, yres, 0, 0, NULL, NULL, bc, NULL);
+		image = fz_new_image_from_compressed_buffer(ctx, w, h, bpc, cspace, xres, yres, 0, 0, NULL, NULL, bc, NULL, NULL);
 		image->orientation = orientation;
 	}
 	fz_always(ctx)
@@ -1626,7 +1632,7 @@ fz_image *fz_new_image_from_display_list(fz_context *ctx, float w, float h, fz_d
 
 	image = fz_new_derived_image(ctx, iw, ih, 8, fz_device_rgb(ctx),
 				SCALABLE_IMAGE_DPI, SCALABLE_IMAGE_DPI, 0, 0,
-				NULL, NULL, NULL, fz_display_list_image,
+				NULL, NULL, NULL, NULL, fz_display_list_image,
 				display_list_image_get_pixmap,
 				display_list_image_get_size,
 				drop_display_list_image);

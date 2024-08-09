@@ -703,7 +703,8 @@ recompress_image(fz_context *ctx, fz_pixmap *pix, int type, int fmt, int method,
 
 	/* fz_new_image_from_compressed_buffer takes ownership of compressed buffer, even
 	 * in failure case. */
-	return fz_new_image_from_compressed_buffer(ctx, pix->w, pix->h, bpc, cs, pix->xres, pix->yres, interpolate, 0, NULL, NULL, cbuf, oldimg->mask);
+	// TODO: colorkey and matte ?
+	return fz_new_image_from_compressed_buffer(ctx, pix->w, pix->h, bpc, cs, pix->xres, pix->yres, interpolate, 0, NULL, NULL, cbuf, oldimg->mask, NULL);
 }
 
 static void
