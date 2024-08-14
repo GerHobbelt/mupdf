@@ -11,3 +11,6 @@ also-ignore:
 	# and the shar code is giving us grief, so we ditch it:
 	/contrib/shar/
 	
+	# too lazy to port this one properly:
+	/unzip/
+	

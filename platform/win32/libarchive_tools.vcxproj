@@ -22,11 +22,35 @@
     <ProjectReference Include="libarchive.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
     </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbzip2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff616ae4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
     <ProjectReference Include="libmupdf_minimal_core.vcxproj">
       <Project>{6f1ee8ba-ccb7-4f76-b9da-337c41dd6fc0}</Project>
     </ProjectReference>
+    <ProjectReference Include="libpcre.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518f174b2ba}</Project>
+    </ProjectReference>
     <ProjectReference Include="libsystem_override.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxz.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa34896}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -61,20 +85,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -88,7 +112,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -122,8 +146,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -135,14 +159,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBARCHIVE_STATIC;PLATFORM_CONFIG_H="libarchive_config.h";BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -150,6 +174,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Shlwapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -161,7 +191,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBARCHIVE_STATIC;PLATFORM_CONFIG_H="libarchive_config.h";BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -169,7 +199,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -177,6 +207,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Shlwapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -190,14 +226,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBARCHIVE_STATIC;PLATFORM_CONFIG_H="libarchive_config.h";BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -205,6 +241,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Shlwapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -216,7 +258,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBARCHIVE_STATIC;PLATFORM_CONFIG_H="libarchive_config.h";BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -224,7 +266,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -232,6 +274,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Shlwapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
@@ -262,9 +310,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/tar/tar_cmdline.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/tar/util.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/tar/write.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libarchive/unzip/bsdunzip.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libarchive/unzip/la_getline.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libarchive/unzip/unzip_cmdline.c" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/cat/bsdcat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/cat/bsdcat_platform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/contrib/android/config/android.h" />
@@ -325,9 +370,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/tar/bsdtar_platform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/tar/bsdtar_windows.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/tar/config_freebsd.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libarchive/unzip/bsdunzip.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libarchive/unzip/bsdunzip_platform.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libarchive/unzip/la_queue.h" />
     <Text Include="../../thirdparty/owemdjee/libarchive/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libarchive/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/libarchive/CTestConfig.cmake" />
@@ -397,11 +439,8 @@
     <Text Include="../../thirdparty/owemdjee/libarchive/libarchive/tar.5" />
     <Text Include="../../thirdparty/owemdjee/libarchive/tar/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libarchive/tar/bsdtar.1" />
-    <Text Include="../../thirdparty/owemdjee/libarchive/unzip/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libarchive/unzip/bsdunzip.1" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
