@@ -681,10 +681,6 @@ void warpapp_inverthit(warpapp_t *app)
 {
 }
 
-static void warpapp_search_in_direction(warpapp_t *app, enum panning *panto, int dir)
-{
-}
-
 void warpapp_onresize(warpapp_t *app, int w, int h)
 {
 	if (app->winw != w || app->winh != h)
