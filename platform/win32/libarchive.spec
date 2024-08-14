@@ -12,3 +12,5 @@ also-ignore:
 	
 	monolithic_main.c
 	
+	bsdunzip.c
+	

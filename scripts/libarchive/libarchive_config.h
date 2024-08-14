@@ -178,7 +178,7 @@ typedef uint64_t uintmax_t;
 #endif
 
 /* Define ZLIB_WINAPI if zlib was built on Visual Studio. */
-#define ZLIB_WINAPI 1
+/* #undef ZLIB_WINAPI */
 
 /* Darwin ACL support */
 /* #undef ARCHIVE_ACL_DARWIN */
@@ -929,7 +929,7 @@ typedef uint64_t uintmax_t;
 /* #undef HAVE_PATHS_H */
 
 /* Define to 1 if you have the <pcreposix.h> header file. */
-#define HAVE_PCREPOSIX_H 1
+/*#undef HAVE_PCREPOSIX_H */
 
 /* Define to 1 if you have the <pcre2posix.h> header file. */
 #define HAVE_PCRE2POSIX_H 1

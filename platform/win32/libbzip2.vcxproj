@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -77,7 +77,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBZIP2;BZIP2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -124,8 +124,8 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBZIP2;BZIP2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/bzip2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BZ2_STATICLIB;BUILD_MONOLITHIC;BUILDING_LIBBZIP2;BZIP2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -150,8 +150,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBZIP2;BZIP2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/bzip2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BZ2_STATICLIB;BUILD_MONOLITHIC;BUILDING_LIBBZIP2;BZIP2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -179,8 +179,8 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBZIP2;BZIP2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/bzip2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BZ2_STATICLIB;BUILD_MONOLITHIC;BUILDING_LIBBZIP2;BZIP2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -205,8 +205,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBZIP2;BZIP2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/bzip2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BZ2_STATICLIB;BUILD_MONOLITHIC;BUILDING_LIBBZIP2;BZIP2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -233,11 +233,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/bzip2/compress.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bzip2/crctable.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bzip2/decompress.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/bzip2/dlltest.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bzip2/huffman.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/bzip2/mk251.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bzip2/libbz2.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bzip2/randtable.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/bzip2/spewG.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bzip2/unzcrash.c" />
     <ClInclude Include="../../thirdparty/owemdjee/bzip2/bzlib.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bzip2/bzlib_private.h" />
@@ -282,6 +280,7 @@
     <Text Include="../../thirdparty/owemdjee/bzip2/bzmore.1" />
     <Text Include="../../thirdparty/owemdjee/bzip2/cmake/ExtractValidFlags.cmake" />
     <Text Include="../../thirdparty/owemdjee/bzip2/cmake/FindCUnit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/bzip2/cmake/FindValgrind.cmake" />
     <Text Include="../../thirdparty/owemdjee/bzip2/cmake/SymLink.cmake" />
     <Text Include="../../thirdparty/owemdjee/bzip2/cmake/Version.cmake" />
     <Text Include="../../thirdparty/owemdjee/bzip2/cmake/runtest.cmake" />
@@ -298,7 +297,6 @@
     <Text Include="../../thirdparty/owemdjee/bzip2/install_links.py" />
     <Text Include="../../thirdparty/owemdjee/bzip2/libbz2.def" />
     <Text Include="../../thirdparty/owemdjee/bzip2/libbz2.pc.in" />
-    <Text Include="../../thirdparty/owemdjee/bzip2/makefile.msc" />
     <Text Include="../../thirdparty/owemdjee/bzip2/man/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bzip2/man/bzdiff.1" />
     <Text Include="../../thirdparty/owemdjee/bzip2/man/bzgrep.1" />
@@ -318,13 +316,16 @@
     <Text Include="../../thirdparty/owemdjee/bzip2/sample3.bz2" />
     <Text Include="../../thirdparty/owemdjee/bzip2/sample3.ref" />
     <Text Include="../../thirdparty/owemdjee/bzip2/tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/bzip2/tests/runtest.py" />
-    <Text Include="../../thirdparty/owemdjee/bzip2/tests/sample1.bz2" />
-    <Text Include="../../thirdparty/owemdjee/bzip2/tests/sample1.ref" />
-    <Text Include="../../thirdparty/owemdjee/bzip2/tests/sample2.bz2" />
-    <Text Include="../../thirdparty/owemdjee/bzip2/tests/sample2.ref" />
-    <Text Include="../../thirdparty/owemdjee/bzip2/tests/sample3.bz2" />
-    <Text Include="../../thirdparty/owemdjee/bzip2/tests/sample3.ref" />
+    <Text Include="../../thirdparty/owemdjee/bzip2/tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bzip2/tests/input/quick/sample1.bz2" />
+    <Text Include="../../thirdparty/owemdjee/bzip2/tests/input/quick/sample1.ref" />
+    <Text Include="../../thirdparty/owemdjee/bzip2/tests/input/quick/sample2.bz2" />
+    <Text Include="../../thirdparty/owemdjee/bzip2/tests/input/quick/sample2.ref" />
+    <Text Include="../../thirdparty/owemdjee/bzip2/tests/input/quick/sample3.bz2" />
+    <Text Include="../../thirdparty/owemdjee/bzip2/tests/input/quick/sample3.ref" />
+    <Text Include="../../thirdparty/owemdjee/bzip2/tests/large_test.py" />
+    <Text Include="../../thirdparty/owemdjee/bzip2/tests/quick_test.py" />
+    <Text Include="../../thirdparty/owemdjee/bzip2/tests/testcase.py" />
     <Text Include="../../thirdparty/owemdjee/bzip2/version.rc.in" />
     <Text Include="../../thirdparty/owemdjee/bzip2/xmlproc.sh" />
     <Xml Include="../../thirdparty/owemdjee/bzip2/docs/entities.xml" />
@@ -332,8 +333,7 @@
     <Xml Include="../../thirdparty/owemdjee/bzip2/entities.xml" />
     <Xml Include="../../thirdparty/owemdjee/bzip2/manual.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

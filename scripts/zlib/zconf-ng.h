@@ -73,7 +73,7 @@
  * define ZLIB_WINAPI.
  * Caution: the standard ZLIB1.DLL is NOT compiled using ZLIB_WINAPI.
  */
-#if defined(ZLIB_WINAPI) && defined(_WIN32)
+#if defined(ZLIB_WINAPI) && defined(_WIN32) && !defined(BUILD_MONOLITHIC)
 #  include <windows.h>
    /* No need for _export, use ZLIB.DEF instead. */
    /* For complete Windows compatibility, use WINAPI, not __stdcall. */
