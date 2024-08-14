@@ -79,6 +79,7 @@
 #include "../../source/fitz/tessocr.h"
 #include "../../thirdparty/gumbo-parser/src/gumbo.h"
 #include "../../thirdparty/owemdjee/gumbo-libxml/gumbo_libxml.h"
+#include "../../thirdparty/owemdjee/tidy-html5/console/monolithic_examples.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -606,6 +607,12 @@ static struct tool_spec {
 #endif
 
 #if defined(MUTOOL_EX)
+	{ {.fa = tidy_tab2space_main }, "tidy_tab2space", "htmltidy::tab2space tool" },
+	{ {.f = tidy_test71_main }, "tidy_test71", "htmltidy::test71 test" },
+	{ {.fa = tidy_cli_main }, "htmltidy", "htmltidy CLI application" },
+#endif
+
+#if defined(MUTOOL_EX)
 	{ {.fa = jbig2enc_main }, "jbig2enc", "jbig2enc tool" },
 #endif
 
@@ -1011,11 +1018,11 @@ static struct tool_spec {
 
 #if defined(MUTOOL_EX)
 	{ {.fa = xml_gio_bread_example_main }, "xml_gio_bread_example", "libxml gio_bread_example demo/tool" },
-	{ {.fa = xml_nanohttp_main }, "xml_nanohttp", "libxml nanohttp demo/tool" },
+	//{ {.fa = xml_nanohttp_main }, "xml_nanohttp", "libxml nanohttp demo/tool" },
 	{ {.fa = xml_runsuite_tests_main }, "xml_runsuite_tests", "libxml runsuite_tests demo/tool" },
 	{ {.fa = xml_runtest_main }, "xml_runtest", "libxml runtest demo/tool" },
 	{ {.fa = xml_runxmlconfig_main }, "xml_runxmlconfig", "libxml runxmlconfig demo/tool" },
-	{ {.fa = xml_schematron_main }, "xml_schematron", "libxml schematron demo/tool" },
+	//{ {.fa = xml_schematron_main }, "xml_schematron", "libxml schematron demo/tool" },
 	{ {.fa = xml_testapi_main }, "xml_testapi", "libxml testapi demo/tool" },
 	{ {.fa = xml_testC14N_main }, "xml_testC14N", "libxml testC14N demo/tool" },
 	{ {.f = xml_testdict_main }, "xml_testdict", "libxml testdict demo/tool" },
@@ -1032,7 +1039,7 @@ static struct tool_spec {
 	{ {.fa = xml_testXPath_main }, "xml_testXPath", "libxml testXPath demo/tool" },
 	{ {.fa = xml_xmlcatalog_main }, "xmlcatalog", "libxml xmlcatalog demo/tool" },
 	{ {.fa = xml_xmllint_main }, "xmllint", "libxml xmllint demo/tool" },
-	{ {.fa = xml_test_xmlreader_main }, "xml_test_xmlreader", "libxml test_xmlreader demo/tool" },
+	//{ {.fa = xml_test_xmlreader_main }, "xml_test_xmlreader", "libxml test_xmlreader demo/tool" },
 	{ {.f = xml_testchar_main }, "xml_testchar", "libxml testchar demo/tool" },
 #endif
 
