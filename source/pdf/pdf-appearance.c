@@ -348,6 +348,10 @@ pdf_write_line_cap_appearance(fz_context *ctx, fz_buffer *buf, fz_rect *rect,
 		float x, float y, float dx, float dy, float w,
 		int sc, int ic, pdf_obj *cap)
 {
+	float l = sqrtf(dx*dx + dy*dy);
+	dx = dx / l;
+	dy = dy / l;
+
 	if (cap == PDF_NAME(Square))
 	{
 		float r = fz_max(3.0f, w * 3.0f);
@@ -464,9 +468,8 @@ pdf_write_line_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, fz_
 	{
 		float dx = b.x - a.x;
 		float dy = b.y - a.y;
-		float l = sqrtf(dx*dx + dy*dy);
-		pdf_write_line_cap_appearance(ctx, buf, rect, a.x, a.y, dx/l, dy/l, w, sc, ic, pdf_array_get(ctx, le, 0));
-		pdf_write_line_cap_appearance(ctx, buf, rect, b.x, b.y, -dx/l, -dy/l, w, sc, ic, pdf_array_get(ctx, le, 1));
+		pdf_write_line_cap_appearance(ctx, buf, rect, a.x, a.y, dx, dy, w, sc, ic, pdf_array_get(ctx, le, 0));
+		pdf_write_line_cap_appearance(ctx, buf, rect, b.x, b.y, -dx, -dy, w, sc, ic, pdf_array_get(ctx, le, 1));
 	}
 	*rect = fz_expand_rect(*rect, fz_max(1, w));
 }
@@ -948,7 +951,7 @@ pdf_write_polygon_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, 
 	le = pdf_dict_get(ctx, annot->obj, PDF_NAME(LE));
 	if (!close && n >= 2 && pdf_array_len(ctx, le) == 2)
 	{
-		float dx, dy, l;
+		float dx, dy;
 		fz_point a, b;
 
 		a.x = pdf_array_get_real(ctx, verts, 0*2+0);
@@ -958,9 +961,8 @@ pdf_write_polygon_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, 
 
 		dx = b.x - a.x;
 		dy = b.y - a.y;
-		l = sqrtf(dx*dx + dy*dy);
 
-		pdf_write_line_cap_appearance(ctx, buf, rect, a.x, a.y, dx/l, dy/l, lw, sc, ic, pdf_array_get(ctx, le, 0));
+		pdf_write_line_cap_appearance(ctx, buf, rect, a.x, a.y, dx, dy, lw, sc, ic, pdf_array_get(ctx, le, 0));
 
 		a.x = pdf_array_get_real(ctx, verts, (n-1)*2+0);
 		a.y = pdf_array_get_real(ctx, verts, (n-1)*2+1);
@@ -969,9 +971,8 @@ pdf_write_polygon_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, 
 
 		dx = b.x - a.x;
 		dy = b.y - a.y;
-		l = sqrtf(dx*dx + dy*dy);
 
-		pdf_write_line_cap_appearance(ctx, buf, rect, a.x, a.y, dx/l, dy/l, lw, sc, ic, pdf_array_get(ctx, le, 1));
+		pdf_write_line_cap_appearance(ctx, buf, rect, a.x, a.y, dx, dy, lw, sc, ic, pdf_array_get(ctx, le, 1));
 	}
 
 	if (exp == 0)
@@ -2278,6 +2279,7 @@ pdf_write_free_text_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 	int q, r, n, textcolor_n;
 	int lang;
 	fz_rect rd;
+	pdf_obj *le;
 #if FZ_ENABLE_HTML_ENGINE
 	const char *rc, *ds;
 	char *free_rc = NULL;
@@ -2356,10 +2358,30 @@ pdf_write_free_text_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 						points[2], points[3],
 						points[4], points[5]);
 				}
-				pdf_write_line_cap_appearance(ctx, buf, &dummy,
-					points[0], points[1],
-					points[2] - points[0], points[3] - points[1], b,
-					1, 0, pdf_dict_get(ctx, annot->obj, PDF_NAME(LE)));
+
+
+				le = pdf_dict_get(ctx, annot->obj, PDF_NAME(LE));
+				if (pdf_array_len(ctx, le) == 2)
+				{
+					pdf_write_line_cap_appearance(ctx, buf, &dummy,
+						points[0], points[1],
+						points[2] - points[0], points[3] - points[1], b,
+						1, 0, pdf_array_get(ctx, le, 0));
+					if (n == 6)
+					{
+						pdf_write_line_cap_appearance(ctx, buf, &dummy,
+							points[4], points[5],
+							points[4] - points[2], points[5] - points[3], b,
+							1, 0, pdf_array_get(ctx, le, 1));
+					}
+					else
+					{
+						pdf_write_line_cap_appearance(ctx, buf, &dummy,
+							points[2], points[3],
+							points[0] - points[2], points[1] - points[3], b,
+							1, 0, pdf_array_get(ctx, le, 1));
+					}
+				}
 			}
 		}
 	}
