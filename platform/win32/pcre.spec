@@ -5,4 +5,5 @@ sources:
 also-ignore:
 	src/
 	maint/
+	amalgamate/pcre2_.*[.]c
 	
