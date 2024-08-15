@@ -5057,7 +5057,7 @@ static void ffi_new_Image(js_State *J)
 			image = fz_new_image_from_compressed_buffer(ctx,
 				w, h, bpc, colorspace, xres, yres,
 				interpolate, imagemask, has_decode ? &decode[0] : NULL, has_colorkey ? &colorkey[0] : NULL,
-				copy, mask);
+				copy, mask, NULL);
 		}
 		fz_catch(ctx)
 			rethrow(J);
