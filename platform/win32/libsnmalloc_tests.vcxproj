@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{501059E0-DA76-453C-9A39-7061DBEA7485}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSNMALLOC;SNMALLOC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/snmalloc/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSNMALLOC;SNMALLOC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSNMALLOC;SNMALLOC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/snmalloc/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSNMALLOC;SNMALLOC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/snmalloc/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSNMALLOC;SNMALLOC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSNMALLOC;SNMALLOC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/snmalloc/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSNMALLOC;SNMALLOC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/snmalloc/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSNMALLOC;SNMALLOC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSNMALLOC;SNMALLOC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/snmalloc/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSNMALLOC;SNMALLOC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/snmalloc/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSNMALLOC;SNMALLOC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSNMALLOC;SNMALLOC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/snmalloc/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/bits/bits.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/cheri/cheri.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/client_meta/client_meta.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/domestication/domestication.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/external_pagemap/external_pagemap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/first_operation/first_operation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/fixed_region/fixed_region.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/jemalloc/jemalloc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/malloc/test_malloc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/memcpy/func-memcpy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/memory/memory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/memory_usage/memory_usage.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/miracle_ptr/miracle_ptr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/pagemap/pagemap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/pool/pool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/redblack/redblack.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/release-rounding/rounding.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/sandbox/sandbox.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/sizeclass/sizeclass.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/statistics/stats.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/teardown/teardown.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/thread_alloc_external/thread_alloc_external.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/two_alloc_types/alloc1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/two_alloc_types/alloc2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/func/two_alloc_types/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/perf/contention/contention.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/perf/external_pointer/externalpointer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/perf/low_memory/low-memory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/perf/memcpy/memcpy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/perf/msgpass/msgpass.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/perf/singlethread/singlethread.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/test/perf/startup/startup.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/test/helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/test/measuretime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/test/opt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/test/setup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/test/usage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/test/xoroshiro.h" />
+    <Image Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/ChunkMap.png" />
+    <Image Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/doublefreeprotection.gif" />
+    <Image Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/memcpy_perf.png" />
+    <Image Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/perfgraph-memcpy-only.png" />
+    <Image Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/perfgraph.png" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/ci/README.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/ci/Toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/AddressSpace.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/BUILDING.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/PORTING.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/StrictProvenance.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/FreelistProtection.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/GuardedMemcpy.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/README.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/Randomisation.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/VariableSizedChunks.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/benchres.csv" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/res_je.csv" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/res_mi.csv" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/res_scudo.csv" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/res_smi.csv" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/res_sn-0.5.3.csv" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/res_sn-0.6.0-checks.csv" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/res_sn-0.6.0-memcpy.csv" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/res_sn-0.6.0.csv" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/security.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/snmalloc.pdf" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

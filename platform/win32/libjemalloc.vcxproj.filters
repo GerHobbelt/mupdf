@@ -75,23 +75,29 @@
     <Filter Include="Misc Files\msvc\projects\vc2019\jemalloc">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0020}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\scripts">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0022}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files\scripts\freebsd">
+    <Filter Include="Misc Files\msvc\projects\vc2022">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0023}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\scripts\linux">
+    <Filter Include="Misc Files\msvc\projects\vc2022\jemalloc">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\scripts">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0024}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\scripts\windows">
+    <Filter Include="Misc Files\scripts\freebsd">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0025}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\src">
+    <Filter Include="Misc Files\scripts\linux">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0026}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src">
+    <Filter Include="Misc Files\scripts\windows">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0027}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0029}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +108,9 @@
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/base.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/batcher.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/bin.c">
@@ -281,6 +290,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/tsd.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/util.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/witness.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -336,6 +348,9 @@
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/base.h">
+      <Filter>Header Files\include\jemalloc\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/batcher.h">
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin.h">
@@ -456,6 +471,9 @@
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_macros.h">
+      <Filter>Header Files\include\jemalloc\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_overrides.h">
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_types.h">
@@ -623,6 +641,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tsd_generic.h">
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tsd_internals.h">
+      <Filter>Header Files\include\jemalloc\internal</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tsd_malloc_thread_cleanup.h">
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
@@ -770,10 +791,16 @@
     <Text Include="../../thirdparty/owemdjee/jemalloc/msvc/projects/vc2019/jemalloc/jemalloc.vcxproj.user">
       <Filter>Misc Files\msvc\projects\vc2019\jemalloc</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/jemalloc/msvc/projects/vc2022/jemalloc/jemalloc.vcxproj.filters">
+      <Filter>Misc Files\msvc\projects\vc2022\jemalloc</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/jemalloc/run_tests.sh">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/check-formatting.sh">
+      <Filter>Misc Files\scripts</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/check_trailing_whitespace.sh">
       <Filter>Misc Files\scripts</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/freebsd/before_install.sh">
@@ -793,6 +820,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/linux/before_install.sh">
       <Filter>Misc Files\scripts\linux</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/run_static_analysis.sh">
+      <Filter>Misc Files\scripts</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/windows/before_install.sh">
       <Filter>Misc Files\scripts\windows</Filter>

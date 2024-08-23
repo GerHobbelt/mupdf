@@ -1360,6 +1360,9 @@ xz
 lzma
 libsais
 bxzstr
+7-Zip-zstd
+Image-Smoothing-Algorithm-Based-on-Gradient-Analysis
+lodepng
 
 EOT
 ) | grep -e "$FILTER"
@@ -1429,6 +1432,7 @@ vcpkg
 visible-url-detector
 WebView2Browser
 WebView2Samples
+7-Zip-zstd
 
 EOT
 ) | grep -e "$FILTER"

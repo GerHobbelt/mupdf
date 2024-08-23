@@ -1,3 +1,4 @@
 
 also-ignore:
+	test/
 	

@@ -50,20 +50,20 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -89,7 +89,7 @@
     <NMakeOutput>__build_target.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -123,8 +123,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="bin2coff.vcxproj">
@@ -268,6 +268,9 @@
     <ProjectReference Include="wxw-samples-artprov.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a5daee4}</Project>
     </ProjectReference>
+    <ProjectReference Include="wxw-samples-aui-minimal-static-build.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19116a109667}</Project>
+    </ProjectReference>
     <ProjectReference Include="wxw-samples-aui.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a109667}</Project>
     </ProjectReference>
@@ -289,6 +292,9 @@
     <ProjectReference Include="wxw-samples-config.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a772a1c}</Project>
     </ProjectReference>
+    <ProjectReference Include="wxw-samples-console-minimal-static-build.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19116a281c00}</Project>
+    </ProjectReference>
     <ProjectReference Include="wxw-samples-console.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a281c00}</Project>
     </ProjectReference>
@@ -307,8 +313,20 @@
     <ProjectReference Include="wxw-samples-display.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ae97ea5}</Project>
     </ProjectReference>
+    <ProjectReference Include="wxw-samples-dll-exe.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-18226acfd2c8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wxw-samples-dll-test-exe.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-18226acfd277}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wxw-samples-dll.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19226acfd3cb}</Project>
+    </ProjectReference>
     <ProjectReference Include="wxw-samples-dnd.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226acc1e77}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wxw-samples-docking.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19226a7ba0f9}</Project>
     </ProjectReference>
     <ProjectReference Include="wxw-samples-docview.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226ae5480e}</Project>
@@ -418,6 +436,9 @@
     <ProjectReference Include="wxw-samples-mfc.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a92fa89}</Project>
     </ProjectReference>
+    <ProjectReference Include="wxw-samples-minimal-static-build.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19116a663669}</Project>
+    </ProjectReference>
     <ProjectReference Include="wxw-samples-minimal.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a663669}</Project>
     </ProjectReference>
@@ -456,6 +477,9 @@
     </ProjectReference>
     <ProjectReference Include="wxw-samples-printing.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a8dbc87}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wxw-samples-propgrid-minimal-static-build.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19116a6d6b73}</Project>
     </ProjectReference>
     <ProjectReference Include="wxw-samples-propgrid.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a6d6b73}</Project>
@@ -509,7 +533,7 @@
       <Project>{0b51171b-b10e-4eac-8ffa-19226a79eac8}</Project>
     </ProjectReference>
     <ProjectReference Include="wxw-samples-stc.vcxproj">
-      <Project>{0b51171b-b10e-4eac-8ffa-19226a75eaee}</Project>
+      <Project>{380a7150-828d-4f87-9cce-a7d76e898f13}</Project>
     </ProjectReference>
     <ProjectReference Include="wxw-samples-svg.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a4d5fba}</Project>
@@ -568,6 +592,9 @@
     <ProjectReference Include="wxw-samples-xrc.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a1d8668}</Project>
     </ProjectReference>
+    <ProjectReference Include="wxw-samples-xti.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19226a740fda}</Project>
+    </ProjectReference>
     <ProjectReference Include="wxw-utils-execmon.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a4e5e82}</Project>
     </ProjectReference>
@@ -590,8 +617,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
