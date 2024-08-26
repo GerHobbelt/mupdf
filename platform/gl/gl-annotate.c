@@ -795,7 +795,7 @@ static enum pdf_intent do_annotate_intent(void)
 	return intent;
 }
 
-static void do_annotate_contents(void)
+static int do_annotate_contents(void)
 {
 	static int is_same_edit_operation = 1;
 	static pdf_annot *last_annot = NULL;
@@ -830,6 +830,8 @@ static void do_annotate_contents(void)
 			is_same_edit_operation = 1;
 		}
 	}
+
+	return input.text[0] != 0;
 }
 
 static const char *file_attachment_icons[] = { "Graph", "Paperclip", "PushPin", "Tag" };
@@ -1121,7 +1123,7 @@ void do_annotate_panel(void)
 
 	if (ui.selected_annot && (subtype = pdf_annot_type(ctx, ui.selected_annot)) != PDF_ANNOT_WIDGET)
 	{
-		int n, choice;
+		int n, choice, has_content;
 		pdf_obj *obj;
 
 		/* common annotation properties */
@@ -1137,7 +1139,7 @@ void do_annotate_panel(void)
 		if (obj)
 			ui_label("Popup: %d 0 R", pdf_to_num(ctx, obj));
 
-		do_annotate_contents();
+		has_content = do_annotate_contents();
 
 		ui_spacer();
 
@@ -1232,6 +1234,43 @@ void do_annotate_panel(void)
 				if (e_choice != -1) e = e_choice;
 				trace_action("annot.setLineEndingStyles(%q, %q);\n", line_ending_styles[s], line_ending_styles[e]);
 				pdf_set_annot_line_ending_styles(ctx, ui.selected_annot, s, e);
+			}
+		}
+
+		if (subtype == PDF_ANNOT_LINE)
+		{
+			float llx[3];
+			static int ll, lle, llo;
+			int ll_changed;
+			int cap;
+
+			if (has_content)
+			{
+				cap = pdf_annot_line_caption(ctx, ui.selected_annot);
+				if (ui_checkbox("Line Caption", &cap))
+				{
+					pdf_set_annot_line_caption(ctx, ui.selected_annot, cap);
+					trace_action("annot.setLineCaption(%s);\n", cap ? "true" : "false");
+				}
+			}
+
+			pdf_annot_line_leader(ctx, ui.selected_annot, llx+0, llx+1, llx+2);
+			ll = (int)llx[0];
+			lle = (int)llx[1];
+			llo = (int)llx[2];
+			ui_label("Line Leader: %d", ll);
+			ll_changed = ui_slider(&ll, -20, 20, 256);
+			if (llx[0])
+			{
+				ui_label("LLE: %d", lle);
+				ll_changed |= ui_slider(&lle, 0, 20, 256);
+				ui_label("LLO: %d", llo);
+				ll_changed |= ui_slider(&llo, 0, 20, 256);
+			}
+			if (ll_changed)
+			{
+				pdf_set_annot_line_leader(ctx, ui.selected_annot, ll, lle, llo);
+				trace_action("annot.setLineLeader(%d,%d,%d);\n", ll, lle, llo);
 			}
 		}
 
