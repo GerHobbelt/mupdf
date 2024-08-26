@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF67AF02}</ProjectGuid>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFEDCB3C}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -114,7 +114,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLOAT_COMPARE;FLOAT_COMPARE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -124,12 +124,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tinygettext/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/dirent/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLOAT_COMPARE;FLOAT_COMPARE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLOAT_COMPARE;FLOAT_COMPARE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLOAT_COMPARE;FLOAT_COMPARE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -150,13 +150,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tinygettext/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/dirent/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLOAT_COMPARE;FLOAT_COMPARE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLOAT_COMPARE;FLOAT_COMPARE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -169,7 +169,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLOAT_COMPARE;FLOAT_COMPARE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -179,12 +179,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tinygettext/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/dirent/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLOAT_COMPARE;FLOAT_COMPARE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLOAT_COMPARE;FLOAT_COMPARE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -197,7 +197,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLOAT_COMPARE;FLOAT_COMPARE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -205,13 +205,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tinygettext/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/dirent/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLOAT_COMPARE;FLOAT_COMPARE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLOAT_COMPARE;FLOAT_COMPARE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -226,50 +226,34 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/dictionary.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/dictionary_manager.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/iconv.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/language.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/log.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/plural_forms.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/po_parser.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/tinygettext.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/unix_file_system.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/test/helloworld.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/test/po_parser_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/test/tinygettext_test.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/dictionary.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/dictionary_manager.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/dirent.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/file_system.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/iconv.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/language.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/log.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/log_stream.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/plural_forms.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/po_parser.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/tinygettext.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/unix_file_system.hpp" />
-    <Image Include="../../thirdparty/owemdjee/tinygettext/images/logo.png" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/CMake/CompilerFlags.cmake" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/LICENSE.md" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/README.md" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/TODO" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/flake.nix" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/images/logo.svg" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/mk/cmake/TinyCMMC.cmake" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/broken.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/game/de.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/helloworld/de.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/level/de.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/po/de.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/po/de_AT.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/po/fr.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/test.sh" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/tinygettext-config.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/tinygettext.nix" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/tinygettext.pc.in" />
+    <ClCompile Include="../../thirdparty/owemdjee/float_compare/test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/float_compare/float_compare.hpp" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/README.md" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/MSVisualStudio/v10alt/coinutils.props" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/MSVisualStudio/v10alt/genDefForCoinUtils.ps1" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/MSVisualStudio/v17/CoinUtilsTest.cmd" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/MSVisualStudio/v9alt/coinutils.vsprops" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/MSVisualStudio/v9alt/genDefForCoinUtils.ps1" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/README.md" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/coinutils.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/doxydoc/doxygen.conf.in" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/m4/ac_coinutils_inttypes.m4" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/m4/ac_coinutils_mempool.m4" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/m4/ac_coinutils_threads.m4" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/src/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/src/config_coinutils.h.in" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/src/format-source.sh" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/float_compare/coin/test/Makefile.in" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

@@ -19,32 +19,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF67AF02}</ProjectGuid>
+    <ProjectGuid>{374CC642-1C86-4DB8-9E89-04B58071C22E}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -91,7 +91,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4324;4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -114,7 +114,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -124,12 +124,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tinygettext/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/dirent/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -150,13 +150,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tinygettext/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/dirent/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -169,7 +169,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -179,12 +179,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tinygettext/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/dirent/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -197,7 +197,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -205,13 +205,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tinygettext/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/dirent/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINYGETTEXT;TINYGETTEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -226,50 +226,46 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/dictionary.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/dictionary_manager.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/iconv.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/language.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/log.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/plural_forms.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/po_parser.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/tinygettext.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/src/unix_file_system.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/test/helloworld.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/test/po_parser_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tinygettext/test/tinygettext_test.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/dictionary.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/dictionary_manager.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/dirent.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/file_system.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/iconv.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/language.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/log.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/log_stream.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/plural_forms.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/po_parser.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/tinygettext.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tinygettext/include/tinygettext/unix_file_system.hpp" />
-    <Image Include="../../thirdparty/owemdjee/tinygettext/images/logo.png" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/CMake/CompilerFlags.cmake" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/LICENSE.md" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/README.md" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/TODO" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/flake.nix" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/images/logo.svg" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/mk/cmake/TinyCMMC.cmake" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/broken.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/game/de.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/helloworld/de.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/level/de.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/po/de.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/po/de_AT.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/po/fr.po" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/test/test.sh" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/tinygettext-config.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/tinygettext.nix" />
-    <Text Include="../../thirdparty/owemdjee/tinygettext/tinygettext.pc.in" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_add_struct_name.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_box.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_bytestring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_combined_processors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_custom_class1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_custom_class3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_custom_class4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_default_values.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_deque.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_enum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_field_variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_flag_enum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_flag_enum_with_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_flatten.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_flatten_anonymous.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_forward_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_literal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_literal_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_map_with_key_validation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_monster_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_readme_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_readme_example2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_ref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_save_load.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_size.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_snake_case_to_camel_case.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_snake_case_to_pascal_case.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_string_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_tagged_union.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_tagged_union2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_timestamp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_unique_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_unique_ptr2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/test_wstring.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/write_and_read.hpp" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/CMakeLists.txt" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

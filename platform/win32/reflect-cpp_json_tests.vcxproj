@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{03C105A5-B37C-4AAA-8A65-45E239D37BD0}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;4324;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ProjectReference Include="libgbenchmark.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6fa4e9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgoogletest.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7a17e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libreflect-cpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff196074}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override_4_googletests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82e}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_add_struct_name.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_all_of.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_alphanumeric_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_alphanumeric_unordered_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_and_then.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_anonymous_fields.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_any_of.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_apply.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_array2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_as.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_as2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_as_flatten.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_box.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_box2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_c_array_class1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_c_array_class2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_c_array_class3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_c_array_class4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_c_array_class5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_combined_processors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_const_fields.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_custom_class1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_custom_class2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_custom_class3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_custom_class4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_custom_constructor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_deep_nested.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_default_values.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_deque.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_email.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_empty_object.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_enum1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_enum2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_enum3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_enum4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_enum5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_enum6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_enum7.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_error_messages.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_extra_fields.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_field_variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_field_variant_std.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_filepath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_flag_enum1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_flag_enum2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_flag_enum_with_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_flatten.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_flatten_anonymous.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_forward_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_generic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_hex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_inheritance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_inheritance2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_inside_function.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_integers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_json_schema.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_json_schema2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_json_schema3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_json_schema_size_validation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_literal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_literal_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_literal_unordered_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_many_fields.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_map_with_key_validation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_meta_fields.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_monster_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_move_replace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_multimap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_multiset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_no_optionals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_oct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_one_of.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_optional_fields.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_readme_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_ref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_reflector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_reflector_read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_reflector_write.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_replace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_replace2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_replace_flatten.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_replace_flatten2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_replace_with_other_struct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_replace_with_other_struct2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_result.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_rfl_tuple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_rfl_variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_rfl_variant_emplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_rfl_variant_get_if.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_rfl_variant_holds_alternative.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_rfl_variant_swap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_rfl_variant_visit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_rfl_variant_visit_in_place.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_save_load.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_shared_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_size.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_snake_case_to_camel_case.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_snake_case_to_camel_case_rename.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_snake_case_to_pascal_case.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_snake_case_to_pascal_case_rename.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_std_ref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_string_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_string_unordered_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_strip_field_names.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_tagged_union.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_tagged_union2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_tagged_union3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_tagged_union4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_template.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_timestamp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_tuple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_unique_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_unique_ptr2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_unnamed_namespace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_unordered_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_unordered_multimap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_unordered_multiset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_unordered_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/test_wstring.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/write_and_read.hpp" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

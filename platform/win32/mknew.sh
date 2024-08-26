@@ -1363,6 +1363,12 @@ bxzstr
 7-Zip-zstd
 Image-Smoothing-Algorithm-Based-on-Gradient-Analysis
 lodepng
+float_compare
+sse2neon
+msgpack-c
+reflect-cpp
+libbson
+flatbuffers
 
 EOT
 ) | grep -e "$FILTER"

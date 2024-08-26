@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF196074}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4324;4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/all/canada_read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/all/canada_write.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/all/licenses_read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/all/licenses_write.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reflect-cpp\benchmarks\all\main_all_bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/all/person_read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/all/person_write.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/json/canada.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/json/licenses.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\reflect-cpp\benchmarks\json\main_json_bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/json/person.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/reflectcpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/yyjson.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/AddStructName.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/AllOf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/AnyOf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Attribute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Box.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Bytestring.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Description.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/ExtraFields.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Field.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Flatten.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Generic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Hex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Literal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/MetaField.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/NamedTuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/NoFieldNames.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/NoOptionals.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Oct.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/OneOf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Pattern.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/PatternValidator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Processors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Rename.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Skip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/SnakeCaseToCamelCase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/SnakeCaseToPascalCase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/TaggedUnion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Timestamp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Validator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/Variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/always_false.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/apply.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/as.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/bson.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/bson/Parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/bson/Reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/bson/Writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/bson/load.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/bson/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/bson/save.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/bson/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/cbor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/cbor/Parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/cbor/Reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/cbor/Writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/cbor/load.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/cbor/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/cbor/save.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/cbor/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/comparisons.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/default.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/define_literal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/define_named_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/define_tagged_union.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/define_variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/enums.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/extract_discriminators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/field_names_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/field_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/fields.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/flexbuf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/flexbuf/Parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/flexbuf/Reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/flexbuf/Writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/flexbuf/load.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/flexbuf/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/flexbuf/save.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/flexbuf/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/from_named_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/get.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/Array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/Field.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/Fields.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/Getter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/HasValidation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/Skip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/StringLiteral.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/VisitTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/VisitorWrapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/all_fields.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/bind_to_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/copy_flattened_tuple_to_named_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/copy_from_named_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/copy_from_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/copy_to_field_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/define_literal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/define_named_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/define_tagged_union.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/define_variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/element_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/enums/Names.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/enums/StringConverter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/enums/get_enum_names.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/enums/is_flag_enum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/enums/is_scoped_enum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/extract_discriminators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/field_tuple_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/field_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/find_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/flattened_ptr_tuple_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/flattened_tuple_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/get_fake_object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/get_field_names.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/get_ith_field_from_fake_object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/get_meta_fields.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/get_type_name.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/has_fields.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/has_flatten_fields.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/has_reflection_method_v.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/has_reflection_type_v.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/has_reflector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/has_tag_v.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/has_to_class_method_v.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_attribute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_basic_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_description.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_empty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_extra_fields.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_field.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_flatten_field.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_literal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_named_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_no_field_names_v.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_no_optionals_v.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_pattern.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_rename.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_skip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_validator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/is_variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/lit_name.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/make_tag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/move_and_flatten_field_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/move_field_tuple_to_named_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/move_from_named_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/move_from_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/move_to_field_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/no_duplicate_field_names.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/nt_to_ptr_named_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/nth_element.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/nth_element_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/num_fields.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/processed_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/ptr_field_tuple_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/ptr_named_tuple_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/ptr_tuple_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/remove_fields.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/remove_namespaces.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/remove_ptrs_tup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/strings/join.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/strings/replace_all.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/strings/split.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/tag_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/to_flattened_ptr_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/to_ptr_field.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/to_ptr_field_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/to_ptr_named_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/to_ptr_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/to_std_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/transform_snake_case.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/tup_to_ptr_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/tuple/accumulate_sizes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/tuple/apply.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/tuple/calculate_positions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/tuple/concat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/tuple/make_from_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/tuple_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/variant/find_max_size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/variant/is_alternative_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/wrap_in_fields.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/internal/wrap_in_rfl_array_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/io/load_bytes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/io/load_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/io/save_bytes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/io/save_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/json/Parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/json/Reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/json/Writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/json/load.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/json/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/json/save.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/json/schema/JSONSchema.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/json/schema/Type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/json/to_schema.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/json/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/make_from_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/make_named_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/msgpack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/msgpack/Parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/msgpack/Reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/msgpack/Writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/msgpack/load.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/msgpack/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/msgpack/save.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/msgpack/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/name_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/named_tuple_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/AreReaderAndWriter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/ArrayReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/CustomParser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/FieldVariantParser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/FieldVariantReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/IsReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/IsWriter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/MapParser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/MapReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/NamedTupleParser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_box.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_c_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_default.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_filepath.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_map_like.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_named_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_optional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_pair.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_reference_wrapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_rename.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_rfl_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_rfl_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_rfl_variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_shared_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_skip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_string_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_tagged_union.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_unique_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_vector_like.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/Parser_wstring.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/TaggedUnionWrapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/TupleParser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/TupleReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/VectorParser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/VectorReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/ViewReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/ViewReaderWithStrippedFieldNames.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/is_empty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/is_forward_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/is_map_like.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/is_map_like_not_multimap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/is_required.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/is_set_like.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/is_tagged_union_wrapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/is_vector_like.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/is_view_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/schema/Definition.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/schema/Type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/schema/ValidationType.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/schema/make.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/schema/to_numeric_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/supports_attributes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/tagged_union_wrapper_no_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/parsing/to_single_error_message.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/patterns.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/remove_fields.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/replace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/to_named_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/to_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/toml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/toml/Parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/toml/Reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/toml/Writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/toml/load.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/toml/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/toml/save.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/toml/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/tuple_cat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/type_name_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/visit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/xml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/xml/Parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/xml/Reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/xml/Writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/xml/load.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/xml/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/xml/save.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/xml/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/yaml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/yaml/Parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/yaml/Reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/yaml/Writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/yaml/load.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/yaml/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/yaml/save.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/yaml/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/tests/bson/write_and_read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/tests/cbor/write_and_read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/write_and_read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/write_and_read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/tests/msgpack/write_and_read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/tests/toml/write_and_read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/tests/xml/write_and_read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/tests/yaml/write_and_read.hpp" />
+    <Image Include="../../thirdparty/owemdjee/reflect-cpp/banner1.png" />
+    <Image Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/img/canada_read.png" />
+    <Image Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/img/canada_write.png" />
+    <Image Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/img/licenses_read.png" />
+    <Image Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/img/licenses_write.png" />
+    <Image Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/img/person_read.png" />
+    <Image Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/img/person_write.png" />
+    <Image Include="../../thirdparty/owemdjee/reflect-cpp/docs/banner2.png" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/README.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/all/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/data/canada.json" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/data/licenses.json" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/json/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/anonymous_fields.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/as.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/backwards_compatability.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/bson.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/bytestring.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/c_arrays_and_inheritance.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/cbor.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/composing_validators.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/custom_classes.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/custom_parser.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/enums.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/extra_fields.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/field_syntax.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/flatten_structs.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/flexbuffers.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/generic.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/json.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/json_schema.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/literals.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/msgpack.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/named_tuple.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/number_systems.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/object.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/optional_fields.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/patterns.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/processors.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/replace.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/result.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/rfl_ref.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/rfl_skip.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/rfl_tuple.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/size_validation.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/standard_containers.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/structs.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/supporting_your_own_format.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/timestamps.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/to_view.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/toml.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/validating_numbers.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/variants_and_tagged_unions.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/xml.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/yaml.md" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/reflectcpp-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/tests/bson/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/tests/cbor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/tests/flexbuffers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/tests/json/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/tests/msgpack/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/tests/toml/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/tests/xml/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/tests/yaml/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reflect-cpp/vcpkg.json" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
