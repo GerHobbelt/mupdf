@@ -741,6 +741,60 @@ static void do_annotate_date(void)
 		ui_label("Date: %s", s);
 }
 
+static const char *intent_names[] = {
+	"Default", // all
+	"FreeTextCallout", // freetext
+	"FreeTextTypewriter", // freetext
+	"LineArrow", // line
+	"LineDimension", // line
+	"PolyLineDimension", // polyline
+	"PolygonCloud", // polygon
+	"PolygonDimension", // polygon
+	"StampImage", // stamp
+	"StampSnapshot", // stamp
+};
+
+static enum pdf_intent do_annotate_intent(void)
+{
+	enum pdf_intent intent;
+	int choice;
+
+	if (!pdf_annot_has_intent(ctx, ui.selected_annot))
+		return PDF_ANNOT_IT_DEFAULT;
+
+	intent = pdf_annot_intent(ctx, ui.selected_annot);
+	ui_label("Intent:");
+	choice = ui_select("IT", intent_names[intent], intent_names, nelem(intent_names));
+	if (choice != -1)
+	{
+		trace_action("annot.setIntent(%d);\n", choice);
+		pdf_set_annot_intent(ctx, ui.selected_annot, choice);
+		intent = choice;
+
+		// Changed intent!
+		if (intent == PDF_ANNOT_IT_FREETEXT_CALLOUT)
+		{
+			pdf_set_annot_callout_point(ctx, ui.selected_annot, fz_make_point(0, 0));
+			pdf_set_annot_callout_style(ctx, ui.selected_annot, PDF_ANNOT_LE_OPEN_ARROW);
+		}
+	}
+
+	// Press 'c' to move Callout line to current cursor position.
+	if (intent == PDF_ANNOT_IT_FREETEXT_CALLOUT)
+	{
+		if (!ui.focus && ui.key && ui.plain)
+		{
+			if (ui.key == 'c')
+			{
+				fz_point p = fz_transform_point(fz_make_point(ui.x, ui.y), view_page_inv_ctm);
+				pdf_set_annot_callout_point(ctx, ui.selected_annot, p);
+			}
+		}
+	}
+
+	return intent;
+}
+
 static void do_annotate_contents(void)
 {
 	static int is_same_edit_operation = 1;
@@ -1018,6 +1072,7 @@ void do_annotate_panel(void)
 {
 	static struct list annot_list;
 	enum pdf_annot_type subtype;
+	enum pdf_intent intent;
 	pdf_annot *annot;
 	int idx;
 	int n;
@@ -1075,6 +1130,8 @@ void do_annotate_panel(void)
 
 		do_annotate_author();
 		do_annotate_date();
+
+		intent = do_annotate_intent();
 
 		obj = pdf_dict_get(ctx, pdf_annot_obj(ctx, ui.selected_annot), PDF_NAME(Popup));
 		if (obj)
@@ -1175,6 +1232,23 @@ void do_annotate_panel(void)
 				if (e_choice != -1) e = e_choice;
 				trace_action("annot.setLineEndingStyles(%q, %q);\n", line_ending_styles[s], line_ending_styles[e]);
 				pdf_set_annot_line_ending_styles(ctx, ui.selected_annot, s, e);
+			}
+		}
+
+		if (subtype == PDF_ANNOT_FREE_TEXT && intent == PDF_ANNOT_IT_FREETEXT_CALLOUT)
+		{
+			enum pdf_line_ending s;
+			int s_choice;
+
+			s = pdf_annot_callout_style(ctx, ui.selected_annot);
+
+			ui_label("Callout Arrow:");
+			s_choice = ui_select("LE0", line_ending_styles[s], line_ending_styles, nelem(line_ending_styles));
+			if (s_choice != -1)
+			{
+				s = s_choice;
+				trace_action("annot.setCalloutStyle(%q);\n", line_ending_styles[s]);
+				pdf_set_annot_callout_style(ctx, ui.selected_annot, s);
 			}
 		}
 
