@@ -21,6 +21,7 @@ let projname = path.basename(projpath, ".vcxproj")
 	.replace(/[_-]demo[s]?$/, '')
 	.replace(/[_-]benchmark[s]?$/, '')
 	.replace(/[_-]example[s]?$/, '')
+	.replace(/[_-]misc?$/, '')
 	.replace(/^lib/, '');
 
 if (debug) 

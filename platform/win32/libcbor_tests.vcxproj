@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -77,7 +77,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCBOR_TESTS;CBOR_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -131,7 +131,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCBOR_TESTS;CBOR_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libcbor/src;../../thirdparty/owemdjee/libcbor/examples/bazel;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCBOR_TESTS;CBOR_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libcbor/src;../../thirdparty/owemdjee/libcbor/examples/bazel;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,7 +186,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCBOR_TESTS;CBOR_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libcbor/src;../../thirdparty/owemdjee/libcbor/examples/bazel;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCBOR_TESTS;CBOR_TESTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libcbor/src;../../thirdparty/owemdjee/libcbor/examples/bazel;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -226,37 +226,6 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/examples/bazel/src/hello.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/examples/bazel/src/hello_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/examples/bazel/src/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/examples/cbor2cjson.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/examples/cjson2cbor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/examples/create_items.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/examples/hello.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/examples/readfile.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/examples/sort.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/examples/streaming_array.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/examples/streaming_parser.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/allocators.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/arrays.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/bytestrings.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/callbacks.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/common.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/encoding.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/floats_ctrls.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/internal/builder_callbacks.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/internal/encoders.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/internal/loaders.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/internal/memory_utils.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/internal/stack.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/internal/unicode.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/ints.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/maps.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/serialization.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/streaming.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/strings.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcbor/src/cbor/tags.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libcbor/test/array_encoders_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libcbor/test/array_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libcbor/test/assertions.c" />
@@ -286,27 +255,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libcbor/test/uint_encoders_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libcbor/test/uint_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libcbor/test/unicode_test.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/examples/bazel/src/hello.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/arrays.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/bytestrings.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/callbacks.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/common.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/data.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/encoding.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/floats_ctrls.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/internal/builder_callbacks.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/internal/encoders.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/internal/loaders.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/internal/memory_utils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/internal/stack.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/internal/unicode.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/ints.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/maps.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/serialization.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/streaming.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/strings.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcbor/src/cbor/tags.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcbor/test/assertions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcbor/test/stream_expectations.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcbor/test/test_allocator.h" />
@@ -352,27 +300,14 @@
     <Text Include="../../thirdparty/owemdjee/libcbor/doc/source/standard_conformance.rst" />
     <Text Include="../../thirdparty/owemdjee/libcbor/doc/source/tests.rst" />
     <Text Include="../../thirdparty/owemdjee/libcbor/doc/source/using.rst" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/examples/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/examples/bazel/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/examples/data/all_types.cbor" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/examples/data/floats.cbor" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/examples/data/indef_string.cbor" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/examples/data/integer.cbor" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/examples/data/json_example.json" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/examples/data/map.cbor" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/examples/data/nested_array.cbor" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/examples/data/tagged_date.cbor" />
     <Text Include="../../thirdparty/owemdjee/libcbor/misc/update_version.py" />
     <Text Include="../../thirdparty/owemdjee/libcbor/release.sh" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/src/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/src/cbor/configuration.h.in" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/src/libcbor.pc.in" />
-    <Text Include="../../thirdparty/owemdjee/libcbor/src/libcborConfig.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libcbor/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libcbor/test/data/callbacks.cbor" />
     <Text Include="../../thirdparty/owemdjee/libcbor/test/data/pretty.cbor" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

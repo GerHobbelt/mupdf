@@ -1,0 +1,1637 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBD6A23}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLATBUFFERS;FLATBUFFERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLATBUFFERS;FLATBUFFERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLATBUFFERS;FLATBUFFERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLATBUFFERS;FLATBUFFERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLATBUFFERS;FLATBUFFERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLATBUFFERS;FLATBUFFERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLATBUFFERS;FLATBUFFERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLATBUFFERS;FLATBUFFERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLATBUFFERS;FLATBUFFERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLATBUFFERS;FLATBUFFERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLATBUFFERS;FLATBUFFERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFLATBUFFERS;FLATBUFFERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/cpp/animals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/benchmarks/cpp/benchmark_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/benchmarks/cpp/flatbuffers/fb_bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/benchmarks/cpp/raw/raw_bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/conan/test_package/test_package.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/grpc/samples/greeter/client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/grpc/samples/greeter/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/cpp_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/go_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/java_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/python_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/swift_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/ts_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/grpc/tests/grpctest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/grpc/tests/message_builder_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/include/codegen/python.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/samples/sample_bfbs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/samples/sample_binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/samples/sample_text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/annotated_binary_text_gen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/bfbs_gen_lua.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/bfbs_gen_nim.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/binary_annotator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/code_generators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/file_binary_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/file_name_saving_file_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/file_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/flatc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/flatc_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/flathash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_csharp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_dart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_fbs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_go.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_grpc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_java.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_json_schema.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_kotlin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_kotlin_kmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_lobster.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_php.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_python.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_rust.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_swift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_ts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/idl_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/reflection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/src/util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/64bit/offset64_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/alignment_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/bazel_repository_test_dir/pulls_in_flatbuffers_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/cpp17/test_cpp17.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/evolution_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/flexbuffers_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/include_build_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/json_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/key_field_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test.grpc.fb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_generated.grpc.fb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_suffix/ext_only/monster_test.grpc.fb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_suffix/filesuffix_only/monster_test.grpc.fb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_suffix/monster_test.grpc.fb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/native_type_test_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/parser_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/proto_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/reflection_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/test_assert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/test_builder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/flatbuffers/tests/util_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/cpp/generated/animal_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/benchmarks/cpp/bench.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/benchmarks/cpp/flatbuffers/bench_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/benchmarks/cpp/flatbuffers/fb_bench.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/benchmarks/cpp/raw/raw_bench.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/goldens/cpp/basic_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/cpp_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/go_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/java_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/python_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/schema_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/swift_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/ts_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/codegen/idl_namer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/codegen/namer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/codegen/python.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/buffer_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/code_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/code_generators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/default_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/detached_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/file_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/flatbuffer_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/flatbuffers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/flatc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/flex_flat_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/flexbuffers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/grpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/idl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/minireflect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/pch/flatc_pch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/pch/pch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/reflection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/reflection_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/stl_emulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/vector_downward.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/include/flatbuffers/verifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/samples/monster_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/annotated_binary_text_gen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/bfbs_gen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/bfbs_gen_lua.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/bfbs_gen_nim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/bfbs_namer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/binary_annotator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_binary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_csharp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_dart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_fbs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_go.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_java.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_json_schema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_kotlin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_lobster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_php.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_python.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_rust.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_swift.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_text.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_gen_ts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/idl_namer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/src/namer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/64bit/evolution/v1_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/64bit/evolution/v2_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/64bit/offset64_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/64bit/test_64bit_bfbs_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/64bit/test_64bit_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/alignment_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/cpp17/generated_cpp17/monster_test_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/cpp17/generated_cpp17/optional_scalars2_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/cpp17/generated_cpp17/optional_scalars_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/cpp17/generated_cpp17/union_vector_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/cpp17/stringify_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/evolution_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/evolution_test/evolution_v1_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/evolution_test/evolution_v2_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/flexbuffers_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/is_quiet_nan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/json_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/key_field/key_field_sample_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/key_field_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/minified_enums/enums_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_extra_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test.grpc.fb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_bfbs_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_generated.grpc.fb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_suffix/ext_only/monster_test.grpc.fb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_suffix/ext_only/monster_test_generated.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_suffix/filesuffix_only/monster_test.grpc.fb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_suffix/filesuffix_only/monster_test_suffix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_suffix/monster_test.grpc.fb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_suffix/monster_test_suffix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/namespace_test1_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/namespace_test2_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/native_inline_table_test_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/native_type_test_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/native_type_test_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/parser_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/proto_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/reflection_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/test_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/test_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/union_underlying_type_test_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/union_vector_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/flatbuffers/tests/util_test.h" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/docs/images/fpl_logo_small.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/docs/images/ftv2mnode.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/docs/images/ftv2pnode.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/net/FlatBuffers/flatbuffers.png" />
+    <Image Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/Resources/images/tutorial_cover_image_1.png" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/CMake/BuildFlatBuffers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/CMake/DESCRIPTION.txt" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/CMake/FindFlatBuffers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/CMake/PackageDebian.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/CMake/PackageRedhat.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/CMake/Version.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/CMake/flatbuffers-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/CMake/flatbuffers-config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/CMake/flatbuffers.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/FlatBuffers.podspec" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/Formatters.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/cpp/flatbuffers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/fbs/animal.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/android/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/android/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/android/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/android/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/bazel/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/benchmarks/cpp/flatbuffers/bench.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/benchmarks/swift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/build_defs.bzl" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/composer.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/conan/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/conan/build.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/conan/test_package/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/conan/test_package/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/dart/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/dart/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/dart/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/dart/analysis_options.yaml" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/dart/publish.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/dart/pubspec.yaml" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/dart/test/bool_structs.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/dart/test/list_of_enums.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/dart/test/monster_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/header.html" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/Benchmarks.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/Building.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/CUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/Compiler.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/CppUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/CsharpUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/DartUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/FlatBuffers.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/FlexBuffers.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/GoApi.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/GoApi_generated.txt" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/GoUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/Grammar.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/IntermediateRepresentation.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/Internals.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/JavaScriptUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/JavaUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/KotlinUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/LobsterUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/LuaUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/PHPUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/PythonUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/README_TO_GENERATE_DOCS.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/RustUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/Schemas.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/Support.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/SwiftUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/Tutorial.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/TypeScriptUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/WhitePaper.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/gRPC/CppUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/docs/source/style.css" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/examples/go-echo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/examples/go-echo/hero.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/examples/go-echo/net.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/go/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/cpp/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/csharp/flatbuffers/goldens/Galaxy.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/csharp/flatbuffers/goldens/Universe.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/csharp/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/dart/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/generate_goldens.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/go/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/golden_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/java/flatbuffers/goldens/Galaxy.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/java/flatbuffers/goldens/Universe.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/java/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/kotlin/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/lobster/basic_generated.lobster" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/lobster/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/lua/Galaxy.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/lua/Universe.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/lua/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/nim/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/php/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/py/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/py/flatbuffers/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/py/flatbuffers/goldens/Galaxy.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/py/flatbuffers/goldens/Universe.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/py/flatbuffers/goldens/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/py/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/rust/basic_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/rust/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/schema/basic.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/swift/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/swift/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/ts/basic.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/ts/flatbuffers/goldens.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/ts/flatbuffers/goldens/galaxy.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/ts/flatbuffers/goldens/universe.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/goldens/ts/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/build_grpc.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/go/format.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/go/greeter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/greeter.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/python/greeter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/python/greeter/client.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/python/greeter/models/HelloReply.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/python/greeter/models/HelloRequest.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/python/greeter/models/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/python/greeter/models/greeter_grpc_fb.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/python/greeter/server.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/swift/Greeter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/ts/greeter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/ts/greeter/package.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/ts/greeter/src/client.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/ts/greeter/src/greeter.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/ts/greeter/src/greeter_generated.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/ts/greeter/src/greeter_grpc.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/ts/greeter/src/greeter_grpc.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/ts/greeter/src/models.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/ts/greeter/src/models/hello-reply.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/ts/greeter/src/models/hello-request.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/ts/greeter/src/server.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/examples/ts/greeter/tsconfig.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/flatbuffers-java-grpc/src/main/java/com/google/flatbuffers/grpc/FlatbuffersUtils.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/samples/greeter/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/samples/greeter/greeter.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/src/compiler/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/tests/GameFactory.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/tests/JavaGrpcTest.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/tests/grpctest.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/grpc/tests/java-grpc-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/include/codegen/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/ArrayReadWriteBuf.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/BaseVector.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/BooleanVector.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/ByteBufferReadWriteBuf.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/ByteBufferUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/ByteVector.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/Constants.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/DoubleVector.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/FlatBufferBuilder.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/FlexBuffers.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/FlexBuffersBuilder.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/FloatVector.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/IntVector.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/LongVector.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/ReadBuf.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/ReadWriteBuf.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/ShortVector.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/StringVector.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/Struct.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/Table.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/UnionVector.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/Utf8.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/Utf8Old.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/Utf8Safe.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/reflection/AdvancedFeatures.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/reflection/BaseType.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/reflection/Enum.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/reflection/EnumVal.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/reflection/Field.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/reflection/KeyValue.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/reflection/Object.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/reflection/RPCCall.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/reflection/Schema.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/reflection/SchemaFile.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/reflection/Service.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/main/java/com/google/flatbuffers/reflection/Type.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/java/src/test/java/JavaTest.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/js/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/benchmark/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/benchmark/monster_test_java.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/benchmark/monster_test_kotlin.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/convention-plugins/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/convention-plugins/src/main/kotlin/convention.publication.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/flatbuffers-kotlin/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/flatbuffers-kotlin/src/jvmTest/resources/utf8_sample.txt" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/gradle/libs.versions.toml" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/kotlin/settings.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/lobster/flatbuffers.lobster" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/lua/flatbuffers.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/lua/flatbuffers/binaryarray.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/lua/flatbuffers/builder.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/lua/flatbuffers/compat.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/lua/flatbuffers/compat_5_1.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/lua/flatbuffers/compat_5_3.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/lua/flatbuffers/compat_luajit.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/lua/flatbuffers/numTypes.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/lua/flatbuffers/view.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/mjs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/net/FlatBuffers/ByteBuffer.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/net/FlatBuffers/ByteBufferUtil.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/net/FlatBuffers/FlatBufferBuilder.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/net/FlatBuffers/FlatBufferConstants.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/net/FlatBuffers/FlatBufferVerify.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/net/FlatBuffers/IFlatbufferObject.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/net/FlatBuffers/Offset.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/net/FlatBuffers/Struct.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/net/FlatBuffers/Table.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/package.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/pnpm-lock.yaml" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/_version.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/builder.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/compat.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/encode.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/flexbuffers.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/number_types.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/packer.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/reflection/AdvancedFeatures.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/reflection/BaseType.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/reflection/Enum.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/reflection/EnumVal.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/reflection/Field.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/reflection/KeyValue.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/reflection/Object.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/reflection/RPCCall.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/reflection/Schema.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/reflection/SchemaFile.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/reflection/Service.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/reflection/Type.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/reflection/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/table.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/flatbuffers/util.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/reflection/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/reflection/reflection.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/reflection/ts/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/build.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/src/array.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/src/builder.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/src/endian_scalar.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/src/follow.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/src/get_root.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/src/primitives.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/src/push.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/src/table.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/src/vector.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/src/verifier.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/src/vtable.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flatbuffers/src/vtable_writer.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/bitwidth.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/buffer.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/builder/map.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/builder/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/builder/push.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/builder/ser.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/builder/value.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/builder/vector.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/flexbuffer_type.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/reader/de.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/reader/iter.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/reader/map.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/reader/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/reader/serialize.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/rust/flexbuffers/src/reader/vector.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/SampleBinary.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/SampleBinary.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/csharp_sample.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/dart_sample.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/go_sample.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/java_sample.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/javascript_sample.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/kotlin_sample.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/lua/MyGame/Sample/Color.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/lua/MyGame/Sample/Equipment.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/lua/MyGame/Sample/Monster.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/lua/MyGame/Sample/Vec3.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/lua/MyGame/Sample/Weapon.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/monster.bfbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/monster.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/monster_generated.lobster" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/monsterdata.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/php_sample.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/python_sample.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/rust_generated/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/rust_generated/my_game/sample/color_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/rust_generated/my_game/sample/equipment_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/rust_generated/my_game/sample/monster_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/rust_generated/my_game/sample/vec_3_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/rust_generated/my_game/sample/weapon_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/sample_binary.lobster" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/sample_binary.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/sample_binary.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/sample_binary.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/sample_flexbuffers.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/sample_flexbuffers_serde.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/samples/sample_text.lobster" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/scripts/check-grpc-generated-code.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/scripts/check_generate_code.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/scripts/clang-format-all.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/scripts/clang-format-git.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/scripts/clang-tidy-git.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/scripts/generate_code.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/scripts/generate_grpc_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/scripts/release.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/scripts/util.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/snap/snapcraft.yaml" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/src/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/Documentation.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/Resources/code/fbs/monster_step_1.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/Resources/code/fbs/monster_step_2.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/Resources/code/fbs/monster_step_3.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/Resources/code/fbs/monster_step_4.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/Resources/code/fbs/monster_step_5.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/Resources/code/fbs/monster_step_6.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/Resources/code/fbs/monster_step_7.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/Tutorials/Tutorial_Table_of_Contents.tutorial" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/Tutorials/create_your_first_buffer.tutorial" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/Tutorials/creating_flatbuffer_schema.tutorial" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/swift/Sources/FlatBuffers/Documentation.docc/Tutorials/reading_bytebuffer.tutorial" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/64bit/evolution/v1.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/64bit/evolution/v2.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/64bit/test_64bit.bfbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/64bit/test_64bit.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/64bit/test_64bit.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/64bit/test_64bit.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/DartTest.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/DictionaryLookup/LongFloatEntry.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/DictionaryLookup/LongFloatMap.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Benchmarks/" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Benchmarks/FlatBufferBuilderBenchmark.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Benchmarks/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/Assert.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/ByteBufferTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/FlatBufferBuilderTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/FlatBuffersExampleTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/FlatBuffersFuzzTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/FlatBuffersTestClassAttribute.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/FlatBuffersTestMethodAttribute.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/FuzzTestData.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/Lcg.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/NetTest.bat" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/NetTest.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/TestTable.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/clean.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FlatBuffers.Test/packages.config" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/FromInclude.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/GoTest.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/KeywordTest/ABC.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/KeywordTest/KeywordsInTable.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/KeywordTest/KeywordsInUnion.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/KeywordTest/Table2.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/KeywordTest/public.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/KotlinTest.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/LobsterTest.bat" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/LuaTest.bat" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/LuaTest.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MutatingBool.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Ability.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Ability.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Ability.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Ability.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/AbilityT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Any.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Any.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Any.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Any.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/AnyAmbiguousAliases.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/AnyAmbiguousAliases.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/AnyAmbiguousAliases.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/AnyAmbiguousAliases.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/AnyAmbiguousAliasesUnion.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/AnyUnion.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/AnyUniqueAliases.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/AnyUniqueAliases.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/AnyUniqueAliases.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/AnyUniqueAliases.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/AnyUniqueAliasesUnion.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/ArrayStruct.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/ArrayStruct.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/ArrayStruct.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/ArrayStructT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/ArrayTable.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/ArrayTable.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/ArrayTable.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/ArrayTableT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Color.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Color.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Color.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Color.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/LongEnum.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/LongEnum.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/LongEnum.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/LongEnum.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Monster.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Monster.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Monster.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Monster.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/MonsterStorageGrpc.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/MonsterT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/NestedStruct.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/NestedStruct.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/NestedStruct.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/NestedStructT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/NestedUnion/Any.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/NestedUnion/Color.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/NestedUnion/NestedUnionTest.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/NestedUnion/Test.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/NestedUnion/TestSimpleTableWithEnum.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/NestedUnion/Vec3.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/NestedUnion/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Race.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Race.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Race.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Race.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Referrable.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Referrable.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Referrable.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Referrable.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/ReferrableT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Stat.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Stat.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Stat.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Stat.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/StatT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/StructOfStructs.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/StructOfStructs.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/StructOfStructs.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/StructOfStructs.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/StructOfStructsOfStructs.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/StructOfStructsOfStructs.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/StructOfStructsOfStructs.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/StructOfStructsOfStructs.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/StructOfStructsOfStructsT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/StructOfStructsT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Test.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Test.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Test.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Test.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TestEnum.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TestEnum.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TestEnum.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TestSimpleTableWithEnum.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TestSimpleTableWithEnum.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TestSimpleTableWithEnum.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TestSimpleTableWithEnum.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TestSimpleTableWithEnumT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TestT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TypeAliases.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TypeAliases.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TypeAliases.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TypeAliases.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/TypeAliasesT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Vec3.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Vec3.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Vec3.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Vec3.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/Vec3T.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example/monster_test_grpc_fb.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example2/Monster.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example2/Monster.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example2/Monster.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example2/Monster.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example2/MonsterT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/Example2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/InParentNamespace.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/InParentNamespace.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/InParentNamespace.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/InParentNamespace.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/InParentNamespaceT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/MonsterExtra.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/MonsterExtra.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/MonsterExtra.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/MonsterExtraT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/OtherNameSpace/FromInclude.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/OtherNameSpace/FromInclude.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/OtherNameSpace/TableB.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/OtherNameSpace/TableB.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/OtherNameSpace/TableBT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/OtherNameSpace/Unused.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/OtherNameSpace/Unused.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/OtherNameSpace/UnusedT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/OtherNameSpace/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/MyGame/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/PythonTest.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/RustTest.bat" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/RustTest.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/TableA.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/TableA.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/TableAT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/TestAll.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/alignment_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/alignment_test.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/alignment_test_after_fix.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/alignment_test_before_fix.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/annotated_binary.bfbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/annotated_binary.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/annotated_binary.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/annotated_binary.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/annotated_binary_old.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/generate_annotations.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_root_offset.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_root_table_too_short.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_root_table_vtable_offset.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_string_length.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_string_length_cut_short.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_struct_array_field_cut_short.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_struct_field_cut_short.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_table_field_offset.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_table_field_size.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_union_type_value.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_vector_length_cut_short.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_vector_scalars_cut_short.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_vector_strings_cut_short.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_vector_structs_cut_short.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_vector_tables_cut_short.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_vector_union_type_value.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_vector_unions_cut_short.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_vtable_field_offset.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_vtable_ref_table_size.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_vtable_ref_table_size_short.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_vtable_size.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/annotated_binary/tests/invalid_vtable_size_short.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/arrays_test.bfbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/arrays_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/arrays_test.schema.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/arrays_test/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/arrays_test/my_game/example/array_struct_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/arrays_test/my_game/example/array_table_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/arrays_test/my_game/example/nested_struct_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/arrays_test/my_game/example/test_enum_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/bazel_repository_test_dir/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/bazel_repository_test_template.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/defs.bzl" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/dictionary_lookup.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/Dockerfile.testing.cpp.debian_buster" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/TODO.Dockerfile.testing.php.hhvm_2019_01_16" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/TODO.Dockerfile.testing.python.cpython_with_numpy" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/TODO.Dockerfile.testing.python.pypy_6_0_0_py2" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/TODO.Dockerfile.testing.python.pypy_6_0_0_py3" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/build_flatc.run.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/cpp_test.run.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.csharp.mono_5_18" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.golang.1_11" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.java.openjdk_10_0_2" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.java.openjdk_11_0_1" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.node.12_20_1" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.node.14_15_4" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.php.zend_7_3" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.python.cpython_2_7_15" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.python.cpython_3_7_1" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.python.numpy.cpython_2_7_15" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.python.numpy.cpython_3_7_1" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.rust.1_51_0" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.rust.big_endian.1_51_0" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.rust.nightly" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/docker/languages/Dockerfile.testing.swift_5_2" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/evolution_test/evolution_v1.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/evolution_test/evolution_v1.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/evolution_test/evolution_v2.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/evolution_test/evolution_v2.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/bar/bar.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/bar/bar_with_foo.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/bar/bar_with_ns.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/bar/baz/baz.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/bar/baz/baz_with_ns.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/enum_val_attributes.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/flatc_cpp_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/flatc_kotlin_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/flatc_schema_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/flatc_test.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/flatc_ts_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/foo.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/foo_with_ns.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/flatc/main.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/gold_flexbuffer_example.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test/include_test1.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test/order.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test/sub/include_test2.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test/sub/no_namespace.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test1/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test1/my_game/other_name_space/from_include_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test1/my_game/other_name_space/table_b_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test1/my_game/other_name_space/unused_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test1/table_a_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test2/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test2/my_game/other_name_space/from_include_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test2/my_game/other_name_space/table_b_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test2/my_game/other_name_space/unused_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/include_test2/table_a_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/included_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/includer_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/javatest.bin" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/key_field/key_field_sample.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/keyword_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/keyword_test/keyword_test/abc_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/keyword_test/keyword_test/keywords_in_table_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/keyword_test/keyword_test/keywords_in_union_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/keyword_test/keyword_test/public_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/keyword_test/keyword_test/table_2_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/keyword_test/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/lobstertest.lobster" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/luatest.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/minified_enums/enums.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_extra.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test.bfbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test.schema.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/ability_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/any_ambiguous_aliases_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/any_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/any_unique_aliases_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/color_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/long_enum_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/monster_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/race_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/referrable_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/stat_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/struct_of_structs_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/struct_of_structs_of_structs_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/test_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/test_simple_table_with_enum_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/type_aliases_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example/vec_3_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/example_2/monster_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/in_parent_namespace_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/other_name_space/from_include_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/other_name_space/table_b_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/my_game/other_name_space/unused_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test/table_a_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_generated.lobster" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_generated.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_generated.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/ability_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/any_ambiguous_aliases_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/any_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/any_unique_aliases_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/color_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/long_enum_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/monster_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/race_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/referrable_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/stat_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/struct_of_structs_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/struct_of_structs_of_structs_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/test_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/test_simple_table_with_enum_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/type_aliases_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example/vec_3_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/example_2/monster_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/in_parent_namespace_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/other_name_space/from_include_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/other_name_space/table_b_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/my_game/other_name_space/unused_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monster_test_serialize/table_a_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monsterdata_extra.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/monsterdata_test.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/more_defaults.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/more_defaults/abc_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/more_defaults/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/more_defaults/more_defaults_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/name_clash_test/invalid_test1.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/name_clash_test/invalid_test2.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/name_clash_test/valid_test1.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/name_clash_test/valid_test2.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/EnumInNestedNS.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/EnumInNestedNS.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/EnumInNestedNS.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/EnumInNestedNS.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/StructInNestedNS.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/StructInNestedNS.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/StructInNestedNS.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/StructInNestedNS.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/StructInNestedNST.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/TableInNestedNS.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/TableInNestedNS.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/TableInNestedNS.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/TableInNestedNS.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/TableInNestedNST.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/UnionInNestedNS.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/UnionInNestedNS.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/UnionInNestedNS.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/UnionInNestedNS.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/UnionInNestedNSUnion.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/NamespaceB/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/SecondTableInA.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/SecondTableInA.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/SecondTableInA.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/SecondTableInA.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/SecondTableInAT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/TableInC.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/TableInC.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/TableInFirstNS.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/TableInFirstNS.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/TableInFirstNS.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/TableInFirstNS.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/TableInFirstNST.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceA/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceC/TableInC.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceC/TableInC.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceC/TableInC.lua" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceC/TableInC.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceC/TableInCT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/NamespaceC/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/namespace_a/namespace_b/enum_in_nested_ns_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/namespace_a/namespace_b/struct_in_nested_ns_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/namespace_a/namespace_b/table_in_nested_ns_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/namespace_a/namespace_b/union_in_nested_ns_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/namespace_a/second_table_in_a_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/namespace_a/table_in_first_ns_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/namespace_c/table_in_c_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/namespace_test1.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/namespace_test1_generated.lobster" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/namespace_test2.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/namespace_test/namespace_test2_generated.lobster" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/nan_inf_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/native_inline_table_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/native_type_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/nested_namespace_test/nested_namespace_test1.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/nested_namespace_test/nested_namespace_test1_generated.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/nested_namespace_test/nested_namespace_test2.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/nested_namespace_test/nested_namespace_test2_generated.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/nested_namespace_test/nested_namespace_test3.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/nested_namespace_test/nested_namespace_test3_generated.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/nested_union_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/nim/testnim.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars/OptionalByte.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars/OptionalByte.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars/OptionalByte.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars/ScalarStuff.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars/ScalarStuff.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars/ScalarStuff.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars/optional_scalars/optional_byte_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars/optional_scalars/scalar_stuff_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars_defaults.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars_generated.lobster" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/optional_scalars_generated.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/phpUnionVectorTest.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/private_annotation_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/private_annotation_test/ab_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/private_annotation_test/annotations_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/private_annotation_test/any_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/private_annotation_test/game_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/private_annotation_test/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/private_annotation_test/object_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/prototest/GenerateProtoGoldens.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/prototest/test.golden.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/prototest/test_id.golden.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/prototest/test_include.golden.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/prototest/test_include_id.golden.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/prototest/test_suffix.golden.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/prototest/test_suffix_id.golden.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/prototest/test_union.golden.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/prototest/test_union_id.golden.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/prototest/test_union_include.golden.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/prototest/test_union_include_id.golden.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/prototest/test_union_suffix.golden.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/prototest/test_union_suffix_id.golden.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/py_flexbuffers_test.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/py_test.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/required_strings.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_namer_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_namer_test/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_namer_test/rust_namer_test/field_table_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_namer_test/rust_namer_test/field_union_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_namer_test/rust_namer_test/game_message_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_namer_test/rust_namer_test/game_message_wrapper_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_namer_test/rust_namer_test/player_input_change_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_namer_test/rust_namer_test/player_spectate_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_namer_test/rust_namer_test/player_stat_event_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_namer_test/rust_namer_test/root_table_generated.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_no_std_compilation_test/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_no_std_compilation_test/src/main.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_serialize_test/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_serialize_test/src/main.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/benches/benchmarks.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/benches/flatbuffers_benchmarks.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/benches/flexbuffers_benchmarks.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/bin/flatbuffers_alloc_check.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/bin/flexbuffers_alloc_check.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/bin/monster_example.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/outdir/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/outdir/build.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/outdir/src/main.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/tests/arrays_test.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/tests/flexbuffers_tests/binary_format.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/tests/flexbuffers_tests/interop.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/tests/flexbuffers_tests/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/tests/flexbuffers_tests/other_api.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/tests/flexbuffers_tests/qc_serious.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/tests/flexbuffers_tests/rwyw.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/tests/integration_test.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/tests/more_defaults_test.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/rust_usage_test/tests/optional_scalars_test.rs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/service_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/service_test_generated.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/service_test_grpc.fb.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/swift/Wasm.tests/" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/swift/Wasm.tests/Tests/FlatBuffers.Test.Swift.WasmTests/" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/swift/tests/CodeGenerationTests/test_import.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/swift/tests/CodeGenerationTests/test_no_include.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/swift/tests/SwiftTest.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/swift/tests/Tests/FlatBuffers.Test.SwiftTests/" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/JavaScriptComplexArraysTest.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/JavaScriptFlexBuffersTest.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/JavaScriptRequiredStringTest.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/JavaScriptTest.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/JavaScriptTestv1.cjs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/JavaScriptUnionUnderlyingTypeTest.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/JavaScriptUnionVectorTest.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/TypeScriptTest.py" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/arrays_test_complex.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/arrays_test_complex_generated.cjs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/array-struct.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/array-struct.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/array-struct.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/array-table.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/array-table.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/array-table.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/inner-struct.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/inner-struct.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/inner-struct.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/nested-struct.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/nested-struct.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/nested-struct.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/outer-struct.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/outer-struct.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/outer-struct.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/test-enum.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/test-enum.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/arrays_test_complex/my-game/example/test-enum.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/bazel_repository_test_dir/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/bazel_repository_test_dir/README.md" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/bazel_repository_test_dir/import_test.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/bazel_repository_test_dir/independent_deps_test.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/bazel_repository_test_dir/one.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/bazel_repository_test_dir/package.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/bazel_repository_test_dir/pnpm-lock.yaml" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/bazel_repository_test_dir/two.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/foobar.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/foobar.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/foobar.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/foobar/abc.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/foobar/abc.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/foobar/abc.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/foobar/class.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/foobar/class.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/foobar/class.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/foobar/tab.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/monster_test.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/monster_test.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/monster_test.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/monster_test_generated.cjs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/ability.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/ability.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/ability.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/any-ambiguous-aliases.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/any-ambiguous-aliases.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/any-ambiguous-aliases.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/any-unique-aliases.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/any-unique-aliases.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/any-unique-aliases.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/any.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/any.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/any.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/color.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/color.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/color.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/long-enum.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/long-enum.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/long-enum.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/monster.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/monster.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/monster.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/race.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/race.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/race.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/referrable.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/referrable.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/referrable.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/stat.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/stat.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/stat.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/struct-of-structs-of-structs.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/struct-of-structs-of-structs.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/struct-of-structs-of-structs.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/struct-of-structs.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/struct-of-structs.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/struct-of-structs.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/test-simple-table-with-enum.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/test-simple-table-with-enum.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/test-simple-table-with-enum.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/test.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/test.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/test.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/type-aliases.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/type-aliases.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/type-aliases.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/vec3.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/vec3.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example/vec3.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example2.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example2.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example2.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example2/monster.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example2/monster.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/example2/monster.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/in-parent-namespace.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/in-parent-namespace.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/in-parent-namespace.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/other-name-space.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/other-name-space.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/other-name-space.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/other-name-space/from-include.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/other-name-space/from-include.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/other-name-space/from-include.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/other-name-space/table-b.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/other-name-space/table-b.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/other-name-space/table-b.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/other-name-space/unused.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/other-name-space/unused.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/my-game/other-name-space/unused.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/no_import_ext/optional-scalars.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/no_import_ext/optional-scalars.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/no_import_ext/optional-scalars.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/no_import_ext/optional-scalars/optional-byte.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/no_import_ext/optional-scalars/optional-byte.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/no_import_ext/optional-scalars/optional-byte.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/no_import_ext/optional-scalars/scalar-stuff.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/no_import_ext/optional-scalars/scalar-stuff.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/no_import_ext/optional-scalars/scalar-stuff.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/no_import_ext/optional_scalars.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/no_import_ext/optional_scalars.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/no_import_ext/optional_scalars.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/optional-scalars.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/optional-scalars/optional-byte.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/optional-scalars/scalar-stuff.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/optional_scalars.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/package.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/pnpm-lock.yaml" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/advanced-features.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/advanced-features.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/advanced-features.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/base-type.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/base-type.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/base-type.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/enum-val.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/enum-val.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/enum-val.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/enum.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/enum.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/enum.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/field.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/field.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/field.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/key-value.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/key-value.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/key-value.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/object.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/object.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/object.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/rpccall.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/rpccall.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/rpccall.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/schema-file.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/schema-file.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/schema-file.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/schema.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/schema.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/schema.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/service.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/service.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/service.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/type.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/type.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection/type.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/reflection_generated.cjs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/required-strings/foo.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/required-strings/foo.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/required_strings_generated.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/required_strings_generated.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/table-a.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/table-a.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/table-a.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/test_dir/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/test_dir/import_test.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/test_dir/package.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/test_dir/typescript_include.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/test_dir/typescript_transitive_include.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/tsconfig.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/tsconfig.node.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript/class.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript/class.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript/class.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript/object.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript/object.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript/object.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript_include.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript_include_generated.cjs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript_keywords.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript_keywords.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript_keywords.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript_keywords.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript_keywords_generated.cjs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript_transitive_include.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/typescript_transitive_include_generated.cjs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/a.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/a.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/a.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/abc.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/abc.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/abc.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/b.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/b.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/b.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/c.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/c.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/c.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/d.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/d.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union-underlying-type/d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_underlying_type_test.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_underlying_type_test.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_underlying_type_test.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/attacker.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/attacker.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/attacker.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/book-reader.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/book-reader.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/book-reader.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/character.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/character.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/character.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/falling-tub.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/falling-tub.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/falling-tub.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/gadget.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/gadget.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/gadget.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/hand-fan.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/hand-fan.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/hand-fan.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/movie.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/movie.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/movie.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/rapunzel.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/rapunzel.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/rapunzel.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/union_vector.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/union_vector.js" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/union_vector.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/ts/union_vector/union_vector_generated.cjs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/type_field_collsion.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/type_field_collsion/Collision.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/unicode_test.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_underlying_type_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_value_collision.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_value_collsion/union_value_collision_generated.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/Attacker.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/Attacker.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/AttackerT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/BookReader.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/BookReader.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/BookReaderT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/Character.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/Character.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/CharacterUnion.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/FallingTub.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/FallingTub.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/FallingTubT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/Gadget.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/Gadget.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/GadgetUnion.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/HandFan.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/HandFan.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/HandFanT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/Movie.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/Movie.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/MovieT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/Rapunzel.cs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/Rapunzel.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/RapunzelT.java" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/union_vector.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/union_vector/union_vector.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tests/vector_has_test.fbs" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/builder.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/byte-buffer.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/compile_flat_file.sh" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/constants.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/encoding.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/flatbuffers.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/flexbuffers.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/flexbuffers/bit-width-util.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/flexbuffers/bit-width.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/flexbuffers/builder.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/flexbuffers/flexbuffers-util.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/flexbuffers/reference-util.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/flexbuffers/reference.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/flexbuffers/stack-value.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/flexbuffers/value-type-util.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/flexbuffers/value-type.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/repositories.bzl" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/types.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/ts/utils.ts" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tsconfig.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/tsconfig.mjs.json" />
+    <Text Include="../../thirdparty/owemdjee/flatbuffers/typescript.bzl" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/android/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/drawable/ic_launcher_background.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/layout/activity_main.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/values/colors.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/values/strings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/android/app/src/main/res/values/styles.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/docs/source/doxygen_layout.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/grpc/flatbuffers-java-grpc/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/grpc/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/grpc/tests/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/flatbuffers/java/pom.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

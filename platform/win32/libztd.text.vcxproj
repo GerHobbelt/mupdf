@@ -1,0 +1,1049 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7CF89A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZTD.TEXT;ZTD.TEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZTD.TEXT;ZTD.TEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZTD.TEXT;ZTD.TEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZTD.TEXT;ZTD.TEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZTD.TEXT;ZTD.TEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZTD.TEXT;ZTD.TEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZTD.TEXT;ZTD.TEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZTD.TEXT;ZTD.TEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZTD.TEXT;ZTD.TEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZTD.TEXT;ZTD.TEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZTD.TEXT;ZTD.TEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZTD.TEXT;ZTD.TEXT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/barrier/source/convert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/barrier/source/data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/barrier/source/data_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/boost.text.no_warnings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/ctre.unchecked.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/cuneicode.basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/cuneicode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/cuneicode_registry.basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/cuneicode_registry.basic.unchecked.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/cuneicode_registry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/cuneicode_registry.single_from_bulk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/cuneicode_registry.single_from_bulk.unchecked.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/cuneicode_registry.unchecked.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/encoding_c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/iconv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/iconv.init.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/icu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/icu.init.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/memcpy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/noop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/simdutf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/simdutf.unchecked.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/standard_c++.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/standard_c++.init.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/standard_c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/utf8cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/utf8cpp.unchecked.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/windows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/ztd.text.basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/ztd.text.basic.unchecked.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/ztd.text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/source/ztd.text.unchecked.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/error_handling/source/boost.text.no_warnings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/error_handling/source/cuneicode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/error_handling/source/cuneicode_registry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/error_handling/source/encoding_c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/error_handling/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/error_handling/source/noop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/error_handling/source/windows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/error_handling/source/ztd.text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/function_form/source/bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/benchmarks/function_form/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/basic/source/encoding_type_erasure.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/basic/source/gap_buffer_decode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/basic/source/istream_decode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/basic/source/istreambuf_decode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/basic/source/rope_transcode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/basic/source/strange_unit_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/boost.text/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/compile_fails/source/error_handler.replacement.ascii.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/count-punycode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/encode-decode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-execution-utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-unicode-container-into.deque.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-unicode-container-into.too_small.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-unicode-container.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-unicode-errors.default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-unicode-errors.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-unicode-errors.replacement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-unicode-errors.skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-unicode-multi-errors.default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-unicode-multi-errors.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-unicode-multi-errors.replacement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-unicode-multi-errors.skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-unicode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/transcode-utf16-shift_jis-pivot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/source/validate-utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/setup/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/snippets/source/design.skip_input_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/snippets/source/error_handler.anatomy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/snippets/source/error_handler.custom.ascii.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/snippets/source/error_handler.replacement.ascii.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/snippets/source/runtime_locale_encoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/shift_jis/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/shift_jis/source/shift_jis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/examples/shift_jis/source/shift_jis_index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/additional_encodings/source/gb18030.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/additional_encodings/source/gbk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/additional_encodings/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/additional_encodings/source/punycode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/additional_encodings/source/shift_jis_x0208.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/additional_encodings/source/windows_1252.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/count_code_points.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/count_code_units.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/encoding_properties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/validate_decodable_as.basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/validate_decodable_as.unicode.default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/validate_decodable_as.unicode.default.utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/validate_decodable_as.unicode.default.utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/validate_decodable_as.unicode.default.utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/validate_decodable_as.unicode.explicit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/validate_decodable_as.unicode.explicit.utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/validate_decodable_as.unicode.explicit.utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/validate_decodable_as.unicode.explicit.utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/validate_encodable_as.basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/source/validate_encodable_as.unicode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/any_encoding.decode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/any_encoding.encode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/any_encoding.transcode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/count_decodable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/count_encodable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/count_transcodable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/decode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/decode_one.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/decode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/encode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/encode_one.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/encode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/encoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/encoding_scheme.decode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/encoding_scheme.encode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/encoding_scheme.transcode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/errors.replacement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/errors.throw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/rvalues.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/text_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/transcode.containers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/transcode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/transcode.decode_encode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/transcode_one.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/transcode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/validate_decodable_as.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/validate_encodable_as.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/source/validate_transcodable_as.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/compile_fails/source/decode_lossy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/compile_fails/source/encode_lossy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/compile_fails/source/transcode_lossy.decode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/compile_fails/source/transcode_lossy.encode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/iconv/source/iconv.decode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/iconv/source/iconv.encode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/iconv/source/iconv.transcode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/iconv/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/any_encoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/any_encoding_with.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/ascii.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/assert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/assume_valid_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/basic_encoding_scheme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/basic_iconv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/basic_text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/basic_text_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/ciscode_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/ciscode_one.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/ciscode_result.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/ciscode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/code_point.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/code_unit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/count_decodable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/count_encodable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/count_result.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/count_transcodable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/cuneicode_encoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/decode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/decode_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/decode_one.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/decode_result.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/decode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/default_encoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/default_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/cast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/char_predicates.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/empty_state.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/encoding_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/encoding_iterator_storage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/encoding_name.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/encoding_range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/pass_through_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/progress_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/replacement_units.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/result_type_constraints.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/scheme_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/span_reconstruct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/transcode_extension_points.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/transcode_routines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/detail/update_input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/encode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/encode_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/encode_one.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/encode_result.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/encode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/encoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/encoding_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/encoding_scheme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/error_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/error_handler_always_returns_ok.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/execution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/extension.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/forward.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/iconv_names.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/impl/execution_iconv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/impl/execution_non_uchar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/impl/execution_uchar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/impl/fixed_cuneicode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/impl/wide_execution_cwchar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/impl/wide_execution_iconv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/impl/wide_execution_iso10646.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/impl/wide_execution_windows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/incomplete_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/is_bidirectional_encoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/is_code_points_replaceable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/is_code_units_replaceable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/is_full_range_representable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/is_ignorable_error_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/is_input_error_skippable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/is_lossless.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/is_transcoding_compatible.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/is_unicode_code_point.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/is_unicode_encoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/literal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/max_units.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/no_encoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/normalization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/pass_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/propagate_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/punycode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/recode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/recode_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/recode_one.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/recode_result.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/recode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/replacement_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/shift_jis_x0208.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/skip_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/skip_input_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/state.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/text_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/throw_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/transcode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/transcode_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/transcode_one.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/transcode_result.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/transcode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/unicode_code_point.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/unicode_scalar_value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/validate_decodable_as.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/validate_encodable_as.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/validate_result.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/validate_transcodable_as.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/version.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/wide_execution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/source/ztd/text/wide_literal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/mockup/source/environment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/mockup/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/snippets/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/snippets/source/transcode_to.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/tiny_buffer/source/decode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/tiny_buffer/source/encode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/tiny_buffer/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ztd.text/tests/tiny_buffer/source/transcode.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/benchmarks/barrier/include/barrier/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/benchmarks/barrier/include/barrier/barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/benchmarks/barrier/include/barrier/convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/benchmarks/barrier/include/barrier/data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/benchmarks/barrier/include/barrier/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/include/ztd/text/benchmarks/ctre_utf8_cxx17.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/benchmarks/include/ztd/text/benchmarks/cuneicode_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/benchmarks/include/ztd/text/benchmarks/fast_transcode.ztd.text.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/benchmarks/include/ztd/text/benchmarks/utf8_startup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/benchmarks/include/ztd/text/benchmarks/version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/examples/basic/source/gap_buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/snippets/include/my_encoding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/snippets/include/my_utf16.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/examples/include/ztd/text/examples/utf8_startup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/examples/shift_jis/include/detail/shift_jis_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/examples/shift_jis/include/shift_jis.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/any_encoding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/any_encoding_with.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/ascii.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/assert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/assume_valid_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/atari_st.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/atascii.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/basic_encoding_scheme.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/basic_iconv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/basic_text.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/basic_text_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/basic_text_view_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/big5_hkscs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/char_predicates.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/ciscode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/ciscode_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/ciscode_one.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/ciscode_result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/ciscode_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/code_point.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/code_unit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/count_as_decoded.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/count_as_encoded.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/count_as_transcoded.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/count_result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/cuneicode_encoding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/cuneicode_registry_encoding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/decode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/decode_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/decode_one.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/decode_result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/decode_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/default_encoding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/default_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/any_encoding_with_includes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/ascii_includes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/basic_encoding_scheme_includes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/basic_iconv_includes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/constant_encoding_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/default_char_range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/default_char_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/empty_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/encoding_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/encoding_iterator_storage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/encoding_name.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/encoding_range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/forward_if_move_only.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/forwarding_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/is_lossless.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/pass_through_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/progress_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/recode_extension_points.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/replacement_units.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/result_type_constraints.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/scheme_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/span_reconstruct.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/transcode_extension_points.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/transcode_routines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/detail/update_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/encode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/encode_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/encode_one.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/encode_result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/encode_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/encoding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/encoding_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/encoding_scheme.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/error_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/error_handler_always_returns_ok.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/euc_kr_uhc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/execution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/extension.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/forward.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/gb18030.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/gbk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/ibm_1006_urdu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/ibm_424_hebrew_bulletin.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/ibm_856_hebrew.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/ibm_866_cyrillic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iconv_names.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/impl/execution_cuchar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/impl/execution_cuneicode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/impl/execution_iconv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/impl/execution_mac_os.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/impl/fixed_cuneicode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/impl/gbk_or_gb18030.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/impl/single_ascii_byte_high_bit_lookup_encoding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/impl/single_byte_lookup_encoding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/impl/wide_execution_cuneicode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/impl/wide_execution_cwchar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/impl/wide_execution_iconv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/impl/wide_execution_iso10646.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/impl/wide_execution_windows.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/incomplete_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/is_bidirectional_encoding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/is_code_points_replaceable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/is_code_units_replaceable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/is_compatible_code_points.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/is_full_range_representable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/is_ignorable_error_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/is_input_error_skippable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/is_redundant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/is_self_synchronizing_code.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/is_transcoding_compatible.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/is_unicode_code_point.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/is_unicode_encoding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_10.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_13.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_14.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_15.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_16.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_1_1985.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_1_1998.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_6.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_7.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/iso_8859_8.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/kamenicky.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/kazakh_strk1048.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/koi8_r.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/koi8_u.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/literal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/mac_cyrillic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/mac_roman.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/max_units.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/no_encoding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/no_normalization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/normalization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/normalization_result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/normalized_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/normalized_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/pass_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/petscii.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/petscii_shifted.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/petscii_unshifted.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/propagate_ciscode_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/propagate_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/propagate_recode_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/propagate_transcode_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/punycode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/recode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/recode_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/recode_one.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/recode_result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/recode_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/replacement_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/shift_jis_x0208.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/skip_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/skip_input_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/tatar_ansi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/tatar_ascii.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/text.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/text_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/throw_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/transcode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/transcode_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/transcode_one.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/transcode_result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/transcode_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/unicode_code_point.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/unicode_scalar_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/utf16.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/utf32.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/utf8.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/validate_decodable_as.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/validate_encodable_as.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/validate_result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/validate_transcodable_as.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/wide_execution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/wide_literal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/windows_1251.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/windows_1252.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/windows_1253.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/windows_1254.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/windows_1255.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/windows_1256.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/windows_1257.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/windows_1258.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/windows_437_dos_latin_us.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/windows_865_dos_nordic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/include/ztd/text/windows_874.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/tests/shared/include/ztd/text/tests/basic_unicode_strings.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/tests/shared/include/ztd/text/tests/file_write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/tests/shared/include/ztd/text/tests/source_for_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ztd.text/tests/shared/include/ztd/text/tests/utf8_startup.hpp" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf16_to_utf16_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf16_to_utf16_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf16_to_utf32_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf16_to_utf32_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf16_to_utf8_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf16_to_utf8_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf32_to_utf16_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf32_to_utf16_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf32_to_utf32_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf32_to_utf32_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf32_to_utf8_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf32_to_utf8_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf8_to_utf16_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf8_to_utf16_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf8_to_utf32_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf8_to_utf32_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf8_to_utf8_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf8_to_utf8_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf16_to_utf16_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf16_to_utf16_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf16_to_utf32_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf16_to_utf32_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf16_to_utf8_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf16_to_utf8_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf32_to_utf16_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf32_to_utf16_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf32_to_utf32_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf32_to_utf32_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf32_to_utf8_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf32_to_utf8_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf8_to_utf16_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf8_to_utf16_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf8_to_utf32_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf8_to_utf32_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf8_to_utf8_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf8_to_utf8_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf16_to_utf16_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf16_to_utf16_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf16_to_utf32_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf16_to_utf32_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf16_to_utf8_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf16_to_utf8_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf32_to_utf16_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf32_to_utf16_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf32_to_utf32_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf32_to_utf32_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf32_to_utf8_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf32_to_utf8_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf8_to_utf16_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf8_to_utf16_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf8_to_utf32_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf8_to_utf32_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf8_to_utf8_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf8_to_utf8_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf16_to_utf16_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf16_to_utf16_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf16_to_utf32_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf16_to_utf32_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf16_to_utf8_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf16_to_utf8_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf32_to_utf16_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf32_to_utf16_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf32_to_utf32_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf32_to_utf32_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf32_to_utf8_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf32_to_utf8_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf8_to_utf16_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf8_to_utf16_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf8_to_utf32_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf8_to_utf32_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf8_to_utf8_well_formed.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf8_to_utf8_well_formed_init.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/function_form.large/transform_two_spans.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/function_form.small/transform_two_spans.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/encode-decode-path.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/freedom.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/masterful-eop.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/paris-post-office.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/pnld-lass.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/transcoding-path.png" />
+    <Image Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/unicode-vortex.png" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/benchmarks/barrier/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/graph_config.in.json" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/benchmarks/conversion_speed/graph_config.internal.in.json" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/benchmarks/error_handling/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/benchmarks/error_handling/graph_config.in.json" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/benchmarks/function_form/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/benchmarks/function_form/graph_config.in.json" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/cmake/ztd.text-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/_static/inline_removal.js" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/code_point.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/code_unit.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/containers/basic_text.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/contains_unicode_encoding.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/conversions/count_as_decoded.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/conversions/count_as_encoded.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/conversions/count_as_transcoded.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/conversions/decode.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/conversions/encode.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/conversions/recode.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/conversions/transcode.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/conversions/validate_decodable_as.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/conversions/validate_encodable_as.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/conversions/validate_transcodable_as.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/count_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/decode_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/decode_state.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/default_code_point_encoding.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/default_code_unit_encoding.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encode_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encode_state.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encoding_error.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/any_encoding.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/any_encoding_with.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/ascii.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/basic_iconv.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/big5_hkscs.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/cuneicode_registry_encoding.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/encoding_scheme.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/euc_kr_uhc.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/execution.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/gb18030.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/gbk.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/literal.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/mutf8.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/petscii.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/punycode.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/shift_jis_x0208.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/single_byte_encoding.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/utf16.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/utf32.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/utf8.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/wide_execution.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/wide_literal.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/encodings/wtf8.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/error handlers/assume_valid_handler.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/error handlers/default_handler.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/error handlers/incomplete_handler.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/error handlers/pass_handler.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/error handlers/replacement_handler.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/error handlers/skip_handler.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/error handlers/throw_handler.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_code_points_replaceable.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_code_units_replaceable.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_decode_injective.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_decode_state_independent.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_encode_injective.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_encode_state_independent.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_ignorable_error_handler.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_input_error_skippable.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_self_synchronizing_code.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_state_complete.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_state_independent.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_transcoding_compatible.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_unicode_code_point.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_unicode_encoding.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/is_unicode_scalar_value.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/make_decode_state.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/make_encode_state.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/max_code_points.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/max_code_units.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/max_recode_code_points.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/max_transcode_code_units.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/pivot.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/pivotless_transcode_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/propagate_error.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/recode_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/skip_input_error.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/stateless_count_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/stateless_decode_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/stateless_encode_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/stateless_recode_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/stateless_transcode_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/stateless_validate_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/transcode_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/unicode_code_point.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/unicode_scalar_value.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/validate_pivotless_transcode_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/validate_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/validate_transcode_result.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/views/basic_text_view.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/views/decode_view.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/views/encode_view.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/views/recode_view.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/api/views/transcode_view.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/benchmarks.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/benchmarks/function form.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/benchmarks/internal - transcoding - UTF.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/benchmarks/transcoding - UTF.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/bibliography.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/config.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/definitions.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/beyond lucky 7.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/bulk vs single.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/converting.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/converting/count as decoded.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/converting/count as encoded.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/converting/count as transcoded.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/converting/decode.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/converting/encode.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/converting/recode.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/converting/transcode.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/converting/validate decodable.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/converting/validate encodable.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/converting/validate transcodable.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/error handling.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/error handling/anatomy.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/error handling/lossy protection.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/error handling/writing a handler.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/loss.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/lucky 7 extensions/injective.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/lucky 7 extensions/replacement characters.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/lucky 7 extensions/skip on error.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/lucky 7 extensions/speed.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/lucky 7 extensions/state.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/lucky 7 extensions/unicode encoding.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/lucky 7.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/design/strong vs weak code points.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/encodings.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/errors.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/errors/common.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/future.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/genindex.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf16_to_utf16_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf16_to_utf16_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf16_to_utf32_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf16_to_utf32_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf16_to_utf8_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf16_to_utf8_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf32_to_utf16_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf32_to_utf16_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf32_to_utf32_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf32_to_utf32_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf32_to_utf8_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf32_to_utf8_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf8_to_utf16_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf8_to_utf16_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf8_to_utf32_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf8_to_utf32_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf8_to_utf8_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.large/utf8_to_utf8_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf16_to_utf16_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf16_to_utf16_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf16_to_utf32_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf16_to_utf32_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf16_to_utf8_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf16_to_utf8_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf32_to_utf16_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf32_to_utf16_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf32_to_utf32_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf32_to_utf32_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf32_to_utf8_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf32_to_utf8_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf8_to_utf16_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf8_to_utf16_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf8_to_utf32_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf8_to_utf32_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf8_to_utf8_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.internal.small/utf8_to_utf8_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf16_to_utf16_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf16_to_utf16_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf16_to_utf32_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf16_to_utf32_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf16_to_utf8_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf16_to_utf8_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf32_to_utf16_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf32_to_utf16_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf32_to_utf32_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf32_to_utf32_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf32_to_utf8_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf32_to_utf8_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf8_to_utf16_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf8_to_utf16_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf8_to_utf32_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf8_to_utf32_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf8_to_utf8_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.large/utf8_to_utf8_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf16_to_utf16_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf16_to_utf16_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf16_to_utf32_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf16_to_utf32_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf16_to_utf8_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf16_to_utf8_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf32_to_utf16_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf32_to_utf16_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf32_to_utf32_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf32_to_utf32_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf32_to_utf8_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf32_to_utf8_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf8_to_utf16_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf8_to_utf16_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf8_to_utf32_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf8_to_utf32_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf8_to_utf8_well_formed.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/conversion_speed.small/utf8_to_utf8_well_formed_init.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/function_form.large/transform_two_spans.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/function_form.small/" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/img/benchmark_results/function_form.small/transform_two_spans.png.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/in the wild.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/known unicode encodings.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/license.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/documentation/source/quick.rst" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/basic/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/basic/data/utf16-le.hex" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/basic/data/utf32-be.hex" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/boost.text/" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/boost.text/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/compile_fails/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/basic/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/quick/setup/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/documentation/snippets/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/shift_jis/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/shift_jis/data/greeting.shift-jis.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/examples/shift_jis/data/greeting.utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/single/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/single/single.py" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/tests/additional_encodings/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/tests/additional_encodings/data/tests/additional_encodings/latin1/latin1.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/tests/additional_encodings/data/tests/additional_encodings/latin1/utf-32-be.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/tests/additional_encodings/data/tests/additional_encodings/latin1/utf-32-le.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/tests/basic_compile_time/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/tests/basic_run_time/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/tests/compile_fails/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/tests/iconv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/tests/inclusion/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/tests/mockup/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/tests/snippets/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/tests/tiny_buffer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ztd.text/ztd.text.pc.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

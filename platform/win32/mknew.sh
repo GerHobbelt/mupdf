@@ -57,15 +57,18 @@ mknewMISCproj() {
 delnewproj() {
 	libname=$1
 	echo "delnewproj: $libname"
-	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   ${libname}_demos.vcxproj*   2> /dev/null
+	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   ${libname}_demos.vcxproj*   ${libname}_tools.vcxproj*   ${libname}_misc.vcxproj*   ${libname}_benchmarks.vcxproj*   2> /dev/null
+	rm                       ${libname}_test.vcxproj*    ${libname}_example.vcxproj*    ${libname}_demo.vcxproj*    ${libname}_tool.vcxproj*                               ${libname}_benchmark.vcxproj*    2> /dev/null
 	libname=$( echo lib$1 | sed -e 's/^liblib/lib/i' -e 's/-?lib$//i' )
-	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   ${libname}_demos.vcxproj*   2> /dev/null
+	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   ${libname}_demos.vcxproj*   ${libname}_tools.vcxproj*   ${libname}_misc.vcxproj*   ${libname}_benchmarks.vcxproj*   2> /dev/null
+	rm                       ${libname}_test.vcxproj*    ${libname}_example.vcxproj*    ${libname}_demo.vcxproj*    ${libname}_tool.vcxproj*                               ${libname}_benchmark.vcxproj*    2> /dev/null
 }
 
 delnewproj2() {
 	libname=$1
 	echo "delnewproj: $libname"
-	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   2> /dev/null
+	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   ${libname}_demos.vcxproj*   ${libname}_tools.vcxproj*   ${libname}_misc.vcxproj*   ${libname}_benchmarks.vcxproj*   2> /dev/null
+	rm                       ${libname}_test.vcxproj*    ${libname}_example.vcxproj*    ${libname}_demo.vcxproj*    ${libname}_tool.vcxproj*                               ${libname}_benchmark.vcxproj*    2> /dev/null
 }
 
 
@@ -1369,6 +1372,9 @@ msgpack-c
 reflect-cpp
 libbson
 flatbuffers
+ztd.text
+cmocka
+cJSON
 
 EOT
 ) | grep -e "$FILTER"
