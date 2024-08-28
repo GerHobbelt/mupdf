@@ -10,15 +10,18 @@ DEPENDENCIES=											            		\
 		$(PROJDIR)/../../scripts/copy-to-solution-basedir/Makefile
 
 all:
-	echo "copy $(SRCDIR64)/*.exe to $(DSTDIR)"
-	vcopy $(SRCDIR32)/*.exe $(DSTDIR)
-	vcopy $(SRCDIR64)/*.exe $(DSTDIR)
+	@echo "copy $(SRCDIR64)/*.exe to $(DSTDIR)"
+	cp $(SRCDIR32)/bin2coff.exe $(DSTDIR)
+	-robocopy /NP /COPY:DAT /DCOPY:DAT $(SRCDIR64) $(DSTDIR) *.exe
+
+# cp $(SRCDIR32)/*.exe $(DSTDIR)
+# cp $(SRCDIR64)/*.exe $(DSTDIR)
 
 forced-rebuild: clean all
-	echo "forced-rebuild"
+	@echo "forced-rebuild"
 
 clean:
-	echo "clean"
+	@echo "clean"
 	-rm -f $(DSTDIR)*.exe
 
 
