@@ -46,20 +46,20 @@
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -72,7 +72,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -106,11 +106,11 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SYSTEM_WINDOWS;BUILD_MONOLITHIC;BUILDING_CPPLOCATE;CPPLOCATE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -127,7 +127,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -136,7 +136,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SYSTEM_WINDOWS;BUILD_MONOLITHIC;BUILDING_CPPLOCATE;CPPLOCATE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -153,14 +153,14 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SYSTEM_WINDOWS;BUILD_MONOLITHIC;BUILDING_CPPLOCATE;CPPLOCATE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -176,7 +176,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -186,7 +186,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SYSTEM_WINDOWS;BUILD_MONOLITHIC;BUILDING_CPPLOCATE;CPPLOCATE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -202,20 +202,33 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="cpplocate.vcxproj">
+      <Project>{00811970-815b-4f64-bc9d-219078c74995}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgoogletest.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7a17e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override_4_googletests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82e}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cpplocate/source/tests/cpplocate-test/cpplocate_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpplocate/source/tests/cpplocate-test/cpplocate_test.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cpplocate\source\tests\cpplocate-test\cpplocate_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpplocate/source/tests/liblocate-test/liblocate_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpplocate/source/tests/liblocate-test/liblocate_test.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\cpplocate\source\tests\liblocate-test\liblocate_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpplocate/source/tests/liblocate-test/utils_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpplocate/source/tests/monolithic_main.c" />
     <ClInclude Include="../../thirdparty/owemdjee/cpplocate/source/cpplocate/include/cpplocate/cpplocate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cpplocate/source/liblocate/include/liblocate/liblocate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpplocate/source/tests/monolithic_examples.h" />
     <Image Include="../../thirdparty/owemdjee/cpplocate/cpplocate-logo.png" />
     <Text Include="../../thirdparty/owemdjee/cpplocate/AUTHORS" />
     <Text Include="../../thirdparty/owemdjee/cpplocate/CMakeLists.txt" />
@@ -258,7 +271,8 @@
     <Text Include="../../thirdparty/owemdjee/cpplocate/source/tests/liblocate-test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cpplocate/source/version.h.in" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
