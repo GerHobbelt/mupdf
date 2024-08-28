@@ -134,6 +134,16 @@ src = src
 .replace(/<LinkIncremental>[^]*?<\/LinkIncremental>/g, '')
 .replace(/<WholeProgramOptimization>[^]*?<\/WholeProgramOptimization>/g, '')
 .replace(/<CopyLocalDeploymentContent>[^]*?<\/CopyLocalDeploymentContent>/g, '')
+// remove empty PropertyGroups, e.g.
+// <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+.replace(/<PropertyGroup Condition="[^<>]* \/>/g, '')
+// merge unlabeled PropertyGroup sections, e.g.
+//   <PropertyGroup>
+//     <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+//   </PropertyGroup>
+//   <PropertyGroup>
+//     ...
+.replace(/(<PropertyGroup>[^]*?)<\/PropertyGroup>[\s\r\n]*<PropertyGroup>/g, '$1\n')
 // consolidate the CopyLocalDeploymentContent setting to the main property group:
 .replace(/<\/IntDir>/g, `</IntDir>
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
