@@ -1375,6 +1375,7 @@ flatbuffers
 ztd.text
 cmocka
 cJSON
+cpplocate
 
 EOT
 ) | grep -e "$FILTER"
@@ -1392,7 +1393,6 @@ bin2cpp
 binary_bakery
 calibre
 capnproto
-cpplocate
 cryptest
 EtwExplorer
 ex-leptonica-freetype-harfbuzz
