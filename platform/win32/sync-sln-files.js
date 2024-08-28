@@ -12,7 +12,7 @@ const command = +process.argv[2];
 const source_sln_file = process.argv[3];
 let dest_sln_files = [].concat(process.argv).toSpliced(0, 4);
 
-console.log({ argv: process.argv, command, source_sln_file, dest_sln_files });
+//console.log({ argv: process.argv, command, source_sln_file, dest_sln_files });
 
 
 // Return array of projects discovered in SLN file content:
@@ -50,12 +50,64 @@ default:
 	console.log(`Unknown/unsupported command '${command}'. Aborting.\n`);
 	process.exit(1);
 	break;
+
+case 1:
+{
+	// copy the directory structure and the bottom chunk to the target sln file (if it not the source).
+	let list_src = fs.readFileSync(source_sln_file, 'utf8');
+	
+	// find the last SLN directory entry in there:
+	let folder_re = new RegExp(`^([\\s\\S]*${ protect4RE('Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}")') }[\\s\\S]*?\\bEndProject\\b)`, 'g');
+	let m = folder_re.exec(list_src);
+	let prefix_str = m[1];
+
+	let global_chunk_re = /\b(Global\b[\s\S]*\bEndGlobal)\b/g;
+	let mg = global_chunk_re.exec(list_src);
+	console.log({ mg });
+	let postfix_index = mg.index;
+	let postfix_str = mg[1];
+
+	console.log({ folder_re, prefix_str, postfix_str });
+	
+	//console.log({ dest_sln_files });
+	dest_sln_files.forEach((l) => {
+		let dest_sln_file = l;
+		if (dest_sln_file === source_sln_file)
+			return;
+		let dest_src = fs.readFileSync(dest_sln_file, 'utf8');
+		console.log({ dest_sln_file, size: dest_src.length, folder_re });
+
+		folder_re.lastIndex = 0;
+		let m2 = folder_re.exec(dest_src);
+		if (m2) {
+			let dest_prefix_str = m2[1];
+			
+			global_chunk_re.lastIndex = 0;
+			let m3 = global_chunk_re.exec(dest_src);
+			if (m3) {
+				let dest_postfix_index = m3.index;
+				let dest_postfix_str = m3[1];
+
+				let dest_tail_str = dest_src.slice(dest_postfix_index + dest_postfix_str.length);
+				console.log({ dest_sln_file, m3, dest_tail_str });
+				
+				// slice the sln and prepend the prefix_str:
+				dest_src = prefix_str + dest_src.slice(dest_prefix_str.length, dest_postfix_index) + postfix_str + dest_tail_str;
+				
+				console.log(`Updating ${ dest_sln_file }.`);
+				fs.writeFileSync(dest_sln_file, dest_src, 'utf8');
+			}
+		}
+	});
+}
+	break;
 	
 case 3:
+{
 	let failed_sln_file = dest_sln_files.filter((l) => /failed-ideas/.test(l))[0];
 	let maymatter_sln_file = dest_sln_files.filter((l) => /may-matter/.test(l))[0];
 	
-	console.log({ failed_sln_file, maymatter_sln_file, length: dest_sln_files.length });
+	//console.log({ failed_sln_file, maymatter_sln_file, length: dest_sln_files.length });
 	
 	if (!failed_sln_file || !maymatter_sln_file || dest_sln_files.length !== 2) {
 		console.log(`Expected two extra SLN files only: a failed-ideas and may-matter one, nothing else. Aborting.\n`);
@@ -92,7 +144,7 @@ case 3:
 			list_prjs[idx].in_maymatter_sln = true;
 		}
 	});
-	console.log({ list_prjs });	
+	//console.log({ list_prjs });	
 
 	let list_edited = false;
 	let failed_edited = false;
@@ -150,6 +202,7 @@ EndProject
 	if (list_edited || failed_edited || maymatter_edited) {
 		console.log("NOTE: solution files have been updated.\n");
 	}
+}
 	break;
 }
 

@@ -7,4 +7,4 @@
 
 node ./sync-sln-files.js 1 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '*.sln' )
 node ./sync-sln-files.js 2 m-dev-list.sln  $( find . -maxdepth 1 -type f -name 'm-dev-*.sln' | grep -v failed-ideas | grep -v may-matter )
-node ./sync-sln-files.js 3 m-dev-list.sln  *failed-ideas*.sln *may-matter*.sln
+#node ./sync-sln-files.js 3 m-dev-list.sln  *failed-ideas*.sln *may-matter*.sln
