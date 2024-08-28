@@ -49,20 +49,20 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -89,7 +89,7 @@
     <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -123,8 +123,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
@@ -1844,6 +1844,35 @@
     <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/intro.html" />
     <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/introduction.html" />
     <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/lake-characteristics.html" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/anchor-sections-1.1.0/" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/anchor-sections-1.1.0/anchor-sections-hash.css" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/anchor-sections-1.1.0/anchor-sections.css" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/anchor-sections-1.1.0/anchor-sections.js" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/bsTable-3.3.7/" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/bsTable-3.3.7/bootstrapTable.js" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/bsTable-3.3.7/bootstrapTable.min.css" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/css/plugin-bookdown.css" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/css/plugin-clipboard.css" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/css/plugin-fontsettings.css" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/css/plugin-highlight.css" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/css/plugin-search.css" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/css/plugin-table.css" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/css/style.css" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/js/app.min.js" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/js/clipboard.min.js" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/js/jquery.highlight.js" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/js/plugin-bookdown.js" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/js/plugin-clipboard.js" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/js/plugin-fontsettings.js" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/js/plugin-search.js" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/gitbook-2.6.7/js/plugin-sharing.js" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/jquery-3.6.0/" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/jquery-3.6.0/jquery-3.6.0.min.js" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/kePrint-0.0.1/" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/kePrint-0.0.1/kePrint.js" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/lightable-0.0.1/" />
+    <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/libs/lightable-0.0.1/lightable.css" />
     <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/literature.html" />
     <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/methods.html" />
     <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/_book/references.html" />
@@ -1864,7 +1893,8 @@
     <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/style.css" />
     <Text Include="../../thirdparty/owemdjee/Sancho.Panza.on.tesseract.OCR/toc.css" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
