@@ -130,10 +130,15 @@ src = src
 .replace(/<IntDir>[^]*?<\/IntDir>/g, `<IntDir>$(SolutionDir)obj\\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\\$(ConfigurationType)-$(ProjectName)\\</IntDir>`)
 //       <OmitFramePointers>true</OmitFramePointers>
 .replace(/<OmitFramePointers>[^]*?<\/OmitFramePointers>/g, '')
+//       <LinkIncremental>false</LinkIncremental>    -- will be set further below; it doesn't work when specified in the common-project.props.
+.replace(/<LinkIncremental>[^]*?<\/LinkIncremental>/g, '')
+.replace(/<WholeProgramOptimization>[^]*?<\/WholeProgramOptimization>/g, '')
 .replace(/<CopyLocalDeploymentContent>[^]*?<\/CopyLocalDeploymentContent>/g, '')
 // consolidate the CopyLocalDeploymentContent setting to the main property group:
 .replace(/<\/IntDir>/g, `</IntDir>
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
     `)
 /*
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -143,10 +148,10 @@ src = src
     <CharacterSet>Unicode</CharacterSet>
     <UseDebugLibraries>true</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
  */
 .replace(/<CharacterSet>[^]*?<\/CharacterSet>/g, '')
-.replace(/<WholeProgramOptimization>[^]*?<\/WholeProgramOptimization>/g, '')
 .replace(/<PlatformToolset>[^]*?<\/PlatformToolset>/g, `<PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>`)
 /*

@@ -1,7 +1,4 @@
 
-directories:
-	../../thirdparty/owemdjee/libeigen/
-
 also-ignore:
 	/bench/
 	/blas/
