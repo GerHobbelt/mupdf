@@ -57,11 +57,6 @@ static const struct cmd_info commands[] = 	\
 #define MONOLITHIC_CMD_TABLE_END()	        \
 }
 
-// APIs for use in the generic startup code when you're writing your own main monolithic exec wrapper:
-
-int setup_exe_for_monitor_dpi_etc(void);
-int setup_exe_for_utf8_console_locale(void);
-
 #ifdef __cplusplus
 }
 #endif
