@@ -27,6 +27,10 @@
 
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef int tool_f(void);
 typedef int tool_fa(int argc, const char** argv);
 typedef int tool_f_cpp();
@@ -53,4 +57,11 @@ static const struct cmd_info commands[] = 	\
 #define MONOLITHIC_CMD_TABLE_END()	        \
 }
 
+// APIs for use in the generic startup code when you're writing your own main monolithic exec wrapper:
 
+int setup_exe_for_monitor_dpi_etc(void);
+int setup_exe_for_utf8_console_locale(void);
+
+#ifdef __cplusplus
+}
+#endif
