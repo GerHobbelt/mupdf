@@ -2,6 +2,8 @@
 // Defines the subcluster init + exec function prototypes for use in a larger monolith.
 // 
 
+#pragma once
+
 #if defined(MONOLITHIC_SUBCLUSTER_MAIN)
 
 #ifdef __cplusplus

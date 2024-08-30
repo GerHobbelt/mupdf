@@ -862,7 +862,9 @@ extern "C" {
 
 int MONOLITHIC_SUBCLUSTER_MAIN_INIT(void)
 {
-	return setup_exe_for_monitor_dpi_etc();
+	int rv = setup_exe_for_monitor_dpi_etc();
+	rv |= setup_exe_for_utf8_console_locale();
+	return rv;
 }
 
 #ifdef __cplusplus
