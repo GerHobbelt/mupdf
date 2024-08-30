@@ -412,6 +412,11 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
   })
   .filter((f) => {
     if (DEBUG > 2) console.error("files.filter:", {f, ext: path.extname(f).toLowerCase()})
+		
+	// skip directory entries here
+	if (f.endsWith('/'))
+		return false;
+	
     let base;
     switch (path.extname(f).toLowerCase()) {
     case '.c':
@@ -474,7 +479,21 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
         }
         return true;
 
+    case '':
+		// files without any extension are always 'special' and will be added to the project:
+        filterDirs.add('Misc Files');
+        base = path.dirname(f);
+        if (base === '.') {
+          base = '';
+        }
+        if (base.length > 0) {
+          base = 'Misc Files/' + base;
+          filterDirs.add(base);
+        }
+        return true;
+
     default:
+		if (DEBUG > 2) console.error("files.filter:", {f, ext: path.extname(f).toLowerCase(), isSpecial: isSpecialMiscFile(f)})
         if (!isSpecialMiscFile(f))
           return false;
 
