@@ -3,5 +3,4 @@ also-ignore:
 	/test/
 	
 sources:
-	dummy.c
-	
+    ../../scripts/libresult-cpp/dummy.cpp

@@ -1,4 +1,3 @@
 
 sources:
-	dummy.c
-	
+    ../../scripts/libthirdparty/dummy.cpp

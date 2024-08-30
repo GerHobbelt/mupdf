@@ -1,3 +1,3 @@
 
 sources:
-	dummy.c
+    ../../scripts/libplf_nanotimer/dummy.cpp

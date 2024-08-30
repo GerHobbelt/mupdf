@@ -23,4 +23,3 @@ special-inject:
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
-	

@@ -20,4 +20,4 @@ directories:
 	../../thirdparty/owemdjee/VQMT/tmp
 
 sources:
-	dummy.c
+    ../../scripts/collection-1tmp1/dummy.cpp

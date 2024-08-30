@@ -4,5 +4,4 @@ also-ignore:
 	/tests/
 	
 sources:
-	dummy.c
-	
+    ../../scripts/libcrow/dummy.cpp

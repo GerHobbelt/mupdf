@@ -11,5 +11,4 @@ also-ignore:
 	unsupported/
 
 extra-sources:
-	dummy++.cpp
-		
+    ../../scripts/libeigen/dummy.cpp

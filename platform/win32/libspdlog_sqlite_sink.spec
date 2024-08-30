@@ -1,4 +1,3 @@
 
 extra-sources:
-	dummy.c
-	
+    ../../scripts/libspdlog_sqlite_sink/dummy.cpp

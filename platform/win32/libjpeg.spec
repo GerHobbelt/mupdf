@@ -1,4 +1,3 @@
 
 sources:
-	dummy.c
-	
+    ../../scripts/libjpeg/dummy.cpp

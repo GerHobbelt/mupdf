@@ -1376,6 +1376,7 @@ ztd.text
 cmocka
 cJSON
 cpplocate
+uni-algo
 
 EOT
 ) | grep -e "$FILTER"

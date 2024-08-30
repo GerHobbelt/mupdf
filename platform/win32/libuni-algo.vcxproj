@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF8EBB31}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNI_ALGO;UNI_ALGO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNI_ALGO;UNI_ALGO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNI_ALGO;UNI_ALGO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNI_ALGO;UNI_ALGO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNI_ALGO;UNI_ALGO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNI_ALGO;UNI_ALGO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNI_ALGO;UNI_ALGO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNI_ALGO;UNI_ALGO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNI_ALGO;UNI_ALGO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNI_ALGO;UNI_ALGO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNI_ALGO;UNI_ALGO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNI_ALGO;UNI_ALGO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/example/c_wrapper/c_uni.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/gen/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/perf/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/sqlite/unisqlite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/src/data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/clang-tidy/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/case.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/conv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/ext/ascii.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/ext/translit/japanese_kana_to_romaji_hepburn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/ext/translit/macedonian_to_latin_docs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/impl/impl_case.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/impl/impl_case_locale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/impl/impl_conv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/impl/impl_iter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/impl/impl_locale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/impl/impl_norm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/impl/impl_prop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/impl/impl_script.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/impl/impl_segment_grapheme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/impl/impl_segment_word.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/locale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/norm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/prop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/ranges.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/ranges_conv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/ranges_grapheme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/ranges_norm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/ranges_word.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/script.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uni-algo/test/standalone/version.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/example/c_wrapper/c_uni.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/example/cpp_find_text_in_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/example/cpp_ranges.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/example/cpp_security_corner_cases.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/gen/gen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/case.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/conv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/ext/ascii.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/ext/translit/japanese_kana_to_romaji_hepburn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/ext/translit/macedonian_to_latin_docs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/data/data_case.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/data/data_norm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/data/data_prop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/data/data_script.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/data/data_segment_grapheme.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/data/data_segment_word.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/data/extern_case.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/data/extern_norm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/data/extern_prop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/data/extern_script.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/data/extern_segment_grapheme.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/data/extern_segment_word.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/example/cpp_proxy_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_case.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_case_locale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_conv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_cpp_lib_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_iter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_locale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_norm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_prop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_script.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_segment_grapheme.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_segment_word.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/impl_unicode_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/internal_defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/internal_stages.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/internal_undefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/internal/data_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/internal/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/internal/found.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/internal/locale_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/internal/ranges_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/internal/ranges_translit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/internal/safe_layer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/locale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/norm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/prop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/ranges.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/ranges_conv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/ranges_grapheme.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/ranges_norm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/ranges_word.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/script.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/perf/perf_convert_utf8to16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/perf/perf_normalize_nfc_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/perf/perf_normalize_nfc_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/perf/perf_segment_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/perf/perf_segment_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/perf/perf_transform_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/sqlite/unisqlite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/random_stuff/amalgamation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/random_stuff/broken_utf8to16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/random_stuff/simple_search.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/random_stuff/unaligned_load_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/random_stuff/unsafe_utf8to16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/random_stuff/w3c_utf8to16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_alloc_func.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_ascii.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_case.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_conv_and_iter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_extra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_fast_ascii.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_kewb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_lenient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_lenient2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_lenient_iter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_lenient_iter_rev.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_locale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_norm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_norm_unaccent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_perf_iter_conv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_prop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_ranges.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_script.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_segment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_segment_cursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_short_func.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_strict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_strict2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_strict_iter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_strict_iter_rev.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_translit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_translit_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_valid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_visual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uni-algo/test/test_visual_data.h" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/cmake/uni-algo-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/doc/API.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/doc/API_ABI_STABILITY.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/doc/CONSTEXPR.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/doc/CURSOR.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/doc/CUSTOM_ALLOCATOR.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/doc/SAFE_LAYER.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/gen/checklist.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/gen/nm_result.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/ext/README.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/data/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/doc/README_FIRST.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/doc/comment_tags.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/doc/config_defines.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/doc/data.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/doc/generator_utf16.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/doc/isolated_arrays.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/doc/list_and_info.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/doc/signature.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/include/uni_algo/impl/doc/what_is_this_language.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/perf/result/convert_utf8to16.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/perf/result/normalize_nfc_utf16.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/perf/result/normalize_nfc_utf8.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/perf/result/segment_utf16.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/perf/result/transform_utf16.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/sqlite/README.md" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/test/cmake/default-build-type.cmake" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/test/random_stuff/mg152_notes.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/test/standalone/standalone.cmake" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/test/visual/test_utf16_broken.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/test/visual/test_utf16to8_result.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/test/visual/test_utf32_broken.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/test/visual/test_utf32to8_result.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/test/visual/test_utf8_broken.txt" />
+    <Text Include="../../thirdparty/owemdjee/uni-algo/test/visual/test_utf8to16_result.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

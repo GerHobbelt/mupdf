@@ -2,6 +2,5 @@
 also-ignore:
 	/tests/
 	
-source:
-	dummy.cpp
-	
+sources:
+    ../../scripts/libexpected/dummy.cpp
