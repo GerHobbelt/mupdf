@@ -19,32 +19,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFFB2E3F}</ProjectGuid>
+    <ProjectGuid>{D9C05468-D667-4B30-A0FB-6B2FAE6F3FBB}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -227,7 +227,9 @@
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/compact_enc_det/compact_enc_det/compact_enc_det.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/compact_enc_det/compact_enc_det/compact_enc_det_hint_code.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/compact_enc_det/compact_enc_det/compact_enc_det_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/compact_enc_det/util/encodings/encodings.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/compact_enc_det/util/encodings/encodings_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/compact_enc_det/util/languages/languages.cc" />
     <ClInclude Include="../../thirdparty/owemdjee/compact_enc_det/compact_enc_det/compact_enc_det.h" />
     <ClInclude Include="../../thirdparty/owemdjee/compact_enc_det/compact_enc_det/compact_enc_det_generated_tables.h" />
@@ -249,6 +251,14 @@
     <Text Include="../../thirdparty/owemdjee/compact_enc_det/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/compact_enc_det/README.md" />
     <Text Include="../../thirdparty/owemdjee/compact_enc_det/autogen.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libgoogletest.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7a17e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override_4_googletests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82e}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
