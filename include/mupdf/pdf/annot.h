@@ -801,7 +801,11 @@ void pdf_add_annot_ink_list(fz_context *ctx, pdf_annot *annot, int n, fz_point s
 void pdf_set_annot_icon_name(fz_context *ctx, pdf_annot *annot, const char *name);
 void pdf_set_annot_is_open(fz_context *ctx, pdf_annot *annot, int is_open);
 
+enum pdf_line_ending pdf_annot_line_start_style(fz_context *ctx, pdf_annot *annot);
+enum pdf_line_ending pdf_annot_line_end_style(fz_context *ctx, pdf_annot *annot);
 void pdf_annot_line_ending_styles(fz_context *ctx, pdf_annot *annot, enum pdf_line_ending *start_style, enum pdf_line_ending *end_style);
+void pdf_set_annot_line_start_style(fz_context *ctx, pdf_annot *annot, enum pdf_line_ending s);
+void pdf_set_annot_line_end_style(fz_context *ctx, pdf_annot *annot, enum pdf_line_ending e);
 void pdf_set_annot_line_ending_styles(fz_context *ctx, pdf_annot *annot, enum pdf_line_ending start_style, enum pdf_line_ending end_style);
 
 const char *pdf_annot_icon_name(fz_context *ctx, pdf_annot *annot);
@@ -810,6 +814,14 @@ int pdf_annot_is_standard_stamp(fz_context *ctx, pdf_annot *annot);
 
 void pdf_annot_line(fz_context *ctx, pdf_annot *annot, fz_point *a, fz_point *b);
 void pdf_set_annot_line(fz_context *ctx, pdf_annot *annot, fz_point a, fz_point b);
+
+void pdf_annot_line_leader(fz_context *ctx, pdf_annot *annot, float *ll, float *lle, float *llo);
+void pdf_set_annot_line_leader(fz_context *ctx, pdf_annot *annot, float ll, float lle, float llo);
+
+int pdf_annot_line_caption(fz_context *ctx, pdf_annot *annot);
+void pdf_set_annot_line_caption(fz_context *ctx, pdf_annot *annot, int cap);
+fz_point pdf_annot_line_caption_offset(fz_context *ctx, pdf_annot *annot);
+void pdf_set_annot_line_caption_offset(fz_context *ctx, pdf_annot *annot, fz_point offset);
 
 int pdf_annot_vertex_count(fz_context *ctx, pdf_annot *annot);
 fz_point pdf_annot_vertex(fz_context *ctx, pdf_annot *annot, int i);
