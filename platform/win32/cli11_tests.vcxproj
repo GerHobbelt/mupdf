@@ -237,6 +237,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/cli11/book/code/geet.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/book/code/intro.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/book/code/simplest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/arg_capture.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/callback_passthrough.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/config_app.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/custom_parse.cpp" />
@@ -289,7 +290,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/TransformTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/TrueFalseTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/WindowsTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/applications/system_args.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/applications/ensure_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/applications/ensure_utf8_twice.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/informational.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/link_test_1.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/link_test_2.cpp" />
@@ -327,12 +329,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/cli11/tests/catch.hpp" />
     <Image Include="../../thirdparty/owemdjee/cli11/docs/CLI11_100.png" />
     <Image Include="../../thirdparty/owemdjee/cli11/docs/CLI11_300.png" />
+    <Text Include="../../thirdparty/owemdjee/cli11/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/cli11/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/cli11/CLI11.CPack.Description.txt" />
-    <Text Include="../../thirdparty/owemdjee/cli11/CLI11.hpp.in" />
     <Text Include="../../thirdparty/owemdjee/cli11/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cli11/CPPLINT.cfg" />
     <Text Include="../../thirdparty/owemdjee/cli11/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cli11/MODULE.bazel" />
     <Text Include="../../thirdparty/owemdjee/cli11/README.md" />
     <Text Include="../../thirdparty/owemdjee/cli11/azure-pipelines.yml" />
     <Text Include="../../thirdparty/owemdjee/cli11/book/CMakeLists.txt" />
@@ -352,10 +355,12 @@
     <Text Include="../../thirdparty/owemdjee/cli11/book/chapters/toolkits.md" />
     <Text Include="../../thirdparty/owemdjee/cli11/book/chapters/validators.md" />
     <Text Include="../../thirdparty/owemdjee/cli11/book/code/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cli11/book/package.json" />
     <Text Include="../../thirdparty/owemdjee/cli11/cmake/CLI11.pc.in" />
     <Text Include="../../thirdparty/owemdjee/cli11/cmake/CLI11ConfigVersion.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/cli11/cmake/CLI11GeneratePkgConfig.cmake" />
     <Text Include="../../thirdparty/owemdjee/cli11/cmake/CLI11Warnings.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cli11/cmake/CLI11precompiled.pc.in" />
     <Text Include="../../thirdparty/owemdjee/cli11/cmake/CodeCoverage.cmake" />
     <Text Include="../../thirdparty/owemdjee/cli11/docs/CLI11.svg" />
     <Text Include="../../thirdparty/owemdjee/cli11/docs/CMakeLists.txt" />
@@ -369,10 +374,15 @@
     <Text Include="../../thirdparty/owemdjee/cli11/scripts/check_style.sh" />
     <Text Include="../../thirdparty/owemdjee/cli11/scripts/check_style_docker.sh" />
     <Text Include="../../thirdparty/owemdjee/cli11/scripts/clang-format-pre-commit" />
+    <Text Include="../../thirdparty/owemdjee/cli11/single-include/CLI11.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/cli11/single-include/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cli11/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cli11/tests/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/cli11/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cli11/tests/data/unicode.txt" />
+    <Text Include="../../thirdparty/owemdjee/cli11/tests/find_package_tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cli11/tests/mesonTest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cli11/tests/package_config_tests/CMakeLists.txt" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
