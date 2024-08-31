@@ -42,10 +42,13 @@ static int setup_exe_for_monitor_dpi_etc(void)
 		r += (d > 0);
 		mon = MonitorFromWindow(w, MONITOR_DEFAULTTONEAREST);
 		rv = GetScaleFactorForMonitor(mon, &scale);
+		r += (rv == S_OK);
 
 #ifdef __cplusplus
 		rv = ::SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
+		r += (rv == S_OK);
 		rv = ::SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
+		r += (rv == S_OK);
 #else
 		rv = SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
 		r += (rv == S_OK);
@@ -53,7 +56,7 @@ static int setup_exe_for_monitor_dpi_etc(void)
 		r += (rv == S_OK);
 #endif
 
-		return r >= 7 ? 0 : 1 + r;   // 0 is success; at least one of the SetProcessDpiAwareness() calls must have passed successfully then.
+		return r >= 8 ? 0 : 1 + r;   // 0 is success; at least one of the SetProcessDpiAwareness() calls must have passed successfully then.
 #else
 		return 0;
 #endif
