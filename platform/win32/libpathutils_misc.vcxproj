@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -76,7 +76,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPATHUTILS;PATHUTILS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -225,6 +225,10 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libpathutils/normalize-filepath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpathutils/normalize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpathutils/sanitize-filepath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpathutils/sanitize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libpathutils/tmp/FileIO/src/DirectoryReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libpathutils/tmp/FileIO/src/FileIO.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libpathutils/tmp/FileIO/src/FileSystemWalker.cpp" />
@@ -247,6 +251,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/libpathutils/tmp/pistis-filesystem/src/test/cpp/pistis/filesystem/FileTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libpathutils/tmp/pistis-filesystem/src/test/cpp/pistis/filesystem/PathTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libpathutils/tmp/pistis-filesystem/src/test/cpp/pistis/filesystem/TestArtifacts.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpathutils/pathutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpathutils/pathutils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libpathutils/tmp/FileIO/src/DirectoryReader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpathutils/tmp/FileIO/src/FileIO.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpathutils/tmp/FileIO/src/FileSystemWalker.h" />
@@ -280,6 +286,7 @@
     <Text Include="../../thirdparty/owemdjee/libpathutils/tmp/cpppath/environment.yaml" />
     <Text Include="../../thirdparty/owemdjee/libpathutils/tmp/cpppath/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libpathutils/tmp/path-util/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpathutils/tmp/path-util/Yipfile" />
     <Text Include="../../thirdparty/owemdjee/libpathutils/tmp/path/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/libpathutils/tmp/path/README.md" />
     <Text Include="../../thirdparty/owemdjee/libpathutils/tmp/path/zz.toml" />
@@ -290,7 +297,8 @@
     <Text Include="../../thirdparty/owemdjee/libpathutils/tmp/pistis-filesystem/src/test/cpp/Makefile" />
     <Text Include="../../thirdparty/owemdjee/libpathutils/tmp/pistis-filesystem/src/test/resources/test_file_1.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
