@@ -16,6 +16,12 @@ let dest_sln_files = [].concat(process.argv).toSpliced(0, 4);
 
 //console.log({ argv: process.argv, command, source_sln_file, dest_sln_files });
 
+// extra BOGUS project which will be apended to each SLN file so we can delete the project in MSVC and have that one rewrite a *fresh, clean* SLN afterwards:
+const bogus_extra_project = `
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zzzzzz", "zzzzzz.vcxproj", "{A60D8644-5A1C-4D29-8970-77777777777F}"
+EndProject
+`;
 
 // Return array of projects discovered in SLN file content:
 function getAllProjectsFromSln(sln_src) {
@@ -94,20 +100,23 @@ case 1:
                 //console.log({ dest_sln_file, m3, dest_tail_str });
 
                 // slice the sln and prepend the prefix_str:
-                dest_src = prefix_str + dest_src.slice(dest_prefix_str.length, dest_postfix_index) + postfix_str + dest_tail_str;
+                dest_src = prefix_str + dest_src.slice(dest_prefix_str.length, dest_postfix_index) + postfix_str + dest_tail_str + bogus_extra_project;
 
                 console.log(`Updating ${ dest_sln_file }.`);
                 fs.writeFileSync(dest_sln_file, dest_src, 'utf8');
             }
         }
     });
+
+	console.log(`Updating ${ source_sln_file }.`);
+	fs.writeFileSync(source_sln_file, list_src + bogus_extra_project, 'utf8');
 }
     break;
 
 
 case 2:
 {
-    // copy the directory structure and the bottom chunk to the target sln file (if it not the source).
+    // copy the directory structure and the bottom chunk to the target sln file (if it is not the source).
     let list_src = fs.readFileSync(source_sln_file, 'utf8');
 
     let list_prjs = getAllProjectsFromSln(list_src);

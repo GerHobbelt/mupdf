@@ -1378,6 +1378,18 @@ cJSON
 cpplocate
 uni-algo
 reflect
+figcone_tree
+sfun
+figcone_shoal
+shoal
+figcone_ini
+inifile-cpp
+figcone_toml
+figcone_json
+figcone_xml
+figcone_yaml
+libchewing
+libexif
 
 EOT
 ) | grep -e "$FILTER"
@@ -1389,6 +1401,7 @@ myapplist=$(
 (
 grep -v '#' <<EOT
 
+exif
 bbe
 bebop
 bin2cpp

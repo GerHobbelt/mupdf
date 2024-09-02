@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF61808A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING;CHEWING_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING;CHEWING_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING;CHEWING_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING;CHEWING_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING;CHEWING_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING;CHEWING_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING;CHEWING_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING;CHEWING_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING;CHEWING_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING;CHEWING_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING;CHEWING_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING;CHEWING_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/capi/src/chewing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/contrib/simple-select.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/genkeystroke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/performance.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/porting_layer/src/asprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/randkeystroke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/simulate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/stress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-bopomofo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-easy-symbol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-error-handling.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-fullshape.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-keyboard.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-keyboardless.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-logger.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-regression.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-reset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-special-symbol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-struct-size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-symbol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/test-userphrase.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/testchewing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchewing/tests/testhelper.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchewing/include/chewing-compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchewing/include/chewing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchewing/include/chewingio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchewing/include/global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchewing/include/mod_aux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchewing/tests/chewing-utf8-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchewing/tests/porting_layer/include/plat_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchewing/tests/porting_layer/include/sys/plat_posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchewing/tests/porting_layer/include/sys/plat_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchewing/tests/porting_layer/src/asprintf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchewing/tests/testhelper.h" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/ChangeLog-svn" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/ChewingConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/benches/conversion.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/capi/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/capi/cbindgen.toml" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/capi/src/io.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/capi/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/capi/src/logger.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/capi/src/public.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/capi/src/symbols-msvc.def" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/capi/src/types.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/capi/src/version.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/capi/tests/test-user-dictionary.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/chewing.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/cmake/version.texi.in" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/contrib/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/contrib/python/chewing.py" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/contrib/python/test.py" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/data/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/data/phone.cin" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/data/svnrev" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/doc/chewing-cli-dump.1" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/doc/chewing-cli-info.1" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/doc/chewing-cli-init-database.1" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/doc/chewing-cli.1" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/doc/libchewing.texi" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/scripts/create_keystroke_from_text.py" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/scripts/gendiff-from-libchewingdata.sh" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/conversion/chewing.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/conversion/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/conversion/simple.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/conversion/symbol.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/dictionary/layered.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/dictionary/loader.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/dictionary/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/dictionary/sqlite.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/dictionary/trie.asn1" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/dictionary/trie.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/dictionary/trie_buf.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/dictionary/uhash.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/abbrev.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/composition_editor.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/estimate.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/keyboard/colemak_dh_ansi.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/keyboard/colemak_dh_orth.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/keyboard/dvorak.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/keyboard/dvorak_on_qwerty.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/keyboard/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/keyboard/qgmlwy.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/keyboard/qwerty.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/keyboard/workman.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/selection/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/selection/phrase.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/selection/symbol.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/zhuyin_layout/dc26.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/zhuyin_layout/et.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/zhuyin_layout/et26.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/zhuyin_layout/ginyieh.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/zhuyin_layout/hsu.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/zhuyin_layout/ibm.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/zhuyin_layout/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/zhuyin_layout/pinyin.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/editor/zhuyin_layout/standard.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/path.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/zhuyin/bopomofo.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/zhuyin/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/src/zhuyin/syllable.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/README" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/data/default-test.txt" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/data/golden-chewing-v1.sqlite3" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/data/golden-chewing.sqlite3" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/data/phone.cin" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/debug-chewing-shell.sh" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/materials.txt" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/simulate.sh" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/stresstest.py" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/testhelper/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/testhelper/src/key2pho.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/testhelper/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/testhelper/src/path.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tests/testhelper/src/utf8.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tools/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tools/src/dump.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tools/src/flags.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tools/src/info.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tools/src/init_database.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/tools/src/main.rs" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/vet/audits.toml" />
+    <Text Include="../../thirdparty/owemdjee/libchewing/vet/config.toml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
