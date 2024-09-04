@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFCC4678}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASTL;EASTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASTL;EASTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASTL;EASTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASTL;EASTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASTL;EASTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASTL;EASTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASTL;EASTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASTL;EASTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASTL;EASTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASTL;EASTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASTL;EASTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEASTL;EASTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/BenchmarkAlgorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/BenchmarkBitset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/BenchmarkDeque.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/BenchmarkHash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/BenchmarkHeap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/BenchmarkList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/BenchmarkMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/BenchmarkSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/BenchmarkSort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/BenchmarkString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/BenchmarkTupleVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/BenchmarkVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/EASTLBenchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/benchmark/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/source/allocator_eastl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/source/assert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/source/atomic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/source/fixed_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/source/hashtable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/source/intrusive_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/source/numeric_limits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/source/red_black_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/source/string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/source/thread_support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/EASTLTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/EASTLTestAllocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestAlgorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestAllocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestAllocatorPropagate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestAny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestAtomicAsm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestAtomicBasic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestAtomicMultiThreaded.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestBit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestBitVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestBitcast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestBitset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestCharTraits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestChrono.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestConcepts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestCppCXTypeTraits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestDeque.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestExtra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFinally.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFixedFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFixedHash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFixedList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFixedMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFixedSList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFixedSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFixedString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFixedTupleVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFixedVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFunctional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestHash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestHeap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestIntrusiveHash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestIntrusiveList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestIntrusiveSDList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestIntrusiveSList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestListMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestLruCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestMemory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestMeta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestNumericLimits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestOptional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestRandom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestRatio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestRingBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestSList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestSegmentedVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestSmartPtr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestSort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestSpan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestStringHashMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestStringMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestStringView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestTuple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestTupleVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestTypeTraits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestUtility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestVariant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestVariant2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestVectorMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestVectorSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/benchmark/source/EASTLBenchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/algorithm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/allocator_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/any.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bitset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bitvector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/adaptors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/call_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/compressed_pair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/fixed_ring_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/fixed_tuple_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/intrusive_sdlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/intrusive_slist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/list_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/lru_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/overloaded.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/ring_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/sort_extra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/tuple_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/compare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/core_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/core_allocator_adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/deque.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/finally.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/fixed_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/fixed_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/fixed_hash_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/fixed_hash_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/fixed_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/fixed_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/fixed_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/fixed_slist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/fixed_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/fixed_substring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/fixed_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/functional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/hash_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/hash_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/initializer_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_add_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_and_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_cmpxchg_strong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_cmpxchg_weak.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_compiler_barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_cpu_pause.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_exchange.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_fetch_add.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_fetch_and.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_fetch_or.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_fetch_sub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_fetch_xor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_load.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_memory_barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_or_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_signal_fence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_sub_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_thread_fence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_xor_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arm/arch_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arm/arch_arm_load.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arm/arch_arm_memory_barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arm/arch_arm_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arm/arch_arm_thread_fence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_add_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_and_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_cmpxchg_strong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_cmpxchg_weak.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_exchange.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_fetch_add.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_fetch_and.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_fetch_or.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_fetch_sub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_fetch_xor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_load.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_memory_barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_or_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_sub_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_thread_fence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_xor_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_asserts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_base_width.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_casts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_flag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_flag_standalone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_integral.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_add_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_and_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_cmpxchg_strong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_cmpxchg_weak.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_compiler_barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_cpu_pause.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_exchange.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_fetch_add.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_fetch_and.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_fetch_or.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_fetch_sub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_fetch_xor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_load.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_memory_barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_or_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_signal_fence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_sub_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_thread_fence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_xor_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_memory_order.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_pointer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_size_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_standalone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_add_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_and_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_cmpxchg_strong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_cmpxchg_weak.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_cpu_pause.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_exchange.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_fetch_add.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_fetch_and.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_fetch_or.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_fetch_sub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_fetch_xor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_load.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_memory_barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_or_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_signal_fence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_sub_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_thread_fence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_xor_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_add_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_and_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_cmpxchg_strong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_cmpxchg_weak.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_cpu_pause.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_exchange.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_fetch_add.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_fetch_and.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_fetch_or.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_fetch_sub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_fetch_xor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_load.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_or_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_signal_fence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_sub_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_thread_fence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/gcc/compiler_gcc_xor_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_add_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_and_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_cmpxchg_strong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_cmpxchg_weak.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_cpu_pause.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_exchange.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_fetch_add.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_fetch_and.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_fetch_or.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_fetch_sub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_fetch_xor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_or_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_signal_fence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_sub_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/msvc/compiler_msvc_xor_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/char_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/concepts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/copy_help.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/enable_shared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/fill_help.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/fixed_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/function_detail.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/function_help.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/functional_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/generic_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/hashtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/in_place_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/integer_sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/intrusive_hashtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/mem_fn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/memory_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/move_help.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/pair_fwd_decls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/piecewise_construct_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/red_black_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/smart_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/thread_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/tuple_fwd_decls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/type_compound.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/type_detected.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/type_fundamental.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/type_pod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/type_properties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/type_transformations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/type_void_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/intrusive_hash_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/intrusive_hash_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/intrusive_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/intrusive_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/linked_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/linked_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/meta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/numeric.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/numeric_limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/optional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/priority_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/ratio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/safe_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/scoped_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/scoped_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/segmented_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/shared_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/shared_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/slist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/sort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/string_hash_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/string_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/string_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/unique_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/unordered_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/unordered_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/vector_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/vector_multimap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/vector_multiset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/vector_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/weak_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/test/source/ConceptImpls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/test/source/EASTLTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/test/source/EASTLTestAllocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/test/source/EASTLTestIterators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/test/source/GetTypeName.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/test/source/TestMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/test/source/TestSet.h" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/3RDPARTYLICENSES.TXT" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/README.md" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/_config.yml" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/benchmark/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/Benchmarks.md" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/BestPractices.md" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/Bonus/tuple_vector_readme.md" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/CMake/EASTL_Project_Integration.md" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/Design.md" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/EASTL-n2271.pdf" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/EASTL.natvis" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/Glossary.md" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/Gotchas.md" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/Introduction.md" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/Maintenance.md" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/Modules.md" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/html/EASTL Benchmarks.html" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/html/EASTL Best Practices.html" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/html/EASTL Design.html" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/html/EASTL FAQ.html" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/html/EASTL Glossary.html" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/html/EASTL Gotchas.html" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/html/EASTL Introduction.html" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/html/EASTL Maintenance.html" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/html/EASTL Modules.html" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/html/EASTLDoc.css" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/doc/quick-reference.pdf" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/scripts/CMake/CommonCppFlags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/scripts/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/test/source/TestString.inl" />
+    <Text Include="../../thirdparty/owemdjee/EASTL/test/source/TestStringView.inl" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

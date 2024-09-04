@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF1F1194}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTL;GTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTL;GTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTL;GTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTL;GTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTL;GTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTL;GTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTL;GTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTL;GTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTL;GTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTL;GTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTL;GTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGTL;GTL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/benchmarks/bitvector_bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/benchmarks/hash_bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/benchmarks/soa.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/btree/btree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/allmaps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/dump_load.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/dump_nested.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/emplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/f1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/f2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/hash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/hash_std.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/hash_value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/knucleotide.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/matt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/hmap/serialize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/memoize/memoize_fib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/memoize/memoize_primes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/memoize/mt_memoize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/memoize/mt_memoize_lru.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/misc/adv_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/misc/bit_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/misc/intrusive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/misc/soa.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/misc/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/misc/vec_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/phmap/insert_bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/phmap/lazy_emplace_l.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/phmap/mt_word_counter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/examples/phmap/p_bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/btree/btree_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/misc/bitvector_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/misc/lru_cache_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/misc/vector_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/container_memory_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/dump_load_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/erase_if_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/flat_hash_map_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/flat_hash_set_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/hash_policy_testing_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/node_hash_map_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/node_hash_policy_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/node_hash_set_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/parallel_flat_hash_map_mutex_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/parallel_flat_hash_map_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/parallel_flat_hash_set_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/parallel_hash_map_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/parallel_hash_set_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/parallel_node_hash_map_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/parallel_node_hash_set_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/raw_hash_set_allocator_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtl/tests/phmap/raw_hash_set_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/benchmarks/polymur_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/examples/btree/btree_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/examples/hmap/hash_std.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/examples/hmap/hash_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/adv_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/bit_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/bits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/btree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/combinators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/gtl_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/gtl_config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/intrusive.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/lru_cache.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/meminfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/memoize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/phmap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/phmap_dump.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/phmap_fwd_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/phmap_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/soa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/stopwatch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/vec_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/include/gtl/vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/btree/btree_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/misc/vector_test.cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/phmap/hash_generator_testing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/phmap/hash_policy_testing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/phmap/hashtable_debug.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/phmap/test_instance_tracker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/phmap/tracked.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/phmap/unordered_map_constructor_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/phmap/unordered_map_lookup_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/phmap/unordered_map_members_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/phmap/unordered_map_modifiers_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/phmap/unordered_set_constructor_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/phmap/unordered_set_lookup_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/phmap/unordered_set_members_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtl/tests/phmap/unordered_set_modifiers_test.hpp" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/closed_hashing.png" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/flat_mem_usage.gif" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/flat_mem_usage.png" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/flat_par_mutex_4.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/flat_par_mutex_5.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/flat_par_mutex_5_speed.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/flat_par_mutex_6_speed.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/flat_par_speed.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/flat_peak.gif" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/flat_peak.png" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/gtl.png" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/hashtable_benchmarks.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/idx_computation_cost.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/index_computation.png" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/lock_various_sizes.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/mt_stl_flat_par_both.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/mt_stl_flat_par_both_run2.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/mt_stl_flat_par_mem.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/mt_stl_flat_par_mem_run2.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/mt_stl_flat_par_mem_run2_zoomed.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/mt_stl_flat_par_mem_zoomed.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/mt_stl_flat_par_speed.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/mt_stl_flat_par_speed_run2.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/no_preselection.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/node_mem_usage.gif" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/node_mem_usage.png" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/node_peak.gif" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/node_peak.png" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/par_align_test.png" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/par_mt_memory.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/par_mt_speed.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/parallel_flat_peak.gif" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/parallel_flat_peak.png" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/parallel_node_peak.gif" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/parallel_node_peak.png" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/phash.png" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/phmap_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/spp_flat_par_both.png" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/stl_flat_both.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/stl_flat_mem.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/stl_flat_par_both.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/stl_flat_par_mem.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/stl_flat_par_mem_zoomed.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/stl_flat_par_speed.PNG" />
+    <Image Include="../../thirdparty/owemdjee/gtl/html/img/stl_flat_speed.PNG" />
+    <Text Include="../../thirdparty/owemdjee/gtl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtl/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/gtl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gtl/cmake/CMakeLists.txt.in" />
+    <Text Include="../../thirdparty/owemdjee/gtl/cmake/DetectVersion.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtl/cmake/DownloadGTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtl/cmake/helpers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gtl/docs/btree.md" />
+    <Text Include="../../thirdparty/owemdjee/gtl/docs/hmap.md" />
+    <Text Include="../../thirdparty/owemdjee/gtl/docs/new_release.md" />
+    <Text Include="../../thirdparty/owemdjee/gtl/docs/phmap.md" />
+    <Text Include="../../thirdparty/owemdjee/gtl/examples/hmap/knucleotide-input.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtl/examples/hmap/knucleotide-input0.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/bench_results/martinus_mod/InsertManyInt.html" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/bench_results/martinus_mod/Lookup.html" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/bench_results/martinus_mod/index2.html" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/css/bootstrap-responsive.min.css" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/css/bootstrap.min.css" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/css/colors.css" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/css/style.css" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/diagrams/closed_hashing" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/diagrams/closed_hashing.svg" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/diagrams/index_computation" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/diagrams/index_computation.svg" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/includes.hs" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/latex_macros" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/parallel_hashmap.html" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/parallel_hashmap.md" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/parallel_hashmap.pdf" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/template.html" />
+    <Text Include="../../thirdparty/owemdjee/gtl/html/template.latex" />
+    <Text Include="../../thirdparty/owemdjee/gtl/include/gtl/debug_vis/gtl.natvis" />
+    <Text Include="../../thirdparty/owemdjee/gtl/include/gtl/debug_vis/gtl_gdb.py" />
+    <Text Include="../../thirdparty/owemdjee/gtl/include/gtl/debug_vis/gtl_lldb.py" />
+    <Text Include="../../thirdparty/owemdjee/gtl/index.html" />
+    <Text Include="../../thirdparty/owemdjee/gtl/licenses/license_folly" />
+    <Text Include="../../thirdparty/owemdjee/gtl/licenses/license_lamerman" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

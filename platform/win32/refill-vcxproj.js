@@ -23,9 +23,11 @@ let projname = path.basename(projpath, ".vcxproj")
 	.replace(/[_-]example[s]?$/, '')
 	.replace(/[_-]misc?$/, '')
 	.replace(/^lib/, '');
+let projname_alt = path.basename(projpath, ".vcxproj")
+	.replace(/^lib/, '');
 
 if (debug) 
-	console.error({projname, scriptpath})
+	console.error({projname, projname_alt, scriptpath})
 
 
 // now try to map the project name to a source directory:
@@ -294,6 +296,10 @@ const projectMap = {
 	"protobuf_compiler": "protobuf",
 	"libprotobuf_conformance": "protobuf",
 };
+
+testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname_alt}`;
+
+checkDirAndReportPlusExitOnSuccess(testpath);
 
 for (const key in projectMap) {
 	let value = projectMap[key];

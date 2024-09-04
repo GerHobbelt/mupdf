@@ -923,18 +923,23 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
 
 
 
-function process_path(rawSourcesPath, is_dir) {
-  if (DEBUG > 1) console.error("process_path RAW:", {rawSourcesPath, is_dir});
+function normalize_process_path(rawSourcesPath) {
+  if (DEBUG > 1) console.error("normalize_process_path RAW:", {rawSourcesPath});
   while (/\/[^.\/][^\/]*\/\.\.\//.test(rawSourcesPath)) {
     rawSourcesPath = rawSourcesPath.replace(/\/[^.\/][^\/]*\/\.\.\//, '/')
   }
 
   let sourcesPath = unixify(path.resolve(rawSourcesPath.trim()));
-  if (DEBUG > 1) console.error("process_path NORMALIZED:", {rawSourcesPath, sourcesPath, is_dir});
+  if (DEBUG > 1) console.error("normalize_process_path NORMALIZED:", {rawSourcesPath, sourcesPath});
   if (!fs.existsSync(sourcesPath)) {
     console.error("ERROR: Non-existing path specified:", sourcesPath);
     process.exit(1);
   }
+  return sourcesPath;
+}
+
+function process_path(rawSourcesPath, is_dir) {
+  let sourcesPath = normalize_process_path(rawSourcesPath);
 
   const globConfig = Object.assign({}, globDefaultOptions, {
     nodir: !is_dir,
@@ -961,13 +966,19 @@ if (spec.special_inject != null) {
 }
 
 
+// quick precheck of the directories: abort early when any of these don't exist, before...
+for (let f of spec.directories) {
+  normalize_process_path(f);
+}
 
+// ...collecting the indicated files and directory trees:
 for (let f of spec.sources) {
   process_path(f, false);
 }
 for (let f of spec.directories) {
   process_path(f, true);
 }
+
 //if (DEBUG > 1) console.error("The gathered collection:", {fsrc1_arr});
 
 

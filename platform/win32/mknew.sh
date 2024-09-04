@@ -1390,6 +1390,19 @@ figcone_xml
 figcone_yaml
 libchewing
 libexif
+unordered_dense
+emhash
+rapidhash
+gtl
+dense_hash_map
+Allocator
+EASTL
+stl-allocator
+pool_allocator
+sparse-map
+libetpan
+cpp-base64
+fast-cpp-csv-parser
 
 EOT
 ) | grep -e "$FILTER"
@@ -1401,6 +1414,9 @@ myapplist=$(
 (
 grep -v '#' <<EOT
 
+ocr-evaluation-tools
+StringViewTests
+map_benchmark
 exif
 bbe
 bebop

@@ -8,7 +8,7 @@ directories:
 	../../thirdparty/owemdjee/gperf-hash/tmp
 	../../thirdparty/owemdjee/libchopshop/tmp
 	../../thirdparty/owemdjee/libcppjieba/tmp
-	#../../thirdparty/owemdjee/libdiagnostics/tmp
+#	../../thirdparty/owemdjee/libdiagnostics/tmp
 	../../thirdparty/owemdjee/libdist/tmp
 	../../thirdparty/owemdjee/libhog/tmp
 	../../thirdparty/owemdjee/libpathutils/tmp
@@ -16,8 +16,14 @@ directories:
 	../../thirdparty/owemdjee/sdcc/tmp
 	../../thirdparty/owemdjee/splinter/tmp
 	../../thirdparty/owemdjee/text-wrangler/tmp
-	#../../thirdparty/owemdjee/vcopy/tmp
+#	../../thirdparty/owemdjee/vcopy/tmp
 	../../thirdparty/owemdjee/VQMT/tmp
+	../../thirdparty/owemdjee/libeternaltimestamp/tmp
+	../../thirdparty/gumbo-parser/tmp
+	../../thirdparty/owemdjee/javascript-serialization-benchmark/tmp
+	../../thirdparty/owemdjee/libchiaroscuramente/inspiration
+	../../tmp2
 
 sources:
     ../../scripts/collection-1tmp1/dummy.cpp
+
