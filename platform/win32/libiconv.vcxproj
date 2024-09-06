@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -76,7 +76,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBICONV;ICONV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -234,10 +234,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/lib/genaliases2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/lib/genflags.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/lib/gentranslit.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/lib/iconv.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/libcharset/lib/localcharset.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/locale_charset.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/src/iconv_cli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libiconv/src/iconv_no_i18n.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/uniwidth/width.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/tests/gengb18030z.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/tests/genutf8.c" />
@@ -614,16 +614,22 @@
     <ClInclude Include="../../thirdparty/owemdjee/libiconv/srclib/xreadlink.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libiconv/tests/qemu.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libiconv/win32/iconv_version.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libiconv/woe32dll/export.h" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/ABOUT-NLS" />
     <Text Include="../../thirdparty/owemdjee/libiconv/AUTHORS" />
     <Text Include="../../thirdparty/owemdjee/libiconv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/COPYING" />
     <Text Include="../../thirdparty/owemdjee/libiconv/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/DEPENDENCIES" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/DESIGN" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/HACKING" />
     <Text Include="../../thirdparty/owemdjee/libiconv/INSTALL.windows" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/JOIN-GNU" />
     <Text Include="../../thirdparty/owemdjee/libiconv/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/libiconv/LICENSE.md" />
     <Text Include="../../thirdparty/owemdjee/libiconv/Makefile.devel" />
     <Text Include="../../thirdparty/owemdjee/libiconv/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/libiconv/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/NOTES" />
     <Text Include="../../thirdparty/owemdjee/libiconv/README" />
     <Text Include="../../thirdparty/owemdjee/libiconv/README.libiconv" />
     <Text Include="../../thirdparty/owemdjee/libiconv/README.markdown" />
@@ -634,116 +640,28 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/SMP/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/libiconv/SMP/smp.props" />
     <Text Include="../../thirdparty/owemdjee/libiconv/SMP/smp_winrt.props" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/THANKS" />
     <Text Include="../../thirdparty/owemdjee/libiconv/THIS_VERSION_IS_1.17" />
     <Text Include="../../thirdparty/owemdjee/libiconv/aclocal.m4" />
     <Text Include="../../thirdparty/owemdjee/libiconv/autogen.sh" />
     <Text Include="../../thirdparty/owemdjee/libiconv/autopull.sh" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010-MT/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010-MT/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010-MT/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010-MT/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010-MT/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010-MT/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010-MT/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2010/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013-MT/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013-MT/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013-MT/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013-MT/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013-MT/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013-MT/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013-MT/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2013/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015-MT/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015-MT/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015-MT/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015-MT/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015-MT/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015-MT/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015-MT/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2015/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017-MT/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017-MT/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017-MT/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017-MT/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017-MT/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017-MT/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017-MT/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2017/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-MT/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-MT/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-MT/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-MT/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-MT/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-MT/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-MT/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-arm/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-arm/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-arm/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-arm/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-arm/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-arm/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019-arm/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2019/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-MT/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-MT/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-MT/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-MT/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-MT/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-MT/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-MT/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-arm/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-arm/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-arm/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-arm/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-arm/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-arm/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022-arm/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022/_props/iconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022/_props/iconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022/_props/libiconv-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/build-VS2022/_props/vs_common.props" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/build-aux/ar-lib" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/build-aux/compile" />
     <Text Include="../../thirdparty/owemdjee/libiconv/build-aux/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/build-aux/install-reloc" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/build-aux/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/build-aux/libtool-reloc" />
     <Text Include="../../thirdparty/owemdjee/libiconv/build-aux/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/build-aux/missing" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/build-aux/mkinstalldirs" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/build-aux/reloc-ldflags" />
     <Text Include="../../thirdparty/owemdjee/libiconv/cmake/FindGperf.cmake" />
     <Text Include="../../thirdparty/owemdjee/libiconv/cmake/FindMan2html.cmake" />
     <Text Include="../../thirdparty/owemdjee/libiconv/cmake/genaliases.cmake" />
     <Text Include="../../thirdparty/owemdjee/libiconv/cmake/gperf-static.cmake" />
     <Text Include="../../thirdparty/owemdjee/libiconv/config.h.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libiconv/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/configure" />
     <Text Include="../../thirdparty/owemdjee/libiconv/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/libiconv/distfiles/config_for_vs.sh" />
     <Text Include="../../thirdparty/owemdjee/libiconv/distfiles/download.url" />
@@ -770,7 +688,10 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/lib/translit.def" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/AUTHORS" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/DEPENDENCIES" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/HACKING" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/INSTALL.windows" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/INTEGRATE" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/Makefile.devel" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/NEWS" />
@@ -779,8 +700,12 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/autogen.sh" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/autopull.sh" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/build-aux/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/build-aux/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/build-aux/libtool-reloc" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/build-aux/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/build-aux/mkinstalldirs" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/configure" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/include/libcharset.h.build.in" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/include/libcharset.h.in" />
@@ -801,6 +726,10 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/aix-4.1.5" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/aix-4.2.0" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/aix-4.3.2" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/all-charsets" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/all-charsets-X11" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/all-locales" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/beos-5" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/cygwin-1.7.2" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/darwin-6.8" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/darwin-7.5" />
@@ -815,6 +744,7 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/hpux-10.20" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/hpux-11.00" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/irix-6.5" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/locale_charmap" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/netbsd-3.0" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/openbsd-4.1" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/osf1-5.1" />
@@ -823,6 +753,7 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/solaris-2.6" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/solaris-2.7" />
     <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/sunos-4.1.4" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/win32" />
     <Text Include="../../thirdparty/owemdjee/libiconv/m4/cp.m4" />
     <Text Include="../../thirdparty/owemdjee/libiconv/m4/eilseq.m4" />
     <Text Include="../../thirdparty/owemdjee/libiconv/m4/general.m4" />
@@ -848,8 +779,11 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/man/iconvctl.3.html" />
     <Text Include="../../thirdparty/owemdjee/libiconv/os2/iconv.def" />
     <Text Include="../../thirdparty/owemdjee/libiconv/po/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/po/LINGUAS" />
     <Text Include="../../thirdparty/owemdjee/libiconv/po/Makefile.in.in" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/po/Makevars" />
     <Text Include="../../thirdparty/owemdjee/libiconv/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/po/Rules-quot" />
     <Text Include="../../thirdparty/owemdjee/libiconv/po/af.po" />
     <Text Include="../../thirdparty/owemdjee/libiconv/po/bg.po" />
     <Text Include="../../thirdparty/owemdjee/libiconv/po/ca.po" />
@@ -885,6 +819,7 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/po/sl.po" />
     <Text Include="../../thirdparty/owemdjee/libiconv/po/sq.po" />
     <Text Include="../../thirdparty/owemdjee/libiconv/po/sr.po" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/po/stamp-po" />
     <Text Include="../../thirdparty/owemdjee/libiconv/po/sv.po" />
     <Text Include="../../thirdparty/owemdjee/libiconv/po/tr.po" />
     <Text Include="../../thirdparty/owemdjee/libiconv/po/uk.po" />
@@ -1000,15 +935,19 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/ATARIST.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-2003.IRREVERSIBLE.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-2003.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-1999-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-1999-snippet.UTF-8" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-1999.IRREVERSIBLE.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-1999.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-2001-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-2001-snippet.UTF-8" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-2001.IRREVERSIBLE.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-2001.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-2004-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-2004-snippet.UTF-8" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-2004.IRREVERSIBLE.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-2004.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-2008-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-2008-snippet.UTF-8" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-2008.IRREVERSIBLE.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/BIG5-HKSCS-2008.TXT" />
@@ -1029,11 +968,13 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/CP1252.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/CP1253.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/CP1254.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/CP1255-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/CP1255-snippet.UTF-8" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/CP1255.IRREVERSIBLE.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/CP1255.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/CP1256.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/CP1257.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/CP1258-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/CP1258-snippet.UTF-8" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/CP1258.IRREVERSIBLE.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/CP1258.TXT" />
@@ -1080,6 +1021,7 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/Georgian-Academy.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/Georgian-PS.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/HP-ROMAN8.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/HZ-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/HZ-snippet.UTF-8" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/IBM-037.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/IBM-1025.TXT" />
@@ -1136,13 +1078,21 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/IBM-880.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/IBM-905.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/IBM-924.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-CN-EXT-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-CN-EXT-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-CN-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-CN-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-JP-1-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-JP-1-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-JP-2-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-JP-2-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-JP-3-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-JP-3-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-JP-MS-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-JP-MS-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-JP-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-JP-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-KR-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-2022-KR-snippet.UTF-8" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-8859-1.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/ISO-8859-10.TXT" />
@@ -1192,6 +1142,7 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/RK1048.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/SHIFT_JIS.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/SHIFT_JISX0213.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/TCVN-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/TCVN-snippet.UTF-8" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/TCVN.IRREVERSIBLE.TXT" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/TCVN.TXT" />
@@ -1200,33 +1151,49 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/Translit1.ASCII" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/Translit1.ISO-8859-1" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/TranslitFail1.ISO-8859-1" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/UCS-2BE-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/UCS-2BE-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/UCS-2LE-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/UCS-2LE-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/UCS-4BE-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/UCS-4BE-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/UCS-4LE-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/UCS-4LE-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-16-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-16-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-16BE-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-16BE-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-16LE-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-16LE-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-32-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-32-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-32BE-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-32BE-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-32LE-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-32LE-snippet.UTF-8" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-7-snippet" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/UTF-7-snippet.UTF-8" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/VISCII.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-ebcdic" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-stateful" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-stateful.bat" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-stateful.sh" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-stateless" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-stateless.bat" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-stateless.sh" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-subst" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-subst.sh" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-tag" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-translit" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-translit.bat" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-translit.sh" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-translitfailure" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tests/check-translitfailure.sh" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/tools/CP50221-0208-EXT.TXT" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/tools/CP50221-0212-EXT.TXT" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/tools/JISX0213.TXT" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/tools/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/libiconv/tools/gen-translit-def-part.lisp" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/win32/iconv.aps" />
+    <Text Include="../../thirdparty/owemdjee/libiconv/windows/windres-options" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
