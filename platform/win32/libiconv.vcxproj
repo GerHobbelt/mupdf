@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -76,7 +76,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBICONV;ICONV_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -237,62 +237,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/lib/iconv.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/libcharset/lib/localcharset.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/locale_charset.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/locale_codeset.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/locale_monthnames.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/libcharset/tools/locale_x11encoding.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/src/iconv_cli.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/src/iconv_no_i18n.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/allocator.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/areadlink.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/basename-lgpl.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/binary-io.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/c-ctype.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/canonicalize-lgpl.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/careadlinkat.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/cloexec.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/close.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/dup2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/error.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/fcntl.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/fd-hook.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/free.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/fstat.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/getdtablesize.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/getprogname.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/malloc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/malloc/scratch_buffer_dupfree.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/malloc/scratch_buffer_grow.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/malloc/scratch_buffer_grow_preserve.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/malloc/scratch_buffer_set_array_size.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/malloca.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/mempcpy.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/msvc-inval.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/msvc-nothrow.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/open.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/progname.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/progreloc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/raise.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/rawmemchr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/read.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/readlink.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/realloc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/relocatable.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/relocwrapper.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/safe-read.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/setenv.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/sigprocmask.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/stat-time.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/stat-w32.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/stat.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/stdio-read.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/stdio-write.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/strerror-override.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/strerror.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/unistd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/uniwidth/width.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/xmalloc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/xreadlink.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/srclib/xstrdup.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/tests/gengb18030z.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/tests/genutf8.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/tests/is-native.c" />
@@ -301,10 +247,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/tests/test-shiftseq.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/tests/test-to-wchar.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libiconv/tests/uniq-u.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/tools/8bit_tab_to_h.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/tools/cjk_tab_to_h.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/tools/cjk_variants.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libiconv/woe32dll/iconv-exports.c" />
     <ClInclude Include="../../thirdparty/owemdjee/libiconv/SMP/config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libiconv/SMP/iconv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libiconv/SMP/lib/aliases.h" />
@@ -673,11 +615,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libiconv/tests/qemu.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libiconv/win32/iconv_version.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libiconv/woe32dll/export.h" />
-    <ResourceCompile Include="../../thirdparty/owemdjee/libiconv/res/libiconv.rc" />
-    <ResourceCompile Include="../../thirdparty/owemdjee/libiconv/win32/iconv.rc" />
-    <ResourceCompile Include="../../thirdparty/owemdjee/libiconv/win32/libiconv.rc" />
-    <ResourceCompile Include="../../thirdparty/owemdjee/libiconv/windows/iconv.rc" />
-    <ResourceCompile Include="../../thirdparty/owemdjee/libiconv/windows/libiconv.rc" />
     <Text Include="../../thirdparty/owemdjee/libiconv/AUTHORS" />
     <Text Include="../../thirdparty/owemdjee/libiconv/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libiconv/ChangeLog" />
@@ -1289,8 +1226,7 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/tools/Makefile" />
     <Text Include="../../thirdparty/owemdjee/libiconv/tools/gen-translit-def-part.lisp" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

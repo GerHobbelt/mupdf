@@ -9,3 +9,6 @@ also-ignore:
 	gnulib-local/
 	relocatable-stub.c
 	
+	/woe32dll/
+	
+	
