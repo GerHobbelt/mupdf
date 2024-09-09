@@ -1231,7 +1231,10 @@ fz_stext_extract(fz_context *ctx, fz_stext_device *dev, fz_text_span *span, fz_m
 	mt = find_actualtext(dev);
 
 	if (mt)
-		do_extract_within_actualtext(ctx, dev, span, ctm, mt);
+	{
+		if (!(dev->opts.flags & FZ_STEXT_INHIBIT_ACTUALTEXT))
+			do_extract_within_actualtext(ctx, dev, span, ctm, mt);
+	}
 	else
 		do_extract(ctx, dev, span, ctm, 0, span->len);
 }
@@ -1641,6 +1644,12 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		opts->flags_conf_mask |= FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE;
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE;
+	}
+	if (fz_has_option(ctx, string, "inhibit-actualtext", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_INHIBIT_ACTUALTEXT;
+		if (fz_option_eq(val, "yes"))
+			opts->flags |= FZ_STEXT_INHIBIT_ACTUALTEXT;
 	}
 	if (fz_has_option(ctx, string, "glyph-bbox", &val))
 	{

@@ -151,6 +151,9 @@ typedef struct fz_stext_struct fz_stext_struct;
 	FZ_STEXT_NO_TEXT_AS_PATH: If this option is set, SVG text will be
 	kept as-is. When this option is not set, SVG text will be rendered
 	as curves.
+
+	FZ_STEXT_INHIBIT_ACTUALTEXT: If this option is set, we will no longer
+	replace text by the ActualText replacement specified in the document.
 */
 enum
 {
@@ -170,6 +173,7 @@ enum
 	FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE = 8192,
 	FZ_STEXT_COLLECT_STRUCTURE = 16384,
 	FZ_STEXT_ACCURATE_BBOXES = 32768,
+	FZ_STEXT_INHIBIT_ACTUALTEXT = 65536,
 };
 
 /**
