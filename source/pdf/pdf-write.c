@@ -624,10 +624,26 @@ static pdf_obj *markref(fz_context *ctx, pdf_document *doc, pdf_write_state *opt
 			if (pdf_is_indirect(ctx, len))
 			{
 				int num2 = pdf_to_num(ctx, len);
-				expand_lists(ctx, opts, num2+1);
-				opts->use_list[num2] = 0;
+				if (num2 != num)
+				{
+					expand_lists(ctx, opts, num2+1);
+					opts->use_list[num2] = 0;
+				}
 				len = pdf_resolve_indirect(ctx, len);
-				pdf_dict_put(ctx, obj, PDF_NAME(Length), len);
+				if (pdf_is_int(ctx, len))
+					pdf_dict_put(ctx, obj, PDF_NAME(Length), len);
+				else
+				{
+					fz_stream *stm = pdf_open_stream_number(ctx, doc, num);
+					size_t newlen;
+					fz_try(ctx)
+						newlen = fz_skip(ctx, stm, SIZE_MAX);
+					fz_always(ctx)
+						fz_drop_stream(ctx, stm);
+					fz_catch(ctx)
+						fz_rethrow(ctx);
+					pdf_dict_put_int(ctx, obj, PDF_NAME(Length), newlen);
+				}
 			}
 		}
 	}
