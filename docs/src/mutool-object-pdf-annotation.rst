@@ -506,7 +506,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     Set the annotation quadding (justification).
 
-    :arg value: Quadding value, `0` for left-justified, `1` for centered, `2` for right-justified.
+    :arg value: `Number`. Quadding value, `0` for left-justified, `1` for centered, `2` for right-justified.
 
     |example_tag|
 
@@ -565,7 +565,7 @@ These properties are only present for some annotation types, so support for them
 
     Get the annotation bounding box.
 
-    :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+    :return: `Array`. `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
     |example_tag|
 
@@ -579,7 +579,7 @@ These properties are only present for some annotation types, so support for them
 
     Set the annotation bounding box.
 
-    :arg rect: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+    :arg rect: `Array`. `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
     |example_tag|
 
@@ -610,7 +610,7 @@ These properties are only present for some annotation types, so support for them
 
     :arg font: `String` ("Helv" = Helvetica, "TiRo" = Times New Roman, "Cour" = Courier).
     :arg size: `Integer`.
-    :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
+    :arg color: `Array`. The :ref:`color value<mutool_run_js_api_colors>`.
 
     |example_tag|
 
@@ -658,7 +658,7 @@ These properties are only present for some annotation types, so support for them
 
     Sets the annotation interior color.
 
-    :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
+    :arg color: `Array`. The :ref:`color value<mutool_run_js_api_colors>`.
 
     |example_tag|
 
@@ -758,7 +758,11 @@ These properties are only present for some annotation types, so support for them
 
     .. code-block:: javascript
 
-        annotation.setLineEndingStyles({start:"Square", end:"OpenArrow"});
+        annotation.setLineEndingStyles("Square", "OpenArrow");
+
+
+
+
 
 
 
@@ -778,6 +782,69 @@ These properties are only present for some annotation types, so support for them
    * - "ROpenArrow"
    * - "RClosedArrow"
    * - "Slash"
+
+
+
+.. method:: setLineLeader(ll, lle, llo)
+
+    Sets the line leader properties for a Line annotation.
+
+    :arg ll: `String`. The length of leader lines that extend from each endpoint of the line perpendicular to the line itself. A positive value means that the leader lines appear in the direction that is clockwise when traversing the line from its starting point to its ending point a negative value indicates the opposite direction.
+
+    :arg lle: `String`. A non-negative number representing the length of leader line extensions that extend from the line proper 180 degrees from the leader lines.
+
+    :arg llo: `String`. A non-negative number representing the length of the leader line offset, which is the amount of empty space between the endpoints of the annotation and the beginning of the leader lines.
+
+
+    .. image:: images/leader-lines.png
+          :alt: Leader lines explained
+          :width: 100%
+
+
+
+.. method:: getLineLeader()
+
+    Gets the line leader properties for a Line annotation.
+
+    :return: `Array` Returns an array with the line leader values as `[ll, lle, llo]`.
+
+
+.. method:: setLineCaption(enable)
+
+    Sets the line caption property for a Line annotation.
+
+    :arg enable: `Boolean` Sets whether line caption is enabled or not.
+
+
+    .. note::
+
+        When line captions are enabled then using the :meth:`setContents` method on the Line will graphically render the caption contents onto the line.
+
+
+.. method:: getLineCaption()
+
+    :return: `Boolean` Returns whether the line caption is enabled or not.
+
+
+.. method:: setLineCaptionOffset(arr)
+
+    Sets any line caption offset.
+
+
+    :arg arr: `Array` An array of two numbers specifying the offset of the caption text from its normal position. The first value is the horizontal offset along the annotation line from its midpoint, with a positive value indicating offset to the right and a negative value indicating offset to the left. The second value is the vertical offset perpendicular to the annotation line, with a positive value indicating a shift up and a negative value indicating a shift down.
+
+
+    .. image:: images/offset-caption.png
+          :alt: Offset caption explained
+          :width: 100%
+
+
+
+.. method:: getLineCaptionOffset()
+
+    :return: `Array` Returns the line caption offset.
+
+
 
 
 .. method:: hasIcon()
