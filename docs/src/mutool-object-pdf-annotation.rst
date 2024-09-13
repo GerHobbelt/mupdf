@@ -787,6 +787,8 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: setLineLeader(ll, lle, llo)
 
+    |mutool_tag|
+
     Sets the line leader properties for a Line annotation.
 
     :arg ll: `String`. The length of leader lines that extend from each endpoint of the line perpendicular to the line itself. A positive value means that the leader lines appear in the direction that is clockwise when traversing the line from its starting point to its ending point a negative value indicates the opposite direction.
@@ -804,12 +806,16 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: getLineLeader()
 
+    |mutool_tag|
+
     Gets the line leader properties for a Line annotation.
 
     :return: `Array` Returns an array with the line leader values as `[ll, lle, llo]`.
 
 
 .. method:: setLineCaption(enable)
+
+    |mutool_tag|
 
     Sets the line caption property for a Line annotation.
 
@@ -823,15 +829,19 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: getLineCaption()
 
+    |mutool_tag|
+
     :return: `Boolean` Returns whether the line caption is enabled or not.
 
 
 .. method:: setLineCaptionOffset(arr)
 
+    |mutool_tag|
+
     Sets any line caption offset.
 
 
-    :arg arr: `Array` An array of two numbers specifying the offset of the caption text from its normal position. The first value is the horizontal offset along the annotation line from its midpoint, with a positive value indicating offset to the right and a negative value indicating offset to the left. The second value is the vertical offset perpendicular to the annotation line, with a positive value indicating a shift up and a negative value indicating a shift down.
+    :arg arr: `Array` An array of two numbers `[x, y]` specifying the offset of the caption text from its normal position. The first value is the horizontal offset along the annotation line from its midpoint, with a positive value indicating offset to the right and a negative value indicating offset to the left. The second value is the vertical offset perpendicular to the annotation line, with a positive value indicating a shift up and a negative value indicating a shift down.
 
 
     .. image:: images/offset-caption.png
@@ -842,7 +852,9 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: getLineCaptionOffset()
 
-    :return: `Array` Returns the line caption offset.
+    |mutool_tag|
+
+    :return: `Array` Returns the line caption offset as `[x, y]`.
 
 
 
