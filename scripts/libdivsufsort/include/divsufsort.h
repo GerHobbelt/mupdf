@@ -33,6 +33,10 @@ extern "C" {
 
 #include <inttypes.h>
 
+#if defined(BUILD_MONOLITHIC) && !defined(DIVSUFSORT_API)
+#define DIVSUFSORT_API    /* static lib build */
+#endif
+
 #ifndef DIVSUFSORT_API
 # ifdef DIVSUFSORT_BUILD_DLL
 #  define DIVSUFSORT_API __declspec(dllexport)

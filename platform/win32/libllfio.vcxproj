@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF4AC2C9}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLLFIO;LLFIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLLFIO;LLFIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLLFIO;LLFIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLLFIO;LLFIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLLFIO;LLFIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLLFIO;LLFIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLLFIO;LLFIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLLFIO;LLFIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLLFIO;LLFIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLLFIO;LLFIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLLFIO;LLFIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLLFIO;LLFIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/detail/SpookyV2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/adopt_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/barrier_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/benchmark_asio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/benchmark_atomic_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/benchmark_chained1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/benchmark_chained2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/benchmark_latency.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/benchmark_unchained1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/benchmark_unchained2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/call_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/closure_execution_afio_io_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/closure_execution_traditional_io_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/completion_example1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/completion_example2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/determine_legal_filenames.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/enumerate_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/filecopy_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/filedir_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/filter_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/find_in_files_afio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/find_in_files_iostreams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/readallof_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/readwrite_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/readwrite_example_traditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/statfs_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/workshop_atomic_updates_afio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/workshop_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/workshop_final_afio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/workshop_naive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/workshop_naive_afio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/example/workshop_naive_async_afio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/src/afio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/test_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/test_all_multiabi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/test_inline_linkage1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/test_inline_linkage2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/test_inline_linkage_master.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/api_error_check.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_data_op_req_compilation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_adopt_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_barrier_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_enumerate_works.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_errors_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_lstat_works.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_pagesize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_statfs_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_sync_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_threadpool_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_torture_autoflush_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_torture_direct_sync_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_torture_direct_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_torture_sync_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_torture_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_works_1_autoflush_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_works_1_prime_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_works_1_sync_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_works_1_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_works_64_autoflush_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_works_64_direct_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_works_64_directsync_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_works_64_sync_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_works_64_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/async_io_zero_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/atomic_log_append_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/delete_stability.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/free_functions_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/op_container_deduced_compilation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/path_works.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/attic/test/tests/race_protection_works.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/example/malloc1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/example/malloc2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/example/map_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/example/mapped_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/example/path_view_openat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/example/read_directory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/example/read_entire_file1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/example/read_stats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/example/scatter_write.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/example/sparse_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/example/tls_socket_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/example/wrap_tls_socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/programs/benchmark-async/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/programs/benchmark-dynamic_thread_pool_group/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/programs/benchmark-io-congestion/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/programs/benchmark-iostreams/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/programs/benchmark-locking/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/programs/collision-check/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/programs/fs-probe/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/programs/illegal-codepoints/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/programs/key-value-store/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/src/llfio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test-packaging/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/byte_socket_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/clone_extents.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/current_path.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/directory_handle_create_close/runner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/directory_handle_enumerate/runner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/dynamic_thread_pool_group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/extended_attributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/fast_random_file_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/file_handle_create_close/runner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/file_handle_lock_unlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/handle_adapter_xor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/issue0009.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/issue0027.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/issue0028.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/issue0073.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/issue0102.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/issue0113.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/large_pages.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/map_handle_cache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/map_handle_create_close/runner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/mapped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/mapped_file_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/path_discovery.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/path_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/pipe_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/process_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/section_handle_create_close/runner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/shared_fs_mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/statfs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/symlink_handle_create_close/runner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/tls_socket_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/traverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/trivial_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/llfio/test/tests/utils.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/detail/SpookyV2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/doc/doxy/doxygen_input/groups/groups.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/doc/doxy/doxygen_input/pages/doxygen_mainpage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/include/boost/afio/v2/afio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/include/boost/afio/v2/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/include/boost/afio/v2/detail/ErrorHandling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/include/boost/afio/v2/detail/Undoer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/include/boost/afio/v2/detail/Utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/include/boost/afio/v2/detail/impl/nt_kernel_stuff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/include/boost/afio/v2/detail/valgrind/helgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/include/boost/afio/v2/detail/valgrind/memcheck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/include/boost/afio/v2/detail/valgrind/valgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/test/Aligned_Allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/test/afio_pch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/attic/test/test_functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/kvstore/kvstore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/llfio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/revision.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/clone.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/contents.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/difference.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/handle_adapter/cached_parent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/handle_adapter/combining.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/handle_adapter/xor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/shared_fs_mutex/atomic_append.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/shared_fs_mutex/base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/shared_fs_mutex/byte_ranges.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/shared_fs_mutex/lock_files.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/shared_fs_mutex/memory_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/shared_fs_mutex/safe_byte_ranges.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/summarize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/traverse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/algorithm/trivial_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/byte_io_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/byte_io_multiplexer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/byte_socket_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/deadline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/detail/impl/getaddrinfo_category.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/detail/impl/posix/import.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/detail/impl/windows/import.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/directory_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/dynamic_thread_pool_group.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/fast_random_file_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/file_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/fs_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/llfio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/lockable_byte_io_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/logging.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/map_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/mapped.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/mapped_file_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/multiplex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/native_handle_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/path_discovery.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/path_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/path_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/pipe_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/process_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/stat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/statfs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/status_code.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/storage_profile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/symlink_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/tls_socket_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/v2.0/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/include/llfio/version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/programs/key-value-store/include/key_value_store.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/test/test_kernel_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/test/tests/directory_handle_create_close/kernel_directory_handle.cpp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/test/tests/directory_handle_enumerate/kernel_directory_handle_enumerate.cpp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/test/tests/file_handle_create_close/kernel_file_handle.cpp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/test/tests/map_handle_create_close/kernel_map_handle.cpp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/test/tests/section_handle_create_close/kernel_section_handle.cpp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/llfio/test/tests/symlink_handle_create_close/kernel_symlink_handle.cpp.hpp" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/afio_latencies.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/afio_latencies_1.2.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/afio_latencies_1.3.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/boost.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/boost_full.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/boost_proposed.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/workshop_atomic_updates_insertions.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/workshop_atomic_updates_insertions_1.3.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/workshop_atomic_updates_lookups.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/workshop_atomic_updates_lookups_1.3.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/workshop_naive_insertions.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/workshop_naive_insertions_1.3.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/workshop_naive_lookups.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/workshop_naive_lookups_1.3.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct_files/fig-analysis-cdf.gif" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct_files/fig-method-edp.gif" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct_files/fig-result-big-legend.gif" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct_files/fig-result-big.gif" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct_files/fig-result-small-ext3.gif" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct_files/fig-result-small-hfsplus.gif" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct_files/fig-result-small-jfs.gif" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct_files/fig-result-small-nfs.gif" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct_files/fig-result-small-reiserfs.gif" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct_files/fig-result-small-xfs.gif" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct_files/fig-result-zoom.gif" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct_files/new_usenix.jpg" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Files are hard_files/fs_properties.png" />
+    <Image Include="../../thirdparty/owemdjee/llfio/reference/Files are hard_files/program_bugs.png" />
+    <Text Include="../../thirdparty/owemdjee/llfio/Build.md" />
+    <Text Include="../../thirdparty/owemdjee/llfio/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/llfio/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/llfio/Licence.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/Notes.md" />
+    <Text Include="../../thirdparty/owemdjee/llfio/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/build/Jamfile.v2" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/clang-reformat.sh" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/Jamfile.v2" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/benchmarks.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_comments.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_close.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_dir_2_absolute.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_dir_3_relative.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_enumerate_6_glob_first.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_enumerate_6_maxitems_first.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_enumerate_6_metadata_first.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_extents.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_file_2_absolute.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_file_3_relative.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_op_flags.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_read_3_length_deducing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_read_4_length_specifying.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_rmdir_2_absolute.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_rmdir_3_relative.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_rmfile_2_absolute.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_rmfile_3_relative.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_rmsymlink_2_absolute.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_rmsymlink_3_relative.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_statfs.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_symlink_3_absolute.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_symlink_4_relative.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_sync.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_truncate.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_write_3_length_deducing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_write_4_length_specifying.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/async_zero.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/atomic_logging.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/atomic_relink.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/boost_afio_validate_inputs.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/close_1_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/close_1_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/close_2_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/compilation.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/complete_async_op_2_errored.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/complete_async_op_3_normal.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/current_dispatcher.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/current_dispatcher_guard.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/depends.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/design_rationale.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/dir_1_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/dir_2_absolute_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/dir_3_absolute_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/dir_3_relative_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/dir_4_relative_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/directory_entry.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/directory_entry_hash.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/direntry.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/dispatcher.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/enqueued_task.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/enqueued_task_r___.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/enqueued_task_void___.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/enumerate_1_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/enumerate_6_glob_first_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/enumerate_6_max_items_first_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/enumerate_6_metadata_first_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/enumerate_7_glob_first_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/enumerate_7_max_items_first_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/enumerate_7_metadata_first_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/enumerate_req.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/extents_1_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/extents_1_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/extents_2_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/file_1_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/file_2_absolute_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/file_3_absolute_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/file_3_relative_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/file_4_relative_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/file_buffer_default_size.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/file_concat.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/file_flags.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/filesystem_races.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/filter.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/from_hex_string.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/fs_metadata_flags.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/future.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/future_void_.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/handle.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/handle_mapped_file.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/hello_world.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/introduction.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/io_req.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/io_req_constt_.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/io_req_constvoid_.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/io_req_void_.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/is_future.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/is_future_-future_-t-_.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/link.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/lock_req.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/make_dispatcher.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/make_io_req_3_length_deducing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/make_io_req_4_length_specifying.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/metadata_flags.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/normalise_path.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/open_states.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/overview.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/page_sizes.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/path.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/path_direct.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/path_hash.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/path_make_absolute.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/path_req.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/path_req_absolute.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/path_req_relative.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/process_threadpool.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/random_fill.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/random_string.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/read_1_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/read_3_length_deducing_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/read_4_length_deducing_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/read_4_length_specifying_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/read_5_length_specifying_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmdir_1_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmdir_2_absolute_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmdir_3_absolute_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmdir_3_relative_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmdir_4_relative_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmfile_1_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmfile_2_absolute_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmfile_3_absolute_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmfile_3_relative_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmfile_4_relative_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmsymlink_1_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmsymlink_2_absolute_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmsymlink_3_absolute_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmsymlink_3_relative_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/rmsymlink_4_relative_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/so_what.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/stat_t.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/statfs_2_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/statfs_2_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/statfs_3_nonthrowing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/statfs_t.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/statfs_t_f_flags_t.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/std_thread_pool.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/std_thread_pool_worker.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/symlink_2_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/symlink_3_absolute_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/symlink_4_absolute_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/symlink_4_relative_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/symlink_5_relative_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/sync_1_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/sync_1_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/sync_2_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/target.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/thread_source.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/to_asio_buffers_1_asio_const_buffer.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/to_asio_buffers_1_asio_mutable_buffer.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/to_asio_buffers_1_c_arrays.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/to_asio_buffers_1_const_c_arrays.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/to_asio_buffers_1_const_trivial_and_container_types.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/to_asio_buffers_1_trivial_and_container_types.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/to_asio_buffers_2_buffer.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/to_asio_buffers_2_buffer_of_t.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/to_asio_buffers_2_const_buffer_of_t.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/to_hex_string.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/truncate_2_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/truncate_2_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/truncate_3_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/type.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/unlink.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/utils_page_allocator.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/utils_page_allocator_-void-_.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/utils_page_allocator_rebind.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/utils_secded_ecc.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/verify_status.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/write_1_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/write_3_length_deducing_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/write_4_length_deducing_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/write_4_length_specifying_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/write_5_length_specifying_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/zero_2_batch.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/zero_2_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/disqus_identifiers/zero_3_non_throwing.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/doxy/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/doxy/doxygen_enhance.py" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/doxy/doxygen_input/doxygen_footer.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/doxy/doxygen_input/doxygen_header.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/doxy/make_documentation.bat" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/html/myboostbook.css" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/latencies.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/make_qbk.py" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/afio_latencies.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/afio_latencies_1.2.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/afio_latencies_1.3.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/src/images/boost_proposed.svg" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/doc/workshop.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/index.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/multiabi_alltests_gcc.sh" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/multiabi_alltests_msvc.bat" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/send_to_wandbox.sh" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/standalone_alltests_gcc.bat" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/standalone_alltests_gcc.sh" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/standalone_alltests_msvc.bat" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/test/Jamfile.v2" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/test/json_encode.py" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/test/test_file_glob.bat" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/test/test_file_glob.sh" />
+    <Text Include="../../thirdparty/owemdjee/llfio/attic/test/update_coveralls.sh" />
+    <Text Include="../../thirdparty/owemdjee/llfio/cmake/QuickCppLibBootstrap.cmake" />
+    <Text Include="../../thirdparty/owemdjee/llfio/cmake/brew-llvm.sh" />
+    <Text Include="../../thirdparty/owemdjee/llfio/cmake/headers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/llfio/cmake/interface.cmake" />
+    <Text Include="../../thirdparty/owemdjee/llfio/cmake/sources.cmake" />
+    <Text Include="../../thirdparty/owemdjee/llfio/cmake/tests.cmake" />
+    <Text Include="../../thirdparty/owemdjee/llfio/cmake/toolchain-linux-arm.cmake" />
+    <Text Include="../../thirdparty/owemdjee/llfio/cmake/toolchain-linux-libc++.cmake" />
+    <Text Include="../../thirdparty/owemdjee/llfio/doc/presentations/20150924_CppCon Presentation.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/doc/presentations/20160421_ACCU Presentation.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/doc/presentations/20160922_CppCon Presentation.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/doc/presentations/videos.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/graphs/benchmark_locking 2x i5 M540 @ 2.53Ghz Win10 4.125Gb bandwidth.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/llfio/graphs/benchmark_locking 4x i7-3770K @ 3.50Ghz Win10 20.075Gb bandwidth.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/llfio/graphs/benchmark_locking core count comparison.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/llfio/include/llfio/llfio.ixx" />
+    <Text Include="../../thirdparty/owemdjee/llfio/index.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/install_dev_githooks.sh" />
+    <Text Include="../../thirdparty/owemdjee/llfio/meta/libraries.json" />
+    <Text Include="../../thirdparty/owemdjee/llfio/programs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/programs/benchmark-async/results.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/llfio/programs/collision-check/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/programs/fs-probe/fs_probe_results.yaml" />
+    <Text Include="../../thirdparty/owemdjee/llfio/programs/fs-probe/fs_probe_results_legacy.yaml" />
+    <Text Include="../../thirdparty/owemdjee/llfio/programs/fs-probe/latencies.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/llfio/programs/key-value-store/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/11.1.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/54d0f0190cf29ca811040c8a.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/Chidambaram.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/Error Handling is Ocassionally Correct_files/main.css" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/Files are hard.html" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/Linux KAIO/History of Linux KAIO API.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/Linux KAIO/KAIOUserGuide.htm" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/Linux KAIO/linux-kaio.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/iron-sosp05.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/oopsla2019.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/osdi14-paper-pillai.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/popl2020-px86.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/reference/ptso.pdf" />
+    <Text Include="../../thirdparty/owemdjee/llfio/scripts/AddTryItNow.py" />
+    <Text Include="../../thirdparty/owemdjee/llfio/scripts/BuildTimes.py" />
+    <Text Include="../../thirdparty/owemdjee/llfio/scripts/GenJenkinsMatrixDashboard.py" />
+    <Text Include="../../thirdparty/owemdjee/llfio/scripts/JenkinsMatrixToDashboard.py" />
+    <Text Include="../../thirdparty/owemdjee/llfio/scripts/SoakTest.py" />
+    <Text Include="../../thirdparty/owemdjee/llfio/scripts/XMLTidy.py" />
+    <Text Include="../../thirdparty/owemdjee/llfio/scripts/benchmark_locking_matrix.py" />
+    <Text Include="../../thirdparty/owemdjee/llfio/scripts/make_free_functions.py" />
+    <Text Include="../../thirdparty/owemdjee/llfio/scripts/readme_to_html.sh" />
+    <Text Include="../../thirdparty/owemdjee/llfio/scripts/xhtml_to_docbook.xsl" />
+    <Text Include="../../thirdparty/owemdjee/llfio/single-header/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/llfio/test/tests/directory_handle_create_close/existing0/testdir/pin.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/test/tests/directory_handle_create_close/existing1/testdir/pin.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/test/tests/directory_handle_create_close/existing1/testdir/testfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/test/tests/directory_handle_create_close/existing1/testfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/test/tests/directory_handle_enumerate/existing/dir/pin.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/test/tests/directory_handle_enumerate/existing/foo.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/test/tests/file_handle_create_close/existing0/testfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/test/tests/file_handle_create_close/existing1/testfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/test/tests/symlink_handle_create_close/existing0/testfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/test/tests/symlink_handle_create_close/existing1/testfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/llfio/test/tests/symlink_handle_create_close/existing1/testlink" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

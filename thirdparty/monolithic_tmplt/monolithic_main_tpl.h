@@ -175,7 +175,7 @@ static int TurnOffEcho()
  * clobber our own outer REPL line reader here, so we make sure to reset the console/tty to echo mode
  * instead of RAW mode, as it was changed to that by QJS.
  *
- * The curious artifact this produced that you would not only not see anything you typed any more, but
+ * The curious artifact this produced is that you would not only not see anything you typed any more, but
  * hitting the RETURN key would NOT terminate the call to standard fgets() as that one is '\r' instead
  * of '\n', at least on Windows! A nasty bug that took a while to uncover...
  */
@@ -191,12 +191,17 @@ fgets_rl(char *dst, int max, FILE *fp)
 		int is_a_tty = isatty(fd);
 
 		//_set_fmode(_O_TEXT);
-		const int STDIN_BUFSIZE = 2048;
 
 		// flush stdin by twiddling the buffer. This also ensures the subsequent fgetc() has a line buffer working for it.
 		int rv = setvbuf(stdin, NULL, _IONBF, 0);
+		// MS Windows: at least on this platform it turns out that setting up a buffer like this will prevent *paste from clipboard*
+		// actions in the MSWindows console stop to work when the content pasted is larger than the configured buffer, at least.
+		// Some testing has shown that stdin works as one would expect in this scenario when there's *no buffer* set up.
+#if 01
+		const int STDIN_BUFSIZE = 16384;
 		rv = setvbuf(stdin, NULL, _IOFBF, STDIN_BUFSIZE);
 		rv = setvbuf(stdin, NULL, _IOLBF, STDIN_BUFSIZE);
+#endif
 
 #if defined(_WIN32)
 		HANDLE handle;
@@ -239,6 +244,8 @@ fgets_rl(char *dst, int max, FILE *fp)
 		tcsetattr(fd, TCSANOW, &old_tty);
 #endif /* !_WIN32 */
 	}
+
+	//int rv = setvbuf(stdin, NULL, _IONBF, 0);
 
 	// get max bytes or upto a newline...
 	for (p = dst, max--; max > 0; max--) {

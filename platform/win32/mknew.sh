@@ -1403,6 +1403,9 @@ sparse-map
 libetpan
 cpp-base64
 fast-cpp-csv-parser
+llfio
+popt
+vivid
 
 EOT
 ) | grep -e "$FILTER"

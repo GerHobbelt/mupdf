@@ -978,7 +978,7 @@ static struct tool_spec {
 #endif
 
 #if defined(MUTOOL_EX)
-	{ {.f = linenoise_example_main }, "linenoise_example", "linenoise example" },
+	{ {.fa = linenoise_example_main }, "linenoise_example", "linenoise example" },
 #endif
 
 #if defined(MUTOOL_EX)

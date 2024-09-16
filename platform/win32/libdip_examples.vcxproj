@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF99629D}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;4324;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDIP;DIP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libdip/include;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/libeigen;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/imgproc;../../scripts/OpenCV/modules/stitching;../../scripts/OpenCV/modules/objdetect;../../scripts/OpenCV/modules/photo;../../thirdparty/owemdjee/quirc/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/ocl4dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/cannops/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudabgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafilters/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaimgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastereo/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastructuredlight/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudawarping/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/datasets/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_objdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/dpm/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/fuzzy/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/hfs/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../thirdparty/owemdjee/opencv_contrib/modules/julia/include;../../thirdparty/owemdjee/opencv_contrib/modules/line_descriptor/include;../../thirdparty/owemdjee/opencv_contrib/modules/matlab/include;../../thirdparty/owemdjee/opencv_contrib/modules/mcc/include;../../thirdparty/owemdjee/opencv_contrib/modules/ml/include;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/ovis/include;../../thirdparty/owemdjee/opencv_contrib/modules/phase_unwrapping/include;../../thirdparty/owemdjee/opencv_contrib/modules/plot/include;../../thirdparty/owemdjee/opencv_contrib/modules/quality/include;../../thirdparty/owemdjee/opencv_contrib/modules/rapid/include;../../thirdparty/owemdjee/opencv_contrib/modules/reg/include;../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include;../../thirdparty/owemdjee/opencv_contrib/modules/saliency/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/shape/include;../../thirdparty/owemdjee/opencv_contrib/modules/signal/include;../../thirdparty/owemdjee/opencv_contrib/modules/structured_light/include;../../thirdparty/owemdjee/opencv_contrib/modules/superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/surface_matching/include;../../thirdparty/owemdjee/opencv_contrib/modules/text/include;../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include;../../thirdparty/owemdjee/opencv_contrib/modules/videostab/include;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/wechat_qrcode/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/xobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xstereo/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DIP_EXAMPLES_DIR="./dip/examples";DIP_COPYRIGHT_YEAR=2024;BUILD_MONOLITHIC;BUILDING_LIBDIP;DIP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDIP;DIP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libdip/include;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/libeigen;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/imgproc;../../scripts/OpenCV/modules/stitching;../../scripts/OpenCV/modules/objdetect;../../scripts/OpenCV/modules/photo;../../thirdparty/owemdjee/quirc/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/ocl4dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/cannops/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudabgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafilters/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaimgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastereo/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastructuredlight/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudawarping/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/datasets/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_objdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/dpm/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/fuzzy/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/hfs/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../thirdparty/owemdjee/opencv_contrib/modules/julia/include;../../thirdparty/owemdjee/opencv_contrib/modules/line_descriptor/include;../../thirdparty/owemdjee/opencv_contrib/modules/matlab/include;../../thirdparty/owemdjee/opencv_contrib/modules/mcc/include;../../thirdparty/owemdjee/opencv_contrib/modules/ml/include;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/ovis/include;../../thirdparty/owemdjee/opencv_contrib/modules/phase_unwrapping/include;../../thirdparty/owemdjee/opencv_contrib/modules/plot/include;../../thirdparty/owemdjee/opencv_contrib/modules/quality/include;../../thirdparty/owemdjee/opencv_contrib/modules/rapid/include;../../thirdparty/owemdjee/opencv_contrib/modules/reg/include;../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include;../../thirdparty/owemdjee/opencv_contrib/modules/saliency/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/shape/include;../../thirdparty/owemdjee/opencv_contrib/modules/signal/include;../../thirdparty/owemdjee/opencv_contrib/modules/structured_light/include;../../thirdparty/owemdjee/opencv_contrib/modules/superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/surface_matching/include;../../thirdparty/owemdjee/opencv_contrib/modules/text/include;../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include;../../thirdparty/owemdjee/opencv_contrib/modules/videostab/include;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/wechat_qrcode/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/xobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xstereo/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDIP;DIP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libdip/include;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/libeigen;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/imgproc;../../scripts/OpenCV/modules/stitching;../../scripts/OpenCV/modules/objdetect;../../scripts/OpenCV/modules/photo;../../thirdparty/owemdjee/quirc/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/ocl4dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/cannops/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudabgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafilters/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaimgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastereo/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastructuredlight/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudawarping/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/datasets/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_objdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/dpm/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/fuzzy/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/hfs/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../thirdparty/owemdjee/opencv_contrib/modules/julia/include;../../thirdparty/owemdjee/opencv_contrib/modules/line_descriptor/include;../../thirdparty/owemdjee/opencv_contrib/modules/matlab/include;../../thirdparty/owemdjee/opencv_contrib/modules/mcc/include;../../thirdparty/owemdjee/opencv_contrib/modules/ml/include;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/ovis/include;../../thirdparty/owemdjee/opencv_contrib/modules/phase_unwrapping/include;../../thirdparty/owemdjee/opencv_contrib/modules/plot/include;../../thirdparty/owemdjee/opencv_contrib/modules/quality/include;../../thirdparty/owemdjee/opencv_contrib/modules/rapid/include;../../thirdparty/owemdjee/opencv_contrib/modules/reg/include;../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include;../../thirdparty/owemdjee/opencv_contrib/modules/saliency/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/shape/include;../../thirdparty/owemdjee/opencv_contrib/modules/signal/include;../../thirdparty/owemdjee/opencv_contrib/modules/structured_light/include;../../thirdparty/owemdjee/opencv_contrib/modules/superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/surface_matching/include;../../thirdparty/owemdjee/opencv_contrib/modules/text/include;../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include;../../thirdparty/owemdjee/opencv_contrib/modules/videostab/include;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/wechat_qrcode/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/xobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xstereo/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DIP_EXAMPLES_DIR="./dip/examples";DIP_COPYRIGHT_YEAR=2024;BUILD_MONOLITHIC;BUILDING_LIBDIP;DIP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDIP;DIP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libdip/include;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/libeigen;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/imgproc;../../scripts/OpenCV/modules/stitching;../../scripts/OpenCV/modules/objdetect;../../scripts/OpenCV/modules/photo;../../thirdparty/owemdjee/quirc/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/ocl4dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/cannops/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudabgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafilters/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaimgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastereo/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastructuredlight/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudawarping/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/datasets/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_objdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/dpm/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/fuzzy/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/hfs/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../thirdparty/owemdjee/opencv_contrib/modules/julia/include;../../thirdparty/owemdjee/opencv_contrib/modules/line_descriptor/include;../../thirdparty/owemdjee/opencv_contrib/modules/matlab/include;../../thirdparty/owemdjee/opencv_contrib/modules/mcc/include;../../thirdparty/owemdjee/opencv_contrib/modules/ml/include;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/ovis/include;../../thirdparty/owemdjee/opencv_contrib/modules/phase_unwrapping/include;../../thirdparty/owemdjee/opencv_contrib/modules/plot/include;../../thirdparty/owemdjee/opencv_contrib/modules/quality/include;../../thirdparty/owemdjee/opencv_contrib/modules/rapid/include;../../thirdparty/owemdjee/opencv_contrib/modules/reg/include;../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include;../../thirdparty/owemdjee/opencv_contrib/modules/saliency/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/shape/include;../../thirdparty/owemdjee/opencv_contrib/modules/signal/include;../../thirdparty/owemdjee/opencv_contrib/modules/structured_light/include;../../thirdparty/owemdjee/opencv_contrib/modules/superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/surface_matching/include;../../thirdparty/owemdjee/opencv_contrib/modules/text/include;../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include;../../thirdparty/owemdjee/opencv_contrib/modules/videostab/include;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/wechat_qrcode/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/xobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xstereo/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDIP;DIP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libdip/include;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/libeigen;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/imgproc;../../scripts/OpenCV/modules/stitching;../../scripts/OpenCV/modules/objdetect;../../scripts/OpenCV/modules/photo;../../thirdparty/owemdjee/quirc/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/ocl4dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/cannops/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudabgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafilters/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaimgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastereo/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastructuredlight/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudawarping/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/datasets/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_objdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/dpm/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/fuzzy/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/hfs/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../thirdparty/owemdjee/opencv_contrib/modules/julia/include;../../thirdparty/owemdjee/opencv_contrib/modules/line_descriptor/include;../../thirdparty/owemdjee/opencv_contrib/modules/matlab/include;../../thirdparty/owemdjee/opencv_contrib/modules/mcc/include;../../thirdparty/owemdjee/opencv_contrib/modules/ml/include;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/ovis/include;../../thirdparty/owemdjee/opencv_contrib/modules/phase_unwrapping/include;../../thirdparty/owemdjee/opencv_contrib/modules/plot/include;../../thirdparty/owemdjee/opencv_contrib/modules/quality/include;../../thirdparty/owemdjee/opencv_contrib/modules/rapid/include;../../thirdparty/owemdjee/opencv_contrib/modules/reg/include;../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include;../../thirdparty/owemdjee/opencv_contrib/modules/saliency/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/shape/include;../../thirdparty/owemdjee/opencv_contrib/modules/signal/include;../../thirdparty/owemdjee/opencv_contrib/modules/structured_light/include;../../thirdparty/owemdjee/opencv_contrib/modules/superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/surface_matching/include;../../thirdparty/owemdjee/opencv_contrib/modules/text/include;../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include;../../thirdparty/owemdjee/opencv_contrib/modules/videostab/include;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/wechat_qrcode/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/xobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xstereo/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DIP_EXAMPLES_DIR="./dip/examples";DIP_COPYRIGHT_YEAR=2024;BUILD_MONOLITHIC;BUILDING_LIBDIP;DIP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDIP;DIP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libdip/include;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/libeigen;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/imgproc;../../scripts/OpenCV/modules/stitching;../../scripts/OpenCV/modules/objdetect;../../scripts/OpenCV/modules/photo;../../thirdparty/owemdjee/quirc/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/ocl4dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/cannops/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudabgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafilters/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaimgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastereo/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastructuredlight/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudawarping/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/datasets/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_objdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/dpm/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/fuzzy/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/hfs/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../thirdparty/owemdjee/opencv_contrib/modules/julia/include;../../thirdparty/owemdjee/opencv_contrib/modules/line_descriptor/include;../../thirdparty/owemdjee/opencv_contrib/modules/matlab/include;../../thirdparty/owemdjee/opencv_contrib/modules/mcc/include;../../thirdparty/owemdjee/opencv_contrib/modules/ml/include;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/ovis/include;../../thirdparty/owemdjee/opencv_contrib/modules/phase_unwrapping/include;../../thirdparty/owemdjee/opencv_contrib/modules/plot/include;../../thirdparty/owemdjee/opencv_contrib/modules/quality/include;../../thirdparty/owemdjee/opencv_contrib/modules/rapid/include;../../thirdparty/owemdjee/opencv_contrib/modules/reg/include;../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include;../../thirdparty/owemdjee/opencv_contrib/modules/saliency/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/shape/include;../../thirdparty/owemdjee/opencv_contrib/modules/signal/include;../../thirdparty/owemdjee/opencv_contrib/modules/structured_light/include;../../thirdparty/owemdjee/opencv_contrib/modules/superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/surface_matching/include;../../thirdparty/owemdjee/opencv_contrib/modules/text/include;../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include;../../thirdparty/owemdjee/opencv_contrib/modules/videostab/include;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/wechat_qrcode/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/xobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xstereo/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDIP;DIP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libdip/include;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/libeigen;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/imgproc;../../scripts/OpenCV/modules/stitching;../../scripts/OpenCV/modules/objdetect;../../scripts/OpenCV/modules/photo;../../thirdparty/owemdjee/quirc/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/ocl4dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/cannops/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudabgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafilters/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaimgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastereo/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastructuredlight/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudawarping/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/datasets/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_objdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/dpm/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/fuzzy/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/hfs/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../thirdparty/owemdjee/opencv_contrib/modules/julia/include;../../thirdparty/owemdjee/opencv_contrib/modules/line_descriptor/include;../../thirdparty/owemdjee/opencv_contrib/modules/matlab/include;../../thirdparty/owemdjee/opencv_contrib/modules/mcc/include;../../thirdparty/owemdjee/opencv_contrib/modules/ml/include;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/ovis/include;../../thirdparty/owemdjee/opencv_contrib/modules/phase_unwrapping/include;../../thirdparty/owemdjee/opencv_contrib/modules/plot/include;../../thirdparty/owemdjee/opencv_contrib/modules/quality/include;../../thirdparty/owemdjee/opencv_contrib/modules/rapid/include;../../thirdparty/owemdjee/opencv_contrib/modules/reg/include;../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include;../../thirdparty/owemdjee/opencv_contrib/modules/saliency/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/shape/include;../../thirdparty/owemdjee/opencv_contrib/modules/signal/include;../../thirdparty/owemdjee/opencv_contrib/modules/structured_light/include;../../thirdparty/owemdjee/opencv_contrib/modules/superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/surface_matching/include;../../thirdparty/owemdjee/opencv_contrib/modules/text/include;../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include;../../thirdparty/owemdjee/opencv_contrib/modules/videostab/include;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/wechat_qrcode/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/xobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xstereo/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DIP_EXAMPLES_DIR="./dip/examples";DIP_COPYRIGHT_YEAR=2024;BUILD_MONOLITHIC;BUILDING_LIBDIP;DIP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDIP;DIP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libdip/include;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/libeigen;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/imgproc;../../scripts/OpenCV/modules/stitching;../../scripts/OpenCV/modules/objdetect;../../scripts/OpenCV/modules/photo;../../thirdparty/owemdjee/quirc/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/ocl4dnn/include;../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/cannops/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudabgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudafilters/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaimgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastereo/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudastructuredlight/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudawarping/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/datasets/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_objdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/dnn_superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/dpm/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/fuzzy/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/hfs/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../thirdparty/owemdjee/opencv_contrib/modules/julia/include;../../thirdparty/owemdjee/opencv_contrib/modules/line_descriptor/include;../../thirdparty/owemdjee/opencv_contrib/modules/matlab/include;../../thirdparty/owemdjee/opencv_contrib/modules/mcc/include;../../thirdparty/owemdjee/opencv_contrib/modules/ml/include;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/ovis/include;../../thirdparty/owemdjee/opencv_contrib/modules/phase_unwrapping/include;../../thirdparty/owemdjee/opencv_contrib/modules/plot/include;../../thirdparty/owemdjee/opencv_contrib/modules/quality/include;../../thirdparty/owemdjee/opencv_contrib/modules/rapid/include;../../thirdparty/owemdjee/opencv_contrib/modules/reg/include;../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include;../../thirdparty/owemdjee/opencv_contrib/modules/saliency/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/shape/include;../../thirdparty/owemdjee/opencv_contrib/modules/signal/include;../../thirdparty/owemdjee/opencv_contrib/modules/structured_light/include;../../thirdparty/owemdjee/opencv_contrib/modules/superres/include;../../thirdparty/owemdjee/opencv_contrib/modules/surface_matching/include;../../thirdparty/owemdjee/opencv_contrib/modules/text/include;../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include;../../thirdparty/owemdjee/opencv_contrib/modules/videostab/include;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/wechat_qrcode/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/xobjdetect/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xstereo/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/blend_images.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/color_quantization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/display.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/fileviewer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/filter_image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/fractal_dimension.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/generate_embedded_font.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/generate_shapes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/geometric_transformation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/image_arithmetic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/image_series_statistics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/oversegmentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/radial_mean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/register_measurement_feature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/select_objects.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/test_binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/time_dilations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/time_fft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/time_openmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/using_measurement_tool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/variance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/cpp/viewer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/examples/external_interfaces/opencv_with_dip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/analysis/chord_length.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/analysis/distance_distribution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/analysis/findshift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/analysis/fouriermellin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/analysis/fractal_dimension.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/analysis/granulometry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/analysis/monogenic_signal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/analysis/orientation_space.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/analysis/pixel_pair_sampling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/analysis/structure_tensor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/analysis/subpixel_location.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/binary/binary_basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/binary/binary_propagation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/binary/binary_support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/binary/count_neighbors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/binary/skeleton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/binary/sup_inf_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/binary/thick_thin_2D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/color/color.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/deconvolution/fista.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/deconvolution/richardson_lucy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/deconvolution/tikhonov_miller.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/deconvolution/wiener.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/detection/corners.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/detection/hough.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/detection/lines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/detection/radon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/display/colormap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/display/image_display.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/display/label_edges.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/distance/edt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/distance/gdt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/distance/separable_dt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/distance/vdt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/file_io/file_io_support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/file_io/ics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/file_io/jpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/file_io/npy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/file_io/png.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/file_io/tiff_read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/file_io/tiff_write.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/generation/coordinates.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/generation/draw_bandlimited.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/generation/draw_discrete.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/generation/draw_fourier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/generation/draw_text_builtin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/generation/draw_text_freetype.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/generation/noise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/generation/windowing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/geometry/interpolation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/geometry/resampleat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/geometry/tile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/geometry/wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/histogram/distribution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/histogram/equalization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/histogram/histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/histogram/per_object_hist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/histogram/statistics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/histogram/threshold_algorithms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/boundary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/copy_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/datatype.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/framework.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/framework_full.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/framework_projection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/framework_scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/framework_separable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/image_copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/image_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/image_indexing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/image_manip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/image_views.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/information.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/iterators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/multithreading.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/neighborhood.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/physical_dimensions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/pixel_table.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/unit_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/linear/convolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/linear/derivative.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/linear/finitediff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/linear/gabor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/linear/gaboriir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/linear/gauss.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/linear/gaussiir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/linear/separate_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/linear/sharpen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/linear/uniform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/mapping/equalization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/mapping/lookup_table.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/mapping/mapping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/math/arithmetic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/math/bitwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/math/comparison.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/math/dyadic_operators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/math/monadic_operators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/math/pixel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/math/select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/math/tensor_operators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/measurement/chain_code.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_surface_area.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/measurement/image_chain_code.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/measurement/measure_chain_code.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/measurement/measure_polygon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/measurement/measurement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/measurement/measurement_tool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/measurement/object_to_measurement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/measurement/polygon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/microscopy/attenuation_correction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/microscopy/colocalization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/microscopy/psf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/microscopy/unmix_stains.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/areaopening.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/filters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/maxima.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/one_dimensional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/pathopening.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/reconstruction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/upperskeleton2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/watershed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/watershed_support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/nonlinear/adaptivegauss.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/nonlinear/anisotropic_diffusion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/nonlinear/bilateral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/nonlinear/kuwahara.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/nonlinear/nonmaximumsuppression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/nonlinear/percentile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/nonlinear/variancefilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/regions/grow_regions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/regions/label.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/regions/label_manipulation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/regions/label_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/regions/region_adjacency_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/segmentation/canny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/segmentation/ellipse_fit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/segmentation/kmeans_clustering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/segmentation/minimum_variance_partitioning.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/segmentation/superpixels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/segmentation/threshold.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/statistics/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/statistics/projection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/statistics/radial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/statistics/statistics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/support/accumulators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/support/gaussian_mixture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/support/matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/support/numeric.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/support/thin_plate_spline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/transform/dft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/transform/dft_optimal_size.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/transform/fourier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/transform/haar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/transform/riesz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/transform/swt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/dipimage/viewslice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/colormap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/control.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/dipview/dipview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/dipviewer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/link.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/manager/glfw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/manager/glut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/manager/proxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/slice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/status.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/viewer/src/tensor.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/dip_matlab_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/dip_opencv_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/dip_vigra_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/accumulators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/analysis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/binary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/border.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/boundary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/chain_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/color.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/deconvolution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/detection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/dft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/display.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/distance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/distribution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/file_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/framework.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/generation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/generic_iterators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/geometry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/histogram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/iterators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/javaio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/javaio/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/label_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/clamp_cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/copy_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/datatype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/dimension_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/image_views.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/numeric.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/physical_dimensions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/sample_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/stringparams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/tensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/library/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/lookup_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/mapping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/measurement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/microscopy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/morphology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/multithreading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/neighborlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/nonlinear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/overload.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/pixel_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/private/constfor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/private/pcg_extras.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/private/pcg_random.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/private/pcg_uint128.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/private/robin_growth_policy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/private/robin_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/private/robin_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/private/robin_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/regions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/saturated_arithmetic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/segmentation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/simple_file_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/testing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/union_find.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/viewer/control.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/viewer/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/viewer/glfw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/viewer/glut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/viewer/histogram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/viewer/image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/viewer/link.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/viewer/manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/viewer/proxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/viewer/slice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/viewer/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/viewer/tensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/viewer/viewer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/dipviewer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/binary/binary_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/binary/bucket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/binary/hilditch_condition_lut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/cmyk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/hcv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/hsi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/ish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/lab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/oklab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/rgb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/wavelength.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/xyz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/color/ycbcr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/deconvolution/common_deconv_utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/distance/find_neighbors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/distance/separable_dt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/file_io/file_io_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/generation/draw_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/geometry/interpolation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/library/framework_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_aspect_ratio_feret.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_bending_energy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_cartesian_box.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_center.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_circularity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_common_stuff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_convex_area.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_convex_perimeter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_convexity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_dimensions_cube.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_dimensions_ellipsoid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_directional_statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_eccentricity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_ellipse_variance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_feret.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_gravity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_grey_dimensions_cube.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_grey_dimensions_ellipsoid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_grey_inertia.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_grey_major_axes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_grey_mu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_grey_size.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_inertia.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_major_axes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_mass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_max_pos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_max_val.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_maximum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_mean.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_min_pos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_min_val.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_minimum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_mu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_p2a.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_perimeter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_podczeck_shapes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_radius.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_roundness.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_size.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_solid_area.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_solidity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_stdandard_deviation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_surface_area.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/morphology/one_dimensional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/morphology/watershed_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/regions/labelingGrana2016.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/transform/fftw3api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/viewer/src/fg_font_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/viewer/src/include_gl.h" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/DIPlib_logo_32.png" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/DIPlib_logo_640.png" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/DIPlib_social_media_preview.png" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/release_procedure/cmake_paths.PNG" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/release_procedure/cmake_variables.PNG" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/release_procedure/file_structure.PNG" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/release_procedure/vs_build.PNG" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/release_procedure/vs_install.PNG" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/release_procedure/vs_release.PNG" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/dipimage.png" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/rice.png" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/rice_graph.png" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/rice_labels.png" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/rice_min_bg.png" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/src/viewer.png" />
+    <Image Include="../../thirdparty/owemdjee/libdip/tools/stall_number.jpg" />
+    <Text Include="../../thirdparty/owemdjee/libdip/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/dipimage_3.0.0.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.0.0.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.1.0.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.2.0.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.3.0.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.4.0.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.4.1.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.4.2.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.4.3.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.5.0.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.5.1.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_next.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/template.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/DIPlib_logo.svg" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/README.html" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/css/m-components.css" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/css/m-dip+documentation.compiled.css" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/css/m-dip.css" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/css/m-documentation.css" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/css/m-grid.css" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/css/m-layout.css" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/css/m-theme-dip.css" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/css/postprocess.py" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/css/postprocess.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/css/pygments-dip.css" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/css/pygments-dip.py" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/dox++config.in" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/logo/DIPlib_logo_source.svg" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/logo/DIPlib_logo_tiny.svg" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/logo/DIPlib_social_media_preview.svg" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/logo/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/release_procedure/DIPimage_on_Linux.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/release_procedure/DIPimage_on_Windows.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/release_procedure/DIPlib_release.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/release_procedure/windows_setup_git_ssh.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/Build/Linux.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/Build/Windows.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/Build/build.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/Build/documentation.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/Build/macOS.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/00_toc.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/01_introduction.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/02_installation.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/03_getting_started.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/04_dip_image.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/05_dip_measurement.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/06_figure_windows.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/07_functions.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/08_customizing.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/09_mex_files.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/10_compiler.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/DIPimage/11_faq.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/pydip_user_manual.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/concepts.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/design.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/features.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/image.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/iterators.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/main.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/styleguide.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/viewer.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/why_tensors.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/DIP.tif" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/cermet.ics" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/cermet.ids" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/chromo3d.ics" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/chromo3d.ids" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/erika.tif" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/fractal1.tiff" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/fractal2.tiff" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/fractal3.tiff" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/fractal4.tiff" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/fractal5.tiff" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/independent_project/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/python/blend_images.py" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/python/convolution_timing_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/python/hough.py" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/python/measurement.py" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/python/oversegmentation.py" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/python/pydip.py" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/python/tifftest.py" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/python/watershed.py" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/trui.ics" />
+    <Text Include="../../thirdparty/owemdjee/libdip/examples/trui.ids" />
+    <Text Include="../../thirdparty/owemdjee/libdip/include/diplib/private/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/repository_organization.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/src/DIPlib_sources.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libdip/src/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/DIPlibConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/FindFFTW3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/FindFreeGLUT.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/FindGLFW.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/FindMatlab.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/build/cmake_windows_2017a.bat" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/build/cmake_windows_2018b.bat" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/build/deploy_linux.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/build/deploy_macos.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/build/deploy_windows.bat" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/build/dip3.nsi" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/build/manylinux.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/compiler_flags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/count_lines.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/generate_tiff_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/update_deps_file.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libdip/viewer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdip/viewer/DIPviewer_sources.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libdip/viewer/java/Viewer.java" />
+    <Xml Include="../../thirdparty/owemdjee/libdip/codestyle.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
