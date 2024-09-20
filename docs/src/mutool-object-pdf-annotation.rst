@@ -506,7 +506,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     Set the annotation quadding (justification).
 
-    :arg value: Quadding value, `0` for left-justified, `1` for centered, `2` for right-justified.
+    :arg value: `Number`. Quadding value, `0` for left-justified, `1` for centered, `2` for right-justified.
 
     |example_tag|
 
@@ -565,7 +565,7 @@ These properties are only present for some annotation types, so support for them
 
     Get the annotation bounding box.
 
-    :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+    :return: `Array`. `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
     |example_tag|
 
@@ -579,7 +579,7 @@ These properties are only present for some annotation types, so support for them
 
     Set the annotation bounding box.
 
-    :arg rect: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+    :arg rect: `Array`. `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
     |example_tag|
 
@@ -610,7 +610,7 @@ These properties are only present for some annotation types, so support for them
 
     :arg font: `String` ("Helv" = Helvetica, "TiRo" = Times New Roman, "Cour" = Courier).
     :arg size: `Integer`.
-    :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
+    :arg color: `Array`. The :ref:`color value<mutool_run_js_api_colors>`.
 
     |example_tag|
 
@@ -658,7 +658,7 @@ These properties are only present for some annotation types, so support for them
 
     Sets the annotation interior color.
 
-    :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
+    :arg color: `Array`. The :ref:`color value<mutool_run_js_api_colors>`.
 
     |example_tag|
 
@@ -758,7 +758,8 @@ These properties are only present for some annotation types, so support for them
 
     .. code-block:: javascript
 
-        annotation.setLineEndingStyles({start:"Square", end:"OpenArrow"});
+        annotation.setLineEndingStyles("Square", "OpenArrow");
+
 
 
 
@@ -778,6 +779,199 @@ These properties are only present for some annotation types, so support for them
    * - "ROpenArrow"
    * - "RClosedArrow"
    * - "Slash"
+
+
+Line Leaders
+~~~~~~~~~~~~~~~
+
+
+In a PDF line annotation, "line leaders" refer to visual elements that can be added to the endpoints of a line annotation to enhance its appearance or meaning.
+
+.. image:: images/leader-lines.png
+          :alt: Leader lines explained
+          :width: 100%
+
+
+.. method:: setLineLeader(ll)
+
+    |mutool_tag|
+
+    Sets the line leader length.
+
+    :arg ll: `Number`. The length of leader lines that extend from each endpoint of the line perpendicular to the line itself. A positive value means that the leader lines appear in the direction that is clockwise when traversing the line from its starting point to its ending point a negative value indicates the opposite direction.
+
+
+.. method:: getLineLeader()
+
+    |mutool_tag|
+
+    Gets the line leader length.
+
+    :return: `Number`
+
+
+.. method:: setLineLeaderExtension(lle)
+
+    |mutool_tag|
+
+    Sets the line leader extension.
+
+    :arg lle: `Number`. A non-negative number representing the length of leader line extensions that extend from the line proper 180 degrees from the leader lines.
+
+
+.. method:: getLineLeaderExtension()
+
+    |mutool_tag|
+
+    Gets the line leader extension.
+
+    :return: `Number`
+
+
+.. method:: setLineLeaderOffset(llo)
+
+    |mutool_tag|
+
+    Sets the line leader offset.
+
+    :arg llo: `Number`. A non-negative number representing the length of the leader line offset, which is the amount of empty space between the endpoints of the annotation and the beginning of the leader lines.
+
+
+
+.. method:: getLineLeaderOffset()
+
+    |mutool_tag|
+
+    Gets the line leader offset.
+
+    :return: `Number`
+
+
+.. method:: setLineCaption(enable)
+
+    |mutool_tag|
+
+    Sets whether line caption is enabled or not.
+
+    :arg enable: `Boolean`.
+
+
+    .. note::
+
+        When line captions are enabled then using the :meth:`setContents` method on the Line will graphically render the caption contents onto the line.
+
+
+.. method:: getLineCaption()
+
+    |mutool_tag|
+
+    Returns whether the line caption is enabled or not.
+
+    :return: `Boolean`.
+
+
+.. method:: setLineCaptionOffset(point)
+
+    |mutool_tag|
+
+    Sets any line caption offset.
+
+
+    :arg point: `Array`. A point, `[x, y]`, specifying the offset of the caption text from its normal position. The first value is the horizontal offset along the annotation line from its midpoint, with a positive value indicating offset to the right and a negative value indicating offset to the left. The second value is the vertical offset perpendicular to the annotation line, with a positive value indicating a shift up and a negative value indicating a shift down.
+
+
+    .. image:: images/offset-caption.png
+          :alt: Offset caption explained
+          :width: 100%
+
+
+
+.. method:: getLineCaptionOffset()
+
+    |mutool_tag|
+
+    Returns the line caption offset as a point, `[x, y]`.
+
+    :return: `Array`.
+
+
+----
+
+
+Callouts
+~~~~~~~~~~~~
+
+Callouts are used with :ref:`"FreeText" annotations <mutool_run_js_api_annotation_types>` and allow for a graphical line to point to an area on a page.
+
+.. image:: images/callout-annot.png
+          :alt: Callout annotation
+          :width: 100%
+
+
+.. method:: hasCallout()
+
+    |mutool_tag|
+
+    Returns whether the annotation has a callout or not.
+
+    :return: `Boolean`.
+
+
+.. method:: setCalloutLine(points)
+
+    |mutool_tag|
+
+    Takes an array of 2 or 3 points.
+
+    :arg points: [ [x1, y1], [x2, y2], [x3, y3]? ].
+
+
+.. method:: getCalloutLine()
+
+    |mutool_tag|
+
+    Returns the array of points.
+
+    :return: `[ [x1, y1], [x2, y2], [x3, y3]? ]`.
+
+
+.. method:: setCalloutPoint(point)
+
+    |mutool_tag|
+
+    Takes a point where the callout should point to.
+
+    :arg points: `[x,y]`.
+
+
+.. method:: getCalloutPoint()
+
+    |mutool_tag|
+
+    Returns the callout point.
+
+    :return: `[x,y]`.
+
+
+.. method:: setCalloutStyle(style)
+
+    |mutool_tag|
+
+    Sets the style of the callout line.
+
+    :arg style: `String`. A :ref:`line ending style <mutool_pdf_annotation_line_ending_styles>`.
+
+
+.. method:: getCalloutStyle()
+
+    |mutool_tag|
+
+    Returns the callout style.
+
+    :return: `String`.
+
+
+----
 
 
 .. method:: hasIcon()
