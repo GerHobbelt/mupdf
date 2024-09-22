@@ -2,3 +2,5 @@
 also-ignore:
 	/src/
 	
+	/tmp/
+	

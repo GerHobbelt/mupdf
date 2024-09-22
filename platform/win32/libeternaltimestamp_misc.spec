@@ -1,0 +1,6 @@
+
+also-ignore:
+	/test/
+	/demo/
+	
+	

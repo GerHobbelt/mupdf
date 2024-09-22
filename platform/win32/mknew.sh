@@ -1406,6 +1406,7 @@ fast-cpp-csv-parser
 llfio
 popt
 vivid
+SSIM
 
 EOT
 ) | grep -e "$FILTER"

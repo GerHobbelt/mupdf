@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -76,7 +76,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLM;COLM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -130,7 +130,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLM;COLM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/colm/src/aapl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -157,7 +157,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLM;COLM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/colm/src/aapl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -185,7 +185,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLM;COLM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/colm/src/aapl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -212,7 +212,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLM;COLM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/colm/src/aapl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -549,16 +549,22 @@
     <ClInclude Include="../../thirdparty/owemdjee/colm/test/rlparse.d/vector.h" />
     <ClInclude Include="../../thirdparty/owemdjee/colm/test/rlparse.d/version.h" />
     <Text Include="../../thirdparty/owemdjee/colm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/colm/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/colm/CREDITS" />
     <Text Include="../../thirdparty/owemdjee/colm/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/colm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/colm/TODO-aapl" />
     <Text Include="../../thirdparty/owemdjee/colm/autogen.sh" />
     <Text Include="../../thirdparty/owemdjee/colm/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/colm/contrib/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/colm/doc/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/colm/doc/aapl/Doxyfile.in" />
     <Text Include="../../thirdparty/owemdjee/colm/doc/aapl/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/colm/doc/aapl/check_ex_compile" />
     <Text Include="../../thirdparty/owemdjee/colm/doc/aapl/footer.html" />
     <Text Include="../../thirdparty/owemdjee/colm/doc/aapl/header.html" />
+    <Text Include="../../thirdparty/owemdjee/colm/doc/aapl/makedummy" />
+    <Text Include="../../thirdparty/owemdjee/colm/doc/aapl/makelinks" />
     <Text Include="../../thirdparty/owemdjee/colm/doc/colm/0_00_welcome.adoc" />
     <Text Include="../../thirdparty/owemdjee/colm/doc/colm/0_01_installing.adoc" />
     <Text Include="../../thirdparty/owemdjee/colm/doc/colm/0_02_vim_syntax.adoc" />
@@ -596,18 +602,24 @@
     <Text Include="../../thirdparty/owemdjee/colm/free-codes.sh" />
     <Text Include="../../thirdparty/owemdjee/colm/grammar/Makefile" />
     <Text Include="../../thirdparty/owemdjee/colm/grammar/c++/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/colm/grammar/c++/expected" />
     <Text Include="../../thirdparty/owemdjee/colm/grammar/dns/Makefile" />
     <Text Include="../../thirdparty/owemdjee/colm/grammar/dns/dns.rl" />
     <Text Include="../../thirdparty/owemdjee/colm/grammar/go/Makefile" />
     <Text Include="../../thirdparty/owemdjee/colm/grammar/pcre/Makefile" />
     <Text Include="../../thirdparty/owemdjee/colm/grammar/pcre/pcre.rl" />
     <Text Include="../../thirdparty/owemdjee/colm/grammar/python/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/colm/grammar/python/expected" />
     <Text Include="../../thirdparty/owemdjee/colm/grammar/python/input.py" />
     <Text Include="../../thirdparty/owemdjee/colm/grammar/rust/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/colm/package/control" />
+    <Text Include="../../thirdparty/owemdjee/colm/package/postinst" />
+    <Text Include="../../thirdparty/owemdjee/colm/sedsubst" />
     <Text Include="../../thirdparty/owemdjee/colm/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/colm/src/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/colm/src/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/colm/src/README" />
+    <Text Include="../../thirdparty/owemdjee/colm/src/aapl/COPYING" />
     <Text Include="../../thirdparty/owemdjee/colm/src/aapl/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/colm/src/aapl/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/colm/src/aapl/README" />
@@ -631,6 +643,7 @@
     <Text Include="../../thirdparty/owemdjee/colm/test/aapl.d/gentests.sh" />
     <Text Include="../../thirdparty/owemdjee/colm/test/autogen.sh" />
     <Text Include="../../thirdparty/owemdjee/colm/test/colm.d/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/colm/test/colm.d/TESTS" />
     <Text Include="../../thirdparty/owemdjee/colm/test/colm.d/binary1.in" />
     <Text Include="../../thirdparty/owemdjee/colm/test/colm.d/gentests.sh" />
     <Text Include="../../thirdparty/owemdjee/colm/test/colm.d/inpush1a.in" />
@@ -1178,8 +1191,11 @@
     <Text Include="../../thirdparty/owemdjee/colm/test/rlhc.d/case/union.cpp-C-F1--var-backend.in" />
     <Text Include="../../thirdparty/owemdjee/colm/test/rlhc.d/case/union.cpp-C-T0--goto-backend.in" />
     <Text Include="../../thirdparty/owemdjee/colm/test/rlhc.d/case/union.cpp-C-T1--goto-backend.in" />
+    <Text Include="../../thirdparty/owemdjee/colm/test/rlhc.d/gentests" />
     <Text Include="../../thirdparty/owemdjee/colm/test/rlparse.d/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/colm/test/rlparse.d/case/rlscan.rl" />
+    <Text Include="../../thirdparty/owemdjee/colm/test/rlparse.d/gentests" />
+    <Text Include="../../thirdparty/owemdjee/colm/test/runtests" />
     <Text Include="../../thirdparty/owemdjee/colm/test/subject.mk.in" />
     <Text Include="../../thirdparty/owemdjee/colm/test/subject.sh.in" />
     <Text Include="../../thirdparty/owemdjee/colm/test/trans.d/Makefile.am" />
@@ -1523,9 +1539,11 @@
     <Text Include="../../thirdparty/owemdjee/colm/test/trans.d/case/zlen1_ocaml.rl" />
     <Text Include="../../thirdparty/owemdjee/colm/test/trans.d/case/zlen1_ruby.rl" />
     <Text Include="../../thirdparty/owemdjee/colm/test/trans.d/case/zlen1_rust.rl" />
+    <Text Include="../../thirdparty/owemdjee/colm/test/trans.d/gentests" />
     <Text Include="../../thirdparty/owemdjee/colm/version.mk" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
