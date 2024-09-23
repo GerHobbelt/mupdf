@@ -201,6 +201,7 @@ enum
 	FZ_STEXT_SEGMENT = 1 << 18,
 	FZ_STEXT_PARAGRAPH_BREAK = 1 << 19,
 	FZ_STEXT_TABLE_HUNT = 1 << 20,
+	FZ_STEXT_COLLECT_FLAGS = 1 << 21,
 
 	/* An old, deprecated option. */
 	FZ_STEXT_MEDIABOX_CLIP = FZ_STEXT_CLIP
@@ -398,7 +399,8 @@ enum
 {
 	FZ_STEXT_STRIKEOUT = 1,
 	FZ_STEXT_UNDERLINE = 2,
-	FZ_STEXT_SYNTHETIC = 4
+	FZ_STEXT_SYNTHETIC = 4,
+	FZ_STEXT_BOLD = 8 /* Either real or 'fake' bold */
 };
 
 /**
