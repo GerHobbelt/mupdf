@@ -46,6 +46,10 @@ public class HelloWorld
         var stream = new FzStream3();
         mupdf.FzDocument document0 = new mupdf.FzDocument("pdf", stream);
 
+        // Check FZ_ENABLE_FB2.
+        System.Console.WriteLine("FZ_VERSION=" + mupdf.mupdf.FZ_VERSION);
+        System.Console.WriteLine("FZ_ENABLE_FB2=" + mupdf.mupdf.FZ_ENABLE_FB2);
+
         // Check we can load a document.
         mupdf.FzDocument document = new mupdf.FzDocument("zlib.3.pdf");
         System.Console.WriteLine("document: " + document);
