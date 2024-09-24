@@ -129,6 +129,7 @@ static void saveimage(pdf_obj *ref)
 	int type;
 
 	fz_var(image);
+	fz_var(mask);
 	fz_var(pix);
 
 	fz_try(ctx)
@@ -261,7 +262,9 @@ static void savefont(pdf_obj *dict)
 
 static void extractobject(int num)
 {
-	pdf_obj *ref;
+	pdf_obj *ref = NULL;
+
+	fz_var(ref);
 
 	fz_try(ctx)
 	{

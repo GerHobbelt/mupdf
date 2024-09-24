@@ -1720,6 +1720,8 @@ void pdf_deserialise_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm)
 		obj = pdf_parse_dict(ctx, doc, stm, &doc->lexbuf.base);
 
 		nis = pdf_dict_get_int(ctx, obj, PDF_NAME(NumSections));
+		if (nis < 0 || nis > doc->num_xref_sections)
+			fz_throw(ctx, FZ_ERROR_FORMAT, "Bad journal format");
 		pdf_fingerprint_file(ctx, doc, digest, nis);
 
 		file_size = pdf_dict_get_int(ctx, obj, PDF_NAME(FileSize));
@@ -1786,6 +1788,9 @@ void pdf_deserialise_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm)
 	doc->journal->current = NULL;
 	if (pos > 0)
 	{
+		if (doc->journal->head == NULL)
+			fz_throw(ctx, FZ_ERROR_FORMAT, "Badly formed journal");
+
 		doc->journal->current = doc->journal->head;
 		while (--pos)
 		{
