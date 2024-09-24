@@ -27,7 +27,6 @@
 #include "pixmap-imp.h"
 
 #include <string.h>
-#include <math.h>
 
 #if defined(_MSC_VER) && !defined(_USE_MATH_DEFINES)
 #error "mupdf needs you to define _USE_MATH_DEFINES when compiling with MSVC to get access to M_PI et al on the Win32 platform."

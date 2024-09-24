@@ -30,10 +30,6 @@
 #error "mupdf needs you to define _USE_MATH_DEFINES when compiling with MSVC to get access to M_PI et al on the Win32 platform."
 #endif
 
-#ifndef M_PI
-#define M_PI    3.14159265358979323846264338327950
-#endif
-
 //#define DEBUG_DESKEWER
 
 //int errprintf_nomem(const char *string, ...);

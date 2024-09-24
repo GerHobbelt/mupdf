@@ -1108,6 +1108,10 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			{
 				page_stext_options.flags |= FZ_STEXT_MEDIABOX_CLIP;
 			}
+			if (!(stext_options.flags_conf_mask & FZ_STEXT_ACCURATE_BBOXES))
+			{
+				page_stext_options.flags |= FZ_STEXT_ACCURATE_BBOXES;
+			}
 			if (!(stext_options.flags_conf_mask & FZ_STEXT_PRESERVE_SPANS))
 			{
 				if (output_format->format == OUT_STEXT_JSON || output_format->format == OUT_OCR_STEXT_JSON)
