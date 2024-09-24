@@ -756,6 +756,7 @@ struct fz_font
 	void *t3resources;
 	fz_buffer **t3procs; /* has 256 entries if used */
 	struct fz_display_list **t3lists; /* has 256 entries if used */
+	float *t3widths; /* has 256 entries if used */
 	unsigned short *t3flags; /* has 256 entries if used */
 	int t3transparency; /* 1 if the t3 fonts might use transparency */
 	void *t3doc; /* a pdf_document for the callback */
