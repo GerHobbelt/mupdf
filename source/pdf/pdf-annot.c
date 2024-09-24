@@ -3937,13 +3937,23 @@ pdf_print_default_appearance(fz_context *ctx, char *buf, int nbuf, const char *f
 void
 pdf_annot_default_appearance_unmapped(fz_context *ctx, pdf_annot *annot, char *font_name, int font_name_len, float *size, int *n, float color[4])
 {
-	pdf_obj *da = pdf_dict_get_inheritable(ctx, annot->obj, PDF_NAME(DA));
-	if (!da)
+	pdf_obj *da;
+	pdf_annot_push_local_xref(ctx, annot);
+
+	fz_try(ctx)
 	{
-		pdf_obj *trailer = pdf_trailer(ctx, annot->page->doc);
-		da = pdf_dict_getl(ctx, trailer, PDF_NAME(Root), PDF_NAME(AcroForm), PDF_NAME(DA), NULL);
+		da = pdf_dict_get_inheritable(ctx, annot->obj, PDF_NAME(DA));
+		if (!da)
+		{
+			pdf_obj *trailer = pdf_trailer(ctx, annot->page->doc);
+			da = pdf_dict_getl(ctx, trailer, PDF_NAME(Root), PDF_NAME(AcroForm), PDF_NAME(DA), NULL);
+		}
+		pdf_parse_default_appearance_unmapped(ctx, pdf_to_str_buf(ctx, da), font_name, font_name_len, size, n, color);
 	}
-	pdf_parse_default_appearance_unmapped(ctx, pdf_to_str_buf(ctx, da), font_name, font_name_len, size, n, color);
+	fz_always(ctx)
+		pdf_annot_pop_local_xref(ctx, annot);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 }
 
 void
