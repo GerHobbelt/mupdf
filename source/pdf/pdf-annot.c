@@ -3793,7 +3793,7 @@ fz_point pdf_annot_callout_point(fz_context *ctx, pdf_annot *annot)
 void pdf_set_annot_callout_point(fz_context *ctx, pdf_annot *annot, fz_point p)
 {
 	fz_rect rect;
-	fz_point a, b, line[2];
+	fz_point a, b, line[3];
 	float m;
 
 	rect = pdf_annot_rect(ctx, annot);
