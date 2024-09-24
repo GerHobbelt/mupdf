@@ -5139,11 +5139,6 @@ void pdf_dict_put_real(fz_context *ctx, pdf_obj *dict, pdf_obj *key, double x)
 	pdf_dict_put_drop(ctx, dict, key, pdf_new_real(ctx, x));
 }
 
-void pdf_dict_put_indirect(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int num, int gen)
-{
-	pdf_dict_put_drop(ctx, dict, key, pdf_new_indirect(ctx, pdf_get_bound_document(ctx, dict), num, gen));
-}
-
 void pdf_dict_put_name(fz_context *ctx, pdf_obj *dict, pdf_obj *key, const char *x)
 {
 	pdf_dict_put_drop(ctx, dict, key, pdf_new_name(ctx, x));

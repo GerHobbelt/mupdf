@@ -1919,7 +1919,7 @@ void pdf_signature_set_value(fz_context *ctx, pdf_document *doc, pdf_obj *field,
 	char *buf = NULL;
 
 	vnum = pdf_create_object(ctx, doc);
-	pdf_dict_put_indirect(ctx, field, PDF_NAME(V), vnum, 0);
+	pdf_dict_put_indirect(ctx, field, PDF_NAME(V), vnum);
 
 	max_digest_size = signer->max_digest_size(ctx, signer);
 

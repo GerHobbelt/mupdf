@@ -1973,7 +1973,7 @@ void pdf_repair_trailer(fz_context *ctx, pdf_document *doc)
 				obj = pdf_dict_get(ctx, dict, PDF_NAME(Type));
 				if (obj == PDF_NAME(Catalog))
 				{
-					pdf_dict_put_indirect(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root), i, 0);
+					pdf_dict_put_indirect(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root), i);
 					hasroot = 1;
 				}
 			}
@@ -1982,7 +1982,7 @@ void pdf_repair_trailer(fz_context *ctx, pdf_document *doc)
 			{
 				if (pdf_is_string(ctx, pdf_dict_get(ctx, dict, PDF_NAME(Creator))) || pdf_is_string(ctx, pdf_dict_get(ctx, dict, PDF_NAME(Producer))))
 				{
-					pdf_dict_put_indirect(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info), i, 0);
+					pdf_dict_put_indirect(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info), i);
 					hasinfo = 1;
 				}
 			}
