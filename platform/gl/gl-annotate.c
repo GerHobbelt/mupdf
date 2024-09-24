@@ -1270,43 +1270,6 @@ void do_annotate_panel(void)
 			}
 		}
 
-		if (subtype == PDF_ANNOT_LINE)
-		{
-			float llx[3];
-			static int ll, lle, llo;
-			int ll_changed;
-			int cap;
-
-			if (has_content)
-			{
-				cap = pdf_annot_line_caption(ctx, ui.selected_annot);
-				if (ui_checkbox("Line Caption", &cap))
-				{
-					pdf_set_annot_line_caption(ctx, ui.selected_annot, cap);
-					trace_action("annot.setLineCaption(%s);\n", cap ? "true" : "false");
-				}
-			}
-
-			pdf_annot_line_leader(ctx, ui.selected_annot, llx+0, llx+1, llx+2);
-			ll = (int)llx[0];
-			lle = (int)llx[1];
-			llo = (int)llx[2];
-			ui_label("Line Leader: %d", ll);
-			ll_changed = ui_slider(&ll, -20, 20, 256);
-			if (llx[0])
-			{
-				ui_label("LLE: %d", lle);
-				ll_changed |= ui_slider(&lle, 0, 20, 256);
-				ui_label("LLO: %d", llo);
-				ll_changed |= ui_slider(&llo, 0, 20, 256);
-			}
-			if (ll_changed)
-			{
-				pdf_set_annot_line_leader(ctx, ui.selected_annot, ll, lle, llo);
-				trace_action("annot.setLineLeader(%d,%d,%d);\n", ll, lle, llo);
-			}
-		}
-
 		if (subtype == PDF_ANNOT_FREE_TEXT && intent == PDF_ANNOT_IT_FREETEXT_CALLOUT)
 		{
 			enum pdf_line_ending s;
