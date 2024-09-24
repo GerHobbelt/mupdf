@@ -110,7 +110,7 @@
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/freetype/include;../../scripts/gbenchmark/include;../../scripts/freetype;../../scripts/harfbuzz/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARFBUZZ_TESTS;HARFBUZZ_TESTS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -122,7 +122,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/freetype/include;../../scripts/gbenchmark/include;../../scripts/freetype;../../scripts/harfbuzz/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARFBUZZ_TESTS;HARFBUZZ_TESTS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -132,7 +132,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/freetype/include;../../scripts/gbenchmark/include;../../scripts/freetype;../../scripts/harfbuzz/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARFBUZZ_TESTS;HARFBUZZ_TESTS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -144,7 +144,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/freetype/include;../../scripts/gbenchmark/include;../../scripts/freetype;../../scripts/harfbuzz/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARFBUZZ_TESTS;HARFBUZZ_TESTS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -268,9 +268,6 @@
     <ClCompile Include="../../thirdparty/harfbuzz/src/test-use-table.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/test-vector.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/test.cc" />
-    <ClCompile Include="../../thirdparty/harfbuzz/src/wasm/graphite/shape.cc" />
-    <ClCompile Include="../../thirdparty/harfbuzz/src/wasm/sample/c/shape-fallback.cc" />
-    <ClCompile Include="../../thirdparty/harfbuzz/src/wasm/sample/c/shape-ot.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/test/api/test-aat-layout.c" />
     <ClCompile Include="../../thirdparty/harfbuzz/test/api/test-base-minmax.c" />
     <ClCompile Include="../../thirdparty/harfbuzz/test/api/test-baseline.c" />
@@ -658,7 +655,6 @@
     <Font Include="../../thirdparty/harfbuzz/perf/fonts/Amiri-Regular.ttf" />
     <Font Include="../../thirdparty/harfbuzz/perf/fonts/NotoNastaliqUrdu-Regular.ttf" />
     <Font Include="../../thirdparty/harfbuzz/perf/fonts/Roboto-Regular.ttf" />
-    <Font Include="../../thirdparty/harfbuzz/src/wasm/sample/c/test.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/api/fonts/AdobeVFPrototype-Subset.otf" />
     <Font Include="../../thirdparty/harfbuzz/test/api/fonts/AdobeVFPrototype.WA.gpos.otf" />
     <Font Include="../../thirdparty/harfbuzz/test/api/fonts/AdobeVFPrototype.WAV.gpos.otf" />
@@ -1160,6 +1156,7 @@
     <Font Include="../../thirdparty/harfbuzz/test/shape/data/in-house/fonts/b895f8ff06493cc893ec44de380690ca0074edfa.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/shape/data/in-house/fonts/bb0c53752e85c3d28973ebc913287b8987d3dfe8.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/shape/data/in-house/fonts/bb9473d2403488714043bcfb946c9f78b86ad627.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/shape/data/in-house/fonts/bbc24004e776f348a0f72287d24b0124867ee750.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/shape/data/in-house/fonts/be10ea33f28a139f3305db2302af6220f2f9a583.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/shape/data/in-house/fonts/bef923f4ccb474f961c43b63a9c74b7d9b7a023f.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/shape/data/in-house/fonts/bf39b0e91ef9807f15a9e283a21a14a209fd2cfc.ttf" />
@@ -2711,12 +2708,6 @@
     <Text Include="../../thirdparty/harfbuzz/src/ms-use/IndicSyllabicCategory-Additional.txt" />
     <Text Include="../../thirdparty/harfbuzz/src/relative_to.py" />
     <Text Include="../../thirdparty/harfbuzz/src/sample.py" />
-    <Text Include="../../thirdparty/harfbuzz/src/wasm/graphite/Makefile" />
-    <Text Include="../../thirdparty/harfbuzz/src/wasm/rust/harfbuzz-wasm/Cargo.toml" />
-    <Text Include="../../thirdparty/harfbuzz/src/wasm/rust/harfbuzz-wasm/src/lib.rs" />
-    <Text Include="../../thirdparty/harfbuzz/src/wasm/sample/c/Makefile" />
-    <Text Include="../../thirdparty/harfbuzz/src/wasm/sample/rust/hello-wasm/Cargo.toml" />
-    <Text Include="../../thirdparty/harfbuzz/src/wasm/sample/rust/hello-wasm/src/lib.rs" />
     <Text Include="../../thirdparty/harfbuzz/test/COPYING" />
     <Text Include="../../thirdparty/harfbuzz/test/api/fonts/README" />
     <Text Include="../../thirdparty/harfbuzz/test/api/results/bad-154" />
@@ -2948,6 +2939,7 @@
     <Text Include="../../thirdparty/harfbuzz/test/shape/data/in-house/tests/use-syllable.tests" />
     <Text Include="../../thirdparty/harfbuzz/test/shape/data/in-house/tests/use-vowel-letter-spoofing.tests" />
     <Text Include="../../thirdparty/harfbuzz/test/shape/data/in-house/tests/use.tests" />
+    <Text Include="../../thirdparty/harfbuzz/test/shape/data/in-house/tests/variation-selectors.tests" />
     <Text Include="../../thirdparty/harfbuzz/test/shape/data/in-house/tests/variations-rvrn.tests" />
     <Text Include="../../thirdparty/harfbuzz/test/shape/data/in-house/tests/variations.tests" />
     <Text Include="../../thirdparty/harfbuzz/test/shape/data/in-house/tests/vertical.tests" />

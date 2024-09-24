@@ -225,6 +225,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/c_header_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/spinlock_benchmark.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/strerror_benchmark.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/thread_identity_benchmark.cc" />
@@ -300,6 +301,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/low_level_scheduling.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/nullability_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/per_thread_tls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/poison.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/pretty_function.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/raw_logging.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/scheduling_mode.h" />
@@ -314,6 +316,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/sysinfo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/thread_identity.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/throw_delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/tracing.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/tsan_mutex_interface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/unaligned_access.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/unscaledcycleclock.h" />
@@ -383,6 +386,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/crc/internal/non_temporal_memcpy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/failure_signal_handler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/address_is_readable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/bounded_utf8_length_sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/decode_rust_punycode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/demangle.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/demangle_rust.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/elf_mem_image.h" />
@@ -399,6 +404,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/stacktrace_win32-inl.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/stacktrace_x86-inl.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/symbolize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/utf8_for_code_point.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/vdso_support.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/leak_check.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/stacktrace.h" />
@@ -575,7 +581,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/damerau_levenshtein_distance.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/escaping.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/escaping_test_common.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/has_absl_stringify.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/memutil.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/numbers_test_common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/ostringstream.h" />
@@ -620,6 +625,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/internal/waiter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/internal/waiter_base.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/internal/win32_waiter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/internal/win32_xp_waiter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/mutex.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/notification.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/civil_time.h" />
@@ -1374,6 +1380,10 @@
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/principia_make.sh" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/test_package/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/test_package/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/vs/Common.props" />
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/vs/absl.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/vs/googletest.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/vs/test.vcxproj.filters" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

@@ -1407,6 +1407,10 @@ llfio
 popt
 vivid
 SSIM
+observable
+skia
+inja
+SFML
 
 EOT
 ) | grep -e "$FILTER"

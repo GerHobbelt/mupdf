@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF4B2120}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSFML;SFML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSFML;SFML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSFML;SFML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSFML;SFML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSFML;SFML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSFML;SFML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSFML;SFML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSFML;SFML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSFML;SFML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSFML;SFML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSFML;SFML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSFML;SFML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/X11/X11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/android/app/src/main/jni/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/event_handling/EventHandling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/ftp/Ftp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/island/Island.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/joystick/Joystick.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/opengl/OpenGL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/raw_input/RawInput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/shader/Shader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/sockets/Sockets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/sockets/TCP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/sockets/UDP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/sound/Sound.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/sound_capture/SoundCapture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/sound_effects/SoundEffects.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/stencil/Stencil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/tennis/Tennis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/voip/Client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/voip/Server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/voip/VoIP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/vulkan/Vulkan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/win32/Win32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/examples/window/Window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/AudioDevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/AudioResource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/InputSoundFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/Listener.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/Miniaudio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/MiniaudioUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/Music.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/OutputSoundFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/PlaybackDevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/Sound.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundBufferRecorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileReaderFlac.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileReaderMp3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileReaderOgg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileReaderWav.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileWriterFlac.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileWriterOgg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileWriterWav.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundRecorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundSource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/BlendMode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/CircleShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/ConvexShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/Font.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/GLCheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/GLExtensions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/Glsl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/Image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/RectangleShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/RenderStates.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/RenderTarget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/RenderTexture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/RenderTextureImplDefault.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/RenderTextureImplFBO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/RenderWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/Shader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/Shape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/Sprite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/StencilMode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/Text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/Texture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/TextureSaver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/Transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/Transformable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/VertexArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/VertexBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/View.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Main/MainAndroid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Main/MainWin32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Network/Ftp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Network/Http.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Network/IpAddress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Network/Packet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Network/Socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Network/SocketSelector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Network/TcpListener.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Network/TcpSocket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Network/UdpSocket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Network/Unix/SocketImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Network/Win32/SocketImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Android/Activity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Android/NativeActivity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Android/ResourceStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Android/SuspendAwareClock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Clock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Err.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Exception.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/FileInputStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/MemoryInputStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Sleep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/String.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Unix/SleepImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Vector2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Vector3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Win32/SleepImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Android/ClipboardImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Android/CursorImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Android/InputImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Android/JoystickImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Android/SensorImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Android/VideoModeImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Android/WindowImplAndroid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Clipboard.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Cursor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/DRM/ClipboardImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/DRM/CursorImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/DRM/DRMContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/DRM/InputImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/DRM/VideoModeImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/DRM/WindowImplDRM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/EGLCheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/EglContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/FreeBSD/JoystickImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/GlContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/GlResource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Joystick.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/JoystickManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Keyboard.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Mouse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/NetBSD/JoystickImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/OpenBSD/JoystickImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Sensor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/SensorManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Touch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/ClipboardImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/CursorImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/Display.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/GlxContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/InputImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/JoystickImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/KeySymToKeyMapping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/KeySymToUnicodeMapping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/KeyboardImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/SensorImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/VideoModeImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/VulkanImplX11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/WindowImplX11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/VideoMode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Vulkan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/ClipboardImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/CursorImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/InputImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/JoystickImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/SensorImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/VideoModeImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/VulkanImplWin32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/WglContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/WindowImplWin32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/WindowBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/WindowImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/iOS/CursorImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/HIDJoystickManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/JoystickImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/SensorImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/VideoModeImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Audio/AudioResource.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Audio/InputSoundFile.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Audio/Music.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Audio/OutputSoundFile.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Audio/Sound.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Audio/SoundBuffer.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Audio/SoundBufferRecorder.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Audio/SoundFileFactory.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Audio/SoundFileReader.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Audio/SoundFileWriter.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Audio/SoundRecorder.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Audio/SoundSource.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Audio/SoundStream.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/BlendMode.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/CircleShape.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Color.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/ConvexShape.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/CoordinateType.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Drawable.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Font.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Glsl.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Glyph.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Image.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Rect.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/RectangleShape.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Render.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/RenderStates.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/RenderTarget.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/RenderTexture.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/RenderWindow.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Shader.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Shape.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Sprite.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/StencilMode.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Text.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Texture.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Transform.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Transformable.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/Vertex.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/VertexArray.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/VertexBuffer.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Graphics/View.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Network/Ftp.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Network/Http.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Network/IpAddress.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Network/Packet.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Network/Socket.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Network/SocketSelector.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Network/TcpListener.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Network/TcpSocket.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Network/UdpSocket.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/System/Angle.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/System/Clock.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/System/Config.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/System/Err.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/System/Exception.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/System/FileInputStream.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/System/MemoryInputStream.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/System/Sleep.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/System/String.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/System/Time.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/System/Vector2.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/System/Vector3.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/TestUtilities/AudioUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/TestUtilities/GraphicsUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/TestUtilities/SystemUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/TestUtilities/WindowUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Window/Clipboard.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Window/Context.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Window/ContextSettings.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Window/Cursor.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Window/Event.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Window/GlResource.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Window/Joystick.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Window/Keyboard.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Window/VideoMode.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Window/Vulkan.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Window/Window.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/Window/WindowBase.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/test/install/Install.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/SFML/SFML App.xctemplate/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/SFML/SFML CLT.xctemplate/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/doc/mainpage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/examples/cocoa/CocoaAppDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/examples/cocoa/NSString+stdstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/examples/include/gl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/examples/island/stb_perlin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/examples/vulkan/vulkan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/FLAC/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/FLAC/assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/FLAC/callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/FLAC/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/FLAC/format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/FLAC/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/FLAC/ordinals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/FLAC/stream_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/FLAC/stream_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/config/ftconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/config/ftheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/config/ftmodule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/config/ftoption.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/config/ftstdlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/freetype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ft2build.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftadvanc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftautoh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftbbox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftbdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftbitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftbzip2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftcache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftcffdrv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftchapters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftcid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/fterrdef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/fterrors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftgasp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftglyph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftgxval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftgzip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftimage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftincrem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftlcdfil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftlzw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftmm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftmodapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftmoderr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftotval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftoutln.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftpfr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftrender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftsizes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftsnames.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftstroke.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftsynth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftsystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/fttrigon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftttdrv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/fttypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftwinfnt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ftxf86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/t1tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ttnameid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/tttables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/tttags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/freetype2/ttunpat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/glad/include/glad/egl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/glad/include/glad/gl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/glad/include/glad/glx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/glad/include/glad/wgl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/mingw/_mingw_dxhelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/mingw/dinput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/miniaudio/miniaudio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/minimp3/minimp3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/minimp3/minimp3_ex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/ogg/config_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/ogg/ogg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/ogg/os_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/stb_image/stb_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/stb_image/stb_image_write.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vorbis/codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vorbis/vorbisenc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vorbis/vorbisfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vk_icd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vk_layer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vk_platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vk_sdk_platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vulkan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vulkan_android.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vulkan_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vulkan_ios.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vulkan_macos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vulkan_mir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vulkan_vi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vulkan_wayland.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vulkan_win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vulkan_xcb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vulkan_xlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/extlibs/headers/vulkan/vulkan_xlib_xrandr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/AudioResource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/Export.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/InputSoundFile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/Listener.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/Music.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/OutputSoundFile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/PlaybackDevice.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/Sound.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/SoundBuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/SoundBufferRecorder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/SoundChannel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/SoundFileFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/SoundFileReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/SoundFileWriter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/SoundRecorder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/SoundSource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/SoundStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/GpuPreference.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/BlendMode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/CircleShape.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Color.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/ConvexShape.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/CoordinateType.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Drawable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Export.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Font.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Glsl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Glyph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/PrimitiveType.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Rect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/RectangleShape.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/RenderStates.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/RenderTarget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/RenderTexture.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/RenderWindow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Shader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Shape.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Sprite.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/StencilMode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Text.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Texture.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Transformable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Vertex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/VertexArray.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/VertexBuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/View.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Main.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Network.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Network/Export.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Network/Ftp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Network/Http.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Network/IpAddress.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Network/Packet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Network/Socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Network/SocketHandle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Network/SocketSelector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Network/TcpListener.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Network/TcpSocket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Network/UdpSocket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/OpenGL.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Angle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Clock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Err.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Export.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/FileInputStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/InputStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/MemoryInputStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/NativeActivity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Sleep.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/String.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/SuspendAwareClock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Time.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Utf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Vector2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Vector3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/Clipboard.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/Context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/ContextSettings.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/Cursor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/Event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/Export.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/GlResource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/Joystick.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/Keyboard.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/Mouse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/Sensor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/Touch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/VideoMode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/Vulkan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/Window.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/WindowBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/WindowEnums.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/WindowHandle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/AudioDevice.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/MiniaudioUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileReaderFlac.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileReaderMp3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileReaderOgg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileReaderWav.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileWriterFlac.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileWriterOgg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/SoundFileWriterWav.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/GLCheck.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/GLExtensions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/RenderTextureImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/RenderTextureImplDefault.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/RenderTextureImplFBO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/TextureSaver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Network/SocketImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/PCH.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Android/Activity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Android/ResourceStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/System/EnumArray.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Unix/SleepImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Win32/SleepImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/System/Win32/WindowsHeader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Android/ClipboardImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Android/CursorImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Android/JoystickImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Android/SensorImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Android/WindowImplAndroid.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/ClipboardImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/CursorImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/DRM/ClipboardImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/DRM/CursorImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/DRM/DRMContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/DRM/WindowImplDRM.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/EGLCheck.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/EglContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/FreeBSD/JoystickImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/GlContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/InputImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/JoystickImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/JoystickManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/NetBSD/JoystickImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/OpenBSD/JoystickImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/SensorImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/SensorManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/ClipboardImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/CursorImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/Display.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/GlxContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/JoystickImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/KeySymToKeyMapping.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/KeySymToUnicodeMapping.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/KeyboardImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/SensorImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/Utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Unix/WindowImplX11.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/VideoModeImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/VulkanImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/ClipboardImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/CursorImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/JoystickImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/SensorImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/Utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/WglContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/Win32/WindowImplWin32.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/WindowImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/iOS/ClipboardImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/iOS/CursorImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/iOS/EaglContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/iOS/JoystickImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/iOS/ObjCType.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/iOS/SFAppDelegate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/iOS/SFMain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/iOS/SFView.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/iOS/SFViewController.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/iOS/SensorImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/iOS/WindowImplUIKit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/AutoreleasePoolWrapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/ClipboardImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/CursorImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/HIDInputManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/HIDJoystickManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/JoystickImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/NSImage+raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/SFApplication.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/SFApplicationDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/SFContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/SFKeyboardModifiersHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/SFOpenGLView+keyboard_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/SFOpenGLView+mouse_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/SFOpenGLView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/SFSilentResponder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/SFViewController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/SFWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/SFWindowController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/Scaling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/SensorImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/WindowImplCocoa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/WindowImplDelegateProtocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/macOS/cg_sf_conversion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/test/TestUtilities/AudioUtil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/test/TestUtilities/GraphicsUtil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/test/TestUtilities/SystemUtil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/test/TestUtilities/WindowUtil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/SFML/SFML App.xctemplate/ResourcePath.hpp" />
+    <Font Include="../../thirdparty/owemdjee/SFML/examples/android/app/src/main/assets/tuffy.ttf" />
+    <Font Include="../../thirdparty/owemdjee/SFML/examples/cocoa/resources/tuffy.ttf" />
+    <Font Include="../../thirdparty/owemdjee/SFML/examples/event_handling/resources/tuffy.ttf" />
+    <Font Include="../../thirdparty/owemdjee/SFML/examples/island/resources/tuffy.ttf" />
+    <Font Include="../../thirdparty/owemdjee/SFML/examples/joystick/resources/tuffy.ttf" />
+    <Font Include="../../thirdparty/owemdjee/SFML/examples/opengl/resources/tuffy.ttf" />
+    <Font Include="../../thirdparty/owemdjee/SFML/examples/raw_input/resources/tuffy.ttf" />
+    <Font Include="../../thirdparty/owemdjee/SFML/examples/shader/resources/tuffy.ttf" />
+    <Font Include="../../thirdparty/owemdjee/SFML/examples/sound_effects/resources/tuffy.ttf" />
+    <Font Include="../../thirdparty/owemdjee/SFML/examples/tennis/resources/tuffy.ttf" />
+    <Font Include="../../thirdparty/owemdjee/SFML/test/Graphics/tuffy.ttf" />
+    <Font Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/SFML/SFML App.xctemplate/tuffy.ttf" />
+    <Font Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/SFML/SFML CLT.xctemplate/tuffy.ttf" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/android/app/src/main/assets/image.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/android/app/src/main/res/drawable-hdpi/sfml_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/android/app/src/main/res/drawable-ldpi/sfml_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/android/app/src/main/res/drawable-mdpi/sfml_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/android/app/src/main/res/drawable-xhdpi/sfml_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/android/app/src/main/res/drawable-xxhdpi/sfml_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/assets/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/cocoa/resources/blue.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/cocoa/resources/green.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/cocoa/resources/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/cocoa/resources/red.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/opengl/resources/background.jpg" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/opengl/resources/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/shader/resources/background.jpg" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/shader/resources/devices.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/shader/resources/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/shader/resources/sfml.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/shader/resources/text-background.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/sound_effects/resources/text-background.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/tennis/resources/sfml_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/vulkan/resources/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/win32/resources/image1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/SFML/examples/win32/resources/image2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/SFML/test/Graphics/sfml-logo-big.bmp" />
+    <Image Include="../../thirdparty/owemdjee/SFML/test/Graphics/sfml-logo-big.gif" />
+    <Image Include="../../thirdparty/owemdjee/SFML/test/Graphics/sfml-logo-big.jpg" />
+    <Image Include="../../thirdparty/owemdjee/SFML/test/Graphics/sfml-logo-big.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/tools/nsis/header.bmp" />
+    <Image Include="../../thirdparty/owemdjee/SFML/tools/nsis/sfml.ico" />
+    <Image Include="../../thirdparty/owemdjee/SFML/tools/nsis/sidebar.bmp" />
+    <Image Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/SFML/SFML App.xctemplate/background.jpg" />
+    <Image Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/SFML/SFML App.xctemplate/icon.png" />
+    <Image Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/SFML/SFML CLT.xctemplate/background.jpg" />
+    <Image Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/SFML/SFML CLT.xctemplate/icon.png" />
+    <Text Include="../../thirdparty/owemdjee/SFML/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/SFML/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/SFML/changelog.md" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/CompilerWarnings.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/Config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/Format.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/Macros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/Mesa3D.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/Modules/FindDRM.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/Modules/FindEGL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/Modules/FindFLAC.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/Modules/FindFreetype.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/Modules/FindGBM.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/Modules/FindGLES.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/Modules/FindUDev.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/Modules/FindVorbis.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/SFMLConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/SFMLConfigDependencies.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/SFML/cmake/Tidy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/SFML/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/doc/doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/SFML/doc/doxygen.css" />
+    <Text Include="../../thirdparty/owemdjee/SFML/doc/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/SFML/doc/header.html.in" />
+    <Text Include="../../thirdparty/owemdjee/SFML/doc/searchOverrides.css" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/X11/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/android/app/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/android/app/src/main/jni/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/android/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/android/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/android/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/android/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/android/gradlew" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/android/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/android/settings.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/asset_licenses.md" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/assets/icon.icns" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/cocoa/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/cocoa/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/cocoa/resources/Credits.rtf" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/cocoa/resources/icon.icns" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/event_handling/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/ftp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/island/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/joystick/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/opengl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/raw_input/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/shader/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/sockets/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/sound/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/sound/resources/ding.flac" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/sound/resources/ding.mp3" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/sound_capture/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/sound_effects/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/stencil/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/tennis/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/voip/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/vulkan/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/win32/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/examples/window/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/FLAC.framework/FLAC" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/FLAC.framework/Resources" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/FLAC.framework/Versions/A/FLAC" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/FLAC.framework/Versions/Current" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/freetype.framework/Resources" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/freetype.framework/Versions/A/freetype" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/freetype.framework/Versions/Current" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/freetype.framework/freetype" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/ogg.framework/Resources" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/ogg.framework/Versions/A/ogg" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/ogg.framework/Versions/Current" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/ogg.framework/ogg" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/vorbis.framework/Resources" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/vorbis.framework/Versions/A/vorbis" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/vorbis.framework/Versions/Current" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/vorbis.framework/vorbis" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/vorbisenc.framework/Resources" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/vorbisenc.framework/Versions/A/vorbisenc" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/vorbisenc.framework/Versions/Current" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/vorbisenc.framework/vorbisenc" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/vorbisfile.framework/Resources" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/vorbisfile.framework/Versions/A/vorbisfile" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/vorbisfile.framework/Versions/Current" />
+    <Text Include="../../thirdparty/owemdjee/SFML/extlibs/libs-macos/Frameworks/vorbisfile.framework/vorbisfile" />
+    <Text Include="../../thirdparty/owemdjee/SFML/include/SFML/Audio/SoundFileFactory.inl" />
+    <Text Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Color.inl" />
+    <Text Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Glsl.inl" />
+    <Text Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Rect.inl" />
+    <Text Include="../../thirdparty/owemdjee/SFML/include/SFML/Graphics/Transform.inl" />
+    <Text Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Angle.inl" />
+    <Text Include="../../thirdparty/owemdjee/SFML/include/SFML/System/String.inl" />
+    <Text Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Time.inl" />
+    <Text Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Utf.inl" />
+    <Text Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Vector2.inl" />
+    <Text Include="../../thirdparty/owemdjee/SFML/include/SFML/System/Vector3.inl" />
+    <Text Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/Event.inl" />
+    <Text Include="../../thirdparty/owemdjee/SFML/include/SFML/Window/WindowBase.inl" />
+    <Text Include="../../thirdparty/owemdjee/SFML/license.md" />
+    <Text Include="../../thirdparty/owemdjee/SFML/migration.md" />
+    <Text Include="../../thirdparty/owemdjee/SFML/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/SFML/src/SFML/Audio/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/src/SFML/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/src/SFML/Graphics/GLExtensions.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/src/SFML/Main/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/src/SFML/Network/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/src/SFML/System/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/src/SFML/Window/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/test/Audio/ding.flac" />
+    <Text Include="../../thirdparty/owemdjee/SFML/test/Audio/ding.mp3" />
+    <Text Include="../../thirdparty/owemdjee/SFML/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/test/install/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/android/clean_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/android/compile_arm-v7a.sh" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/android/compile_arm.sh" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/android/compile_libs.sh" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/android/compile_mips.sh" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/android/compile_x86.sh" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/android/create_toolchains.sh" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/android/download_sources.sh" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/android/make_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/android/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/pkg-config/sfml-all.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/pkg-config/sfml-audio.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/pkg-config/sfml-graphics.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/pkg-config/sfml-network.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/pkg-config/sfml-system.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/pkg-config/sfml-window.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/windows/resource.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/SFML/SFML App.xctemplate/TemplateIcon.icns" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/SFML/SFML App.xctemplate/TemplateInfo.plist.in" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/SFML/SFML CLT.xctemplate/TemplateIcon.icns" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/SFML/SFML Compiler.xctemplate/TemplateInfo.plist.in" />
+    <Text Include="../../thirdparty/owemdjee/SFML/tools/xcode/templates/readme.txt" />
+    <Xml Include="../../thirdparty/owemdjee/SFML/examples/android/app/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/SFML/examples/android/app/src/main/res/values/strings.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -76,7 +76,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBABSEIL_CPP;ABSEIL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -123,7 +123,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../scripts/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBABSEIL_CPP;ABSEIL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -149,7 +149,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../scripts/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBABSEIL_CPP;ABSEIL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -178,7 +178,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../scripts/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBABSEIL_CPP;ABSEIL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -204,7 +204,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../scripts/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBABSEIL_CPP;ABSEIL_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -225,8 +225,10 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/c_header_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/cycleclock.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/low_level_alloc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/poison.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/raw_logging.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/scoped_set_env.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/spinlock.cc" />
@@ -235,6 +237,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/sysinfo.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/thread_identity.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/throw_delegate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/tracing.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/unscaledcycleclock.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/log_severity.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/container/internal/hashtablez_sampler.cc" />
@@ -250,11 +253,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/crc/internal/crc_x86_arm_combined.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/failure_signal_handler.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/address_is_readable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/decode_rust_punycode.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/demangle.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/demangle_rust.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/elf_mem_image.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/examine_stack.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/stack_consumption.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/utf8_for_code_point.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/vdso_support.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/leak_check.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/stacktrace.cc" />
@@ -364,6 +369,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/internal/stdcpp_waiter.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/internal/waiter_base.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/internal/win32_waiter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/internal/win32_xp_waiter.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/mutex.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/notification.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/civil_time.cc" />
@@ -412,6 +418,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/low_level_scheduling.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/nullability_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/per_thread_tls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/poison.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/pretty_function.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/raw_logging.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/scheduling_mode.h" />
@@ -426,6 +433,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/sysinfo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/thread_identity.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/throw_delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/tracing.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/tsan_mutex_interface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/unaligned_access.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/unscaledcycleclock.h" />
@@ -495,6 +503,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/crc/internal/non_temporal_memcpy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/failure_signal_handler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/address_is_readable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/bounded_utf8_length_sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/decode_rust_punycode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/demangle.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/demangle_rust.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/elf_mem_image.h" />
@@ -511,6 +521,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/stacktrace_win32-inl.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/stacktrace_x86-inl.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/symbolize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/utf8_for_code_point.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/vdso_support.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/leak_check.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/stacktrace.h" />
@@ -687,7 +698,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/damerau_levenshtein_distance.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/escaping.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/escaping_test_common.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/has_absl_stringify.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/memutil.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/numbers_test_common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/ostringstream.h" />
@@ -732,6 +742,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/internal/waiter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/internal/waiter_base.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/internal/win32_waiter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/internal/win32_xp_waiter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/mutex.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/notification.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/civil_time.h" />
@@ -1484,9 +1495,12 @@
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/msvc/types/types.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/msvc/utility/utility.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/principia_make.sh" />
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/vs/Common.props" />
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/vs/absl.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/vs/googletest.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/vs/test.vcxproj.filters" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

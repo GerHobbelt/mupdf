@@ -477,7 +477,7 @@ include_paths = `;${include_paths.trim()};`
     .replace(/;.;/g, ';')
 
 // patch: when there's a single /boost/ reference in there, get the whole damn bunch:
-if (/\/owemdjee\/boost\//.test(include_paths) || /\/scripts\/boost\//.test(include_paths)) {
+if (/\/owemdjee\/boost\b/.test(include_paths) || /\/scripts\/boost\b/.test(include_paths)) {
     include_paths = `${include_paths}
     ../../scripts/boost/include
     ../../thirdparty/owemdjee/boost
@@ -644,7 +644,7 @@ if (/\/owemdjee\/boost\//.test(include_paths) || /\/scripts\/boost\//.test(inclu
 }
 
 // patch: when there's a single /openCV/ reference in there, get the whole damn bunch:
-if (/\/owemdjee\/opencv\//.test(include_paths) || /\/scripts\/OpenCV\//.test(include_paths)) {
+if (/\/owemdjee\/opencv\b/.test(include_paths) || /\/scripts\/OpenCV\b/.test(include_paths)) {
     include_paths = `${include_paths}
     ../../scripts/OpenCV
     ../../scripts/OpenCV/modules/core
@@ -744,6 +744,20 @@ if (/\/owemdjee\/opencv\//.test(include_paths) || /\/scripts\/OpenCV\//.test(inc
     .replace(/\s+/g, '');
 }
 
+//patch: when we have googletest/include --> we also required: ../../thirdparty/owemdjee/abseil-cpp --> requires: ../../thirdparty/owemdjee/re2
+if (/\/googletest\//.test(include_paths)) {
+    include_paths = `${include_paths}
+    ../../thirdparty/owemdjee/abseil-cpp
+	../../thirdparty/owemdjee/re2
+    `.replace(/\n/g, ';')
+    .replace(/\s+/g, '');
+}
+else if (/\/abseil-cpp\b/.test(include_paths)) {
+    include_paths = `${include_paths}
+	../../thirdparty/owemdjee/re2
+    `.replace(/\n/g, ';')
+    .replace(/\s+/g, '');
+}
 
 include_paths = `../../include/system-override;.;${include_paths};`;
 
