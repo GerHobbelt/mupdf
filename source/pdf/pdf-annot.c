@@ -2533,46 +2533,68 @@ pdf_set_annot_line(fz_context *ctx, pdf_annot *annot, fz_point a, fz_point b)
 	pdf_dirty_annot(ctx, annot);
 }
 
-void
-pdf_annot_line_leader(fz_context *ctx, pdf_annot *annot, float *ll, float *lle, float *llo)
+float
+pdf_annot_line_leader(fz_context *ctx, pdf_annot *annot)
 {
+	float value;
 	pdf_annot_push_local_xref(ctx, annot);
-
 	fz_try(ctx)
 	{
 		check_allowed_subtypes(ctx, annot, PDF_NAME(LL), line_subtypes);
-
-		*ll = pdf_dict_get_real(ctx, annot->obj, PDF_NAME(LL));
-		*lle = pdf_dict_get_real(ctx, annot->obj, PDF_NAME(LLE));
-		*llo = pdf_dict_get_real(ctx, annot->obj, PDF_NAME(LLO));
+		value = pdf_dict_get_real(ctx, annot->obj, PDF_NAME(LL));
 	}
 	fz_always(ctx)
 		pdf_annot_pop_local_xref(ctx, annot);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
+	return value;
+}
+
+float
+pdf_annot_line_leader_extension(fz_context *ctx, pdf_annot *annot)
+{
+	float value;
+	pdf_annot_push_local_xref(ctx, annot);
+	fz_try(ctx)
+	{
+		check_allowed_subtypes(ctx, annot, PDF_NAME(LLE), line_subtypes);
+		value = pdf_dict_get_real(ctx, annot->obj, PDF_NAME(LLE));
+	}
+	fz_always(ctx)
+		pdf_annot_pop_local_xref(ctx, annot);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+	return value;
+}
+
+float
+pdf_annot_line_leader_offset(fz_context *ctx, pdf_annot *annot)
+{
+	float value;
+	pdf_annot_push_local_xref(ctx, annot);
+	fz_try(ctx)
+	{
+		check_allowed_subtypes(ctx, annot, PDF_NAME(LLO), line_subtypes);
+		value = pdf_dict_get_real(ctx, annot->obj, PDF_NAME(LLO));
+	}
+	fz_always(ctx)
+		pdf_annot_pop_local_xref(ctx, annot);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+	return value;
 }
 
 void
-pdf_set_annot_line_leader(fz_context *ctx, pdf_annot *annot, float ll, float lle, float llo)
+pdf_set_annot_line_leader(fz_context *ctx, pdf_annot *annot, float value)
 {
 	begin_annot_op(ctx, annot, "Set line leader");
-
 	fz_try(ctx)
 	{
 		check_allowed_subtypes(ctx, annot, PDF_NAME(LL), line_subtypes);
-
-		pdf_dict_del(ctx, annot->obj, PDF_NAME(LL));
-		pdf_dict_del(ctx, annot->obj, PDF_NAME(LLE));
-		pdf_dict_del(ctx, annot->obj, PDF_NAME(LLO));
-		if (ll)
-		{
-			pdf_dict_put_real(ctx, annot->obj, PDF_NAME(LL), ll);
-			if (lle)
-				pdf_dict_put_real(ctx, annot->obj, PDF_NAME(LLE), lle);
-			if (llo)
-				pdf_dict_put_real(ctx, annot->obj, PDF_NAME(LLO), llo);
-		}
-
+		if (value)
+			pdf_dict_put_real(ctx, annot->obj, PDF_NAME(LL), value);
+		else
+			pdf_dict_del(ctx, annot->obj, PDF_NAME(LL));
 		end_annot_op(ctx, annot);
 	}
 	fz_catch(ctx)
@@ -2580,7 +2602,48 @@ pdf_set_annot_line_leader(fz_context *ctx, pdf_annot *annot, float ll, float lle
 		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
 	}
+	pdf_dirty_annot(ctx, annot);
+}
 
+void
+pdf_set_annot_line_leader_extension(fz_context *ctx, pdf_annot *annot, float value)
+{
+	begin_annot_op(ctx, annot, "Set line leader_extension");
+	fz_try(ctx)
+	{
+		check_allowed_subtypes(ctx, annot, PDF_NAME(LLE), line_subtypes);
+		if (value)
+			pdf_dict_put_real(ctx, annot->obj, PDF_NAME(LLE), value);
+		else
+			pdf_dict_del(ctx, annot->obj, PDF_NAME(LLE));
+		end_annot_op(ctx, annot);
+	}
+	fz_catch(ctx)
+	{
+		abandon_annot_op(ctx, annot);
+		fz_rethrow(ctx);
+	}
+	pdf_dirty_annot(ctx, annot);
+}
+
+void
+pdf_set_annot_line_leader_offset(fz_context *ctx, pdf_annot *annot, float value)
+{
+	begin_annot_op(ctx, annot, "Set line leader offset");
+	fz_try(ctx)
+	{
+		check_allowed_subtypes(ctx, annot, PDF_NAME(LLO), line_subtypes);
+		if (value)
+			pdf_dict_put_real(ctx, annot->obj, PDF_NAME(LLO), value);
+		else
+			pdf_dict_del(ctx, annot->obj, PDF_NAME(LLO));
+		end_annot_op(ctx, annot);
+	}
+	fz_catch(ctx)
+	{
+		abandon_annot_op(ctx, annot);
+		fz_rethrow(ctx);
+	}
 	pdf_dirty_annot(ctx, annot);
 }
 

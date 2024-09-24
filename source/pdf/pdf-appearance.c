@@ -2344,76 +2344,89 @@ pdf_write_line_caption(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, fz_rec
 	float size;
 	const char *text;
 	pdf_obj *res_font;
-	fz_font *font;
+	fz_font *font = NULL;
 	fz_matrix tm;
 	int lang;
 	int top;
 	float tw;
 
-	// vector of line
-	dx = b.x - a.x;
-	dy = b.y - a.y;
-	line_length = hypotf(dx, dy);
-	dx /= line_length;
-	dy /= line_length;
+	fz_var(font);
 
-	text = pdf_annot_contents(ctx, annot);
-	lang = pdf_annot_language(ctx, annot);
-	co = pdf_dict_get_point(ctx, annot->obj, PDF_NAME(CO));
-
-	font = fz_new_base14_font(ctx, "Helvetica");
-	if (!*res)
-		*res = pdf_new_dict(ctx, annot->page->doc, 1);
-	res_font = pdf_dict_put_dict(ctx, *res, PDF_NAME(Font), 1);
-	add_required_fonts(ctx, annot->page->doc, res_font, lang, font, "Helv", text);
-	size = 12;
-
-	tw = measure_string(ctx, lang, font, text) * size;
-
-	// don't inline if CP says so
-	top = 0;
-	if (pdf_dict_get(ctx, annot->obj, PDF_NAME(CP)) == PDF_NAME(Top))
-		top = 1;
-
-	// don't inline if caption wouldn't fit
-	if (tw + size > line_length)
-		top = 1;
-
-	tm = fz_rotate(atan2(dy, dx) * 180 / M_PI);
-	tm.e = (a.x + b.x) / 2 - dx * (tw / 2);
-	tm.f = (a.y + b.y) / 2 - dy * (tw / 2);
-
-	// caption offset
-	if (co.x || co.y)
+	fz_try(ctx)
 	{
-		// don't write text inline
-		top = 1;
+		// vector of line
+		dx = b.x - a.x;
+		dy = b.y - a.y;
+		line_length = hypotf(dx, dy);
+		dx /= line_length;
+		dy /= line_length;
 
-		if (co.y < 0)
-			co.y -= size;
+		text = pdf_annot_contents(ctx, annot);
+		lang = pdf_annot_language(ctx, annot);
+		co = pdf_dict_get_point(ctx, annot->obj, PDF_NAME(CO));
 
-		tm.e += co.x * dx - co.y * dy;
-		tm.f += co.x * dy + co.y * dx;
+		font = fz_new_base14_font(ctx, "Helvetica");
+		if (!*res)
+			*res = pdf_new_dict(ctx, annot->page->doc, 1);
+		res_font = pdf_dict_put_dict(ctx, *res, PDF_NAME(Font), 1);
+		add_required_fonts(ctx, annot->page->doc, res_font, lang, font, "Helv", text);
+		size = 12;
+
+		tw = measure_string(ctx, lang, font, text) * size;
+
+		// don't inline if CP says so
+		top = 0;
+		if (pdf_dict_get(ctx, annot->obj, PDF_NAME(CP)) == PDF_NAME(Top))
+			top = 1;
+
+		// don't inline if caption wouldn't fit
+		if (tw + size > line_length)
+			top = 1;
+
+		tm = fz_rotate(atan2(dy, dx) * 180 / M_PI);
+		tm.e = (a.x + b.x) / 2 - dx * (tw / 2);
+		tm.f = (a.y + b.y) / 2 - dy * (tw / 2);
+
+		// caption offset
+		if (co.x || co.y)
+		{
+			// don't write text inline
+			top = 1;
+
+			if (co.y < 0)
+				co.y -= size;
+
+			tm.e += co.x * dx - co.y * dy;
+			tm.f += co.x * dy + co.y * dx;
+		}
+		else if (top)
+		{
+			tm.e -= dy * size * 0.2f;
+			tm.f += dx * size * 0.2f;
+		}
+		else
+		{
+			tm.e += dy * size * 0.3f;
+			tm.f -= dx * size * 0.3f;
+		}
+
+		fz_append_printf(ctx, buf, "q\n%M cm\n", &tm);
+		fz_append_string(ctx, buf, "0 g\n"); // Acrobat always draws captions in black
+		fz_append_printf(ctx, buf, "BT\n");
+		write_string(ctx, buf, lang, font, "Helv", size, text, text + strlen(text));
+		fz_append_printf(ctx, buf, "ET\n");
+		fz_append_printf(ctx, buf, "Q\n");
+
+		*rect = fz_include_point_in_rect(*rect, fz_make_point(tm.e - dx * tw/2, tm.f - dy * tw/2));
+		*rect = fz_include_point_in_rect(*rect, fz_make_point(tm.e + dx * tw/2, tm.f + dy * tw/2));
+		*rect = fz_expand_rect(*rect, size);
 	}
-	else if (top)
+	fz_always(ctx)
 	{
-		tm.e -= dy * size * 0.2f;
-		tm.f += dx * size * 0.2f;
+		fz_drop_font(ctx, font);
 	}
-	else
-	{
-		tm.e += dy * size * 0.3f;
-		tm.f -= dx * size * 0.3f;
-	}
-
-	fz_append_printf(ctx, buf, "q\n%M cm\n", &tm);
-	fz_append_string(ctx, buf, "0 g\n"); // Acrobat always draws captions in black
-	write_string(ctx, buf, lang, font, "Helv", size, text, text + strlen(text));
-	fz_append_printf(ctx, buf, "Q\n");
-
-	*rect = fz_include_point_in_rect(*rect, fz_make_point(tm.e - dx * tw/2, tm.f - dy * tw/2));
-	*rect = fz_include_point_in_rect(*rect, fz_make_point(tm.e + dx * tw/2, tm.f + dy * tw/2));
-	*rect = fz_expand_rect(*rect, size);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 
 	if (!top)
 		return (tw + size / 2) / 2;

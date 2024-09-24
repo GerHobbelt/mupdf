@@ -1882,151 +1882,158 @@ FUN(PDFAnnotation_setPopup)(JNIEnv *env, jobject self, jobject jrect)
 }
 
 JNIEXPORT jfloat JNICALL
-FUN(PDFAnnotation_getLeaderLinesLength)(JNIEnv *env, jobject self)
+FUN(PDFAnnotation_getLineLeader)(JNIEnv *env, jobject self)
 {
 	fz_context *ctx = get_context(env);
 	pdf_annot *annot = from_PDFAnnotation(env, self);
-	jfloat ll, lle, llo;
+	jfloat v;
 
 	if (!ctx || !annot) return 0;
 
 	fz_try(ctx)
-		pdf_annot_line_leader(ctx, annot, &ll, &lle, &llo);
+		v = pdf_annot_line_leader(ctx, annot);
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 
-	return ll;
-}
-
-JNIEXPORT jfloat JNICALL
-FUN(PDFAnnotation_getLeaderLinesExtension)(JNIEnv *env, jobject self)
-{
-	fz_context *ctx = get_context(env);
-	pdf_annot *annot = from_PDFAnnotation(env, self);
-	jfloat ll, lle, llo;
-
-	if (!ctx || !annot) return 0;
-
-	fz_try(ctx)
-		pdf_annot_line_leader(ctx, annot, &ll, &lle, &llo);
-	fz_catch(ctx)
-		jni_rethrow(env, ctx);
-
-	return lle;
-}
-
-JNIEXPORT jfloat JNICALL
-FUN(PDFAnnotation_getLeaderLinesOffset)(JNIEnv *env, jobject self)
-{
-	fz_context *ctx = get_context(env);
-	pdf_annot *annot = from_PDFAnnotation(env, self);
-	jfloat ll, lle, llo;
-
-	if (!ctx || !annot) return 0;
-
-	fz_try(ctx)
-		pdf_annot_line_leader(ctx, annot, &ll, &lle, &llo);
-	fz_catch(ctx)
-		jni_rethrow(env, ctx);
-
-	return llo;
+	return v;
 }
 
 JNIEXPORT void JNICALL
-FUN(PDFAnnotation_setLeaderLinesLength)(JNIEnv *env, jobject self, jfloat length)
+FUN(PDFAnnotation_setLineLeader)(JNIEnv *env, jobject self, jfloat length)
 {
 	fz_context *ctx = get_context(env);
 	pdf_annot *annot = from_PDFAnnotation(env, self);
-	jfloat ll, lle, llo;
 
 	if (!ctx || !annot) return;
 
 	fz_try(ctx)
-	{
-		pdf_annot_line_leader(ctx, annot, &ll, &lle, &llo);
-		pdf_set_annot_line_leader(ctx, annot, length, lle, llo);
-	}
+		pdf_set_annot_line_leader(ctx, annot, length);
 	fz_catch(ctx)
 		jni_rethrow_void(env, ctx);
 }
 
-JNIEXPORT void JNICALL
-FUN(PDFAnnotation_setLeaderLinesExtension)(JNIEnv *env, jobject self, jfloat extension)
+
+JNIEXPORT jfloat JNICALL
+FUN(PDFAnnotation_getLineLeaderExtension)(JNIEnv *env, jobject self)
 {
 	fz_context *ctx = get_context(env);
 	pdf_annot *annot = from_PDFAnnotation(env, self);
-	jfloat ll, lle, llo;
+	jfloat v;
+
+	if (!ctx || !annot) return 0;
+
+	fz_try(ctx)
+		v = pdf_annot_line_leader_extension(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return v;
+}
+
+JNIEXPORT void JNICALL
+FUN(PDFAnnotation_setLineLeaderExtension)(JNIEnv *env, jobject self, jfloat extension)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
 
 	if (!ctx || !annot) return;
 
 	fz_try(ctx)
-	{
-		pdf_annot_line_leader(ctx, annot, &ll, &lle, &llo);
-		pdf_set_annot_line_leader(ctx, annot, ll, extension, llo);
-	}
+		pdf_set_annot_line_leader_extension(ctx, annot, extension);
 	fz_catch(ctx)
 		jni_rethrow_void(env, ctx);
 }
 
-JNIEXPORT void JNICALL
-FUN(PDFAnnotation_setLeaderLinesOffset)(JNIEnv *env, jobject self, jfloat offset)
+JNIEXPORT jfloat JNICALL
+FUN(PDFAnnotation_getLineLeaderOffset)(JNIEnv *env, jobject self)
 {
 	fz_context *ctx = get_context(env);
 	pdf_annot *annot = from_PDFAnnotation(env, self);
-	jfloat ll, lle, llo;
+	jfloat v;
+
+	if (!ctx || !annot) return 0;
+
+	fz_try(ctx)
+		v = pdf_annot_line_leader_offset(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return v;
+}
+
+JNIEXPORT void JNICALL
+FUN(PDFAnnotation_setLineLeaderOffset)(JNIEnv *env, jobject self, jfloat offset)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
 
 	if (!ctx || !annot) return;
 
 	fz_try(ctx)
-	{
-		pdf_annot_line_leader(ctx, annot, &ll, &lle, &llo);
-		pdf_set_annot_line_leader(ctx, annot, ll, lle, offset);
-	}
+		pdf_set_annot_line_leader_offset(ctx, annot, offset);
+	fz_catch(ctx)
+		jni_rethrow_void(env, ctx);
+}
+
+JNIEXPORT jboolean JNICALL
+FUN(PDFAnnotation_getLineCaption)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	jboolean v;
+
+	if (!ctx || !annot) return 0;
+
+	fz_try(ctx)
+		v = pdf_annot_line_caption(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return v;
+}
+
+JNIEXPORT void JNICALL
+FUN(PDFAnnotation_setLineCaption)(JNIEnv *env, jobject self, jboolean caption)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+
+	if (!ctx || !annot) return;
+
+	fz_try(ctx)
+		pdf_set_annot_line_caption(ctx, annot, caption);
 	fz_catch(ctx)
 		jni_rethrow_void(env, ctx);
 }
 
 JNIEXPORT jobject JNICALL
-FUN(PDFAnnotation_getLeaderLines)(JNIEnv *env, jobject self)
+FUN(PDFAnnotation_getLineCaptionOffset)(JNIEnv *env, jobject self)
 {
 	fz_context *ctx = get_context(env);
 	pdf_annot *annot = from_PDFAnnotation(env, self);
-	jfloat ll, lle, llo;
-	jobject jleader;
+	fz_point offset;;
 
 	if (!ctx || !annot) return NULL;
 
 	fz_try(ctx)
-		pdf_annot_line_leader(ctx, annot, &ll, &lle, &llo);
+		offset = pdf_annot_line_caption_offset(ctx, annot);
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 
-	jleader = (*env)->NewObject(env, cls_PDFAnnotation_LeaderLines, mid_PDFAnnotation_LeaderLines_init);
-	if (!jleader || (*env)->ExceptionCheck(env))
-		return NULL;
-
-	(*env)->SetFloatField(env, jleader, fid_PDFAnnotation_LeaderLines_length, ll);
-	(*env)->SetFloatField(env, jleader, fid_PDFAnnotation_LeaderLines_extension, lle);
-	(*env)->SetFloatField(env, jleader, fid_PDFAnnotation_LeaderLines_offset, llo);
-
-	return jleader;
+	return to_Point_safe(ctx, env, offset);
 }
 
 JNIEXPORT void JNICALL
-FUN(PDFAnnotation_setLeaderLines)(JNIEnv *env, jobject self, jobject jleader)
+FUN(PDFAnnotation_setLeaderLines)(JNIEnv *env, jobject self, jobject joffset)
 {
 	fz_context *ctx = get_context(env);
 	pdf_annot *annot = from_PDFAnnotation(env, self);
-	jfloat ll, lle, llo;
+	fz_point offset = from_Point(env, joffset);
 
 	if (!ctx || !annot) return;
 
-	ll = (*env)->GetFloatField(env, jleader, fid_PDFAnnotation_LeaderLines_length);
-	lle = (*env)->GetFloatField(env, jleader, fid_PDFAnnotation_LeaderLines_extension);
-	llo = (*env)->GetFloatField(env, jleader, fid_PDFAnnotation_LeaderLines_offset);
-
 	fz_try(ctx)
-		pdf_set_annot_line_leader(ctx, annot, ll, lle, llo);
+		pdf_set_annot_line_caption_offset(ctx, annot, offset);
 	fz_catch(ctx)
 		jni_rethrow_void(env, ctx);
 }
