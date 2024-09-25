@@ -367,7 +367,7 @@ static int ambig_parse_one_command_from_set(const char* source, const struct cmd
 	// heuristic: do not attempt to match single-character commands: a command particle must at least be size 2:
 	if (arg1_start > 1)
 	{
-		for (int i = 0; i < command_count1; i++)
+		for (size_t i = 0; i < command_count1; i++)
 		{
 			struct cmd_info el = commands1[i];
 			size_t cmd_len = strlen(el.cmd);
@@ -389,7 +389,7 @@ static int ambig_parse_one_command_from_set(const char* source, const struct cmd
 			}
 		}
 
-		for (int i = 0; i < command_count2; i++)
+		for (size_t i = 0; i < command_count2; i++)
 		{
 			struct cmd_info el = commands2[i];
 			size_t cmd_len = strlen(el.cmd);
@@ -464,11 +464,11 @@ static int ambig_parse_one_command_from_set(const char* source, const struct cmd
 	}
 	else if (hit_count > 1)
 	{
-		int sanity_limit = hit_count;
+		size_t sanity_limit = hit_count;
 		if (sanity_limit > 8)
 			sanity_limit = 7;    // so we can report "at least 2 more..."
 
-		int i;
+		size_t i;
 		for (i = 0; i < sanity_limit; i++)
 		{
 			struct cmd_info el = hits[i].cmd;
@@ -480,7 +480,7 @@ static int ambig_parse_one_command_from_set(const char* source, const struct cmd
 		}
 		if (i < hit_count)
 		{
-			fprintf(stderr, "(... %d more ambiguous matches)\n\nPlease enter a longer command name particle to help us produce an umambiguous command match. Use 'h' or 'help' command to get a list of supported commands.\n", (int)hit_count - i);
+			fprintf(stderr, "(... %zu more ambiguous matches)\n\nPlease enter a longer command name particle to help us produce an unambiguous command match. Use 'h' or 'help' command to get a list of supported commands.\n", hit_count - i);
 		}
 		rv = -4242 - 1;
 	}
