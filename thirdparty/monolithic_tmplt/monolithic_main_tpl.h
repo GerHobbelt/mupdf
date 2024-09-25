@@ -291,7 +291,7 @@ static char* readline(const char* prompt)
 
 static int parse_one_command_from_set(const char* source, const struct cmd_info *commands, size_t command_count)
 {
-	for (int i = 0; i < command_count; i++)
+	for (size_t i = 0; i < command_count; i++)
 	{
 		struct cmd_info el = commands[i];
 		size_t cmd_len = strlen(el.cmd);
