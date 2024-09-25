@@ -39,7 +39,7 @@ static void assert_fail_msg(const char* msg, const char* file, int line)
         )
 
 uint64_t rand_seed = 0;
-static uint64_t fast_rand()
+static uint64_t fast_rand(void)
 {
 	rand_seed *= 41;
 	rand_seed ^= 0xDEADBEEF5a5A5A5AULL;
