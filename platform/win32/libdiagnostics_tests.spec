@@ -2,5 +2,6 @@
 also-ignore:
 	/tmp/
 	
-	/tests/
+	/src/
+	
 	
