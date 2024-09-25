@@ -86,11 +86,11 @@
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
       <BrowseInformation>false</BrowseInformation>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4018;4061;4100;4127;4180;4200;4206;4242;4244;4267;4324;4365;4388;4464;4514;4623;4625;4626;4668;4710;4820;5026;5027;5038;5045;5105;5219;5250;5262;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -244,35 +244,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2grep.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2posix.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2posix_test.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/allocator_src/sljitExecAllocatorApple.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/allocator_src/sljitExecAllocatorCore.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/allocator_src/sljitExecAllocatorFreeBSD.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/allocator_src/sljitExecAllocatorPosix.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/allocator_src/sljitExecAllocatorWindows.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/allocator_src/sljitProtExecAllocatorNetBSD.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/allocator_src/sljitProtExecAllocatorPosix.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/allocator_src/sljitWXExecAllocatorPosix.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/allocator_src/sljitWXExecAllocatorWindows.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitLir.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeARM_32.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeARM_64.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeARM_T2_32.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeLOONGARCH_64.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeMIPS_32.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeMIPS_64.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeMIPS_common.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativePPC_32.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativePPC_64.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativePPC_common.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeRISCV_32.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeRISCV_64.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeRISCV_common.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeS390X.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeX86_32.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeX86_64.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeX86_common.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitSerialize.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitUtils.c" />
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/monolithic_examples.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2_intmodedep.h" />
@@ -280,10 +251,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2_jit_simd_inc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2_ucp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2posix.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitConfig.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitConfigCPU.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitConfigInternal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitLir.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/wx/config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/wx/pcre2.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcre/vms/stdint.h" />
@@ -551,6 +518,7 @@
     <Text Include="../../thirdparty/owemdjee/pcre/maint/GenerateUcpTables.py" />
     <Text Include="../../thirdparty/owemdjee/pcre/maint/ManyConfigTests" />
     <Text Include="../../thirdparty/owemdjee/pcre/maint/README" />
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/RunPerlTest" />
     <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/BidiMirroring.txt" />
     <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/CaseFolding.txt" />
     <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/DerivedBidiClass.txt" />

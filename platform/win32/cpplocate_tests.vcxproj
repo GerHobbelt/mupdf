@@ -82,11 +82,11 @@
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
       <BrowseInformation>false</BrowseInformation>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4018;4061;4100;4127;4180;4206;4242;4244;4267;4324;4365;4388;4464;4514;4623;4625;4626;4668;4710;4820;5026;5027;5038;5045;5105;5219;5250;5262;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -110,7 +110,7 @@
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SYSTEM_WINDOWS;BUILD_MONOLITHIC;BUILDING_CPPLOCATE;CPPLOCATE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -127,7 +127,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -136,7 +136,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SYSTEM_WINDOWS;BUILD_MONOLITHIC;BUILDING_CPPLOCATE;CPPLOCATE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -153,14 +153,14 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SYSTEM_WINDOWS;BUILD_MONOLITHIC;BUILDING_CPPLOCATE;CPPLOCATE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -176,7 +176,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -186,7 +186,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SYSTEM_WINDOWS;BUILD_MONOLITHIC;BUILDING_CPPLOCATE;CPPLOCATE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -202,7 +202,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/liblocate/include;../../scripts/cpplocate/source/cpplocate/include;../../thirdparty/owemdjee/cpplocate/source/tests;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

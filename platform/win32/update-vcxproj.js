@@ -291,14 +291,66 @@ With /WAll (all warnings enabled) we need to kill a few very obnoxious ones that
 - warning C4464: relative include path contains '..'
 - warning C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
 - warning C4061: enumerator 'OPJ_PROG_UNKNOWN' in switch of enum 'PROG_ORDER' is not explicitly handled by a case label
+- warning C4710: 'void _force_has_format_string(const char *,...)': function not inlined
+- warning C4514: 'icu::UnicodeString::reverse': unreferenced inline function has been removed
 
+   -->
+ 
+      <DisableSpecificWarnings>4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+ 
 while we keep these:
 
 - warning C4255: 'opj_procedure_list_create': no function prototype given: converting '()' to '(void)'
 - warning C4242: 'function': conversion from 'Byte8_t' to 'unsigned int', possible loss of data
 - warning C4296: '>=': expression is always true
+- warning C4365: 'argument': conversion from '__int64' to 'unsigned int', signed/unsigned mismatch
+- warning C4309: 'argument': truncation of constant value
+- warning C4310: cast truncates constant value
+- warning C4324: 'my_error_mgr': structure was padded due to alignment specifier
+- warning C4388: '!=': signed/unsigned mismatch
+- warning C4996: 'htmlSAXParseFile': was declared deprecated
+- warning C5219: implicit conversion from 'PRUint32' to 'float', possible loss of data
+- warning C5262: implicit fall-through occurs here; are you missing a break statement? Use [[fallthrough]] when a break statement is intentionally omitted between cases
+- warning C5250: '__builtin_assume_aligned': intrinsic function not declared
+- warning C4200: nonstandard extension used: zero-sized array in struct/union
+- warning C5031: #pragma warning(pop): likely mismatch, popping warning state pushed in different file
+- warning C5264: 'hwy::`anonymous-namespace'::SortI16DescHighwayDispatchTable': 'const' variable is not used
+- warning C5266: 'const' qualifier on return type has no effect
+
+- warning C4295: 'in': array is too small to include a terminating null character
 
 - warning C4133: 'function': incompatible types - from 'opj_jp2_t *' to 'opj_j2k_t *'
+
+- warning C4191: 'type cast': unsafe conversion from 'GLADapiproc' to 'PFNGLEVALMESH2PROC'.   Making a function call using the resulting pointer may cause your program to fail.
+
+- warning C4626: 'fmt::detail::counting_buffer<char>': assignment operator was implicitly defined as deleted
+- warning C4623: 'OT::LayerList': default constructor was implicitly defined as deleted
+- warning C4371: 'hb_filter_iter_factory_t<const hb_set_t *&,OT::HBUINT16 OT::FeatureTableSubstitutionRecord::* >': layout of class may have changed from a previous version of the compiler due to better packing of member 'hb_filter_iter_factory_t<const hb_set_t *&,OT::HBUINT16 OT::FeatureTableSubstitutionRecord::* >::f'
+
+- warning C5026: 'Eigen::internal::evaluator<Eigen::PlainObjectBase<Eigen::Array<double,-1,1,0,-1,1>>>': move constructor was implicitly defined as deleted
+- warning C4626: 'Eigen::internal::evaluator<Eigen::PlainObjectBase<Eigen::Array<double,-1,1,0,-1,1>>>': assignment operator was implicitly defined as deleted
+- warning C5027: 'Eigen::internal::evaluator<Eigen::PlainObjectBase<Eigen::Array<double,-1,1,0,-1,1>>>': move assignment operator was implicitly defined as deleted
+- warning C4625: 'Eigen::internal::evaluator<Eigen::Array<double,-1,1,0,-1,1>>': copy constructor was implicitly defined as deleted
+- warning C5026: 'Eigen::internal::evaluator<Eigen::Array<double,-1,1,0,-1,1>>': move constructor was implicitly defined as deleted
+- warning C4626: 'Eigen::internal::evaluator<Eigen::Array<double,-1,1,0,-1,1>>': assignment operator was implicitly defined as deleted
+- warning C5027: 'Eigen::internal::evaluator<Eigen::Array<double,-1,1,0,-1,1>>': move assignment operator was implicitly defined as deleted
+
+- warning C4263: 'void TDataCollection::error(int)': member function does not override any base class virtual member function
+- warning C4264: 'void TNSCollection::error(ccIndex,ccIndex)': no override available for virtual member function from base 'TNSCollection'; function is hidden
+- warning C4265: 'tvision::NegativeScreenCursor': class has virtual functions, but its non-trivial destructor is not virtual; instances of this class may not be destructed correctly
+- warning C4435: 'TCollection': Object layout under /vd2 will change due to virtual base 'TNSCollection'
+- warning C4582: 'fmt::detail::value<Context>::no_value': constructor is not implicitly called
+- warning C4710: 'bool fmt::detail::has_const_formatter_impl<Context>(...)': function not inlined
+- warning C5214: applying '++' to an operand with a volatile qualified type is deprecated in C++20
+- warning C5267: definition of implicit assignment operator for 'TColorGroup' is deprecated because it has a user-provided destructor
+- warning C5038: data member 'spdlog::details::styling_info::styles' will be initialized after data member 'spdlog::details::styling_info::is_start'
+- warning C5204: 'CharDistributionAnalysis': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+- warning C4946: reinterpret_cast used between related classes: 'cv::Matx<double,4,1>' and 'cv::Scalar_<double>'
+- warning C4866: compiler may not enforce left-to-right evaluation order for call to 'clipp::operator,'
+
+lest we want to ignore most of these too:
+ 
+      <DisableSpecificWarnings>5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
 	
 */
 
@@ -317,7 +369,7 @@ let compiler_settings = `
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
