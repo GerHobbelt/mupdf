@@ -695,7 +695,7 @@ static void help_dialog(void)
 	ui_dialog_end();
 }
 
-static fz_buffer *format_info_text();
+static fz_buffer *format_info_text(void);
 
 static void info_dialog(void)
 {
@@ -1162,7 +1162,7 @@ void render_page_if_changed(void)
 	}
 }
 
-static struct mark save_mark()
+static struct mark save_mark(void)
 {
 	struct mark mark;
 	mark.loc = currentpage;
@@ -2160,7 +2160,7 @@ static void *warning_user = NULL;
 static void *error_user = NULL;
 
 static void
-remove_oldest_console_line()
+remove_oldest_console_line(void)
 {
 	unsigned char *s;
 	size_t size = fz_buffer_storage(ctx, console_buffer, &s);
@@ -2619,7 +2619,7 @@ const char *format_date(int64_t secs64)
 	return buf;
 }
 
-static fz_buffer *format_info_text()
+static fz_buffer *format_info_text(void)
 {
 	fz_buffer *out = fz_new_buffer(ctx, 4096);
 	pdf_document *pdoc = pdf_specifics(ctx, doc);
