@@ -2853,6 +2853,7 @@ def main2():
                             )
                     if state.state_.windows:
                         out_rel = os.path.relpath( out, build_dirs.dir_so)
+                        sys.stdout.reconfigure(encoding='utf8')
                         jlib.system(f'cd {build_dirs.dir_so} && {mono} {out_rel}', verbose=1)
                     else:
                         command = f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}'
