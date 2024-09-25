@@ -283,6 +283,23 @@ src = src.replace(/<ResourceCompile>([^]*?)<\/ResourceCompile>/g, (m, p1) => {
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
+	
+With /WAll (all warnings enabled) we need to kill a few very obnoxious ones that didn't show at warning Level 4. Examples:
+
+- warning C4820: 'opj_poc': '3' bytes padding added after data member 'progorder'
+- warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+- warning C4464: relative include path contains '..'
+- warning C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+- warning C4061: enumerator 'OPJ_PROG_UNKNOWN' in switch of enum 'PROG_ORDER' is not explicitly handled by a case label
+
+while we keep these:
+
+- warning C4255: 'opj_procedure_list_create': no function prototype given: converting '()' to '(void)'
+- warning C4242: 'function': conversion from 'Byte8_t' to 'unsigned int', possible loss of data
+- warning C4296: '>=': expression is always true
+
+- warning C4133: 'function': incompatible types - from 'opj_jp2_t *' to 'opj_j2k_t *'
+	
 */
 
 let compiler_settings = `
@@ -296,11 +313,11 @@ let compiler_settings = `
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
       <BrowseInformation>false</BrowseInformation>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
