@@ -591,7 +591,7 @@ dloginfoproc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
     return FALSE;
 }
 
-static void info()
+static void info(void)
 {
     int code = DialogBoxW(NULL, L"IDD_DLOGINFO", hwndframe, dloginfoproc);
     if (code <= 0)
@@ -625,7 +625,7 @@ void winhelp(pdfapp_t*app)
  * Main window
  */
 
-static void winopen()
+static void winopen(void)
 {
     WNDCLASS wc;
     HMENU menu;
@@ -791,7 +791,7 @@ void windrawstring(pdfapp_t *app, int x, int y, char *s)
     TextOutA(hdc, x, y - 12, s, (int)strlen(s));
 }
 
-static void winblitsearch()
+static void winblitsearch(void)
 {
     if (gapp.issearching)
     {
@@ -802,7 +802,7 @@ static void winblitsearch()
     }
 }
 
-static void winblit()
+static void winblit(void)
 {
     RECT r;
     HBRUSH brush;
