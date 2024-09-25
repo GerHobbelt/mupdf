@@ -42,9 +42,9 @@ POSSIBILITY OF SUCH DAMAGE.
 /* The current PCRE version information. */
 
 #define PCRE2_MAJOR           10
-#define PCRE2_MINOR           44
+#define PCRE2_MINOR           45
 #define PCRE2_PRERELEASE      -DEV
-#define PCRE2_DATE            2024-03-11
+#define PCRE2_DATE            2024-06-09
 
 /* When an application links to a PCRE DLL in Windows, the symbols that are
 imported have to be identified as such. When building PCRE2, the appropriate
@@ -321,6 +321,8 @@ pcre2_pattern_convert(). */
 #define PCRE2_ERROR_TOO_MANY_CAPTURES              197
 #define PCRE2_ERROR_CONDITION_ATOMIC_ASSERTION_EXPECTED  198
 #define PCRE2_ERROR_BACKSLASH_K_IN_LOOKAROUND      199
+#define PCRE2_ERROR_MAX_VAR_LOOKBEHIND_EXCEEDED    200
+#define PCRE2_ERROR_PATTERN_COMPILED_SIZE_TOO_BIG  201
 
 
 /* "Expected" matching error codes: no match and partial match. */
@@ -1003,6 +1005,29 @@ PCRE2_SUFFIX a no-op. Otherwise, generate an error. */
 #error PCRE2_CODE_UNIT_WIDTH must be 0, 8, 16, or 32.
 #endif
 #endif  /* PCRE2_CODE_UNIT_WIDTH is defined */
+
+/* Assertion macros */
+
+#ifdef HAVE_BUILTIN_UNREACHABLE
+#define PCRE2_UNREACHABLE() __builtin_unreachable()
+#else
+#define PCRE2_UNREACHABLE() do {} while(0)
+#endif
+
+#ifdef PCRE2_DEBUG
+#if defined(HAVE_BUILTIN_EXPECT) && defined(HAVE_BUILTIN_UNREACHABLE)
+#define PCRE2_ASSERT(x) do { if (__builtin_expect(!(x), 0)) __builtin_unreachable(); } while (0)
+#elif defined(HAVE_ASSERT_H)
+#include <assert.h>
+#define PCRE2_ASSERT(x) assert(x)
+#elif defined(HAVE_STDLIB_H) && defined(HAVE_STDIO_H)
+#define PCRE2_ASSERT(x) do { if (!(x)) { fprintf(stderr, "Assertion failed at " __FILE__ ":%d\n", __LINE__); abort(); }} while(0)
+#else
+#define PCRE2_ASSERT(x) do {} while(0)
+#endif
+#else
+#define PCRE2_ASSERT(x) do {} while(0)
+#endif
 
 #ifdef __cplusplus
 }  /* extern "C" */

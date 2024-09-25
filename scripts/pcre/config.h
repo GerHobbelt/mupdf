@@ -1,6 +1,9 @@
 /* config.h for CMake builds */
 
+#define HAVE_ASSERT_H 1
+/* #undef HAVE_BUILTIN_EXPECT */
 /* #undef HAVE_BUILTIN_MUL_OVERFLOW */
+/* #undef HAVE_BUILTIN_UNREACHABLE */
 /* #undef HAVE_ATTRIBUTE_UNINITIALIZED */
 /* #undef HAVE_DIRENT_H */
 #define HAVE_SYS_STAT_H 1
