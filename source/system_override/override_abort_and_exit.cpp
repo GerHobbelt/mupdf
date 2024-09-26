@@ -158,7 +158,7 @@ static __declspec(noreturn) void invoke_exit(int code)
 #pragma warning(push)
 #pragma warning(disable: 4273)
 
-_ACRTIMP __declspec(noreturn) void __cdecl abort(void);;
+_ACRTIMP __declspec(noreturn) void __cdecl abort(void);
 _ACRTIMP __declspec(noreturn) void __cdecl exit(_In_ int _Code);
 
 // qiqqa_abort_application

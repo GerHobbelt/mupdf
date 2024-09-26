@@ -36,7 +36,7 @@ namespace system_override {
 		static SystemOverrideClass *override;
 
 	protected:
-		int volatile invoked{0};
+		int invoked{0};
 		static bool always_kick_in;
 	};
 
