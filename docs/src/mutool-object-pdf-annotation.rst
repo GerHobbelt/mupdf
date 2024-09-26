@@ -373,8 +373,6 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
 .. method:: getColor()
 
-
-
     Get the annotation color, represented as an array of 1, 3, or 4 component values.
 
     :return: The :ref:`color value<mutool_run_js_api_colors>`.
@@ -388,8 +386,6 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
 
 .. method:: setColor(color)
-
-
 
     Set the annotation color, represented as an array of 1, 3, or 4 component values.
 
@@ -800,6 +796,10 @@ In a PDF line annotation, "line leaders" refer to visual elements that can be ad
 
     :arg ll: `Number`. The length of leader lines that extend from each endpoint of the line perpendicular to the line itself. A positive value means that the leader lines appear in the direction that is clockwise when traversing the line from its starting point to its ending point a negative value indicates the opposite direction.
 
+    .. note::
+
+        Setting a value of `0` effectivley removes the line leader.
+
 
 .. method:: getLineLeader()
 
@@ -818,6 +818,9 @@ In a PDF line annotation, "line leaders" refer to visual elements that can be ad
 
     :arg lle: `Number`. A non-negative number representing the length of leader line extensions that extend from the line proper 180 degrees from the leader lines.
 
+    .. note::
+
+        Setting a value of `0` effectivley removes the line leader extension.
 
 .. method:: getLineLeaderExtension()
 
@@ -836,7 +839,9 @@ In a PDF line annotation, "line leaders" refer to visual elements that can be ad
 
     :arg llo: `Number`. A non-negative number representing the length of the leader line offset, which is the amount of empty space between the endpoints of the annotation and the beginning of the leader lines.
 
+    .. note::
 
+        Setting a value of `0` effectivley removes the line leader offset.
 
 .. method:: getLineLeaderOffset()
 
@@ -883,6 +888,10 @@ In a PDF line annotation, "line leaders" refer to visual elements that can be ad
     .. image:: images/offset-caption.png
           :alt: Offset caption explained
           :width: 100%
+
+    .. note::
+
+        Setting a point of `[0,0]` effectivley removes the caption offset.
 
 
 
@@ -1113,9 +1122,6 @@ Callouts are used with :ref:`"FreeText" annotations <mutool_run_js_api_annotatio
 
 .. method:: setLine(endpoints)
 
-
-
-
     Set the two line end points, represented by an array of two points, each represented as an `[x, y]` array.
 
     :arg endpoint1: `[x,y]`.
@@ -1129,7 +1135,6 @@ Callouts are used with :ref:`"FreeText" annotations <mutool_run_js_api_annotatio
 
 
 .. method:: hasPopup()
-
 
     Checks the support for annotation popup.
 
@@ -1156,7 +1161,6 @@ Callouts are used with :ref:`"FreeText" annotations <mutool_run_js_api_annotatio
 
 .. method:: setPopup(rect)
 
-
     Set annotation popup rectangle.
 
     :arg rect: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
@@ -1170,7 +1174,6 @@ Callouts are used with :ref:`"FreeText" annotations <mutool_run_js_api_annotatio
 
 .. method:: hasOpen()
 
-
     Checks the support for annotation open state.
 
     :return: `Boolean`.
@@ -1180,8 +1183,6 @@ Callouts are used with :ref:`"FreeText" annotations <mutool_run_js_api_annotatio
     .. code-block:: javascript
 
         var hasOpen = annotation.hasOpen();
-
-
 
 
 .. method:: getIsOpen()
