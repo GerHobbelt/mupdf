@@ -172,6 +172,11 @@ typedef struct fz_stext_grid_positions fz_stext_grid_positions;
 	of text at what appear to be paragraph boundaries. This only works
 	for left-to-right, top-to-bottom paragraphs. Works best on a segmented
 	page.
+
+	FZ_STEXT_TABLE_HUNT: If this option is set, we will hunt for tables
+	within the stext. Details of the potential tables found will be
+	inserted into the stext for the caller to interpret. This will work
+	best on a segmented page.
 */
 enum
 {
@@ -195,6 +200,7 @@ enum
 	FZ_STEXT_IGNORE_ACTUALTEXT = 1 << 17,
 	FZ_STEXT_SEGMENT = 1 << 18,
 	FZ_STEXT_PARAGRAPH_BREAK = 1 << 19,
+	FZ_STEXT_TABLE_HUNT = 1 << 20,
 
 	/* An old, deprecated option. */
 	FZ_STEXT_MEDIABOX_CLIP = FZ_STEXT_CLIP
@@ -462,7 +468,10 @@ struct fz_stext_struct
 	int len;
 	int max_uncertainty;
 	struct {
+		int reinforcement;
 		float pos;
+		float min;
+		float max;
 		int uncertainty;
 	} list[1];
  };
@@ -767,6 +776,12 @@ int fz_segment_stext_page(fz_context *ctx, fz_stext_page *page);
 	Attempt to break paragraphs at plausible places.
 */
 void fz_paragraph_break(fz_context *ctx, fz_stext_page *page);
+
+/**
+	Hunt for possible tables on a page, and update the stext with
+	information.
+*/
+void fz_table_hunt(fz_context *ctx, fz_stext_page *page);
 
 /**
 	Create a device to extract the text on a page.

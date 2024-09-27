@@ -170,6 +170,7 @@ const char *fz_stext_options_usage =
 	"  accurate-bboxes=no:   calculate char bboxes for from the outlines\n"
 	"  vectors=no:           include vector bboxes in output\n"
 	"  segment=no:           don't attempt to segment the page\n"
+	"  table-hunt:           hunt for tables within a (segmented) page\n"
 	"  text-as-path:         (SVG: default) output text as curves\n"
 	"  external-styles       store the CSS page styles in a separate file instead of inlining\n"
 	"  resolution=<scale>    render and position everything at the specified scale (in pixels per inch)\n"
@@ -1585,6 +1586,9 @@ fz_stext_close_device(fz_context *ctx, fz_device *dev)
 	if (tdev->opts.flags & FZ_STEXT_SEGMENT)
 		fz_segment_stext_page(ctx, page);
 
+	if (tdev->opts.flags & FZ_STEXT_TABLE_HUNT)
+		fz_table_hunt(ctx, page);
+
 	if (tdev->opts.flags & FZ_STEXT_PARAGRAPH_BREAK)
 		fz_paragraph_break(ctx, page);
 }
@@ -1705,6 +1709,12 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		opts->flags_conf_mask |= FZ_STEXT_PARAGRAPH_BREAK;
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_PARAGRAPH_BREAK;
+	}
+	if (fz_has_option(ctx, string, "table-hunt", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_TABLE_HUNT;
+		if (fz_option_eq(val, "yes"))
+			opts->flags |= FZ_STEXT_TABLE_HUNT;
 	}
 	if (fz_has_option(ctx, string, "glyph-bbox", &val))
 	{

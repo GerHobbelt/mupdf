@@ -250,6 +250,21 @@ static int boxer_results(boxer_t *boxer, fz_rect **list)
 }
 #endif
 
+/* Currently unused debugging routine */
+#if 0
+static void
+boxer_dump(fz_context *ctx, boxer_t *boxer)
+{
+	int i;
+
+	printf("bbox = %g %g %g %g\n", boxer->mediabox.x0, boxer->mediabox.y0, boxer->mediabox.x1, boxer->mediabox.y1);
+	for (i = 0; i < boxer->list->len; i++)
+	{
+		printf("%d %g %g %g %g\n", i, boxer->list->list[i].x0, boxer->list->list[i].y0, boxer->list->list[i].x1, boxer->list->list[i].y1);
+	}
+}
+#endif
+
 /* Destroy a boxer. */
 static void boxer_destroy(fz_context *ctx, boxer_t *boxer)
 {
@@ -513,6 +528,9 @@ do_dump_stext(fz_stext_block *block, int depth)
 				break;
 			case FZ_STEXT_BLOCK_IMAGE:
 				printf("IMAGE %p\n", block);
+				break;
+			case FZ_STEXT_BLOCK_VECTOR:
+				printf("VECTOR %p\n", block);
 				break;
 			case FZ_STEXT_BLOCK_STRUCT:
 				printf("STRUCT %p\n", block);
@@ -803,6 +821,16 @@ analyse_sub(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_block, 
 	return ret;
 }
 
+static int
+line_isnt_all_spaces(fz_context *ctx, fz_stext_line *line)
+{
+	fz_stext_char *ch;
+	for (ch = line->first_char; ch != NULL; ch = ch->next)
+		if (ch->c != 32 && ch->c != 160)
+			return 1;
+	return 0;
+}
+
 int fz_segment_stext_page(fz_context *ctx, fz_stext_page *page)
 {
 	boxer_t *boxer;
@@ -831,7 +859,8 @@ int fz_segment_stext_page(fz_context *ctx, fz_stext_page *page)
 			{
 			case FZ_STEXT_BLOCK_TEXT:
 				for (line = block->u.t.first_line; line != NULL; line = line->next)
-					boxer_feed(ctx, boxer, &line->bbox);
+					if (line_isnt_all_spaces(ctx, line))
+						boxer_feed(ctx, boxer, &line->bbox);
 				break;
 			case FZ_STEXT_BLOCK_VECTOR:
 				boxer_feed(ctx, boxer, &block->bbox);
