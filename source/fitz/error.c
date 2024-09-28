@@ -1254,6 +1254,20 @@ fz_error_type_name(enum fz_error_type exc)
 	case FZ_ERROR_TRYLATER: return "trylater";
 	case FZ_ERROR_ABORT: return "abort";
 	case FZ_ERROR_REPAIRED: return "repaired";
+
+	case FZ_ERROR_NOT_A_PDF: return "not-a-PDF-file";
+
+	default:
+	case FZ_ERROR_COUNT:
+	case FZ_ERROR_C_RTL_SERIES:
+	case FZ_ERROR_C_RTL_SERIES_MASK:
+	case FZ_ERROR_SYS_SERIES:
+	case FZ_ERROR_SYS_SERIES_MASK:
+		if ((exc & FZ_ERROR_C_RTL_SERIES_MASK) == FZ_ERROR_C_RTL_SERIES)
+			return "RTL-run-time";
+		if ((exc & FZ_ERROR_SYS_SERIES_MASK) == FZ_ERROR_SYS_SERIES)
+			return "OS-run-time";
+		break;
 	}
 	return "invalid error type";
 }

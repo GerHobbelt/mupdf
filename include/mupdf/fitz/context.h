@@ -318,7 +318,7 @@ enum fz_error_type
 	FZ_ERROR_TRYLATER, // try-later progressive loading signal
 	FZ_ERROR_ABORT, // user requested abort signal
 	FZ_ERROR_REPAIRED, // internal flag used when repairing a PDF to avoid cycles
-    FZ_ERROR_NOT_A_PDF,
+	FZ_ERROR_NOT_A_PDF,
 	
 	FZ_ERROR_COUNT,
 
