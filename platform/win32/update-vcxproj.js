@@ -318,6 +318,9 @@ while we keep these:
 - warning C5266: 'const' qualifier on return type has no effect
 - warning C4619: #pragma warning: there is no warning number '4231'
 - warning C4152: nonstandard extension, function/data pointer conversion in expression
+- warning C4800: Implicit conversion from 'int' to bool. Possible information loss
+- warning C5246: '_Elems': the initialization of a subobject should be wrapped in braces
+- warning C4355: 'this': used in base member initializer list
 
 - warning C4295: 'in': array is too small to include a terminating null character
 - warning C4295: 'xmltranscodetable_ISO8859_5': array is too small to include a terminating null character
@@ -350,15 +353,20 @@ while we keep these:
 - warning C5038: data member 'spdlog::details::styling_info::styles' will be initialized after data member 'spdlog::details::styling_info::is_start'
 - warning C5204: 'CharDistributionAnalysis': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
 - warning C4946: reinterpret_cast used between related classes: 'cv::Matx<double,4,1>' and 'cv::Scalar_<double>'
-- warning C4866: compiler may not enforce left-to-right evaluation order for call to 'clipp::operator,'
 - warning C5267: definition of implicit assignment operator for 'cv::dnn::dnn4_v20240521::Net' is deprecated because it has a user-provided destructor
 - warning C4266: 'void cv::Feature2D::detect(cv::InputArrayOfArrays,std::vector<std::vector<cv::KeyPoint,std::allocator<cv::KeyPoint>>,std::allocator<std::vector<cv::KeyPoint,std::allocator<cv::KeyPoint>>>> &,cv::InputArrayOfArrays)': no override available for virtual member function from base 'cv::Feature2D'; function is hidden.
 - warning C5029: nonstandard extension used: alignment attributes in C++ apply to variables, data members and tag types only
 - warning C5220: 'Concurrency::_Worker_proxy<_Index_type>::_M_pWorker_range': a non-static data member with a volatile qualified type no longer implies that compiler generated copy/move constructors and copy/move assignment operators are not trivial.
+- warning C4582: 'absl::lts_20240722::CordBuffer::Rep::short_rep': constructor is not implicitly called
+- warning C4583: 'absl::lts_20240722::flags_internal::Flag<std::string>::Get::U::value': destructor is not implicitly called
+- warning C4437: dynamic_cast from virtual base 'testing::gmock_matchers_test::`anonymous-namespace'::Base' to 'testing::gmock_matchers_test::`anonymous-namespace'::AmbiguousCastTypes::VirtualDerived' could fail in some contexts
+- warning C4868: compiler may not enforce left-to-right evaluation order in braced initializer list
+- warning C4866: compiler may not enforce left-to-right evaluation order for call to 'clipp::operator,'
+- warning C4866: compiler may not enforce left-to-right evaluation order for call to 'absl::lts_20240722::log_internal::LogMessage::operator<<<23>'
 
 lest we want to ignore most of these too:
  
-      <DisableSpecificWarnings>4619;5029;5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4355;5246;5267;4866;4868;5220;4582;4583;4435;4619;5029;5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
 	
 */
 
@@ -377,7 +385,7 @@ let compiler_settings = `
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4619;5029;5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4355;5246;5267;4866;4868;5220;4582;4583;4435;4619;5029;5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
