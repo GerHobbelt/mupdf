@@ -604,7 +604,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	if (cur_line && glyph < 0)
 	{
 		/* Don't advance pen or break lines for no-glyph characters in a cluster */
-		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &dev->pen, &dev->pen, bidi, dev->color, 0);
+		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &dev->pen, &dev->pen, bidi, dev->color, 0);
 		dev->lastbidi = bidi;
 		dev->lastchar = c;
 		return;
@@ -774,7 +774,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	/* Add synthetic space */
 	if (add_space && !(dev->opts.flags & FZ_STEXT_INHIBIT_SPACES))
 	{
-		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, ' ', (dev->flags & FZ_STEXT_ACCURATE_BBOXES) ? NON_ACCURATE_GLYPH_ADDED_SPACE : NON_ACCURATE_GLYPH, &dev->pen, &p, bidi, dev->color, 1);
+		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, ' ', (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? NON_ACCURATE_GLYPH_ADDED_SPACE : NON_ACCURATE_GLYPH, &dev->pen, &p, bidi, dev->color, 1);
 		if (dev->delayed_new_line)
 		{
 			/* this is after dehyphenation and the next synthetic space, so break to new line. */
@@ -784,7 +784,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		}
 	}
 
-	add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &p, &q, bidi, dev->color, 0);
+	add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &p, &q, bidi, dev->color, 0);
 	if (dev->delayed_new_line && is_space(c))
 	{
 		/* this is after dehyphenation and the next actual space, so break to new line. */
@@ -2046,7 +2046,7 @@ fz_stext_fill_path(fz_context *ctx, fz_device *dev, const fz_path *path, int eve
 
 	check_for_strikeout(ctx, tdev, page, path, ctm);
 
-	if (tdev->flags & FZ_STEXT_COLLECT_VECTORS)
+	if (tdev->opts.flags & FZ_STEXT_COLLECT_VECTORS)
 		add_vector(ctx, page, path_bounds);
 }
 
@@ -2064,7 +2064,7 @@ fz_stext_stroke_path(fz_context *ctx, fz_device *dev, const fz_path *path, const
 
 	check_for_strikeout(ctx, tdev, page, path, ctm);
 
-	if (tdev->flags & FZ_STEXT_COLLECT_VECTORS)
+	if (tdev->opts.flags & FZ_STEXT_COLLECT_VECTORS)
 		add_vector(ctx, page, path_bounds);
 }
 

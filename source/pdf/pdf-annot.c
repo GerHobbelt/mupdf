@@ -182,17 +182,9 @@ pdf_nuke_annots(fz_context *ctx, pdf_page *page)
 		annot->obj = NULL;
 		pdf_drop_annot(ctx, annot);
 	}
-	for (annot = page->widgets; annot; annot = annot->next)
-	{
-		pdf_drop_obj(ctx, annot->obj);
-		annot->obj = NULL;
-		pdf_drop_annot(ctx, annot);
-	}
 
 	page->annots = NULL;
-	page->widgets = NULL;
 	page->annot_tailp = &page->annots;
-	page->widget_tailp = &page->widgets;
 }
 
 static pdf_annot *find_and_unlink_annot_from_list(fz_context *ctx, pdf_annot **prev, pdf_obj *obj)
@@ -223,7 +215,6 @@ void
 pdf_sync_annots(fz_context *ctx, pdf_page *page)
 {
 	pdf_annot *old_annots;
-	pdf_annot *old_widgets;
 	pdf_annot *annot, *next;
 	pdf_obj *annots;
 	pdf_obj *subtype;
@@ -231,11 +222,8 @@ pdf_sync_annots(fz_context *ctx, pdf_page *page)
 
 	// Save list of annots loaded last time (if any).
 	old_annots = page->annots;
-	old_widgets = page->widgets;
 	page->annots = NULL;
-	page->widgets = NULL;
 	page->annot_tailp = &page->annots;
-	page->widget_tailp = &page->widgets;
 
 	// Create new list of annots (reusing old annots when possible)
 	annots = pdf_dict_get(ctx, page->obj, PDF_NAME(Annots));
@@ -261,13 +249,6 @@ pdf_sync_annots(fz_context *ctx, pdf_page *page)
 
 	// Nuke the annot structs that are no longer used on the page
 	for (annot = old_annots; annot; annot = next)
-	{
-		next = annot->next;
-		pdf_drop_obj(ctx, annot->obj);
-		annot->obj = NULL;
-		pdf_drop_annot(ctx, annot);
-	}
-	for (annot = old_widgets; annot; annot = next)
 	{
 		next = annot->next;
 		pdf_drop_obj(ctx, annot->obj);
