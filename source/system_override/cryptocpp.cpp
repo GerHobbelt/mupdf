@@ -1,7 +1,11 @@
 
 #include "system_override_internal.h"
 
-using namespace system_override;
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <cassert>
 
 
 

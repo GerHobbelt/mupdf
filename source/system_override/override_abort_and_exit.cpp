@@ -1,118 +1,13 @@
 
 #include "system_override_internal.h"
 
-using namespace system_override;
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>   // abort(), exit()
+
 
 // Mandatory or MSVC will optimize this entire endeavour to Kingdom Come and we won't have our debugger breakpoints at start and end...
 #pragma optimize("", off)
-
-// these two are defined at the very bottom of this source file as for them to work we must undo some override stuff first,and all bets are off after we've done *that*!
-
-//
-// structure of the override:
-// 
-// app: calls exit() (overridden) --> invoke_exit() [*] --> invoke_original_exit() --> exit() (actual system RTL call)
-// app: calls abort() (overridden) --> invoke_exit() [*] --> invoke_original_exit() --> exit() (actual system RTL call)
-// app: runs main() and *returns* --> SystemOverrideClass object destructor is invoked [*] 
-//
-// call chain points marked with [*] are the places where you are supposed to "hook into" the exit phase of the application,
-// i.e. break into the debugger, etc.
-//
-
-static __declspec(noreturn) void invoke_original_abort(void);
-static __declspec(noreturn) void invoke_original_exit(int code);
-
-static void BreakIntoDebugger(void);   
-
-// The idea behind this seemingly convoluted way to set the invoke-debugger flag to true or false
-// is that this is relatively to *patch* in the final compiled binary in both debug and release builds
-// so that debugging facilities can be triggered ad hoc when trouble ensues somewhere.
-//
-// For the 'easily patched' feature to work, both strings should have the same length: you only want to
-// flip a single byte in the hex editor when you want to switch this behaviour.
-#define DO_INVOKE_DEBUGGER_MARKER_STRING             "marker:do.invoke.debugger"
-#if !defined(NDEBUG) || 1  // always on
-#define ACTIVE_INVOKE_DEBUGGER_MARKER_STRING         DO_INVOKE_DEBUGGER_MARKER_STRING
-#else
-#define ACTIVE_INVOKE_DEBUGGER_MARKER_STRING         "marker:No.invoke.debugger"
-#endif
-
-static const char *flag_do_invoke_debugger = ACTIVE_INVOKE_DEBUGGER_MARKER_STRING;
-
-namespace system_override {
-
-	/* static */ bool SystemOverrideClass::always_kick_in = false;
-
-	static SystemOverrideClass __override_singular_instance {};
-
-	SystemOverrideClass *SystemOverrideClass::override = &__override_singular_instance;
-
-	SystemOverrideClass::SystemOverrideClass(bool _always_kick_in) {
-		always_kick_in = _always_kick_in;
-		override = this;
-		Starting();
-	}
-
-	SystemOverrideClass::~SystemOverrideClass() {
-		Ending();
-		override = nullptr;
-	}
-
-	void SystemOverrideClass::Starting() {
-		KickInTheDoor();
-		invoked++;
-	}
-	void SystemOverrideClass::Ending() {
-		invoked--;
-		KickInTheDoor(invoked >= 0);
-	}
-
-	void SystemOverrideClass::KickInTheDoor(bool should_do) {
-		if (should_do || always_kick_in) {
-			SystemOverrideClass *self = override;
-
-			if (0 == strcmp(flag_do_invoke_debugger, DO_INVOKE_DEBUGGER_MARKER_STRING)) {
-				BreakIntoDebugger();
-			}
-		}
-	}
-
-	void SystemOverrideClass::Tickle(void) {
-		if (!override) {
-			override = &__override_singular_instance;
-		}
-	}
-
-}
-
-static int __init_system_override(void) {
-	system_override::SystemOverrideClass::Tickle();
-	return 0;
-}
-#if 0
-static void __init_system_override_ctor(void) __attribute__ ((constructor)) {
-	__init_system_override();
-}
-#endif
-static int __override_singular_instance_rv = __init_system_override();
-
-#if 0
-#pragma startup __init_system_override 1
-#pragma exit    __init_system_override 1
-#endif
-
-
-static __declspec(noreturn) void invoke_abort(void)
-{
-	SystemOverrideClass::KickInTheDoor();
-	invoke_original_abort();
-}
-
-static __declspec(noreturn) void invoke_exit(int code)
-{
-	SystemOverrideClass::KickInTheDoor();
-	invoke_original_exit(code);
-}
 
 
 
@@ -155,7 +50,6 @@ static __declspec(noreturn) void invoke_exit(int code)
 
 
 // warning C4273: 'exit': inconsistent dll linkage
-#pragma warning(push)
 #pragma warning(disable: 4273)
 
 _ACRTIMP __declspec(noreturn) void __cdecl abort(void);
@@ -192,138 +86,8 @@ namespace std {
 }
 
 
-
-
-
-
-extern "C" __declspec(noreturn) void __cdecl __imp_qiqqa_abort_application(void)
-{
-	invoke_abort();
-}
-
-namespace std {
-	__declspec(noreturn) void __imp_qiqqa_abort_application()
-	{
-		invoke_abort();
-	}
-}
-
-
-// qiqqa_exit_application
-
-extern "C" __declspec(noreturn) void __cdecl __imp_qiqqa_exit_application(int _Code)
-{
-	invoke_exit(_Code);
-}
-
-
-namespace std {
-	__declspec(noreturn) void __imp_qiqqa_exit_application(int _Code)
-	{
-		invoke_exit(_Code);
-	}
-}
-
-
-#pragma warning(pop)
-
 #endif
 
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-#if defined(__MINGW32__) || defined(_WIN32) || defined(WIN64)
-
-extern "C" __declspec(dllimport) void __stdcall DebugBreak();
-
-#if (defined(_WIN32_WINNT) && (_WIN32_WINNT >= 0x0400)) || (defined(_WIN32_WINDOWS) && (_WIN32_WINDOWS > 0x0400))
-
-extern "C" __declspec(dllimport)  int __stdcall IsDebuggerPresent();
-
-void BreakIntoDebugger(void)
-{
-	if (IsDebuggerPresent())
-	{
-// MSVC only has a reasonable (= active) define for _CrtDbgBreak in debug build mode...
-#if defined(_CrtDbgBreak) && defined(_DEBUG)
-		_CrtDbgBreak();
-#else
-		DebugBreak();
-#endif
-	}
-}
-
-#elif defined(_MSC_VER)
-
-void BreakIntoDebugger(void)
-{
-// MSVC only has a reasonable (= active) define for _CrtDbgBreak in debug build mode...
-#if defined(_CrtDbgBreak) && defined(_DEBUG)
-	_CrtDbgBreak();
-#endif
-	__debugbreak();
-}
-
-#else
-
-void BreakIntoDebugger(void)
-{
-	DebugBreak();
-}
-
-#endif   // _WIN32_WINNT || _WIN32_WINDOWS
-
-#elif defined(__has_builtin) && __has_builtin(__builtin_debugtrap)
-
-void BreakIntoDebugger(void)
-{
-	__builtin_debugtrap();
-}
-
-#elif defined(__has_builtin) && __has_builtin(__debugbreak)
-
-void BreakIntoDebugger(void)
-{
-	__debugbreak();
-}
-
-#elif defined(__GNUC__) && (defined(__x86_64) || defined(__x86_64__) || defined(__amd64__) || defined(__i386))
-// If we can use inline assembler, do it because this allows us to break
-// directly at the location of the failing check instead of breaking inside
-// raise() called from it, i.e. one stack frame below.
-
-void BreakIntoDebugger(void)
-{
-	asm volatile ("int $3") /* NOLINT */;
-}
-
-#else // Fall back to the generic ways.
-
-#include <signal.h>
-
-#if defined(SIGTRAP) 
-
-void BreakIntoDebugger(void)
-{
-	raise(SIGTRAP);
-}
-
-#else
-
-void BreakIntoDebugger(void)
-{
-	static int s = 0;
-	while (s == 0) {
-		sleep(1);
-	}
-}
-
-#endif
-
-#endif
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -366,7 +130,8 @@ void setup_handlers() {
 void my_terminate_handler() {
 	try {
 		std::cerr << boost::stacktrace::stacktrace();
-	} catch (...) {}
+	}
+	catch (...) {}
 	std::abort();
 }
 //]
@@ -661,7 +426,7 @@ extern "C++"
 
 
 
-  // Argument values for _set_error_mode().
+	// Argument values for _set_error_mode().
 #define _OUT_TO_DEFAULT 0
 #define _OUT_TO_STDERR  1
 #define _OUT_TO_MSGBOX  2
@@ -697,15 +462,15 @@ _ACRTIMP void __cdecl perror(_In_opt_z_ char const* _ErrMsg);
 
 
 // These point to the executable module name.
-_CRT_INSECURE_DEPRECATE_GLOBALS(_get_pgmptr ) _ACRTIMP char**    __cdecl __p__pgmptr (void);
+_CRT_INSECURE_DEPRECATE_GLOBALS(_get_pgmptr) _ACRTIMP char**    __cdecl __p__pgmptr (void);
 _CRT_INSECURE_DEPRECATE_GLOBALS(_get_wpgmptr) _ACRTIMP wchar_t** __cdecl __p__wpgmptr(void);
-_CRT_INSECURE_DEPRECATE_GLOBALS(_get_fmode  ) _ACRTIMP int*      __cdecl __p__fmode  (void);
+_CRT_INSECURE_DEPRECATE_GLOBALS(_get_fmode) _ACRTIMP int*      __cdecl __p__fmode  (void);
 
 #ifdef _CRT_DECLARE_GLOBAL_VARIABLES_DIRECTLY
-_CRT_INSECURE_DEPRECATE_GLOBALS(_get_pgmptr ) extern char*    _pgmptr;
+_CRT_INSECURE_DEPRECATE_GLOBALS(_get_pgmptr) extern char*    _pgmptr;
 _CRT_INSECURE_DEPRECATE_GLOBALS(_get_wpgmptr) extern wchar_t* _wpgmptr;
 #ifndef _CORECRT_BUILD
-_CRT_INSECURE_DEPRECATE_GLOBALS(_get_fmode  ) extern int      _fmode;
+_CRT_INSECURE_DEPRECATE_GLOBALS(_get_fmode) extern int      _fmode;
 #endif
 #else
 #define _pgmptr  (*__p__pgmptr ())
@@ -719,7 +484,7 @@ _ACRTIMP errno_t __cdecl _get_pgmptr (_Outptr_result_z_ char**    _Value);
 _Success_(return == 0)
 _ACRTIMP errno_t __cdecl _get_wpgmptr(_Outptr_result_z_ wchar_t** _Value);
 
-_ACRTIMP errno_t __cdecl _set_fmode  (_In_              int       _Mode );
+_ACRTIMP errno_t __cdecl _set_fmode  (_In_              int       _Mode);
 
 _ACRTIMP errno_t __cdecl _get_fmode  (_Out_             int*      _PMode);
 
@@ -739,8 +504,8 @@ _ACRTIMP errno_t __cdecl _get_fmode  (_Out_             int*      _PMode);
 #if defined(_MSC_VER)
 
 
-static __declspec(noreturn) void invoke_original_abort(void);
-static __declspec(noreturn) void invoke_original_exit(int code);
+__declspec(noreturn) void invoke_original_abort(void);
+__declspec(noreturn) void invoke_original_exit(int code);
 
 
 // now blow away our overrides; as we do that we must re-introduce the original system prototypes, so we better make sure we agree with the current compiler here!
@@ -758,25 +523,21 @@ namespace std {
 
 
 // warning C4273: 'exit': inconsistent dll linkage
-#pragma warning(push)
 #pragma warning(disable: 4273)
 
 /**
 * Replacement for the C standard `abort` that returns to the `setjmp` call for
 * recoverable errors.
 */
-static __declspec(noreturn) void invoke_original_abort(void)
+__declspec(noreturn) void invoke_original_abort(void)
 {
 	abort();
 }
 
-static __declspec(noreturn) void invoke_original_exit(int code)
+__declspec(noreturn) void invoke_original_exit(int code)
 {
 	exit(code);
 }
-
-
-#pragma warning(pop)
 
 
 #endif

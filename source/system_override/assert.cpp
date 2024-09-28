@@ -1,7 +1,11 @@
 
 #include "system_override_internal.h"
 
-using namespace system_override;
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <cassert>
 
 
 
@@ -40,14 +44,14 @@ extern "C" void __cdecl fz_sysassert_and_continue(const char * _Message, const c
 extern "C" void __cdecl fz_sysassert(const char * _Message, const char * _File, const char * _Function, unsigned int _Line)
 {
 	fprintf(stderr, "Assertion failed: %s in %s() (%s:%d)\n", _Message, _Function, _File, _Line);
-	SystemOverrideClass::KickInTheDoor();
+	SystemOverride_KickInTheDoor();
 	exit(666);
 }
 
 extern "C" void __cdecl fz_sysassert_and_continue(const char * _Message, const char * _File, const char * _Function, unsigned int _Line)
 {
 	fprintf(stderr, "Assertion failed: %s in %s() (%s:%d)\n", _Message, _Function, _File, _Line);
-	SystemOverrideClass::KickInTheDoor();
+	SystemOverride_KickInTheDoor();
 }
 
 #endif

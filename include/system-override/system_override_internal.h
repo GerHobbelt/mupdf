@@ -10,39 +10,24 @@
 #include <crtdbg.h>
 #include <windows.h>
 #endif
-#include <intrin.h>		// __debugbreak()
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <cassert>
 
 
-namespace system_override {
+#ifdef __cplusplus
+extern "C" {
+#endif 
 
-	class SystemOverrideClass {
-	public:
-		SystemOverrideClass(bool _always_kick_in = false);
-		~SystemOverrideClass();
+__declspec(noreturn) void invoke_original_abort(void);      // WARNING @ user-land code: internal use only; DO NOT USE.
+__declspec(noreturn) void invoke_original_exit(int code);   // WARNING @ user-land code: internal use only; DO NOT USE.
 
-	protected:
-		void Starting();
-		void Ending();
+void SystemOverride_KickInTheDoor(void);
 
-	public:
-		static void KickInTheDoor(bool should_do = true);
+__declspec(noreturn) void invoke_abort(void);
+__declspec(noreturn) void invoke_exit(int code);
 
-		static void Tickle(void);
-		static SystemOverrideClass *override;
+void BreakIntoDebugger(void);   // WARNING @ user-land code: call system_override::SystemOverrideClass::KickInTheDoor() instead, or its C equivalent SystemOverride_KickInTheDoor().
 
-	protected:
-		int invoked{0};
-		static bool always_kick_in;
-	};
-
+#ifdef __cplusplus
 }
-
-
-// void BreakIntoDebugger(void);   // call system_override::SystemOverrideClass::KickInTheDoor() instead.
+#endif 
 
 #endif
