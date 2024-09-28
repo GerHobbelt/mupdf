@@ -167,6 +167,8 @@ const char *fz_stext_options_usage =
 	"  mediabox-clip=no:     include characters outside mediabox\n"
 	"  glyph-bbox:           use painted area of glyphs instead of font size for bounding boxes\n"
 	"  structured=no:        don't collect structure data\n"
+	"  accurate-bboxes=no:   calculate char bboxes for from the outlines\n"
+	"  vectors=no:           include vector bboxes in output\n"
 	"  text-as-path:         (SVG: default) output text as curves\n"
 	"  external-styles       store the CSS page styles in a separate file instead of inlining\n"
 	"  resolution=<scale>    render and position everything at the specified scale (in pixels per inch)\n"
@@ -350,7 +352,7 @@ add_line_to_block(fz_context *ctx, fz_stext_page *page, fz_stext_block *block, c
 #define NON_ACCURATE_GLYPH (-1)
 
 static fz_stext_char *
-add_char_to_line(fz_context *ctx, fz_stext_device *dev, fz_stext_page *page, fz_stext_line *line, fz_matrix trm, fz_font *font, float size, int c, int glyph, fz_point *p, fz_point *q, int bidi, int color)
+add_char_to_line(fz_context *ctx, fz_stext_device *dev, fz_stext_page *page, fz_stext_line *line, fz_matrix trm, fz_font *font, float size, int c, int glyph, fz_point *p, fz_point *q, int bidi, int color, int synthetic)
 {
 	fz_stext_char *ch = fz_pool_alloc(ctx, page->pool, sizeof *line->first_char);
 	fz_point a, d;
@@ -369,6 +371,7 @@ add_char_to_line(fz_context *ctx, fz_stext_device *dev, fz_stext_page *page, fz_
 	ch->origin = *p;
 	ch->size = size;
 	ch->font = fz_keep_font(ctx, font);
+	ch->flags = synthetic ? FZ_STEXT_SYNTHETIC : 0;
 
 	if (dev->opts.flags & FZ_STEXT_GLYPH_BBOX)
 	{
@@ -601,7 +604,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	if (cur_line && glyph < 0)
 	{
 		/* Don't advance pen or break lines for no-glyph characters in a cluster */
-		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &dev->pen, &dev->pen, bidi, dev->color);
+		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &dev->pen, &dev->pen, bidi, dev->color, 0);
 		dev->lastbidi = bidi;
 		dev->lastchar = c;
 		return;
@@ -771,7 +774,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	/* Add synthetic space */
 	if (add_space && !(dev->opts.flags & FZ_STEXT_INHIBIT_SPACES))
 	{
-		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, ' ', (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? NON_ACCURATE_GLYPH_ADDED_SPACE : NON_ACCURATE_GLYPH, &dev->pen, &p, bidi, dev->color);
+		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, ' ', (dev->flags & FZ_STEXT_ACCURATE_BBOXES) ? NON_ACCURATE_GLYPH_ADDED_SPACE : NON_ACCURATE_GLYPH, &dev->pen, &p, bidi, dev->color, 1);
 		if (dev->delayed_new_line)
 		{
 			/* this is after dehyphenation and the next synthetic space, so break to new line. */
@@ -781,7 +784,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		}
 	}
 
-	add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &p, &q, bidi, dev->color);
+	add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &p, &q, bidi, dev->color, 0);
 	if (dev->delayed_new_line && is_space(c))
 	{
 		/* this is after dehyphenation and the next actual space, so break to new line. */
@@ -1645,6 +1648,18 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE;
 	}
+	if (fz_has_option(ctx, string, "accurate-bboxes", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_ACCURATE_BBOXES;
+		if (fz_option_eq(val, "yes"))
+			opts->flags |= FZ_STEXT_ACCURATE_BBOXES;
+	}
+	if (fz_has_option(ctx, string, "vectors", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_COLLECT_VECTORS;
+		if (fz_option_eq(val, "yes"))
+			opts->flags |= FZ_STEXT_COLLECT_VECTORS;
+	}
 	if (fz_has_option(ctx, string, "inhibit-actualtext", &val))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_INHIBIT_ACTUALTEXT;
@@ -2009,6 +2024,15 @@ check_for_strikeout(fz_context *ctx, fz_stext_device *tdev, fz_stext_page *page,
 }
 
 static void
+add_vector(fz_context *ctx, fz_stext_page *page, fz_rect bbox)
+{
+	fz_stext_block *b = add_block_to_page(ctx, page);
+
+	b->type = FZ_STEXT_BLOCK_VECTOR;
+	b->u.v.bbox = bbox;
+}
+
+static void
 fz_stext_fill_path(fz_context *ctx, fz_device *dev, const fz_path *path, int even_odd, fz_matrix ctm, fz_colorspace *cs, const float *color, float alpha, fz_color_params cp)
 {
 	fz_stext_device *tdev = (fz_stext_device*)dev;
@@ -2021,6 +2045,9 @@ fz_stext_fill_path(fz_context *ctx, fz_device *dev, const fz_path *path, int eve
 		*bounds = fz_union_rect(*bounds, path_bounds);
 
 	check_for_strikeout(ctx, tdev, page, path, ctm);
+
+	if (tdev->flags & FZ_STEXT_COLLECT_VECTORS)
+		add_vector(ctx, page, path_bounds);
 }
 
 static void
@@ -2028,13 +2055,17 @@ fz_stext_stroke_path(fz_context *ctx, fz_device *dev, const fz_path *path, const
 {
 	fz_stext_device *tdev = (fz_stext_device*)dev;
 	fz_stext_page *page = tdev->page;
+	fz_rect path_bounds = fz_bound_path(ctx, path, ss, ctm);
 	fz_rect *bounds = actualtext_bounds((fz_stext_device *)dev);
 
 	/* If we're in an actualttext, then update the bounds to include this content. */
 	if (bounds != NULL)
-		*bounds = fz_union_rect(*bounds, fz_bound_path(ctx, path, ss, ctm));
+		*bounds = fz_union_rect(*bounds, path_bounds);
 
 	check_for_strikeout(ctx, tdev, page, path, ctm);
+
+	if (tdev->flags & FZ_STEXT_COLLECT_VECTORS)
+		add_vector(ctx, page, path_bounds);
 }
 
 static void

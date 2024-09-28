@@ -1009,8 +1009,8 @@ fz_print_stext_page_as_json(fz_context *ctx, fz_output *out, fz_stext_page *page
 
 /* Plain text */
 
-void
-fz_print_stext_page_as_text(fz_context *ctx, fz_output *out, fz_stext_page *page)
+static void
+do_as_text(fz_context *ctx, fz_output *out, fz_stext_block *first_block)
 {
 	fz_stext_block *block;
 	fz_stext_line *line;
@@ -1018,10 +1018,11 @@ fz_print_stext_page_as_text(fz_context *ctx, fz_output *out, fz_stext_page *page
 	char utf[10];
 	int i, n;
 
-	for (block = page->first_block; block; block = block->next)
+	for (block = first_block; block; block = block->next)
 	{
-		if (block->type == FZ_STEXT_BLOCK_TEXT)
+		switch (block->type)
 		{
+		case FZ_STEXT_BLOCK_TEXT:
 			for (line = block->u.t.first_line; line; line = line->next)
 			{
 				for (ch = line->first_char; ch; ch = ch->next)
@@ -1033,6 +1034,11 @@ fz_print_stext_page_as_text(fz_context *ctx, fz_output *out, fz_stext_page *page
 				fz_write_string(ctx, out, "\n");
 			}
 			fz_write_string(ctx, out, "\n");
+			break;
+		case FZ_STEXT_BLOCK_STRUCT:
+			if (block->u.s.down != NULL)
+				do_as_text(ctx, out, block->u.s.down->first_block);
+			break;
 		}
 	}
 }
@@ -1134,6 +1140,13 @@ fz_print_stext_page_as_empty_box(fz_context *ctx, fz_output *out, fz_stext_page 
 #ifdef WRITE_AS_PS
 	fz_write_printf(ctx, out, "showpage\n");
 #endif
+}
+
+
+void
+fz_print_stext_page_as_text(fz_context *ctx, fz_output *out, fz_stext_page *page)
+{
+	do_as_text(ctx, out, page->first_block);
 }
 
 /* Text output writer */

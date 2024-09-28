@@ -148,6 +148,10 @@ typedef struct fz_stext_struct fz_stext_struct;
 	into effectively being a 'tree' that should be walked in depth-first
 	order.
 
+	FZ_STEXT_COLLECT_VECTORS: If this option is set, we will collect
+	details (currently just the bbox) of vector graphics. This is intended
+	to be of use in segmentation analysis.
+
 	FZ_STEXT_NO_TEXT_AS_PATH: If this option is set, SVG text will be
 	kept as-is. When this option is not set, SVG text will be rendered
 	as curves.
@@ -174,6 +178,7 @@ enum
 	FZ_STEXT_COLLECT_STRUCTURE = 16384,
 	FZ_STEXT_ACCURATE_BBOXES = 32768,
 	FZ_STEXT_INHIBIT_ACTUALTEXT = 65536,
+	FZ_STEXT_COLLECT_VECTORS = 131072,
 };
 
 /**
@@ -303,7 +308,8 @@ enum
 {
 	FZ_STEXT_BLOCK_TEXT = 0,
 	FZ_STEXT_BLOCK_IMAGE = 1,
-	FZ_STEXT_BLOCK_STRUCT = 2
+	FZ_STEXT_BLOCK_STRUCT = 2,
+	FZ_STEXT_BLOCK_VECTOR = 3
 };
 
 /**
@@ -318,6 +324,7 @@ struct fz_stext_block
 		struct { fz_stext_line *first_line, *last_line; } t;
 		struct { fz_matrix transform; fz_image *image; } i;
 		struct { fz_stext_struct *down; int index; } s;
+		struct { fz_rect bbox; } v;
 	} u;
 	fz_stext_block *prev, *next;
 };
@@ -354,7 +361,8 @@ struct fz_stext_char
 enum
 {
 	FZ_STEXT_STRIKEOUT = 1,
-	FZ_STEXT_UNDERLINE = 2
+	FZ_STEXT_UNDERLINE = 2,
+	FZ_STEXT_SYNTHETIC = 4
 };
 
 /**
