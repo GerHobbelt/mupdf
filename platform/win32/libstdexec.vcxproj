@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF3CA511}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4061;4100;4127;4180;4206;4242;4244;4267;4324;4355;4365;4371;4388;4435;4464;4514;4582;4583;4619;4623;4625;4626;4668;4710;4820;4866;4868;4946;5026;5027;5029;5031;5038;5045;5105;5219;5220;5246;5250;5262;5266;5267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTDEXEC;STDEXEC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTDEXEC;STDEXEC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTDEXEC;STDEXEC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTDEXEC;STDEXEC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTDEXEC;STDEXEC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTDEXEC;STDEXEC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTDEXEC;STDEXEC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTDEXEC;STDEXEC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTDEXEC;STDEXEC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTDEXEC;STDEXEC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTDEXEC;STDEXEC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTDEXEC;STDEXEC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/_clangd_helper_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/fibonacci.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/static_thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/static_thread_pool_bulk_enqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/static_thread_pool_bulk_enqueue_nested.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/static_thread_pool_nested.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/static_thread_pool_nested_old.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/static_thread_pool_old.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/tbb_thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/tbb_thread_pool_nested.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/hello_coro.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/hello_world.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/io_uring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/_clangd_helper_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/bulk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/launch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_cpu_mt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_cpu_st.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_distributed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_gpu_m.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_gpu_s.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/nvtx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/retry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/scope.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/server_theme/let_value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/server_theme/on_transfer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/server_theme/split_bulk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/server_theme/then_upon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/then.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/src/system_context/system_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/async_scope/test_dtor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/async_scope/test_empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/async_scope/test_spawn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/async_scope/test_spawn_future.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/async_scope/test_start_now.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/async_scope/test_stop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_any_sequence_of.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_empty_sequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_ignore_all_values.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_iterate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_transform_each.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_any_sender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_at_coroutine_exit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_bwos_lifo_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_create.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_env.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_finally.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_into_tuple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_io_uring_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_just_from.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_libdispatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_materialize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_on.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_on2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_on3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_repeat_effect_until.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_repeat_effect_until_fail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_repeat_n.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_repeat_n_fail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_sequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_sequence_senders.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_system_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_system_context_replaceability.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_task.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_timed_thread_scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_trampoline_scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_type_async_scope.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_variant_sender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_when_any.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/bulk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/ensure_started.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/launch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/let_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/let_stopped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/let_value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/monotonic_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/start_detached.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/synchronized_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/then.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/transfer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/transfer_when_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/upon_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/upon_stopped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/when_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/rrd/async_scope.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/rrd/split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_bulk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_continues_on.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_ensure_started.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_into_variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_let_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_let_fail1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_let_stopped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_let_value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_schedule_from.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_starts_on.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_stopped_as_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_stopped_as_optional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_then.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_then_fail1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_transfer_when_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_upon_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_upon_stopped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_when_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/consumers/test_start_detached.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/consumers/test_sync_wait.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/factories/test_just.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/factories/test_just_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/factories/test_just_stopped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/factories/test_read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/factories/test_transfer_just.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/other/test_execute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/concepts/test_awaitables.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/concepts/test_concept_operation_state.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/concepts/test_concept_scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/concepts/test_concepts_receiver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/concepts/test_concepts_sender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/cpos/test_cpo_bulk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/cpos/test_cpo_connect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/cpos/test_cpo_ensure_started.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/cpos/test_cpo_receiver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/cpos/test_cpo_schedule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/cpos/test_cpo_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/cpos/test_cpo_start.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/cpos/test_cpo_upon_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/cpos/test_cpo_upon_stopped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/detail/test_completion_signatures.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/detail/test_utility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/queries/test_forwarding_queries.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/queries/test_get_forward_progress_guarantee.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/tbbexec/test_tbb_thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/test_scratch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test_package/test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/examples/algorithms/retry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/examples/algorithms/then.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/static_thread_pool_old.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__atomic_intrusive_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__atomic_ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__basic_sequence.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__bit_cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__bwos_lifo_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__numa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__system_context_default_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__system_context_default_impl_entry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__system_context_replaceability_api.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__xorshift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/intrusive_heap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/any_sender_of.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/async_scope.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/at_coroutine_exit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/create.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/env.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/finally.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/inline_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/into_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/just_from.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/libdispatch_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/linux/__detail/memory_mapped_region.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/linux/__detail/safe_file_descriptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/linux/io_uring_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/linux/memory_mapped_region.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/linux/safe_file_descriptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/materialize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/on.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/on_coro_disposition.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/repeat_effect_until.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/repeat_n.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/reschedule.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/scope.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/any_sequence_of.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/empty_sequence.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/ignore_all_values.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/iterate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/transform_each.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence_senders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/single_thread_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/start_now.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/static_thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/system_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/timed_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/timed_thread_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/trampoline_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/variant_sender.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/when_any.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__as_awaitable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__awaitable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__basic_sender.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__bulk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__completion_signatures.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__connect_awaitable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__continues_on.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__cpo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__debug.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__diagnostics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__domain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__ensure_started.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__env.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__execute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__execution_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__force_include.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__inline_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__into_variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__intrusive_mpsc_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__intrusive_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__intrusive_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__intrusive_slist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__just.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__let.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__manual_lifetime.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__on.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__operation_states.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__optional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__ranges.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__read_env.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__receiver_adaptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__receiver_ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__receivers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__run_loop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__schedule_from.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__schedulers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__scope.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__sender_adaptor_closure.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__sender_introspection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__senders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__senders_core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__shared.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__spin_loop_pause.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__split.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__start_detached.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__starts_on.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__stop_token.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__stopped_as_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__stopped_as_optional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__submit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__sync_wait.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__tag_invoke.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__then.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__transfer_just.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__transform_completion_signatures.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__transform_sender.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__upon_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__upon_stopped.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__when_all.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__with_awaitable_senders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__write_env.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/coroutine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/execution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/functional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/stop_token.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/tbbexec/tbb_thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/test/nvexec/tracer_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/test/test_common/receivers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/test/test_common/require_terminate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/test/test_common/retry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/test/test_common/schedulers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/test/test_common/senders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/test/test_common/type_helpers.hpp" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/MAINTAINERS.md" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/README.md" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/CompilerHelpers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/FindSphinx.cmake" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/Findnuma.cmake" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/cmake/cpm/patches/icm/regex-build-error.diff" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/cmake/versions.json" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/docs/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/docs/source/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/docs/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/docs/source/reference/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/include/nvexec/README.md" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/test/exec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/test/nvexec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/test/rrd/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/test/rrd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/test_package/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/test_package/conanfile.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

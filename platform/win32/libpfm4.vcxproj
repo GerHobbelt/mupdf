@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFCEEC6A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4061;4100;4127;4180;4206;4242;4244;4267;4324;4355;4365;4371;4388;4435;4464;4514;4582;4583;4619;4623;4625;4626;4668;4710;4820;4866;4868;4946;5026;5027;5029;5031;5038;5045;5105;5219;5220;5246;5250;5262;5266;5267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPFM4;PFM4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPFM4;PFM4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPFM4;PFM4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPFM4;PFM4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPFM4;PFM4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPFM4;PFM4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPFM4;PFM4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPFM4;PFM4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPFM4;PFM4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPFM4;PFM4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPFM4;PFM4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPFM4;PFM4_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/examples/check_events.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/examples/showevtinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_fam10h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_fam11h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_fam12h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_fam14h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_fam15h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_fam16h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_fam17h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_fam19h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_fam19h_l3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_fam1ah.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_fam1ah_l3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_k7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_k8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_rapl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv7_pmuv1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_cell.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_gen_ia64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_adl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_atom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_bdw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_bdx_unc_cbo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_bdx_unc_ha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_bdx_unc_imc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_bdx_unc_irp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_bdx_unc_pcu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_bdx_unc_qpi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_bdx_unc_r2pcie.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_bdx_unc_r3qpi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_bdx_unc_sbo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_bdx_unc_ubo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_coreduo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_glm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_gnr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_hsw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_hswep_unc_cbo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_hswep_unc_ha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_hswep_unc_imc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_hswep_unc_irp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_hswep_unc_pcu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_hswep_unc_qpi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_hswep_unc_r2pcie.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_hswep_unc_r3qpi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_hswep_unc_sbo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_hswep_unc_ubo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_icl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_icx_unc_cha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_icx_unc_iio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_icx_unc_imc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_icx_unc_irp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_icx_unc_m2m.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_icx_unc_m2pcie.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_icx_unc_m3upi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_icx_unc_pcu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_icx_unc_ubox.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_icx_unc_upi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_ivb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_ivb_unc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_ivbep_unc_cbo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_ivbep_unc_ha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_ivbep_unc_imc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_ivbep_unc_irp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_ivbep_unc_pcu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_ivbep_unc_qpi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_ivbep_unc_r2pcie.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_ivbep_unc_r3qpi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_ivbep_unc_ubo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_knc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_knl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_knl_unc_cha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_knl_unc_edc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_knl_unc_imc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_knl_unc_m2pcie.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_netburst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_netburst_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_nhm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_nhm_unc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_p6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_rapl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_skl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_skx_unc_cha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_skx_unc_iio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_skx_unc_imc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_skx_unc_irp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_skx_unc_m2m.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_skx_unc_m3upi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_skx_unc_pcu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_skx_unc_ubo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_skx_unc_upi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_slm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_snb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_snb_unc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_snbep_unc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_snbep_unc_cbo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_snbep_unc_ha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_snbep_unc_imc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_snbep_unc_pcu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_snbep_unc_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_snbep_unc_qpi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_snbep_unc_r2pcie.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_snbep_unc_r3qpi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_snbep_unc_ubo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_spr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_spr_unc_cha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_spr_unc_imc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_spr_unc_upi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_tmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_wsm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_x86_arch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_x86_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_itanium.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_itanium2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_kunpeng_unc_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_mips.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_mips_74k.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_mips_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_montecito.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_perf_event_pmu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_perf_event_raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_power10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_power4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_power5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_power6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_power7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_power8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_power9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_powerpc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_powerpc_nest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_powerpc_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_ppc970.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_s390x_cpumf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_s390x_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_sicortex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_sparc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_sparc_niagara.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_sparc_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_sparc_ultra12.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_sparc_ultra3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_sparc_ultra4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_torrent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_tx2_unc_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/branch_smpl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/evt2raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/notify_group.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/notify_self.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/perf_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/rtop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/self.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/self_basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/self_count.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/self_pipe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/self_smpl_multi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/syst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/syst_count.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/syst_smpl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/task.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/task_attach_timeout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/task_cpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/task_smpl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/x86/bts_smpl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/tests/validate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/tests/validate_arm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/tests/validate_arm64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/tests/validate_mips.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/tests/validate_perf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/tests/validate_power.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/tests/validate_x86.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/include/perfmon/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/include/perfmon/perf_event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/include/perfmon/pfmlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/include/perfmon/pfmlib_perf_event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam10h.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam11h.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam12h.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam14h.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam15h.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam15h_nb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam16h.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam17h_zen1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam17h_zen2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam19h_zen3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam19h_zen3_l3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam19h_zen4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam1ah_zen5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_fam1ah_zen5_l3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_k7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/amd64_events_k8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_1176_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cavium_tx2_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a15_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a53_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a57_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a7_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a8_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a9_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_fujitsu_a64fx_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_hisilicon_kunpeng_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_hisilicon_kunpeng_unc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_marvell_tx2_unc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_neoverse_n1_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_neoverse_n2_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_neoverse_v1_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_neoverse_v2_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_qcom_krait_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_xgene_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/cell_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_adl_glc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_adl_grt_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_atom_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_bdw_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_bdx_unc_cbo_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_bdx_unc_ha_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_bdx_unc_imc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_bdx_unc_irp_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_bdx_unc_pcu_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_bdx_unc_qpi_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_bdx_unc_r2pcie_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_bdx_unc_r3qpi_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_bdx_unc_sbo_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_bdx_unc_ubo_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_core_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_coreduo_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_glm_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_gnr_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_hsw_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_hswep_unc_cbo_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_hswep_unc_ha_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_hswep_unc_imc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_hswep_unc_irp_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_hswep_unc_pcu_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_hswep_unc_qpi_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_hswep_unc_r2pcie_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_hswep_unc_r3qpi_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_hswep_unc_sbo_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_hswep_unc_ubo_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_icl_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_icx_unc_cha_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_icx_unc_iio_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_icx_unc_imc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_icx_unc_irp_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_icx_unc_m2m_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_icx_unc_m2pcie_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_icx_unc_m3upi_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_icx_unc_pcu_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_icx_unc_ubox_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_icx_unc_upi_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_ivb_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_ivbep_unc_cbo_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_ivbep_unc_ha_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_ivbep_unc_imc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_ivbep_unc_irp_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_ivbep_unc_pcu_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_ivbep_unc_qpi_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_ivbep_unc_r2pcie_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_ivbep_unc_r3qpi_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_ivbep_unc_ubo_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_knc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_knl_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_knl_unc_cha_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_knl_unc_edc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_knl_unc_imc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_knl_unc_m2pcie_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_netburst_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_nhm_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_nhm_unc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_p6_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_pii_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_pm_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_ppro_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_skl_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_skx_unc_cha_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_skx_unc_iio_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_skx_unc_imc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_skx_unc_irp_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_skx_unc_m2m_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_skx_unc_m3upi_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_skx_unc_pcu_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_skx_unc_ubo_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_skx_unc_upi_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_slm_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_snb_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_snb_unc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_snbep_unc_cbo_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_snbep_unc_ha_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_snbep_unc_imc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_snbep_unc_pcu_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_snbep_unc_qpi_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_snbep_unc_r2pcie_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_snbep_unc_r3qpi_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_snbep_unc_ubo_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_spr_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_spr_unc_cha_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_spr_unc_imc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_spr_unc_upi_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_tmt_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_wsm_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_wsm_unc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/intel_x86_arch_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/itanium2_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/itanium_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/mips_74k_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/montecito_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/perf_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/power10_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/power4_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/power5+_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/power5_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/power6_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/power7_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/power8_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/power9_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/powerpc_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/powerpc_nest_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/ppc970_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/ppc970mp_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/s390x_cpumf_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/sparc_niagara1_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/sparc_niagara2_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/sparc_ultra12_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/sparc_ultra3_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/sparc_ultra3i_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/sparc_ultra3plus_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/sparc_ultra4plus_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/torrent_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_cell_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_ia64_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_netburst_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_snbep_unc_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_x86_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_itanium2_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_itanium_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_mips_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_montecito_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_perf_event_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_power_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_s390x_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_sicortex_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_sparc_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/perf_examples/perf_util.h" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/README" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/config.mk" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/README" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/README.source" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/changelog" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/compat" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/control" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/copyright" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/docs" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/libpfm4-dev.dirs" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/libpfm4-dev.install" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/libpfm4-dev.manpages" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/libpfm4.install" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/python-libpfm4.install" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/pyversions" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/rules" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/debian/source/format" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_amd64.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_amd64_fam10h.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_amd64_fam15h.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_amd64_fam16h.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_amd64_fam17h.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_amd64_fam17h_zen2.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_amd64_fam19h_zen3.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_amd64_fam19h_zen3_l3.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_amd64_fam19h_zen4.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_amd64_fam1ah_zen5.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_amd64_fam1ah_zen5_l3.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_amd64_k7.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_amd64_k8.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_a64fx.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac15.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac53.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac57.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac7.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac8.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac9.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_neoverse_n1.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_neoverse_n2.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_neoverse_v1.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_neoverse_v2.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_qcom_krait.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_xgene.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_adl_glc.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_adl_grt.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_atom.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_bdw.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_bdx_unc_cbo.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_bdx_unc_ha.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_bdx_unc_imc.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_bdx_unc_irp.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_bdx_unc_pcu.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_bdx_unc_qpi.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_bdx_unc_r2pcie.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_bdx_unc_r3qpi.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_bdx_unc_sbo.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_bdx_unc_ubo.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_core.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_coreduo.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_emr.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_glm.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_gnr.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_hsw.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_hswep_unc_cbo.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_hswep_unc_ha.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_hswep_unc_imc.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_hswep_unc_irp.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_hswep_unc_pcu.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_hswep_unc_qpi.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_hswep_unc_r2pcie.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_hswep_unc_r3qpi.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_hswep_unc_sbo.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_hswep_unc_ubo.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_icl.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_icx.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_icx_unc_cha.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_icx_unc_iio.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_icx_unc_imc.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_icx_unc_irp.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_icx_unc_m2m.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_icx_unc_m2pcie.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_icx_unc_m3upi.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_icx_unc_pcu.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_icx_unc_ubox.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_icx_unc_upi.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_ivb.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_ivb_unc.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_ivbep_unc_cbo.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_ivbep_unc_ha.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_ivbep_unc_imc.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_ivbep_unc_irp.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_ivbep_unc_pcu.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_ivbep_unc_qpi.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_ivbep_unc_r2pcie.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_ivbep_unc_r3qpi.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_ivbep_unc_ubo.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_knc.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_knl.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_knm.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_nhm.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_nhm_unc.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_p6.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_rapl.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_skl.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_skx_unc_cha.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_skx_unc_iio.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_skx_unc_imc.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_skx_unc_irp.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_skx_unc_m2m.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_skx_unc_m3upi.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_skx_unc_pcu.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_skx_unc_ubo.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_skx_unc_upi.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_slm.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_snb.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_snb_unc.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_snbep_unc_cbo.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_snbep_unc_ha.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_snbep_unc_imc.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_snbep_unc_pcu.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_snbep_unc_qpi.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_snbep_unc_r2pcie.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_snbep_unc_r3qpi.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_snbep_unc_ubo.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_spr.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_spr_unc_cha.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_spr_unc_imc.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_spr_unc_upi.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_tmt.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_wsm.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_wsm_unc.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_x86_arch.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_mips_74k.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_perf_event_raw.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/pfm_find_event.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/pfm_get_event_attr_info.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/pfm_get_event_encoding.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/pfm_get_event_info.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/pfm_get_event_next.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/pfm_get_os_event_encoding.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/pfm_get_perf_event_encoding.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/pfm_get_pmu_info.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/pfm_get_version.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/pfm_initialize.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/pfm_strerror.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/pfm_terminate.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/examples/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/include/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/lib/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/libpfm.spec" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/perf_examples/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/perf_examples/x86/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/python/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/python/README" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/python/self.py" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/python/src/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/python/src/pmu.py" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/python/src/session.py" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/python/sys.py" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/rules.mk" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/tests/Makefile" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

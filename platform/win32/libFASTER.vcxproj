@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFCDF5D5}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4061;4100;4127;4180;4206;4242;4244;4267;4324;4355;4365;4371;4388;4435;4464;4514;4582;4583;4619;4623;4625;4626;4668;4710;4820;4866;4868;4946;5026;5027;5029;5031;5038;5045;5105;5219;5220;5246;5250;5262;5266;5267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTER;FASTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTER;FASTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTER;FASTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTER;FASTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTER;FASTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTER;FASTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTER;FASTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTER;FASTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTER;FASTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTER;FASTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTER;FASTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTER;FASTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/benchmark-dir/benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/benchmark-dir/process_ycsb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/playground/sum_store-dir/sum_store.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/src/core/address.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/src/core/lss_allocator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/src/core/thread.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/src/environment/file_linux.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/src/environment/file_windows.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/blobs/azure_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/blobs/faster_blobs_example.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/blobs/storage_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/compact_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/in_memory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/malloc_fixed_page_size_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/paging_queue_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/paging_threadpool_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/paging_uring_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/recovery_queue_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/recovery_threadpool_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/recovery_uring_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/scan_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/FASTER/cc/test/utility_test.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/benchmark-dir/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/playground/sum_store-dir/concurrent_recovery_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/playground/sum_store-dir/single_threaded_recovery_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/playground/sum_store-dir/sum_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/common/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/address.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/async_result_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/auto_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/checkpoint_locks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/checkpoint_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/compact.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/faster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/gc_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/grow_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/guid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/hash_bucket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/hash_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/internal_contexts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/key_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/light_epoch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/log_scan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/lss_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/malloc_fixed_page_size.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/native_buffer_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/persistent_memory_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/phase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/record.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/recovery_status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/state_transitions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/core/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/device/azure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/device/file_system_disk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/device/null_disk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/device/storage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/environment/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/environment/file_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/environment/file_linux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/src/environment/file_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/test/paging_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/test/recovery_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FASTER/cc/test/test_types.h" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/docs/assets/images/faster-banner.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/docs/assets/images/faster-logo.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/bechmark-machine-specs.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/big-0reads-int64cd.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/big-0reads-logscale.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/big-0reads.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/big-100reads-int64cd.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/big-100reads-logscale.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/big-100reads.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/big-50reads-int64cd.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/big-50reads-logscale.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/big-50reads.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/big-loading.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/big-readpercent.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/scan-uncommitted.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/small-0reads.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/small-100reads.png" />
+    <Image Include="../../thirdparty/owemdjee/FASTER/img/small-50reads.png" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/README.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/azure-pipelines-full.yml" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/azure-pipelines.yml" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cc/CMakeLists.txt.in" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cc/benchmark-dir/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cc/benchmark-dir/README.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cc/benchmark-dir/benchmark.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cc/playground/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cc/playground/sum_store-dir/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cc/scripts/linux/azure/blob.sh" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cc/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cc/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cc/test/blobs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/App.config" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/ConcurrentDictionaryBenchmark.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/FasterSpanByteYcsbBenchmark.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/FasterYcsbBenchmark.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/Functions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/FunctionsSB.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/Input.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/Key.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/KeySpanByte.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/Options.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/Output.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/RandomGenerator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/TestLoader.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/TestStats.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/Value.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/YcsbConstants.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/ZipfGenerator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/scripts/compare_runs.ps1" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/benchmark/scripts/run_benchmark.ps1" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/performance/BenchmarkDotNet/BenchmarkDotNetTestsApp.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/performance/BenchmarkDotNet/InliningTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/performance/BenchmarkDotNet/LightEpochTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/performance/BenchmarkDotNet/README.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/performance/BenchmarkDotNet/SyncVsAsyncTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/AsyncStress/FasterWrapper.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/AsyncStress/IFasterWrapper.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/AsyncStress/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/AsyncStress/SerializedFasterWrapper.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/AsyncStress/SerializedUpdaters.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/CacheStoreConcurrent/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/CacheStoreConcurrent/Types.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/ClassRecoveryDurability/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/ClassRecoveryDurability/Storedb.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/ClassRecoveryDurability/Types.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/FasterLogMLSDTest/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/MemoryDb/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/SumStore/App.config" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/SumStore/ConcurrencyTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/SumStore/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/SumStore/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/SumStore/Properties/launchSettings.json" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/SumStore/README.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/SumStore/RecoveryTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/SumStore/SumStoreTypes.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/playground/TstRunner/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/FASTER.client.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/FASTER.server.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/README.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/benchmark/FASTER.benchmark/FasterYcsbBenchmark.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/benchmark/FASTER.benchmark/Native32.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/benchmark/FASTER.benchmark/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/benchmark/FASTER.benchmark/Properties/launchSettings.json" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/benchmark/FASTER.benchmark/RandomGenerator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/benchmark/FASTER.benchmark/Types.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/FixedLenClient/Functions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/FixedLenClient/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/FixedLenServer/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/FixedLenServer/Types.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/VarLenClient/CustomType.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/VarLenClient/CustomTypeFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/VarLenClient/CustomTypeSamples.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/VarLenClient/MemoryBenchmark.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/VarLenClient/MemoryFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/VarLenClient/MemorySamples.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/VarLenClient/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/VarLenServer/Options.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/VarLenServer/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/WebClient/FASTERFunctions.js" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/samples/WebClient/WebClient.html" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/CallbackFunctionsBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/ClientNetworkSession.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/ClientSession.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/ClientSessionAsync.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/FasterKVClient.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/FixedLenSerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/ICallbackFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/JavascriptClient/BatchHeader.js" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/JavascriptClient/CallbackFunctionsBase.js" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/JavascriptClient/ClientNetworkSession.js" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/JavascriptClient/ClientSession.js" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/JavascriptClient/ParameterSerializer.js" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/JavascriptClient/Queue.js" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/JavascriptClient/Utils.js" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/MemoryFunctionsBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/MemoryParameterSerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/Status.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.client/StatusCode.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/BatchHeader.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/BufferSizeUtils.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/ElasticCircularBuffer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/HeaderReaderWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/IClientSerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/IKeyInputSerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/IKeySerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/IMessageConsumer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/INetworkSender.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/IServerSerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/LightConcurrentStack.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/MaxSizeSettings.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/MessageType.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/NetworkSenderBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/SeaaBuffer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/SimpleObjectPool.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/TcpNetworkSender.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.common/WireFormat.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/BinaryServerSession.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/ByteArrayComparer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/ConnectionArgs.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/FasterKVServerSessionBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/FixedLenSerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/ISessionProvider.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/Providers/FasterKVProvider.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/Providers/FasterKVProviderBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/Providers/SpanByteFasterKVProvider.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/PubSub/FixedLenKeySerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/PubSub/GlobUtils.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/PubSub/SpanByteKeySerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/PubSub/SubscribeBroker.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/PubSub/SubscribeKVBroker.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/ServerKVFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/ServerSessionBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/Servers/FasterServerBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/Servers/FasterServerTcp.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/Servers/FixedLenServer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/Servers/GenericServer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/Servers/IFasterServer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/Servers/ServerOptions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/Servers/VarLenServer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/SpanByteClientSerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/SpanByteFunctionsForServer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/SpanByteServerSerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/src/FASTER.server/WebsocketServerSession.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/test/FASTER.remote.test/FixedLenBinaryPubSubTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/test/FASTER.remote.test/FixedLenBinaryTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/test/FASTER.remote.test/FixedLenClient.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/test/FASTER.remote.test/TestUtils.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/test/FASTER.remote.test/VarLenBinaryPubSubTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/test/FASTER.remote.test/VarLenBinaryTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/remote/test/FASTER.remote.test/VarLenMemoryClient.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/AzureBackedStore/App.config" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/AzureBackedStore/Functions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/AzureBackedStore/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/AzureBackedStore/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/AzureBackedStore/Types.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/CacheStore/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/CacheStore/Types.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/EpvsSample/EpvsBench.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/EpvsSample/ListExample.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/EpvsSample/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/FasterLogPubSub/App.config" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/FasterLogPubSub/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/FasterLogPubSub/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/FasterLogSample/App.config" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/FasterLogSample/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/FasterLogSample/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/HelloWorld/App.config" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/HelloWorld/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/HelloWorld/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/ReadAddress/Types.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/ReadAddress/VersionedReadApp.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/ResizableCacheStore/CacheSizeTracker.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/ResizableCacheStore/ISizeTracker.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/ResizableCacheStore/LogSizeTracker.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/ResizableCacheStore/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/ResizableCacheStore/Types.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/ResizableCacheStore/ZipfGenerator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/SecondaryReaderStore/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreAsyncApi/App.config" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreAsyncApi/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreAsyncApi/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreAsyncApi/Types.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreCheckpointRecover/App.config" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreCheckpointRecover/Functions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreCheckpointRecover/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreCheckpointRecover/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreCheckpointRecover/Types.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreCustomTypes/App.config" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreCustomTypes/Functions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreCustomTypes/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreCustomTypes/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreCustomTypes/Types.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreDiskReadBenchmark/App.config" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreDiskReadBenchmark/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreDiskReadBenchmark/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreDiskReadBenchmark/Types.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreLogCompaction/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreLogCompaction/Types.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreVarLenTypes/App.config" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreVarLenTypes/AsciiSumSample.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreVarLenTypes/AsciiSumSpanByteFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreVarLenTypes/CustomMemoryFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreVarLenTypes/CustomSpanByteFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreVarLenTypes/MemoryByteSample.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreVarLenTypes/MemoryIntSample.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreVarLenTypes/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreVarLenTypes/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreVarLenTypes/SpanByteSample.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/samples/StoreVarLenTypes/Utils.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/AllocatorBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/AsyncIOContext.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/AtomicOwner.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/BlittableAllocator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/BlittableFrame.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/BlittableScanIterator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/ErrorList.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/GenericAllocator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/GenericFrame.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/GenericScanIterator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/IFasterScanIterator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/IScanIteratorFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/MallocFixedPageSize.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/MemoryPageScanIterator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/PageUnit.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/PendingFlushList.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/ScanIteratorBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/VarLenBlittableAllocator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/VarLenBlittableScanIterator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/WorkQueueFIFO.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Allocator/WorkQueueLIFO.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Async/AsyncOperationInternal.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Async/CompletePendingAsync.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Async/DeleteAsync.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Async/RMWAsync.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Async/ReadAsync.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Async/UpsertAsync.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/ClientSession/BasicContext.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/ClientSession/ClientSession.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/ClientSession/FASTERClientSession.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/ClientSession/IClientSession.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/ClientSession/IFasterContext.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/ClientSession/ILockableContext.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/ClientSession/IUnsafeContext.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/ClientSession/LockableContext.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/ClientSession/LockableUnsafeContext.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/ClientSession/UnsafeContext.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Compaction/CompactionType.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Compaction/FASTERCompaction.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Compaction/ICompactionFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Compaction/LogCompactionFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Device/AsyncPool.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Device/Devices.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Device/IDevice.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Device/LocalMemoryDevice.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Device/LocalStorageDevice.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Device/ManagedLocalStorageDevice.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Device/NullDevice.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Device/ShardedStorageDevice.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Device/StorageDeviceBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Device/TieredStorageDevice.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Epochs/EpochProtectedVersionScheme.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Epochs/FastThreadLocal.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Epochs/LightEpoch.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/FASTER.core.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/FasterLog/CommitFailureException.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/FasterLog/CommitInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/FasterLog/FasterLog.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/FasterLog/FasterLogIterator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/FasterLog/FasterLogRecoveryInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/FasterLog/FasterLogSettings.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/FasterLog/ILogCommitManager.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/FasterLog/ILogEnqueueEntry.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/FasterLog/ILogEntryConsumer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/FasterLog/IReadOnlySpanBatch.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/FasterLog/LogCommitPolicy.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/CheckpointManagement/DefaultCheckpointNamingScheme.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/CheckpointManagement/DeviceLogCommitCheckpointManager.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/CheckpointManagement/ICheckpointNamingScheme.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/CheckpointManagement/INamedDeviceFactory.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/CheckpointManagement/LocalStorageNamedDeviceFactory.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/CheckpointManagement/NullNamedDeviceFactory.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Common/AddressInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Common/CheckpointSettings.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Common/CompletedOutput.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Common/Contexts.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Common/FasterKVSettings.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Common/HeapContainer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Common/LogSettings.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Common/OperationOptions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Common/RecordInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Common/RecordMetadata.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Extensions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/FASTER.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/FASTERBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/FASTERIterator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/FASTERThread.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/BlockAllocate.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/ConditionalCopyToTail.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/ContainsKeyInMemory.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/ContinuePending.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/EpochOperations.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/FindRecord.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/HandleOperationStatus.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/HashEntryInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/Helpers.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/InternalDelete.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/InternalLock.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/InternalRMW.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/InternalRead.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/InternalUpsert.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/Locking/ILockTable.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/Locking/OverflowBucketLockTable.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/Locking/TransientLocking.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/ModifiedBitOperation.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/OperationStackContext.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/ReadCache.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/RecordSource.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/SplitIndex.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/TryCopyToReadCache.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/Implementation/TryCopyToTail.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/LogAccessor.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/FASTER/WriteReason.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Interfaces/CallbackInfos.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Interfaces/DataContractObjectSerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Interfaces/FasterEqualityComparer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Interfaces/FunctionsBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Interfaces/IFasterEqualityComparer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Interfaces/IFasterKV.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Interfaces/IFasterSession.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Interfaces/IFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Interfaces/IObjectSerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Interfaces/NullFasterSession.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Interfaces/ObjectSerializer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Interfaces/TryAddFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Recovery/Checkpoint.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Recovery/DeltaLog.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Recovery/DirectoryConfiguration.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Recovery/FileDescriptor.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Recovery/ICheckpointManager.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Recovery/IndexCheckpoint.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Recovery/IndexRecovery.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Recovery/Recovery.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Synchronization/FasterStateMachine.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Synchronization/FullCheckpointStateMachine.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Synchronization/HybridLogCheckpointTask.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Synchronization/IStateMachineCallback.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Synchronization/ISynchronizationStateMachine.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Synchronization/IndexResizeStateMachine.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Synchronization/IndexSnapshotStateMachine.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Synchronization/StateTransitions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Index/Synchronization/VersionChangeStateMachine.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/AsyncCountDown.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/AsyncQueue.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/AsyncResultTypes.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/BufferPool.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/CompletionEvent.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/FasterException.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/LockType.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/Native32.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/OverflowPool.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/PageAsyncResultTypes.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/SafeConcurrentDictionary.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/Status.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/StatusCode.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/Utilities/Utility.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/DefaultVariableLengthStruct.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/FixedLengthStruct.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/IHeapConvertible.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/IVariableLengthStruct.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/MemoryComparer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/MemoryFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/MemoryVarLenStruct.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/ReadOnlyMemoryVarLenStruct.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/SessionVariableLengthStructSettings.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/SpanByte.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/SpanByteAndMemory.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/SpanByteComparer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/SpanByteExtensions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/SpanByteFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/SpanByteVarLenStruct.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/UnmanagedMemoryManager.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/UnsafeLogMemoryExtensions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/VarLenHeapContainer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/core/VarLen/VariableLengthStructSettings.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/AzureStorageDevice.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/AzureStorageNamedDeviceFactory.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/BlobEntry.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/BlobManager.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/BlobUtils.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/BlobUtilsV12.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/FASTER.devices.AzureStorageDevice.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/FasterTraceHelper.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/IBlobManager.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/IStorageErrorHandler.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/LeaseTimer.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/StorageErrorHandler.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/StorageOperations.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/TrackedThreads.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/src/devices/AzureStorageDevice/Utils.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/IKeyTester.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/IValueTester.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/LongKeyTester.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/LongValueTester.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/NonSpanByteValueFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/Options.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/SessionWrapper.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/SpanByteKeyTester.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/SpanByteValueFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/SpanByteValueTester.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/StressApp.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/StringKeyTester.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/StringValueTester.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/stress/TestLoader.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/AdvancedLockTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/AsyncLargeObjectTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/AsyncTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/BasicDiskFASTERTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/BasicFASTERTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/BasicLockTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/BlittableIterationTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/BlittableLogCompactionTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/BlittableLogScanTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/CancellationTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/CheckpointManagerTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/CompletePendingTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ComponentRecoveryTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/DeltaLogTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/DeviceFasterLogTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/DisposeTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/EnqueueAndWaitForCommit.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/EnqueueTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/EphemeralLockingTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ExpirationTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/FasterLogAndDeviceConfigTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/FasterLogFastCommitTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/FasterLogRecoverReadOnlyTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/FasterLogResumeTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/FasterLogScanTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/FasterLogTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/FlakyDeviceTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/FunctionPerSessionTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/GenericByteArrayTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/GenericDiskDeleteTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/GenericIterationTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/GenericLogCompactionTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/GenericLogScanTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/GenericStringTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/InputOutputParameterTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/LargeObjectTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/LockableUnsafeContextTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/LogFormatter.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/LogReadAsyncTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/LogShiftTailStressTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/LowMemAsyncTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/MallocFixedPageSizeTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ManagedLocalStorageTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/MemoryLogCompactionTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/MiscFASTERTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ModifiedBitTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/MoreLogCompactionTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/NUnitLoggerProvider.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/NameValidator.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/NativeReadCacheTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/NeedCopyUpdateTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ObjectFASTERTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ObjectReadCacheTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ObjectRecoveryTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ObjectRecoveryTest2.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ObjectRecoveryTest3.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ObjectRecoveryTestTypes.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ObjectTestTypes.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/OverflowBucketLockTableTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/PostOperationsTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ReadAddressTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ReadCacheChainTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/RecoverContinueTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/RecoverReadOnlyTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/RecoveryChecks.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/RecoveryTestTypes.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/RecoveryTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ReproReadCacheTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/SessionFASTERTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/SharedDirectoryTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/SimpleAsyncTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/SimpleRecoveryTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/SimpleTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/SimpleVersionSchemeTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/SimulatedFlakyDevice.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/SingleWriterTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/SpanByteLogScanTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/SpanByteTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/StateMachineBarrierTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/StateMachineTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/TestTypes.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/TestUtils.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/ThreadSession.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/TryEnqueueBasicTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/UnsafeContextTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/VLTestTypes.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/VarLenBlittableIterationTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/VariableLengthIteratorTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/VariableLengthStructFASTERTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/WaitForCommit.cs" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/cs/test/app.config" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/Gemfile" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_config.yml" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_data/navigation.yml" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/01-quick-start-guide.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/02-faqs.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/20-fasterkv-basics.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/23-fasterkv-tuning.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/25-fasterkv-recovery.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/26-fasterkv-samples.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/29-fasterkv-cpp.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/30-fasterkv-record-locking.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/40-fasterlog-basics.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/43-fasterlog-tuning.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/46-fasterlog-samples.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/50-remote-basics.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/51-remote-pubsub.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/80-build-and-test.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/82-code-structure.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/84-roadmap.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/90-td-introduction.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/95-research-papers.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_docs/96-slides-videos.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_includes/feature_row_small" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_includes/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_layouts/default.html" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_pages/home.md" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/_sass/minimal-mistakes/skins/_air.scss" />
+    <Text Include="../../thirdparty/owemdjee/FASTER/docs/assets/css/main.scss" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

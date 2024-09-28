@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF3F3556}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4061;4100;4127;4180;4206;4242;4244;4267;4324;4355;4365;4371;4388;4435;4464;4514;4582;4583;4619;4623;4625;4626;4668;4710;4820;4866;4868;4946;5026;5027;5029;5031;5038;5045;5105;5219;5220;5246;5250;5262;5266;5267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENTT;ENTT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENTT;ENTT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENTT;ENTT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENTT;ENTT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENTT;ENTT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENTT;ENTT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENTT;ENTT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENTT;ENTT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENTT;ENTT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENTT;ENTT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENTT;ENTT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENTT;ENTT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/entt/conan/test_package/test_package.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/benchmark/benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/config/version.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/container/dense_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/container/dense_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/container/table.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/any.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/bit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/compressed_pair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/enum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/family.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/hashed_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/ident.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/monostate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/tuple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/type_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/type_traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/core/utility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/component.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/entity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/observer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/organizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/registry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/runtime_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/sigh_mixin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/snapshot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/sparse_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/storage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/storage_entity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/storage_no_instance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/storage_utility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/entity/view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/graph/adjacency_matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/graph/dot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/graph/flow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/locator/locator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_any.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_container.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_conv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_ctor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_custom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_dtor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_func.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_pointer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_prop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_template.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/meta/meta_utility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/poly/poly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/process/process.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/process/scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/resource/resource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/resource/resource_cache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/resource/resource_loader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/signal/delegate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/signal/dispatcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/signal/emitter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/entt/signal/sigh.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/example/custom_identifier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/example/entity_copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/example/reserved_bits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/example/signal_less.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/dispatcher/plugin/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/dispatcher/plugin/plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/dispatcher/shared/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/dispatcher/shared/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/emitter/plugin/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/emitter/plugin/plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/emitter/shared/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/emitter/shared/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/locator/plugin/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/locator/plugin/plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/locator/shared/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/locator/shared/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/meta/plugin/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/meta/plugin/plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/meta/plugin_std/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/meta/plugin_std/plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/meta/shared/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/meta/shared/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/registry/plugin/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/registry/plugin/plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/registry/shared/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/lib/registry/shared/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/odr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/entt/test/snapshot/snapshot.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/single_include/entt/entt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/config/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/config/macro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/config/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/container/dense_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/container/dense_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/container/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/container/table.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/any.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/attribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/bit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/compressed_pair.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/enum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/family.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/hashed_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/ident.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/monostate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/ranges.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/type_info.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/core/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/component.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/entity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/group.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/mixin.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/observer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/organizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/ranges.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/registry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/runtime_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/snapshot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/sparse_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/storage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entity/view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/entt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/graph/adjacency_matrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/graph/dot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/graph/flow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/graph/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/locator/locator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/adl_pointer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/container.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/factory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/pointer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/policy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/resolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/template.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/meta/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/poly/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/poly/poly.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/process/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/process/process.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/process/scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/resource/cache.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/resource/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/resource/loader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/resource/resource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/signal/delegate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/signal/dispatcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/signal/emitter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/signal/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/src/entt/signal/sigh.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/aggregate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/basic_test_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/bitmask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/boxed_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/emitter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/empty.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/entity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/linter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/listener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/meta_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/mixin.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/new_delete.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/non_comparable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/non_default_constructible.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/non_movable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/pointer_stable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/throwing_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/throwing_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/tracked_memory_resource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/common/transparent_equal_to.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/lib/locator/plugin/userdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/lib/meta/plugin/userdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/entt/test/lib/meta/plugin_std/userdata.h" />
+    <Text Include="../../thirdparty/owemdjee/entt/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/entt/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/entt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/entt/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/entt/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/entt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/TODO" />
+    <Text Include="../../thirdparty/owemdjee/entt/WORKSPACE" />
+    <Text Include="../../thirdparty/owemdjee/entt/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/entt/bazel/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/entt/bazel/copts.bzl" />
+    <Text Include="../../thirdparty/owemdjee/entt/cmake/in/EnTTConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/entt/cmake/in/entt.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/entt/conan/build.py" />
+    <Text Include="../../thirdparty/owemdjee/entt/conan/ci/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/entt/conan/ci/install.sh" />
+    <Text Include="../../thirdparty/owemdjee/entt/conan/test_package/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/entt/conan/test_package/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/entt/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/dox/extra.dox" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/doxy.in" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/config.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/container.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/core.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/entity.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/faq.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/graph.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/lib.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/links.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/locator.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/meta.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/poly.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/process.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/reference.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/resource.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/signal.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/docs/md/unreal.md" />
+    <Text Include="../../thirdparty/owemdjee/entt/natvis/entt/config.natvis" />
+    <Text Include="../../thirdparty/owemdjee/entt/natvis/entt/container.natvis" />
+    <Text Include="../../thirdparty/owemdjee/entt/natvis/entt/core.natvis" />
+    <Text Include="../../thirdparty/owemdjee/entt/natvis/entt/entity.natvis" />
+    <Text Include="../../thirdparty/owemdjee/entt/natvis/entt/graph.natvis" />
+    <Text Include="../../thirdparty/owemdjee/entt/natvis/entt/locator.natvis" />
+    <Text Include="../../thirdparty/owemdjee/entt/natvis/entt/meta.natvis" />
+    <Text Include="../../thirdparty/owemdjee/entt/natvis/entt/poly.natvis" />
+    <Text Include="../../thirdparty/owemdjee/entt/natvis/entt/process.natvis" />
+    <Text Include="../../thirdparty/owemdjee/entt/natvis/entt/resource.natvis" />
+    <Text Include="../../thirdparty/owemdjee/entt/natvis/entt/signal.natvis" />
+    <Text Include="../../thirdparty/owemdjee/entt/scripts/amalgamate.py" />
+    <Text Include="../../thirdparty/owemdjee/entt/scripts/config.json" />
+    <Text Include="../../thirdparty/owemdjee/entt/scripts/sync_bzlmod_version.sh" />
+    <Text Include="../../thirdparty/owemdjee/entt/scripts/update_homebrew.sh" />
+    <Text Include="../../thirdparty/owemdjee/entt/src/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/entt/test/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/entt/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/entt/test/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/entt/test/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/entt/test/common/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/entt/test/entt/entity/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/entt/test/entt/meta/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/entt/tools/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

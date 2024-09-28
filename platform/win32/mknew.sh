@@ -1411,6 +1411,18 @@ observable
 skia
 inja
 SFML
+libpfm4
+Catch2
+entt
+FASTER
+actor-framework
+restclient-cpp
+stdexec
+msgpack-cpp
+ejdb
+iowow
+nanobench
+libprng
 
 EOT
 ) | grep -e "$FILTER"

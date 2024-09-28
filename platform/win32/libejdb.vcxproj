@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF8C302}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4061;4100;4127;4180;4206;4242;4244;4267;4324;4355;4365;4371;4388;4435;4464;4514;4582;4583;4619;4623;4625;4626;4668;4710;4820;4866;4868;4946;5026;5027;5029;5031;5038;5045;5105;5219;5220;5246;5250;5262;5266;5267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEJDB;EJDB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEJDB;EJDB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEJDB;EJDB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEJDB;EJDB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEJDB;EJDB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEJDB;EJDB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEJDB;EJDB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEJDB;EJDB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEJDB;EJDB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEJDB;EJDB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEJDB;EJDB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEJDB;EJDB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/TestQSortR.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_dart/lib/ejdb2_dart.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/ejdb2jni.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/ejdb2_node.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/ejdb2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/examples/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jbi/jbi_consumer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jbi/jbi_dup_scanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jbi/jbi_full_scanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jbi/jbi_pk_scanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jbi/jbi_selection.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jbi/jbi_sorter_consumer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jbi/jbi_uniq_scanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jbi/jbi_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jbr/jbr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jbr/tests/jbr_test1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jbs/jbs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jql/inc/jqpx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jql/jql.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jql/jqp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/jql_test1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/tests/ejdb_test1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/tests/ejdb_test2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/tests/ejdb_test3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/tests/ejdb_test4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ejdb/src/tests/ejdb_test5.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_dart/lib/dart_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_dart/lib/dart_native_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Runner-Bridging-Header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/ios/Classes/Ejdb2FlutterPlugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/js_native_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/js_native_api_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/node_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/node_api_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/ejdb2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/ejdb2_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/jbi/sort_r.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/jbr/jbr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/jql/jql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/jql/jql_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/jql/jqp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/tests/ejdb_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ejdb/src/tmpl/ejdb2cfg.h" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/BASE.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/CAPI.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/Changelog" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/WINDOWS.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/analysis_options.yaml" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/AddIOWOW.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/AddIWNET.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/CMakeFindJavaCommon.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/DebChangelog.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/FindCUnit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/FindIOWOW.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/FindIWNET.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/FindJNI.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/FindJava.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/FindLibIberty.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/GitRevision.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/ProjectUtils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/TestQsortR.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/UploadPPA.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/cmake/Modules/Win32LIBTools.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/compile_commands.json" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/docker/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/docker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/docker/testbed/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/docker/testbed/jenkins-agent" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/docker/testbed/llvm-update-alternatives.sh" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/docker/testbed/llvm.sh" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/docker/testbed/setup.sh" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/installer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/installer/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/installer/debian/dput.cf.in" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/installer/jni/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/ios-tc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/man/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/man/ejdb2.3" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/man/jbs.1" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/musl-linux-x86-64-tc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/pvs_studio_analyze.sh" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/release.sh" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_android/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_android/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_android/test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_android/test/ejdb2/src/androidTest/java/com/softmotions/ejdb2/Ejdb2AndroidTest.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_android/test/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_android/test/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_android/test/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_android/test/gradlew" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_android/test/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_android/test/local.properties" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_dart/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_dart/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_dart/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_dart/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_dart/analysis_options.yaml" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_dart/pubspec.yaml" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_dart/pubspec.yaml.in" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_dart/version.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/analysis_options.yaml" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/android/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/android/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/android/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/android/gradlew" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/android/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/android/src/main/java/com/softmotions/ejdb2/Ejdb2FlutterPlugin.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/app/src/main/java/com/softmotions/ejdb2_example/MainActivity.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/gradlew" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Flutter/Debug.xcconfig" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Flutter/Release.xcconfig" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Podfile" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/pubspec.yaml" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/ios/ejdb2_flutter.podspec" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/pubspec.yaml" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/pubspec.yaml.in" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/version.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/example/src/main/java/EJDB2Example.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/hints.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/android/java/com/softmotions/ejdb2/EJDB2.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/android/java/com/softmotions/ejdb2/EJDB2Builder.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/android/java/com/softmotions/ejdb2/EJDB2Exception.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/android/java/com/softmotions/ejdb2/IWKVOptions.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/android/java/com/softmotions/ejdb2/JQL.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/android/java/com/softmotions/ejdb2/JQLCallback.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/android/java/com/softmotions/ejdb2/example/EJDB2Example.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/main/java/com/softmotions/ejdb2/EJDB2.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/main/java/com/softmotions/ejdb2/EJDB2Builder.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/main/java/com/softmotions/ejdb2/EJDB2Document.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/main/java/com/softmotions/ejdb2/EJDB2DocumentCallback.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/main/java/com/softmotions/ejdb2/EJDB2Exception.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/main/java/com/softmotions/ejdb2/IWKVOptions.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/main/java/com/softmotions/ejdb2/JQL.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/main/java/com/softmotions/ejdb2/JQLCallback.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/main/java/com/softmotions/ejdb2/JSON.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/main/java/com/softmotions/ejdb2/JSONException.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/main/java/com/softmotions/ejdb2/JSONMissingException.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/maven-deploy.sh" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/src/test/java/com/softmotions/ejdb2/TestEJDB2.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/version.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/binary.js" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/example/index.ts" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/example/package.json" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/example/tsconfig.json" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/hints.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/index.js" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/install.js" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/package.json" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/test.js" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/tsconfig.json" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/tslint.json" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/utils.js" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_node/version.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/android/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/android/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/android/gradlew" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/android/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/android/src/main/java/com/softmotions/ejdb2/EJDB2DBModule.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/android/src/main/java/com/softmotions/ejdb2/EJDB2JQLModule.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/android/src/main/java/com/softmotions/ejdb2/EJDB2Package.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/index.js" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/package.json" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/version.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/App.js" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/androidTest/java/com/test/DetoxTest.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/java/com/test/MainActivity.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/java/com/test/MainApplication.java" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/gradlew" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/keystores/debug.keystore.properties" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/app.json" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/babel.config.js" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/e2e/firstTest.spec.js" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/e2e/init.js" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/e2e/mocha.opts" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/index.js" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/metro.config.js" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/package.json" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_swift/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jbr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jbr/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jbs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jbs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/000.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/000.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/001.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/001.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/002.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/002.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/003.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/003.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/004.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/004.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/005.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/005.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/006.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/006.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/007.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/007.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/008.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/008.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/009.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/009.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/010.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/010.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/011.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/012.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/013.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/014.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/014.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/015.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/015.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/016.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/016.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/017.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/017.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/018.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/018.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/019.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/019.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/020.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/020.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/021.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/021.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/022.expected.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/jql/tests/data/022.jql" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/tests/package.json" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/src/tmpl/libejdb2.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/uncrustify.cfg" />
+    <Text Include="../../thirdparty/owemdjee/ejdb/win64-tc.cmake" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_android/test/ejdb2/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/android/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/app/src/debug/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/app/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/app/src/main/res/drawable/launch_background.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/app/src/main/res/values/styles.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_flutter/example/android/app/src/profile/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/example/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_jni/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/binding/android/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/debug/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/res/values/strings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ejdb/src/bindings/ejdb2_react_native/tests/android/app/src/main/res/values/styles.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

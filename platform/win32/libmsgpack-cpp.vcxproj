@@ -1,0 +1,1061 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFC61CD6}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4061;4100;4127;4180;4206;4242;4244;4267;4324;4355;4365;4371;4388;4435;4464;4514;4582;4583;4619;4623;4625;4626;4668;4710;4820;4866;4868;4946;5026;5027;5029;5031;5038;5045;5105;5219;5220;5246;5250;5262;5266;5267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMSGPACK_CPP;MSGPACK_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMSGPACK_CPP;MSGPACK_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMSGPACK_CPP;MSGPACK_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMSGPACK_CPP;MSGPACK_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMSGPACK_CPP;MSGPACK_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMSGPACK_CPP;MSGPACK_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMSGPACK_CPP;MSGPACK_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMSGPACK_CPP;MSGPACK_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMSGPACK_CPP;MSGPACK_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMSGPACK_CPP;MSGPACK_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMSGPACK_CPP;MSGPACK_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMSGPACK_CPP;MSGPACK_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/boost/asio_send_recv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/boost/asio_send_recv_zlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/boost/msgpack_variant_capitalize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/boost/msgpack_variant_mapbased.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/class_intrusive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/class_intrusive_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/class_non_intrusive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/custom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/enum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/map_based_versionup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/protocol_new.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/reuse_zone.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/simple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/speed_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/speed_test_nested_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp11/container.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp11/non_def_con_class.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp11/socket_stream_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/x3/parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/x3/stream_unpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/example/x3/unpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test-install/simple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/array_ref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/boost_fusion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/boost_optional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/boost_string_ref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/boost_string_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/boost_variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/buffer_c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/carray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/cases.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/convert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/fixint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/inc_adaptor_define.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/iterator_cpp11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/limit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/msgpack_basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/msgpack_container.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/msgpack_cpp11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/msgpack_cpp17.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/msgpack_cpp20.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/msgpack_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/msgpack_tuple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/msgpack_vref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/msgpack_x3_parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/multi_file1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/multi_file2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/object.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/object_with_zone.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/pack_unpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/raw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/reference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/reference_cpp11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/reference_wrapper_cpp11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/shared_ptr_cpp11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/size_equal_only.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/streaming.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/unique_ptr_cpp11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/user_class.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/version.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/visitor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/msgpack-cpp/test/zone.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/adaptor_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/adaptor_base_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/array_ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/array_ref_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/bool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/boost/fusion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/boost/msgpack_variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/boost/msgpack_variant_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/boost/optional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/boost/string_ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/boost/string_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/carray.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/char_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/check_container_size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/check_container_size_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/complex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp11/array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp11/array_char.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp11/array_unsigned_char.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp11/chrono.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp11/forward_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp11/reference_wrapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp11/shared_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp11/timespec.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp11/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp11/unique_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp11/unordered_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp11/unordered_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp17/array_byte.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp17/byte.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp17/carray_byte.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp17/optional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp17/string_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp17/variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp17/vector_byte.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/cpp20/span.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/define_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/deque.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/ext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/ext_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/fixint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/fixint_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/float.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/int_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/map_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/msgpack_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/msgpack_tuple_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/nil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/nil_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/pair.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/raw.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/raw_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/size_equal_only.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/size_equal_only_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/tr1/unordered_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/tr1/unordered_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/v4raw.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/v4raw_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/vector_bool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/vector_char.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/vector_unsigned_char.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/adaptor/wstring.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/assert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/cpp_config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/cpp_config_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/cpp_version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/create_object_visitor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/create_object_visitor_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/fbuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/fbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/gcc_atomic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/iterator_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/meta_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/null_visitor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/null_visitor_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/object_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/object_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/object_fwd_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/pack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/pack_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/parse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/parse_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/parse_return.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/alpha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/blackfin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/convex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/ia64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/m68k.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/mips.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/parisc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/ppc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/ptx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/pyramid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/rs6k.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/sparc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/superh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/sys370.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/sys390.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/x86/32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/x86/64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/architecture/z.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/borland.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/clang.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/comeau.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/compaq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/diab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/digitalmars.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/dignus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/edg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/ekopath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/gcc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/gcc_xml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/greenhills.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/hp_acc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/iar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/ibm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/intel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/kai.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/llvm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/metaware.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/metrowerks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/microtec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/mpw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/nvcc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/palm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/pgi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/sgi_mipspro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/sunpro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/tendra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/visualc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/compiler/watcom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/detail/_cassert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/detail/_exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/detail/comp_detected.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/detail/endian_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/detail/os_detected.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/detail/platform_detected.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/detail/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/detail/test_def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/hardware.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/hardware/simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/hardware/simd/arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/hardware/simd/arm/versions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/hardware/simd/ppc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/hardware/simd/ppc/versions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/hardware/simd/x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/hardware/simd/x86/versions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/hardware/simd/x86_amd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/hardware/simd/x86_amd/versions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/language.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/language/cuda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/language/objc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/language/stdc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/language/stdcpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/c/_prefix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/c/cloudabi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/c/gnu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/c/uc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/c/vms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/c/zos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/std.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/std/_prefix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/std/cxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/std/dinkumware.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/std/libcomo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/std/modena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/std/msl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/std/roguewave.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/std/sgi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/std/stdcpp3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/std/stlport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/library/std/vacpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/make.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/aix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/amigaos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/android.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/beos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/bsd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/bsd/bsdi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/bsd/dragonfly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/bsd/free.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/bsd/net.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/bsd/open.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/cygwin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/haiku.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/hpux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/ios.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/irix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/linux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/macos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/os400.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/qnxnto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/solaris.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/unix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/vms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/os/windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/other.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/other/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/other/workaround.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/platform/cloudabi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/platform/ios.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/platform/mingw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/platform/mingw32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/platform/mingw64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/platform/windows_desktop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/platform/windows_phone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/platform/windows_runtime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/platform/windows_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/platform/windows_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/platform/windows_system.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/platform/windows_uwp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/predef/version_number.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/arithmetic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/arithmetic/add.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/arithmetic/dec.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/arithmetic/detail/div_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/arithmetic/div.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/arithmetic/inc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/arithmetic/mod.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/arithmetic/mul.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/arithmetic/sub.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/detail/get_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/elem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/enum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/insert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/pop_back.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/pop_front.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/push_back.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/push_front.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/remove.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/replace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/reverse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/to_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/to_seq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/array/to_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/assert_msg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/cat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/comma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/comma_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/comparison.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/comparison/equal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/comparison/greater.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/comparison/greater_equal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/comparison/less.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/comparison/less_equal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/comparison/not_equal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/config/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/config/limits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/control.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/control/deduce_d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/control/detail/dmc/while.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/control/detail/edg/while.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/control/detail/msvc/while.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/control/detail/while.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/control/expr_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/control/expr_iif.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/control/if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/control/iif.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/control/while.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/debug.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/debug/assert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/debug/error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/debug/line.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/dec.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/detail/auto_rec.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/detail/check.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/detail/dmc/auto_rec.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/detail/is_binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/detail/is_nullary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/detail/is_unary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/detail/null.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/detail/split.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/empty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/enum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/enum_params.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/enum_params_with_a_default.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/enum_params_with_defaults.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/enum_shifted.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/enum_shifted_params.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/expand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/expr_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/facilities.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/facilities/apply.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/facilities/detail/is_empty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/facilities/empty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/facilities/expand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/facilities/identity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/facilities/intercept.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/facilities/is_1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/facilities/is_empty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/facilities/is_empty_or_1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/facilities/is_empty_variadic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/facilities/overload.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/for.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/identity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/inc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iterate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/bounds/lower1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/bounds/lower2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/bounds/lower3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/bounds/lower4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/bounds/lower5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/bounds/upper1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/bounds/upper2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/bounds/upper3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/bounds/upper4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/bounds/upper5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/finish.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/iter/forward1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/iter/forward2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/iter/forward3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/iter/forward4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/iter/forward5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/iter/reverse1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/iter/reverse2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/iter/reverse3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/iter/reverse4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/iter/reverse5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/local.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/rlocal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/self.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/detail/start.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/iterate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/local.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/iteration/self.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/library.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/limits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/adt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/append.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/at.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/cat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/detail/dmc/fold_left.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/detail/edg/fold_left.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/detail/edg/fold_right.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/detail/fold_left.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/detail/fold_right.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/enum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/first_n.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/fold_left.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/fold_right.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/for_each.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/for_each_i.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/for_each_product.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/rest_n.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/reverse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/to_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/to_seq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/to_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/list/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/logical.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/logical/and.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/logical/bitand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/logical/bitnor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/logical/bitor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/logical/bitxor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/logical/bool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/logical/compl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/logical/nor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/logical/not.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/logical/or.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/logical/xor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/max.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/min.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/punctuation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/punctuation/comma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/punctuation/comma_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/punctuation/detail/is_begin_parens.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/punctuation/is_begin_parens.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/punctuation/paren.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/punctuation/paren_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/punctuation/remove_parens.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repeat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repeat_2nd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repeat_3rd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repeat_from_to.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repeat_from_to_2nd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repeat_from_to_3rd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/deduce_r.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/deduce_z.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/detail/dmc/for.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/detail/edg/for.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/detail/for.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/detail/msvc/for.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/enum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/enum_binary_params.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/enum_params.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/enum_params_with_a_default.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/enum_params_with_defaults.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/enum_shifted.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/enum_shifted_binary_params.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/enum_shifted_params.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/enum_trailing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/enum_trailing_binary_params.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/enum_trailing_params.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/for.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/repeat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/repetition/repeat_from_to.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/selection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/selection/max.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/selection/min.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/cat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/detail/binary_transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/detail/is_empty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/detail/split.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/detail/to_list_msvc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/elem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/enum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/first_n.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/fold_left.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/fold_right.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/for_each.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/for_each_i.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/for_each_product.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/insert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/pop_back.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/pop_front.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/push_back.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/push_front.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/remove.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/replace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/rest_n.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/reverse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/seq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/subseq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/to_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/to_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/to_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/seq/variadic_seq_to_seq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/slot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/slot/counter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/slot/detail/counter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/slot/detail/def.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/slot/detail/shared.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/slot/detail/slot1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/slot/detail/slot2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/slot/detail/slot3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/slot/detail/slot4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/slot/detail/slot5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/slot/slot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/stringize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/detail/is_single_return.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/eat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/elem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/enum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/insert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/pop_back.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/pop_front.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/push_back.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/push_front.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/rem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/remove.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/replace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/reverse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/to_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/to_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/tuple/to_seq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/variadic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/variadic/detail/is_single_return.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/variadic/elem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/variadic/size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/variadic/to_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/variadic/to_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/variadic/to_seq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/variadic/to_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/while.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/preprocessor/wstringize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/sbuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/sbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/sysdep.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/unpack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/unpack_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/unpack_define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/unpack_exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/adaptor_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/adaptor_base_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/array_ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/array_ref_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/bool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/boost/fusion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/boost/msgpack_variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/boost/msgpack_variant_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/boost/optional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/boost/string_ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/boost/string_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/carray.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/char_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/check_container_size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/check_container_size_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/complex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp11/array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp11/array_char.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp11/array_unsigned_char.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp11/chrono.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp11/forward_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp11/reference_wrapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp11/shared_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp11/timespec.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp11/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp11/unique_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp11/unordered_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp11/unordered_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp17/array_byte.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp17/byte.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp17/carray_byte.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp17/optional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp17/string_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp17/variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp17/vector_byte.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/cpp20/span.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/define.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/define_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/deque.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/detail/cpp03_define_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/detail/cpp03_define_array_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/detail/cpp03_define_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/detail/cpp03_define_map_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/detail/cpp03_msgpack_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/detail/cpp03_msgpack_tuple_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/detail/cpp11_convert_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/detail/cpp11_define_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/detail/cpp11_define_array_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/detail/cpp11_define_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/detail/cpp11_define_map_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/detail/cpp11_msgpack_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/detail/cpp11_msgpack_tuple_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/ext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/ext_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/fixint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/fixint_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/float.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/int_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/map_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/msgpack_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/msgpack_tuple_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/nil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/nil_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/pair.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/raw.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/raw_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/size_equal_only.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/size_equal_only_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/tr1/unordered_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/tr1/unordered_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/v4raw.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/v4raw_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/vector_bool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/vector_char.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/vector_unsigned_char.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/adaptor/wstring.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/cpp_config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/cpp_config_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/detail/cpp03_zone.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/detail/cpp03_zone_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/detail/cpp11_zone.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/detail/cpp11_zone_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/fbuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/fbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/iterator_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/meta_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/object_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/object_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/object_fwd_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/pack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/pack_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/parse_return.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/sbuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/sbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/unpack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/unpack_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/unpack_exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/versioning.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/vrefbuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/vrefbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/zbuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/zbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/zone.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v1/zone_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/adaptor_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/adaptor_base_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/array_ref_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/boost/msgpack_variant_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/check_container_size_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/define_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/detail/cpp03_define_array_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/detail/cpp03_define_map_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/detail/cpp03_msgpack_tuple_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/detail/cpp11_define_array_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/detail/cpp11_define_map_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/detail/cpp11_msgpack_tuple_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/ext_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/fixint_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/int_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/map_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/msgpack_tuple_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/nil_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/raw_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/size_equal_only_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/adaptor/v4raw_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/cpp_config_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/create_object_visitor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/create_object_visitor_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/detail/cpp03_zone_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/detail/cpp11_zone_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/fbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/iterator_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/meta_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/null_visitor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/null_visitor_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/object_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/object_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/object_fwd_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/pack_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/parse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/parse_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/parse_return.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/sbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/unpack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/unpack_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/vrefbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/x3_parse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/x3_parse_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/x3_unpack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/x3_unpack_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/zbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v2/zone_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/adaptor_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/adaptor_base_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/array_ref_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/boost/msgpack_variant_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/check_container_size_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/define_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/detail/cpp03_define_array_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/detail/cpp03_define_map_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/detail/cpp03_msgpack_tuple_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/detail/cpp11_define_array_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/detail/cpp11_define_map_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/detail/cpp11_msgpack_tuple_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/ext_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/fixint_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/int_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/map_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/msgpack_tuple_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/nil_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/raw_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/size_equal_only_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/adaptor/v4raw_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/cpp_config_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/create_object_visitor_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/detail/cpp03_zone_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/detail/cpp11_zone_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/fbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/iterator_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/meta_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/null_visitor_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/object_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/object_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/object_fwd_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/pack_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/parse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/parse_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/parse_return.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/sbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/unpack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/unpack_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/vrefbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/x3_parse_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/x3_unpack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/x3_unpack_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/zbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/v3/zone_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/version_master.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/versioning.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/vrefbuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/vrefbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/x3_parse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/x3_parse_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/x3_unpack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/x3_unpack_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/zbuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/zbuffer_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/zone.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/include/msgpack/zone_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/msgpack-cpp/test/test_allocator.hpp" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/Files.cmake" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/NOTICE" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/QUICKSTART-CPP.md" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/ci/build_cmake.sh" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/ci/build_regression.sh" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/ci/set_gcc_10.sh" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/cmake/CodeCoverage.cmake" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/codecov.yml" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/example/boost/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp03/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/example/cpp11/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/example/x3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/make_file_list.sh" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/makedist.sh" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/msgpack-cxx-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/preprocess" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/test-install/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/test/cases.mpac" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/test/cases_compact.mpac" />
+    <Text Include="../../thirdparty/owemdjee/msgpack-cpp/update_version.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
