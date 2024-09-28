@@ -19,6 +19,21 @@ for f in $( grep -w "vcxproj" "$SLN" | tr '\\ \t"\r' "\n" | grep -w "vcxproj\$" 
 	fi
 done
 
+
+# custom conditions: don't inspect the __build_target* projects when we're not processing the mupdf or dev-list sln files:
+if [[ $SLN =~ "mupdf" ]] ; then
+	true
+elif [[ $SLN =~ "m-dev-list" ]] ; then
+	true
+else
+	echo "###################### IGNORING __build_target* projects... ##################"
+	cat vcxproj-file-list.lst | grep -v __build_target > tmp.lst
+	cat vcxproj-file-list.lst | grep __build_target_current_work >> tmp.lst
+	cat tmp.lst | sort | uniq > vcxproj-file-list.lst 
+	rm tmp.lst
+fi
+
+
 echo "" > vcxproj-file-list-extras.lst
 for f in $( cat vcxproj-file-list.lst | sort | uniq ) ; do
 	echo "PROCESSING::: $f"

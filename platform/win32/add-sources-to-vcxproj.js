@@ -492,6 +492,14 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
         }
         return true;
 
+    case '.vcxproj':
+    case '.sln':
+    case '.filters':
+		// these are MSVC project files and should be ignored as source files.
+		if (DEBUG > 1) console.log('IGNORE:', {f, f4f, sp});
+		ignoreCount++;
+		return false;
+
     default:
 		if (DEBUG > 2) console.error("files.filter:", {f, ext: path.extname(f).toLowerCase(), isSpecial: isSpecialMiscFile(f)})
         if (!isSpecialMiscFile(f))
