@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{F00868E8-0DBC-4C6B-B31A-EF1330CB4D91}</ProjectGuid>
+    <ProjectGuid>{6781D7BB-B856-4F2A-A8A0-C3BC8CA32677}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -105,7 +105,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4018;4061;4100;4127;4180;4206;4242;4244;4267;4324;4365;4371;4388;4464;4514;4619;4623;4625;4626;4668;4710;4820;4946;5026;5027;5029;5031;5038;5045;5105;5219;5250;5262;5266;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4018;4061;4100;4127;4180;4206;4242;4244;4267;4324;4355;4365;4371;4388;4435;4464;4514;4582;4583;4619;4623;4625;4626;4668;4710;4820;4866;4868;4946;5026;5027;5029;5031;5038;5045;5105;5219;5220;5246;5250;5262;5266;5267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -129,29 +129,74 @@
 <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="chiaroscuramente.vcxproj">
+      <Project>{78c512d3-eee8-4816-9c2d-bdacb76e3917}</Project>
+    </ProjectReference>
+    <ProjectReference Include="chiaroscuramente_misc.vcxproj">
+      <Project>{8c4d49f1-ad78-4dcf-b92c-ddc2a6eb8df0}</Project>
+    </ProjectReference>
     <ProjectReference Include="curl.vcxproj">
       <Project>{00111979-815b-4f64-bc9d-219078b1f3aa}</Project>
     </ProjectReference>
-    <ProjectReference Include="__build_target_boost.vcxproj">
-      <Project>{d00cae4a-b94a-4ea5-b8dd-4851fc7a6b64}</Project>
+    <ProjectReference Include="libcfgpath.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff651180}</Project>
     </ProjectReference>
-    <ProjectReference Include="__build_target_experimental.vcxproj">
-      <Project>{b88bfa7d-1964-41d9-ae63-c91997fe2c7a}</Project>
+    <ProjectReference Include="libchaos.vcxproj">
+      <Project>{6769b987-26e9-4cb8-81fe-715d9e5ce4d9}</Project>
     </ProjectReference>
-    <ProjectReference Include="__build_target_extra_libraries.vcxproj">
-      <Project>{a2bd0caf-40f2-436a-afa8-778eb0a81fe2}</Project>
+    <ProjectReference Include="libchaos_tests.vcxproj">
+      <Project>{6769b987-26e9-4cb8-81fe-715d9e43ecbf}</Project>
     </ProjectReference>
-    <ProjectReference Include="__build_target_mupdf.vcxproj">
-      <Project>{0688fe97-e8b4-4d80-8b8b-d445b349a82d}</Project>
+    <ProjectReference Include="libchewing.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff61808a}</Project>
     </ProjectReference>
-    <ProjectReference Include="__build_target_opencv.vcxproj">
-      <Project>{988af974-e48d-4f43-844c-8e136d041aa2}</Project>
+    <ProjectReference Include="libchewing_text_cud.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff374a24}</Project>
     </ProjectReference>
-    <ProjectReference Include="__build_target_tesseract.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-101000000002}</Project>
+    <ProjectReference Include="libchiaroscuramente.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffc90ba9}</Project>
     </ProjectReference>
-    <ProjectReference Include="__build_target_wxWindows.vcxproj">
-      <Project>{2b0af988-5c4d-4794-86b1-c14ab102ba31}</Project>
+    <ProjectReference Include="libchopshop.vcxproj">
+      <Project>{9068f65e-7329-45fe-86c6-4a2d234536f4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfastPRNG.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd97593}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpathutils.vcxproj">
+      <Project>{9048804d-1d6d-4393-8f85-b7560875a43e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpathutils_misc.vcxproj">
+      <Project>{74c923b5-4908-42b3-9bb7-3eebc6447749}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpathutils_tests.vcxproj">
+      <Project>{9048804d-1d6d-4393-8f85-b756086cf9a5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libprng.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcfb82a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libprng_misc.vcxproj">
+      <Project>{75e72cc7-ade9-47d4-97e2-ba7f8386dbb2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libvcopy.vcxproj">
+      <Project>{5a7c1b31-1eb5-4f0c-8873-355e5e1e889c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libvcopy_misc.vcxproj">
+      <Project>{f7b450cc-eff3-4742-960c-63e2a0814830}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libvcopy_tests.vcxproj">
+      <Project>{5a7c1b31-1eb5-4f0c-8873-355e5ee2fe16}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libworde_butcher.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffee37e6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="stdext-path.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa0525d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vcopy.vcxproj">
+      <Project>{36652466-05bf-488f-bace-8d2132d64068}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vcopy_test.vcxproj">
+      <Project>{c7bbab70-0fa2-4660-b47c-35f31b559aee}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
