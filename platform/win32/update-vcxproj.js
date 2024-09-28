@@ -321,6 +321,9 @@ while we keep these:
 - warning C4800: Implicit conversion from 'int' to bool. Possible information loss
 - warning C5246: '_Elems': the initialization of a subobject should be wrapped in braces
 - warning C4355: 'this': used in base member initializer list
+- warning C4200: nonstandard extension used: zero-sized array in struct/union
+
+- warning C4295: 'xmltranscodetable_ISO8859_2': array is too small to include a terminating null character
 
 - warning C4295: 'in': array is too small to include a terminating null character
 - warning C4295: 'xmltranscodetable_ISO8859_5': array is too small to include a terminating null character
@@ -366,7 +369,7 @@ while we keep these:
 
 lest we want to ignore most of these too:
  
-      <DisableSpecificWarnings>4355;5246;5267;4866;4868;5220;4582;4583;4435;4619;5029;5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4200;4355;5246;5267;4866;4868;5220;4582;4583;4435;4619;5029;5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
 	
 */
 
@@ -385,7 +388,7 @@ let compiler_settings = `
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4355;5246;5267;4866;4868;5220;4582;4583;4435;4619;5029;5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4200;4355;5246;5267;4866;4868;5220;4582;4583;4435;4619;5029;5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
