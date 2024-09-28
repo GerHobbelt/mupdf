@@ -1486,6 +1486,11 @@ void pdf_undo(fz_context *ctx, pdf_document *doc)
 	fz_write_printf(ctx, fz_stddbg(ctx), "Undo!\n");
 #endif
 
+	// nuke all caches
+	pdf_drop_page_tree_internal(ctx, doc);
+	pdf_sync_open_pages(ctx, doc);
+	fz_empty_store(ctx);
+
 	doc->journal->current = entry->prev;
 
 	swap_fragments(ctx, doc, entry);
@@ -1524,6 +1529,11 @@ void pdf_redo(fz_context *ctx, pdf_document *doc)
 
 	if (entry == NULL)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Already at end of history");
+
+	// nuke all caches
+	pdf_drop_page_tree_internal(ctx, doc);
+	pdf_sync_open_pages(ctx, doc);
+	fz_empty_store(ctx);
 
 	doc->journal->current = entry;
 
@@ -1913,6 +1923,8 @@ static void prepare_object_for_alteration(fz_context *ctx, pdf_obj *obj, pdf_obj
 			pdf_drop_local_xref_and_resources(ctx, doc);
 		}
 	}
+
+	fz_empty_store(ctx);
 
 	entry = NULL;
 	if (doc->journal)

@@ -1427,6 +1427,7 @@ static void do_undo(void)
 
 	if (desired != -1 && desired != pos)
 	{
+		clear_selected_annot();
 		page_contents_changed = 1;
 		while (pos > desired)
 		{
@@ -1440,7 +1441,6 @@ static void do_undo(void)
 			pdf_redo(ctx, pdf);
 			pos++;
 		}
-		clear_selected_annot();
 		load_page();
 	}
 
