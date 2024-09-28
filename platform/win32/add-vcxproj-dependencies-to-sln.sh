@@ -25,6 +25,8 @@ if [[ $SLN =~ "mupdf" ]] ; then
 	true
 elif [[ $SLN =~ "m-dev-list" ]] ; then
 	true
+elif [[ $SLN =~ "m-single" ]] ; then
+	true
 else
 	echo "###################### IGNORING __build_target* projects... ##################"
 	cat vcxproj-file-list.lst | grep -v __build_target > tmp.lst
