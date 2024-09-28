@@ -33,7 +33,18 @@ extern "C" {
 
 typedef int tool_f(void);
 typedef int tool_fa(int argc, const char** argv);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
 typedef int tool_f_cpp();
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 static int help(void);
 static int quit(void);
@@ -46,7 +57,9 @@ struct cmd_info
 	{
 		tool_f* f;
 		tool_fa* fa;
+#ifdef __cplusplus
 		tool_f_cpp* fpp;
+#endif
 	} f;
 };
 

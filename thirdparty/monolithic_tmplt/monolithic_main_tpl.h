@@ -22,9 +22,16 @@
 #endif
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef int tool_f(void);
 typedef int tool_fa(int argc, const char** argv);
+
+#ifdef __cplusplus
+}
+#endif
 
 static int help(void);
 static int quit(void);
@@ -57,6 +64,9 @@ static struct cmd_info
 #include <string.h>
 #include <locale.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 static const char* xoptarg; /* Global argument pointer. */
 static int xoptind = 0; /* Global argv index. */
@@ -110,6 +120,10 @@ static int xgetopt(int argc, const char** argv, const char* optstring)
 
 	return c;
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #ifdef HAVE_READLINE
 #include <readline/readline.h>
@@ -284,7 +298,9 @@ static char* readline(const char* prompt)
 	}
 	return NULL;
 }
+
 #endif
+
 
 #define PS1 "> "
 
