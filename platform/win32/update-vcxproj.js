@@ -137,6 +137,9 @@ src = src
 // remove empty PropertyGroups, e.g.
 // <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
 .replace(/<PropertyGroup Condition="[^<>]* \/>/g, '')
+//   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+//   </PropertyGroup>
+.replace(/<PropertyGroup Condition="[^<>]*>[\s]*?<\/PropertyGroup>/gm, '')
 // merge unlabeled PropertyGroup sections, e.g.
 //   <PropertyGroup>
 //     <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
@@ -226,6 +229,7 @@ src = src
 .replace(/<ImportGroup\s+Label="PropertySheets"\s*\/>/g, '')
 .replace(/<ImportGroup\s+Label="PropertySheets"[^]*?<\/ImportGroup>/g, '')
 .replace(/<EnableUnitySupport>[^<]*<\/EnableUnitySupport>/g, '')
+.replace(/<UseStructuredOutput>[^<]*<\/UseStructuredOutput>/g, '')
 
 /*
     <ResourceCompile>
