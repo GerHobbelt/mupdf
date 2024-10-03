@@ -6,6 +6,8 @@
 
 TARGETS=                            
 
+# "all target does not exist"
+# See notes about 'pseudotarget' a.k.a. phony target at the bottom of this makefile. That's what you get when using nmake instead of (GNU) make.
 all : $(TARGETS)
 	@echo "Target: all --> done"
 	@echo "leptonica/MSVC: copy test images to the expected target directory."
@@ -23,8 +25,10 @@ rebuild : clean all
 
 clean :
 	@echo "Target: clean --> done"
+	-rmdir -Recurse -Force "$(BINDIR)/../../lept/demo-data/"
 	-rmdir /S "$(BINDIR)/../../lept/demo-data/"
-
+	# First rmdir is for cmd/powershell environment, second if for rmdir from unix tools (git-for-windows).
+	# You need either one when running this from MSVC IDE or direct from MSVC command line.
 
 .PHONY : all clean rebuild
 #
