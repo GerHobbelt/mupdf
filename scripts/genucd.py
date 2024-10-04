@@ -1,5 +1,7 @@
 # Create utfdata.h from UnicodeData.txt
 
+import sys
+
 tolower = []
 toupper = []
 isalpha = []
@@ -71,7 +73,8 @@ def dumpmap(name, input):
 			print(hex(a)+","+str(n-a)+",")
 	print("};");
 
-print("/* This file was automatically created from UnicodeData.txt */")
+print("/* This file was automatically created from UnicodeData.txt using the genucd.py script. */")
+
 dumpalpha()
 dumpmap("ucd_tolower", tolower)
 dumpmap("ucd_toupper", toupper)
