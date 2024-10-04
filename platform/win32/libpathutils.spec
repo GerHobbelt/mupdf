@@ -2,3 +2,5 @@
 also-ignore:
 	/tmp/
 	
+	.*test.*
+	
