@@ -464,6 +464,15 @@ const char *fz_parse_page_range(fz_context *ctx, const char *s, int *a, int *b, 
 int fz_tolower(int c);
 int fz_toupper(int c);
 
+/**
+	Unicode aware isXYZ() functions.
+*/
+int fz_islower(int c);
+int fz_isupper(int c);
+int fz_isalpha(int c);
+int fz_isdigit(int c);
+int fz_isalnum(int c);
+
 #ifdef __cplusplus
 }
 #endif

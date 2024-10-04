@@ -5,6 +5,8 @@ import sys
 tolower = []
 toupper = []
 isalpha = []
+isdigit = []
+tovalue = []
 
 for line in open("UnicodeData.txt").readlines():
 	line = line.split(";")
@@ -12,6 +14,13 @@ for line in open("UnicodeData.txt").readlines():
 	# if code > 65535: continue # skip non-BMP codepoints
 	if line[2][0] == 'L':
 		isalpha.append(code)
+	if line[2][0] == 'N':
+		isdigit.append(code)
+        fraction = line[8]
+        if not '/' in fraction:
+            fraction = fraction + "/1"
+        terms = fraction.split('/')
+		tovalue.append((code,terms[0],terms[1]))
 	if line[12]:
 		toupper.append((code,int(line[12],16)))
 	if line[13]:
@@ -41,6 +50,38 @@ def dumpalpha():
 	for a, b in table:
 		if b - a == 0:
 			print(hex(a)+",")
+	print("};");
+
+def dumpdigit():
+	table = []
+	prev = 0
+	start = 0
+	for code in isdigit:
+		if code != prev+1:
+			if start:
+				table.append((start,prev))
+			start = code
+		prev = code
+	table.append((start,prev))
+
+	print("")
+	print("static const int ucd_digit2[] = {")
+	for a, b in table:
+		if b - a > 0:
+			print(hex(a)+","+hex(b)+",")
+	print("};");
+
+	print("")
+	print("static const int ucd_digit1[] = {")
+	for a, b in table:
+		if b - a == 0:
+			print(hex(a)+",")
+	print("};");
+
+	print("")
+	print("static const int ucd_digit_value[] = {")
+	for a, b in tovalue:
+		print(hex(a)+","+str(b)+",")
 	print("};");
 
 def dumpmap(name, input):
@@ -76,5 +117,6 @@ def dumpmap(name, input):
 print("/* This file was automatically created from UnicodeData.txt using the genucd.py script. */")
 
 dumpalpha()
+dumpdigit()
 dumpmap("ucd_tolower", tolower)
 dumpmap("ucd_toupper", toupper)

@@ -60,6 +60,68 @@ fz_ucd_bsearch(int c, const int *t, int n, int ne)
 }
 
 int
+fz_islower(int c)
+{
+	const int* p;
+
+	p = fz_ucd_bsearch(c, ucd_toupper2, nelem(ucd_toupper2) / 3, 3);
+	if (p && c >= p[0] && c <= p[1])
+		return 1;
+	p = fz_ucd_bsearch(c, ucd_toupper1, nelem(ucd_toupper1) / 2, 2);
+	if (p && c == p[0])
+		return 1;
+	return 0;
+}
+
+int
+fz_isupper(int c)
+{
+	const int* p;
+
+	p = fz_ucd_bsearch(c, ucd_tolower2, nelem(ucd_tolower2) / 3, 3);
+	if (p && c >= p[0] && c <= p[1])
+		return 1;
+	p = fz_ucd_bsearch(c, ucd_tolower1, nelem(ucd_tolower1) / 2, 2);
+	if (p && c == p[0])
+		return 1;
+	return 0;
+}
+
+int
+fz_isalpha(int c)
+{
+	const int * p;
+
+	p = fz_ucd_bsearch(c, ucd_alpha2, nelem(ucd_alpha2) / 2, 2);
+	if (p && c >= p[0] && c <= p[1])
+		return 1;
+	p = fz_ucd_bsearch(c, ucd_alpha1, nelem(ucd_alpha1), 1);
+	if (p && c == p[0])
+		return 1;
+	return 0;
+}
+
+int
+fz_isdigit(int c)
+{
+	const int* p;
+
+	p = fz_ucd_bsearch(c, ucd_digit2, nelem(ucd_digit2) / 2, 2);
+	if (p && c >= p[0] && c <= p[1])
+		return 1;
+	p = fz_ucd_bsearch(c, ucd_digit1, nelem(ucd_digit1), 1);
+	if (p && c == p[0])
+		return 1;
+	return 0;
+}
+
+int
+fz_isalnum(int c)
+{
+	return fz_isdigit(c) || fz_isalpha(c);
+}
+
+int
 fz_tolower(int c)
 {
 	const int *p;
