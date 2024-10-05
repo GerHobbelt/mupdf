@@ -129,6 +129,7 @@ typedef struct
 	uint32_t fdselect_len;
 	uint32_t fdarray_index_offset;
 	uint32_t charstring_type;
+	int uses_cidfont_operators;
 
 	uint16_t unpacked_charset_len;
 	uint16_t unpacked_charset_max;
@@ -1761,6 +1762,9 @@ read_top_dict(fz_context *ctx, cff_t *cff, int idx)
 	{
 		switch (k)
 		{
+		case DICT_OP_ROS:
+			cff->uses_cidfont_operators = 1;
+			break;
 		case DICT_OP_charset:
 			cff->charset_offset = dict_arg_int(ctx, &di, 0);
 			break;
@@ -2139,7 +2143,7 @@ fz_subset_cff_for_gids(fz_context *ctx, fz_buffer *orig, int *gids, int num_gids
 		index_load(ctx, &cff.fdarray_index, base, (uint32_t)len, cff.fdarray_index_offset);
 
 		/* Move our list of gids into our own storage. */
-		if (cidfont)
+		if (cidfont && cff.uses_cidfont_operators)
 		{
 			/* For CIDFonts we are given CIDs here, not gids. Accordingly
 			 * we need to look them up in the charset */
@@ -2164,7 +2168,7 @@ fz_subset_cff_for_gids(fz_context *ctx, fz_buffer *orig, int *gids, int num_gids
 		subset_locals(ctx, &cff);
 		subset_globals(ctx, &cff);
 
-		if (cidfont)
+		if (cidfont && cff.uses_cidfont_operators)
 		{
 			get_fdselect_len(ctx, &cff);
 			read_fdarray_and_privates(ctx, &cff);
