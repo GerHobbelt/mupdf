@@ -231,6 +231,7 @@ compare_areas(const void *a_, const void *b_)
 		return 0;
 }
 
+#ifdef DEBUG_WRITE_AS_PS
 /* Sort the rectangle list to be largest area first. For ease of humans
  * reading debug output. */
 static void boxer_sort(boxer_t *boxer)
@@ -245,6 +246,7 @@ static int boxer_results(boxer_t *boxer, fz_rect **list)
 	*list = boxer->list->list;
 	return boxer->list->len;
 }
+#endif
 
 /* Destroy a boxer. */
 static void boxer_destroy(fz_context *ctx, boxer_t *boxer)
