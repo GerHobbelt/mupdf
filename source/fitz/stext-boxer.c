@@ -300,7 +300,7 @@ static boxer_t *boxer_subset(fz_context *ctx, boxer_t *boxer, fz_rect rect)
 	return new_boxer;
 }
 
-static void analyse_sub(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_block, fz_stext_block **last_block, boxer_t *big_boxer, int depth);
+static int analyse_sub(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_block, fz_stext_block **last_block, boxer_t *big_boxer, int depth);
 
 static void
 analyse_subset(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_block, fz_stext_block **last_block, boxer_t *boxer, fz_rect r, int depth)
@@ -308,7 +308,7 @@ analyse_subset(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_bloc
 	boxer_t *sub_box = boxer_subset(ctx, boxer, r);
 
 	fz_try(ctx)
-		analyse_sub(ctx, page, first_block, last_block, sub_box, depth);
+		(void)analyse_sub(ctx, page, first_block, last_block, sub_box, depth);
 	fz_always(ctx)
 		boxer_destroy(ctx, sub_box);
 	fz_catch(ctx)
@@ -317,7 +317,7 @@ analyse_subset(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_bloc
 
 /* Consider a boxer for subdivision.
  * Returns 0 if no suitable subdivision point found.
- * if a subdivision point is found.*/
+ * Returns 1 if a subdivision point is found.*/
 static int
 boxer_subdivide(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_block, fz_stext_block **last_block, boxer_t *boxer, int depth)
 {
@@ -605,7 +605,6 @@ page_subset(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_block, 
 					if (newblock == NULL)
 					{
 						newblock = fz_pool_alloc(ctx, page->pool, sizeof(fz_stext_block));
-						memset(newblock, 0, sizeof(*newblock));
 
 						/* Add the block onto our target list */
 						if (target == NULL)
@@ -715,7 +714,7 @@ enum {
 	MAX_ANALYSIS_DEPTH = 6
 };
 
-static void
+static int
 analyse_sub(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_block, fz_stext_block **last_block, boxer_t *big_boxer, int depth)
 {
 	fz_rect margins;
@@ -723,6 +722,7 @@ analyse_sub(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_block, 
 	boxer_t *boxer1 = NULL;
 	boxer_t *boxer2 = NULL;
 	fz_stext_struct *div;
+	int ret = 0;
 
 	/* Find the margins in the enclosing boxer. This returns
 	 * a subset of the bbox of the original. */
@@ -743,6 +743,8 @@ analyse_sub(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_block, 
 		/* If nothing subsetted (no textual content in that region), give up. */
 		if (div == NULL)
 			break;
+
+		ret = 1;
 
 		if (depth < MAX_ANALYSIS_DEPTH)
 		{
@@ -791,18 +793,21 @@ analyse_sub(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_block, 
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
+
+	return ret;
 }
 
-void fz_segment_stext_page(fz_context *ctx, fz_stext_page *page)
+int fz_segment_stext_page(fz_context *ctx, fz_stext_page *page)
 {
 	boxer_t *boxer;
 	fz_stext_block *block;
+	int ret = 0;
 
 	/* If we have structure already, give up. We can't hope to beat
 	 * proper structure! */
 	for (block = page->first_block; block != NULL; block = block->next)
 		if (block->type == FZ_STEXT_BLOCK_STRUCT)
-			return;
+			return 0;
 
 #ifdef DEBUG_WRITE_AS_PS
 	printf("1 -1 scale 0 -%g translate\n", page->mediabox.y1-page->mediabox.y0);
@@ -827,7 +832,7 @@ void fz_segment_stext_page(fz_context *ctx, fz_stext_page *page)
 			}
 		}
 
-		analyse_sub(ctx, page, &page->first_block, &page->last_block, boxer, 0);
+		ret = analyse_sub(ctx, page, &page->first_block, &page->last_block, boxer, 0);
 	}
 	fz_always(ctx)
 		boxer_destroy(ctx, boxer);
@@ -837,4 +842,6 @@ void fz_segment_stext_page(fz_context *ctx, fz_stext_page *page)
 #ifdef DEBUG_WRITE_AS_PS
 	printf("showpage\n");
 #endif
+
+	return ret;
 }

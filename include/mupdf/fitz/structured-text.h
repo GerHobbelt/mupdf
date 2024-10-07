@@ -521,8 +521,16 @@ fz_stext_options *fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts
 /**
 	Perform segmentation analysis on an (unstructured) page to look for
 	recursive subdivisions.
+
+	Essentially this code attempts to split the page horizontally and/or
+	vertically repeatedly into smaller and smaller "segments" (divisions).
+
+	Returns 0 if no changes were made to the document.
+
+	This is experimental code, and may change (or be removed) in future
+	versions!
 */
-void fz_segment_stext_page(fz_context *ctx, fz_stext_page *page);
+int fz_segment_stext_page(fz_context *ctx, fz_stext_page *page);
 
 /**
 	Create a device to extract the text on a page.
