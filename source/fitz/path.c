@@ -987,17 +987,31 @@ fz_bound_path(fz_context *ctx, const fz_path *path, const fz_stroke_state *strok
 fz_rect
 fz_adjust_rect_for_stroke(fz_context *ctx, fz_rect r, const fz_stroke_state *stroke, fz_matrix ctm)
 {
+	float linewidth;
 	float expand;
 
 	if (!stroke)
 		return r;
 
-	expand = stroke->linewidth;
-	if (expand == 0)
-		expand = 1.0f;
+	linewidth = stroke->linewidth;
+	if (linewidth == 0)
+		linewidth = 1;
+
+	expand = linewidth * 0.5f;
+
+	if (r.x1 == r.x0 && r.y1 == r.y0)
+	{
+		// Miter has no effect on straight line segments
+	}
+	else
+	{
+		if (stroke->linejoin == FZ_LINEJOIN_MITER)
+			expand = fz_max(expand, stroke->miterlimit * linewidth);
+		if (stroke->linejoin == FZ_LINEJOIN_MITER_XPS)
+			expand = fz_max(expand, stroke->miterlimit * linewidth * 0.5f);
+	}
+
 	expand *= fz_matrix_max_expansion(ctm);
-	if ((stroke->linejoin == FZ_LINEJOIN_MITER || stroke->linejoin == FZ_LINEJOIN_MITER_XPS) && stroke->miterlimit > 1)
-		expand *= stroke->miterlimit;
 
 	r.x0 -= expand;
 	r.y0 -= expand;
