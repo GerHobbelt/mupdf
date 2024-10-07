@@ -35,15 +35,44 @@
 
 #include "utfdata.h"
 
-static const int *
-fz_ucd_bsearch(int c, const int *t, int n, int ne)
+static inline int
+fz_ascii_tolower(int c)
 {
-	const int *p;
-	int m;
+	if (c >= 'A' && c <= 'Z')
+		return c + 'a' - 'A';
+	return c;
+}
+
+static inline const int*
+fz_ucd_bsearch(int c, const int* t, unsigned int n, unsigned int ne)
+{
+	const int* p;
+	unsigned int m;
+#if 01
+	// speed-up for 'ascii' range, i.e. English alphabet:
+	if (c < 128)
+	{
+		// check a match for both slot[0] and slot[1]: this takes care of most scenarios, including is_alpha, which has 2 ranges in the ASCII/English range.
+		if (c < t[0])
+			return 0;
+		m = 2;  // aim beyond the slots used for the ASCII range in any table: this will produce the speediest initial reduction in `n` in the bsearch loop.
+	}
+	else
+	{
+		m = n / 2;
+	}
+#else
+	// speed-up by estimating initial probe position: assume table spans unicode points 0..0x1FFFF --> compiler can optimize the slow division to a shift-right opcode.
+	m = c * n / 0x20000 + 1;
+	if (m >= n)
+	{
+		m = n - 1;
+	}
+	// ^^^^ bad optimization as the table slots are not evenly distributed across the unicode codepoint range, hence the estimate will be way off most of the time.
+#endif
 	while (n > 1)
 	{
-		m = n/2;
-		p = t + m*ne;
+		p = t + m * ne;
 		if (c >= p[0])
 		{
 			t = p;
@@ -53,6 +82,7 @@ fz_ucd_bsearch(int c, const int *t, int n, int ne)
 		{
 			n = m;
 		}
+		m = n / 2;
 	}
 	if (n && c >= t[0])
 		return t;
@@ -155,25 +185,170 @@ fz_strnlen(const char *s, size_t n)
 }
 
 int
-fz_strncasecmp(const char *a, const char *b, size_t n)
+fz_str_has_utf8_runes(const char* s)
 {
-	if (!n--)
-		return 0;
-	for (; *a && *b && n && (*a == *b || fz_tolower(*a) == fz_tolower(*b)); a++, b++, n--)
+	for (; *s && (*s & 0b10000000) == 0; s++)
 		;
-	return fz_tolower(*a) - fz_tolower(*b);
+	return (*s == 0);
 }
 
 int
-fz_strcasecmp(const char *a, const char *b)
+fz_strn_has_utf8_runes(const char* s, size_t n)
 {
-	while (fz_tolower(*a) == fz_tolower(*b))
+	for (; n && *s && (*s & 0b10000000) == 0; s++, n--)
+		;
+	return (n == 0 || *s == 0);
+}
+
+// warning C4057 : 'function' : 'const char *' differs in indirection to slightly different base types from 'const unsigned char *'
+#pragma warning(disable: 4057)
+
+int
+fz_strncasecmp(const char* a_, const char* b_, size_t n)
+{
+	int orig_n = n;
+	const unsigned char* a = a_;
+	const unsigned char* b = b_;
+
+	if (!n--)
+		return 0;
+	for (; *a && *b && n && (*a == *b || fz_ascii_tolower(*a) == fz_ascii_tolower(*b)); a++, b++, n--)
+		;
+	int rv = fz_ascii_tolower(*a) - fz_ascii_tolower(*b);
+	if (rv == 0)
+		return rv;
+	// is the difference against the ASCII range? then exit with the difference value as is.
+	if (*a < Runeself || *b < Runeself)
+		return rv;
+
+	n++;
+
+	// from here, treat string as UTF8/Unicode and compare *runes*!
+	//
+	// WARNING: the above comparison may have stopped midway inside a rune, so we must backpedal to the start of the UTF8 sequence before we can commence!
+	// We can backpedal using a test for bitmask 0b10xxxxxx as that one marks all UTF8 follow-up bytes after the initial UTF8 high byte for any rune.
+	while (n < orig_n && ((*a & 0b11000000) == 0b10000000))
+	{
+		a--;
+		b--;
+		n++;
+	}
+	// next loop is almost superfluous: it only applies as a safety measure when the A or B string contain illegal UTF8 sequences.
+	while (n < orig_n && ((*b & 0b11000000) == 0b10000000))
+	{
+		a--;
+		b--;
+		n++;
+	}
+
+	int na = n;
+	int nb = n;
+	while (*a && *b && na && nb)
+	{
+		int sa, sb;
+		int ca, cb;
+
+		sa = fz_chartorune(&ca, a, na);
+		sb = fz_chartorune(&cb, b, nb);
+		if (ca != cb)
+		{
+			ca = fz_tolower(ca);
+			cb = fz_tolower(cb);
+		}
+		if (ca != cb)
+		{
+			return ca - cb;
+		}
+		// ca == cb, but it's not necessarily true that  sa == sb  as the original (un-lower-ed) runes may have had different UTF8 byte counts!
+		a += sa;
+		b += sb;
+		na -= sa;
+		nb -= sb;
+	}
+
+	// when we get here, at least one of A/B strings has hit a NUL sentinel *or* we've run out of space to scan, i.e. n == 0.
+	if (!na && !nb)
+	{
+		// we reached end of string length to scan, so the strings are deemed equal
+		return 0;
+	}
+	if (!na)
+	{
+		return -1;
+	}
+	if (!nb)
+	{
+		return +1;
+	}
+	// good enough, as we'll be comparing something against a NUL sentinel anyway:
+	rv = fz_ascii_tolower(*a) - fz_ascii_tolower(*b);
+	return rv;
+}
+
+int
+fz_strcasecmp(const char *a_, const char *b_)
+{
+	const unsigned char* orig_a = a_;
+	const unsigned char* a = a_;
+	const unsigned char* b = b_;
+
+	while (fz_ascii_tolower(*a) == fz_ascii_tolower(*b))
 	{
 		if (*a++ == 0)
 			return 0;
 		b++;
 	}
-	return fz_tolower(*a) - fz_tolower(*b);
+	int rv = fz_ascii_tolower(*a) - fz_ascii_tolower(*b);
+	if (rv == 0)
+		return rv;
+	// is the difference against the ASCII range? then exit with the difference value as is.
+	if (*a < Runeself || *b < Runeself)
+		return rv;
+
+	// from here, treat string as UTF8/Unicode and compare *runes*!
+	//
+	// WARNING: the above comparison may have stopped midway inside a rune, so we must backpedal to the start of the UTF8 sequence before we can commence!
+	// We can backpedal using a test for bitmask 0b10xxxxxx as that one marks all UTF8 follow-up bytes after the initial UTF8 high byte for any rune.
+	while (a > orig_a && ((*a & 0b11000000) == 0b10000000))
+	{
+		a--;
+		b--;
+	}
+	// next loop is almost superfluous: it only applies as a safety measure when the A or B string contain illegal UTF8 sequences.
+	while (a < orig_a && ((*b & 0b11000000) == 0b10000000))
+	{
+		a--;
+		b--;
+	}
+
+	do
+	{
+		int sa, sb;
+		int ca, cb;
+
+		sa = fz_chartorune_unsafe(&ca, a);
+		sb = fz_chartorune_unsafe(&cb, b);
+		if (ca != cb)
+		{
+			ca = fz_tolower(ca);
+			cb = fz_tolower(cb);
+		}
+		if (ca != cb)
+		{
+			return ca - cb;
+		}
+		// ca == cb --> sa == sb
+		if (*a == 0)
+			return 0;
+		a += sa;
+		b += sa;
+	} while (*a && *b);
+
+	// when we get here, at least one of A/B strings has hit a NUL sentinel.
+	// 
+	// --> good enough comparison, as we'll be comparing something against a NUL sentinel anyway:
+	rv = fz_ascii_tolower(*a) - fz_ascii_tolower(*b);
+	return rv;
 }
 
 char *
@@ -184,22 +359,140 @@ fz_strcasestr(char* str, const char* substr)
 	if (!*substr)
 		return str;
 
-	while (*str)
+	// when the substring doesn't have any UTF8 rune above the ASCII range to match against, we can safely treat the strings as ASCII, even when str isn't.
+	// Otherwise, we have to do a rune-based search-and-match rather than a byte-based one.
+	if (!fz_str_has_utf8_runes(substr))
 	{
-		int i;
-		int muster = fz_tolower(*substr);
-		while (*str && fz_tolower(*str) != muster)
+		int muster = fz_ascii_tolower(*substr);
+		while (*str)
+		{
+			while (*str && fz_ascii_tolower(*str) != muster)
+				str++;
+			if (!*str)
+				return NULL;
+			// right now: str[0] == substr[0]; check the tail to see if we have a full match:
+			int i = 1;
+			while (str[i] && substr[i] && fz_ascii_tolower(str[i]) == fz_ascii_tolower(substr[i]))
+				i++;
+			if (!substr[i])
+				return str;
+			// not a full match: move str forward and continue the scan
 			str++;
-		if (!*str)
-			return NULL;
-		// right now: str[0] == substr[0]; check the tail to see if we have a full match:
-		i = 1;
-		while (str[i] && substr[i] && fz_tolower(str[i]) == fz_tolower(substr[i]))
-			i++;
-		if (!substr[i])
-			return str;
-		// not a full match: move str forward and continue the scan
-		str++;
+		}
+	}
+	else
+	{
+		size_t sublen = strlen(substr);
+
+		// we can do a faster initial scan when the substring does not start with a UTF8 rune beyond the ASCII range:
+		if (*substr < Runeself)
+		{
+			int muster = fz_ascii_tolower(*substr);
+			while (*str)
+			{
+				while (*str && fz_ascii_tolower(*str) != muster)
+					str++;
+				if (!*str)
+					return NULL;
+				// right now: str[0] == substr[0]; check the tail to see if we have a full match:
+				//
+				// Do note that the original runes can have different UTF8 lengths, hence we need to be careful with calculating the `n` length value for the fz_strncasecmp() call
+				// --> we can't really use the fz_strncasecmp() call as is, but have to use a slightly altered variant of that one for comparison against `substr`:
+				const unsigned char* a = str + 1;
+				const unsigned char* b = substr + 1;
+				size_t n = sublen - 1;
+				int i = 0;
+
+				while (*a && *b && n)
+				{
+					int sa, sb;
+					int ca, cb;
+
+					sa = fz_chartorune_unsafe(&ca, a);   // !!! use the unsafe variant here!
+					sb = fz_chartorune(&cb, b, n);
+					if (ca != cb)
+					{
+						ca = fz_tolower(ca);
+						cb = fz_tolower(cb);
+					}
+					if (ca != cb)
+					{
+						i = 1;  // all we need to do is signal difference, so no need to calculate `ca - cb` now.
+						break;
+					}
+					// ca == cb
+					a += sa;
+					b += sb;
+					n -= sb;
+				}
+
+				if (!i && !n)
+					return str;
+				// not a full match: move str forward and continue the scan
+				str++;
+			}
+		}
+		else
+		{
+			// we now know for sure that substr starts with an UTF8 rune beyond the ASCII range, hence
+			// we can safely skip all ASCII-range bytes in str and only match the remaining runes.
+			int musterc, mustern;
+			int subc, subn;
+			subn = fz_chartorune_unsafe(&subc, substr);
+			subc = fz_tolower(subc);
+
+			while (*str)
+			{
+				if (*str < Runeself)
+				{
+					str++;
+					continue;
+				}
+
+				mustern = fz_chartorune_unsafe(&musterc, str);
+				musterc = fz_tolower(musterc);
+				if (musterc != subc)
+				{
+					str += mustern;
+					continue;
+				}
+
+				// right now: str[0] == substr[0]; check the tail to see if we have a full match:
+				//
+				// Do note that the original runes can have different UTF8 lengths, hence we need to be careful with calculating the `n` length value for the fz_strncasecmp() call
+				// --> we can't really use the fz_strncasecmp() call as is, but have to use a slightly altered variant of that one for comparison against `substr`:
+				const unsigned char* a = str + mustern;
+				const unsigned char* b = substr + subn;
+				int i = 0;
+
+				while (*a && *b)
+				{
+					int sa, sb;
+					int ca, cb;
+
+					sa = fz_chartorune_unsafe(&ca, a);   // !!! use the unsafe variant here!
+					sb = fz_chartorune_unsafe(&cb, b);
+					if (ca != cb)
+					{
+						ca = fz_tolower(ca);
+						cb = fz_tolower(cb);
+					}
+					if (ca != cb)
+					{
+						i = 1;  // all we need to do is signal difference, so no need to calculate `ca - cb` now.
+						break;
+					}
+					// ca == cb
+					a += sa;
+					b += sb;
+				}
+
+				if (!i && !*b)
+					return str;
+				// not a full match: move str forward and continue the scan
+				str += mustern;
+			}
+		}
 	}
 	return NULL;
 }
@@ -356,7 +649,6 @@ fz_dirname(char *dir, const char *path, size_t n)
 		fz_strncpy_s(NULL, dir, ".", n);
 		return;
 	}
-
 
 	if (p[-1] == '/' || p[-1] == '\\')
 	{

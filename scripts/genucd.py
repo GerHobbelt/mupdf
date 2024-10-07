@@ -16,10 +16,10 @@ for line in open("UnicodeData.txt").readlines():
 		isalpha.append(code)
 	if line[2][0] == 'N':
 		isdigit.append(code)
-        fraction = line[8]
-        if not '/' in fraction:
-            fraction = fraction + "/1"
-        terms = fraction.split('/')
+		fraction = line[8]
+		if not '/' in fraction:
+			fraction = fraction + "/1"
+		terms = fraction.split('/')
 		tovalue.append((code,terms[0],terms[1]))
 	if line[12]:
 		toupper.append((code,int(line[12],16)))
@@ -80,8 +80,8 @@ def dumpdigit():
 
 	print("")
 	print("static const int ucd_digit_value[] = {")
-	for a, b in tovalue:
-		print(hex(a)+","+str(b)+",")
+	for a, b, c in tovalue:
+		print(hex(a)+","+str(b)+","+str(c)+",")
 	print("};");
 
 def dumpmap(name, input):

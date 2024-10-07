@@ -473,6 +473,12 @@ int fz_isalpha(int c);
 int fz_isdigit(int c);
 int fz_isalnum(int c);
 
+/**
+  Return TRUE when string contains ANY UTF8 rune outside the ASCII range.
+*/
+int fz_str_has_utf8_runes(const char* s);
+int fz_strn_has_utf8_runes(const char* s, size_t n);
+
 #ifdef __cplusplus
 }
 #endif
