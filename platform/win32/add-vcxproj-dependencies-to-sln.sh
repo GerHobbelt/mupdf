@@ -23,6 +23,10 @@ done
 # custom conditions: don't inspect the __build_target* projects when we're not processing the mupdf or dev-list sln files:
 if [[ $SLN =~ "mupdf" ]] ; then
 	true
+elif [[ $SLN =~ "m-dev-list-of-failed-ideas" ]] ; then
+	echo "SKIPPED: m-dev-list-of-failed-ideas.sln is a special solution gathering the failed/obsoleted projects we aren't interested in any longer."
+	rm vcxproj-file-list.lst
+	exit 0
 elif [[ $SLN =~ "m-dev-list" ]] ; then
 	true
 else
