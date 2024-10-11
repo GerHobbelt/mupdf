@@ -328,6 +328,7 @@ while we keep these:
 - warning C4200: nonstandard extension used: zero-sized array in struct/union
 - warning C4152: nonstandard extension, function/data pointer conversion in expression
 - warning C4711: function 'pngcrush_pause' selected for automatic inline expansion
+- warning C4774: 'snprintf' : format string expected in argument 3 is not a string literal
 
 - warning C4295: 'singleline_comment_1': array is too small to include a terminating null character
 - warning C4295: 'xmltranscodetable_ISO8859_2': array is too small to include a terminating null character
@@ -375,7 +376,7 @@ while we keep these:
 
 lest we want to ignore most of these too:
  
-      <DisableSpecificWarnings>4711;4295;4152;4200;4355;5246;5267;4866;4868;5220;4582;4583;4435;4619;5029;5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;4102;4146;4189;4245;4334;4389;4457;4458;4456;4459;4701;4702;4706;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4774;4711;4295;4152;4200;4355;5246;5267;4866;4868;5220;4582;4583;4435;4619;5029;5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;4102;4146;4189;4245;4334;4389;4457;4458;4456;4459;4701;4702;4706;%(DisableSpecificWarnings)</DisableSpecificWarnings>
 	
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
