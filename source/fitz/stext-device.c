@@ -1237,7 +1237,7 @@ fz_stext_extract(fz_context *ctx, fz_stext_device *dev, fz_text_span *span, fz_m
 
 	if (mt)
 	{
-		if (!(dev->opts.flags & FZ_STEXT_INHIBIT_ACTUALTEXT))
+		if (!(dev->opts.flags & FZ_STEXT_IGNORE_ACTUALTEXT))
 			do_extract_within_actualtext(ctx, dev, span, ctm, mt);
 	}
 	else
