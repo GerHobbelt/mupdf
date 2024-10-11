@@ -546,8 +546,7 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: hasRect()
 
-
-    Checks the support for annotation bounding box.
+    Returns whether the annotation is capable of supporting a bounding box.
 
     :return: `Boolean`.
 
@@ -622,8 +621,7 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: hasInteriorColor()
 
-
-    Checks whether the annotation has support for an interior color.
+    Returns whether the annotation has support for an interior color.
 
     :return: `Boolean`.
 
@@ -674,8 +672,8 @@ These properties are only present for some annotation types, so support for them
 .. method:: hasAuthor()
 
 
+    Returns whether the annotation has support for an author.
 
-    Checks whether the annotation has an author.
 
     :return: `Boolean`.
 
@@ -987,10 +985,217 @@ Callouts are used with :ref:`"FreeText" annotations <mutool_run_js_api_annotatio
 ----
 
 
+Line Leaders
+~~~~~~~~~~~~~~~
+
+
+In a PDF line annotation, "line leaders" refer to visual elements that can be added to the endpoints of a line annotation to enhance its appearance or meaning.
+
+.. image:: images/leader-lines.png
+          :alt: Leader lines explained
+          :width: 100%
+
+
+.. method:: setLineLeader(ll)
+
+    |mutool_tag|
+
+    Sets the line leader length.
+
+    :arg ll: `Number`. The length of leader lines that extend from each endpoint of the line perpendicular to the line itself. A positive value means that the leader lines appear in the direction that is clockwise when traversing the line from its starting point to its ending point a negative value indicates the opposite direction.
+
+    .. note::
+
+        Setting a value of `0` effectivley removes the line leader.
+
+
+.. method:: getLineLeader()
+
+    |mutool_tag|
+
+    Gets the line leader length.
+
+    :return: `Number`
+
+
+.. method:: setLineLeaderExtension(lle)
+
+    |mutool_tag|
+
+    Sets the line leader extension.
+
+    :arg lle: `Number`. A non-negative number representing the length of leader line extensions that extend from the line proper 180 degrees from the leader lines.
+
+    .. note::
+
+        Setting a value of `0` effectivley removes the line leader extension.
+
+.. method:: getLineLeaderExtension()
+
+    |mutool_tag|
+
+    Gets the line leader extension.
+
+    :return: `Number`
+
+
+.. method:: setLineLeaderOffset(llo)
+
+    |mutool_tag|
+
+    Sets the line leader offset.
+
+    :arg llo: `Number`. A non-negative number representing the length of the leader line offset, which is the amount of empty space between the endpoints of the annotation and the beginning of the leader lines.
+
+    .. note::
+
+        Setting a value of `0` effectivley removes the line leader offset.
+
+.. method:: getLineLeaderOffset()
+
+    |mutool_tag|
+
+    Gets the line leader offset.
+
+    :return: `Number`
+
+
+.. method:: setLineCaption(enable)
+
+    |mutool_tag|
+
+    Sets whether line caption is enabled or not.
+
+    :arg enable: `Boolean`.
+
+
+    .. note::
+
+        When line captions are enabled then using the :meth:`setContents` method on the Line will graphically render the caption contents onto the line.
+
+
+.. method:: getLineCaption()
+
+    |mutool_tag|
+
+    Returns whether the line caption is enabled or not.
+
+    :return: `Boolean`.
+
+
+.. method:: setLineCaptionOffset(point)
+
+    |mutool_tag|
+
+    Sets any line caption offset.
+
+
+    :arg point: `Array`. A point, `[x, y]`, specifying the offset of the caption text from its normal position. The first value is the horizontal offset along the annotation line from its midpoint, with a positive value indicating offset to the right and a negative value indicating offset to the left. The second value is the vertical offset perpendicular to the annotation line, with a positive value indicating a shift up and a negative value indicating a shift down.
+
+
+    .. image:: images/offset-caption.png
+          :alt: Offset caption explained
+          :width: 100%
+
+    .. note::
+
+        Setting a point of `[0,0]` effectivley removes the caption offset.
+
+
+
+.. method:: getLineCaptionOffset()
+
+    |mutool_tag|
+
+    Returns the line caption offset as a point, `[x, y]`.
+
+    :return: `Array`.
+
+
+----
+
+
+Callouts
+~~~~~~~~~~~~
+
+Callouts are used with :ref:`"FreeText" annotations <mutool_run_js_api_annotation_types>` and allow for a graphical line to point to an area on a page.
+
+.. image:: images/callout-annot.png
+          :alt: Callout annotation
+          :width: 100%
+
+
+.. method:: hasCallout()
+
+    |mutool_tag|
+
+    Returns whether the annotation is capable of supporting a callout or not.
+
+
+    :return: `Boolean`.
+
+
+.. method:: setCalloutLine(points)
+
+    |mutool_tag|
+
+    Takes an array of 2 or 3 points.
+
+    :arg points: [ [x1, y1], [x2, y2], [x3, y3]? ].
+
+
+.. method:: getCalloutLine()
+
+    |mutool_tag|
+
+    Returns the array of points.
+
+    :return: `[ [x1, y1], [x2, y2], [x3, y3]? ]`.
+
+
+.. method:: setCalloutPoint(point)
+
+    |mutool_tag|
+
+    Takes a point where the callout should point to.
+
+    :arg points: `[x,y]`.
+
+
+.. method:: getCalloutPoint()
+
+    |mutool_tag|
+
+    Returns the callout point.
+
+    :return: `[x,y]`.
+
+
+.. method:: setCalloutStyle(style)
+
+    |mutool_tag|
+
+    Sets the style of the callout line.
+
+    :arg style: `String`. A :ref:`line ending style <mutool_pdf_annotation_line_ending_styles>`.
+
+
+.. method:: getCalloutStyle()
+
+    |mutool_tag|
+
+    Returns the callout style.
+
+    :return: `String`.
+
+
+----
+
+
 .. method:: hasIcon()
 
+    Returns whether the annotation is capable of supporting an icon or not.
 
-    Checks the support for annotation icon.
 
     :return: `Boolean`.
 
@@ -1094,8 +1299,7 @@ Callouts are used with :ref:`"FreeText" annotations <mutool_run_js_api_annotatio
 
 .. method:: hasLine()
 
-
-    Checks the support for annotation line.
+    Returns whether the annotation is capable of supporting a line or not.
 
     :return: `Boolean`.
 
@@ -1140,7 +1344,7 @@ Callouts are used with :ref:`"FreeText" annotations <mutool_run_js_api_annotatio
 
 .. method:: hasPopup()
 
-    Checks the support for annotation popup.
+    Returns whether the annotation is capable of supporting a popup or not.
 
     :return: `Boolean`.
 
@@ -1178,7 +1382,7 @@ Callouts are used with :ref:`"FreeText" annotations <mutool_run_js_api_annotatio
 
 .. method:: hasOpen()
 
-    Checks the support for annotation open state.
+    Returns whether the annotation is capable of supporting an open state or not.
 
     :return: `Boolean`.
 
@@ -1221,8 +1425,7 @@ Callouts are used with :ref:`"FreeText" annotations <mutool_run_js_api_annotatio
 
 .. method:: hasFilespec()
 
-
-    Checks support for the annotation file specification.
+    Returns whether the annotation is capable of supporting the annotation file specification.
 
     :return: `Boolean`.
 
@@ -1284,9 +1487,7 @@ The border drawn around some annotations can be controlled by:
 
 .. method:: hasBorder()
 
-
-
-    Check support for the annotation border style.
+    Returns whether the annotation is capable of supporting border style.
 
     :return: `Boolean`.
 
@@ -1445,8 +1646,7 @@ Annotations that have a border effect allows the effect to be controlled by:
 
 .. method:: hasBorderEffect()
 
-
-    Check support for annotation border effect.
+    Returns whether the annotation is capable of supporting border effect.
 
     :return: `Boolean`.
 
@@ -1531,7 +1731,8 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
 .. method:: hasInkList()
 
-    Check support for the annotation ink list.
+    Returns whether the annotation is capable of supporting ink list.
+
 
     :return: `Boolean`.
 
@@ -1648,7 +1849,7 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
 .. method:: hasQuadPoints()
 
-    Check support for the annotation quadpoints.
+    Returns whether the annotation is capable of supporting quadpoints.
 
     :return: `Boolean`.
 
@@ -1716,7 +1917,7 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
 .. method:: hasVertices()
 
-    Check support for the annotation vertices.
+    Returns whether the annotation is capable of supporting annotation vertices.
 
     :return: `Boolean`.
 

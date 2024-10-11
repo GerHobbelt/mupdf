@@ -78,7 +78,7 @@ Then in this case we are working in the **PDF** coordinate space with the origin
 
     To explain the syntax behind `"q 200 0 0 200 10 10 cm /Image1 Do Q"` this is **Adobe PDF** syntax for referencing, sizing and positioning an image and can be explained as follows:
 
-    .. code-block:: bash
+    .. code-block:: postscript
 
         q                               % Save graphics state
             200 0 0 200 10 10 cm        % Translate
