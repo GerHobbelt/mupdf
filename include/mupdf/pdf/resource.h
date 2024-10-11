@@ -53,7 +53,7 @@ void pdf_purge_object_from_store(fz_context *ctx, pdf_document *doc, int num);
 enum { PDF_SIMPLE_FONT_RESOURCE=1, PDF_CID_FONT_RESOURCE=2, PDF_CJK_FONT_RESOURCE=3 };
 enum { PDF_SIMPLE_ENCODING_NONE, PDF_SIMPLE_ENCODING_LATIN, PDF_SIMPLE_ENCODING_GREEK, PDF_SIMPLE_ENCODING_CYRILLIC };
 
-/* The contents of this structure are defined publically just so we can
+/* The contents of this structure are defined publicly just so we can
  * define this on the stack. */
 typedef struct
 {
@@ -92,7 +92,7 @@ typedef void (pdf_recolor_vertex)(fz_context *ctx, void *opaque, fz_colorspace *
 	Function to handle recoloring a shade.
 
 	Called with src_cs from the shade. If no recoloring is required, return NULL. Otherwise
-	fill in *dst_cs, and return a vertex recolorer.
+	fill in *dst_cs, and return a vertex re-colorer.
 */
 typedef pdf_recolor_vertex *(pdf_shade_recolorer)(fz_context *ctx, void *opaque, fz_colorspace *src_cs, fz_colorspace **dst_cs);
 
