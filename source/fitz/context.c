@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -346,7 +346,8 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 	}
 	fz_catch(ctx)
 	{
-		fz_error(NULL, "cannot create context (phase 2)");
+		fz_report_error(ctx);
+		fz_log_error(ctx, "cannot create context (phase 2)");
 		fz_drop_context(ctx);
 		return NULL;
 	}
