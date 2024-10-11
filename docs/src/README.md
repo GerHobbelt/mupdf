@@ -62,6 +62,13 @@ This will ensure that the documentation runs in a localhost and will also hot-re
 This will ensure that the documentation runs in a localhost and will also hot-reload changes.
 
 
+- Alternatively you can also use [Sphinx Autobuild](https://pypi.org/project/sphinx-autobuild/) and do:
+
+`sphinx-autobuild src _build/html`
+
+This will ensure that the documentation runs in a localhost and will also hot-reload changes.
+
+
 ## Building PDF documentation
 
 
