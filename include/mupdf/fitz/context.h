@@ -285,6 +285,19 @@ int fz_do_catchFL(fz_context *ctx, const char *file, int line);
 * Also note that these calls DO NOT erase the last exception/error message, which can
 * be accessed any time before or after by calling `fz_caught_message()` without
 * changing the 'pending/handled' state of the current exception/error.
+*
+* Aside: when you wish to log/report additional information, the preferred idiom is:
+*
+*     fz_report_error(ctx);
+*     fz_log_error_printf(ctx, "b0rk b0rk b0rk while processing: %s", input);
+*     // or: fz_log_error(ctx, "b0rk b0rk b0rk");
+*
+* followed by
+*
+*     fz_drop_context(ctx);
+*
+* where applicable, e.g. when this is the last thing you'll report before terminating
+* the application.
 */
 
 /* Report an error to the registered error callback. */
