@@ -169,6 +169,7 @@ const char *fz_stext_options_usage =
 	"  structured=no:        don't collect structure data\n"
 	"  accurate-bboxes=no:   calculate char bboxes for from the outlines\n"
 	"  vectors=no:           include vector bboxes in output\n"
+	"  segment=no:           don't attempt to segment the page\n"
 	"  text-as-path:         (SVG: default) output text as curves\n"
 	"  external-styles       store the CSS page styles in a separate file instead of inlining\n"
 	"  resolution=<scale>    render and position everything at the specified scale (in pixels per inch)\n"
@@ -1561,6 +1562,9 @@ fz_stext_close_device(fz_context *ctx, fz_device *dev)
 
 	/* TODO: smart sorting of blocks and lines in reading order */
 	/* TODO: unicode NFC normalization */
+
+	if (tdev->opts.flags & FZ_STEXT_SEGMENT)
+		fz_segment_stext_page(ctx, page);
 }
 
 static void
@@ -1662,11 +1666,17 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_COLLECT_VECTORS;
 	}
-	if (fz_has_option(ctx, string, "inhibit-actualtext", &val))
+	if (fz_has_option(ctx, string, "ignore-actualtext", &val))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_IGNORE_ACTUALTEXT;
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_IGNORE_ACTUALTEXT;
+	}
+	if (fz_has_option(ctx, string, "segment", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_SEGMENT;
+		if (fz_option_eq(val, "yes"))
+			opts->flags |= FZ_STEXT_SEGMENT;
 	}
 	if (fz_has_option(ctx, string, "glyph-bbox", &val))
 	{

@@ -159,27 +159,32 @@ typedef struct fz_stext_grid_positions fz_stext_grid_positions;
 
 	FZ_STEXT_IGNORE_ACTUALTEXT: If this option is set, we will no longer
 	replace text by the ActualText replacement specified in the document.
+
+	FZ_STEXT_SEGMENT: If this option is set, we will attempt to segment
+	the page into different regions. This will deliberately not do anything
+	to pages with structure information present.
 */
 enum
 {
-	FZ_STEXT_PRESERVE_LIGATURES = 1,
-	FZ_STEXT_PRESERVE_WHITESPACE = 2,
-	FZ_STEXT_PRESERVE_IMAGES = 4,
-	FZ_STEXT_NO_REUSE_IMAGES = 8,
-	FZ_STEXT_REFERENCE_IMAGES = 16,
-	FZ_STEXT_INHIBIT_SPACES = 32,
-	FZ_STEXT_DEHYPHENATE = 64,
-	FZ_STEXT_PRESERVE_SPANS = 128,
-	FZ_STEXT_MEDIABOX_CLIP = 256,
-	FZ_STEXT_GLYPH_BBOX = 512,
-	FZ_STEXT_NO_TEXT_AS_PATH = 1024,
-	FZ_STEXT_EXTERNAL_STYLES = 2048,
-	FZ_STEXT_RESOLUTION = 4096,
-	FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE = 8192,
-	FZ_STEXT_COLLECT_STRUCTURE = 16384,
-	FZ_STEXT_ACCURATE_BBOXES = 32768,
-	FZ_STEXT_COLLECT_VECTORS = 65536,
-	FZ_STEXT_IGNORE_ACTUALTEXT = 131072,
+	FZ_STEXT_PRESERVE_LIGATURES = 1 << 0,
+	FZ_STEXT_PRESERVE_WHITESPACE = 1 << 1,
+	FZ_STEXT_PRESERVE_IMAGES = 1 << 2,
+	FZ_STEXT_NO_REUSE_IMAGES = 1 << 3,
+	FZ_STEXT_REFERENCE_IMAGES = 1 << 4,
+	FZ_STEXT_INHIBIT_SPACES = 1 << 5,
+	FZ_STEXT_DEHYPHENATE = 1 << 6,
+	FZ_STEXT_PRESERVE_SPANS = 1 << 7,
+	FZ_STEXT_MEDIABOX_CLIP = 1 << 8,
+	FZ_STEXT_GLYPH_BBOX = 1 << 9,
+	FZ_STEXT_NO_TEXT_AS_PATH = 1 << 10,
+	FZ_STEXT_EXTERNAL_STYLES = 1 << 11,
+	FZ_STEXT_RESOLUTION = 1 << 12,
+	FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE = 1 << 13,
+	FZ_STEXT_COLLECT_STRUCTURE = 1 << 14,
+	FZ_STEXT_ACCURATE_BBOXES = 1 << 15,
+	FZ_STEXT_COLLECT_VECTORS = 1 << 16,
+	FZ_STEXT_IGNORE_ACTUALTEXT = 1 << 17,
+	FZ_STEXT_SEGMENT = 1 << 18,
 };
 
 /**
@@ -694,6 +699,20 @@ const char* fz_get_ligature_replacement(int c);
 	when that option is OFF.
 */
 int fz_is_whitespace(int c);
+
+/**
+	Perform segmentation analysis on an (unstructured) page to look for
+	recursive subdivisions.
+
+	Essentially this code attempts to split the page horizontally and/or
+	vertically repeatedly into smaller and smaller "segments" (divisions).
+
+	Returns 0 if no changes were made to the document.
+
+	This is experimental code, and may change (or be removed) in future
+	versions!
+*/
+int fz_segment_stext_page(fz_context *ctx, fz_stext_page *page);
 
 /**
 	Create a device to extract the text on a page.
