@@ -227,10 +227,23 @@ void fz_log_error_printf(fz_context *ctx, const char *fmt, ...) FZ_PRINTFLIKE(2,
 void fz_vlog_error_printf(fz_context *ctx, const char *fmt, va_list ap);
 
 /**
+	Format a warning message, and log it to the registered
+	warning stream (stderr by default).
+*/
+void fz_log_warning_printf(fz_context *ctx, const char *fmt, ...) FZ_PRINTFLIKE(2, 3);
+void fz_vlog_warning_printf(fz_context *ctx, const char *fmt, va_list ap);
+
+/**
 	Log a (preformatted) string to the registered
 	error stream (stderr by default).
 */
 void fz_log_error(fz_context *ctx, const char *str);
+
+/**
+	Log a (preformatted) string to the registered
+	warning stream (stderr by default).
+*/
+void fz_log_warning(fz_context *ctx, const char *str);
 
 void fz_start_throw_on_repair(fz_context *ctx);
 void fz_end_throw_on_repair(fz_context *ctx);
@@ -253,6 +266,9 @@ void fz_end_throw_on_repair(fz_context *ctx);
 #define fz_log_error_printf(CTX, ...) fz_log_error_printfFL(CTX, __FILE__, __LINE__, __VA_ARGS__)
 #define fz_vlog_error_printf(CTX, FMT, VA) fz_log_error_printfFL(CTX, __FILE__, __LINE__, FMT, VA)
 #define fz_log_error(CTX, STR) fz_log_error_printfFL(CTX, __FILE__, __LINE__, STR)
+#define fz_log_warning_printf(CTX, ...) fz_log_warning_printfFL(CTX, __FILE__, __LINE__, __VA_ARGS__)
+#define fz_vlog_warning_printf(CTX, FMT, VA) fz_log_warning_printfFL(CTX, __FILE__, __LINE__, FMT, VA)
+#define fz_log_warning(CTX, STR) fz_log_warning_printfFL(CTX, __FILE__, __LINE__, STR)
 #define fz_do_catch(CTX) fz_do_catchFL(CTX, __FILE__, __LINE__)
 FZ_NORETURN void fz_vthrowFL(fz_context *ctx, const char *file, int line, int errcode, const char *fmt, va_list ap);
 FZ_NORETURN void fz_throwFL(fz_context *ctx, const char *file, int line, int errcode, const char *fmt, ...) FZ_PRINTFLIKE(5,6);
@@ -265,6 +281,9 @@ void fz_rethrow_unlessFL(fz_context *ctx, const char *file, int line, int errcod
 void fz_log_error_printfFL(fz_context *ctx, const char *file, int line, const char *fmt, ...) FZ_PRINTFLIKE(4,5);
 void fz_vlog_error_printfFL(fz_context *ctx, const char *file, int line, const char *fmt, va_list ap);
 void fz_log_errorFL(fz_context *ctx, const char *file, int line, const char *str);
+void fz_log_warning_printfFL(fz_context *ctx, const char *file, int line, const char *fmt, ...) FZ_PRINTFLIKE(4, 5);
+void fz_vlog_warning_printfFL(fz_context *ctx, const char *file, int line, const char *fmt, va_list ap);
+void fz_log_warningFL(fz_context *ctx, const char *file, int line, const char *str);
 int fz_do_catchFL(fz_context *ctx, const char *file, int line);
 #endif
 
@@ -303,8 +322,11 @@ int fz_do_catchFL(fz_context *ctx, const char *file, int line);
 /* Report an error to the registered error callback. */
 void fz_report_error(fz_context *ctx);
 
+/* Report an error while marking it as ignored, hence downgraded to warning level. */
+void fz_report_error_as_ignored(fz_context *ctx);
+
 /*
- * Swallow an error and ignore it completely.
+ * Swallow an error and ignore it completely and silently.
  * This should only be called to signal that you've handled a TRYLATER or ABORT error,
  */
 void fz_ignore_error(fz_context *ctx);

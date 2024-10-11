@@ -53,6 +53,9 @@
 #undef fz_log_error_printf
 #undef fz_vlog_error_printf
 #undef fz_log_error
+#undef fz_log_warning_printf
+#undef fz_vlog_warning_printf
+#undef fz_log_warning
 
 #endif
 
@@ -951,8 +954,6 @@ void fz_vlog_error_printf(fz_context *ctx, const char *fmt, va_list ap)
 		ctx = fz_get_global_context();
 	}
 
-	fz_flush_warnings(ctx);
-
 	prepmsg(buf, fmt, ap);
 
 	fz_log_error(ctx, buf);
@@ -971,6 +972,44 @@ void fz_log_error(fz_context *ctx, const char *str)
 		ctx->error.print(ctx, ctx->error.print_user, str);
 	else
 		fz_default_error_callback(ctx, NULL, str);
+}
+
+void fz_log_warning_printf(fz_context* ctx, const char* fmt, ...)
+{
+	va_list ap;
+
+	va_start(ap, fmt);
+	fz_vlog_warning_printf(ctx, fmt, ap);
+	va_end(ap);
+}
+
+void fz_vlog_warning_printf(fz_context* ctx, const char* fmt, va_list ap)
+{
+	char buf[sizeof ctx->error.message];
+
+	if (!ctx && fz_has_global_context())
+	{
+		ctx = fz_get_global_context();
+	}
+
+	prepmsg(buf, fmt, ap);
+
+	fz_log_warning(ctx, buf);
+}
+
+void fz_log_warning(fz_context* ctx, const char* str)
+{
+	if (!ctx && fz_has_global_context())
+	{
+		ctx = fz_get_global_context();
+	}
+
+	//fz_flush_warnings(ctx);
+
+	if (ctx && ctx->error.print)
+		ctx->warn.print(ctx, ctx->warn.print_user, str);
+	else
+		fz_default_warning_callback(ctx, NULL, str);
 }
 
 
@@ -1414,6 +1453,20 @@ void fz_report_error(fz_context *ctx)
 #endif
 	/* TODO: send errcode to fz_log_error instead of formatting it here */
 	fz_log_error_printf(ctx, "%s error: %s", fz_error_type_name(ctx->error.errcode), fz_caught_message(ctx));
+	ctx->error.errcode = FZ_ERROR_NONE;
+}
+
+void fz_report_error_as_ignored(fz_context* ctx)
+{
+#ifdef CLUSTER
+	if (ctx->error.errcode == FZ_ERROR_TRYLATER || ctx->error.errcode == FZ_ERROR_ABORT)
+	{
+		fprintf(stderr, "REPORTED (IGNORED) ERROR THAT IS TRYLATER OR ABORT\n");
+		abort();
+	}
+#endif
+	/* TODO: send errcode to fz_log_warning instead of formatting it here */
+	fz_log_warning_printf(ctx, "%s (ignored) error: %s", fz_error_type_name(ctx->error.errcode), fz_caught_message(ctx));
 	ctx->error.errcode = FZ_ERROR_NONE;
 }
 
