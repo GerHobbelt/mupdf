@@ -1225,13 +1225,15 @@ do_extract_within_actualtext(fz_context *ctx, fz_stext_device *dev, fz_text_span
 static void
 fz_stext_extract(fz_context *ctx, fz_stext_device *dev, fz_text_span *span, fz_matrix ctm)
 {
-	metatext_t *mt;
+	fz_stext_device *tdev = (fz_stext_device*)dev;
+	metatext_t *mt = NULL;
 
 	if (span->len == 0)
 		return;
 
 	/* Are we in an actualtext? */
-	mt = find_actualtext(dev);
+	if (!(tdev->opts.flags & FZ_STEXT_IGNORE_ACTUALTEXT))
+		mt = find_actualtext(dev);
 
 	if (mt)
 	{
@@ -1662,9 +1664,9 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 	}
 	if (fz_has_option(ctx, string, "inhibit-actualtext", &val))
 	{
-		opts->flags_conf_mask |= FZ_STEXT_INHIBIT_ACTUALTEXT;
+		opts->flags_conf_mask |= FZ_STEXT_IGNORE_ACTUALTEXT;
 		if (fz_option_eq(val, "yes"))
-			opts->flags |= FZ_STEXT_INHIBIT_ACTUALTEXT;
+			opts->flags |= FZ_STEXT_IGNORE_ACTUALTEXT;
 	}
 	if (fz_has_option(ctx, string, "glyph-bbox", &val))
 	{
