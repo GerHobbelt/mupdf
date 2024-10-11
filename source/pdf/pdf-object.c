@@ -1468,6 +1468,7 @@ void pdf_abandon_operation(fz_context *ctx, pdf_document *doc)
 void pdf_undo(fz_context *ctx, pdf_document *doc)
 {
 	pdf_journal_entry *entry;
+	pdf_journal_fragment *frag;
 
 	if (ctx == NULL || doc == NULL)
 		return;
@@ -1489,7 +1490,8 @@ void pdf_undo(fz_context *ctx, pdf_document *doc)
 	// nuke all caches
 	pdf_drop_page_tree_internal(ctx, doc);
 	pdf_sync_open_pages(ctx, doc);
-	fz_empty_store(ctx);
+	for (frag = entry->head; frag; frag = frag->next)
+		pdf_purge_object_from_store(ctx, doc, frag->obj_num);
 
 	doc->journal->current = entry->prev;
 
@@ -1501,6 +1503,7 @@ void pdf_undo(fz_context *ctx, pdf_document *doc)
 void pdf_redo(fz_context *ctx, pdf_document *doc)
 {
 	pdf_journal_entry *entry;
+	pdf_journal_fragment *frag;
 
 	if (ctx == NULL || doc == NULL)
 		return;
@@ -1533,7 +1536,8 @@ void pdf_redo(fz_context *ctx, pdf_document *doc)
 	// nuke all caches
 	pdf_drop_page_tree_internal(ctx, doc);
 	pdf_sync_open_pages(ctx, doc);
-	fz_empty_store(ctx);
+	for (frag = entry->head; frag; frag = frag->next)
+		pdf_purge_object_from_store(ctx, doc, frag->obj_num);
 
 	doc->journal->current = entry;
 
@@ -1924,7 +1928,9 @@ static void prepare_object_for_alteration(fz_context *ctx, pdf_obj *obj, pdf_obj
 		}
 	}
 
-	fz_empty_store(ctx);
+	// Empty store of items keyed on the object being changed.
+	if (parent != 0)
+		pdf_purge_object_from_store(ctx, doc, parent);
 
 	entry = NULL;
 	if (doc->journal)

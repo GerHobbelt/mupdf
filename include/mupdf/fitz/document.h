@@ -902,14 +902,6 @@ void fz_run_page_annots(fz_context *ctx, fz_page *page, fz_device *dev, fz_matri
 fz_page *fz_keep_page(fz_context *ctx, fz_page *page);
 
 /**
-	Increment the reference count for the page. Returns the same
-	pointer. Must only be used when the alloc lock is already taken.
-
-	Never throws exceptions.
-*/
-fz_page *fz_keep_page_locked(fz_context *ctx, fz_page *page);
-
-/**
 	Decrements the reference count for the page. When the reference
 	count hits 0, the page and its references are freed.
 
