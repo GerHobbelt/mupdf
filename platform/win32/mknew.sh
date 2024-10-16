@@ -1423,6 +1423,13 @@ ejdb
 iowow
 nanobench
 libprng
+curlpp
+lsnms
+libspatialindex
+THST
+simdutf
+md5-optimisation
+c4core
 
 EOT
 ) | grep -e "$FILTER"

@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -76,7 +76,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAOS;CHAOS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -123,14 +123,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAOS;CHAOS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAOS;CHAOS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -149,7 +149,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAOS;CHAOS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -157,7 +157,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAOS;CHAOS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -178,14 +178,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAOS;CHAOS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAOS;CHAOS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -204,7 +204,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAOS;CHAOS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -212,7 +212,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAOS;CHAOS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libchaos/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -241,6 +241,106 @@
     <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/engines/empty.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/engines/ncg.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/engines/xorring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/bat1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/bat2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/bat3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/birth1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/birth2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/ex1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/ex3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/ex4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/ex7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/fbirth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/fcoll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/mrg32k3a.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/my16807.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/pcg32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/scat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/scat2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/speedpcg32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/speedxoshiro128plusplus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/testpcg32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/testxoshiro128plusplus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/xorshift.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/xoshiro128plusplus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/addstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/bitset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/chrono.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/gdef.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/mystr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/num.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/num2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/tables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/tcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/fbar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/fdist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/finv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/fmass.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/gofs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/gofw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/statcoll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/wdist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/bbattery.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fcho.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fcong.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ffam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ffsr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fftc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fknuth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fmarsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fmultin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fnpair.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fres.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fspectral.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ftab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fvaria.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fwalk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/rijndael-alg-fst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/scatter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/scomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sentrop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sknuth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/smarsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/smultin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/snpair.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sres.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sspacings.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sspectral.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/svaria.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/swalk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/swrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/tu01_sha1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uautomata.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ubrent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ucarry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ucrypto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ucryptoIS.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ucubic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/udeng.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ufile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ugfsr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ugranger.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uinv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uknuth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ulcg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ulec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/umarsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/umrg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/unif01.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/unumrec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uquad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/usoft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/utaus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/utezuka.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/utouzin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uvaria.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uweyl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uwu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uxorshift.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/vectorsF2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libchaos/tests/b_engines.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libchaos/tests/b_generators.cc" />
     <ClInclude Include="../../thirdparty/owemdjee/libchaos/include/chaos.h" />
@@ -261,6 +361,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/libchaos/include/chaos/seed.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/libchaos/include/chaos/truely.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/libchaos/include/chaos/types.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/my16807.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\libchaos\src\test.tools\TestU01\include\TestU01\api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include/TestU01/examples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include/TestU01/lib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include/TestU01/probdist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include/TestU01/suite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include/TestU01/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/num.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uxorshift.h" />
     <Image Include="../../thirdparty/owemdjee/libchaos/docs/_images/ncg-distribution-rankit.png" />
     <Image Include="../../thirdparty/owemdjee/libchaos/docs/_images/ncg-speed-benchmark.png" />
     <Image Include="../../thirdparty/owemdjee/libchaos/docs/_static/ajax-loader.gif" />
@@ -341,10 +450,178 @@
     <Text Include="../../thirdparty/owemdjee/libchaos/docs/source/quickstart.rst" />
     <Text Include="../../thirdparty/owemdjee/libchaos/examples/graph.R" />
     <Text Include="../../thirdparty/owemdjee/libchaos/install.sh" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/README" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/aclocal.m4" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/bootstrap" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/configure" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/depcomp" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/doc/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/doc/lmac.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/doc/myarticle.sty" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/bat1.res" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/bat2.res" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/birth1.res" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/ex3.res" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/fbirth.res1.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/fbirth.res2.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/fcoll.res1.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/fcoll.res2.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/examples/vax.bin" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include/Makefile.def" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include/gdefconf.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/include/makedef" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/missing" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mkinstalldirs" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/addstr.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/annexea.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/bitset.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/chrono.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/gdef.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/guidemylib.bbl" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/guidemylib.pdf" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/guidemylib.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/mystr.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/num.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/num2.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/tables.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/tcode.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/titre.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/mylib/util.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/CombCubLCG.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/CombCubic2.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/CombL2.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/CombWH2.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/Cubic1.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/InvExpl.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/InvExpl2a.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/InvExpl2b.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/InvImpl.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/InvImpl2a.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/InvImpl2b.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/LCGBad2.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/LCGGood.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/LCGGranger.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/LCGPow2.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/LCGWu2.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/LFSR1.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/LFSR2.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/LFSR3.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/MRG2.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/MRG3.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/param/TausLCG2.par" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/copyright.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/fbar.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/fdist.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/finv.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/fmass.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/gofs.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/gofw.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/guideprobdist.bbl" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/guideprobdist.pdf" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/guideprobdist.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/statcoll.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/titre.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/probdist/wdist.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/bbattery.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/bintro.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/copyright.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fcho.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fcong.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ffam.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ffsr.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fintro.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fknuth.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fmarsa.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fmultin.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fnpair.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fres.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fresshort.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fspectral.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fstring.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ftab.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fvaria.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/fwalk.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/guidelongtestu01.pdf" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/guideshorttestu01.pdf" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/guidetestu01.bbl" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/guidetestu01.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/intro.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/rijndael-alg-fst.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/scatfig.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/scatter.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/scomp.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sentrop.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sintro.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sknuth.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/smarsa.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/smultin.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/snpair.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sres.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sresshort.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sspacings.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sspectral.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/sstring.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/svaria.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/swalk.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/swrite.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/title.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/tu01_sha1.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uautomata.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ubrent.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ucarry.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ucrypto.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ucubic.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/udeng.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ufile.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ugfsr.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ugranger.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uintro.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uinv.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uknuth.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ulcg.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/ulec.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/umarsa.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/umrg.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/unif01.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/unumrec.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uquad.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/usoft.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/utaus.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/utezuka.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/utouzin.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uvaria.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uweyl.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uwu.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/uxorshift.tex" />
+    <Text Include="../../thirdparty/owemdjee/libchaos/src/test.tools/TestU01/testu01/vectorsF2.tex" />
     <Xml Include="../../thirdparty/owemdjee/libchaos/docs/_static/opensearch.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

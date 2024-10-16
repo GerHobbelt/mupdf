@@ -50,20 +50,20 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -91,7 +91,7 @@
     <NMakeOutput>__build_target.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -125,15 +125,24 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="copy_executables_to_solution_basedir.vcxproj">
+      <Project>{c6303e5b-2ffb-4cde-a1d5-141e7552bd4b}</Project>
+    </ProjectReference>
     <ProjectReference Include="curl.vcxproj">
       <Project>{00111979-815b-4f64-bc9d-219078b1f3aa}</Project>
     </ProjectReference>
+    <ProjectReference Include="__build_target-extra.vcxproj">
+      <Project>{99ca7bb8-dca7-450f-ba73-abcb14120d0f}</Project>
+    </ProjectReference>
     <ProjectReference Include="__build_target_boost.vcxproj">
       <Project>{d00cae4a-b94a-4ea5-b8dd-4851fc7a6b64}</Project>
+    </ProjectReference>
+    <ProjectReference Include="__build_target_current_work_OK.vcxproj">
+      <Project>{4f909fc9-29e8-48b0-8d70-454bb35b3498}</Project>
     </ProjectReference>
     <ProjectReference Include="__build_target_experimental.vcxproj">
       <Project>{b88bfa7d-1964-41d9-ae63-c91997fe2c7a}</Project>
@@ -144,21 +153,17 @@
     <ProjectReference Include="__build_target_mupdf.vcxproj">
       <Project>{0688fe97-e8b4-4d80-8b8b-d445b349a82d}</Project>
     </ProjectReference>
-    <ProjectReference Include="__build_target_opencv.vcxproj">
-      <Project>{988af974-e48d-4f43-844c-8e136d041aa2}</Project>
+    <ProjectReference Include="__build_target_opencv_OK.vcxproj">
+      <Project>{8f38801b-804a-49ff-9606-266fd642c1ac}</Project>
     </ProjectReference>
     <ProjectReference Include="__build_target_tesseract.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-101000000002}</Project>
-    </ProjectReference>
-    <ProjectReference Include="__build_target_wxWindows.vcxproj">
-      <Project>{2b0af988-5c4d-4794-86b1-c14ab102ba31}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{4F909FC9-29E8-48B0-8D70-454BB35B3498}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>__build_target.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>__build_target.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="chiaroscuramente.vcxproj">
+      <Project>{78c512d3-eee8-4816-9c2d-bdacb76e3917}</Project>
+    </ProjectReference>
+    <ProjectReference Include="curl.vcxproj">
+      <Project>{00111979-815b-4f64-bc9d-219078b1f3aa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcfgpath.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff651180}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libchaos.vcxproj">
+      <Project>{6769b987-26e9-4cb8-81fe-715d9e5ce4d9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libchaos_tests.vcxproj">
+      <Project>{6769b987-26e9-4cb8-81fe-715d9e43ecbf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libchewing.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff61808a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libchewing_text_cud.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff374a24}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libchiaroscuramente.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffc90ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libchopshop.vcxproj">
+      <Project>{9068f65e-7329-45fe-86c6-4a2d234536f4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfastPRNG.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd97593}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffbc95c8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_ini.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa9b697}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_ini_tests.vcxproj">
+      <Project>{f3131262-bf0e-4ba4-bbbe-7adbab1feca4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_json.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff8a6ef}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_json_tests.vcxproj">
+      <Project>{6e761ed9-6f43-41bc-993a-f68d768eb1b4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_shoal.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2f2b5a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_shoal_tests.vcxproj">
+      <Project>{97bd7118-17f9-4d55-9892-61b1f120a4f8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_tests.vcxproj">
+      <Project>{0f0aa777-ada9-4e9b-8739-619977e7f5b7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_toml.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe22d2b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_toml_tests.vcxproj">
+      <Project>{4f6d0892-3d48-4936-be9e-8f96c8f6a22a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_tree.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff630524}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_tree_tests.vcxproj">
+      <Project>{5f6b0b36-58a7-44d4-9ea2-1a32d8321682}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_xml.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6a4922}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_xml_tests.vcxproj">
+      <Project>{bc70bf31-8501-498c-b8f8-bf5cdac53613}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_yaml.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4aa197}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_yaml_tests.vcxproj">
+      <Project>{4e4c307e-9194-4968-920c-30fd8ce25b5a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libinifile-cpp-tests.vcxproj">
+      <Project>{19bf3058-8639-4b09-a02f-5ef6c5ea750a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libinifile-cpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff65df3f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpathutils.vcxproj">
+      <Project>{9048804d-1d6d-4393-8f85-b7560875a43e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpathutils_tests.vcxproj">
+      <Project>{9048804d-1d6d-4393-8f85-b756086cf9a5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libprng.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcfb82a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="librapidxml.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2c2bb2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libvcopy.vcxproj">
+      <Project>{5a7c1b31-1eb5-4f0c-8873-355e5e1e889c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libvcopy_tests.vcxproj">
+      <Project>{5a7c1b31-1eb5-4f0c-8873-355e5ee2fe16}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libworde_butcher.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffee37e6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="stdext-path.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa0525d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vcopy.vcxproj">
+      <Project>{36652466-05bf-488f-bace-8d2132d64068}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vcopy_test.vcxproj">
+      <Project>{c7bbab70-0fa2-4660-b47c-35f31b559aee}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>

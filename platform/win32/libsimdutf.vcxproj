@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB9C0A4}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDUTF;SIMDUTF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDUTF;SIMDUTF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDUTF;SIMDUTF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDUTF;SIMDUTF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDUTF;SIMDUTF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDUTF;SIMDUTF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDUTF;SIMDUTF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDUTF;SIMDUTF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDUTF;SIMDUTF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDUTF;SIMDUTF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDUTF;SIMDUTF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDUTF;SIMDUTF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/alignment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/base64/benchmark_base64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/CppCon2018/utf_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/llvm/ConvertUTF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/Profiling/ppc_timer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/iconv_u8u16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/libu8u16_BE.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/libu8u16_LE.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/src/libu8u16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/src/u8u16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/src/x8x16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/src/xml_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/src/xmldecl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/u8u16_g4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/u8u16_mmx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/u8u16_p4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/u8u16_p4_ideal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/u8u16_spu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/u8u16_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/x8x16_p4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/base/Timing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/buffer/AllProcessors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/buffer/BaseBufferProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/core/DecoderLut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/core/EncoderLut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/iconv/iconv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/message/MessageConverter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/tests/CorrectnessTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/tests/Example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/tests/FileConverter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/tests/iconv_sample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8sse4/fromutf8-sse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/benchmark_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/cmdline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/threaded.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/singleheader/amalgamation_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_base64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_latin1_to_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_latin1_to_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_latin1_to_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_utf16_to_latin1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_utf16_to_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_utf16_to_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_utf32_to_latin1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_utf32_to_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_utf32_to_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_utf8_to_latin1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_utf8_to_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_utf8_to_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_validate_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_validate_utf32le.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/implementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/encoding_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/fallback/implementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_base64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_convert_latin1_to_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_convert_latin1_to_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_convert_latin1_to_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_convert_utf16_to_latin1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_convert_utf16_to_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_convert_utf16_to_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_convert_utf32_to_latin1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_convert_utf32_to_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_convert_utf32_to_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_convert_utf8_to_latin1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_convert_utf8_to_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_convert_utf8_to_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_validate_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/avx2_validate_utf32le.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/haswell/implementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_ascii_validation.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_base64.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_latin1_to_utf16.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_latin1_to_utf32.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_latin1_to_utf8.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_utf16_to_latin1.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_utf16_to_utf32.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_utf16_to_utf8.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_utf32_to_latin1.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_utf32_to_utf16.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_utf32_to_utf8.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_utf8_to_latin1.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_valid_utf8_to_latin1.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_from_utf8.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_from_valid_utf8.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_macros.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_utf32_validation.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_utf8_common.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_utf8_validation.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/implementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/implementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/ppc64/implementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/implementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_helpers.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_latin1_to.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_length_from.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_utf16_to.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_utf32_to.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_utf8_to.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_validate.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/simdutf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/implementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/internal/loader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/internal/write_v_u16_11bits_to_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_base64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_convert_latin1_to_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_convert_latin1_to_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_convert_latin1_to_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_convert_utf16_to_latin1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_convert_utf16_to_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_convert_utf16_to_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_convert_utf32_to_latin1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_convert_utf32_to_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_convert_utf32_to_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_convert_utf8_to_latin1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_convert_utf8_to_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_convert_utf8_to_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_validate_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/westmere/sse_validate_utf32le.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/base64_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/bele_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_latin1_to_utf16be_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_latin1_to_utf16le_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_latin1_to_utf32_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_latin1_to_utf8_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16be_to_latin1_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16be_to_latin1_tests_with_errors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16be_to_utf32_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16be_to_utf32_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16be_to_utf8_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16be_to_utf8_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16le_to_latin1_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16le_to_latin1_tests_with_errors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16le_to_utf32_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16le_to_utf32_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16le_to_utf8_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16le_to_utf8_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf32_to_latin1_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf32_to_latin1_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf32_to_utf16be_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf32_to_utf16be_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf32_to_utf16le_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf32_to_utf16le_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf32_to_utf8_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf32_to_utf8_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf8_to_latin1_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf8_to_latin1_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf8_to_utf16be_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf8_to_utf16be_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf8_to_utf16le_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf8_to_utf16le_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf8_to_utf32_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf8_to_utf32_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf16be_to_latin1_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf16be_to_utf32_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf16be_to_utf8_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf16le_to_latin1_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf16le_to_utf32_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf16le_to_utf8_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf32_to_latin1_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf32_to_utf16be_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf32_to_utf16le_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf32_to_utf8_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf8_to_latin1_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf8_to_utf16be_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf8_to_utf16le_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_valid_utf8_to_utf32_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/count_utf16be.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/count_utf16le.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/count_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/detect_encodings_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/helpers/random_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/helpers/random_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/helpers/random_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/helpers/random_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/helpers/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/helpers/transcode_test_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/null_safety_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/readme_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/reference/encode_latin1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/reference/encode_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/reference/encode_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/reference/encode_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/reference/validate_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/reference/validate_utf16_to_latin1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/reference/validate_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/reference/validate_utf32_to_latin1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/reference/validate_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/reference/validate_utf8_to_latin1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/select_implementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/special_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/validate_ascii_basic_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/validate_ascii_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/validate_utf16be_basic_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/validate_utf16be_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/validate_utf16le_basic_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/validate_utf16le_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/validate_utf32_basic_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/validate_utf32_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/validate_utf8_basic_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/validate_utf8_brute_force_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/validate_utf8_puzzler_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/validate_utf8_with_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tools/fastbase64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tools/sutf.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/base64/libbase64_spaces.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/base64/node_base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/base64/openssl3_base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/CppCon2018/utf_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/hoehrmann/hoehrmann.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/inoue2008/inoue_utf8_to_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/inoue2008/inoue_utf8_to_utf16_tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/llvm/ConvertUTF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/Profiling/BOM_Profiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/Profiling/i386_timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/config/config_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/config/g4_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/config/mmx_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/config/p4_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/config/p4_ideal_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/config/spu_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/config/ssse3_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/lib/altivec_simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/lib/mmx_simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/lib/mmx_simd_basic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/lib/mmx_simd_built_in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/lib/mmx_simd_modified.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/lib/spu_simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/lib/sse_simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/lib/stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/src/bytelex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/src/charsets/ASCII_EBCDIC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/src/multiliteral.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/src/xml_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/src/xmldecl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/base/CustomMemcpy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/base/PerfDefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/base/Timing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/buffer/BaseBufferProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/buffer/BufferDecoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/buffer/BufferEncoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/buffer/ProcessorPlugins.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/buffer/ProcessorSelector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/core/DecoderLut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/core/DecoderProcess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/core/Dfa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/core/EncoderLut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/core/EncoderProcess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/core/ProcessTrivial.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/iconv/iconv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/message/MessageConverter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/utf8lut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utfcpp/source/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utfcpp/source/utf8/checked.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utfcpp/source/utf8/core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utfcpp/source/utf8/cpp11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utfcpp/source/utf8/cpp17.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utfcpp/source/utf8/unchecked.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/apple_arm_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/benchmark_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/cmdline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/event_counter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/linux-perf-events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/include/simdutf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/include/simdutf/avx512.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/include/simdutf/common_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/include/simdutf/compiler_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/include/simdutf/encoding_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/include/simdutf/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/include/simdutf/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/include/simdutf/internal/isadetection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/include/simdutf/portability.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/include/simdutf/simdutf_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/buf_block_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf8_to_latin1/utf8_to_latin1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf8_to_latin1/valid_utf8_to_latin1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf8_to_utf16/utf8_to_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf8_to_utf16/valid_utf8_to_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf8_to_utf32/utf8_to_utf32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf8_to_utf32/valid_utf8_to_utf32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf8_validation/utf8_lookup4_algorithm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf8_validation/utf8_validator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/ascii.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/latin1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/latin1_to_utf16/latin1_to_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/latin1_to_utf32/latin1_to_utf32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/latin1_to_utf8/latin1_to_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf16_to_latin1/utf16_to_latin1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf16_to_latin1/valid_utf16_to_latin1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf16_to_utf32/utf16_to_utf32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf16_to_utf32/valid_utf16_to_utf32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf16_to_utf8/utf16_to_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf16_to_utf8/valid_utf16_to_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf32_to_latin1/utf32_to_latin1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf32_to_latin1/valid_utf32_to_latin1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf32_to_utf16/utf32_to_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf32_to_utf16/valid_utf32_to_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf32_to_utf8/utf32_to_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf32_to_utf8/valid_utf32_to_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf8_to_latin1/utf8_to_latin1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf8_to_latin1/valid_utf8_to_latin1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf8_to_utf16/utf8_to_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf8_to_utf16/valid_utf8_to_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf8_to_utf32/utf8_to_utf32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/scalar/utf8_to_utf32/valid_utf8_to_utf32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/arm64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/arm64/begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/arm64/bitmanipulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/arm64/end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/arm64/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/arm64/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/arm64/simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/arm64/simd16-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/fallback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/fallback/begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/fallback/bitmanipulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/fallback/end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/fallback/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/haswell.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/haswell/begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/haswell/bitmanipulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/haswell/end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/haswell/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/haswell/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/haswell/simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/haswell/simd16-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/icelake.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/icelake/begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/icelake/bitmanipulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/icelake/end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/icelake/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/icelake/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/ppc64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/ppc64/begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/ppc64/bitmanipulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/ppc64/end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/ppc64/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/ppc64/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/ppc64/simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/rvv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/rvv/begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/rvv/end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/rvv/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/rvv/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/westmere.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/westmere/begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/westmere/bitmanipulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/westmere/end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/westmere/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/westmere/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/westmere/simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/simdutf/westmere/simd16-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/tables/base64_tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/tables/utf16_to_utf8_tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/tables/utf8_to_utf16_tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/helpers/random_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/helpers/random_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/helpers/random_utf32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/helpers/random_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/helpers/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/helpers/transcode_test_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/reference/decode_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/reference/decode_utf32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/reference/encode_latin1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/reference/encode_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/reference/encode_utf32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/reference/encode_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/reference/validate_utf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/reference/validate_utf16_to_latin1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/reference/validate_utf32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/reference/validate_utf32_to_latin1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/reference/validate_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tests/reference/validate_utf8_to_latin1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/tools/sutf.h" />
+    <Image Include="../../thirdparty/owemdjee/simdutf/doc/avx512.png" />
+    <Image Include="../../thirdparty/owemdjee/simdutf/doc/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/simdutf/doc/node2023.png" />
+    <Image Include="../../thirdparty/owemdjee/simdutf/doc/utf16utf8.png" />
+    <Image Include="../../thirdparty/owemdjee/simdutf/doc/utf8utf16.png" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/LICENSE-APACHE" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/LICENSE-MIT" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/README-RVV.md" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/base64/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/inoue2008/script.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/COPYRIGHT" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/OSL3.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/README" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/lib/libgen/make_basic_ops.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/lib/libgen/make_half_operand_versions.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/lib/libgen/make_test.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/lib/outline.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/proto/u8u16.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/src/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/src/libu8u16.pdf" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/src/libu8u16.w" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/data/test_minimal.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_clang_corr_tests.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_clang_corr_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_gcc_corr_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_gcc_example.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_gcc_file_conv.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_gcc_iconv_lib.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_gcc_iconv_sample.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_mingw_corr_tests.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_mingw_example.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_mingw_file_conv.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_mingw_iconv_lib.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_mingw_iconv_sample.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_msvc_corr_tests.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_msvc_example.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_msvc_file_conv.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_msvc_iconv_lib.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/build_msvc_iconv_sample.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/html_table.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/measure.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/resize.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/wipe_all.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/scripts/wipe_interm.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utfcpp/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utfcpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/dataset/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/dataset/emoji.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/dataset/scripts/utf8type.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/dataset/wikipedia_mars/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/dataset/wikipedia_mars/convert_to_utf6.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/cmake/CPM.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/cmake/JoinPaths.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/cmake/add_cpp_test.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/cmake/simdutf-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/cmake/simdutf-flags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/doxygen.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/riscv/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/riscv/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/riscv/remove-docker-station" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/riscv/run-docker-station" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64/avx512.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64/neon_decode.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64/sse.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64/sseregular.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64/sseurl.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64/table.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/benchmark_print.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/clang_format.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/clang_format_docker.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/common.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/create_latex_table.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/docker/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/docker/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/docker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/docker/llvm.gpg" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/prepare_doxygen.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/release.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/sse_convert_utf16_to_utf8.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/sse_utf8_utf16_decode.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/sse_validate_utf16le_proof.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/sse_validate_utf16le_testcases.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/table.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/simdutf.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/singleheader/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/singleheader/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/singleheader/amalgamate.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/tests/helpers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/tests/installation_tests/find/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/tests/installation_tests/from_fetch/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/tests/reference/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/toolchain-rvv-spike.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/tools/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
