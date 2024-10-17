@@ -1430,6 +1430,17 @@ THST
 simdutf
 md5-optimisation
 c4core
+docopt.cpp
+PSI
+dablooms
+Cuckoo_Filter
+Containers
+radix_tree
+adaptive-radix-tree
+PruningRadixTrie
+libart
+rax
+botan
 
 EOT
 ) | grep -e "$FILTER"
