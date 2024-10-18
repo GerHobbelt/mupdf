@@ -779,6 +779,8 @@ extern const char* fz_hex_digits;
 	- '<size>': one of 'l' , 'll', 't', 'z', 'I64', 'I32', 'I16'. Both 'l' and 'll' expect an `int64_t` compatible-sized type, 't' maps
 	  to your system's `ptrdiff_t` type and `z` maps to your system's `size_t` type.
 
+	%< outputs a quoted (utf8) string (for XML).
+
 	Unrecognized `%` commands will be copied verbatim, *but without
 	any recognized modifiers*. E.g. `%5K` will print `%K`.
 

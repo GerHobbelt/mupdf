@@ -397,6 +397,62 @@ static void fmtquote_pdf(struct fmtbuf *out, const char *s, int sq, int eq)
 	fmtputc(out, eq);
 }
 
+static void fmtquote_xml(struct fmtbuf *out, const char *s)
+{
+	int c, n;
+	fmtputc(out, '"');
+	while (*s != 0) {
+		n = fz_chartorune(&c, s);
+		switch (c) {
+		case '"':
+			fmtputc(out, '&');
+			fmtputc(out, 'q');
+			fmtputc(out, 'u');
+			fmtputc(out, 'o');
+			fmtputc(out, 't');
+			fmtputc(out, ';');
+			break;
+		case '&':
+			fmtputc(out, '&');
+			fmtputc(out, 'a');
+			fmtputc(out, 'm');
+			fmtputc(out, 'p');
+			fmtputc(out, ';');
+			break;
+		case '<':
+			fmtputc(out, '&');
+			fmtputc(out, 'l');
+			fmtputc(out, 't');
+			fmtputc(out, ';');
+			break;
+		case '>':
+			fmtputc(out, '&');
+			fmtputc(out, 'g');
+			fmtputc(out, 't');
+			fmtputc(out, ';');
+			break;
+		default:
+			if (c < 32 || c >= 127) {
+				fmtputc(out, '&');
+				fmtputc(out, '#');
+				if (c > 255)
+				{
+					fmtputc(out, "0123456789ABCDEF"[(c>>12)&15]);
+					fmtputc(out, "0123456789ABCDEF"[(c>>8)&15]);
+				}
+				fmtputc(out, "0123456789ABCDEF"[(c>>4)&15]);
+				fmtputc(out, "0123456789ABCDEF"[(c)&15]);
+				fmtputc(out, ';');
+			}
+			else
+				fmtputc(out, c);
+			break;
+		}
+		s += n;
+	}
+	fmtputc(out, '"');
+}
+
 static void fmtname(struct fmtbuf *out, const char *s)
 {
 	int c;
@@ -1492,7 +1548,14 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					}
 				}
 				break;
-
+			case '<': /* quoted string for xml */
+				{
+					const char* str = va_arg(args, const char*);
+					if (!str) 
+						str = "";
+					fmtquote_xml(&out, str);
+				}
+				break;
 			case '(': /* pdf string */
 				{
 					const char* str = va_arg(args, const char*);
