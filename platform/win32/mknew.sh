@@ -1441,6 +1441,13 @@ PruningRadixTrie
 libart
 rax
 botan
+cpp-unicodelib
+fast_align
+Non-Maximum-Suppression
+cmake_examples
+modern-cpp-template
+googletest-ci-cpp-template
+Algo_Ds_Notes
 
 EOT
 ) | grep -e "$FILTER"
@@ -1514,6 +1521,9 @@ visible-url-detector
 WebView2Browser
 WebView2Samples
 7-Zip-zstd
+Algo_Ds_Notes
+modern-cpp-template
+googletest-ci-cpp-template
 
 EOT
 ) | grep -e "$FILTER"

@@ -1,0 +1,1171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF74451E}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_EXAMPLES;CMAKE_EXAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_EXAMPLES;CMAKE_EXAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_EXAMPLES;CMAKE_EXAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_EXAMPLES;CMAKE_EXAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_EXAMPLES;CMAKE_EXAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_EXAMPLES;CMAKE_EXAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_EXAMPLES;CMAKE_EXAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_EXAMPLES;CMAKE_EXAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_EXAMPLES;CMAKE_EXAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_EXAMPLES;CMAKE_EXAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_EXAMPLES;CMAKE_EXAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_EXAMPLES;CMAKE_EXAMPLES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/1-first-executable/say_hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/2-first-find-package/test_opencv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/3-first-static-library/foo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/4-first-add-subdirectory/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/4-first-add-subdirectory/use_hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/5-first-header-only-library/use_logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/6-first-package/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/6-first-package/use_hello/use_hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/7-first-shared-library/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/7-first-shared-library/use_hello/use_hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/option_example/car/car.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/option_example/exe/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/option_example/face/face.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/option_example2/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/compilation_database/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/compile_definitions/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/configure_file/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/copy_directory/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/copy_files/essential_mat_reconstr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cxx_standard/cmake_cxx_standard/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cxx_standard/set_properties/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cxx_standard/set_target_properties/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cxx_standard/target_compile_features/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/debug_postfix/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/debug_postfix/world.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/debug_symbol_example/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/fPIC/bad/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/fPIC/bad/mylib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/fPIC/bad/otherlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/file_glob/src/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/file_glob/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/compile_flag_example1/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/opencl_example/matvec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/opengl_example/snake.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example2/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example2/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example3/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example3/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/simd_multiversion_example/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/sse_example/src/fast_ceil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/msvc_runtime_mt_md_example/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/include_directories/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/link_options/increase_msvc_stack_size/demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/rpath/rpath_related_cmake_variables/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/rpath/rpath_related_cmake_variables/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/rpath/rpath_related_cmake_variables/world.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/rpath/set_rpath_example/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/rpath/set_rpath_example/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/specify_output_name/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/specify_output_name/testbench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/specify_output_name/world.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/src/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/vs_debugger_environment/demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/vs_debugger_working_directory/demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/1-minimal-install/install-executable/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/1-minimal-install/install-static-library-with-headers/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/1-minimal-export/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/1-minimal-export/use_hello/use_hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/2-export-to-subdir/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/2-export-to-subdir/use_hello/use_hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/3-install-headers-to-subdir/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/3-install-headers-to-subdir/use_hello/use_hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/4-export-with-namespace/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/4-export-with-namespace/use_hello/use_hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/5-export-with-version/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/5-export-with-version/use_hello/use_hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/1-pick-package-name/foo/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/1-pick-package-name/use_foo/use_foo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/2-set-package-namespace/foo/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/2-set-package-namespace/use_foo/use_foo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/3-set-include-subdir/foo/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/3-set-include-subdir/use_foo/use_foo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/4-multiple-targets/foo/add.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/4-multiple-targets/foo/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/4-multiple-targets/use_foo/use_foo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/1-simple/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/2-export-failed/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/3-solved-with-private-transitive/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/4-solved-with-build-interface/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/5-solved-by-clean-interface-inc-dirs/hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/use_hello/use_hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/export-by-template-config-file/hello_project/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/export-by-template-config-file/say_hello_project/say_hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/implicitly-install-headers/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/install-library-and-executable/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/install-library-and-executable/say_hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/use-generator-expression-for-include-directories/src/hello/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/CPM/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/CPM2/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/ExternalProject_Add/sample1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/FetchContent/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/FetchContent2/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/FetchContent_TBB/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/file_DOWNLOAD/hello_nb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_armadillo/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_benchmark/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_benchmark/testbed2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_benchmark/testbed3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_boost_system/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_cereal/use_cereal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ceres/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_cpuinfo/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_crc32c/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_eigen/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_freeglut/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_gflags/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_glfw_opengl/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_glfw_vulkan/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_glm/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_glog/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_googletest/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_imgui-SFML/imgui-SFML_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_include-what-you-use/global_usage/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_include-what-you-use/global_usage/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_include-what-you-use/per_target_usage/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_include-what-you-use/per_target_usage/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_libclang/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_libiconv/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_lmdb/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ncnn/src/yolov4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ncurses/testbed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_openblas/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_opencl/find_opencl_with_icd_loader/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_opencl/find_opencl_with_megpeak_opencl_stub/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_opencv/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_openssl/SSL_man_in_middle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_openssl/ssl-client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_openssl/ssl-server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_pkgconfig_lmdb/src/lmdb-demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_proto_to_cpp/src/protobuf_example_read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_proto_to_cpp/src/protobuf_example_write.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/core/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/core/remarkable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/core/render_line.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/core/render_scene.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_rapidcheck/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_raylib/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_raylib_2/core_basic_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_sdl2/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_sdl_image/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_sfml/sfml_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_utest.h/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_vld/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_vulkan/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/1_directly_require_prebuilt/peach.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/2_require_on_imported_library/peach.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/3_require_on_alias_library/peach.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/4_debug_and_release_libs_by_keyword/say_hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/5_debug_and_release_libs_by_property/say_hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/6_require_on_source_target_simple/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/6_require_on_source_target_simple/say_hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/7_require_on_source_target_internal_subdirectory/cJSON/cJSON.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/7_require_on_source_target_internal_subdirectory/demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/8_require_on_source_target_external_subdirectory/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/9_system_libs/dl/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/9_system_libs/pthread/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/cmake-tools-basic-usage/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/find-dll-when-debug-and-run/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/generate-cmake-file-api-files/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/trigger-cmake-via-tasks/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/1-minimal/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/2-specify-generator/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/3-specify-cache-variables/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/4-specify-toolchain-file/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/asan-dll/globally/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/asan-dll/per_target/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/asan-simple/src/char_array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/asan-simple/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/asan-simple/src/my_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/heap_buffer_overflow/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/memory_leak/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/use_opencl/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/tsan/data_race/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/tsan/data_race/test2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/tsan/thread_leak/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/ubsan/call_back_on_empty_container/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/ubsan/signed_integer_overflow/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/7-macOS/invoke-objc-from-cpp/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/add_subdirectory_use_SYSTEM/hello/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/add_subdirectory_use_SYSTEM/test_hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/copy_dll_as_function/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/create_dll_export_all_symbols/src/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/create_dll_export_all_symbols/testbed/demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/arm-linux-gnueabihf/src/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/arm-linux-gnueabihf/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/arm-linux-gnueabihf/src/main2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/arm-none-eabi/src/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/arm-none-eabi/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/linux-32bit/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/ohos_ndk/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/rtos/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/toolchain-tests/ex2/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/debug_dependencies/debug_example/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example/src/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example2/src/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example3/src/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_example/src/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_example2/src/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/find_package_examples/src/hdf5_example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/find_package_examples/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/find_package_examples/src/protobuf_example_read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/find_package_examples/src/protobuf_example_write.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/src/myImgui/MyImgui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/src/vulkanApp/VulkanApp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/src/vulkanBase/VulkanBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/c_call_python/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/c_call_python/src/run.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/jni/jni/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/jni_2/jni/hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/mex/src/add.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/mex/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11_2/IPM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11_2/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/windows_masm/foo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/manually_create_packages/create_imported_lib_example/src/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/masm_example/src/CalcSum_.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/masm_example/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/ref/naivetest_libjpeg/src/demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/ref/naivetest_zlib/src/demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/ref/test_libjpeg/src/demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/test_libjpegturbo/src/tjexample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/test_libpng/src/demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/test_zlib/src/demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/msbuild-call-ninja-in-visual-studio/m.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/object-library/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/object-library/mylib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/presets-example/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/sleek/tests/openmp/testbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/transitive_usage_requirements/foo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/transitive_usage_requirements/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/transitive_usage_requirements/testbed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake_examples/x-misc/use_zlib_dll/src/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/3-first-static-library/foo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/4-first-add-subdirectory/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/5-first-header-only-library/logger/logger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/6-first-package/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/7-first-shared-library/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/option_example/car/car.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/option_example/face/face.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/compilation_database/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/debug_postfix/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/debug_postfix/world.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/fPIC/bad/mylib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/fPIC/bad/otherlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/file_glob/src/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example2/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example3/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/rpath/rpath_related_cmake_variables/world.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/rpath/set_rpath_example/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/specify_output_name/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/specify_output_name/world.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/src/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/1-minimal-install/install-static-library-with-headers/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/1-minimal-export/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/2-export-to-subdir/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/3-install-headers-to-subdir/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/4-export-with-namespace/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/5-export-with-version/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/1-pick-package-name/foo/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/2-set-package-namespace/foo/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/3-set-include-subdir/foo/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/4-multiple-targets/foo/add.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/4-multiple-targets/foo/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/1-simple/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/2-export-failed/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/3-solved-with-private-transitive/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/4-solved-with-build-interface/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/5-solved-by-clean-interface-inc-dirs/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/export-by-template-config-file/hello_project/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/implicitly-install-headers/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/install-library-and-executable/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/use-generator-expression-for-include-directories/api/hello/hello.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/ExternalProject_Add/sample1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_libclang/header.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/core/remarkable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/core/render_line.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/core/render_scene.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_utest.h/utest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/6_require_on_source_target_simple/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/7_require_on_source_target_internal_subdirectory/cJSON/cJSON.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/prebuilt/EasyX_20240225/include/easyx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/prebuilt/EasyX_20240225/include/graphics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/prebuilt/hello/inc/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/7-macOS/invoke-objc-from-cpp/objc_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/add_subdirectory_use_SYSTEM/hello/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/create_dll_export_all_symbols/src/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/arm-linux-gnueabihf/src/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/arm-none-eabi/src/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/ohos_ndk/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/debug_dependencies/debug_example/my_eigen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example/src/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example2/src/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example3/src/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_example/src/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_example2/src/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/src/myImgui/MyImgui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/src/stb_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/src/vulkanApp/VulkanApp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/src/vulkanBase/VulkanBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/c_call_python/src/run.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/jni/jni/droid_HelloWorld.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/jni_2/droid_HelloWorld.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/mex/src/add.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/attr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/buffer_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/detail/class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/detail/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/detail/descr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/detail/init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/detail/internals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/detail/typeid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/eigen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/embed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/eval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/functional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/iostream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/numpy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/pybind11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/pytypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/stl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/include/pybind11/stl_bind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11_2/IPM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/manually_create_packages/hello/include/hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/transitive_usage_requirements/foo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake_examples/x-misc/transitive_usage_requirements/hello.h" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/copy_files/assets/leuvenA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/copy_files/assets/leuvenB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/msvc_runtime_mt_md_example/vs2022_change_vc_runtime_to_MTd.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/msvc_runtime_mt_md_example/vs2022_default_vc_runtime_MDd.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/msvc_runtime_mt_md_example/vs2022_gtest_default_runtime_is_MTd.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/vs_debugger_working_directory/vs_debugger_working_directory.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/FetchContent2/cmake_fetchcontent_gitclone_commands.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ncnn/asset/000011.jpg" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ncnn/asset/VS_specify_cmd_argument.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_sdl2/hello_world.bmp" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_sdl_image/frontground.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/5-build-opencv-with-cmake-presets/build-opencv-with-cmake-presets.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/asan-dll/asan_dll_not_found.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cmake_format_usage/cmake-format-1.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/ohos_ndk/deveco_ndk.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/toolchain-tests/ex3/compare_cmake_configure_log.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/textures/texture.jpg" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/x-misc/manually_create_packages/create_imported_lib_example/run_executables.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/ref/naivetest_libjpeg/girl.jpg" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/ref/test_libjpeg/girl.jpg" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/test_libjpegturbo/girl.jpg" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/test_libpng/op.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/x-misc/presets-example/snapshots/all_together.png" />
+    <Image Include="../../thirdparty/owemdjee/cmake_examples/x-misc/presets-example/snapshots/list_presets.png" />
+    <MASM Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/windows_masm/bar.asm" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/1-first-executable/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/2-first-find-package/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/3-first-static-library/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/4-first-add-subdirectory/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/4-first-add-subdirectory/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/5-first-header-only-library/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/5-first-header-only-library/logger/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/6-first-package/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/6-first-package/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/6-first-package/use_hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/7-first-shared-library/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/7-first-shared-library/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/1-quick-start/7-first-shared-library/use_hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_build_type/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_build_type/simple/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_build_type/verbose/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_configuration_types/verbose/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_install_prefix/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/cmake_dependent_option/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/option_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/option_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/option_example/car/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/option_example/face/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/option_example2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/option_example2/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/options_via_txt_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cmake_options/options_via_txt_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/compilation_database/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/compilation_database/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/compile_definitions/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/compile_options/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/configure_file/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/configure_file/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/configure_file/hello_config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/copy_directory/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/copy_directory/data/sub/sub1.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/copy_directory/data/test.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/copy_files/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/copy_files/assets/essential_mat_data.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cxx_standard/cmake_cxx_standard/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cxx_standard/set_properties/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cxx_standard/set_target_properties/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/cxx_standard/target_compile_features/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/debug_postfix/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/debug_postfix/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/debug_symbol_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/debug_symbol_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/debug_symbol_example/manage_flags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/fPIC/bad/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/fPIC/bad/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/fPIC/global/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/fPIC/per_target/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/fPIC/ugly/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/file_glob/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/file_glob/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/compile_flag_example1/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/compile_flag_example1/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/cuda_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/cuda_example/deps.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/opencl_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/opencl_example/matvec.cl" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/opengl_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/opengl_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example2/predigest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/openmp_example3/predigest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/simd_multiversion_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/simd_multiversion_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/sse_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/hpc_compute/sse_example/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/msvc_runtime_mt_md_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/msvc_runtime_mt_md_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/flags_and_properties/msvc_runtime_mt_md_example/cmake/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/android-arm32-build.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/android-arm32-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/android-arm32-run.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/android-arm32-run.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/android-arm64-build.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/android-arm64-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/android-arm64-run.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/android-arm64-run.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/call-msbuild.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/clion-android-arm64.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/clion-mingw-w64.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/enter-vs2019-x64-ninja-env.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/enter-vs2022-x64-ninja-env.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/linux-x64.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/mac-M1-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/mac-x64.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/ohos-arm64-v8a.bat" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2013-x64.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2013-x86.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2015-x64.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2015-x86.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2017-x64-host=x64.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2017-x64-ninja.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2017-x64.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2017-x86.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2019-win32.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2019-x64-clang-cl.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2019-x64-ninja-multiconfig.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2019-x64-ninja.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2019-x64.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2022-arm64.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2022-win32.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2022-x64-clang-cl.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2022-x64-ninja-multiconfig.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2022-x64-ninja.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2022-x64-run.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/vs2022-x64.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/build/xcode.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/generator_collections/setup-udev-and-adb-cheet-sheet.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/include_directories/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/link_options/general/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/link_options/increase_msvc_stack_size/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/link_options/static_link_glibc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/link_options/static_link_glibc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/rpath/rpath_related_cmake_variables/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/rpath/rpath_related_cmake_variables/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/rpath/rpath_related_cmake_variables/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/rpath/set_rpath_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/rpath/set_rpath_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/rpath/set_rpath_example/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/specify_output_name/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/target_existence/aliased_target/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/target_existence/target/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/vs_debugger_environment/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/vs_debugger_environment/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/vs_debugger_working_directory/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/vs_debugger_working_directory/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/2-common-settings/vs_debugger_working_directory/input.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/1-minimal-install/install-executable/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/1-minimal-install/install-executable/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/1-minimal-install/install-static-library-with-headers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/1-minimal-install/install-static-library-with-headers/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/1-minimal-export/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/1-minimal-export/use_hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/2-export-to-subdir/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/2-export-to-subdir/use_hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/3-install-headers-to-subdir/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/3-install-headers-to-subdir/use_hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/4-export-with-namespace/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/4-export-with-namespace/use_hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/5-export-with-version/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/2-basic-export/5-export-with-version/use_hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/1-pick-package-name/foo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/1-pick-package-name/use_foo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/2-set-package-namespace/foo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/2-set-package-namespace/use_foo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/3-set-include-subdir/foo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/3-set-include-subdir/use_foo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/4-multiple-targets/foo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/3-export-multiple-targets/4-multiple-targets/use_foo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/1-simple/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/1-simple/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/2-export-failed/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/2-export-failed/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/3-solved-with-private-transitive/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/3-solved-with-private-transitive/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/4-solved-with-build-interface/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/4-solved-with-build-interface/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/5-solved-by-clean-interface-inc-dirs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/5-solved-by-clean-interface-inc-dirs/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/4-install-subdir/use_hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/packing/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/export-by-template-config-file/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/export-by-template-config-file/hello_project/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/export-by-template-config-file/hello_project/cmake/helloConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/export-by-template-config-file/say_hello_project/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/implicitly-install-headers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/install-library-and-executable/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/install-library-and-executable/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/use-generator-expression-for-include-directories/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/use-generator-expression-for-include-directories/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/3-create-packages/x-fancy-but-not-pratical/use-generator-expression-for-include-directories/cmake/helloConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/CPM/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/CPM/CPM.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/CPM2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/CPM2/CPM.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/ExternalProject_Add/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/ExternalProject_Add/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/FetchContent/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/FetchContent/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/FetchContent2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/FetchContent2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/FetchContent3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/FetchContent_TBB/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/FetchContent_TBB/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/FetchContent_TBB/cmake/deps.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/file_DOWNLOAD/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/file_DOWNLOAD/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/vcpkg_examples/1_fmt_910/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/vcpkg_examples/1_fmt_910/vcpkg.json" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/vcpkg_examples/2_opencv_470/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/vcpkg_examples/2_opencv_470/vcpkg.json" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/vcpkg_examples/3_opencv_470_ffmpeg_for_videoio/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/vcpkg_examples/3_opencv_470_ffmpeg_for_videoio/vcpkg.json" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/10_auto_download_packages/vcpkg_examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_armadillo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_armadillo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_benchmark/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_benchmark/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_boost_system/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_boost_system/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_boost_system/cmake/deps.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_cereal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_cereal/artifacts.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ceres/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ceres/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ceres/cmake/deps.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_cpuinfo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_cpuinfo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_crc32c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_crc32c/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_eigen/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_freeglut/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_gflags/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_gflags/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_gflags/cmake/deps.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_glfw_opengl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_glfw_vulkan/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_glm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_glm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_glog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_glog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_glog/cmake/deps.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_googletest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_googletest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_graphviz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_imgui-SFML/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_include-what-you-use/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_include-what-you-use/global_usage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_include-what-you-use/per_target_usage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_libclang/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_libclang/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_libclang/cmake-modules/FindLibClang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_libiconv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_libiconv/windows_encoding.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_libpng/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_lmdb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_lmdb/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ncnn/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ncnn/asset/yolo-fastest.bin" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ncnn/asset/yolo-fastest.param" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ncnn/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ncnn/src/yolo-fastest.bin" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ncnn/src/yolo-fastest.cfg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ncnn/src/yolo-fastest.param" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ncnn/src/yolo-fastest.weights" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_ncurses/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_openblas/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_openblas/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_opencl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_opencl/find_opencl_with_icd_loader/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_opencl/find_opencl_with_icd_loader/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_opencl/find_opencl_with_icd_loader/cmake/deps.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_opencl/find_opencl_with_megpeak_opencl_stub/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_opencl/find_opencl_with_megpeak_opencl_stub/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_opencl/find_opencl_with_megpeak_opencl_stub/cmake/deps.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_opencv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_openssl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_openssl/private.key" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_openssl/public.key" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_openssl/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_pkgconfig_lmdb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_proto_to_cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_proto_to_cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_proto_to_cpp/copy_dll.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_proto_to_cpp/find_protobuf_before_3.22.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_proto_to_cpp/find_protobuf_since_3.22.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/blue-fileopen.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/blue-folder-open.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/document-save-as.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/document-save.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/go-next.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/go-previous.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/help-faq.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/remarkable.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/zoom-fit-best.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/zoom-fit-height.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/zoom-fit-width.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/zoom-in.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/zoom-original.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_qt/ui/resource/zoom-out.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_rapidcheck/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_raylib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_raylib_2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_raylib_2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_sdl2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_sdl_image/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_sfml/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_utest.h/makefile" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_vld/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_vld/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_vld/cmake/FindVLD.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_vld/cmake/crtlinkage.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_vulkan/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_vulkan/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_windows_pkgconfig_zlib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_zlib/FindZLIB.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/11_use_installed_packages/use_zlib/why.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/1_directly_require_prebuilt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/2_require_on_imported_library/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/3_require_on_alias_library/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/4_debug_and_release_libs_by_keyword/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/5_debug_and_release_libs_by_property/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/6_require_on_source_target_simple/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/7_require_on_source_target_internal_subdirectory/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/7_require_on_source_target_internal_subdirectory/cJSON/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/8_require_on_source_target_external_subdirectory/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/8_require_on_source_target_external_subdirectory/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/9_system_libs/dl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/9_system_libs/pthread/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/4-import-packages/9_system_libs/pthread/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/cmake-tools-basic-usage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/cmake-tools-basic-usage/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/debug-cmake-scripts/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/debug-cmake-scripts/test.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/find-dll-when-debug-and-run/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/find-dll-when-debug-and-run/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/generate-cmake-file-api-files/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/generate-cmake-file-api-files/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/generate-cmake-file-api-files/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/generate-cmake-file-api-files/build2.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/trigger-cmake-via-tasks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/5-vscode-integration/trigger-cmake-via-tasks/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/1-minimal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/1-minimal/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/1-minimal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/2-specify-generator/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/2-specify-generator/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/2-specify-generator/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/3-specify-cache-variables/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/3-specify-cache-variables/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/3-specify-cache-variables/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/4-specify-toolchain-file/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/4-specify-toolchain-file/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/4-specify-toolchain-file/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/5-build-opencv-with-cmake-presets/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/5-build-opencv-with-cmake-presets/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/6-cmake-presets/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/asan-dll/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/asan-dll/globally/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/asan-dll/per_target/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/asan-simple/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/asan-simple/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/asan-simple/addr2line.py" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/heap_buffer_overflow/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/memory_leak/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/use_opencl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/asan/use_opencl/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/tsan/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/tsan/data_race/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/tsan/data_race/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/tsan/thread_leak/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/ubsan/call_back_on_empty_container/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/7-sanitizers/ubsan/signed_integer_overflow/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/docs/cmake_cheat_sheet.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/docs/cmake_document_signature.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/docs/debugging.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/docs/generator.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/docs/generator_expression.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/docs/misc.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/docs/refs.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/docs/styles.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/docs/subdirectory.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/7-macOS/invoke-objc-from-cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/add_subdirectory_use_SYSTEM/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/add_subdirectory_use_SYSTEM/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/add_subdirectory_use_SYSTEM/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cmake_format_usage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cmake_format_usage/new/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cmake_format_usage/old/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cmake_format_usage/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/copy_dll_as_function/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/copy_dll_as_function/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/copy_dll_as_function/protobuf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/copy_dll_as_function/protobuf/lib/vs2017_x64/libprotobuf.dll" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/copy_dll_as_function/protobuf/lib/vs2017_x64/libprotobufd.dll" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/create_dll_export_all_symbols/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/arm-linux-gnueabihf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/arm-linux-gnueabihf/arm-linux-gnueabihf-gcc.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/arm-linux-gnueabihf/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/arm-none-eabi/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/arm-none-eabi/arm-none-eabi-gcc.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/linux-32bit/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/ohos_ndk/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/ohos_ndk/detail.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/ohos_ndk/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/rtos/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/rtos/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/rtos/arm-gcc-toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/rtos/arm-none-eabi-gcc.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/rtos/linaro-7.2.1-aarch64-toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/toolchain-tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/toolchain-tests/ex1/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/toolchain-tests/ex1/hello.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/toolchain-tests/ex2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/toolchain-tests/ex2/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/toolchain-tests/ex2/hello.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/toolchain-tests/ex3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/toolchain-tests/ex3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/toolchain-tests/ex3/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/toolchain-tests/ex3/hello1.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/cross-build/toolchain-tests/ex3/hello2.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/debug_dependencies/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/debug_dependencies/debug.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/debug_dependencies/debug_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/debug_dependencies/debug_example/deps.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example/docs/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example2/docs/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example2/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example3/docs/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_coverage_example3/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_example2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_example2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/doxygen/doxygen_example2/docs/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/find_package_examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/find_package_examples/glew.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/find_package_examples/hdf5-example.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/find_package_examples/leveldb-example.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/find_package_examples/protobuf-example.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/find_package_examples/run_protoc.bat" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/function_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/function_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/generate_assemble_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/clang-format-wrapper.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/cmake/deps.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/glslc/imgui.ini" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/REAME.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/c_call_python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/c_call_python/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/c_call_python/src/run.pxy" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_winform/App.config" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_winform/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_winform/Form1.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_winform/Form1.cs" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_winform/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_winform/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_winform/Properties/Resources.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_winform/Properties/Resources.resx" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_winform/Properties/Settings.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_winform/Properties/Settings.settings" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_winform/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_wpf/App.config" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_wpf/App.xaml" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_wpf/App.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_wpf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_wpf/MainWindow.xaml" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_wpf/MainWindow.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_wpf/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_wpf/Properties/Resources.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_wpf/Properties/Resources.resx" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_wpf/Properties/Settings.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_wpf/Properties/Settings.settings" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/csharp_wpf/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/jni/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/jni/droid/HelloWorld.java" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/jni/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/jni_2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/jni_2/droid/HelloWorld.java" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/jni_2/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/mex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/pybind11/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/pybind11/__main__.py" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/pybind11/_version.py" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/tools/FindCatch.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/tools/FindEigen3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/tools/FindPythonLibsNew.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/tools/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/tools/libsize.py" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/tools/pybind11Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/pybind11/tools/pybind11Tools.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11/test.py" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/pybind11_2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/swift/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/swift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/windows_masm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/language_bindings/windows_masm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/list_remove_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/manually_create_packages/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/manually_create_packages/create_imported_lib_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/manually_create_packages/create_imported_lib_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/manually_create_packages/hello/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/manually_create_packages/protobuf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/manually_create_packages/protobuf/lib/vs2017_x64/libprotobuf.dll" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/masm_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/dist/FindJPEG.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/dist/FindJPEGTURBO.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/dist/FindPNG.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/dist/FindZLIB.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/dist/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/neat/FindJPEGTURBO.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/neat/FindZLIB.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/neat/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/ref/naivetest_libjpeg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/ref/naivetest_zlib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/ref/test_libjpeg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/ref/test_libjpeg/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/test_libjpegturbo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/test_libpng/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/modules/test_zlib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/msbuild-call-ninja-in-visual-studio/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/msbuild-call-ninja-in-visual-studio/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/msbuild-call-ninja-in-visual-studio/build.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/msbuild-call-ninja-in-visual-studio/clean.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/msbuild-call-ninja-in-visual-studio/configure.cmd" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/object-library/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/presets-example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/presets-example/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/presets-example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/presets-example/badpresets.json" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/presets-example/scripts/android-arm32.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/presets-example/scripts/android-arm64.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/presets-example/scripts/linux-x64.sh" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/regex_replace_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/run_python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/run_python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/run_python/hello.py" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/run_python_with_args/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/run_python_with_args/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/run_python_with_args/hello.py" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/run_python_with_args_and_env_vars/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/run_python_with_args_and_env_vars/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/run_python_with_args_and_env_vars/start.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/run_python_with_args_and_env_vars/testing/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/run_python_with_args_and_env_vars/testing/runtests.py" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/sleek/sleek.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/sleek/tests/openmp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/syntax/test.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/transitive_usage_requirements/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/transitive_usage_requirements/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/umake/test.py" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/umake/umake.py" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/use_sub_directory_packages/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/use_sub_directory_packages/use_protobuf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/use_sub_directory_packages/use_protobuf/protobuf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/use_zlib_dll/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/use_zlib_dll/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/verbose_output/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake_examples/x-misc/when_should_I_delete_build_and_call_cmake_again/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

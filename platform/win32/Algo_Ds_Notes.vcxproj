@@ -1,0 +1,1717 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-219078549AE8}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ALGO_DS_NOTES;ALGO_DS_NOTES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ALGO_DS_NOTES;ALGO_DS_NOTES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ALGO_DS_NOTES;ALGO_DS_NOTES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ALGO_DS_NOTES;ALGO_DS_NOTES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbzip2_alt.vcxproj">
+      <Project>{4a3e6970-9110-46f5-bd12-b73218cca406}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpp-terminal.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2367fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnanosvg.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-751bff971987}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxz.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa34896}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/0-1BFS/0-1_BFS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/C++/Frequency_Of_A_Element.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/C++/Max_And_Next_Max_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/C++/Mean_Variance_Standard_Deviation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/C++/Merge_Two_Sorted_Arrays.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/C/Frequency_Of_A_Element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/C/Max_And_Next_Max_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/C/Mean_Variance_Standard_Deviation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/C/Merge_Two_Sorted_Arrays.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/AKS_Primarility_Test/AKS.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/AKS_Primarility_Test/AKS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/ASCII_SUBSEQUENCES/ASCII_SUBSEQUENCES.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/ASCII_SUBSEQUENCES/ASCII_Subsequences.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/AVL_Tree/AVL_Tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/AVL_Tree/AVL_Tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Activity_Selection/Activity_Selection.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Activity_Selection/Activity_Selection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Aho-Corasick/Aho-Corasick.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Anagram/Anagram.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Anagram/Anagram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Arithmetic_Progression/Arithmetic_Progression.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Arithmetic_Progression/Arithmetic_Progression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Armstrong_Number/Armstrong_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Armstrong_Number/Armstrong_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Array_Rotation/Array_Rotation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Array_Rotation/Array_Rotation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Assembly_Line_Scheduling/Assembly_Line_Scheduling.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Assembly_Line_Scheduling/Assembly_Line_Scheduling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Automorphic_Number/Automorphic_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Automorphic_Number/Automorphic_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/BFS_On_Matrix/BFS_On_Matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Babylonian_Method/Babylonian_Method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Babylonian_Method/Babylonian_Method.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Backtracking_using_bitmask/Backtrack_using_bitmask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bead_Sort/Bead_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bead_Sort/Bead_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bellmanford_Algorithm/Bellmanford.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bellmanford_Algorithm/Bellmanford.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bezier_Curve/Bezier_Curve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bezier_Curve/Bezier_Curve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Big_Integer/Big_Integer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Heap/Binaryheap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Insertion_Sort/Binary_Insertion_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Insertion_Sort/Binary_Insertion_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search/Binary_Search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search/Binary_Search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search/searching_a_circularly_sorted_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search_Trees/BinarySearchTree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search_Trees/BinarySearchTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Bottom_View/Binary_Tree_Bottom_View.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Bottom_View/Binary_Tree_Bottom_View.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Left_View/Binary_Tree_Left_View.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Right_View/Binary_Tree_Right_View.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Right_View/Binary_Tree_Right_View.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Top_View/Binary_Tree_Left_View.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Top_View/Binary_Tree_Top_View.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Top_View/Binary_Tree_Top_View.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Birthday_Paradox/Birthday_Paradox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bisection_Method/Bisection_Method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bisection_Method/Bisection_Method.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bitonic_Array/Bitonic_Array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bitonic_Array/Bitonic_Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bitonic_Point/Bitonic_Point.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bitonic_Point/Bitonic_Point.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bitwise_Addition/bitwise_addition.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bitwise_Addition/bitwise_addition.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Boyer_Moore_Algorithm/Boyer_Moore.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Boyer_Moore_Algorithm/Boyer_Moore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Breadth_First_Search/Breadth_First_Search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Breadth_First_Search/Breadth_First_Search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bresenham_Algo_Programs/Bresenham_Line_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bresenham_Circle_Drawing_Algo/bresenham_circle_algo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bresenham_Circle_Drawing_Algo/bresenham_circle_algo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bubble_Sort/Bubble_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bubble_Sort/Bubble_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bucket_Sort/Bucket_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bucket_Sort/Bucket_sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Catalan_Numbers/Catalan_Numbers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Catalan_Numbers/Catalan_Numbers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Celebrity_Problem/Celebrity_Problem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Celebrity_Problem/Celebrity_Problem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Centered_Decagonal_Number/Centered_Decagonal_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Centered_Decagonal_Number/Centered_Decagonal_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Centered_Square_Number/Centered_Square_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Centered_Square_Number/Centered_Square_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Check_Palindrome_for_LinkedList/Palindrome.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Chinese_Remainder_Theorem/Chinese_Remainder_Theorem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Chinese_Remainder_Theorem/Chinese_remainder_theorem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Chocolate_Distribution/Chocolate_Distribution.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Chocolate_Distribution/Chocolate_Distribution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circle_Sort/Circle_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circle_Sort/Circle_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circular_Doubly_Linked_List/Circular_Doubly_Linked_List.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circular_Linked_List/Circular_Linked_List.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circular_Linked_List/Circular_Linked_List.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circular_Queue/Circular_Queue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circular_Queue/Circular_Queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cocktail_Sort/Cocktail_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cocktail_Sort/Cocktail_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Coin_Change/Coin_Change.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Coin_Change/Coin_Change.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Comb_Sort/Comb_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Comb_Sort/comb_sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Compound_Interest/Compound_Interest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Compound_Interest/Compound_Interest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Connected_Components_Undirected_Graph/Connected_Components_Undirected_Graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Coprime_Numbers/Coprime_Numbers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Coprime_Numbers/Coprime_Numbers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Count_Inversion/Count_Inversion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Count_Inversion/Count_Inversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Counting_Sort/Counting_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Counting_Sort/Counting_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cycle_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cycle_Sort/Cycle_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cycle_Sort/cyclesort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cyclic_Permutation/Cyclic_Permutation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cyclic_Permutation/Cyclic_Permutation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/DDA_Line_Drawing_Algorithm/DDA_Line_Drawing_Algo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/DDA_Line_Drawing_Algorithm/DDA_Line_Drawing_Algo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dearrangements/Dearrangements.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dearrangements/Dearrangements.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dearrangements/Dearrangements_DP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dearrangements/Dearrangements_DP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Decagonal_Numbers/Decagonal_Numbers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Decagonal_Numbers/Decagonal_Numbers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Delannoy_Number/Delannoy_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Delannoy_Number/Delannoy_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Depth_First_Search/Depth_First_Search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Depth_First_Search/Depth_First_Search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Digit_Count/Digit_Count.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Digit_Count/Digit_Count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dijkstra_Algorithm/Dijkstra_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dijkstra_Algorithm/Dijkstra_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dijkstra_Algorithm/Dijkstra_Algorithm_STL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dijkstra_Algorithm/Dijkstra_Efficient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Disjoint_Sets/Disjoint_Sets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Distance_Between_Points/Distance_Between_Points.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Distance_Between_Points/Distance_Between_Points.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Divisible_Pairs_In_Array/Divisible_Pairs_In_Array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Divisible_Pairs_In_Array/Divisible_Pairs_In_Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Doubly_Linked_List/Doubly_Linked_List.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Doubly_Linked_List/Doubly_Linked_List.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dynamic_Programming_Rod_Cutting/Dynamic_Programming_Rod_Cutting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dynamic_Stack_Arrays/Dynamic_Stack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dynamic_Stack_Arrays/Dynamic_Stack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Edit_Distance_Algorithm/Edit_distance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Egg_Drop/Egg_Drop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Egg_Drop/Egg_Drop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Equilibrium_Index_Of_Array/Equilibrium_Index_Of_Array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Equilibrium_Index_Of_Array/Equilibrium_Index_Of_Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Euclidean_Algorithm/Euclidean_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Euclidean_Algorithm/Euclidean_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Euler_Totient_Function/Euler_Totient_Function.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Euler_Totient_Function/Euler_Totient_Function.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Exponential_Search/Exponential_Search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Exponential_Search/Exponential_Search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Expression_Tree/Expression_Tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Extended_Euclidean_Algorithm/Extended_Euclidean_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Extended_Euclidean_Algorithm/Extended_Euclidean_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/FCFS_Scheduling/FCFS_Scheduling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Factorial/Factorial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Factorial/Factorial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fenwick_Tree/Fenwick_Tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fenwick_Tree/Fenwick_Tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fermat_Little_Theorem/Fermat_Little_Theorem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fermat_Little_Theorem/Fermat_Little_Theorem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Number/Fibonacci_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Number/Fibonacci_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Number_Using_DP_Approach/Fibonacci_Number_Using_DP_Approach.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Number_Using_DP_Approach/Fibonacci_Number_Using_DP_Approach.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Words/Fibonacci_Words.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Words/Fibonacci_Words.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Flood_Fill/Flood_Fill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Flood_Fill/Flood_Fill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/Floyd&apos;s_Cycle_Detection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/Floyd&apos;s_Cycle_Detection_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Warshall_Algorithm/Floyd_Warshall_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ford_Fulkerson_Method/Ford-Fulkerson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ford_Fulkerson_Method/Ford_Fulkerson_Method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ford_Fulkerson_Method/Ford_Fulkerson_Method.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Geometric_Progression/Geometric_Progression.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Geometric_Progression/Geometric_Progression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Geometric_Progression/Sum_Of_Infinite_GP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Geometric_Progression/Sum_Of_Infinite_GP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Gnome_Sort/Gnome_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Gnome_Sort/Gnome_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Good_Permutation/Good_Permutation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Good_Permutation/Good_Permutation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Graph/Graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Graph_Coloring_Algorithm/Graph_Coloring_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Gray_Code/Gray_Code.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Hamiltonian_Cycle/Hamiltonian_Cycle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Harmonic_Progression/Harmonic_Progression.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Harmonic_Progression/Harmonic_Progression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Hashing/Hashing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Heap_Sort/Heap_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Heap_Sort/Heap_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Huffman_Encoding/Huffman_Coding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Huffman_Encoding/Huffman_Encoding_STL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Infix_To_Postfix/Infix_To_Postfix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Inheritance(C++)/Hierarchical.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Inheritance(C++)/Multi_Level.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Inheritance(C++)/Multiple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Inheritance(C++)/Single_Level.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Insertion_Sort/Insertion_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Insertion_Sort/Insertion_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Integer_to_Roman/Integer_to_Roman.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Interpolation_Search/Interpolation_Search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Interpolation_Search/Interpolation_Search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Inversions_Count/Inversions_Count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Is_Binary_Search_Tree/isbst.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Job Sequencing/Job_Sequencing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Johnson_Algorithm/Johnson_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Jolly_Jumper_Sequence/Jolly_Jumper_Sequence.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Jolly_Jumper_Sequence/Jolly_Jumper_Sequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Josephus_Problem/Josephus_Problem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Josephus_Problem/Josephus_Problem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Jump Search/jump_search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kadane_Algorithm/Kadane_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kadane_Algorithm/Kadane_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Karatsuba_Algorithm/Karatsuba_multiplication_algo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knapsack/01_knapsack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knapsack/Knapsack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knapsack/Knapsack_DP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knapsack_Fractional/Knapsack_Fractional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knapsack_Unbounded/Knapsack_Unbounded.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knuth_Morris_Pratt_Algorithm/KMP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knuth_Morris_Pratt_Algorithm/KMP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kosaraju_Algorithm/Kosaraju_algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Large_Number_Factorial/Large_Number_Factorial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Large_Number_Factorial/Large_Number_Factorial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Largest_Common_Multiple/Largest_Common_Multiple_1-DArray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Largest_Common_Multiple/Largest_Common_Multiple_1-DArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Last_Digit_of_Nth_Fibonacci_Number/Last_Digit_of_Nth_Fibonacci_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Last_Digit_of_Square_of_Nth_Fibonacci_Number/Last_Digit_of_Square_of_Nth_Fibonacci_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Lazy_Propagation_Segmentation_Tree/Lazy_Propagation_Segmentation_Tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Leaders_Of_Array/Leaders_Of_Array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Leaders_Of_Array/Leaders_Of_Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Leap_Year/Leap_Year.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Leap_Year/Leap_Year.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Liang_Barsky_Algo/Liang_Barsky_Algo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Liang_Barsky_Algo/Liang_Barsky_Algo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linear_Search/Linear_Search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linear_Search/Linear_Search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List/Cycle_Detection_Removal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List/Length_of_Linked_List.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List/Linked_List.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List/Linked_List.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Bubble_Sort/Linked_List_Bubble_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Bubble_Sort/Linked_List_Bubble_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Insertion_Sort/LinkedList_Insertion_sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Insertion_Sort/Linked_List_Insertion_sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Merge_Sort/Linked_List_Merge_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Merge_Sort/Linked_List_Merge_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Quick_Sort/Linked_List_Quick_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Selection_Sort/Linked_List_Selection_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Selection_Sort/Linked_List_Selection_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Logarithmic_Exponent/Logarithmic_Exponent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Logarithmic_Exponent/Logarithmic_Exponent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Alternating_Subarray/Longest_Alternating_Subarray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Alternating_Subarray/Longest_Alternating_Subarray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Common_Subsequence/Longest_Common_Subsequence.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Common_Subsequence/Longest_Common_Subsequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Common_Substring/Longest_Common_Substring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Increasing_Subarray/Longest_Increasing_Subarray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Increasing_Subarray/Longest_Increasing_Subarray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Increasing_Subsequence/LIS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Palindromic_Subsequence/Longest_Palindromic_Subsequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Palindromic_Substring/Longest_Palindromic_Substring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Repeating_Subsequence/Longest_Repeating_Subsequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Lucas_Numbers/Lucas_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Lucas_Numbers/Lucas_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Lucas_Theorem/Lucas_Theorem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Lucas_Theorem/Lucus_Theorem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Machine_Learning/K-means/k-means_using_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Machine_Learning/K_Nearest_Neighbours/K_Nearest_Neighbors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Machine_Learning/K_Nearest_Neighbours/K_Nearest_Neighbours.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Majority_Element/Majority_Element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Majority_Element/Majority_Element.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Manacher_Algorithm/Manacher_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Manhattan_Distance/Manhattan_Distance.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Manhattan_Distance/Manhattan_Distance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Markov_Matrix/Markov_Matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Markov_Matrix/Markov_Matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Chain_Multiplication/Matrix_Chain_Multiplication.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Chain_Multiplication/Matrix_Chain_Multiplication_DP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C++/Idempotent_Matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C++/Matrix_Addition.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C++/Matrix_Determinant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C++/Matrix_Lower_triangular.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C++/Matrix_Mirror_of_matrix_across_diagonal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C++/Matrix_Multiplication.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C++/Matrix_Multiplication_Recursive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C++/Matrix_Scalar_Multiplication.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C++/Matrix_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C++/Matrix_Subtraction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C++/Matrix_Upper_triangular.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C++/Sum_Of_Middle_Row_And_Column.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C/Matrix_Lower_triangular.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C/Matrix_Multiplication.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C/Matrix_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C/Matrix_Upper_triangular.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/C/sum_of_two_matrices.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Matrix_Rotation90.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Matrix_Rotation90.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Total_Possible_Paths/Total_Possible_Paths.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Total_Possible_Paths/Total_Possible_Paths.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Max_Circular_SubArray_Sum/max_circular_subArray_sum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Max_Circular_SubArray_Sum/max_circular_subarray_sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Maximum_Product_Subset_Array/Maximum_Product_Subarray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Maximum_Product_Subset_Array/Maximum_Product_Subarray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Median_Sorted_Arrays/Median_Sorted_Arrays.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Merge_Sort/Merge_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Merge_Sort/Merge_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Merge_Sort_3_Way/Merge_Sort_3_Way.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Merge_With_Insertion_Sort/Merge_With_Insertion_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Minesweeper/minesweeper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Minimum_Absolute_Difference_In_Array/Minimum_Absolute_Difference_In_Array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Minimum_Absolute_Difference_In_Array/Minimum_Absolute_Difference_In_Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Minimum_Cost_Path/Minimum_Cost_Path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Minimum_Cost_Path/Minimum_Cost_Path.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Minimum_Product_Subset_Array/Minimum_Product_Subset_array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Minimum_Product_Subset_Array/Minimum_Product_Subset_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Minimum_inversions/Minimum_inversions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Mo_Algorithm/Mo_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Mo_Algorithm/Mo_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Modular Inverse/Modular_Inverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Modular_Exponentiation/Iterative_Modular_Exponentiation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Modular_Exponentiation/Modular_Exponentiation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Modular_Exponentiation/Recursive_Modular_Exponentiation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Mystery_Number/Mystery_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Mystery_Number/Mystery_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Naive_String_Matching/Naive_String_Matching.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Natural_Numbers_Sum/Natural_Numbers_Sum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Natural_Numbers_Sum/Natural_Numbers_Sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Next_Greater_Element/Next_Greater_Element.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Next_Perfect_Square/Next_Perfect_Square.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Next_Perfect_Square/Next_Perfect_Square.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Next_Smallest_Palindrome/Next_Smallest_Palindrome.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Nim_Game/Nim_Game.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Nim_Game/Nim_Game.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Nobel_Integer/Noble_Integer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Nobel_Integer/Noble_Integer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Nonagonal_Number/Nonagonal_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Nonagonal_Number/Nonagonal_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/C++/Binary_To_Decimal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/C++/Decimal_To_Hexadecimal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/C++/Decimal_To_Octal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/C++/Decimal_to_Binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/C++/Hexadecimal_To_Binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/C++/Hexadecimal_To_Decimal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/C++/Octal_To_Decimal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/C/Binary_To_Decimal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/C/Decimal_To_Hexadecimal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/C/Decimal_To_Octal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/C/Hexadecimal_To_Binary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/C/Hexadecimal_To_Decimal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/C/Octal_To_Decimal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Of_Islands/Number_Of_Islands.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Octree/Octree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Optimal_Binary_Search_Tree/Optimal_Binary_Search_Tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Optimal_Binary_Search_Tree/Optimal_Binary_Search_Tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Optimal_Strategy_For_A_Game (Set-1)/optimal_strategy_for_a_game_set_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Painter_Partition_Problem/Painter_Partition_Problem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Palindrome/palindrome_no.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Palindrome/palindrome_no.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Palindrome/palindrome_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Palindromic_Array/Palindromic_Array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Palindromic_Array/Palindromic_Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pancake_Sort/Pancake_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pancake_Sort/Pancake_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Partial_Dearrangements/Partial_Dearrangements.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Partial_Dearrangements/Partial_Dearrangements.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Partition_Problem/Partition_Problem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Partition_Problem/Partition_Problem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pascal_Triangle/Pascal_Triangle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pascal_Triangle/Pascal_Triangle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Array/Perfect_Array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Array/Perfect_Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Number/Perfect_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Number/Perfect_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Square_String/Perfect_Square_String.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Square_String/Perfect_Square_String.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Sum/Perfect_Sum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Sum/Perfect_Sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pigeonhole_Sort/Pigeonhole_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pigeonhole_Sort/Pigeonhole_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Postfix_Evaluation/Postfix _Evaluation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Postfix_To_Infix/Postfix_To_Infix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Postfix_To_Infix/Postfix_To_Infix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Postman_Sort/Postman_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Power_Of_Two/Power_Of_Two.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Power_Of_Two/Power_Of_Two.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Power_Set/Power_Set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Power_Set/Power_Set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Preemptive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prefix_Function/Prefix_Function.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prefix_Sum/Prefix_Sum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prefix_Sum/Prefix_Sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prime_Factorization/Prime_Factorization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prime_Number/Prime_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prime_Number/Prime_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prims_Algorithm/Prims_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prims_Algorithm/Prims_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Priority_Queue/HeapPriorityQueue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Priority_Queue/LeftistPriorityQueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Priority_Queue/Priority_Queue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pythagorean_Quadruples/Pythagorean_Quadruples.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pythagorean_Quadruples/Pythagorean_Quadruples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pythagorean_Triplets/Pythagorean_Triplets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pythagorean_Triplets/Pythagorean_Triplets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queens_Problem/Queens_Problem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queens_Problem/Queens_Problem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Arrays/Queue_Using_Arrays.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Arrays/Queue_Using_Arrays.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Linked_List/Queue_Linked_List.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Linked_List/Queue_Linked_List.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Linked_List/Queue_using_template_linked_list/Queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Stacks/Queues_Using_Stacks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queues_Using_Stacks/Efficient_Enqueue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queues_Using_Stacks/Queues_Using_Stacks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Hull/Quick_Hull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Select/Quick_Select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Sort/Quick_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Sort/Quick_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quicksort_3_way/Quicksort_3_way.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/RSA_Algorithm/RSA_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/RSA_Algorithm/RSA_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/RSA_CRT/RSA_CRT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rabin_Karp/Rabin_Karp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rabin_Karp/Rabin_Karp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Radix_Sort/Radix_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Radix_Sort/Radix_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rain_Water_Trapping/Rain_Water_Trapping.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rain_Water_Trapping/Rain_Water_Trapping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rat_in_maze/Rat_in_maze.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Red_Black_Tree/RedBlackTrees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Red_Black_Tree/Red_Black_Tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Red_Black_Tree/Red_Black_Tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Regula_Falsi_Method/regula_falsi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Regula_Falsi_Method/regula_falsi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Reversal_Linked_List/Reversal_Linked_List.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Reversal_Linked_List/Reversal_Linked_List.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Reverse_Of_Number/Reverse_Of_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Reverse_Of_Number/Reverse_Of_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Root_Mean_Square/Root_Mean_Square.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Root_Mean_Square/Root_Mean_Square.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rotation_Of_Numbers/Rotation_Of_Numbers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rotation_Of_Numbers/Rotation_Of_Numbers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Russian_Peasant_Multiplication/Russian_Peasant_Multiplication_Algo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Scheduling_Algorithm/C++/Non_Preemptive/First_Come_First_Served.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Scheduling_Algorithm/C++/Non_Preemptive/Priority_Scheduling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Scheduling_Algorithm/C++/Non_Preemptive/Shortest_Job_First.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Scheduling_Algorithm/C++/Preemptive/Round_Robin_Scheduling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Scheduling_Algorithm/C++/Preemptive/Shortest_Remaining_Time_First.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Scheduling_Algorithm/C/Non_Preemptive/First_Come_First_Served.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Scheduling_Algorithm/C/Non_Preemptive/Priority_Scheduling.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Scheduling_Algorithm/C/Non_Preemptive/Shortest_Job_First.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Scheduling_Algorithm/C/Preemptive/Shortest_Remaining_Time_First.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Segment_Tree_RMQ/Segement_Tree_RMQ.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Segment_Tree_RMQ/Segement_Tree_RMQ.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Segmented_Sieve/Segmented_Sieve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Segmented_Sieve/Segmented_Sieve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Selection_Algorithm_Repo/Selection_algo_using_Quick_sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Selection_Algorithm_Repo/Selection_algo_using_Quick_sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Selection_Sort/Selection_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Selection_Sort/Selection_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Set_Bits_Till_N/Set_Bits_Till_N.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Set_Bits_Till_N/Set_Bits_Till_N.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shaker_Sort/Shaker_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shaker_Sort/Shaker_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shell_Sort/Shell_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shell_Sort/Shell_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shortest_Path_Finder_Algorithm/Shortest_Path_Finder_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sieve_Of_Eratosthenes/Sieve_Of_Eratosthenes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sieve_Of_Eratosthenes/Sieve_of_Eratosthenes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Simple_Interest/Simple_Interest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Simple_Interest/Simple_Interest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Simpsons_rule/Simpsons_Rule.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Simpsons_rule/Simpsons_Rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Skip_list/skip_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sleep_Sort/Sleep_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sleep_Sort/Sleep_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sort_Array_zero_one_two/Sort_Array_zero_one_two.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sparse_Table/Sparse_Table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sparse_Table/Sparse_Table.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Special_Permutation/Special_Permutation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Special_Permutation/Special_Permutation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Spiral_Array/SpiralArray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Spiral_Array/Spiral_Array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Spiral_Array/Spiral_Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Square_Root_Decomposition/Square_Root_Decomposition.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Arrays/Stacks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Arrays/Stacks_Using_Arrays.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Linked_Lists/Stacks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Linked_Lists/Stacks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Queues/Efficient_Dequeue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Queues/Efficient_Enqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stooge_Sort/Stooge_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Strassens_Algorithm/Strassens_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Strassens_Algorithm/Strassens_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Subarray_Sum/Subarray_Sum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Subarray_Sum/Subarray_Sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Subsequence_Bitmasking/subsequence_bitmasking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Subset_Sum/Subset_Sum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Subset_Sum/Subset_Sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sudoku_Solver/Sudoku_Solver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sudoku_Solver/Sudoku_Solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Suffix_Array/Suffix_Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Cubes/Sum_Of_Cubes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Cubes/Sum_Of_Cubes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Digits/Sum_Of_Digits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Digits/Sum_Of_Digits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Squares/Sum_Of_Squares.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Squares/Sum_Of_Squares.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Taylor_series_Repo/Taylor_Series_Horner_Rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Taylor_series_Repo/Taylor_series_Horner_rule.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ternary_Search/Ternary_Search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ternary_Search/Ternary_Search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tim_Sort/Tim_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tim_Sort/Tim_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Topological_Sort/Topological_Sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Topological_Sort/Topological_Sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tower_Of_Hanoi/Tower_Of_Hanoi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tower_Of_Hanoi/Tower_Of_Hanoi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Travelling_Salesman_Problem/Travelling_Salesman.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Treap/Treap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Inorder_Construction/Tree_Inorder_Construction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Inorder_Traversal/Tree_Inorder_Traversal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Inorder_Traversal/Tree_Inorder_Traversal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Levelorder_Traversal/Tree_Levelorder_Transversal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Levelorder_Traversal/Tree_Levelorder_Traversal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Mirror_Image/Tree_Mirror_Image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Mirror_Image/Tree_Mirror_Image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Postorder_Traversal/Tree_Postorder_Traversal.c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Postorder_Traversal/Tree_Postorder_Traversal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Preorder_Traversal/Tree_Preorder_Traversal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Preorder_Traversal/Tree_Preorder_Traversal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Spiralorder_Traversal/Tree_Spiralorder_Traversal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Verticalorder_Traversal/Tree_Verticalorder_Traversal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Triangular_Number/Triangular_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Triangular_Number/Triangular_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Numbers/Tribonacci_Numbers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Numbers/Tribonacci_Numbers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Numbers/Tribonacci_Numbers_DP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Numbers/Tribonacci_Numbers_DP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Words/Tribonacci_Words.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Words/Tribonacci_Words.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Trie_For_Natural_Numbers/Trie.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Trie_For_Words/Trie.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ugly_Number/Nth_Ugly_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ugly_Number/Nth_Ugly_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ugly_Number/Ugly_Number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ugly_Number/Ugly_Number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Z_Algorithm/Z_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Z_Algorithm/Z_Algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/infix_to_prefix/infix_to_prefix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/nCr mod P/nCr_mod_P.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/palindromic_string/palindromic_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/palindromic_string/palindromic_string.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ordered_Doubly_Linked_List/Ordered_Doubly_Linked_List.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Linked_List/Queue_using_template_linked_list/Queue.h" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/Java/Eveodd.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/Java/Frequency_Of_A_Element.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/Java/Max_And_Next_Max_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/Java/Mean_Variance_Standard_Deviation.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/Java/Merge_Two_Sorted_Arrays.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/Python/EvenOdd.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/Python/Frequency_Of_A_Element.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/Python/Max_And_Next_Max_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/Python/Mean_Variance_Standard_Deviation.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/Python/Merge_Two_Sorted_Arrays.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/AKS_Primarility_Test/AKS.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/AKS_Primarility_Test/AKS.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/AKS_Primarility_Test/AKS.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/AKS_Primarility_Test/AKS.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/AKS_Primarility_Test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/ASCII_SUBSEQUENCES/ASCII_Subsequences.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/ASCII_SUBSEQUENCES/ASCII_Subsequences.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/ASCII_SUBSEQUENCES/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/AVL_Tree/AVL_Tree.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/AVL_Tree/AVL_Tree.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/AVL_Tree/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/A_Star_Search_Algorithm/A_Star_Search_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Activity_Selection/Activity_Selection.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Activity_Selection/Activity_Selection.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Activity_Selection/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Activity_Selection/activity_selection.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Aggressive_Cows/Aggressive_Cows.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Aho-Corasick/Aho-Corasick.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Anagram/Anagram.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Anagram/Anagram.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Anagram/Anagram.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Arithmetic_Progression/Arithmetic_Progression.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Arithmetic_Progression/Arithmetic_Progression.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Arithmetic_Progression/Arithmetic_Progression.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Arithmetic_Progression/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Armstrong_Number/Armstrong_Number.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Armstrong_Number/Armstrong_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Armstrong_Number/Armstrong_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Armstrong_Number/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Array_Rotation/ArrayRotationUsingTempArray.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Array_Rotation/ArrayRotationUsingTempArray.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Array_Rotation/Array_Rotation.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Array_Rotation/Array_Rotation.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Array_Rotation/Array_Rotation.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Assembly_Line_Scheduling/Assembly_Line_Scheduling.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Assembly_Line_Scheduling/Assembly_Line_Scheduling.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Assembly_Line_Scheduling/Assembly_Line_Scheduling.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Automorphic_Number/Automorphic_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/BFS_Disconnected_Graph/BFS_DisconnectedGraph.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/BFS_On_Matrix/BFS_On_Matrix.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/BFS_On_Matrix/BFS_On_Matrix.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Babylonian_Method/Babylonian_Method.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Babylonian_Method/Babylonian_Method.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Babylonian_Method/Babylonian_Method.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Backtracking_using_bitmask/Backtrack_using_bitmask.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Backtracking_using_bitmask/Backtrack_using_bitmask.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bead_Sort/Bead_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bead_Sort/Bead_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bellmanford_Algorithm/Bellmanford.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bellmanford_Algorithm/Bellmanford.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bellmanford_Algorithm/Bellmanford.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bellmanford_Algorithm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Heap/BinaryHeap.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Heap/Binary_Heap.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Heap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Insertion_Sort/Binary_Insertion_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Insertion_Sort/Binary_Insertion_Sort.dart.txt" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Insertion_Sort/Binary_Insertion_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search/Binary search.ts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search/Binary_Search.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search/Binary_Search.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search/Binary_Search.jl" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search/Binary_Search.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search/Binary_Search.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search/Binary_Search.rs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search_Trees/BinarySearchTree.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search_Trees/BinarySearchTree.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search_Trees/BinarySearchTree.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search_Trees/Binary_Search_Tree.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Search_Trees/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Bottom_View/Binary_Tree_Bottom_View.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Bottom_View/Binary_Tree_Bottom_View.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Left_View/Binary_Tree_Left_View.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Left_View/Binary_Tree_Left_View.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Right_View/Binary_Tree_Right_View.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Right_View/Binary_Tree_Right_View.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Top_View/Binary_Tree_Left_View.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Binary_Tree_Top_View/Binary_Tree_Top_View.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Birthday_Paradox/Birthday_Paradox.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Birthday_Paradox/Birthday_Paradox.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bisection_Method/Bisection_Method.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bisection_Method/Bisection_Method.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bisection_Method/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bitonic_Array/Bitonic_Array.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bitonic_Array/Bitonic_Array.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bitonic_Point/Bitonic_Point.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bitonic_Point/Bitonic_Point.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bloom_Filter/BloomFilter.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bloom_Filter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Boyer_Moore_Algorithm/Boyer_Moore.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Boyer_Moore_Algorithm/Boyer_Moore.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Boyer_Moore_Algorithm/Boyer_Moore.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Boyer_Moore_Algorithm/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Breadth_First_Search/BFS_in_Csharp.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Breadth_First_Search/BreadthFirstSearch.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Breadth_First_Search/Breadth_First_Search.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Breadth_First_Search/Breadth_First_Search.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Breadth_First_Search/Breadth_First_Search.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Breadth_First_Search/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bresenham_Algo_Programs/Bresenham_Line_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bresenham_Algo_Programs/Bresenham_Line_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bresenham_Circle_Drawing_Algo/Bresenham_Circle_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bubble_Sort/Bubble_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bubble_Sort/Bubble_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bubble_Sort/Bubble_Sort.jl" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bubble_Sort/Bubble_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bubble_Sort/Bubble_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bubble_Sort/Bubble_Sort.rs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bubble_Sort/Bubble_Sort.sh" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bubble_Sort/Modified_Bubble_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bubble_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bucket_Sort/Bucket_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bucket_Sort/Bucket_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bucket_Sort/Bucket_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Bucket_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Burrows_Wheeler_Data_Transform_Algorithm/Burrows_Wheeler_Data_Transform_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Burrows_Wheeler_Transformation_Algorithm/BWT.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cartesian_Tree/Cartesian_Tree.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Catalan_Numbers/Catalan_Numbers.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Catalan_Numbers/Catalan_Numbers.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Celebrity_Problem/Celebrity_Problem.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Celebrity_Problem/Celebrity_Problem.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Centered_Decagonal_Number/Centered_Decagonal_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Centered_Decagonal_Number/Centered_Decagonal_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Centered_Square_Number/Centered_Square_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Centered_Square_Number/Centered_Square_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Chinese_Remainder_Theorem/Chinese_Remainder_Theorem.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Chinese_Remainder_Theorem/Chinese_Remainder_Theorem.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Chinese_Remainder_Theorem/Chinese_Remainder_Theorem.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Chinese_Remainder_Theorem/Chinese_Remainder_Theorem.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Chinese_Remainder_Theorem/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Chocolate_Distribution/Chocolate_Distribution.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Chocolate_Distribution/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circle_Sort/Circle_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circle_Sort/Circle_Sort.kts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circle_Sort/Circle_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circle_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circular_Doubly_Linked_List/Circular_Doubly_Linked_List.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circular_Doubly_Linked_List/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circular_Linked_List/Circular_Linked_List.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circular_Linked_List/Circular_Linked_List.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circular_Linked_List/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Circular_Queue/Circular_Queue.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cocktail_Sort/Cocktail_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cocktail_Sort/Cocktail_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cocktail_Sort/Cocktail_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cocktail_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cohen_Sutherland/Cohen_Sutherland.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Coin_Change/Coin_Change.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Coin_Change/Coin_Change.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Coin_Change/Coin_Change.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Collections/arrayList.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Comb_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Comb_Sort/comb_sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Comb_Sort/comb_sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Compound_Interest/Compound_Interest.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Compound_Interest/Compound_Interest.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Connected_Components_Graph/Adjacency_List.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Connected_Components_Graph/Adjacency_Map.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Connected_Components_Undirected_Graph/Connected_Components_Undirected_Graph.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Coprime_Numbers/Coprime_Numbers.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Coprime_Numbers/Coprime_Numbers.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Count_Inversion/Count_Inversion.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Count_Rotations/Count_Rotations.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Counting_Sort/Counting_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Counting_Sort/Counting_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Counting_Sort/Counting_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Counting_Sort/Counting_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Counting_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cycle_Sort/Cycle_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cycle_Sort/Cycle_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cycle_Sort/Cycle_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cycle_Sort/Cycle_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cycle_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cyclic_Permutation/Cyclic_Permutation.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Cyclic_Permutation/Cyclic_Permutation.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/DDA_Algorithm/DDA_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dearrangements/Dearrangements.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dearrangements/Dearrangements.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dearrangements/Dearrangements_DP.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dearrangements/Dearrangements_DP.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Decagonal_Numbers/Decagonal_Numbers.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Decagonal_Numbers/Decagonal_Numbers.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Decision_Tree/Decision_Tree.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Delannoy_Number/Delannoy_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Delannoy_Number/Delannoy_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Depth_First_Search/Depth_First_Search.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Depth_First_Search/Depth_First_Search.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Depth_First_Search/Depth_First_Search.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Depth_First_Search/Depth_First_Search.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Depth_First_Search/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Digit_Count/Digit_Count.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Digit_Count/Digit_Count.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dijkstra_Algorithm/Dijkstra_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dijkstra_Algorithm/Dijkstra_Algorithm.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dijkstra_Algorithm/Dijkstra_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dijkstra_Algorithm/Dijkstra_Algorithm.ts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dijkstra_Algorithm/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Disjoint_Sets/Disjoint_Sets.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Disjoint_Sets/Disjoint_Sets.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Distance_Between_Points/Distance_Between_Points.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Distance_Between_Points/Distance_Between_Points.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Divisible_Pairs_In_Array/Divisible_Pairs_In_Array.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Divisible_Pairs_In_Array/Divisible_Pairs_In_Array.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Doubly_Linked_List/Doubly_Linked_List.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Doubly_Linked_List/Doubly_Linked_List.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Doubly_Linked_List/Doubly_Linked_List.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Doubly_Linked_List/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dynamic_Programming_Rod_Cutting/Dynamic_Programming_Rod_Cutting.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dynamic_Programming_Rod_Cutting/Dynamic_Programming_Rod_Cutting.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dynamic_Programming_Rod_Cutting/Dynamic_Programming_Rod_Cutting.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dynamic_Programming_Rod_Cutting/Dynamic_Programming_Rod_Cutting.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dynamic_Programming_Rod_Cutting/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dynamic_Queue/Dynamic_Queue.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dynamic_Stack_Arrays/Dynamic_Stack.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Dynamic_Stack_Arrays/Dynamic_Stack.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Edit_Distance_Algorithm/Edit_Distance.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Edit_Distance_Algorithm/Edit_Distance.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Edit_Distance_Algorithm/Edit_Distance.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Egg_Drop/Egg_Drop.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Egg_Drop/Egg_Drop.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Egg_Drop/Egg_drop.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Equilibrium_Index_Of_Array/Equilibrium_Index_Of_Array.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Equilibrium_Index_Of_Array/Equilibrium_Index_Of_Array.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Euclidean_Algorithm/Euclidean_Algorithm.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Euclidean_Algorithm/Euclidean_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Euclidean_Algorithm/Euclidean_Algorithm.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Euclidean_Algorithm/Euclidean_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Euclidean_Algorithm/Euclidean_Algorithm.ts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Euclidean_Algorithm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Euler_Totient_Function/Euler_Totient_Function.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Euler_Totient_Function/Euler_Totient_Function.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Euler_Totient_Function/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Exponential_Search/Exponential_Search.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Exponential_Search/Exponential_Search.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Exponential_Search/Exponential_Search.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Exponential_Search/Exponential_Search.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Exponential_Search/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Expression_Tree/Expression_Tree.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Extended_Euclidean_Algorithm/Extended_Euclidean_Algorithm.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Extended_Euclidean_Algorithm/Extended_Euclidean_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Extended_Euclidean_Algorithm/Extended_Euclidean_Algorithm.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Extended_Euclidean_Algorithm/Extended_Euclidean_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Extended_Euclidean_Algorithm/Extended_Euclidean_Algorithm.ts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/FCFS_Scheduling/FCFS_Scheduling.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/FCFS_Scheduling/FCFS_Scheduling.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Factorial/Factorial.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fenwick_Tree/Fenwick_Tree.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fenwick_Tree/Fenwick_Tree.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fenwick_Tree/Fenwick_Tree.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fenwick_Tree/Fenwick_Tree.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fermat_Little_Theorem/Fermat_Little_Theorem.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fermat_Little_Theorem/Fermat_Little_Theorem.jl" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fermat_Little_Theorem/Fermat_Little_Theorem.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Number/Fibonacci_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Number/Fibonacci_Number.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Number/Fibonacci_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Number/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Number_Using_DP_Approach/Fibonacci_Number_Using_DP_Approach.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Words/Fibonacci_Words.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Words/Fibonacci_Words.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floating_Point_Arithmetic/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floating_Point_Arithmetic/float_add.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floating_Point_Arithmetic/float_divide.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floating_Point_Arithmetic/float_multiply.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floating_Point_Arithmetic/float_substract.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/Floyd&apos;s_Cycle_Detection.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/Floyd&apos;s_Cycle_Detection.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Warshall_Algorithm/Floyd_Warshall.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Warshall_Algorithm/Floyd_Warshall_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Warshall_Algorithm/Floyd_Warshall_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Warshall_Algorithm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ford_Fulkerson_Method/Ford_Fulkerson_Method.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ford_Fulkerson_Method/Ford_Fulkerson_Method.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ford_Fulkerson_Method/Ford_Fulkerson_Method.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ford_Fulkerson_Method/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Freq_Of_Elements_Of_Array/CountFrequencyOfArrayElements.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Gcd/gcd.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Gcd/gcd.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/GenericTree_Levelorder_Traversal/GenericTree_Levelorder_Traversal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Geometric_Progression/Geometric_Progression.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Geometric_Progression/Geometric_Progression.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Geometric_Progression/Sum_Of_Infinite_GP.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Geometric_Progression/Sum_Of_Infinite_GP.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Gnome_Sort/Gnome_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Gnome_Sort/Gnome_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Goldmine/Gold.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Good_Permutation/Good_Permutation.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Good_Permutation/Good_Permutation.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Graph/Graph.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Graph/Graph.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Graph/Graph.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Graph_Coloring_Algorithm/Graph_Coloring.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Graph_Coloring_Algorithm/Graph_Coloring_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Harmonic_Progression/Harmonic_Progression.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Harmonic_Progression/Harmonic_Progression.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Hashing/Hashing.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Heap_Sort/Heap_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Heap_Sort/Heap_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Heap_Sort/Heap_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Heap_Sort/Heap_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Heap_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Huffman_Encoding/Huffman_Coding.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/INDEX.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Infix_To_Postfix/Infix_to_Postfix.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Inheritance(C++)/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Inheritance(Java)/Hierarchical.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Inheritance(Java)/Multi_Level.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Inheritance(Java)/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Inheritance(Java)/Single_Level.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Insertion_Sort/Insertion_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Insertion_Sort/Insertion_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Insertion_Sort/Insertion_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Insertion_Sort/Insertion_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Insertion_Sort/Insertion_Sort.rs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Insertion_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Interpolation_Search/Interpolation_Search.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Interpolation_Search/Interpolation_Search.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Interpolation_Search/Interpolation_Search.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Interpolation_Search/Interpolation_Search.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Interpolation_Search/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Intro_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Intro_Sort/introsort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Jhonson_Algoritm/Jhonson.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Job Sequencing/Job_Sequencing.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Job_Sequencing/Job_Sequencing.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Jolly_Jumper_Sequence/Jolly_Jumper_Sequence.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Jolly_Jumper_Sequence/Jolly_Jumper_Sequence.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Josephus_Problem/Josephus_Problem.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Josephus_Problem/Josephus_Problem.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/K_Map_Minimization/K_Map_Minimization.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kadane_Algorithm/Kadane_Algorithm.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kadane_Algorithm/Kadane_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kadane_Algorithm/Kadane_Algorithm.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kadane_Algorithm/Kadane_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Karatsuba_Algo/Karatsuba_multiplication_algo.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Karatsuba_Algorithm/Karatsuba_Algorithm.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Karatsuba_Algorithm/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Karatsuba_Algorithm/karatsuba.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knapsack/Knapsack.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knapsack/KnapsackProblem.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knapsack_Fractional/Knapsack_Fractional.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knapsack_Fractional/Knapsack_Fractional.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knapsack_Unbounded/Knapsack_Unbounded.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knapsack_Unbounded/Knapsack_Unbounded.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knuth_Morris_Pratt_Algorithm/KMP.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knuth_Morris_Pratt_Algorithm/KMP.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knuth_Morris_Pratt_Algorithm/KMP.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knuth_Morris_Pratt_Algorithm/KMP.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Knuth_Morris_Pratt_Algorithm/Knuth-Morris_Pratt_Algorithm_README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kosaraju_Algorithm/Kosaraju_Algorithm.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kosaraju_Algorithm/Kosaraju_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kosaraju_Algorithm/kosaraju_algorithm.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kosaraju_Algorithm/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_Algorithm.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_OOP/AristContainer.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_OOP/Arista.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_OOP/CVSCargador.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_OOP/ConnectionStructure.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_OOP/Grafo.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_OOP/Kruskal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_OOP/LoopDetector.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_OOP/PartitionStructure.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_OOP/Vertice.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/Kruskal_OOP/VerticesSet.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Kruskal_Algorithm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Largest_Common_Multiple/Largest_Common_Multiple_1-DArray.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Leaders_Of_Array/Leaders_Of_Array.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Leaders_Of_Array/Leaders_Of_Array.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Leap Year Code in JavaScript/script.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Leap_Year/Leap_Year.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Leap_Year/Leap_Year.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linear_Regression_Using_Straight_Line/Linear_Regression_using_Straight_Line.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linear_Search/Linear_Search.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linear_Search/Linear_Search.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linear_Search/Linear_Search.jl" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linear_Search/Linear_Search.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linear_Search/Linear_Search.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linear_Search/Linear_Search.rs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linear_Search/Linear_Search.ts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linear_Search/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List/Length_of_Linked_List.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List/LinkedList.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List/LinkedList.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List/Linked_List.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List/Linked_List.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List/Linked_List.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List/StartOfLoop.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Bubble_Sort/Linked_List_Bubble_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Merge_Sort/Linked_List_Merge_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Merge_Sort/Linked_List_Merge_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Quick_Sort/Linked_List_Quick_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Linked_List_Selection_Sort/Linked_List_Selection_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Logarithmic_Exponent/Logarithmic_Exponent.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Alternating_Subarray/Longest_Alternating_Subarray.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Alternating_Subarray/Longest_Alternating_Subarray.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Common_Subsequence/Longest_Common_Subsequence.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Common_Subsequence/Longest_Common_Subsequence.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Common_Subsequence/Longest_Common_Subsequence.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Common_Substring/Longest_Common_Substring.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Common_Substring/Longest_Common_Substring.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Common_Substring/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Increasing_Subarray/Longest_Increasing_Subarray.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Increasing_Subarray/Longest_Increasing_Subarray.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Increasing_Subsequence/LIS.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Increasing_Subsequence/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Palindromic_Subsequence/LongestPalindromicSubsequence.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Palindromic_Subsequence/Longest_Palindromic_Subsequence.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Palindromic_Substring/Longest_Palindromic_Substring.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Palindromic_Substring/Longest_Palindromic_Substring.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Repeating_Subsequence/Longest_Repeating_Subsequence.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Longest_Repeating_Subsequence/Longest_Repeating_Subsequence.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Lucas_Numbers/Lucas_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Lucas_Numbers/Lucas_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Lucas_Theorem/Lucas_Theorem.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Lucas_Theorem/Lucas_Theorem.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Machine_Learning/Linear_Regression/Linear_Regression.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Machine_Learning/Linear_Regression/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Majority_Element/Majority_Element.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Majority_Element/Majority_Element.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Manhattan_Distance/Manhattan_Distance.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Manhattan_Distance/Manhattan_Distance.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Markov_Matrix/Markov_Matrix.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Markov_Matrix/Markov_Matrix.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Chain_Multiplication/Matrix_Chain_Multiplication.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Java/Matrix_Addition.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Java/Matrix_Subtraction.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Java/Matrix_identical.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Java/Matrix_intersection.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Java/Matrix_multiply.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Java/Matrix_transpose.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Matrix_Rotation90.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Matrix_Rotation90.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Python/Matrix_Determinant.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Python/Matrix_addition.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Python/Matrix_input.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Python/Matrix_multiplication.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Python/Matrix_scalar_multiplication.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Python/Matrix_subtraction.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Total_Possible_Paths/Total_Possible_Paths.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Matrix_Operations/Total_Possible_Paths/Total_Possible_Paths.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Maximum_Product_Subset_Array/Maximum_Product_Subarray.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Maximum_Product_Subset_Array/Maximum_Product_Subarray.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Merge_Sort/Merge_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Merge_Sort/Merge_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Merge_Sort/Merge_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Merge_Sort/Merge_Sort.rs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Merge_Sort/Merge_Sort.ts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Merge_Sort/Merge_sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Merge_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Merge_Sort_3_Way/Merge_Sort_3_Way.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Merge_With_Insertion_Sort/Merge_With_Insertion_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Miller_Rabin_Primality_Test/Miller_Rabin_Primality_Test.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Minimum_Cost_Path/Minimum_Cost_Path.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Minimum_Cost_Path/Minimum_Cost_Path.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Minimum_Product_Subset_Array/Minimum_Product_Subset_array.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Minimum_Product_Subset_Array/Minimum_Product_Subset_array.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Mo_Algorithm/Mo_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Modular Inverse/Modular_Inverse.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Modular Inverse/Modular_Inverse.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Modular_Exponentiation/Modular_Exponentiation.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Modular_Exponentiation/Modular_Exponentiation.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Mystery_Number/Mystery_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Mystery_Number/Mystery_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Naive_String_Matching/Naive_String_Matching.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Naive_String_Matching/Naive_String_Matching.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Natural_Numbers_Sum/Natural_Numbers_Sum.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Natural_Numbers_Sum/Natural_Numbers_Sum.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Next_Greater_Element/Next_Greater_Element.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Next_Greater_Element/Next_Greater_Element.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Next_Perfect_Square/Next_Perfect_Square.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Next_Perfect_Square/Next_Perfect_Square.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Next_Smallest_Palindrome/Next_Smallest_Palindrome.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Next_Smallest_Palindrome/Next_Smallest_Palindrome.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Next_Smallest_Palindrome/Next_Smallest_Palindrome.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Nim_Game/Nim_Game.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Nim_Game/Nim_Game.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Nobel_Integer/Noble_Integer.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Nobel_Integer/Noble_Integer.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Nonagonal_Number/Nonagonal_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Nonagonal_Number/Nonagonal_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/Java/Binary_To_Decimal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/Java/Binary_To_Octal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/Java/Decimal_To_Hexadecimal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/Java/Decimal_To_Octal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/Java/Decimal_to_binary.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/Java/Hexadecimal_To_Binary.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/Java/Hexadecimal_To_Decimal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/Java/Octal_To_Decimal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/Python/Binary_To_Decimal.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/Python/Decimal_To_Hexadecimal.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/Python/Decimal_To_Octal.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Conversion/Python/Octal_To_Decimal.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Of_Islands/Number_Of_Islands.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Number_Of_Islands/Number_Of_Islands.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Octree/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Painter_Partition_Problem/Painter_Partition_Problem.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Painter_Partition_Problem/Painter_Partition_Problem.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Palindrome/palindrome_no.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Palindrome/palindrome_no.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Palindrome/palindrome_string.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Palindrome/palindrome_string.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Palindromic_Array/Palindromic_Array.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Palindromic_Array/Palindromic_Array.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pancake_Sort/Pancake_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pancake_Sort/Pancake_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pancake_Sort/Pancake_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pancake_Sort/pancakesort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Partial_Dearrangements/Partial_Dearrangements.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Partial_Dearrangements/Partial_Dearrangements.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Partition_Problem/Partition_Problem.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Partition_Problem/Partition_Problem.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pascal_Triangle/Pascal_Triangle.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pascal_Triangle/Pascal_Triangle.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Array/Perfect_Array.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Array/Perfect_Array.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Number/Perfect_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Number/Perfect_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Square_String/Perfect_Square_String.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Square_String/Perfect_Square_String.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Sum/Perfect_Sum.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Perfect_Sum/Perfect_Sum.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pigeonhole_Sort/Pigeonhole_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pigeonhole_Sort/Pigeonhole_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pigeonhole_Sort/Pigeonhole_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pigeonhole_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Postman_Sort/Postman_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Postman_Sort/Postman_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Postman_Sort/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Power_Of_Any_Number/PowerOfAnyGivenNo.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Power_Of_Two/Power_Of_Two.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Power_Of_Two/Power_Of_Two.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Power_Of_Two/Power_Of_Two.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Power_Set/Power_Set.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Power_Set/Power_Set.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prefix_Sum/Prefix_Sum.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prefix_Sum/Prefix_Sum.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prefix_Sum/Prefix_Sum.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prime_Factorization/Prime_Factorization.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prime_Factorization/Prime_Factorization.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prime_Number/Prime_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prime_Number/Prime_Number.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prime_Number/Prime_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prims_Algorithm/Prims_Algorithm.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prims_Algorithm/Prims_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prims_Algorithm/Prims_Algorithm.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prims_Algorithm/Prims_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Prims_Algorithm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Priority_Queue/HeapPriorityQueue.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Priority_Queue/Priority_Queue.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Priority_Queue/Priority_Queue.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pythagorean_Quadruples/Pythagorean_Quadruples.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pythagorean_Quadruples/Pythagorean_Quadruples.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pythagorean_Triplets/Pythagorean_Triplets.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Pythagorean_Triplets/Pythagorean_Triplets.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Python implementation for the Rabin Karp algorithm" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queens_Problem/Queens_Problem.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queens_Problem/Queens_Problem.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queens_Problem/Queens_Problem.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queens_Problem/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Arrays/Queue_Using_Arrays.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Arrays/Queue_Using_Arrays.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Linked_List/Queue_Linked_List.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Linked_List/Queue_Linked_List.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Linked_List/Queue_Linked_List.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Stacks/Queues_Using_Stacks.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queues_Using_Stacks/Efficient_Dequeue.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queues_Using_Stacks/Efficient_Enqueue.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Hull/Quick_Hull.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Hull/Quick_Hull.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Select/Quick_Select.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Select/Quick_Select.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Sort/Quick_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Sort/Quick_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Sort/Quick_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Sort/Quick_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Sort/Quick_Sort.rs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Sort/Quick_Sort.ts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quick_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Quicksort_3_way/Quicksort_3_way.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/RSA_Algorithm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/RSA_Algorithm/RSA_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/RSA_Algorithm/RSA_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/RSA_CRT/RSA_CRT.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rabin_Karp/Rabin_Karp.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rabin_Karp/Rabin_karp.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rabin_Karp/Rabin_karp.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Radix_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Radix_Sort/Radix_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Radix_Sort/Radix_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Radix_Sort/Radix_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Radix_Sort/Radix_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Radix_Sort/Radix_Sort.rs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rain_Water_Trapping/Rain_Water_Trapping.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rain_Water_Trapping/Rain_Water_Trapping.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Red_Black_Tree/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Red_Black_Tree/RedBlackTree.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Red_Black_Tree/Red_Black_Tree.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Red_Black_Tree/Red_Black_Tree.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Reversal_Linked_List/Reversal_Linked_List.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Reversal_Linked_List/Reversal_Linked_List.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Reverse_Odd_Levels/Reverse_Odd_Levels.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Reverse_Of_Number/Reverse_Of_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Reverse_Of_Number/Reverse_Of_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Root_Mean_Square/Root_Mean_Square.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Root_Mean_Square/Root_Mean_Square.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rotation_Of_Numbers/Rotation_Of_Numbers.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Rotation_Of_Numbers/Rotation_Of_Numbers.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/SRTF_Scheduling/SRTF_Scheduling.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Segment_Tree_RMQ/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Segment_Tree_RMQ/Segement_Tree_RMQ.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Segment_Tree_RMQ/Segment_Tree_RMQ.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Segment_Tree_With_Lazi_Propagation/Segment_Tree_With_Lazy_Propagation.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Segmented_Sieve/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Selection_Algorithm_Repo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Selection_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Selection_Sort/Selection_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Selection_Sort/Selection_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Selection_Sort/Selection_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Selection_Sort/Selection_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Selection_Sort/Selection_Sort.ts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Selection_Sort/Selection_sort.rs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Set_Bits_Till_N/Set_Bits_Till_N.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Set_Bits_Till_N/Set_Bits_Till_N.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Set_Bits_Till_N/Set_Bits_Till_N.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shaker_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shaker_Sort/Shaker_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shaker_Sort/Shaker_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shaker_Sort/Shaker_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shell_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shell_Sort/Shell_Sort.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shell_Sort/Shell_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shell_Sort/Shell_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Shell_Sort/Shell_sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sieve_Of_Eratosthenes/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sieve_Of_Eratosthenes/Sieve_Of_Eratosthenes.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sieve_Of_Eratosthenes/Sieve_Of_Eratosthenes.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sieve_Of_Eratosthenes/Sieve_Of_Eratosthenes.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sieve_Of_Eratosthenes/Sieve_Of_Eratosthenes.ts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Simple_Interest/Simple_Interest.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Simple_Interest/Simple_Interest.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Simpsons_rule/Simpsons_Rule.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Skip_list/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sleep_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sleep_Sort/Sleep sort.jl" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sleep_Sort/Sleep_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sleep_Sort/Sleep_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sleep_Sort/Sleep_Sort.sh" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sleep_Sort/sleep_sort.erl" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sparse_Table/Sparse_Table.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sparse_Table/Sparse_Table.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Special_Permutation/Special_Permutation.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Special_Permutation/Special_Permutation.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Spiral_Array/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Square_Root_Decomposition/SquareRootDecomposition.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Square_Root_Decomposition/Square_Root_Decomposition.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Arrays/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Arrays/Stacks.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Arrays/Stacks.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Arrays/Stacks_Using_Arrays.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Linked_Lists/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Linked_Lists/Stacks.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Linked_Lists/Stacks.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Queues/Efficient_Dequeue.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Queues/Efficient_Enqueue.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Queues/Stack.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Strassens_Algorithm/Strassens_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Strassens_Algorithm/Strassens_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Subarray_Sum/Subarray_Sum.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Subarray_Sum/Subarray_Sum.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Subset_Sum/Subset_Sum.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Subset_Sum/Subset_Sum.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sudoku_Solver/Sudoku_Solver.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sudoku_Solver/Sudoku_Solver.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Suffix_Array/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Cubes/Sum_Of_Cubes.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Cubes/Sum_Of_Cubes.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Cubes/Sum_Of_Cubes.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Digits/Sum_Of_Digits.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Digits/Sum_Of_Digits.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Digits/Sum_Of_Digits.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Squares/Sum_Of_Squares.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Sum_Of_Squares/Sum_Of_Squares.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Taylor_series_Repo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Taylor_series_Repo/Taylor_Series_Horner_Rule.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ternary_Search/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ternary_Search/Ternary_Search.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ternary_Search/Ternary_Search.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ternary_Search/Ternary_Search.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ternary_Search/Ternary_Search.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tim_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tim_Sort/Tim_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tim_Sort/Tim_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Topological_Sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Topological_Sort/Topological_Sort.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Topological_Sort/Topological_Sort.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Topological_Sort/Topological_Sort.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tower_Of_Hanoi/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tower_Of_Hanoi/Tower_Of_Hanoi.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tower_Of_Hanoi/Tower_Of_Hanoi.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tower_Of_Hanoi/Tower_Of_Hanoi.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tower_Of_Hanoi/Tower_Of_Hanoi.ts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tower_Of_Hanoi/Tower_of_Hanoi.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Travelling_Salesman_Problem/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Treap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Treap/Treap.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Diagonal_Traversal/Tree_Diagonal_Traversal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_From_Preorder_and_Inorder_Traversal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Inorder_Construction/Tree_From_Preorder_and_Inorder_Traversal.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Inorder_Traversal/Tree_Inorder_Traversal.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Inorder_Traversal/Tree_Inorder_Traversal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Inorder_Traversal/Tree_Inorder_Traversal.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Inorder_Traversal/Tree_Inorder_Traversal.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Inorder_Traversal/Tree_Inorder_Traversal.ts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Levelorder_Traversal/Tree_Levelorder_Traversal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Levelorder_Traversal/Tree_Levelorder_Traversal.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Levelorder_Traversal/Tree_Levelorder_Traversal.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Mirror_Image/Tree_Mirror_Image.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Mirror_Image/Tree_Mirror_Image.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Postorder_Traversal/Tree_Postorder_Traversal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Postorder_Traversal/Tree_Postorder_Traversal.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Postorder_Traversal/Tree_Postorder_Traversal.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Postorder_Traversal/Tree_Postorder_Traversal.ts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Preorder_Traversal/Tree_Preorder_Traversal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Preorder_Traversal/Tree_Preorder_Traversal.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Preorder_Traversal/Tree_Preorder_Traversal.ts" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Spiralorder_Traversal/Tree_Spiralorder_Traversal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Spiralorder_Traversal/Tree_Spiralorder_Traversal.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Verticalorder_Traversal/Tree_Verticalorder_Traversal.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tree_Verticalorder_Traversal/Tree_Verticalorder_Traversal.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Triangular_Number/Triangular_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Triangular_Number/Triangular_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Numbers/Tribonacci_Numbers.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Numbers/Tribonacci_Numbers.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Numbers/Tribonacci_Numbers_DP.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Numbers/Tribonacci_Numbers_DP.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Words/Tribonacci_Words.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Words/Tribonacci_Words.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Trie_For_Natural_Numbers/Trie.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Trie_For_Words/Trie.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Trie_For_Words/TrieUse.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ugly_Number/Nth_Ugly_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ugly_Number/Nth_Ugly_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ugly_Number/Ugly_Number.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ugly_Number/Ugly_Number.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Z_Algorithm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Z_Algorithm/Z_Algorithm.cs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Z_Algorithm/Z_Algorithm.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Z_Algorithm/Z_Algorithm.js" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Z_Algorithm/Z_Algorithm.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Z_Algorithm/Z_Algorithm.rs" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/infix_to_prefix/Infix_To_Prefix.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/nCr mod P/nCr_mod_P.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/nCr mod P/nCr_mod_P.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
