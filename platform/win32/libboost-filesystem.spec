@@ -1,7 +1,11 @@
 
 also-ignore:
-	config/
 	test/
 	bug/
-	doc/
 	example/
+	
+	config/
+	doc/
+	
+sources:
+    ../../scripts/boost/libboost-filesystem-dummy.cpp
