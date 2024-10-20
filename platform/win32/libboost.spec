@@ -127,6 +127,7 @@ also-ignore:
 	/libs/static_string/
 	/libs/stl_interfaces/
 	/libs/system/
+	/libs/sync/
 	/libs/test/
 	/libs/thread/
 	/libs/throw_exception/

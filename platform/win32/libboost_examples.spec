@@ -41,6 +41,7 @@ also-ignore:
 	/libs/spirit/src/
 	/libs/stacktrace/src/
 	/libs/system/src/
+	/libs/sync/src/
 	/libs/test/src/
 	/libs/test/src/
 	/libs/thread/src/
@@ -190,6 +191,7 @@ also-ignore:
 	/libs/static_string/test/
 	/libs/stl_interfaces/test/
 	/libs/system/test/
+	/libs/sync/test/
 	/libs/test/
 	/libs/thread/test/
 	/libs/throw_exception/test/

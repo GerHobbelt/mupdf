@@ -47,6 +47,7 @@ also-ignore:
 	/libs/spirit/example/x3/rexpr/rexpr_full/src/
 	/libs/stacktrace/src/
 	/libs/system/src/
+	/libs/sync/src/
 	/libs/test/src/
 	/libs/test/tools/console_test_runner/src/
 	/libs/thread/src/

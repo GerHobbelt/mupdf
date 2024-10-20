@@ -4,5 +4,8 @@ also-ignore:
 	bug/
 	example/
 	
+	build/
+	tutorial/
+	
 sources:
     ../../scripts/boost/libboost-thread-dummy.cpp
