@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA1A218}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGNALS_RT;SIGNALS_RT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGNALS_RT;SIGNALS_RT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGNALS_RT;SIGNALS_RT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGNALS_RT;SIGNALS_RT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGNALS_RT;SIGNALS_RT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGNALS_RT;SIGNALS_RT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGNALS_RT;SIGNALS_RT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGNALS_RT;SIGNALS_RT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGNALS_RT;SIGNALS_RT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGNALS_RT;SIGNALS_RT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGNALS_RT;SIGNALS_RT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGNALS_RT;SIGNALS_RT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_aco.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_asg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_bs2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_cls.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_cps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_cps_st.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_css.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_dob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_evl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_fts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_ics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_jls.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_jos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_ksc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_lfs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_lss.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_mws.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_nes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_nls.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_nls_st.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_nod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_nod_st.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_nss_st.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_nss_sts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_nss_ts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_nss_tss.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_psg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_pss.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_pss_st.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_sss.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_vdk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_wnk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/cpp/benchmark_yas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/src/function_detail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/src/lfs_connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/src/signal_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/copperspice/cs_signal/src/cs_signal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/copperspice/cs_signal/src/cs_slot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/dacap/obs/dacap_connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/src/async_task.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/src/async_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/src/event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/src/thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/src/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/src/waitable_event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/src/win32_message_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/digits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/none.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/optional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/profile/detail/output_function.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/profile/profile_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/profile/profiler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/profile/scoped_profiler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/profile/setup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/signals/connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/signals/detail/slot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/signals/detail/statistics_function.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/signals/scoped_connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/signals/shared_connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/signals/shared_connection_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/signals/signal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/signals/statistics_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/src/iscool/signals/statistics_sink.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/DoublyLinkedListTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/ObjectPool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/ObjectPoolTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/SignalBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/SignalTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/miguelmartin/Wink-Signals/examples/Benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/mwthinker/Signal/src/mw/signals/connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/supergrover/sigslot/src/signal.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/Bench.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_aco.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_asg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_bs2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_cls.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_cps.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_cps_st.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_css.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_dob.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_evl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_fts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_ics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_jls.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_jos.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_ksc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_lfs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_lss.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_mws.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_nes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_nls.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_nls_st.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_nod.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_nod_st.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_nss_st.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_nss_sts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_nss_ts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_nss_tss.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_psg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_pss.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_pss_st.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_sss.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_vdk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_wnk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/hpp/benchmark_yas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Ansoulom/cpp-observe/cpp_observe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/include/bind_weak.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/include/combiners.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/include/function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/include/function_detail.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/include/lfs_connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/include/msvc_autolink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/include/signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/include/signal_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/include/spin_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/include/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Kosta-Github/signals-cpp/signals-cpp/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Kosta-Github/signals-cpp/signals-cpp/connection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Kosta-Github/signals-cpp/signals-cpp/connections.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Kosta-Github/signals-cpp/signals-cpp/signal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Kosta-Github/signals-cpp/signals-cpp/signals.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Montellese/cpp-signal/cpp-signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/NoAvailableAlias/nano-signal-slot/nano_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/NoAvailableAlias/nano-signal-slot/nano_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/NoAvailableAlias/nano-signal-slot/nano_observer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/NoAvailableAlias/nano-signal-slot/nano_signal_slot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Nuclex/Config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Nuclex/Events/Delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Nuclex/Events/EmptyDelegateCallError.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Nuclex/Events/Event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/amc522/signal11/Signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/copperspice/cs_signal/src/cs_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/copperspice/cs_signal/src/cs_macro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/copperspice/cs_signal/src/cs_signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/copperspice/cs_signal/src/cs_slot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/copperspice/cs_signal/src/rcu_guarded.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/copperspice/cs_signal/src/rcu_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/cpp11nullptr/lsignal/lsignal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/dacap/obs/dacap_connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/dacap/obs/dacap_signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/dacap/obs/observable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/dacap/obs/observers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/dacap/obs/safe_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/dacap/obs/slot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/eviltwin/observer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/fr00b0/nod/include/nod/nod.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/fteng/signals.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/async_task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/async_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/detail_memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/i_lifetime.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/i_task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/i_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/lifetime.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/lockable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/locking_policy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/message_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/neolib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/noncopyable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/raii.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/signal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/signal_interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/singleton.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/slot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/slot_interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/waitable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/waitable_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/include/neolib/win32_message_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/copy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/digits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/enum_equals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/none.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/none_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/optional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/optional_or_else.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/profile/detail/output_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/profile/output_delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/profile/profile_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/profile/profiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/profile/scoped_profiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/profile/setup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/bounce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/declare_signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/any_tuple_has_type_at_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/any_tuple_has_type_at_index.tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/any_tuple_is_masked.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/any_tuple_is_masked.tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/find_signal_type_from_tuple_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/no_tuple_is_masked.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/no_tuple_is_masked.tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/resolve_identifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/signal_collection_from_tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/slot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/statistics_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/tuple_is_masked.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/tuple_is_masked.tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/find_signal_type_from_tuple_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/get.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/get_from_tuple_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/identifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/implement_signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/one_shot_signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/one_shot_signal_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/relay.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/scoped_connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/shared_connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/shared_connection_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/signal_collection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/signal_collection_from_tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/signal_from_tuple_arguments.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/statistics_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/statistics_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/void_signal_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/time/backward_duration_to_unit_change.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/time/days.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/time/now.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/time/round.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/DoublyLinkedList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/FastDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/ObjectPool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/ObjectPoolScopedAllocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/ScopedAllocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/Signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/SignalBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/SignalDefinitions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/StaticSignalConnectionAllocators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/src/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/joanrieu/signal11/signal11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/larspensjo/SimpleSignal/SimpleSignal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/miguelmartin/Wink-Signals/wink/detail/FastDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/miguelmartin/Wink-Signals/wink/detail/FastDelegateBind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/miguelmartin/Wink-Signals/wink/event_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/miguelmartin/Wink-Signals/wink/signal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/miguelmartin/Wink-Signals/wink/slot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/mwthinker/Signal/src/mw/signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/mwthinker/Signal/src/mw/signals/connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/palacaze/sigslot/include/sigslot/signal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/pbhogan/Signals/Delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/pbhogan/Signals/Signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/supergrover/sigslot/src/signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/vdksoft/signals/include/signals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/yassi/yassi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark_utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/signals-rt/signals.hpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/docs/bind_weak.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/docs/migration-from-boost-signals2.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/docs/simple-examples.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/docs/why-fastsignals.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/CppFakeIt/libfastsignals/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Kosta-Github/signals-cpp/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Kosta-Github/signals-cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/Kosta-Github/signals-cpp/signals-cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/NoAvailableAlias/nano-signal-slot/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/NoAvailableAlias/nano-signal-slot/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/amc522/signal11/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/copperspice/cs_signal/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/copperspice/cs_signal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/cpp11nullptr/lsignal/LICENCE" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/cpp11nullptr/lsignal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/dacap/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/dacap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/fr00b0/nod/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/fr00b0/nod/tools/linux_x64/premake5" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/i42output/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/detail/copy.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/detail/optional_or_else.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/enum_equals.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/optional.impl.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/get.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/get_from_tuple_element.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/relay.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/detail/signal.impl.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/one_shot_signal.impl.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/one_shot_signal_pool.impl.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/signals/signal.impl.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/time/detail/backward_duration_to_unit_change.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/time/detail/now.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/iscool/include/iscool/time/detail/round.tpp" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/jeffomatic/jl_signal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/joanrieu/signal11/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/joanrieu/signal11/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/larspensjo/SimpleSignal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/miguelmartin/Wink-Signals/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/miguelmartin/Wink-Signals/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/miguelmartin/Wink-Signals/examples/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/mwthinker/Signal/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/mwthinker/Signal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/palacaze/sigslot/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/palacaze/sigslot/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/pbhogan/Signals/README.markdown" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/supergrover/sigslot/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/supergrover/sigslot/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/vdksoft/signals/LICENSE-2.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/vdksoft/signals/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/benchmark/lib/vdksoft/signals/doc/signals.pdf" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/results_gcc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/results_msvc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/signals-rt/signal-slot-benchmarks/vs/packages.config" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1448,6 +1448,10 @@ cmake_examples
 modern-cpp-template
 googletest-ci-cpp-template
 Algo_Ds_Notes
+UniversalStacktrace
+signals-rt
+sigslot
+libccpalette
 
 EOT
 ) | grep -e "$FILTER"
@@ -1524,6 +1528,7 @@ WebView2Samples
 Algo_Ds_Notes
 modern-cpp-template
 googletest-ci-cpp-template
+signal-slot-benchmarks
 
 EOT
 ) | grep -e "$FILTER"

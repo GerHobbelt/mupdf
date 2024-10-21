@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF057A28}</ProjectGuid>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF333078}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -76,7 +76,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,10 +110,10 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYDRAQUILL;HYDRAQUILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIVERSALSTACKTRACE;UNIVERSALSTACKTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -123,12 +123,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/hydraquill/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYDRAQUILL;HYDRAQUILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIVERSALSTACKTRACE;UNIVERSALSTACKTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYDRAQUILL;HYDRAQUILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIVERSALSTACKTRACE;UNIVERSALSTACKTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -141,7 +141,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYDRAQUILL;HYDRAQUILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIVERSALSTACKTRACE;UNIVERSALSTACKTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -149,13 +149,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/hydraquill/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYDRAQUILL;HYDRAQUILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIVERSALSTACKTRACE;UNIVERSALSTACKTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYDRAQUILL;HYDRAQUILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIVERSALSTACKTRACE;UNIVERSALSTACKTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -168,7 +168,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYDRAQUILL;HYDRAQUILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIVERSALSTACKTRACE;UNIVERSALSTACKTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -178,12 +178,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/hydraquill/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYDRAQUILL;HYDRAQUILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIVERSALSTACKTRACE;UNIVERSALSTACKTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYDRAQUILL;HYDRAQUILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIVERSALSTACKTRACE;UNIVERSALSTACKTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -196,7 +196,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYDRAQUILL;HYDRAQUILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIVERSALSTACKTRACE;UNIVERSALSTACKTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -204,13 +204,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/hydraquill/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYDRAQUILL;HYDRAQUILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIVERSALSTACKTRACE;UNIVERSALSTACKTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYDRAQUILL;HYDRAQUILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNIVERSALSTACKTRACE;UNIVERSALSTACKTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -225,46 +225,16 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/hydraquill/example/main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/hydraquill/src/hydraquill.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/hydraquill/example/handy.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hydraquill/src/endian_macos.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hydraquill/src/endian_mingw.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hydraquill/src/endian_msvc.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hydraquill/src/hydraquill.h" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/license.md" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/example/gen/gen_linux.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/example/gen/gen_macos.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/example/gen/gen_windows_mingw.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/example/gen/gen_windows_msvc.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/gen/gen_linux.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/gen/gen_macos.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/gen/gen_windows_mingw.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/gen/gen_windows_msvc.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/release/release_build_linux.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/release/release_build_macos.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/release/release_build_mingw.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/release/release_build_msvc.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/release/release_build_osxcross.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/release/release_copy_linux.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/release/release_copy_macos.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/release/release_copy_mingw.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/release/release_copy_msvc.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/release/release_copy_osxcross.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/release/release_headers.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/lib/release/release_zip.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/scripts/clean.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/scripts/dll_copy.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/scripts/dylib_copy.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/scripts/lastresort_get.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/scripts/noto_get.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/scripts/noto_pack.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/scripts/noto_release.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/scripts/twemoji_get.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/make/scripts/zstd_gen.sh" />
-    <Text Include="../../thirdparty/owemdjee/hydraquill/readme.md" />
+    <ClCompile Include="../../thirdparty/owemdjee/UniversalStacktrace/test/BasicTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/UniversalStacktrace/test/Main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/UniversalStacktrace/ust/ust.hpp" />
+    <Text Include="../../thirdparty/owemdjee/UniversalStacktrace/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/UniversalStacktrace/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/UniversalStacktrace/README.md" />
+    <Text Include="../../thirdparty/owemdjee/UniversalStacktrace/cmake/FindLibunwind.cmake" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
