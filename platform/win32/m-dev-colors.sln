@@ -304,7 +304,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specs", "specs", "{D4920C7D
 		libeigen_test.spec = libeigen_test.spec
 		libeigen_unsupported.spec = libeigen_unsupported.spec
 		libeternaltimestamp.spec = libeternaltimestamp.spec
-		libeternaltimestamp_misc.spec = libeternaltimestamp_misc.spec
 		libeternaltimestamp_tests.spec = libeternaltimestamp_tests.spec
 		libeventpp.spec = libeventpp.spec
 		libeventpp_tests.spec = libeventpp_tests.spec
@@ -1134,6 +1133,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcbor", "libcbor.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFB22D7C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcbor_tests", "libcbor_tests.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF7B476F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libccpalette", "libccpalette.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF849A7E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcel-cpp", "libcel-cpp.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFE83546}"
 EndProject
@@ -2757,8 +2758,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xxHash", "xxHash.vcxproj", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yaml-cpp", "yaml-cpp.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF52A2DD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libccpalette", "libccpalette.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF849A7E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -4279,6 +4278,14 @@ Global
 		{A60D8644-5A1C-4D29-8970-7518FF7B476F}.Release|x64.Build.0 = Release|x64
 		{A60D8644-5A1C-4D29-8970-7518FF7B476F}.Release|x86.ActiveCfg = Release|Win32
 		{A60D8644-5A1C-4D29-8970-7518FF7B476F}.Release|x86.Build.0 = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Debug|x64.ActiveCfg = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Debug|x64.Build.0 = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Debug|x86.ActiveCfg = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Debug|x86.Build.0 = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Release|x64.ActiveCfg = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Release|x64.Build.0 = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Release|x86.ActiveCfg = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Release|x86.Build.0 = Release|Win32
 		{A60D8644-5A1C-4D29-8970-7518FFE83546}.Debug|x64.ActiveCfg = Debug|x64
 		{A60D8644-5A1C-4D29-8970-7518FFE83546}.Debug|x64.Build.0 = Debug|x64
 		{A60D8644-5A1C-4D29-8970-7518FFE83546}.Debug|x86.ActiveCfg = Debug|Win32
@@ -10767,14 +10774,6 @@ Global
 		{A60D8644-5A1C-4D29-8970-7518FF52A2DD}.Release|x64.Build.0 = Release|x64
 		{A60D8644-5A1C-4D29-8970-7518FF52A2DD}.Release|x86.ActiveCfg = Release|Win32
 		{A60D8644-5A1C-4D29-8970-7518FF52A2DD}.Release|x86.Build.0 = Release|Win32
-		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Debug|x64.ActiveCfg = Debug|x64
-		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Debug|x64.Build.0 = Debug|x64
-		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Debug|x86.ActiveCfg = Debug|Win32
-		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Debug|x86.Build.0 = Debug|Win32
-		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Release|x64.ActiveCfg = Release|x64
-		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Release|x64.Build.0 = Release|x64
-		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Release|x86.ActiveCfg = Release|Win32
-		{A60D8644-5A1C-4D29-8970-7518FF849A7E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -10808,3 +10807,7 @@ Global
 		libmupdf_CarvedSubset.vcxitems*{0fdc74d7-d18c-45ce-94d6-c5a0edfccdf2}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NTFS ADS Viewer", "..\..\..\thirdparty\DirScanner\NTFS ADS Viewer\NTFS ADS Viewer.vcxproj", "{28E9E026-5E87-4248-BA0B-07813DCD8DB1}"
+EndProject
+	
