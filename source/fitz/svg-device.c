@@ -1368,7 +1368,7 @@ svg_dev_begin_layer(fz_context *ctx, fz_device *dev, const char *name)
 	layer->prev = NULL;
 	sdev->current_layers = layer;
 
-	fz_append_printf(ctx, out, "<g inkscape:groupmode=\"layer\" inkscape:label=%<>\n", name ? name : "null");
+	fz_append_printf(ctx, out, "<g inkscape:groupmode=\"layer\" inkscape:label=%<>\n", name ? name : "");
 }
 
 static void
