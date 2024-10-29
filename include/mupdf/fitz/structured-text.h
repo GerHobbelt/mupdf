@@ -140,8 +140,12 @@ typedef struct fz_stext_grid_positions fz_stext_grid_positions;
 	will not be merged. Each line will thus be a span of text with the same
 	font, colour, and size.
 
-	FZ_STEXT_MEDIABOX_CLIP: If this option is set, characters entirely
-	outside each page's mediabox will be ignored.
+	FZ_STEXT_CLIP: If this option is set, characters that would be entirely
+	clipped away by the current clipping path (or, more accurate, the smallest
+	bbox that contains the current clipping path) will be ignored. The
+	clip path is guaranteed to be smaller then the page mediabox, hence
+	this option subsumes an older, now deprecated, FZ_STEXT_MEDIABOX_CLIP
+	option.
 
 	FZ_STEXT_COLLECT_STRUCTURE: If this option is set, we will collect
 	the structure as specified using begin/end_structure calls. This will
@@ -174,7 +178,7 @@ enum
 	FZ_STEXT_INHIBIT_SPACES = 1 << 5,
 	FZ_STEXT_DEHYPHENATE = 1 << 6,
 	FZ_STEXT_PRESERVE_SPANS = 1 << 7,
-	FZ_STEXT_MEDIABOX_CLIP = 1 << 8,
+	FZ_STEXT_CLIP = 1 << 8,
 	FZ_STEXT_GLYPH_BBOX = 1 << 9,
 	FZ_STEXT_NO_TEXT_AS_PATH = 1 << 10,
 	FZ_STEXT_EXTERNAL_STYLES = 1 << 11,
@@ -185,6 +189,9 @@ enum
 	FZ_STEXT_COLLECT_VECTORS = 1 << 16,
 	FZ_STEXT_IGNORE_ACTUALTEXT = 1 << 17,
 	FZ_STEXT_SEGMENT = 1 << 18,
+
+	/* An old, deprecated option. */
+	FZ_STEXT_MEDIABOX_CLIP = FZ_STEXT_CLIP
 };
 
 /**

@@ -164,7 +164,7 @@ const char *fz_stext_options_usage =
 	"  reuse-images:         duplicate images share the same URI\n"
 	"  dehyphenate:          attempt to join up hyphenated words\n"
 	"  use-cid-for-unknown-unicode: guess unicode from cid if normal mapping fails\n"
-	"  mediabox-clip=no:     include characters outside mediabox\n"
+	"  clip:                 do not include text that is completely clipped\n"
 	"  glyph-bbox:           use painted area of glyphs instead of font size for bounding boxes\n"
 	"  structured=no:        don't collect structure data\n"
 	"  accurate-bboxes=no:   calculate char bboxes for from the outlines\n"
@@ -999,12 +999,15 @@ do_extract(fz_context *ctx, fz_stext_device *dev, fz_text_span *span, fz_matrix 
 
 	for (i = start; i < end; i++)
 	{
-		if (dev->opts.flags & FZ_STEXT_MEDIABOX_CLIP)
-			if (fz_glyph_entirely_outside_box(ctx, &ctm, span, &span->items[i], &dev->page->mediabox))
+		if (dev->opts.flags & FZ_STEXT_CLIP)
+		{
+			fz_rect r = fz_device_current_scissor(ctx, &dev->super);
+			if (fz_glyph_entirely_outside_box(ctx, &ctm, span, &span->items[i], &r))
 			{
 				dev->last.clipped = 1;
 				continue;
 			}
+		}
 
 		/* Calculate new pen location and delta */
 		tm.e = span->items[i].x;
@@ -1078,7 +1081,7 @@ flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, 
 		if (rune == 0)
 			break;
 
-		if (dev->opts.flags & FZ_STEXT_MEDIABOX_CLIP)
+		if (dev->opts.flags & FZ_STEXT_CLIP)
 			if (dev->last.clipped)
 				continue;
 
@@ -1177,12 +1180,15 @@ do_extract_within_actualtext(fz_context *ctx, fz_stext_device *dev, fz_text_span
 		}
 		dev->last.valid = 1;
 
-		if (dev->opts.flags & FZ_STEXT_MEDIABOX_CLIP)
-			if (fz_glyph_entirely_outside_box(ctx, &ctm, span, &span->items[i], &dev->page->mediabox))
+		if (dev->opts.flags & FZ_STEXT_CLIP)
+		{
+			fz_rect r = fz_device_current_scissor(ctx, &dev->super);
+			if (fz_glyph_entirely_outside_box(ctx, &ctm, span, &span->items[i], &r))
 			{
 				dev->last.clipped = 1;
 				continue;
 			}
+		}
 		dev->last.clipped = 0;
 
 		/* Calculate bounding box and new pen position based on font metrics */
@@ -1684,13 +1690,19 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_GLYPH_BBOX;
 	}
-	// default: enable MEDIABOX-CLIP:
-	opts->flags |= FZ_STEXT_MEDIABOX_CLIP;
+	// default: enable CLIP:
+	opts->flags |= FZ_STEXT_CLIP;
 	if (fz_has_option(ctx, string, "mediabox-clip", &val))
 	{
-		opts->flags_conf_mask |= FZ_STEXT_MEDIABOX_CLIP;
+		fz_warn(ctx, "The 'mediabox-clip' option has been deprecated. Use 'clip' instead.");
 		if (fz_option_eq(val, "no"))
-			opts->flags &= ~FZ_STEXT_MEDIABOX_CLIP;
+			opts->flags ^= FZ_STEXT_CLIP;
+	}
+	if (fz_has_option(ctx, string, "clip", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_CLIP;
+		if (fz_option_eq(val, "no"))
+			opts->flags &= ~FZ_STEXT_CLIP;
 	}
 	if (fz_has_option(ctx, string, "text-as-path", &val))
 	{

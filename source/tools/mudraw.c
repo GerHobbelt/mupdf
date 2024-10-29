@@ -1104,9 +1104,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				else
 					page_stext_options.flags &= ~FZ_STEXT_PRESERVE_IMAGES;
 			}
-			if (!(stext_options.flags_conf_mask & FZ_STEXT_MEDIABOX_CLIP))
+			if (!(stext_options.flags_conf_mask & FZ_STEXT_CLIP))
 			{
-				page_stext_options.flags |= FZ_STEXT_MEDIABOX_CLIP;
+				page_stext_options.flags |= FZ_STEXT_CLIP;
 			}
 			if (!(stext_options.flags_conf_mask & FZ_STEXT_ACCURATE_BBOXES))
 			{
@@ -3387,7 +3387,7 @@ int main(int argc, const char** argv)
 							output_format->format == OUT_OCR_HTML ||
 							output_format->format == OUT_OCR_XHTML
 							) ? FZ_STEXT_PRESERVE_IMAGES : 0;
-				stext_opts.flags |= FZ_STEXT_MEDIABOX_CLIP;
+				stext_opts.flags |= FZ_STEXT_CLIP;
 				if (output_format->format == OUT_STEXT_JSON || output_format->format == OUT_OCR_STEXT_JSON)
 					stext_opts.flags |= FZ_STEXT_PRESERVE_SPANS;
 			}
