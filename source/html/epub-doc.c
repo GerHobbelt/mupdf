@@ -468,6 +468,34 @@ epub_load_chapter(fz_context *ctx, epub_document *doc, const char *path, int i)
 	return ch;
 }
 
+static fz_buffer *
+make_error_page(fz_context *ctx, const char *path)
+{
+	fz_buffer *buf = fz_new_buffer(ctx, 1024);
+	fz_output *out = NULL;
+
+	fz_var(out);
+
+	fz_try(ctx)
+	{
+		out = fz_new_output_with_buffer(ctx, buf);
+		fz_write_printf(ctx, out, "<HTML><BODY><P>Missing or unknown chapter: '%s'.</P></BODY></HTML>",
+			path ? path : "<no name>");
+		fz_close_output(ctx, out);
+	}
+	fz_always(ctx)
+	{
+		fz_drop_output(ctx, out);
+	}
+	fz_catch(ctx)
+	{
+		fz_drop_buffer(ctx, buf);
+		fz_rethrow(ctx);
+	}
+
+	return buf;
+}
+
 static fz_html *
 epub_parse_chapter(fz_context *ctx, epub_document *doc, epub_chapter *ch)
 {
@@ -475,6 +503,7 @@ epub_parse_chapter(fz_context *ctx, epub_document *doc, epub_chapter *ch)
 	fz_buffer *buf;
 	char base_uri[2048];
 	fz_html *html;
+	int error = 0;
 
 	/* Look for one we made earlier */
 	html = fz_find_html(ctx, doc, ch->number);
@@ -483,9 +512,19 @@ epub_parse_chapter(fz_context *ctx, epub_document *doc, epub_chapter *ch)
 
 	fz_dirname(base_uri, ch->path, sizeof base_uri);
 
-	buf = fz_read_archive_entry(ctx, zip, ch->path);
+	buf = fz_try_read_archive_entry(ctx, zip, ch->path);
+
 	fz_try(ctx)
+	{
+		if (buf == NULL)
+		{
+			error = 1;
+			buf = make_error_page(ctx, ch->path);
+		}
 		html = fz_parse_html(ctx, doc->set, zip, base_uri, buf, fz_user_css(ctx), 1, 1, 0);
+		if (html)
+			html->error |= error;
+	}
 	fz_always(ctx)
 		fz_drop_buffer(ctx, buf);
 	fz_catch(ctx)
@@ -538,6 +577,14 @@ epub_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm)
 	epub_page *page = (epub_page*)page_;
 
 	fz_draw_html(ctx, dev, ctm, page->html, page->number);
+
+	if (page->html->error)
+	{
+		if (cookie)
+			cookie->errors++;
+		else
+			fz_throw(ctx, FZ_ERROR_FORMAT, "Bad or missing chapter");
+	}
 }
 
 static fz_link *

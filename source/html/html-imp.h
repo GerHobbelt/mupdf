@@ -343,6 +343,8 @@ struct fz_html_s
 	float layout_w, layout_h, layout_em;
 	float page_margin[4];
 	char *title;
+
+	int error;
 };
 
 typedef enum

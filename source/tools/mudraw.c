@@ -1483,6 +1483,8 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				}
 				fz_info(ctx, " MD5:%s", buf);
 			}
+			if (cookie->errors)
+				fz_warn(ctx, "Page rendering reports errors");
 		}
 		fz_always(ctx)
 		{

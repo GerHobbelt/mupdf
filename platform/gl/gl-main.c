@@ -204,6 +204,8 @@ static int screen_w = 0, screen_h = 0;
 static int scroll_x = 0, scroll_y = 0;
 static int canvas_x = 0, canvas_w = 100;
 static int canvas_y = 0, canvas_h = 100;
+static int page_rendering_error = 0;
+static int page_text_error = 0;
 
 static int outline_w = 14; /* to be scaled by lineheight */
 static int annotate_w = 12; /* to be scaled by lineheight */
@@ -910,6 +912,8 @@ void update_title(void)
 				currentpage.chapter + 1, nc,
 				currentpage.page + 1, fz_count_chapter_pages(ctx, doc, currentpage.chapter));
 	}
+	if (page_rendering_error || page_text_error)
+		strcat(buf, " - ERROR");
 	glutSetWindowTitle(buf);
 	glutSetIconTitle(buf);
 }
@@ -1021,7 +1025,17 @@ void load_page(void)
 	}
 
 	links = fz_load_links(ctx, fzpage);
-	page_text = fz_new_stext_page_from_page(ctx, fzpage, NULL);
+	fz_try(ctx)
+	{
+		page_text = fz_new_stext_page_from_page(ctx, fzpage, NULL);
+		page_text_error = 0;
+	}
+	fz_catch(ctx)
+	{
+		fz_ignore_error(ctx);
+		page_text = NULL;
+		page_text_error = 1;
+	}
 
 	if (currenticc)
 		fz_enable_icc(ctx);
@@ -1069,6 +1083,7 @@ void render_page(void)
 	if (page_contents_changed)
 	{
 		fz_drop_pixmap(ctx, page_contents);
+		fz_cookie cookie = { 0 };
 		page_contents = NULL;
 
 		bbox = fz_round_rect(fz_transform_rect(fz_bound_page_box(ctx, fzpage, currentbox), draw_page_ctm));
@@ -1079,21 +1094,24 @@ void render_page(void)
 
 		fz_try(ctx)
 		{
-			fz_run_page_contents(ctx, fzpage, dev, fz_identity);
+			fz_run_page_contents(ctx, fzpage, dev, fz_identity, &cookie);
 			fz_close_device(ctx, dev);
 		}
 		fz_always(ctx)
 			fz_drop_device(ctx, dev);
 		fz_catch(ctx)
 			fz_rethrow(ctx);
+		page_rendering_error = cookie.errors;
 	}
 
 	pix = fz_clone_pixmap_area_with_different_seps(ctx, page_contents, NULL, profile, NULL, fz_default_color_params, NULL);
 	{
+		fz_cookie cookie = { 0 };
 		dev = fz_new_draw_device(ctx, draw_page_ctm, pix);
 		fz_try(ctx)
 		{
-			fz_run_page_annots(ctx, fzpage, dev, fz_identity);
+			fz_run_page_annots(ctx, fzpage, dev, fz_identity, &cookie);
+			page_rendering_error |= cookie.errors;
 			fz_close_device(ctx, dev);
 		}
 		fz_always(ctx)
@@ -1114,6 +1132,8 @@ void render_page(void)
 	ui_texture_from_pixmap(&page_tex, pix);
 
 	fz_drop_pixmap(ctx, pix);
+
+	update_title();
 
 	FZ_LOG_DUMP_STORE(ctx, "Store state after page render:\n");
 }
@@ -1597,7 +1617,7 @@ static void do_page_selection(void)
 
 		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
-		glColor4f(0.0, 0.1, 0.4, 0.3f);
+		glColor4f(0.0f, 0.1f, 0.4f, 0.3f);
 
 		glBegin(GL_QUADS);
 		for (i = 0; i < n; ++i)
