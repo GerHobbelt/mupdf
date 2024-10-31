@@ -5,7 +5,7 @@ directories:
 ignore:
 	/system_override/
 	/include/fake/
-
+	
     /x11_image.c
     /x11_main.c
     /curl_stream.c
