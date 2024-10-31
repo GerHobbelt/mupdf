@@ -1444,14 +1444,16 @@ botan
 cpp-unicodelib
 fast_align
 Non-Maximum-Suppression
-cmake_examples
-modern-cpp-template
-googletest-ci-cpp-template
-Algo_Ds_Notes
 UniversalStacktrace
 signals-rt
 sigslot
 libccpalette
+ssp
+lazycsv
+csv-parser
+rapidcsv
+libclustering_dim_redux
+zimg
 
 EOT
 ) | grep -e "$FILTER"
@@ -1596,6 +1598,8 @@ UnofficialLeptDocs
 wesanderson
 wordfreq
 wordfrequency
+cmake_examples
+html-parser-test-corpus
 
 EOT
 ) | grep -e "$FILTER"

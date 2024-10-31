@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBCCB87}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIMG;ZIMG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIMG;ZIMG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIMG;ZIMG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIMG;ZIMG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIMG;ZIMG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIMG;ZIMG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIMG;ZIMG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIMG;ZIMG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIMG;ZIMG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIMG;ZIMG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIMG;ZIMG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIMG;ZIMG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/doc/example/api_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/doc/example/api_example_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/doc/example/graphengine_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/doc/example/hdr_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/doc/example/interlace_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/doc/example/misc/argparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/doc/example/misc/mmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/doc/example/misc/win32_bitmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/doc/example/tile_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/dummy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testapp/colorspaceapp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testapp/cpuinfoapp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testapp/depthapp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testapp/frame.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testapp/graphapp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testapp/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testapp/resizeapp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testapp/table.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testapp/unresizeapp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testapp/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testcommon/argparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testcommon/json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testcommon/mmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/testcommon/win32_bitmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/api/zimg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/arm/operation_impl_arm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/arm/operation_impl_neon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/colorspace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/colorspace_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/colorspace_param.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/gamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/matrix3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/operation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/operation_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/x86/gamma_constants_avx512.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/x86/operation_impl_avx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/x86/operation_impl_avx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/x86/operation_impl_avx512.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/x86/operation_impl_sse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/x86/operation_impl_sse2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/x86/operation_impl_x86.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/common/arm/cpuinfo_arm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/common/arm/neon_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/common/cpuinfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/common/libm_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/common/matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/common/x86/cpuinfo_x86.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/common/x86/x86util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/arm/depth_convert_arm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/arm/depth_convert_neon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/arm/dither_arm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/arm/dither_neon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/arm/f16c_neon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/blue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/depth.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/depth_convert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/dither.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/quantize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/depth_convert_avx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/depth_convert_avx512.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/depth_convert_sse2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/depth_convert_x86.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/dither_avx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/dither_avx512.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/dither_sse2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/dither_x86.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/error_diffusion_avx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/error_diffusion_sse2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/f16c_ivb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/f16c_sse2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/graph/filter_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/graph/filtergraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/graph/graphbuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/graph/graphengine_except.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/graph/simple_filters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/arm/resize_impl_arm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/arm/resize_impl_neon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/resize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/resize_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/x86/resize_impl_avx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/x86/resize_impl_avx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/x86/resize_impl_avx512.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/x86/resize_impl_avx512_vnni.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/x86/resize_impl_sse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/x86/resize_impl_sse2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/x86/resize_impl_x86.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/unresize/bilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/unresize/unresize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/unresize/unresize_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/unresize/x86/unresize_impl_sse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/src/zimg/unresize/x86/unresize_impl_x86.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/api/api_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/colorspace/arm/colorspace_neon_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/colorspace/colorspace_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/colorspace/gamma_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/colorspace/x86/colorspace_avx2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/colorspace/x86/colorspace_avx512_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/colorspace/x86/colorspace_avx_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/colorspace/x86/colorspace_sse2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/colorspace/x86/colorspace_sse_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/colorspace/x86/gamma_constants_avx512_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/arm/depth_convert_neon_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/arm/dither_neon_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/arm/f16c_neon_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/depth_convert_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/dither_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/x86/depth_convert_avx2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/x86/depth_convert_avx512_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/x86/depth_convert_sse2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/x86/dither_avx2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/x86/dither_avx512_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/x86/dither_sse2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/x86/error_diffusion_avx2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/x86/error_diffusion_sse2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/x86/f16c_ivb_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/depth/x86/f16c_sse2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/__cos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/__math_divzerof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/__math_invalidf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/__math_oflowf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/__math_uflowf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/__math_xflowf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/__rem_pio2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/__rem_pio2_large.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/__sin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/cos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/exp2f_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/expf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/fpu_wrapper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/log10f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/logf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/logf_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/powf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/powf_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/sin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/graph/graphbuilder_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/resize/arm/resize_impl_neon_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/resize/filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/resize/resize_impl_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/resize/x86/resize_impl_avx2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/resize/x86/resize_impl_avx512_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/resize/x86/resize_impl_avx512_vnni_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/resize/x86/resize_impl_avx_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/resize/x86/resize_impl_sse2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zimg/test/resize/x86/resize_impl_sse_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/doc/example/misc/aligned_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/doc/example/misc/argparse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/doc/example/misc/mmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/doc/example/misc/win32_bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/testapp/apps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/testapp/frame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/testapp/table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/testapp/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/testcommon/aligned_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/testcommon/argparse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/testcommon/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/testcommon/mmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/testcommon/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/testcommon/win32_bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/api/zimg++.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/api/zimg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/arm/operation_impl_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/colorspace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/colorspace_graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/colorspace_param.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/gamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/matrix3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/operation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/operation_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/x86/gamma_constants_avx512.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/colorspace/x86/operation_impl_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/align.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/arm/cpuinfo_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/arm/neon_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/ccdep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/checked_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/cpuinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/except.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/libm_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/make_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/pixel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/static_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/unroll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/x86/avx2_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/x86/avx512_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/x86/avx_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/x86/cpuinfo_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/x86/sse2_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/x86/sse_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/x86/x86util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/common/zassert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/arm/depth_convert_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/arm/dither_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/arm/f16c_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/blue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/depth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/depth_convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/dither.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/quantize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/depth_convert_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/dither_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/depth/x86/f16c_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/graph/filter_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/graph/filtergraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/graph/graphbuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/graph/graphengine_except.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/graph/simple_filters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/arm/resize_impl_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/resize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/resize_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/x86/resize_impl_avx512_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/resize/x86/resize_impl_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/unresize/bilinear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/unresize/unresize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/unresize/unresize_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/src/zimg/unresize/x86/unresize_impl_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/test/dynamic_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/exp2f_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/libm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/logf_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/mymath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/powf_data.h" />
+    <Text Include="../../thirdparty/owemdjee/zimg/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/zimg/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/zimg/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/zimg/README.md" />
+    <Text Include="../../thirdparty/owemdjee/zimg/_msvc/zimg.def" />
+    <Text Include="../../thirdparty/owemdjee/zimg/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/zimg/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/zimg/doc/example/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/zimg/m4/ax_check_compile_flag.m4" />
+    <Text Include="../../thirdparty/owemdjee/zimg/m4/ax_pthread.m4" />
+    <Text Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/COPYRIGHT" />
+    <Text Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/VERSION" />
+    <Text Include="../../thirdparty/owemdjee/zimg/test/extra/musl-libm/WHATSNEW" />
+    <Text Include="../../thirdparty/owemdjee/zimg/zimg.pc.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
