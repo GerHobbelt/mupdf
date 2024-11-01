@@ -110,7 +110,7 @@
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/Algo_Ds_Notes/__include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ALGO_DS_NOTES;ALGO_DS_NOTES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -127,7 +127,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/Algo_Ds_Notes/__include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -136,7 +136,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/Algo_Ds_Notes/__include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ALGO_DS_NOTES;ALGO_DS_NOTES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -153,14 +153,14 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/Algo_Ds_Notes/__include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/Algo_Ds_Notes/__include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ALGO_DS_NOTES;ALGO_DS_NOTES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -176,7 +176,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/Algo_Ds_Notes/__include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -186,7 +186,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/Algo_Ds_Notes/__include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ALGO_DS_NOTES;ALGO_DS_NOTES_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -202,171 +202,24 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/Algo_Ds_Notes/__include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="cryptlib.vcxproj">
-      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libarchive.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libbzip2_alt.vcxproj">
-      <Project>{4a3e6970-9110-46f5-bd12-b73218cca406}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libcpp-terminal.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff2367fa}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libhighway.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libnanosvg.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-751bff971987}</Project>
-    </ProjectReference>
     <ProjectReference Include="libpthread-win32.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libsqlite_tools.vcxproj">
-      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
     </ProjectReference>
     <ProjectReference Include="libsystem_override.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
     </ProjectReference>
-    <ProjectReference Include="libxz.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffa34896}</Project>
-    </ProjectReference>
-    <ProjectReference Include="MuPDFLib_static.vcxproj">
-      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libbase58x.vcxproj">
-      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libBLAKE3.vcxproj">
-      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
-    </ProjectReference>
     <ProjectReference Include="libfmt.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libfreetype.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libgumbo-parser.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libharfbuzz.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libjbig2dec.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libjpeg-turbo.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
-    </ProjectReference>
-    <ProjectReference Include="liblcms2.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libmuhelpers.vcxproj">
-      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libmujs.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libmupdf.vcxproj">
-      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libbrotli.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libcrow.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libcurl.vcxproj">
-      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libextract.vcxproj">
-      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libfreeglut.vcxproj">
-      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libgif.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libjpeg-xl.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libleptonica.vcxproj">
-      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
-    </ProjectReference>
-    <ProjectReference Include="liblz4.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
-      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libmuthreads.vcxproj">
-      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libmutool.vcxproj">
-      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libopenjpeg.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libpkcs7.vcxproj">
-      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libpng.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libqiqqatool.vcxproj">
-      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libQuickJS.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libresources.vcxproj">
-      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libsvgcharter.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libtesseract.vcxproj">
-      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libtiff.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libtinyexpr.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libupskirt.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libwebp.vcxproj">
-      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libxml2.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
     </ProjectReference>
     <ProjectReference Include="libzlib.vcxproj">
       <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
     </ProjectReference>
-    <ProjectReference Include="libzopfli.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
-    </ProjectReference>
     <ProjectReference Include="libzstd.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
-    </ProjectReference>
-    <ProjectReference Include="lib_nas_lockfile.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
-    </ProjectReference>
-    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
@@ -867,10 +720,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Spiral_Array/Spiral_Array.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Spiral_Array/Spiral_Array.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Square_Root_Decomposition/Square_Root_Decomposition.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Arrays/Stacks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Arrays/Stacks_A.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Arrays/Stacks_Using_Arrays.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Linked_Lists/Stacks.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Linked_Lists/Stacks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Linked_Lists/Stacks_L.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Linked_Lists/Stacks_Using_Linked_Lists.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Queues/Efficient_Dequeue.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stacks_Using_Queues/Efficient_Enqueue.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Stooge_Sort/Stooge_Sort.cpp" />
@@ -923,8 +776,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Numbers/Tribonacci_Numbers_DP.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Words/Tribonacci_Words.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Tribonacci_Words/Tribonacci_Words.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Trie_For_Natural_Numbers/Trie.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Trie_For_Words/Trie.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Trie_For_Natural_Numbers/Trie_N.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Trie_For_Words/Trie_W.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ugly_Number/Nth_Ugly_Number.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ugly_Number/Nth_Ugly_Number.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ugly_Number/Ugly_Number.c" />
@@ -937,6 +790,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/palindromic_string/palindromic_string.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ordered_Doubly_Linked_List/Ordered_Doubly_Linked_List.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Queue_Using_Linked_List/Queue_using_template_linked_list/Queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Algo_Ds_Notes/__include/generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Algo_Ds_Notes/__include/graphics.h" />
     <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/Java/Eveodd.java" />
     <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/Java/Frequency_Of_A_Element.java" />
     <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/1-D_Array/Java/Max_And_Next_Max_Number.java" />
