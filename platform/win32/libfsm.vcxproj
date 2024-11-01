@@ -1,0 +1,1117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF2E1951}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFSM;FSM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFSM;FSM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFSM;FSM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFSM;FSM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFSM;FSM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFSM;FSM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFSM;FSM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFSM;FSM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFSM;FSM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFSM;FSM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFSM;FSM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFSM;FSM_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/phase-code.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/trie.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/examples/bm/libfsm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/examples/bm/pcre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/examples/glob/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/examples/iprange/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/examples/rpn/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/examples/uncomment/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/examples/utf8dfa/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/examples/words/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/man/libfsm.3/synopsis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/adt/alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/adt/bitmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/adt/edgeset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/adt/hashrec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/adt/idmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/adt/internedstateset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/adt/path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/adt/priq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/adt/queue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/adt/siphash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/adt/stateset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/adt/tupleset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/adt/xalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/fsm/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/fsm/wordgen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/fsm/xoroshiro256starstar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/capture.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/charset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/clone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/closure.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/collate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/complement.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/complete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/concat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/consolidate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/cost/legible.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/detect_required.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/determinise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/edge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/empty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/end.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/endids.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/epsilons.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/equal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/exec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/fsm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/gen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/getc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/intersect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/lexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/merge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/mergestates.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/minimise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/minimise_test_oracle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/mode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/pred/epsilonsonly.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/pred/hasepsilons.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/pred/hasincoming.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/pred/hasnondeterminism.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/pred/hasoutgoing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/pred/isany.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/pred/iscomplete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/pred/isdfa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/pred/isend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/awk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/dot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/fsm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/go.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/ir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/irdot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/irjson.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/llvm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/rust.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/sh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/vmasm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/vmc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/vmdot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/vmops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/reverse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/shortest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/shuffle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/start.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/subgraph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/subtract.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/trim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/union.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/vacuum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/vm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/vm/ir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/vm/retlist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/vm/v1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/vm/v2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/vm/vm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/walk/all.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/walk/count.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/walk/has.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/walk/iter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/walk/reachable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libfsm/walk2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/ac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/ast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/ast_analysis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/ast_compile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/ast_new_from_fsm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/ast_rewrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/alnum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/alpha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/any.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/ascii.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/bsr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/cntrl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/digit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/graph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/hspace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/hspace_pcre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/lower.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/nl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/notdigit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/nothspace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/nothspace_pcre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/notnl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/notspace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/notvspace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/notvspace_pcre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/notword.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/punct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/space.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/spchr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/upper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Adlam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Ahom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Anatolian_Hieroglyphs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Arabic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Armenian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Avestan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Balinese.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Bamum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Bassa_Vah.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Batak.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Bengali.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Bhaiksuki.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Bopomofo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Brahmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Braille.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Buginese.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Buhid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_C.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Canadian_Aboriginal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Carian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Caucasian_Albanian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Cf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Chakma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Cham.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Cherokee.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Chorasmian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Co.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Coptic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Cs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Cuneiform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Cypriot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Cypro_Minoan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Cyrillic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Deseret.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Devanagari.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Dives_Akuru.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Dogra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Duployan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Egyptian_Hieroglyphs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Elbasan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Elymaic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Ethiopic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Garay.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Georgian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Glagolitic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Gothic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Grantha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Greek.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Gujarati.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Gunjala_Gondi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Gurmukhi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Gurung_Khema.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Han.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Hangul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Hanifi_Rohingya.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Hanunoo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Hatran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Hebrew.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Hiragana.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Imperial_Aramaic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Inherited.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Inscriptional_Pahlavi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Inscriptional_Parthian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Javanese.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Kaithi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Kannada.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Katakana.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Kawi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Kayah_Li.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Kharoshthi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Khitan_Small_Script.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Khmer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Khojki.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Khudawadi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Kirat_Rai.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_L.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Lao.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Latin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Lepcha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Limbu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Linear_A.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Linear_B.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Lisu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Ll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Lm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Lo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Lt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Lu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Lycian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Lydian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_M.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Mahajani.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Makasar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Malayalam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Mandaic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Manichaean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Marchen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Masaram_Gondi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Mc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Me.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Medefaidrin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Meetei_Mayek.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Mende_Kikakui.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Meroitic_Cursive.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Meroitic_Hieroglyphs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Miao.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Mn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Modi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Mongolian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Mro.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Multani.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Myanmar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_N.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Nabataean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Nag_Mundari.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Nandinagari.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Nd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_New_Tai_Lue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Newa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Nko.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Nl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_No.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Nushu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Nyiakeng_Puachue_Hmong.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Ogham.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Ol_Chiki.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Ol_Onal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Old_Hungarian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Old_Italic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Old_North_Arabian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Old_Permic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Old_Persian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Old_Sogdian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Old_South_Arabian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Old_Turkic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Old_Uyghur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Oriya.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Osage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Osmanya.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_P.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Pahawh_Hmong.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Palmyrene.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Pau_Cin_Hau.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Pc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Pd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Pe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Pf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Phags_Pa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Phoenician.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Pi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Po.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Ps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Psalter_Pahlavi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Rejang.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Runic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_S.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Samaritan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Saurashtra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Sc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Sharada.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Shavian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Siddham.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_SignWriting.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Sinhala.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Sk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Sm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_So.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Sogdian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Sora_Sompeng.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Soyombo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Sundanese.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Sunuwar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Syloti_Nagri.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Syriac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Tagalog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Tagbanwa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Tai_Le.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Tai_Tham.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Tai_Viet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Takri.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Tamil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Tangsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Tangut.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Telugu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Thaana.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Thai.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Tibetan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Tifinagh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Tirhuta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Todhri.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Toto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Tulu_Tigalari.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Ugaritic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Vai.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Vithkuqi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Wancho.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Warang_Citi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Yezidi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Yi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Z.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Zanabazar_Square.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Zl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Zp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_Zs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_assigned.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/utf8_private.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/vspace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/vspace_pcre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/word.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class/xdigit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/class_name.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/glob/lexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/glob/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/glob/re_dialect_glob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/like/lexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/like/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/like/re_dialect_like.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/literal/lexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/literal/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/literal/re_dialect_literal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/native/lexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/native/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/native/re_dialect_native.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/pcre/lexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/pcre/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/pcre/re_dialect_pcre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/sql/lexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/sql/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/sql/re_dialect_sql.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/perror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/print/abnf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/print/dot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/print/pcre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/print/tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/re.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/re_strings.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/libre/strerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/lx/ast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/lx/lexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/lx/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/lx/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/lx/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/lx/print/c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/lx/print/dot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/lx/print/dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/lx/print/h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/lx/print/zdot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/lx/tokens.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/lx/var.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/print/abnf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/print/awk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/print/c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/print/dot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/print/fsm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/print/json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/print/llvm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/print/pcre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/print/puts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/print/rust.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/print/tok.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/re/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/retest/cvtpcre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/retest/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/retest/reperf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/retest/runner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/src/rx/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/aho_corasick/actest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/capture/captest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/capture/capture0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/capture/capture1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/capture/capture2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/capture/capture3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/capture/capture4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/capture/capture5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/capture/capture_concat1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/capture/capture_concat2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/capture/capture_long_trail.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/capture/capture_union1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/capture/capture_union2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/detect_required_step_limit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/testutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids0_many_endids.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids10_minimise_partial_overlap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids1_determinise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids1_determinise_and_minimise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids2_union.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids2_union_many_endids.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids7_with_duplicates.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids_reused_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids_trim_must_compact_endids.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/endids/utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/gen/gen1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/gen/gen2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/gen/gen3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/gen/gtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/idmap/idmap_basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/internedstateset/internedstateset_basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/minimise/minimise_test_case_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/queue/queue0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/re_strings/re_strings1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/re_strings/re_strings2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/re_strings/re_strings3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/re_strings/re_strings4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/re_strings/testutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/set/set0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/set/set1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/set/set2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/set/set3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/set/set4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/stateset/stateset0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/stateset/stateset1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/stateset/stateset2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/stateset/stateset3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/stateset/stateset4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/stateset/stateset5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/stateset/stateset6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/tests/stateset/stateset7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/buf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/type_info_adt_edge_set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/type_info_adt_ipriq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/type_info_adt_priq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/type_info_capture_string_set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/type_info_dfa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/type_info_fsm_literal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/type_info_nfa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/type_info_re.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/type_info_re_literal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/type_info_re_pcre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfsm/theft/wrap.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/examples/iprange/tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/edgeset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/hashrec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/idmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/internedstateset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/mappingset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/priq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/pv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/stateset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/tupleset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/u64bitset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/adt/xalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/fsm/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/fsm/bool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/fsm/capture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/fsm/cost.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/fsm/fsm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/fsm/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/fsm/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/fsm/pred.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/fsm/print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/fsm/subgraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/fsm/vm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/fsm/walk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/print/edge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/print/esc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/re/literal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/re/re.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/include/re/strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/adt/set.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/fsm/wordgen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/fsm/xoroshiro256starstar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/capture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/capture_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/determinise_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/endids.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/endids_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/lexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/minimise_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/minimise_test_oracle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/ir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/vm/retlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/vm/vm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libfsm/walk2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/ac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/ast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/ast_analysis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/ast_compile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/ast_new_from_fsm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/class_lookup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/comp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/glob/lexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/glob/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/like/lexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/like/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/literal/lexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/literal/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/native/lexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/native/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/pcre/lexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/pcre/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/sql/lexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/sql/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/libre/print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/lx/ast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/lx/lexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/lx/lx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/lx/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/lx/print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/lx/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/lx/var.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/src/retest/runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/tests/capture/captest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/tests/endids/endids_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/tests/gen/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/tests/re_strings/testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/theft/buf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/theft/theft_libfsm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/theft/type_info_adt_edge_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/theft/type_info_adt_ipriq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/theft/type_info_adt_priq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/theft/type_info_capture_string_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/theft/type_info_dfa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/theft/type_info_fsm_literal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/theft/type_info_nfa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfsm/theft/type_info_re.h" />
+    <Image Include="../../thirdparty/owemdjee/libfsm/share/css/grid.png" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/LICENCE" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/guide/img/makenfa0.dot" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/guide/img/makenfa1.dot" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/guide/img/makenfa2.dot" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/guide/img/makenfa3.dot" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/guide/img/makenfa4.dot" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/guide/img/makenfa5.dot" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/libfsm.svg" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/phase-ast.svg" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/phase-dfa.svg" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/phase-ir.svg" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/phase-nfa.svg" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/phase-rrd.svg" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/phases.md" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/phases.svg" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/re.md" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/re0.svg" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/re2.svg" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/re3.svg" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/re4.svg" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/re5.svg" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/doc/tutorial/trie.svg" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/bm/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/bm/bm.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/bm/libfsm.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/bm/nblab.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/glob/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/iprange/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/iprange/v4ranges.csv" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/iprange/v6ranges.csv" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/lx/a.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/lx/act.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/lx/c11-pp.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/lx/c90-pp.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/lx/literals.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/lx/scheme.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/lx/trie.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/rpn/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/rpn/lexer.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/uncomment/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/uncomment/lexer.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/urldecode/lexer.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/utf8dfa/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/words/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/examples/words/words.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/include/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/include/adt/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/include/fsm/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/include/print/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/include/re/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/fsm.1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/fsm.5/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/fsm_lang.5fsm/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/fsm_print.3/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/glob.5re/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/js.5re/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/libfsm.3/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/like.5re/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/literal.5re/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/lx.1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/lx.5/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/native.5re/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/re.1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/re_dialect.5re/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/rx.1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/man/sql.5re/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/pc/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/pc/libfsm.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/pc/libre.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/reperf/boost.scr" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/bin/class.awk" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/bin/codepoints.awk" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/bin/extract_pcre_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/bin/foldcase2sets.pl" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/bin/format_pcre_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/bin/go2att.awk" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/bin/hilight.gvpr" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/bin/lookahead.gvpr" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/bin/lx-demo" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/bin/plain2mp.awk" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/bin/reperf.awk" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/bin/test2xml.awk" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/bin/unicode2lx.pl" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/css/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/css/config.less" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/css/debug.less" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/css/dot.css" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/css/grid.css" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/css/grid.less" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/css/headings.less" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/css/lists.less" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/css/tables.less" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/css/typography.css" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/css/typography.less" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/js/abbrtitle.js" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/js/col.js" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/js/debug.js" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/mk" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/ucd/CaseFolding.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/ucd/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/ucd/Scripts.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/ucd/UnicodeData.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/xsl/base.xsl" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/xsl/dot.xsl" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/xsl/output.xsl" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/share/xsl/test.xsl" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/adt/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/fsm/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libfsm/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libfsm/cost/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libfsm/lexer.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libfsm/libfsm.syms" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libfsm/pred/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libfsm/print/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libfsm/vm/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libfsm/walk/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/class/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/glob/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/glob/lexer.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/like/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/like/lexer.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/literal/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/literal/lexer.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/native/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/native/lexer.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/pcre/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/pcre/lexer.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/sql/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/dialect/sql/lexer.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/libre.syms" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/libre/print/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/lx/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/lx/lexer.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/lx/print/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/print/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/re/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/retest/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/src/rx/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/aho_corasick/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/aho_corasick/in1.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/aho_corasick/in2.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/aho_corasick/in3.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/capture/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/complement/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/out0.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/out1.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/out2.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/out3.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/out4.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/out5.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/out6.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/out7.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/out8.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/detect_required/out9.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/determinise/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/eclosure/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/eclosure/out0.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/eclosure/out1.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/eclosure/out2.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/eclosure/out3.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/eclosure/out4.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/eclosure/out5.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/eclosure/out6.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/eclosure/out7.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/endids/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/epsilons/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/equals/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/equals/out1.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/equals/out2.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/equals/out3.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/equals/out4.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/out10.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/out11.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/out12.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/out13.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/out14.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/out15.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/out17.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/out18.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/out21.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/out3.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/out4.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/out5.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/fsm/out9.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/gen/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/glob/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/idmap/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/internedstateset/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/intersect/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/ir/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/ir/out0.json" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/ir/out1.json" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/ir/out10.json" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/ir/out11.json" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/ir/out2.json" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/ir/out3.json" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/ir/out4.json" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/ir/out5.json" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/ir/out6.json" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/ir/out7.json" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/ir/out8.json" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/ir/out9.json" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/like/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/literal/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/lxpos/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/lxpos/in0.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/lxpos/in1.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/lxpos/in2.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/lxpos/in3.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/lxpos/in4.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/lxpos/in5.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/lxpos/in6.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/lxpos/in7.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/lxpos/lexer.lx" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/minimise/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/native/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/native/out11.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/native/out12.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/native/out13.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/native/out14.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/native/out16.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/native/out17.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre-anchor/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre-classes/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre-flags/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre-flags/mode10" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre-flags/mode8" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre-flags/mode9" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre-flags/out11.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre-repeat/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre/out10.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre/out20.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre/out21.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre/out22.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre/out23.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre/out25.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre/out30.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre/out43.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre/out47.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre/out48.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre/out49.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pcre/out5.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/pred/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/queue/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out0.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out1.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out10.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out11.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out12.err" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out13.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out14.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out15.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out16.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out17.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out18.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out19.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out2.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out20.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out21.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out22.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out23.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out24.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out3.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out4.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out5.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out6.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out7.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out8.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_literal/out9.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/re_strings/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/retest/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/reverse/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/set/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/sql/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/stateset/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/subtract/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/trim/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/tests/union/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libfsm/theft/Makefile" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/fsm.1/fsm.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/fsm.5/fsm.5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/fsm_lang.5fsm/fsm_lang.5fsm.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/fsm_print.3/fsm_print.3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/glob.5re/glob.5re.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/libfsm.3/libfsm.3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/like.5re/like.5re.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/literal.5re/literal.5re.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/lx.1/lx.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/lx.5/lx.5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/native.5re/native.5re.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/re.1/re.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/re_dialect.5re/re_dialect.5re.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/rx.1/rx.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libfsm/man/sql.5re/sql.5re.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

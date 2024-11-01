@@ -1454,6 +1454,7 @@ csv-parser
 rapidcsv
 libclustering_dim_redux
 zimg
+libfsm
 
 EOT
 ) | grep -e "$FILTER"
