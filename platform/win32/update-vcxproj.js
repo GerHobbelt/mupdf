@@ -124,10 +124,6 @@ src = src
     return `<PreprocessorDefinitions>${defs}</PreprocessorDefinitions>`;
 })
 .replace(/<BrowseInformation>[^]*?<\/BrowseInformation>/g, `<BrowseInformation>false</BrowseInformation>`)
-//     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
-.replace(/<OutDir>[^]*?<\/OutDir>/g, `<OutDir>$(SolutionDir)bin\\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\\</OutDir>`)
-//    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
-.replace(/<IntDir>[^]*?<\/IntDir>/g, `<IntDir>$(SolutionDir)obj\\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\\$(ConfigurationType)-$(ProjectName)\\</IntDir>`)
 //       <OmitFramePointers>true</OmitFramePointers>
 .replace(/<OmitFramePointers>[^]*?<\/OmitFramePointers>/g, '')
 //       <LinkIncremental>false</LinkIncremental>    -- will be set further below; it doesn't work when specified in the common-project.props.
@@ -163,7 +159,46 @@ src = src
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+*/
+.replace(/<PropertyGroup Condition="[^<>]*>[\s\S]*?<\/PropertyGroup>/gm, function (m) {
+	let rv = m;
+
+	// do not patch the sections that come *before* the .props file imports:
+	if (/ Label="Configuration"/.test(rv))
+		return rv;
+	
+	if (!/<OutDir>/.test(rv)) {
+		rv = rv
+		.replace(/<\/PropertyGroup>/, `
+    <OutDir>xxx</OutDir>
+    <IntDir>xxx</IntDir>
+  </PropertyGroup>
+		`).trim();
+	}
+	if (!/<IntDir>/.test(rv)) {
+		rv = rv
+		.replace(/<\/PropertyGroup>/, `
+    <IntDir>xxx</IntDir>
+  </PropertyGroup>
+		`).trim();
+	}
+	
+	return rv;
+})
+// make sure every debug/release PropertyGroup carries these OutDir and IntDir settings; this prevents MSVC from producing weird-named intermediate build directories directly inside the .../win32/ base directory.
+/*
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
  */
+.replace(/<NMakeOutput>collection-1.exe<\/NMakeOutput>/g, '<NMakeOutput></NMakeOutput>')
+//     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+.replace(/<OutDir>[^]*?<\/OutDir>/g, `<OutDir>$(SolutionDir)bin\\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\\</OutDir>`)
+//    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+.replace(/<IntDir>[^]*?<\/IntDir>/g, `<IntDir>$(SolutionDir)obj\\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\\$(ConfigurationType)-$(ProjectName)\\</IntDir>`)
 .replace(/<CharacterSet>[^]*?<\/CharacterSet>/g, '')
 .replace(/<PlatformToolset>[^]*?<\/PlatformToolset>/g, `<PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>`)
