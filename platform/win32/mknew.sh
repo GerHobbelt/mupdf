@@ -1456,6 +1456,10 @@ libclustering_dim_redux
 zimg
 libfsm
 graphengine
+tcmalloc
+ntl
+ygg
+VisualizationLibrary
 
 EOT
 ) | grep -e "$FILTER"
