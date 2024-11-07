@@ -3,6 +3,7 @@
 #define BUILD_MONOLITHIC 1
 #include "../../thirdparty/owemdjee/clipp/test/monolithic_tests.h"
 
+#if 0    // already checked via monolithic `clipp_demos` tool, e.g. the `clipp_run_all_tests` command there.
 
 TEST(LibClipp, actions) {
   EXPECT_EQ(clipp_actions_test_main(), EXIT_SUCCESS);
@@ -160,3 +161,4 @@ TEST(LibClipp, values_sequencing) {
   EXPECT_EQ(clipp_values_sequencing_test_main(), EXIT_SUCCESS);
 }
 
+#endif
