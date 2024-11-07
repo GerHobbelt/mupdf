@@ -1013,7 +1013,7 @@ static struct tool_spec {
 	{ {.fa = lcms2_wtpt_example_main }, "lcms2_wtpt_example", "lcms2 wtpt_example demo/tool" },
 	{ {.fa = lcms2_tiffdiff_util_main }, "lcms2_tiffdiff_util", "lcms2 tiffdiff_util demo/tool" },
 	{ {.fa = lcms2_tificc_util_main }, "lcms2_tificc_util", "lcms2 tificc_util demo/tool" },
-	{ {.fa = lcms2_transicc_util_main }, "lcms2_transicc_util", "lcms2 transicc_util demo/tool" },
+	{ {.fa = lcms2_transicc_util_main }, "transicc", "lcms2 transicc tool" },
 #endif
 
 #if defined(MUTOOL_EX)
