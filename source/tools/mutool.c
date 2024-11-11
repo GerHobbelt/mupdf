@@ -711,7 +711,7 @@ static struct tool_spec {
 #endif
 
 #if defined(MUTOOL_EX)
-	{ {.fa = qjscpp_async_example_main }, "qjscpp_async_example", "qjscpp_async_example tool" },
+	//{ {.fa = qjscpp_async_example_main }, "qjscpp_async_example", "qjscpp_async_example tool" },
 	{ {.fa = qjscpp_classes_example_main }, "qjscpp_classes_example", "qjscpp_classes_example tool" },
 	{ {.fa = qjscpp_closures_example_main }, "qjscpp_closures_example", "qjscpp_closures_example tool" },
 	{ {.fa = qjscpp_exception_example_main }, "qjscpp_exception_example", "qjscpp_exception_example tool" },
