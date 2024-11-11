@@ -1,0 +1,1010 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF3FD4A0}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIGRA;VIGRA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIGRA;VIGRA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIGRA;VIGRA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIGRA;VIGRA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIGRA;VIGRA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIGRA;VIGRA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIGRA;VIGRA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIGRA;VIGRA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIGRA;VIGRA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIGRA;VIGRA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIGRA;VIGRA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVIGRA;VIGRA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/config/checkHDF5usesCompression.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/config/checkHDF5version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/config/checkTemplateDepth.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/config/check_std_thread.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/boundarytensor.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/convert.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/edge.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/invert.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/invert_explicitly.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/nnlsq.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/palette.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/profile.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/pyramid.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/resize.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/smooth.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/subimage.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/total_variation.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/composite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/dissolve.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/graph_agglomerative_clustering.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/imageExportInfo_tutorial.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/imageIO_tutorial.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/imageImportInfo_tutorial.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/invert_tutorial.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/mirror_tutorial.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/smooth_blockwise.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/smooth_convolve.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/smooth_explicitly.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/subimage_tutorial.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/transpose.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/transpose_image_tutorial.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/voronoi.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/watershed.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/examples/weightedWatersheds.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/bmp.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/byteorder.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/codecmanager.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/compression.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/exr.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/gif.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/hdf5_rf_impex.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/hdf5impex.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/hdr.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/iccjpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/imageinfo.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/jpeg.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/lz4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/png.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/pnm.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/rgbe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/sifImport.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/sun.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/tiff.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/viff.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/impex/void_vector.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/test-routines/vigraTestConstrScalar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/test-routines/vigraTestCopy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/test-routines/vigraTestCopyMixed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/test-routines/vigraTestCopyOpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/test-routines/vigraTestDefault.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/test-routines/vigraTestEnum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/test-routines/vigraTestOptional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/test-routines/vigraTestString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraAdjacency.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraBoundaryTensor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraConnectedComponents.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraCorner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraDistance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraExporthdf5RF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraImporthdf5RF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraLearnRF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraLeastAngleRegression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraPredictIndividually.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraPredictLabelsRF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraPredictProbabilitiesRF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraRadialSymmetry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraResize2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraResize3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/matlab/vigraWatershed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/src/regression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/adjacency_list_graph/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/binary_forest/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/blockwisealgorithms/test_convolution.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/blockwisealgorithms/test_labeling.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/blockwisealgorithms/test_watersheds.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/classifier/speed_comparison.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/classifier/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/colorspaces/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/convolution/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/coordinateiterator/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/correlation/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/counting_iterator/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/delegates/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/error/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/features/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/filter_iterator/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/filters/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/fourier/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/functorexpression/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/graph_algorithm/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/gridgraph/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/hdf5impex/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/image/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/gray_image_test_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/one_band_basic_image_test_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/rgb_basic_image_test_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/rgb_imagehierarchy_test_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/select_band_image_test_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/single_band_image_test_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/tests_start_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/variable_bands_image_test_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/vector_2_basic_image_test_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/vector_2_imagehierarchy_test_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/vector_3_basic_image_test_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/vector_3_imagehierarchy_test_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/vector_4_basic_image_test_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/vector_4_imagehierarchy_test_suite.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/imgproc/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/impex/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/integral_image/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/math/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/merge_graph_adaptor/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/morphology/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/multiarray/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/multiarray/test_chunked.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/multiconvolution/speedtest.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/multiconvolution/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/multidistance/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/multimorphology/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/objectfeatures/stand_alone_acc_chain.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/objectfeatures/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/objectfeatures/test_lemon.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/optimization/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/permutation/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/pixeltypes/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/polygon/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/polytope/convex_hull_benchmark.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/polytope/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/random_forest_3/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/registration/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/sampler/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/seededRegionGrowing3d/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/sifImport/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/simpleanalysis/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/simpleanalysis/test_freaky.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/slic2d/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/tensorimaging/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/threadpool/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/unsupervised/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/utilities/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/volumelabeling/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/voxelneighborhood/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/test/watersheds3d/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/accumulator-region-multiband.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/accumulator-region-singleband.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/accumulator.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/adjacencyListGraph.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/axistags.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/blockwise.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/clustering.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/colors.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/converters.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/convolution.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/edgedetection.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/filters.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/geometry.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/graphs.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/gridGraph2d.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/gridGraph3d.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/gridGraphNd.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/grid_graph_implicit_edge_maps.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/histogram.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/impex.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/interestpoints.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/kernel.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/learning.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/minindexedpq.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/morphology.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/multi_array_chunked.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/noise.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/non_local_mean.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/optimization.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/random_forest.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/random_forest_3.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/random_forest_old.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/sampling.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/segmentation.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/tensors.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/utilities.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/vigranumpycore.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/fourier/fourier.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/vigranumpytest.cxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/accessor.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/accumulator-grammar.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/accumulator.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/adjacency_list_graph.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/affine_registration.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/affine_registration_fft.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/affinegeometry.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/algorithm.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/any.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/applywindowfunction.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/array_vector.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/autodiff.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/axistags.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/basicgeometry.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/basicimage.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/basicimageview.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/bessel.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/binary_forest.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/bit_array.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/blockify.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/blockwise_convolution.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/blockwise_labeling.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/blockwise_watersheds.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/bordertreatment.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/boundarytensor.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/box.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/bucket_queue.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/cellconfigurations.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/cellimage.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/clebsch-gordan.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/codec.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/colorconversions.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/combineimages.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/compression.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/config.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/config_version.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/contourcirculator.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/convolution.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/coordinate_iterator.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/copyimage.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/cornerdetection.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/correlation.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/counting_iterator.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/delegate/delegate.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/delegate/detail/delegate_list.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/delegate/detail/delegate_template.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/diff2d.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/distancetransform.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/eccentricitytransform.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/edgedetection.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/eigensystem.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/error.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/fftw.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/fftw3.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/filter_iterator.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/fixedpoint.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/flatmorphology.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/functorexpression.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/functortraits.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/gaborfilter.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/gaussians.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/gradient_energy_tensor.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/graph_algorithms.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/graph_generalization.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/graph_item_impl.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/graph_maps.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/graph_rag_project_back.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/graphs.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/hdf5impex.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/hierarchical_clustering.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/histogram.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/imagecontainer.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/imageinfo.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/imageiterator.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/imageiteratoradapter.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/impex.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/impexalpha.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/impexbase.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/initimage.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/inspectimage.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/inspector_passes.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/integral_image.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/interpolating_accessor.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/invariant_features3D.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/iteratoradapter.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/iteratorfacade.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/iteratortags.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/iteratortraits.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/labelimage.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/labelvolume.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/linear_algebra.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/linear_solve.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/localminmax.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/mathutil.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/matlab.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/matlab_FLEXTYPE.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/matrix.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/medianfilter.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/memory.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/merge_graph_adaptor.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/meshgrid.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/metaprogramming.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/metrics.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_array.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_array_chunked.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_array_chunked_hdf5.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_blocking.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_blockwise.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_convolution.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_distance.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_fft.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_fwd.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_gridgraph.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_handle.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_hierarchical_iterator.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_histogram.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_impex.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_iterator.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_iterator_coupled.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_labeling.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_localminmax.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_math.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_morphology.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_opencl.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_pointoperators.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_resize.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_shape.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_tensorutilities.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/multi_watersheds.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/navigator.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/noise_normalization.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/non_local_mean.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/nonlineardiffusion.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/numerictraits.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/numpy_array.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/numpy_array_converters.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/numpy_array_taggedshape.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/numpy_array_traits.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/orientedtensorfilters.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/overlapped_blocks.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/permutation.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/pixelneighborhood.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/polygon.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/polynomial.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/polynomial_registration.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/polytope.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/print_backtrace.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/priority_queue.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/project2ellipse.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/projective_registration.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/promote_traits.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/python_graph.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/python_utility.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/quadprog.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/quaternion.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_access_set.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest/features.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest/rf_algorithm.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest/rf_common.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest/rf_decisionTree.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest/rf_earlystopping.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest/rf_nodeproxy.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest/rf_online_prediction_set.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest/rf_preprocessing.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest/rf_region.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest/rf_ridge_split.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest/rf_split.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest/rf_visitors.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest/splices.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest_3.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest_3/random_forest.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest_3/random_forest_common.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest_3/random_forest_visitors.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest_3_hdf5_impex.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest_deprec.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/random_forest_hdf5_impex.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/rational.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/rbf_registration.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/recursiveconvolution.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/region_shrinking.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/regression.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/resampling_convolution.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/resizeimage.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/rfftw.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/rgbvalue.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/sampling.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/seededregiongrowing.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/seededregiongrowing3d.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/seg_to_seeds.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/separableconvolution.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/shockfilter.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/sifImport.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/singular_value_decomposition.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/sized_int.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/skeleton.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/slanted_edge_mtf.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/slic.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/specklefilters.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/splineimageview.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/splines.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/static_assert.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/stdconvolution.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/stdimage.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/stdimagefunctions.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/symmetry.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/tensorutilities.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/threading.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/threadpool.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/tiff.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/timing.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/tinyvector.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/transform_iterator.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/transformimage.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/tuple.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/tv_filter.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/type_lists.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/union_find.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/unittest.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/unsupervised_decomposition.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/utilities.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/vector_distance.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/visit_border.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/voxelneighborhood.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/watersheds.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/watersheds3d.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/wigner-matrix.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/include/vigra/windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/auto_file.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/bmp.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/byteorder.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/codecmanager.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/error.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/exr.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/gif.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/hdr.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/iccjpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/jpeg.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/lz4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/png.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/pnm.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/rgbe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/sun.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/tiff.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/viff.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/impex/void_vector.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/matlab/RandomForestProgressVisitor.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/matlab/cellimage.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/src/matlab/random_forest_impex.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/blockwisealgorithms/utils.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/RF_common.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/RF_data.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/SPECTF_features.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/SPECTF_labels.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/ecoli_features.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/ecoli_labels.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/glass_features.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/glass_labels.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/ionosphere_features.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/ionosphere_labels.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/iris_features.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/iris_labels.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/pina_indians_diabetes_features.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/pina_indians_diabetes_labels.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/segmentation_features.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/segmentation_labels.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/wine_features.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/wine_labels.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/wpbc_features.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/data/wpbc_labels.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/classifier/test_visitors.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/convolution/tv_test_data.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/features/wigner-matrix-reference.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/fourier/test.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/NewImHier.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/basic_image_test.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/g++_relops_workaround.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/imagehierarchy_test.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/one_band_image_policy.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/parent_test_class.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/rgb_basic_image_test.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/rgb_imagehierarchy_test.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/rgb_images_policy.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/select_band_image_policy.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/select_image_test.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/single_band_image_policy.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/single_band_image_test.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/test_policy_parent.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/variable_bands_image_policy.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/variable_bands_image_test.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/vector_2_image_policy.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/vector_3_image_policy.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/imagehierarchy/vector_4_image_policy.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/multidistance/test_data.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/optimization/larsdata.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/polygon/convex_hull_test.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/sifImport/testSif_ref_4_16_30001.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/test/unsupervised/test_data.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/construct_custodian_for.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/export_graph_algorithm_visitor.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/export_graph_hierarchical_clustering_visitor.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/export_graph_rag_visitor.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/export_graph_shortest_path_visitor.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/export_graph_visitor.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/gridGraphNd.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/pythonaccumulator.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/tws.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/vigranumpykernel.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/vigranumpyscaleparam.hxx" />
+    <Image Include="../../thirdparty/owemdjee/vigra/docsrc/documents/bullet.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/docsrc/documents/diamond.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/docsrc/documents/pfeil.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/docsrc/documents/pfeilGross.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/docsrc/documents/vigra.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/docsrc/vigra-icon.ico" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/cameraman.png" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/cameraman_noise.png" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/lenna.bmp" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/lenna_color.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/lenna_color_small.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/lenna_gray.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/lenna_small.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/lenna_stripes.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/lenna_sub.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/lenna_transposed.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/oi.JPG" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/oi.png" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/oi_small.jpg" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/cameraman.png" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/chess_smoothed.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/conv1.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/conv2.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/conv3.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/conv4.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/dissolved.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/dissolved_color.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/lenna_color.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/lenna_color_small.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/lenna_composite_color.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/lenna_gray.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/lenna_inverted_color.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/lenna_small.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/lenna_smoothed.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/oi.JPG" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/oi_small.jpg" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/testimage.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/bears.jpg" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/bears_gradient.png" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/bears_segmentation.png" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/bears_superpixels.png" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/conv1.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/conv2.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/conv3.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/conv4.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/dissolved.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/dissolved_color.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/lenna_color.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/lenna_color_small.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/lenna_composite_color.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/lenna_gray.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/lenna_inverted.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/lenna_mirror_horizontal.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/lenna_mirror_vertical.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/lenna_small.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/lenna_smoothed.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/lenna_stripes.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/lenna_sub.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/lenna_transposed_major.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/lenna_transposed_minor.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/oi.JPG" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/oi_small.jpg" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/testimage.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/src/images/testimage.jpg" />
+    <Image Include="../../thirdparty/owemdjee/vigra/test/fourier/ghouse.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/test/image/lenna.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/test/multiconvolution/oi_single.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/test/objectfeatures/of.gif" />
+    <Image Include="../../thirdparty/owemdjee/vigra/test/registration/nuernberg-1991.png" />
+    <Image Include="../../thirdparty/owemdjee/vigra/test/registration/nuernberg-1995.png" />
+    <Image Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/_static/file.png" />
+    <Image Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/_static/minus.png" />
+    <Image Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/_static/plus.png" />
+    <Image Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/_static/vigra-icon.ico" />
+    <Image Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/100075.jpg" />
+    <Image Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/12003.jpg" />
+    <Image Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/12074.jpg" />
+    <Image Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/69015.jpg" />
+    <Image Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/islands.png" />
+    <Text Include="../../thirdparty/owemdjee/vigra/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/README.md" />
+    <Text Include="../../thirdparty/owemdjee/vigra/azure-pipelines.yml" />
+    <Text Include="../../thirdparty/owemdjee/vigra/ci/build_unix.sh" />
+    <Text Include="../../thirdparty/owemdjee/vigra/ci/build_windows.bat" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/CPackConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/FindFFTW3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/FindFFTW3F.cmake" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/FindHDF5.cmake" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/FindOpenEXR.cmake" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/FindVIGRANUMPY_DEPENDENCIES.cmake" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/VIGRA_ADD_NUMPY_MODULE.cmake" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/VigraAddTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/VigraCMakeUtils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/VigraConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/VigraConfigBuild.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/VigraConfigVersion.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/VigraConfigureThreading.cmake" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/VigraDetectThreading.cmake" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/VigraFindPackage.cmake" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/VigraSetDefaults.cmake" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/VigranumpyConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/nuget/vigra.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/nuget/vigra.redist.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/nuget/vigra.redist.targets" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/nuget/vigra.targets" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/package-src.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/run_test.bat.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/run_test.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/shorten_path.bat" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/testdebug.vcxproj.user.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/update-gh-pages.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/vigra-config.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/config/winsetup.iss" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/credits_changelog.dxx" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/documents/CollapsibleLists.js" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/documents/DataAccessors.ps" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/documents/FunctorFactory.ps" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/documents/GenericProg2D.ps" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/documents/blockwise-watersheds-slides.pdf" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/documents/viff.ps" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/doxygen.css" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/examples.dxx" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/header.html" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/image_processing.dxx" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/index.dxx" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/index_fallback.html" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/installation.dxx" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/makeFunctionIndex.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/post.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/tutorial.dxx" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/vigra-icon.xcf" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/vigra-wiki.html" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/vigra.css" />
+    <Text Include="../../thirdparty/owemdjee/vigra/docsrc/vigra_1_8_2.css" />
+    <Text Include="../../thirdparty/owemdjee/vigra/include/vigra/promote_traits.hxx.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/run_lint.sh" />
+    <Text Include="../../thirdparty/owemdjee/vigra/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/src/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/src/examples/aniso_tv.par" />
+    <Text Include="../../thirdparty/owemdjee/vigra/src/examples/block.tif" />
+    <Text Include="../../thirdparty/owemdjee/vigra/src/examples/house.tif" />
+    <Text Include="../../thirdparty/owemdjee/vigra/src/examples/second_order_tv.par" />
+    <Text Include="../../thirdparty/owemdjee/vigra/src/examples/tutorial/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/src/examples/tv.par" />
+    <Text Include="../../thirdparty/owemdjee/vigra/src/impex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/src/matlab/doc/tutorial_reference.pdf" />
+    <Text Include="../../thirdparty/owemdjee/vigra/src/matlab/doc/tutorial_reference.tex" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/adjacency_list_graph/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/binary_forest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/blockwisealgorithms/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/checkUnitTests.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/classifier/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/classifier/data/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/classifier/data/bare.hdf5" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/classifier/data/empty.hdf5" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/colorspaces/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/convolution/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/coordinateiterator/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/correlation/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/counting_iterator/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/delegates/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/error/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/features/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/filter_iterator/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/filters/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/fourier/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/functorexpression/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/graph_algorithm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/gridgraph/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/hdf5impex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/image/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/imgproc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/impex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/impex/bilevel.tiff" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/impex/lenna_0.tif" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/impex/lenna_1.tif" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/impex/lenna_2.tif" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/impex/lenna_masked_color.tif" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/impex/lenna_masked_gray.tif" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/impex/no-image.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/integral_image/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/math/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/merge_graph_adaptor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/morphology/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/multiarray/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/multiarray/compression-ratio-benchmark.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/multiconvolution/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/multidistance/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/multimorphology/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/objectfeatures/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/optimization/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/permutation/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/pixeltypes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/polygon/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/polytope/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/random_forest_3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/random_forest_3/data/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/random_forest_3/data/rf.h5" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/registration/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/sampler/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/seededRegionGrowing3d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/sifImport/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/sifImport/testSif_4_13_30000.sif" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/sifImport/testSif_4_16_30001.sif" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/sifImport/testSif_4_6_30000.sif" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/sifImport/testSif_forBlocks_4_16_30001.sif" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/simpleanalysis/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/slic2d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/tensorimaging/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/threadpool/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/unsupervised/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/unsupervised/example_data.h5" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/utilities/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/volumelabeling/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/voxelneighborhood/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/test/watersheds3d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/_static/basic.css" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/_static/default.css" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/_static/doctools.js" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/_static/jquery.js" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/_static/pygments.css" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/_static/searchtools.js" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/conf.py.cmake2.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/conf.py.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/docsrc/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/blocking.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/eccentricity_transform.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/graph_3cycles.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/graph_agglomerative_clustering.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/graph_felzenszwalb.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/graph_smoothing.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/graph_watersheds.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/grid_graph_shortestpath.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/merge_graph.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/non_local_mean_2d_color.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/examples/shock_filter.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/lib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/lib/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/lib/arraytypes.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/lib/axistags.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/lib/pyqt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/lib/pyqt/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/lib/pyqt/imagewindow.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/lib/pyqt/overlays.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/lib/pyqt/quickdialog.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/lib/pyqt/viewer2svg.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/lib/tagged_array.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/lib/ufunc.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/ruff.toml" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/setup.py.cmake2.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/setup.py.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/src/fourier/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/set_paths.py.cmake2.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/set_paths.py.in" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/test1.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/test2.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/test3.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/test4.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/test_arraytypes.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/test_color.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/test_impex.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/test_multidef.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/test_rf.py" />
+    <Text Include="../../thirdparty/owemdjee/vigra/vigranumpy/test/test_segmentation.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1460,6 +1460,11 @@ tcmalloc
 ntl
 ygg
 VisualizationLibrary
+vigra
+sds
+units-cpp
+opencv_3rdparty
+cgal
 
 EOT
 ) | grep -e "$FILTER"
