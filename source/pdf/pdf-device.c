@@ -363,7 +363,7 @@ pdf_dev_find_font_res(fz_context *ctx, pdf_device *pdev, fz_font *font)
 
 	/* Check if we already had this one */
 	for (k = 0; k < pdev->num_cid_fonts; k++)
-		if (pdev->cid_fonts[k] == font)
+		if (fz_font_eq(ctx, pdev->cid_fonts[k], font))
 			return k;
 
 	return -1;

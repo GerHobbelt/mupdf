@@ -2284,6 +2284,21 @@ void fz_font_digest(fz_context *ctx, fz_font *font, unsigned char digest[16])
 	memcpy(digest, font->digest, 16);
 }
 
+int fz_font_eq(fz_context *ctx, fz_font *a, fz_font *b)
+{
+	unsigned char a_digest[16];
+	unsigned char b_digest[16];
+
+	if (a == b)
+		return 1;
+	if (a == NULL || b == NULL)
+		return 0;
+	fz_font_digest(ctx, a, a_digest);
+	fz_font_digest(ctx, b, b_digest);
+
+	return !memcmp(a_digest, b_digest, 16);
+}
+
 #define CHR(a,b,c,d) ((a<<24) | (b<<16) | (c<<8) | d)
 
 typedef struct

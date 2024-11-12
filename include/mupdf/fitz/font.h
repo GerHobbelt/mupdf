@@ -706,6 +706,12 @@ float fz_font_descender(fz_context *ctx, fz_font *font);
 */
 void fz_font_digest(fz_context *ctx, fz_font *font, unsigned char digest[16]);
 
+/**
+	Compare two fz_fonts.
+*/
+int fz_font_eq(fz_context *ctx, fz_font *a, fz_font *b);
+
+
 /* Implementation details: subject to change. */
 
 void fz_decouple_type3_font(fz_context *ctx, fz_font *font, void *t3doc);
