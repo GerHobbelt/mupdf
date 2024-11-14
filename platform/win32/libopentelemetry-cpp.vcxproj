@@ -310,7 +310,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/etw/test/etw_perf_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/etw/test/etw_provider_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/etw/test/etw_tracer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/memory/src/in_memory_metric_data.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/memory/src/in_memory_metric_exporter_factory.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/memory/src/in_memory_span_exporter_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/memory/test/in_memory_metric_data_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/memory/test/in_memory_metric_exporter_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/memory/test/in_memory_span_data_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/memory/test/in_memory_span_exporter_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/ostream/src/log_record_exporter.cc" />
@@ -414,7 +418,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/opentracing-shim/test/span_shim_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/opentracing-shim/test/tracer_shim_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/sdk/src/common/base64.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/sdk/src/common/core.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/sdk/src/common/env_variables.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/sdk/src/common/global_log_handler.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/sdk/src/common/platform/fork_unix.cc" />
@@ -540,6 +543,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/sdk/test/metrics/sum_aggregation_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/sdk/test/metrics/sync_instruments_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/sdk/test/metrics/sync_metric_storage_counter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/sdk/test/metrics/sync_metric_storage_gauge_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/sdk/test/metrics/sync_metric_storage_histogram_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/sdk/test/metrics/sync_metric_storage_up_down_counter_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp/sdk/test/metrics/view_registry_test.cc" />
@@ -700,6 +704,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/etw/include/opentelemetry/exporters/etw/utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/etw/include/opentelemetry/exporters/etw/uuid.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/memory/include/opentelemetry/exporters/memory/in_memory_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/memory/include/opentelemetry/exporters/memory/in_memory_metric_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/memory/include/opentelemetry/exporters/memory/in_memory_metric_exporter_factory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/memory/include/opentelemetry/exporters/memory/in_memory_span_data.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/memory/include/opentelemetry/exporters/memory/in_memory_span_exporter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp/exporters/memory/include/opentelemetry/exporters/memory/in_memory_span_exporter_factory.h" />
@@ -920,6 +926,7 @@
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/DEPRECATED.md" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/INSTALL.md" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/MODULE.bazel" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/README.md" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/RELEASING.md" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/Versioning.md" />
@@ -965,7 +972,6 @@
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/buildscripts/pre_release.sh" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/buildscripts/semantic-convention/generate.sh" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/buildscripts/semantic-convention/templates/SemanticAttributes.h.j2" />
-    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/README.md" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/do_ci.ps1" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/do_ci.sh" />
@@ -979,12 +985,12 @@
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/install_protobuf.sh" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/install_windows_bazelisk.ps1" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/install_windows_protobuf.ps1" />
-    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/ports/benchmark/portfile.cmake" />
-    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/ports/benchmark/vcpkg.json" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/ports/protobuf/CONTROL" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/ports/protobuf/portfile.cmake" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/run_docker.sh" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/setup_ci_environment.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/setup_cmake.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/setup_gcc10.sh" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/setup_googletest.sh" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/setup_grpc.sh" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/ci/setup_windows_ci_environment.ps1" />
@@ -1022,6 +1028,7 @@
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/docs/deprecation-process.md" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/docs/google-test.md" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/docs/library-distribution.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/docs/maintaining-dependencies.md" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/docs/public/Doxyfile" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/docs/public/GettingHelp.rst" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/docs/public/Makefile" />
@@ -1039,7 +1046,6 @@
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/docs/public/sdk/GettingStarted.rst" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/docs/public/sdk/sdk.rst" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/docs/requirements.md" />
-    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/docs/semantic-conventions.md" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/docs/testing-with-ssl.md" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/docs/using-clang-format.md" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/examples/CMakeLists.txt" />
@@ -1052,6 +1058,7 @@
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/examples/common/logs_foo_library/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/examples/common/metrics_foo_library/BUILD" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/examples/common/metrics_foo_library/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/examples/etw_threads/BUILD" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/examples/etw_threads/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/examples/etw_threads/README.md" />
     <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp/examples/grpc/BUILD" />

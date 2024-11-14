@@ -247,6 +247,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv6.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv7_pmuv1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv8_kunpeng_unc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv8_kunpeng_unc_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv8_thunderx2_unc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv8_thunderx2_unc_perf_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv8_unc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv9.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_perf_event.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_cell.c" />
@@ -348,7 +353,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_intel_x86_perf_event.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_itanium.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_itanium2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_kunpeng_unc_perf_event.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_mips.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_mips_74k.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_mips_perf_event.c" />
@@ -377,7 +381,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_sparc_ultra3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_sparc_ultra4.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_torrent.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_tx2_unc_perf_event.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/branch_smpl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/evt2raw.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libpfm4/perf_examples/notify_group.c" />
@@ -428,7 +431,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cavium_tx2_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a15_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a53_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a55_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a57_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a76_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a7_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a8_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_cortex_a9_events.h" />
@@ -438,8 +443,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_marvell_tx2_unc_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_neoverse_n1_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_neoverse_n2_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_neoverse_n3_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_neoverse_v1_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_neoverse_v2_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_neoverse_v3_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_qcom_krait_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/arm_xgene_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/cell_events.h" />
@@ -562,6 +569,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/sparc_ultra4plus_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/events/torrent_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_amd64_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_armv8_unc_priv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_arm_priv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_cell_priv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libpfm4/lib/pfmlib_ia64_priv.h" />
@@ -616,14 +624,19 @@
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_a64fx.3" />
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac15.3" />
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac53.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac55.3" />
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac57.3" />
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac7.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac72.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac76.3" />
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac8.3" />
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_ac9.3" />
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_neoverse_n1.3" />
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_neoverse_n2.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_neoverse_n3.3" />
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_neoverse_v1.3" />
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_neoverse_v2.3" />
+    <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_neoverse_v3.3" />
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_qcom_krait.3" />
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_arm_xgene.3" />
     <Text Include="../../thirdparty/owemdjee/libpfm4/docs/man3/libpfm_intel_adl_glc.3" />

@@ -319,7 +319,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/jnt_variance_ssse3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/loopfilter_avx2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/loopfilter_sse2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/masked_sad4d_ssse3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/masked_sad_intrin_avx2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/masked_sad_intrin_ssse3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/masked_variance_intrin_ssse3.c" />
@@ -348,8 +347,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_ports/aarch64_cpudetect.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_ports/ppc_cpudetect.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_scale/aom_scale_rtcd.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_scale/generic/aom_scale.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_scale/generic/gen_scalers.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_scale/generic/yv12config.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_scale/generic/yv12extend.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_util/aom_thread.c" />
@@ -550,7 +547,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/rdopt_avx2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/rdopt_sse4.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/reconinter_enc_sse2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/reconinter_enc_ssse3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/temporal_filter_avx2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/temporal_filter_sse2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/wedge_utils_avx2.c" />
@@ -621,6 +617,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_nn_predict_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_quantize_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_round_shift_array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_scale_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_softmax_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_temporal_denoiser_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_txfm_test.cc" />
@@ -712,7 +709,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libaom/test/quant_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/test/quantize_func_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/test/ratectrl_rtc_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/ratectrl_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/test/rd_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/test/reconinter_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libaom/test/resize_test.cc" />
@@ -868,7 +864,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/ppc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/sanitizer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/x86.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_scale/aom_scale.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_scale/yv12config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_util/aom_pthread.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_util/aom_thread.h" />
@@ -1097,7 +1092,6 @@
     <NASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_subpel_variance_impl_sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_variance_impl_sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/intrapred_asm_sse2.asm" />
-    <NASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/inv_wht_sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/quantize_ssse3_x86_64.asm" />
     <NASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/sad4d_sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/sad_sse2.asm" />
@@ -1120,7 +1114,6 @@
     <Text Include="../../thirdparty/owemdjee/libaom/aom/exports_com" />
     <Text Include="../../thirdparty/owemdjee/libaom/aom/exports_dec" />
     <Text Include="../../thirdparty/owemdjee/libaom/aom/exports_enc" />
-    <Text Include="../../thirdparty/owemdjee/libaom/aom/exports_test" />
     <Text Include="../../thirdparty/owemdjee/libaom/aom_dsp/aom_dsp.cmake" />
     <Text Include="../../thirdparty/owemdjee/libaom/aom_dsp/aom_dsp_rtcd_defs.pl" />
     <Text Include="../../thirdparty/owemdjee/libaom/aom_mem/aom_mem.cmake" />
@@ -1134,7 +1127,6 @@
     <Text Include="../../thirdparty/owemdjee/libaom/av1/exports_dec" />
     <Text Include="../../thirdparty/owemdjee/libaom/av1/exports_enc" />
     <Text Include="../../thirdparty/owemdjee/libaom/av1/exports_ident" />
-    <Text Include="../../thirdparty/owemdjee/libaom/av1/exports_test" />
     <Text Include="../../thirdparty/owemdjee/libaom/build/cmake/aom_config_defaults.cmake" />
     <Text Include="../../thirdparty/owemdjee/libaom/build/cmake/aom_configure.cmake" />
     <Text Include="../../thirdparty/owemdjee/libaom/build/cmake/aom_experiment_deps.cmake" />

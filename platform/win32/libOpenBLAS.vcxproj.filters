@@ -679,6 +679,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/benchmark/nrm2.c">
       <Filter>Source Files\benchmark</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/benchmark/omatcopy.c">
+      <Filter>Source Files\benchmark</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/benchmark/potrf.c">
       <Filter>Source Files\benchmark</Filter>
     </ClCompile>
@@ -1105,6 +1108,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/level3/gemm3m_level3.c">
       <Filter>Source Files\driver\level3</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/level3/gemm_batch_thread.c">
+      <Filter>Source Files\driver\level3</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/level3/gemm_thread_m.c">
       <Filter>Source Files\driver\level3</Filter>
     </ClCompile>
@@ -1213,6 +1219,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/blas_server_win32.c">
       <Filter>Source Files\driver\others</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/detect_riscv64.c">
+      <Filter>Source Files\driver\others</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/divtable.c">
       <Filter>Source Files\driver\others</Filter>
     </ClCompile>
@@ -1229,6 +1238,9 @@
       <Filter>Source Files\driver\others</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/dynamic_power.c">
+      <Filter>Source Files\driver\others</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/dynamic_riscv64.c">
       <Filter>Source Files\driver\others</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/dynamic_zarch.c">
@@ -1325,6 +1337,9 @@
       <Filter>Source Files\interface</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/interface/gemm.c">
+      <Filter>Source Files\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/interface/gemm_batch.c">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/interface/gemmt.c">
@@ -1792,6 +1807,18 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dgemm_kernel_4x4_cortexa53.c">
       <Filter>Source Files\kernel\arm64</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dgemm_small_kernel_nn_sve.c">
+      <Filter>Source Files\kernel\arm64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dgemm_small_kernel_nt_sve.c">
+      <Filter>Source Files\kernel\arm64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dgemm_small_kernel_tn_sve.c">
+      <Filter>Source Files\kernel\arm64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dgemm_small_kernel_tt_sve.c">
+      <Filter>Source Files\kernel\arm64</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dot.c">
       <Filter>Source Files\kernel\arm64</Filter>
     </ClCompile>
@@ -1816,10 +1843,19 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/gemm_ncopy_sve_v1x8.c">
       <Filter>Source Files\kernel\arm64</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/gemm_small_kernel_permit_sve.c">
+      <Filter>Source Files\kernel\arm64</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/gemm_tcopy_complex_sve_v1x4.c">
       <Filter>Source Files\kernel\arm64</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/gemm_tcopy_sve_v1x8.c">
+      <Filter>Source Files\kernel\arm64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/gemv_n_sve.c">
+      <Filter>Source Files\kernel\arm64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/gemv_t_sve.c">
       <Filter>Source Files\kernel\arm64</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/iamax_thunderx2t99.c">
@@ -1853,6 +1889,18 @@
       <Filter>Source Files\kernel\arm64</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/scnrm2_thunderx2t99.c">
+      <Filter>Source Files\kernel\arm64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/sgemm_small_kernel_nn_sve.c">
+      <Filter>Source Files\kernel\arm64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/sgemm_small_kernel_nt_sve.c">
+      <Filter>Source Files\kernel\arm64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/sgemm_small_kernel_tn_sve.c">
+      <Filter>Source Files\kernel\arm64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/sgemm_small_kernel_tt_sve.c">
       <Filter>Source Files\kernel\arm64</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/symm_lcopy_sve.c">
@@ -2668,7 +2716,22 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/generic/ztrsm_utcopy_8.c">
       <Filter>Source Files\kernel\generic</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_small_matrix_permit.c">
+      <Filter>Source Files\kernel\loongarch64</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/gemm_ncopy_6.prefx.c">
+      <Filter>Source Files\kernel\loongarch64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/somatcopy_cn_lasx.c">
+      <Filter>Source Files\kernel\loongarch64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/somatcopy_ct_lasx.c">
+      <Filter>Source Files\kernel\loongarch64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/somatcopy_rn_lasx.c">
+      <Filter>Source Files\kernel\loongarch64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/somatcopy_rt_lasx.c">
       <Filter>Source Files\kernel\loongarch64</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/trsm_kernel_LN_UNROLLN6.c">
@@ -3055,6 +3118,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/cdot_microk_power10.c">
       <Filter>Source Files\kernel\power</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/cgemm_kernel_power10.c">
+      <Filter>Source Files\kernel\power</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/cgemv_n.c">
       <Filter>Source Files\kernel\power</Filter>
     </ClCompile>
@@ -3181,6 +3247,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/dswap_microk_power8.c">
       <Filter>Source Files\kernel\power</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/gemm_common.c">
+      <Filter>Source Files\kernel\power</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/gemm_small_kernel_permit_power10.c">
       <Filter>Source Files\kernel\power</Filter>
     </ClCompile>
@@ -3242,6 +3311,30 @@
       <Filter>Source Files\kernel\power</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemm_tcopy_8_power10.c">
+      <Filter>Source Files\kernel\power</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_common.c">
+      <Filter>Source Files\kernel\power</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_common_power10.c">
+      <Filter>Source Files\kernel\power</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_n.c">
+      <Filter>Source Files\kernel\power</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_n_power10.c">
+      <Filter>Source Files\kernel\power</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_n_vsx.c">
+      <Filter>Source Files\kernel\power</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_t.c">
+      <Filter>Source Files\kernel\power</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_t_power10.c">
+      <Filter>Source Files\kernel\power</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_t_vsx.c">
       <Filter>Source Files\kernel\power</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/scopy.c">
@@ -3365,6 +3458,9 @@
       <Filter>Source Files\kernel\power</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/zdot_microk_power8.c">
+      <Filter>Source Files\kernel\power</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/zgemm_kernel_power10.c">
       <Filter>Source Files\kernel\power</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/zgemv_n_4.c">
@@ -4268,6 +4364,9 @@
       <Filter>Source Files\kernel\x86_64</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/x86_64/dtrsm_kernel_RT_bulldozer.c">
+      <Filter>Source Files\kernel\x86_64</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/x86_64/omatcopy_ct.c">
       <Filter>Source Files\kernel\x86_64</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/x86_64/omatcopy_rt.c">
@@ -20617,6 +20716,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/utest/test_fork.c">
       <Filter>Source Files\utest</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/utest/test_gemv.c">
+      <Filter>Source Files\utest</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/utest/test_ismin.c">
       <Filter>Source Files\utest</Filter>
     </ClCompile>
@@ -21712,6 +21814,9 @@
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/KERNEL.NEOVERSEV1">
       <Filter>Misc Files\kernel\arm64</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/KERNEL.NEOVERSEV2">
+      <Filter>Misc Files\kernel\arm64</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/KERNEL.THUNDERX">
       <Filter>Misc Files\kernel\arm64</Filter>
     </Text>
@@ -22129,10 +22234,10 @@
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/KERNEL">
       <Filter>Misc Files\kernel\loongarch64</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/KERNEL.LOONGSON2K1000">
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/KERNEL.LA264">
       <Filter>Misc Files\kernel\loongarch64</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/KERNEL.LOONGSON3R5">
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/KERNEL.LA464">
       <Filter>Misc Files\kernel\loongarch64</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/Makefile">
@@ -22340,6 +22445,18 @@
       <Filter>Misc Files\kernel\loongarch64</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_ncopy_8_lsx.S">
+      <Filter>Misc Files\kernel\loongarch64</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_small_kernel_nn_lasx.S">
+      <Filter>Misc Files\kernel\loongarch64</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_small_kernel_nt_lasx.S">
+      <Filter>Misc Files\kernel\loongarch64</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_small_kernel_tn_lasx.S">
+      <Filter>Misc Files\kernel\loongarch64</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_small_kernel_tt_lasx.S">
       <Filter>Misc Files\kernel\loongarch64</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_tcopy_16.S">

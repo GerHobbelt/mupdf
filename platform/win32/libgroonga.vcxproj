@@ -284,6 +284,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/file_lock.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/file_reader.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/float.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/generated_column.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/geo.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/grn_ecmascript.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/group.c" />
@@ -296,6 +297,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/index_column.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/index_cursor.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/language_model.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/load.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/logger.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/memory.c" />
@@ -440,6 +442,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/windows_event_logger.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/plugins/functions/h3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/plugins/functions/index_column.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/groonga/plugins/functions/language_model.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/plugins/functions/math.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/plugins/functions/number.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/plugins/functions/string.c" />
@@ -592,6 +595,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/groonga/include/groonga/id.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/include/groonga/ii.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/include/groonga/index_column.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/groonga/include/groonga/language_model.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/include/groonga/memory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/include/groonga/msgpack.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/include/groonga/nfkc.h" />
@@ -685,6 +689,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_expr_executor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_file_lock.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_generated_column.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_geo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_group.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_hash.h" />
@@ -693,6 +698,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_index_column.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_index_cursor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_language_model.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_load.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_logger.h" />
     <ClInclude Include="../../thirdparty/owemdjee/groonga/lib/grn_mrb.h" />
@@ -815,7 +821,6 @@
     <Image Include="../../thirdparty/owemdjee/groonga/data/html/admin/assets/jquery-ui-1.12.1/images/ui-icons_777777_256x240.png" />
     <Image Include="../../thirdparty/owemdjee/groonga/data/html/admin/assets/jquery-ui-1.12.1/images/ui-icons_cc0000_256x240.png" />
     <Image Include="../../thirdparty/owemdjee/groonga/data/html/admin/assets/jquery-ui-1.12.1/images/ui-icons_ffffff_256x240.png" />
-    <Image Include="../../thirdparty/owemdjee/groonga/data/html/admin/assets/loading.gif" />
     <Image Include="../../thirdparty/owemdjee/groonga/data/html/admin/favicon.ico" />
     <Image Include="../../thirdparty/owemdjee/groonga/data/html/admin/favicon.png" />
     <Image Include="../../thirdparty/owemdjee/groonga/doc/source/_static/favicon.ico" />
@@ -896,11 +901,11 @@
     <Text Include="../../thirdparty/owemdjee/groonga/bundled_lz4_version" />
     <Text Include="../../thirdparty/owemdjee/groonga/bundled_mecab_naist_jdic_version" />
     <Text Include="../../thirdparty/owemdjee/groonga/bundled_mecab_version" />
-    <Text Include="../../thirdparty/owemdjee/groonga/bundled_message_pack_version" />
     <Text Include="../../thirdparty/owemdjee/groonga/bundled_rapidjson_version" />
     <Text Include="../../thirdparty/owemdjee/groonga/bundled_xxhash_version" />
     <Text Include="../../thirdparty/owemdjee/groonga/ci/msys2/PKGBUILD" />
     <Text Include="../../thirdparty/owemdjee/groonga/cmake/FindGroongaRapidJSON.cmake" />
+    <Text Include="../../thirdparty/owemdjee/groonga/cmake/FindGroongalibedit.cmake" />
     <Text Include="../../thirdparty/owemdjee/groonga/cmake/FindGroongalibstemmer.cmake" />
     <Text Include="../../thirdparty/owemdjee/groonga/cmake/FindGroongalz4.cmake" />
     <Text Include="../../thirdparty/owemdjee/groonga/cmake/FindGroongamsgpackc.cmake" />
@@ -908,6 +913,7 @@
     <Text Include="../../thirdparty/owemdjee/groonga/cmake/FindGroongazstd.cmake" />
     <Text Include="../../thirdparty/owemdjee/groonga/cmake/GroongaSphinx.cmake" />
     <Text Include="../../thirdparty/owemdjee/groonga/cmake/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/groonga/compose.yaml" />
     <Text Include="../../thirdparty/owemdjee/groonga/config.h.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/groonga/config.sh.in" />
     <Text Include="../../thirdparty/owemdjee/groonga/configure.ac" />
@@ -989,6 +995,7 @@
     <Text Include="../../thirdparty/owemdjee/groonga/data/travis/setup.sh" />
     <Text Include="../../thirdparty/owemdjee/groonga/data/windows_event_log/provider.man" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/groonga/doc/Doxyfile" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/Gemfile" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/README" />
@@ -1193,6 +1200,7 @@
     <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/functions/html_untag.po" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/functions/in_records.po" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/functions/in_values.po" />
+    <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/functions/language_model_vectorize.po" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/functions/math_abs.po" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/functions/now.po" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/functions/number_classify.po" />
@@ -1222,6 +1230,7 @@
     <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/grn_expr/query_syntax.po" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/grn_expr/script_syntax.po" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/indexing.po" />
+    <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/language_model.po" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/log.po" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/normalizers.po" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/locale/ja/LC_MESSAGES/reference/normalizers/normalizer_auto.po" />
@@ -1337,6 +1346,11 @@
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/contribution/report.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/development.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/development/travis-ci.rst" />
+    <Text Include="../../thirdparty/owemdjee/groonga/doc/source/example/reference/functions/language_model_vectorize/usage_register.md" />
+    <Text Include="../../thirdparty/owemdjee/groonga/doc/source/example/reference/functions/language_model_vectorize/usage_rerank.md" />
+    <Text Include="../../thirdparty/owemdjee/groonga/doc/source/example/reference/functions/language_model_vectorize/usage_setup_data.md" />
+    <Text Include="../../thirdparty/owemdjee/groonga/doc/source/example/reference/functions/language_model_vectorize/usage_setup_generated_column.md" />
+    <Text Include="../../thirdparty/owemdjee/groonga/doc/source/example/reference/functions/language_model_vectorize/usage_setup_schema.md" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/images/fulltext-introduction/array.svg" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/images/fulltext-introduction/columns.svg" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/images/fulltext-introduction/hash-table.svg" />
@@ -1383,7 +1397,7 @@
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/install/almalinux.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/install/amazon_linux.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/install/centos.rst" />
-    <Text Include="../../thirdparty/owemdjee/groonga/doc/source/install/cmake.rst" />
+    <Text Include="../../thirdparty/owemdjee/groonga/doc/source/install/cmake.md" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/install/debian.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/install/docker.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/install/mac_os_x.rst" />
@@ -1552,6 +1566,7 @@
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/functions/html_untag.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/functions/in_records.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/functions/in_values.rst" />
+    <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/functions/language_model_vectorize.md" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/functions/math_abs.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/functions/now.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/functions/number_classify.rst" />
@@ -1581,6 +1596,7 @@
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/grn_expr/query_syntax.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/grn_expr/script_syntax.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/indexing.rst" />
+    <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/language_model.md" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/log.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/normalizers.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/normalizers/normalizer_auto.rst" />
@@ -1670,10 +1686,8 @@
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/tutorial/query_expansion.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/tutorial/search.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/styles/pdf/ja.json" />
-    <Text Include="../../thirdparty/owemdjee/groonga/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/groonga/dockerfiles/alpine.dockerfile" />
     <Text Include="../../thirdparty/owemdjee/groonga/dockerfiles/run.sh" />
-    <Text Include="../../thirdparty/owemdjee/groonga/dockerfiles/ubuntu-16.04.dockerfile" />
-    <Text Include="../../thirdparty/owemdjee/groonga/dockerfiles/ubuntu-18.04.dockerfile" />
     <Text Include="../../thirdparty/owemdjee/groonga/examples/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/groonga/examples/dictionary/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/groonga/examples/dictionary/README.md" />
@@ -1729,20 +1743,15 @@
     <Text Include="../../thirdparty/owemdjee/groonga/packages/Rakefile" />
     <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian-bookworm-arm64/from" />
     <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian-bookworm/Dockerfile" />
-    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian-bullseye-arm64/from" />
-    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian-bullseye/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian-trixie-arm64/from" />
     <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian-trixie/Dockerfile" />
-    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian/changelog" />
-    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian/compat" />
-    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian/control" />
-    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian/copyright" />
-    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian/groonga-keyring.install" />
-    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian/groonga-keyring.postrm.in" />
-    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian/rules" />
-    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/debian/source/format" />
-    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/env.sh.in" />
     <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/ubuntu-focal-arm64/from" />
+    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/ubuntu-focal/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/ubuntu-jammy-arm64/from" />
+    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/ubuntu-jammy/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/ubuntu-noble-arm64/from" />
+    <Text Include="../../thirdparty/owemdjee/groonga/packages/apt/ubuntu-noble/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/groonga/packages/debian/changelog" />
     <Text Include="../../thirdparty/owemdjee/groonga/packages/debian/compat" />
     <Text Include="../../thirdparty/owemdjee/groonga/packages/debian/control.in" />
@@ -1777,7 +1786,8 @@
     <Text Include="../../thirdparty/owemdjee/groonga/packages/yum/almalinux-8/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/groonga/packages/yum/almalinux-9-aarch64/from" />
     <Text Include="../../thirdparty/owemdjee/groonga/packages/yum/almalinux-9/Dockerfile" />
-    <Text Include="../../thirdparty/owemdjee/groonga/packages/yum/centos-7/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/groonga/packages/yum/amazon-linux-2023-aarch64/from" />
+    <Text Include="../../thirdparty/owemdjee/groonga/packages/yum/amazon-linux-2023/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/groonga/packages/yum/groonga.spec.in" />
     <Text Include="../../thirdparty/owemdjee/groonga/packages/yum/test.sh" />
     <Text Include="../../thirdparty/owemdjee/groonga/plugins/CMakeLists.txt" />
@@ -1879,8 +1889,6 @@
     <Text Include="../../thirdparty/owemdjee/groonga/vendor/mecab/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/groonga/vendor/mecab/config.h.cmake" />
     <Text Include="../../thirdparty/owemdjee/groonga/vendor/mecab/mecabrc.cmake" />
-    <Text Include="../../thirdparty/owemdjee/groonga/vendor/message_pack/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/groonga/vendor/message_pack/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/groonga/vendor/mruby/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/groonga/vendor/mruby/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/groonga/vendor/mruby/built_sources.am" />

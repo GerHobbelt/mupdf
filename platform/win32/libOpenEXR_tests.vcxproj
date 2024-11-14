@@ -234,6 +234,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/base_units.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/buffer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/compression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/compressionTables.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/deep.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/general_attr.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRCoreTest/main.cpp" />
@@ -251,9 +252,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/random.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testAttributes.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testB44ExpLogTable.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testBackwardCompatibility.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testBadTypeAttributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCRgba.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testChannels.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCompositeDeepScanLine.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCompression.cpp" />
@@ -269,8 +270,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepScanLineHuge.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepScanLineMultipleRead.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepTiledBasic.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDwaCompressorSimd.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDwaLookups.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testExistingStreams.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testFutureProofing.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testHeader.cpp" />
@@ -394,9 +393,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/compareFloat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/random.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testAttributes.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testB44ExpLogTable.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testBackwardCompatibility.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testBadTypeAttributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCRgba.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testChannels.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCompositeDeepScanLine.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testCompression.h" />
@@ -412,8 +411,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepScanLineHuge.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepScanLineMultipleRead.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDeepTiledBasic.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDwaCompressorSimd.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testDwaLookups.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testExistingStreams.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testFutureProofing.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/test/OpenEXRTest/testHeader.h" />
@@ -518,6 +515,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenEXR/README.md" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/SECURITY.md" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/bazel/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/FindPythonPackage.cmake" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/FindSphinx.cmake" />
@@ -539,6 +537,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/cmake_uninstall.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/docs/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/share/ci/scripts/install_pybind11.sh" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/share/ci/scripts/linux/install_valgrind.sh" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/share/ci/scripts/linux/log_valgrind.sh" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/share/ci/scripts/linux/run_gcov.sh" />
@@ -599,6 +598,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrmakepreview.py" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrmaketiled.py" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrmanifest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrmetrics.py" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrmultipart.py" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrmultiview.py" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/test/bin/test_exrstdattr.py" />
@@ -647,8 +647,10 @@
     <Text Include="../../thirdparty/owemdjee/OpenEXR/website/imageprocessing.dot" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/website/index.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/website/install.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/latest_news_title.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/website/license.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/website/news.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/website/python.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/website/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/website/scripts/install_doxygen.sh" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/website/scripts/test_images.py" />

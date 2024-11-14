@@ -480,6 +480,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_encryption.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_json.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_linearization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_objects.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_optimization.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_pages.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QTC.cc" />
@@ -598,6 +599,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFObjGen.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFObject.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFObjectHandle.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFObjectHandle_future.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFObjectHelper.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFOutlineDocumentHelper.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFOutlineObjectHelper.hh" />
@@ -669,6 +671,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_Stream.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_String.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_Unresolved.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_objects.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_private.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/RC4.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/RC4_native.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/ResourceFinder.hh" />
@@ -1020,6 +1024,7 @@
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/annotation-no-resources-out.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/annotation-no-resources.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/annotations-foreign-file.out.pdf" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/annotations-no-acroform.json" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/annotations-no-acroform.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/annotations-rotated-180.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/annotations-rotated-270.pdf" />
@@ -1057,6 +1062,7 @@
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad-json-overlay-no-file.json" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad-json-pages-no-file.json" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad-json-schema-error.json" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad-parse.qdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad-token-startxref.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad-xref-entry.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad-xref.pdf" />
@@ -1092,7 +1098,7 @@
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad36.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad37.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad38.pdf" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad39.qdf" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad39.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad4.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad5.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/bad6.pdf" />
@@ -1516,6 +1522,8 @@
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/numeric-and-string-2.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/numeric-and-string-3.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/obj0.pdf" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/object-stream-self-ref.out.pdf" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/object-stream-self-ref.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/object-stream.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/object-types-os.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/object-types.pdf" />
@@ -1525,6 +1533,7 @@
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/outlines-split-21-30.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/outlines-with-actions.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/outlines-with-loop.pdf" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/outlines-with-old-root-dests-dict.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/outlines-with-old-root-dests.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/overlay-copy-annotations-p1.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/overlay-copy-annotations-p2.pdf" />
@@ -1618,7 +1627,11 @@
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/really-shared-images-pages-out.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/recover-xref-stream-recovered.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/recover-xref-stream.pdf" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/remove-info-no-moddate.pdf" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/remove-info.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/remove-labels.pdf" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/remove-metadata-no-moddate.pdf" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/remove-metadata.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/remove-multiple-attachments.json" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/remove-multiple-attachments.pdf" />
     <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/replace-input.pdf" />
@@ -1785,22 +1798,6 @@
     <Text Include="../../thirdparty/owemdjee/qpdf/qtest/bin/qtest-driver" />
     <Text Include="../../thirdparty/owemdjee/qpdf/run-qtest" />
     <Text Include="../../thirdparty/owemdjee/qpdf/spell-check" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/fix-qpdf.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/libjpegmem.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/libqpdf.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/pdf_from_scratch.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/qpdf-ctest.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/qpdf.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/test_driver.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/test_large_file.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/test_parsedoffset.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/test_pdf_doc_encoding.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/test_pdf_unicode.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/test_renumber.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/test_tokenizer.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/test_unicode_filenames.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/test_xref.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/qpdf/win32/zlib_flate.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/qpdf/zlib-flate/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/qpdf/zlib-flate/qtest/missing-z-finish.in" />
     <Xml Include="../../thirdparty/owemdjee/qpdf/appimage/qpdf.appdata.xml" />

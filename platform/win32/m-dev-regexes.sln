@@ -304,6 +304,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specs", "specs", "{D4920C7D
 		libeigen_test.spec = libeigen_test.spec
 		libeigen_unsupported.spec = libeigen_unsupported.spec
 		libeternaltimestamp.spec = libeternaltimestamp.spec
+		libeternaltimestamp_misc.spec = libeternaltimestamp_misc.spec
 		libeternaltimestamp_tests.spec = libeternaltimestamp_tests.spec
 		libeventpp.spec = libeventpp.spec
 		libeventpp_tests.spec = libeventpp_tests.spec
@@ -768,6 +769,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "owemdjee", "owemdjee", "{CA
 		..\..\thirdparty\owemdjee\update-README.js = ..\..\thirdparty\owemdjee\update-README.js
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NTFS ADS Viewer", "..\..\..\thirdparty\DirScanner\NTFS ADS Viewer\NTFS ADS Viewer.vcxproj", "{28E9E026-5E87-4248-BA0B-07813DCD8DB1}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "__build_target_boost", "__build_target_boost.vcxproj", "{D00CAE4A-B94A-4EA5-B8DD-4851FC7A6B64}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "__build_target_mupdf", "__build_target_mupdf.vcxproj", "{0688FE97-E8B4-4D80-8B8B-D445B349A82D}"
@@ -1174,6 +1177,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libglob", "libglob.vcxproj"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libglog", "libglog.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFFBE90D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libgnurx", "libgnurx.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFEA9372}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libgoogletest", "libgoogletest.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFD7A17E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libGQ-gumbo-css-selectors", "libGQ-gumbo-css-selectors.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF24A762}"
@@ -1289,6 +1294,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libnameof", "libnameof.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFFAEEE1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libnanosvg", "libnanosvg.vcxproj", "{A60D8644-5A1C-4D29-8970-751BFF971987}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "liboniguruma", "liboniguruma.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF022F63}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libopencv", "libopencv.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFD45D62}"
 EndProject
@@ -3874,6 +3881,14 @@ Global
 		{A60D8644-5A1C-4D29-8970-7518FFFBE90D}.Release|x64.Build.0 = Release|x64
 		{A60D8644-5A1C-4D29-8970-7518FFFBE90D}.Release|x86.ActiveCfg = Release|Win32
 		{A60D8644-5A1C-4D29-8970-7518FFFBE90D}.Release|x86.Build.0 = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FFEA9372}.Debug|x64.ActiveCfg = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FFEA9372}.Debug|x64.Build.0 = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FFEA9372}.Debug|x86.ActiveCfg = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FFEA9372}.Debug|x86.Build.0 = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FFEA9372}.Release|x64.ActiveCfg = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FFEA9372}.Release|x64.Build.0 = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FFEA9372}.Release|x86.ActiveCfg = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FFEA9372}.Release|x86.Build.0 = Release|Win32
 		{A60D8644-5A1C-4D29-8970-7518FFD7A17E}.Debug|x64.ActiveCfg = Debug|x64
 		{A60D8644-5A1C-4D29-8970-7518FFD7A17E}.Debug|x64.Build.0 = Debug|x64
 		{A60D8644-5A1C-4D29-8970-7518FFD7A17E}.Debug|x86.ActiveCfg = Debug|Win32
@@ -7954,6 +7969,14 @@ Global
 		{00112979-815B-4F64-BC9D-2190780C0A35}.Release|x64.Build.0 = Release|x64
 		{00112979-815B-4F64-BC9D-2190780C0A35}.Release|x86.ActiveCfg = Release|Win32
 		{00112979-815B-4F64-BC9D-2190780C0A35}.Release|x86.Build.0 = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF022F63}.Debug|x64.ActiveCfg = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FF022F63}.Debug|x64.Build.0 = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FF022F63}.Debug|x86.ActiveCfg = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF022F63}.Debug|x86.Build.0 = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF022F63}.Release|x64.ActiveCfg = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FF022F63}.Release|x64.Build.0 = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FF022F63}.Release|x86.ActiveCfg = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF022F63}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -7987,3 +8010,7 @@ Global
 		libmupdf_CarvedSubset.vcxitems*{0fdc74d7-d18c-45ce-94d6-c5a0edfccdf2}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NTFS ADS Viewer", "..\..\..\thirdparty\DirScanner\NTFS ADS Viewer\NTFS ADS Viewer.vcxproj", "{28E9E026-5E87-4248-BA0B-07813DCD8DB1}"
+EndProject
+	

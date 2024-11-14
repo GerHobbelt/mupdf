@@ -263,6 +263,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/fts5/fts5_varint.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/fts5/fts5_vocab.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/icu/icu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/intck/sqlite3intck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/intck/test_intck.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/jni/src/c/sqlite3-jni.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/lsm1/lsm-test/lsmtest1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/lsm1/lsm-test/lsmtest2.c" />
@@ -388,9 +390,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/build.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/callback.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/complete.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/crypto.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/crypto_cc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/crypto_impl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/crypto_libtomcrypt.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/crypto_nss.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/crypto_openssl.c" />
@@ -437,6 +437,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/resolve.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/rowset.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/select.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/sqlcipher.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/status.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/table.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/tclsqlite.c" />
@@ -578,6 +579,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/ext/fts5/fts5.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/ext/fts5/fts5Int.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/ext/icu/sqliteicu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/ext/intck/sqlite3intck.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/ext/jni/src/c/sqlite3-jni.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/ext/lsm1/lsm-test/lsmtest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/ext/lsm1/lsm-test/lsmtest_tdb.h" />
@@ -593,7 +595,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/macosx/SQLCipher.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/src/btree.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/src/btreeInt.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/src/crypto.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/src/hash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/src/hwtime.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/src/msvc.h" />
@@ -621,6 +622,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/vsixtest/App.xaml.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/vsixtest/MainPage.xaml.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlcipher/vsixtest/pch.h" />
+    <Image Include="../../thirdparty/owemdjee/sqlcipher/art/icon-243x273.gif" />
+    <Image Include="../../thirdparty/owemdjee/sqlcipher/art/icon-80x90.gif" />
     <Image Include="../../thirdparty/owemdjee/sqlcipher/art/sqlite370.ico" />
     <Image Include="../../thirdparty/owemdjee/sqlcipher/art/sqlite370.jpg" />
     <Image Include="../../thirdparty/owemdjee/sqlcipher/vsixtest/Assets/LockScreenLogo.scale-200.png" />
@@ -695,6 +698,7 @@
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fts5/tool/mkfts5c.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fts5/tool/showfts5.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/icu/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/intck/intck_common.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/jni/GNUmakefile" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/jni/README.md" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/jni/src/org/sqlite/jni/annotation/Experimental.java" />
@@ -798,9 +802,10 @@
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/api/sqlite3-api-worker1.js" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/api/sqlite3-license-version-header.js" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/api/sqlite3-opfs-async-proxy.js" />
-    <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/api/sqlite3-v-helper.js" />
+    <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/api/sqlite3-vfs-helper.c-pp.js" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/api/sqlite3-vfs-opfs-sahpool.c-pp.js" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/api/sqlite3-vfs-opfs.c-pp.js" />
+    <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/api/sqlite3-vtab-helper.c-pp.js" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/api/sqlite3-worker1-promiser.c-pp.js" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/api/sqlite3-worker1.c-pp.js" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/batch-runner-sahpool.html" />
@@ -816,8 +821,8 @@
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/demo-123.js" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/demo-jsstorage.html" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/demo-jsstorage.js" />
-    <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/demo-worker1-promiser.html" />
-    <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/demo-worker1-promiser.js" />
+    <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/demo-worker1-promiser.c-pp.html" />
+    <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/demo-worker1-promiser.c-pp.js" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/demo-worker1.html" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/demo-worker1.js" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/wasm/fiddle/emscripten.css" />
@@ -875,6 +880,7 @@
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/json/json-speed-check.sh" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/json/jsonb-q1.txt" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/lemon-test01.y" />
+    <Text Include="../../thirdparty/owemdjee/sqlcipher/test/literal2.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/lock_common.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/make-where7.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/malloc_common.tcl" />
@@ -959,7 +965,6 @@
     <Text Include="../../thirdparty/owemdjee/sqlcipher/vsixtest/MainPage.xaml" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/vsixtest/Package.appxmanifest" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/vsixtest/vsixtest.tcl" />
-    <Text Include="../../thirdparty/owemdjee/sqlcipher/vsixtest/vsixtest.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/vsixtest/vsixtest_TemporaryKey.pfx" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >

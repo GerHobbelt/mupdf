@@ -49,20 +49,20 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -109,7 +109,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -143,8 +143,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
@@ -167,6 +167,20 @@
     <Image Include="../../thirdparty/owemdjee/ColorPaletteCodable/Quicklook/Palette Viewer/Palette Viewer/Assets.xcassets/swiftui-icon.imageset/swiftui-icon@3x.png" />
     <Image Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/image/midnight-ablaze-1x.png" />
     <Image Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/image/pastel.png" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/Assets.xcassets/AccentColor.colorset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/Assets.xcassets/AppIcon.appiconset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/Assets.xcassets/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/Assets.xcassets/palettes/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/Assets.xcassets/palettes/equinox-8.pal.dataset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/Assets.xcassets/palettes/equinox-8.pal.dataset/equinox-8.pal" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/Assets.xcassets/palettes/moderna-24.pal.dataset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/Assets.xcassets/palettes/moderna-24.pal.dataset/moderna-24.pal" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/Assets.xcassets/palettes/pear36.hex.dataset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/Assets.xcassets/palettes/pear36.hex.dataset/pear36.hex" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/Assets.xcassets/palettes/slso8.gpl.dataset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/Assets.xcassets/palettes/slso8.gpl.dataset/slso8.gpl" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/Preview Content/Preview Assets.xcassets/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Demos/SwiftUI-Demo/simple-swiftui-presentation/simple_swiftui_presentation.entitlements" />
     <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Quicklook/Palette Viewer/Palette Viewer/Assets.xcassets/AccentColor.colorset/Contents.json" />
     <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Quicklook/Palette Viewer/Palette Viewer/Assets.xcassets/AppIcon.appiconset/Contents.json" />
@@ -211,9 +225,19 @@
     <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/riff/arne-v20-16.pal" />
     <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/riff/sample.pal" />
     <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/svg/35.grd.svg" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/svg/expected/expected - 24 colour palettes.ase.svg" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/svg/expected/expected - atari-800xl-palette.gpl.svg" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/svg/expected/expected - pear36-transparency.hex.svg" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/svg/expected/expected - zenit-241.ase.svg" />
     <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/svg/skyline.jsoncolorgradient.svg" />
     <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/svg/temperature.pspgradient.svg" />
-    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tools/build-platforms.sh" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tools/platform/iOS-build-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tools/platform/ipadOS-build-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tools/platform/macCatalyst-build-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tools/platform/macOS-build-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tools/platform/tvOS-build-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tools/platform/watchOS-build-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tools/sanity-build-test-check.sh" />
     <Xml Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/xml/Satins Cap Colors.xml" />
     <Xml Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/xml/Signature.xml" />
     <Xml Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/xml/ThermoFlex Plus.xml" />
@@ -221,7 +245,8 @@
     <Xml Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/xml/db32-cmyk.xml" />
     <Xml Include="../../thirdparty/owemdjee/ColorPaletteCodable/Tests/ColorPaletteCodableTests/resources/xml/db32-rgb.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

@@ -406,7 +406,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/overlay/backtrack_check_si.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/overlay/check_enrich.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/overlay/clip_linestring.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/overlay/cluster_exits.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/overlay/cluster_info.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/overlay/colocate_clusters.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/overlay/convert_ring.hpp" />
@@ -461,7 +460,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/partition.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/point_is_spike_or_equal.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/point_on_border.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/recalculate.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/relate/areal_areal.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/relate/boundary_checker.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/relate/box_areal.hpp" />
@@ -578,6 +576,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/core/mutable_range.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/core/point_order.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/core/point_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/core/primary_single_tag.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/core/radian_access.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/core/radius.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/core/reverse_dispatch.hpp" />
@@ -867,14 +866,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/policies/relate/intersection_points.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/policies/relate/intersection_policy.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/policies/relate/intersection_ratios.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/policies/robustness/get_rescale_policy.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/policies/robustness/no_rescale_policy.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/policies/robustness/rescale_policy.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/policies/robustness/rescale_policy_tags.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/policies/robustness/robust_point_type.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/policies/robustness/robust_type.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/policies/robustness/segment_ratio.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/policies/robustness/segment_ratio_type.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/srs/epsg.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/srs/esri.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/srs/iau2000.hpp" />
@@ -1327,7 +1319,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/util/constexpr.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/util/coordinate_cast.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/util/for_each_coordinate.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/util/for_each_with_index.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/util/has_infinite_coordinate.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/util/has_nan_coordinate.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/util/has_non_finite_coordinate.hpp" />
@@ -1362,14 +1353,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/views/detail/indexed_point_view.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/views/detail/random_access_view.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/views/detail/two_dimensional_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/views/enumerate_view.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/views/identity_view.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/views/reversible_view.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/views/segment_view.hpp" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/geometry/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/geometry/CONTRIBUTING.md" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/geometry/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/geometry/LICENSE_1_0.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/geometry/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/geometry/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/geometry/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/geometry/index/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/geometry/index/index.html" />

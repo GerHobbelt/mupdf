@@ -412,12 +412,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/gmt/src/segy/pssegyz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gmt/src/segy/segy2grd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gmt/src/segy/segy_io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gmt/src/seis/gmtisf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gmt/src/seis/grdshake.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gmt/src/seis/grdvs30.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gmt/src/seis/pscoupe.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gmt/src/seis/psmeca.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gmt/src/seis/pspolar.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gmt/src/seis/pssac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gmt/src/seis/read_isf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gmt/src/seis/sacio.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gmt/src/seis/utilmeca.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gmt/src/spectrum1d.c" />
@@ -755,10 +757,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/gmt/src/segy/segy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gmt/src/segy/segy_io.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gmt/src/segy/segyreel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gmt/src/seis/isf_head.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gmt/src/seis/longopt/pscoupe_inc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gmt/src/seis/longopt/psmeca_inc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gmt/src/seis/longopt/pspolar_inc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gmt/src/seis/longopt/pssac_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gmt/src/seis/longopt/readisf_inc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gmt/src/seis/longopt/shake_inc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gmt/src/seis/longopt/vs30_inc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gmt/src/seis/meca.h" />
@@ -951,7 +955,6 @@
     <Text Include="../../thirdparty/owemdjee/gmt/CITATION.cff" />
     <Text Include="../../thirdparty/owemdjee/gmt/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/gmt/CODE_CONVENTIONS.md" />
-    <Text Include="../../thirdparty/owemdjee/gmt/CODE_OF_CONDUCT.md" />
     <Text Include="../../thirdparty/owemdjee/gmt/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/gmt/COPYING.LESSERv3" />
     <Text Include="../../thirdparty/owemdjee/gmt/COPYINGv3" />
@@ -1374,6 +1377,7 @@
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/index.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/inset.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/install.rst" />
+    <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/intro.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/isogmt.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/kml2gmt.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/legend.rst" />
@@ -1478,6 +1482,7 @@
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/supplements/segy/segy2grd.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/supplements/segy/segyz.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/supplements/seis/coupe.rst" />
+    <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/supplements/seis/gmtisf.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/supplements/seis/grdshake.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/supplements/seis/grdvs30.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/supplements/seis/meca.rst" />
@@ -1520,13 +1525,11 @@
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/triangulate.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/tutorial.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/tutorial/bash/index.rst" />
-    <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/tutorial/bash/intro.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/tutorial/bash/session-1.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/tutorial/bash/session-2.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/tutorial/bash/session-3.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/tutorial/bash/session-4.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/tutorial/julia/index.rst" />
-    <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/tutorial/julia/intro.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/tutorial/julia/session-1.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/tutorial/julia/session-2.rst" />
     <Text Include="../../thirdparty/owemdjee/gmt/doc/rst/source/tutorial/julia/session-3.rst" />
@@ -3035,6 +3038,7 @@
     <Text Include="../../thirdparty/owemdjee/gmt/test/pscoast/oblsuite.sh" />
     <Text Include="../../thirdparty/owemdjee/gmt/test/pscoast/oblsuite_N.sh" />
     <Text Include="../../thirdparty/owemdjee/gmt/test/pscoast/placement.sh" />
+    <Text Include="../../thirdparty/owemdjee/gmt/test/pscoast/proj4_nox0y0.sh" />
     <Text Include="../../thirdparty/owemdjee/gmt/test/pscoast/pscoast-l2s.sh" />
     <Text Include="../../thirdparty/owemdjee/gmt/test/pscoast/pscoast_180.sh" />
     <Text Include="../../thirdparty/owemdjee/gmt/test/pscoast/pscoast_JA.sh" />

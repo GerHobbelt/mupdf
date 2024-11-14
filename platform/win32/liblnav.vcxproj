@@ -268,6 +268,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/collation-functions.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/column_namer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/command_executor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/lnav/src/crashd.client.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/curl_looper.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/data_parser.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/data_scanner.cc" />
@@ -278,6 +279,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/elem_to_json.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/environ_vtab.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/extension-functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/lnav/src/external_opener.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/field_overlay_source.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/file_collection.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/file_converter_manager.cc" />
@@ -294,7 +296,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/formats/logfmt/logfmt.parser.test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/fs-extension-functions.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/fstat_vtab.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/lnav/src/gantt_source.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/grep_proc.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/help_text.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/help_text_formatter.cc" />
@@ -375,6 +376,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/test_override.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/text_anonymizer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/text_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/lnav/src/text_link_handler.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/text_overlay_menu.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/textfile_highlighters.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/textfile_sub_source.cc" />
@@ -428,6 +430,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/third-party/xxHash/xxh_x86dispatch.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/third-party/xxHash/xxhash.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/time-extension-functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/lnav/src/timeline_source.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/timer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/top_status_source.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/lnav/src/unique_path.cc" />
@@ -560,6 +563,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/byte_array.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/column_namer.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/command_executor.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/crashd.client.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/curl_looper.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/data_parser.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/data_scanner.hh" />
@@ -569,6 +573,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/dump_internals.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/elem_to_json.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/environ_vtab.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/external_opener.cfg.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/external_opener.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/field_overlay_source.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/file_collection.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/file_converter_manager.hh" />
@@ -595,14 +601,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/fmtlib/fmt/xchar.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/formats/logfmt/logfmt.parser.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/fstat_vtab.hh" />
-    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/gantt_source.hh" />
-    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/gantt_status_source.hh" />
-    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/ghc/filesystem.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/ghc/fs_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/ghc/fs_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/ghc/fs_std.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/ghc/fs_std_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/ghc/fs_std_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/grep_highlighter.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/grep_proc.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/hasher.hh" />
@@ -714,6 +712,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/termios_guard.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/text_anonymizer.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/text_format.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/text_link_handler.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/text_overlay_menu.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/textfile_highlighters.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/textfile_sub_source.hh" />
@@ -818,6 +817,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/third-party/xxHash/xxh_x86dispatch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/third-party/xxHash/xxhash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/time_T.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/timeline_source.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/lnav/src/timeline_status_source.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/timer.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/top_status_source.cfg.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/lnav/src/top_status_source.hh" />
@@ -883,14 +884,14 @@
     <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-config-header.png" />
     <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-files-panel.png" />
     <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-filters-panel.png" />
-    <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-gantt-1.png" />
-    <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-gantt-2.png" />
     <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-intro-screen.png" />
     <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-make-check-log.png" />
     <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-markdown-example.png" />
     <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-pretty-view-after.png" />
     <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-pretty-view-before.png" />
     <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-spectro-cpu-pct.png" />
+    <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-timeline-1.png" />
+    <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-timeline-2.png" />
     <Image Include="../../thirdparty/owemdjee/lnav/docs/source/lnav-ui.png" />
     <Image Include="../../thirdparty/owemdjee/lnav/docs/source/open-error.png" />
     <Image Include="../../thirdparty/owemdjee/lnav/docs/source/open-help.png" />
@@ -926,6 +927,11 @@
     <Text Include="../../thirdparty/owemdjee/lnav/cmake/spell.cmake" />
     <Text Include="../../thirdparty/owemdjee/lnav/cmake/variables.cmake" />
     <Text Include="../../thirdparty/owemdjee/lnav/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/lnav/crashd/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/lnav/crashd/Procfile" />
+    <Text Include="../../thirdparty/owemdjee/lnav/crashd/app.py" />
+    <Text Include="../../thirdparty/owemdjee/lnav/crashd/fly.toml" />
+    <Text Include="../../thirdparty/owemdjee/lnav/crashd/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/lnav/demo/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/lnav/demo/fly.toml" />
     <Text Include="../../thirdparty/owemdjee/lnav/demo/loggen.py" />
@@ -1084,6 +1090,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/alb_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/block_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/bunyan_log.json" />
+    <Text Include="../../thirdparty/owemdjee/lnav/src/formats/caddy_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/candlepin_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/choose_repo_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/cloudflare_log.json" />
@@ -1092,6 +1099,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/dpkg_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/elb_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/engine_log.json" />
+    <Text Include="../../thirdparty/owemdjee/lnav/src/formats/env_logger_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/error_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/esx_syslog_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/formats.am" />
@@ -1102,6 +1110,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/java_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/journald_json_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/katello_log.json" />
+    <Text Include="../../thirdparty/owemdjee/lnav/src/formats/lnav_debug_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/logfmt/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/logfmt/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/nextcloud_log.json" />
@@ -1110,11 +1119,12 @@
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/openamdb_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/openstack_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/page_log.json" />
-    <Text Include="../../thirdparty/owemdjee/lnav/src/formats/papertrail_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/pcap_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/procstate_log.json" />
+    <Text Include="../../thirdparty/owemdjee/lnav/src/formats/rails_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/redis_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/s3_log.json" />
+    <Text Include="../../thirdparty/owemdjee/lnav/src/formats/simple_rs_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/snaplogic_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/sssd_log.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/src/formats/strace_log.json" />
@@ -1250,6 +1260,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/datafile_simple.23" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/datafile_simple.24" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/datafile_simple.25" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/datafile_simple.26" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/datafile_simple.3" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/datafile_simple.4" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/datafile_simple.5" />
@@ -1398,6 +1409,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_config.sh_5fd9fbccc35e9b06abdd913da0c16bdb306b926e.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_config.sh_a0907769aba112d628e7ebe39c4ec252e5e0bc69.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_config.sh_b08f7523659d1c12f0e59920cd40d17d4a83b72f.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_config.sh_d3df763c453c81ed3126337c643f9d9a1978119e.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_config.sh_d622658dc98327b1b2fd346802d24bc633e34ac7.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_config.sh_d708b6fd32d83ce0ee00ca5383388308ba5a06e1.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_config.sh_eec3768ebc201ca63bca1411270965f78db1abfc.err" />
@@ -1421,16 +1433,6 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_format_loader.sh_15e861d2327512a721fd42ae51dc5427689e0bb6.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_format_loader.sh_5992e2695b7e6cf1f3520dbb87af8fc2b8f27088.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_format_loader.sh_fca6c1fb9f3aaa69b3ffb2d1a8a86434b2f4a247.err" />
-    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_gantt.sh_3af11588ee36bab7e2caea0f7a24d3c9cafd2310.err" />
-    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_gantt.sh_3c2669075d0636fab98e2a67a72613420f22c322.err" />
-    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_gantt.sh_63500be50fc6743d8312133e2030cbbc39ca15ff.err" />
-    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_gantt.sh_740f22814c5d856234c2450168dae22989c85d1e.err" />
-    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_gantt.sh_74a94ee9103eac5e8e78ca57bccf49efa3827a9d.err" />
-    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_gantt.sh_83db753dd2669f801810f311e2d7d74397e10f26.err" />
-    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_gantt.sh_8fed8a7400042814ba13e50be5e3bd1741d82119.err" />
-    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_gantt.sh_b013ab41c3cca76cf05a01ca1ba65888be247ada.err" />
-    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_gantt.sh_cde7947f361e5f3d4cd1bbc3f7458f426b6a8eb4.err" />
-    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_gantt.sh_e6a4681a5a671c84c020dc91d7ce03c9d17fde07.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_json_format.sh_168cac40c27f547044c89d39eb0ff2ef81da4b21.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_json_format.sh_1bb0fd243e916546aea22029245ac590dae17a86.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_json_format.sh_40223ac4742883f883ccc61044bfffd6e102cca6.err" />
@@ -1475,6 +1477,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_logfile.sh_82d65f4dac07b1623f8202444d5b9144096e8243.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_logfile.sh_8a5e754cd471e5fdcdaede49c9290903acd7aad6.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_logfile.sh_a7037efd0c4bbf51940137a44e57d94e9307e83e.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_logfile.sh_bcf123ebd1c59c46a513f3fadd442bb7ab345843.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_logfile.sh_c18e14a26d8261c9f72747118a469266121d5459.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_logfile.sh_cc368d4b4bb6a9b9c79bd5a70ffa1f2d9d01e286.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_logfile.sh_ccb0d31813367c8d9dc5b5df383fac5b780711c1.err" />
@@ -1583,6 +1586,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_0a5d13b62da4cb66a59a51b0240b5fe0b6036b7e.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_0d46ee142f80f262c8c14a22751571cc567df525.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_13429aed81d7edfd47b57e9cdb8a25c43aff35c4.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_179abe70ea4f072199dda850a8e1c5565ce37829.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_19c92996bcc884bfdb70e3d24606cf5070556a74.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_1cbb81cfe40ee16332c5c775a74d06b945aa65c2.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_1f892b85dc9008c7b3bab7fdf8aa372a6d5ae22c.err" />
@@ -1609,6 +1613,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_57427f3c4b4ec785ffff7c5802c10db0d3e547cf.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_57edc93426e6767aa44ab2356c55327553dcdc8d.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_5801770f3e0ecc1d62c7a97116d6da1981bbc7bd.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_59a1d3c9cdc302c3f9ddfe4d8cf05fb40ffd3b56.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_5fe26fe4fc22f23f8dbe3a6aab394602886f2971.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_61471583c5e2f8ede3a8adefce682c27bf3924c8.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_62eb85c9569e71a630d72065238559528a16114c.err" />
@@ -1633,9 +1638,11 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_b085d26043f9661d70f82cb90ecb3c5245d25eac.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_b2694e4fbecdd128798af25ee0d069e7e35fb499.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_b5aa0561a65de7e8e22085db184c72a94b1a89a9.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_b6d3d4d242083783bbe8cc42dbf5ed3fddfb5609.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_b9330763dea550bbd006d7ae6ae7ea367f831fa3.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_bad03a996c0750733ab99c592b9011851f521a69.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_bd46ca4560f8be6307a914e39539bbac0368080a.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_be440e41ea2ce474e2d776efad0674979a2cdb88.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_c17933125df910588b806a9d07c2655bc71198ef.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_c20b0320096342c180146a5d18a6de82319d70b2.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_c353ef036c505b75996252138fbd4c8d22e8149c.err" />
@@ -1646,6 +1653,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_d4d540f0ef7e34b693fc72078d1cf2e069f86d81.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_dd540973a0dc86320d84706845a15608196ae5be.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_e44c0e2834038ec8d9b0b10b993967edb711c03c.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_e5d780a890db7d3795adc8e217d8d6553ddda95b.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_e70dc7d2b686c7f91c2b41b10f3920c50f3ea405.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_ef3cecab4ae0b90760f728add5652378e26b2fe6.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql.sh_fea98f976873ee7b55e6f322dda42719a19fb3f0.err" />
@@ -1716,8 +1724,11 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_indexes.sh_2b4945247332d01b08e6f17340f7d17f3b3649b8.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_indexes.sh_541a8e35f34a206e340a3880128b6ce137847872.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_indexes.sh_59a1497c13a5e09bc8f95ef02552b2835ebea6e5.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_indexes.sh_66a060f4c737778c10620cd94ce3935bdae5a90b.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_indexes.sh_69fd19d56a8cd1fc9c7eb9351270eabb491f8233.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_indexes.sh_6f707b6e856dbaab6f95e7e89b98dc3652021f85.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_indexes.sh_7cf6e25cb5eb0aab9f75a59d36beab44aba89f79.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_indexes.sh_a7297d8c61805cff38987cdede31066e6d245fd3.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_indexes.sh_b615b6737b1e0d383c8ce4a1db56332f11dbc158.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_indexes.sh_dab07d8de7728752ae938a174468d75e85f3ae7e.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_indexes.sh_f7681c234d4f60df16c997a05163aeb058c52870.err" />
@@ -1848,9 +1859,11 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_str_func.sh_d8d4cde8bbc98175069be579ff5634de43880b8c.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_str_func.sh_e68167bf5edc7a7b1defd06bdfb694ffa8b00df2.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_str_func.sh_ec939e82da809965c61f1c00f68d7afaa4a88382.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_str_func.sh_fa059d4738b2b5bd668360b1287f0245e452b9ef.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_time_func.sh_028e99419eb1ac80b03b36148ef1d4ae1c38c44c.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_time_func.sh_123c85ff1178743f5cb78efeaf98b637bcbe55ff.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_time_func.sh_14737ee9597b7d22519d23fbe34c0eb7d6c09ff2.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_time_func.sh_1804a2824c5e7dee903ef7500a3b60a123b7de01.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_time_func.sh_1fbeb1ba69a95284eb1d4d052f5068ede7968704.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_time_func.sh_20477acc218c96f1385dc97e4d28c80a05c93709.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_time_func.sh_243454526f6b5e19485db771b4932ddffd6f83a4.err" />
@@ -1913,7 +1926,9 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_sql_yaml_func.sh_dc189d02e8979b7ed245d5d750f68b9965984699.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_tailer.sh_12f539e535df04364316699f9edeac461aa9f9de.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_02a0514e0e384e5511ae202ea519552ba04030ed.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_08d527b6655b80eb3fc9f19d502b08ce28d71c80.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_0bba304f34ae07c4fa9e91e0b42f5fe98654a6a8.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_0f6afd335910722eaf816d6c3ef430ee64e65c4b.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_11fd274911e45a743b4de616888a64183d07cb76.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_143a40164c93c7ec44a66e7940b92b128a421147.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_1ce4056d72b871f8bb844c86aade2a9b1da58030.err" />
@@ -1921,6 +1936,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_265a8a5825e6c7dbc85cbe496dab6be7a349f3db.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_4226123565a53b4e3f80e602c1f294721e8e07bf.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_4dd174410d702a7b4be794fb6fa2c8889bd768d6.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_56dff3ab530f95792c923d650a9aa7f06e69e736.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_596b120fbea638472a27964444e262b4572afacc.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_5b51b55dff7332c5bee2c9b797c401c5614d574a.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_5e9320f18d066e6fc930dbbffc357af64312bd4b.err" />
@@ -1936,11 +1952,22 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_ac486314c4e02e480d829ea2f077b86c49fedcec.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_ac872aadda29b9a824361a2c711d62ec1c75d40f.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_c2a346ca1da2da4346f1d310212e166767993ce9.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_c597350651d168f504b28bd34d7bec015eef8634.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_d59b67113864ef5e77267d7fd8ad4072f5aef0fc.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_e088ea61a5382458cc48a2607e2639e52b0be1da.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_e556fa91b91579df20d38540a5db9cedbaf68a62.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_f586ef080a86dfe1f981b345bcf8d7a279b2b247.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_text_file.sh_f7522b0a99550a3ff91aae6582eb861547c535e1.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_timeline.sh_1a611c8752ca85361f436768a9982051530a5d2a.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_timeline.sh_3c2669075d0636fab98e2a67a72613420f22c322.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_timeline.sh_3fb943420cd43a6540bcac4702e257dcbbf00cc6.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_timeline.sh_403bc375071bc26f955b317d751a7d65fb433bc7.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_timeline.sh_7f300bf5f67f7ac2b0929990ed2670eea74062d1.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_timeline.sh_92bccfbb9fb45d7ab03934d662cc99ce50c77d8b.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_timeline.sh_a3af66b778018a11f912ce81bf8b4437b0ffddd0.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_timeline.sh_c54de09ae2633ee461ff92fdede81e2b36623c27.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_timeline.sh_c59a35537a919d78245edf21b83f9c0f3e0693dc.err" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/expected/test_timeline.sh_ced7291b2185772065e32d1add9ce5d4894482a0.err" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/expected_help.txt" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/file_for_dot_read.sql" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/formats/collision/format.json" />
@@ -2041,6 +2068,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/logfile_haproxy.0" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/logfile_invalid_json.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/logfile_invalid_json2.json" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/logfile_invalid_tz.0" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/logfile_journald.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/logfile_json.json" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/logfile_json2.json" />
@@ -2091,6 +2119,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/logfile_with_a_really_long_name_to_test_a_bug_with_long_names.0" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/logfile_with_zones.0" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/logfile_xml_msg.0" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/logfile_yday.0" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/man_echo.txt" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/mvwattrline_output.0" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/naughty_files.py" />
@@ -2108,7 +2137,6 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/test_events.sh" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/test_format_installer.sh" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/test_format_loader.sh" />
-    <Text Include="../../thirdparty/owemdjee/lnav/test/test_gantt.sh" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/test_grep_proc.sh" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/test_json_format.sh" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/test_line_buffer.sh" />
@@ -2137,6 +2165,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/test_sql_xml_func.sh" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/test_sql_yaml_func.sh" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/test_text_file.sh" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/test_timeline.sh" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/test_tui.sh" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/test_view_colors.sh" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/test_vt52_curses.sh" />
@@ -2145,6 +2174,7 @@
     <Text Include="../../thirdparty/owemdjee/lnav/test/textfile_ansi_expanding.0" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/textfile_cjk.0" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/textfile_json_indented.0" />
+    <Text Include="../../thirdparty/owemdjee/lnav/test/textfile_json_long.0" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/textfile_json_one_line.0" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/textfile_nonl.txt" />
     <Text Include="../../thirdparty/owemdjee/lnav/test/textfile_plain.0" />

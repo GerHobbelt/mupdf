@@ -319,6 +319,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpCPU.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpData.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/ACES2/Transform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOpCPU.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOpData.cpp" />
@@ -509,6 +510,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpCPU.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpData.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/ACES2/ColorLib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/ACES2/Common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/ACES2/MatrixLib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/ACES2/Transform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOpCPU.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOpData.h" />
@@ -645,6 +650,7 @@
     <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/rv.png" />
     <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/silhouette.png" />
     <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/substance.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/touchdesigner.png" />
     <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/unreal.png" />
     <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/unreallogo.png" />
     <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/vegaspro.png" />
@@ -1144,6 +1150,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_1.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_2.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_3.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_4.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/README.md" />
@@ -1333,6 +1340,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/config_dock.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/constants.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/inspect/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/inspect/chromaticities_inspector.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/inspect/code_inspector.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/inspect/curve_inspector.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/inspect/log_inspector.py" />
@@ -1370,9 +1378,12 @@
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/log_handlers.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/main_window.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/message_router.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/mode.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/processor_context.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/ref_space_manager.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/settings.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/signal_router.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/style.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transform_manager.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/__init__.py" />
@@ -1401,6 +1412,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/viewer/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/viewer/image_plane.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/viewer/image_viewer.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/viewer/offscreen_viewer.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/viewer/utils.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/viewer_dock.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/__init__.py" />
@@ -1414,7 +1426,10 @@
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/structure.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/table_widget.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/text_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/pyproject.toml" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/tests/conftest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/tests/items/test_color_space_edit.py" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociowrite/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/pyocioamf/README.md" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/pyocioamf/config-aces-reference.yaml" />

@@ -304,6 +304,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specs", "specs", "{D4920C7D
 		libeigen_test.spec = libeigen_test.spec
 		libeigen_unsupported.spec = libeigen_unsupported.spec
 		libeternaltimestamp.spec = libeternaltimestamp.spec
+		libeternaltimestamp_misc.spec = libeternaltimestamp_misc.spec
 		libeternaltimestamp_tests.spec = libeternaltimestamp_tests.spec
 		libeventpp.spec = libeventpp.spec
 		libeventpp_tests.spec = libeventpp_tests.spec
@@ -768,6 +769,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "owemdjee", "owemdjee", "{CA
 		..\..\thirdparty\owemdjee\update-README.js = ..\..\thirdparty\owemdjee\update-README.js
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NTFS ADS Viewer", "..\..\..\thirdparty\DirScanner\NTFS ADS Viewer\NTFS ADS Viewer.vcxproj", "{28E9E026-5E87-4248-BA0B-07813DCD8DB1}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1D-RGB-color-gradient", "1D-RGB-color-gradient.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A17E226}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2D-color-gradient-or-Procedural-texture", "2D-color-gradient-or-Procedural-texture.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A3BE4E7}"
@@ -922,8 +925,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gperf", "gperf.vcxproj", "{
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gperf-hash-tests", "gperf-hash-tests.vcxproj", "{A60D8644-5A1C-4D29-8970-7518123FC8AC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphicsMagick", "GraphicsMagick.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF49B3E8}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "grok-jpeg2000", "grok-jpeg2000.vcxproj", "{00811970-815B-4F64-BC9D-2190788B74AB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hedley", "hedley.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFF12FC0}"
@@ -939,8 +940,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hyperscan", "hyperscan.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF562291}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hypertextcpp", "hypertextcpp.vcxproj", "{5E7728B5-9C50-45DA-8D25-32CF2D4B3C7E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImageMagick", "ImageMagick.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF6B194F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IMGUR5K-Handwriting-Dataset", "IMGUR5K-Handwriting-Dataset.vcxproj", "{3644E12D-D934-41FD-BF7E-83745AF9A7E9}"
 EndProject
@@ -3898,14 +3897,6 @@ Global
 		{A60D8644-5A1C-4D29-8970-7518123FC8AC}.Release|x64.Build.0 = Release|x64
 		{A60D8644-5A1C-4D29-8970-7518123FC8AC}.Release|x86.ActiveCfg = Release|Win32
 		{A60D8644-5A1C-4D29-8970-7518123FC8AC}.Release|x86.Build.0 = Release|Win32
-		{A60D8644-5A1C-4D29-8970-7518FF49B3E8}.Debug|x64.ActiveCfg = Debug|x64
-		{A60D8644-5A1C-4D29-8970-7518FF49B3E8}.Debug|x64.Build.0 = Debug|x64
-		{A60D8644-5A1C-4D29-8970-7518FF49B3E8}.Debug|x86.ActiveCfg = Debug|Win32
-		{A60D8644-5A1C-4D29-8970-7518FF49B3E8}.Debug|x86.Build.0 = Debug|Win32
-		{A60D8644-5A1C-4D29-8970-7518FF49B3E8}.Release|x64.ActiveCfg = Release|x64
-		{A60D8644-5A1C-4D29-8970-7518FF49B3E8}.Release|x64.Build.0 = Release|x64
-		{A60D8644-5A1C-4D29-8970-7518FF49B3E8}.Release|x86.ActiveCfg = Release|Win32
-		{A60D8644-5A1C-4D29-8970-7518FF49B3E8}.Release|x86.Build.0 = Release|Win32
 		{00811970-815B-4F64-BC9D-2190788B74AB}.Debug|x64.ActiveCfg = Debug|x64
 		{00811970-815B-4F64-BC9D-2190788B74AB}.Debug|x64.Build.0 = Debug|x64
 		{00811970-815B-4F64-BC9D-2190788B74AB}.Debug|x86.ActiveCfg = Debug|Win32
@@ -3970,14 +3961,6 @@ Global
 		{5E7728B5-9C50-45DA-8D25-32CF2D4B3C7E}.Release|x64.Build.0 = Release|x64
 		{5E7728B5-9C50-45DA-8D25-32CF2D4B3C7E}.Release|x86.ActiveCfg = Release|Win32
 		{5E7728B5-9C50-45DA-8D25-32CF2D4B3C7E}.Release|x86.Build.0 = Release|Win32
-		{A60D8644-5A1C-4D29-8970-7518FF6B194F}.Debug|x64.ActiveCfg = Debug|x64
-		{A60D8644-5A1C-4D29-8970-7518FF6B194F}.Debug|x64.Build.0 = Debug|x64
-		{A60D8644-5A1C-4D29-8970-7518FF6B194F}.Debug|x86.ActiveCfg = Debug|Win32
-		{A60D8644-5A1C-4D29-8970-7518FF6B194F}.Debug|x86.Build.0 = Debug|Win32
-		{A60D8644-5A1C-4D29-8970-7518FF6B194F}.Release|x64.ActiveCfg = Release|x64
-		{A60D8644-5A1C-4D29-8970-7518FF6B194F}.Release|x64.Build.0 = Release|x64
-		{A60D8644-5A1C-4D29-8970-7518FF6B194F}.Release|x86.ActiveCfg = Release|Win32
-		{A60D8644-5A1C-4D29-8970-7518FF6B194F}.Release|x86.Build.0 = Release|Win32
 		{3644E12D-D934-41FD-BF7E-83745AF9A7E9}.Debug|x64.ActiveCfg = Debug|x64
 		{3644E12D-D934-41FD-BF7E-83745AF9A7E9}.Debug|x64.Build.0 = Debug|x64
 		{3644E12D-D934-41FD-BF7E-83745AF9A7E9}.Debug|x86.ActiveCfg = Debug|Win32
@@ -13147,3 +13130,7 @@ Global
 		libmupdf_CarvedSubset.vcxitems*{0fdc74d7-d18c-45ce-94d6-c5a0edfccdf2}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NTFS ADS Viewer", "..\..\..\thirdparty\DirScanner\NTFS ADS Viewer\NTFS ADS Viewer.vcxproj", "{28E9E026-5E87-4248-BA0B-07813DCD8DB1}"
+EndProject
+	

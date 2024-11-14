@@ -244,6 +244,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmaketiled/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmaketiled/makeTiled.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmanifest/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmetrics/exrmetrics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmetrics/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultipart/exrmultipart.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultiview/Image.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultiview/main.cpp" />
@@ -286,6 +288,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfCompression.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfCompressionAttribute.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfCompressor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfContextInit.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfConvert.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfDeepCompositing.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfDeepFrameBuffer.cpp" />
@@ -433,6 +437,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmaketiled/Image.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmaketiled/makeTiled.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmaketiled/namespaceAlias.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmetrics/exrmetrics.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultiview/Image.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultiview/makeMultiView.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultiview/namespaceAlias.h" />
@@ -465,6 +470,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread/IlmThreadMutex.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread/IlmThreadNamespace.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread/IlmThreadPool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread/IlmThreadProcessGroup.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread/IlmThreadSemaphore.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfAcesFile.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfArray.h" />
@@ -482,6 +488,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfCompression.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfCompressionAttribute.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfCompressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfContextInit.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfConvert.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfDeepCompositing.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfDeepFrameBuffer.h" />
@@ -497,7 +505,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfDeepTiledOutputPart.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfDoubleAttribute.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfDwaCompressor.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfDwaCompressorSimd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfEnvmap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfEnvmapAttribute.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfExport.h" />
@@ -578,9 +585,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfXdr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfZip.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/ImfZipCompressor.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/b44ExpLogTable.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR/dwaLookups.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore/backward_compatibility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore/dwaLookups.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore/internal_attr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore/internal_channel_list.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore/internal_coding.h" />
@@ -672,6 +678,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenEXR/README.md" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/SECURITY.md" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/bazel/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/FindPythonPackage.cmake" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/FindSphinx.cmake" />
@@ -693,6 +700,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenEXR/cmake/cmake_uninstall.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/docs/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/share/ci/scripts/install_pybind11.sh" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/share/ci/scripts/linux/install_valgrind.sh" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/share/ci/scripts/linux/log_valgrind.sh" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/share/ci/scripts/linux/run_gcov.sh" />
@@ -710,6 +718,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmakepreview/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmaketiled/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmanifest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmetrics/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultipart/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultiview/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrstdattr/CMakeLists.txt" />

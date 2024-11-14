@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF022F63}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONIGURUMA;ONIGURUMA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONIGURUMA;ONIGURUMA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONIGURUMA;ONIGURUMA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONIGURUMA;ONIGURUMA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONIGURUMA;ONIGURUMA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONIGURUMA;ONIGURUMA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONIGURUMA;ONIGURUMA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONIGURUMA;ONIGURUMA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONIGURUMA;ONIGURUMA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONIGURUMA;ONIGURUMA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONIGURUMA;ONIGURUMA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONIGURUMA;ONIGURUMA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/harnesses/base.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/harnesses/deluxe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/harnesses/regset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/bug_fix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/callback_each_match.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/callout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/count.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/crnl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/echo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/listcap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/names.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/regset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/scan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/sql.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/syntax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/sample/user_property.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/ascii.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/big5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/cp1251.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/euc_jp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/euc_jp_prop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/euc_kr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/euc_tw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/gb18030.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_11.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_13.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_14.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_15.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/iso8859_9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/koi8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/koi8_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/mktable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/onig_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/regcomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/regenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/regerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/regexec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/regext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/reggnu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/regparse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/regposerr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/regposix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/regsyntax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/regtrav.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/regversion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/sjis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/sjis_prop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/st.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/unicode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/unicode_egcb_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/unicode_fold1_key.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/unicode_fold2_key.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/unicode_fold3_key.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/unicode_fold_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/unicode_property_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/unicode_property_data_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/unicode_unfold_key.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/unicode_wb_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/utf16_be.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/utf16_le.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/utf32_be.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/utf32_le.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/src/utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/test/test_back.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/test/test_options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/test/test_regset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/test/test_syntax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/test/test_utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/test/testc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/test/testp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/test/testu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/tis-ci/stub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oniguruma/windows/testc.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/oniguruma/src/oniggnu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oniguruma/src/onigposix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oniguruma/src/oniguruma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oniguruma/src/regenc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oniguruma/src/regint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oniguruma/src/regparse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oniguruma/src/st.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oniguruma/tis-ci/config.h" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/HISTORY" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/README" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/README_japanese" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/cmake/Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/compile" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/depcomp" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/doc/API" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/doc/CALLOUTS.BUILTIN" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/doc/FAQ" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/doc/RE" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/doc/SYNTAX.md" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/doc/UNICODE_PROPERTIES" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/harnesses/dict_conv.py" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/harnesses/makefile" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/index.html" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/index_ja.html" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/make_win.bat" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/make_win32.bat" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/make_win64.bat" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/missing" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/onig-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/onig-config.in" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/oniguruma.pc.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/oniguruma.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/sample/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/sample/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/Makefile.windows" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/config.h.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/config.h.win32" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/config.h.win64" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/config.h.windows.in" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/euc_jp_prop.gperf" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/gperf_fold_key_conv.py" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/gperf_unfold_key_conv.py" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/make_property.sh" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/make_unicode_egcb.sh" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/make_unicode_egcb_data.py" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/make_unicode_fold.sh" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/make_unicode_fold_data.py" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/make_unicode_property.sh" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/make_unicode_property_data.py" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/make_unicode_wb.sh" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/make_unicode_wb_data.py" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/src/sjis_prop.gperf" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/test-driver" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/tis-ci/test_back.config" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/tis-ci/test_regset.config" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/tis-ci/test_syntax.config" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/tis-ci/test_utf8.config" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/tis-ci/testc.config" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/tis-ci/testu.config" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/tis.config" />
+    <Text Include="../../thirdparty/owemdjee/oniguruma/windows/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

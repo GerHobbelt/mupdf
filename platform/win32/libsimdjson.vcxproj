@@ -276,6 +276,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/errortests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/extracting_values_example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/integer_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/json_path_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/jsoncheck.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/minefieldcheck.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/numberparsingcheck.cpp" />
@@ -289,14 +290,21 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/trivially_copyable_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/minify_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/compilation_failure_tests/first_second_access.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/compilation_failure_tests/iterate_array.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/compilation_failure_tests/iterate_char_star.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/compilation_failure_tests/iterate_object.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/compilation_failure_tests/iterate_string_view.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/compilation_failure_tests/iterate_temporary_buffer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_active_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_array_error_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_array_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_assert_out_of_order_values.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_cacheline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_car_deserialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_car_tag_invoke_deserialization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_compilation_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_custom_types_document_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_custom_types_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_document_stream_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_error_location_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_error_tests.cpp" />
@@ -317,6 +325,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_parse_api_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_readme_examples.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_scalar_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_stl_types_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_to_string.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_tostring_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_twitter_tests.cpp" />
@@ -447,6 +456,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/builtin/ondemand.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/common_defs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/compiler_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/concepts.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/array-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/array.h" />
@@ -490,6 +500,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/array_iterator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/base.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/dependencies.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/deserialize.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/document-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/document.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/document_stream-inl.h" />
@@ -498,8 +509,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/field.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/json_iterator-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/json_iterator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/json_path_to_pointer_conversion-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/json_path_to_pointer_conversion.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/json_type-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/json_type.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/logger-inl.h" />
@@ -514,6 +523,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/raw_json_string.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/serialization-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/std_deserialize.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/token_iterator-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/token_iterator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/value-inl.h" />
@@ -557,6 +567,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/internal/tape_ref.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/internal/tape_type.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/jsonioutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/jsonpathutil.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/lasx.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/lasx/base.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/lasx/begin.h" />
@@ -675,6 +686,7 @@
     <Text Include="../../thirdparty/owemdjee/simdjson/benchmark/dom/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/simdjson/benchmark/dom/checkperf.cmake" />
     <Text Include="../../thirdparty/owemdjee/simdjson/benchmark/top_tweet/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/cmake/CPM.cmake" />
     <Text Include="../../thirdparty/owemdjee/simdjson/cmake/JoinPaths.cmake" />
     <Text Include="../../thirdparty/owemdjee/simdjson/cmake/add_compile_only_test.cmake" />
     <Text Include="../../thirdparty/owemdjee/simdjson/cmake/add_cpp_test.cmake" />
@@ -686,7 +698,6 @@
     <Text Include="../../thirdparty/owemdjee/simdjson/cmake/simdjson-props.cmake" />
     <Text Include="../../thirdparty/owemdjee/simdjson/cmake/simdjson-user-cmakecache.cmake" />
     <Text Include="../../thirdparty/owemdjee/simdjson/dependencies/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/simdjson/dependencies/import.cmake" />
     <Text Include="../../thirdparty/owemdjee/simdjson/doc/basics.md" />
     <Text Include="../../thirdparty/owemdjee/simdjson/doc/basics_doxygen.md" />
     <Text Include="../../thirdparty/owemdjee/simdjson/doc/dom.md" />

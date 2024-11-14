@@ -258,6 +258,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/faiss/c_api/index_factory_c.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/c_api/index_io_c.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/c_api/utils/distances_c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/c_api/utils/utils_c.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/demos/demo_imi_flat.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/demos/demo_imi_pq.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/demos/demo_ivfpq_indexing.cpp" />
@@ -299,6 +300,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/IndexLattice.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/IndexNNDescent.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/IndexNSG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/IndexNeuralNetCodec.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/IndexPQ.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/IndexPQFastScan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/IndexPreTransform.cpp" />
@@ -312,6 +314,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/MetaIndexes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/VectorTransform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/clone_index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/cppcontrib/factory_tools.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/gpu/GpuAutoTune.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/gpu/GpuCloner.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/gpu/GpuResources.cpp" />
@@ -363,6 +366,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/invlists/OnDiskInvertedLists.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/python/python_callbacks.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/utils/Heap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/utils/NeuralNet.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/utils/WorkerThread.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/utils/distances.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/utils/distances_fused/avx512.cpp" />
@@ -377,6 +381,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/utils/sorting.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/utils/utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/misc/test_blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/perf_tests/bench_no_multithreading_rcq_search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/perf_tests/bench_scalar_quantizer_accuracy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/perf_tests/bench_scalar_quantizer_decode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/perf_tests/bench_scalar_quantizer_distance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/perf_tests/bench_scalar_quantizer_encode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/perf_tests/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_NSG_compressed_graph.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_RCQ_cropping.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_approx_topk.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_binary_flat.cpp" />
@@ -388,6 +399,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_dealloc_invlists.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_disable_pq_sdc_tables.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_distances_simd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_factory_tools.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_fastscan_perf.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_heap.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_hnsw.cpp" />
@@ -407,12 +419,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_sliding_ivf.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_threaded_index.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_transfer_invlists.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tutorial/cpp/1-Flat.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tutorial/cpp/2-IVFFlat.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tutorial/cpp/3-IVFPQ.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tutorial/cpp/4-GPU.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tutorial/cpp/5-Multiple-GPUs.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tutorial/cpp/6-HNSW.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/tutorial/cpp/7-PQFastScan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/tutorial/cpp/8-PQFastScanRefine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/tutorial/cpp/9-RefineComparison.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/c_api/AutoTune_c.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/c_api/Clustering_c.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/c_api/IndexBinary_c.h" />
@@ -444,6 +460,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/faiss/c_api/index_io_c.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/c_api/macros_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/c_api/utils/distances_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/c_api/utils/utils_c.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/demos/rocksdb_ivf/RocksDBInvertedLists.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/AutoTune.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/Clustering.h" />
@@ -477,6 +494,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/IndexLattice.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/IndexNNDescent.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/IndexNSG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/IndexNeuralNetCodec.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/IndexPQ.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/IndexPQFastScan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/IndexPreTransform.h" />
@@ -494,6 +512,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/cppcontrib/SaDecodeKernels.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/cppcontrib/detail/CoarseBitType.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/cppcontrib/detail/UintReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/cppcontrib/factory_tools.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/cppcontrib/sa_decode/Level2-avx2-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/cppcontrib/sa_decode/Level2-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/cppcontrib/sa_decode/Level2-neon-inl.h" />
@@ -510,6 +529,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/GpuIcmEncoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/GpuIndex.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/GpuIndexBinaryFlat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/GpuIndexCagra.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/GpuIndexFlat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/GpuIndexIVF.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/GpuIndexIVFFlat.h" />
@@ -552,9 +572,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/impl/ThreadedIndex-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/impl/ThreadedIndex.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/impl/code_distance/code_distance-avx2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/impl/code_distance/code_distance-avx512.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/impl/code_distance/code_distance-generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/impl/code_distance/code_distance-sve.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/impl/code_distance/code_distance.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/impl/code_distance/code_distance_avx512.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/impl/index_read_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/impl/io.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/impl/io_macros.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/impl/kmeans1d.h" />
@@ -573,12 +595,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/python/python_callbacks.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/AlignedTable.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/Heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/NeuralNet.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/WorkerThread.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/approx_topk/approx_topk.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/approx_topk/avx2-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/approx_topk/generic.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/approx_topk/mode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/approx_topk_hamming/approx_topk_hamming.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/bf16.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/distances.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/distances_fused/avx512.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/distances_fused/distances_fused.h" />
@@ -609,7 +633,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/simdlib_ppc64.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/sorting.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/transpose/transpose-avx2-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/transpose/transpose-avx512-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/perf_tests/utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/tests/test_util.h" />
     <Text Include="../../thirdparty/owemdjee/faiss/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/faiss/CMakeLists.txt" />
@@ -679,6 +705,7 @@
     <Text Include="../../thirdparty/owemdjee/faiss/c_api/gpu/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/faiss/cmake/FindMKL.cmake" />
     <Text Include="../../thirdparty/owemdjee/faiss/cmake/faiss-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/faiss/cmake/link_to_faiss_lib.cmake" />
     <Text Include="../../thirdparty/owemdjee/faiss/conda/conda_build_config.yaml" />
     <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-raft/build-lib.sh" />
     <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-raft/build-pkg.sh" />
@@ -711,13 +738,20 @@
     <Text Include="../../thirdparty/owemdjee/faiss/contrib/ivf_tools.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/contrib/ondisk.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/contrib/rpc.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/contrib/torch/README.md" />
+    <Text Include="../../thirdparty/owemdjee/faiss/contrib/torch/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/contrib/torch/clustering.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/contrib/torch/quantization.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/contrib/torch_utils.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/contrib/vecs_io.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/demos/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/faiss/demos/README.md" />
     <Text Include="../../thirdparty/owemdjee/faiss/demos/demo_auto_tune.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/demos/demo_client_server_ivf.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/demos/demo_distributed_kmeans_torch.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/demos/demo_ondisk_ivf.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/demos/demo_qinco.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/demos/index_pq_flat_separate_codes_from_codebook.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/demos/offline_ivf/README.md" />
     <Text Include="../../thirdparty/owemdjee/faiss/demos/offline_ivf/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/demos/offline_ivf/config_ssnpp.yaml" />
@@ -733,9 +767,12 @@
     <Text Include="../../thirdparty/owemdjee/faiss/demos/rocksdb_ivf/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/faiss/demos/rocksdb_ivf/README.md" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/faiss/faiss/cppcontrib/docker_dev/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/hipify.sh" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/perf/slow.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_cagra.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_contrib_gpu.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_gpu_basics.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_gpu_index.py" />
@@ -754,8 +791,11 @@
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/python/gpu_wrappers.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/python/loader.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/perf_tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/faiss/perf_tests/bench_hnsw.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/common_faiss_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/tests/external_module_test.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_autotune.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_binary_factory.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_binary_hashindex.py" />
@@ -767,7 +807,6 @@
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_contrib.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_contrib_with_scipy.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_documentation.py" />
-    <Text Include="../../thirdparty/owemdjee/faiss/tests/test_doxygen_documentation.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_extra_distances.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_factory.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_fast_scan.py" />
@@ -793,13 +832,18 @@
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_rowwise_minmax.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_search_params.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_standalone_codec.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/tests/test_swig_wrapper.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/torch_test_contrib.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/tests/torch_test_neural_net.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tutorial/cpp/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/faiss/tutorial/python/1-Flat.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tutorial/python/2-IVFFlat.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tutorial/python/3-IVFPQ.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tutorial/python/4-GPU.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tutorial/python/5-Multiple-GPUs.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/tutorial/python/7-PQFastScan.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/tutorial/python/8-PQFastScanRefine.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/tutorial/python/9-RefineComparison.py" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

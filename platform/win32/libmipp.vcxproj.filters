@@ -18,10 +18,10 @@
     <Filter Include="Header Files\examples\sort">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\src">
+    <Filter Include="Header Files\include">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\src\math">
+    <Filter Include="Header Files\include\math">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\tests">
@@ -36,20 +36,23 @@
     <Filter Include="Header Files\tests\lib\Catch2\include">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\ci">
+    <Filter Include="Header Files\tests\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\ci\tools">
+    <Filter Include="Misc Files\ci">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\cmake">
+    <Filter Include="Misc Files\ci\tools">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests">
+    <Filter Include="Misc Files\cmake">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests\cmake">
+    <Filter Include="Misc Files\codegen">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\tests">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\tests\lib">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
@@ -58,34 +61,34 @@
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\examples">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0019}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\tests\src">
+    <Filter Include="Source Files\examples">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0018}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests\src\arithmetic_operations">
+    <Filter Include="Source Files\tests">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0020}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests\src\bitwise_operations">
+    <Filter Include="Source Files\tests\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\src\arithmetic_operations">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0021}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests\src\logical_comparisons">
+    <Filter Include="Source Files\tests\src\bitwise_operations">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0022}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests\src\math_functions">
+    <Filter Include="Source Files\tests\src\logical_comparisons">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0023}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests\src\memory_operations">
+    <Filter Include="Source Files\tests\src\math_functions">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0024}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests\src\reductions">
+    <Filter Include="Source Files\tests\src\memory_operations">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0025}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\src\reductions">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0026}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -263,6 +266,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/mipp/tests/src/memory_operations/combine.cpp">
       <Filter>Source Files\tests\src\memory_operations</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/mipp/tests/src/memory_operations/compress.cpp">
+      <Filter>Source Files\tests\src\memory_operations</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/mipp/tests/src/memory_operations/deinterleave.cpp">
       <Filter>Source Files\tests\src\memory_operations</Filter>
     </ClCompile>
@@ -335,59 +341,65 @@
     <ClInclude Include="../../thirdparty/owemdjee/mipp/examples/sort/Quick_sorter.hpp">
       <Filter>Header Files\examples\sort</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/math/avx512_mathfun.h">
-      <Filter>Header Files\src\math</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/math/avx512_mathfun.h">
+      <Filter>Header Files\include\math</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/math/avx512_mathfun.hxx">
-      <Filter>Header Files\src\math</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/math/avx512_mathfun.hxx">
+      <Filter>Header Files\include\math</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/math/avx_mathfun.h">
-      <Filter>Header Files\src\math</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/math/avx_mathfun.h">
+      <Filter>Header Files\include\math</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/math/avx_mathfun.hxx">
-      <Filter>Header Files\src\math</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/math/avx_mathfun.hxx">
+      <Filter>Header Files\include\math</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/math/neon_mathfun.h">
-      <Filter>Header Files\src\math</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/math/neon_mathfun.h">
+      <Filter>Header Files\include\math</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/math/neon_mathfun.hxx">
-      <Filter>Header Files\src\math</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/math/neon_mathfun.hxx">
+      <Filter>Header Files\include\math</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/math/sse_mathfun.h">
-      <Filter>Header Files\src\math</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/math/sse_mathfun.h">
+      <Filter>Header Files\include\math</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/math/sse_mathfun.hxx">
-      <Filter>Header Files\src\math</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/math/sse_mathfun.hxx">
+      <Filter>Header Files\include\math</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/mipp.h">
-      <Filter>Header Files\src</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/mipp.h">
+      <Filter>Header Files\include</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/mipp_impl_AVX.hxx">
-      <Filter>Header Files\src</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/mipp_impl_AVX.hxx">
+      <Filter>Header Files\include</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/mipp_impl_AVX512.hxx">
-      <Filter>Header Files\src</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/mipp_impl_AVX512.hxx">
+      <Filter>Header Files\include</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/mipp_impl_NEON.hxx">
-      <Filter>Header Files\src</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/mipp_impl_NEON.hxx">
+      <Filter>Header Files\include</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/mipp_impl_SSE.hxx">
-      <Filter>Header Files\src</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/mipp_impl_SSE.hxx">
+      <Filter>Header Files\include</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/mipp_impl_SVE.hxx">
-      <Filter>Header Files\src</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/mipp_impl_SVE.hxx">
+      <Filter>Header Files\include</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/mipp_object.hxx">
-      <Filter>Header Files\src</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/mipp_object.hxx">
+      <Filter>Header Files\include</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/mipp_scalar_op.h">
-      <Filter>Header Files\src</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/mipp_scalar_op.h">
+      <Filter>Header Files\include</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/mipp/src/mipp_scalar_op.hxx">
-      <Filter>Header Files\src</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/include/mipp_scalar_op.hxx">
+      <Filter>Header Files\include</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/mipp/tests/lib/Catch2/include/catch.hpp">
       <Filter>Header Files\tests\lib\Catch2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/tests/src/static_for.hpp">
+      <Filter>Header Files\tests\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/mipp/tests/src/static_for.hxx">
+      <Filter>Header Files\tests\src</Filter>
     </ClInclude>
     <Image Include="../../thirdparty/owemdjee/mipp/mipp.jpg">
       <Filter>Resource Files</Filter>
@@ -402,6 +414,9 @@
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/mipp/README.md">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/mipp/TODO.md">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/mipp/ci/analysis-cppcheck.sh">
@@ -423,9 +438,6 @@
       <Filter>Misc Files\ci</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/mipp/ci/build-linux-armv8-clang.sh">
-      <Filter>Misc Files\ci</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/mipp/ci/build-linux-armv8-gcc-11.sh">
       <Filter>Misc Files\ci</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/mipp/ci/build-linux-armv8-gcc.sh">
@@ -452,6 +464,9 @@
     <Text Include="../../thirdparty/owemdjee/mipp/ci/coverage-linux.sh">
       <Filter>Misc Files\ci</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/mipp/ci/test-linux-intel-sde-unit.sh">
+      <Filter>Misc Files\ci</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/mipp/ci/test-linux-macos-unit.sh">
       <Filter>Misc Files\ci</Filter>
     </Text>
@@ -473,17 +488,17 @@
     <Text Include="../../thirdparty/owemdjee/mipp/cmake/cmake_uninstall.cmake.in">
       <Filter>Misc Files\cmake</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/mipp/tests/CMakeLists.txt">
-      <Filter>Misc Files\tests</Filter>
+    <Text Include="../../thirdparty/owemdjee/mipp/codegen/gen_compress.py">
+      <Filter>Misc Files\codegen</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/mipp/tests/cmake/compiler_warnings.cmake">
-      <Filter>Misc Files\tests\cmake</Filter>
+    <Text Include="../../thirdparty/owemdjee/mipp/codegen/mipp_LUT.cpp.j2">
+      <Filter>Misc Files\codegen</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/mipp/tests/cmake/target_fast_math.cmake">
-      <Filter>Misc Files\tests\cmake</Filter>
+    <Text Include="../../thirdparty/owemdjee/mipp/codegen/requirements.txt">
+      <Filter>Misc Files\codegen</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/mipp/tests/cmake/target_optimizations.cmake">
-      <Filter>Misc Files\tests\cmake</Filter>
+    <Text Include="../../thirdparty/owemdjee/mipp/codegen/vcompress-LUT.cpp.j2">
+      <Filter>Misc Files\codegen</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/mipp/tests/lib/Catch2/README.md">
       <Filter>Misc Files\tests\lib\Catch2</Filter>

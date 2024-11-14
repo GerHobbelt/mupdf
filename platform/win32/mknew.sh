@@ -1465,6 +1465,7 @@ sds
 units-cpp
 opencv_3rdparty
 cgal
+oniguruma
 
 EOT
 ) | grep -e "$FILTER"

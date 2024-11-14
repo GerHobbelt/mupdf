@@ -210,20 +210,23 @@
     <Filter Include="Source Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0066}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\parsing">
+    <Filter Include="Source Files\src\codec">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0067}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\query">
+    <Filter Include="Source Files\src\parsing">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0068}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test">
+    <Filter Include="Source Files\src\query">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0069}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tools">
+    <Filter Include="Source Files\test">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0070}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tools\tests">
+    <Filter Include="Source Files\tools">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tools\tests">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0072}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +247,42 @@
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/bit_vector_builder.cpp">
       <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/block_inverted_index.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/codec/block_codec_registry.cpp">
+      <Filter>Source Files\src\codec</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/codec/interpolative.cpp">
+      <Filter>Source Files\src\codec</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/codec/maskedvbyte.cpp">
+      <Filter>Source Files\src\codec</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/codec/optpfor.cpp">
+      <Filter>Source Files\src\codec</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/codec/qmx.cpp">
+      <Filter>Source Files\src\codec</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/codec/simdbp.cpp">
+      <Filter>Source Files\src\codec</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/codec/simple16.cpp">
+      <Filter>Source Files\src\codec</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/codec/simple8b.cpp">
+      <Filter>Source Files\src\codec</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/codec/streamvbyte.cpp">
+      <Filter>Source Files\src\codec</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/codec/varint_g8iu.cpp">
+      <Filter>Source Files\src\codec</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/codec/varintgb.cpp">
+      <Filter>Source Files\src\codec</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/compress.cpp">
       <Filter>Source Files\src</Filter>
@@ -404,9 +443,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_sequence_collection.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_stream_builder.cpp">
-      <Filter>Source Files\test</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_strict_elias_fano.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
@@ -545,16 +581,19 @@
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/bitvector_collection.hpp">
       <Filter>Header Files\include\pisa</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/block_freq_index.hpp">
-      <Filter>Header Files\include\pisa</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/block_posting_list.hpp">
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/block_inverted_index.hpp">
       <Filter>Header Files\include\pisa</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/VarIntG8IU.h">
       <Filter>Header Files\include\pisa\codec</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/all_ones_sequence.hpp">
+      <Filter>Header Files\include\pisa\codec</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/block_codec.hpp">
+      <Filter>Header Files\include\pisa\codec</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/block_codec_registry.hpp">
       <Filter>Header Files\include\pisa\codec</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/block_codecs.hpp">
@@ -569,10 +608,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/integer_codes.hpp">
       <Filter>Header Files\include\pisa\codec</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/interpolative.hpp">
+      <Filter>Header Files\include\pisa\codec</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/interpolative_coding.hpp">
       <Filter>Header Files\include\pisa\codec</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/maskedvbyte.hpp">
+      <Filter>Header Files\include\pisa\codec</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/optpfor.hpp">
       <Filter>Header Files\include\pisa\codec</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/qmx.hpp">
@@ -591,6 +636,9 @@
       <Filter>Header Files\include\pisa\codec</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/strict_elias_fano.hpp">
+      <Filter>Header Files\include\pisa\codec</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/varint_g8iu.hpp">
       <Filter>Header Files\include\pisa\codec</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/varintgb.hpp">
@@ -1374,6 +1422,9 @@
       <Filter>Misc Files\test\docker\benchmark</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/pisa/test/docker/benchmark/build.sh">
+      <Filter>Misc Files\test\docker\benchmark</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pisa/test/docker/benchmark/encodings.sh">
       <Filter>Misc Files\test\docker\benchmark</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/pisa/test/docker/benchmark/evaluate.sh">

@@ -337,17 +337,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem/pmem_posix.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/aarch64/init.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/auto_flush_linux.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/auto_flush_none.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/badblocks.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/badblocks_ndctl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/badblocks_none.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/config.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/deep_flush.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/deep_flush_linux.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/deep_flush_other.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/errormsg.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/extent_linux.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/extent_none.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/libpmem2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/loongarch64/init.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/map.c" />
@@ -362,7 +359,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/pmem2_utils_linux.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/pmem2_utils_ndctl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/pmem2_utils_none.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/pmem2_utils_other.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/ppc64/init.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/region_namespace_ndctl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/region_namespace_none.c" />
@@ -547,6 +543,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_realloc/obj_tx_realloc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_strdup/obj_tx_strdup.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_user_data/obj_tx_user_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ulog_advanced/obj_ulog_advanced.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ulog_size/obj_ulog_size.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_zones/obj_zones.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/out_err/out_err.c" />
@@ -898,7 +895,9 @@
     <Text Include="../../thirdparty/owemdjee/pmdk/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/pmdk/GIT_VERSION" />
     <Text Include="../../thirdparty/owemdjee/pmdk/INSTALL.md" />
-    <Text Include="../../thirdparty/owemdjee/pmdk/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/LICENSE/BSD-3-Clause" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/LICENSE/OPENSOLARIS.LICENSE" />
     <Text Include="../../thirdparty/owemdjee/pmdk/Makefile" />
     <Text Include="../../thirdparty/owemdjee/pmdk/README.md" />
     <Text Include="../../thirdparty/owemdjee/pmdk/RELEASE_STEPS.md" />
@@ -1835,6 +1834,12 @@
     <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_strdup/TEST1" />
     <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_user_data/Makefile" />
     <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_user_data/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ulog_advanced/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ulog_advanced/TEST0" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ulog_advanced/TEST8" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ulog_advanced/TEST9" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ulog_advanced/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ulog_advanced/common.sh" />
     <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ulog_size/Makefile" />
     <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ulog_size/TESTS.py" />
     <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_zones/Makefile" />
@@ -2449,11 +2454,6 @@
     <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/build-CI.sh" />
     <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/build-local.sh" />
     <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/get-system-info.sh" />
-    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/Dockerfile.centos-7" />
-    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/Dockerfile.centos-stream" />
-    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/Dockerfile.debian-11" />
-    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/Dockerfile.fedora-31" />
-    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/Dockerfile.fedora-37" />
     <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/Dockerfile.opensuse-leap-15" />
     <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/Dockerfile.rockylinux-8" />
     <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/Dockerfile.rockylinux-9" />
@@ -2491,7 +2491,6 @@
     <Text Include="../../thirdparty/owemdjee/pmdk/utils/pkg-common.sh" />
     <Text Include="../../thirdparty/owemdjee/pmdk/utils/pkg-config.sh" />
     <Text Include="../../thirdparty/owemdjee/pmdk/utils/pmdk.spec.in" />
-    <Text Include="../../thirdparty/owemdjee/pmdk/utils/run-doc-update.sh" />
     <Text Include="../../thirdparty/owemdjee/pmdk/utils/style_check.sh" />
     <Text Include="../../thirdparty/owemdjee/pmdk/utils/version.sh" />
   </ItemGroup>

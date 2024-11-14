@@ -226,6 +226,7 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/_clangd_helper_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/asio_thread_pool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/fibonacci.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/static_thread_pool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/static_thread_pool_bulk_enqueue.cpp" />
@@ -233,6 +234,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/static_thread_pool_nested.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/static_thread_pool_nested_old.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/static_thread_pool_old.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/taskflow_thread_pool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/tbb_thread_pool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/benchmark/tbb_thread_pool_nested.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/hello_coro.cpp" />
@@ -296,6 +298,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_type_async_scope.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_variant_sender.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_when_any.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/execpools/test_asio_thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/execpools/test_taskflow_thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/execpools/test_tbb_thread_pool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/bulk.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/ensure_started.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/launch.cpp" />
@@ -362,7 +367,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/detail/test_utility.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/queries/test_forwarding_queries.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/queries/test_get_forward_progress_guarantee.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/tbbexec/test_tbb_thread_pool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/test_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/test_scratch.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test_package/test.cpp" />
@@ -420,6 +424,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/trampoline_scheduler.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/variant_sender.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/when_any.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/execpools/asio/asio_thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/execpools/taskflow/taskflow_thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/execpools/tbb/tbb_thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/execpools/thread_pool_base.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__as_awaitable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__awaitable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__basic_sender.hpp" />
@@ -509,6 +517,7 @@
     <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/FindSphinx.cmake" />
     <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/Findnuma.cmake" />
     <Text Include="../../thirdparty/owemdjee/stdexec/cmake/cpm/patches/icm/regex-build-error.diff" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/cmake/import_standalone_asio.cmake" />
     <Text Include="../../thirdparty/owemdjee/stdexec/cmake/versions.json" />
     <Text Include="../../thirdparty/owemdjee/stdexec/conanfile.py" />
     <Text Include="../../thirdparty/owemdjee/stdexec/docs/CMakeLists.txt" />
@@ -518,6 +527,7 @@
     <Text Include="../../thirdparty/owemdjee/stdexec/docs/source/reference/index.rst" />
     <Text Include="../../thirdparty/owemdjee/stdexec/examples/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/include/execpools/asio/asio_config.hpp.in" />
     <Text Include="../../thirdparty/owemdjee/stdexec/include/nvexec/README.md" />
     <Text Include="../../thirdparty/owemdjee/stdexec/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/stdexec/test/exec/CMakeLists.txt" />

@@ -221,9 +221,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/cairo/boilerplate/cairo-boilerplate.c">
       <Filter>Source Files\boilerplate</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cairo/boilerplate/check-link.c">
-      <Filter>Source Files\boilerplate</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cairo/doc/tutorial/src/circle.c">
       <Filter>Source Files\doc\tutorial\src</Filter>
     </ClCompile>
@@ -236,6 +233,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/cairo/doc/tutorial/src/twin.c">
       <Filter>Source Files\doc\tutorial\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cairo/meson-cc-tests/atomic-ops-c11.c">
+      <Filter>Source Files\meson-cc-tests</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cairo/meson-cc-tests/atomic-ops-cxx11.c">
       <Filter>Source Files\meson-cc-tests</Filter>
     </ClCompile>
@@ -246,9 +246,6 @@
       <Filter>Source Files\meson-cc-tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cairo/meson-cc-tests/check-unused-result.c">
-      <Filter>Source Files\meson-cc-tests</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cairo/meson-cc-tests/ft_has_color.c">
       <Filter>Source Files\meson-cc-tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cairo/meson-cc-tests/ipc_rmid_deferred_release.c">
@@ -881,9 +878,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/cairo/src/cairo.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cairo/src/check-link.c">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cairo/src/test-base-compositor-surface.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -1469,10 +1463,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/cairo/test/glyph-cache-pressure.c">
       <Filter>Source Files\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cairo/test/glyph-path.c">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cairo/test/gradient-alpha.c">
       <Filter>Source Files\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cairo/test/gradient-constant-alpha.c">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cairo/test/gradient-scale-crash.c">
       <Filter>Source Files\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cairo/test/gradient-zero-stops-mask.c">
@@ -3581,10 +3581,7 @@
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/bug-source-cu.pdf.rgb24.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/bug-source-cu.ps.argb32.ref.png">
-      <Filter>Resource Files\test\reference</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/bug-source-cu.ps.rgb24.ref.png">
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/bug-source-cu.ps.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/bug-source-cu.ref.png">
@@ -5087,10 +5084,28 @@
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/coverage-row-triangles.xlib.xfail.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/coverage-triangles.image.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/coverage-triangles.recording.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/coverage-triangles.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/coverage-triangles.xfail.png">
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/coverage-triangles.script.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/coverage-triangles.xcb-fallback.rgb24.xfail.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/coverage-triangles.xcb-render-0_0.xfail.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/coverage-triangles.xlib-render-0_0.rgb24.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/coverage-triangles.xlib-render.rgb24.xfail.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/coverage-triangles.xlib.xfail.png">
@@ -6665,9 +6680,6 @@
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/ft-color-font.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/ft-color-font.script.ref.png">
-      <Filter>Resource Files\test\reference</Filter>
-    </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/ft-color-font.script.xfail.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
@@ -7017,6 +7029,15 @@
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/glyph-cache-pressure.svg.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/glyph-path.image.argb32.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/glyph-path.image.rgb24.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/glyph-path.image16.rgb24.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/gradient-alpha.base.argb32.ref.png">
@@ -7913,15 +7934,6 @@
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/line-width-large-overlap-rotated.traps.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/line-width-large-overlap.base.argb32.ref.png">
-      <Filter>Resource Files\test\reference</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/line-width-large-overlap.base.rgb24.ref.png">
-      <Filter>Resource Files\test\reference</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/line-width-large-overlap.ps.ref.png">
-      <Filter>Resource Files\test\reference</Filter>
-    </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/line-width-large-overlap.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
@@ -8289,9 +8301,6 @@
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/long-lines.ps.ref.png">
-      <Filter>Resource Files\test\reference</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/long-lines.ps.xfail.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/long-lines.ref.png">
@@ -10631,7 +10640,7 @@
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/record-replay-extend-repeat.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/record-replay-extend-repeat.svg.ref.png">
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/record-replay-extend-repeat.svg.argb32.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/record-replay-extend-repeat.svg.rgb24.ref.png">
@@ -11465,7 +11474,7 @@
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/recording-surface-extend-repeat.rgb24.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/recording-surface-extend-repeat.svg.ref.png">
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/recording-surface-extend-repeat.svg.argb32.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/recording-surface-extend-repeat.svg.rgb24.ref.png">
@@ -12101,16 +12110,19 @@
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-copy-overlap.traps.rgb24.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-copy-overlap.xcb.argb32.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-copy-overlap.xlib.argb32.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-copy.base.argb32.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-copy.base.rgb24.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-copy.ps2.ref.png">
-      <Filter>Resource Files\test\reference</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-copy.ps3.ref.png">
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-copy.ps.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-copy.ref.png">
@@ -12141,6 +12153,21 @@
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-intersecting.traps.rgb24.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-intersecting.xcb-window&amp;.rgb24.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-intersecting.xcb-window.rgb24.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-intersecting.xcb.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-intersecting.xlib-window.rgb24.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/self-intersecting.xlib.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/set-source.base.argb32.ref.png">
@@ -13295,6 +13322,15 @@
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/text-unhinted-metrics.xcb-fallback.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/text-unhinted-metrics.xcb-render-0_0.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/text-unhinted-metrics.xcb-window&amp;.rgb24.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/text-unhinted-metrics.xcb-window.rgb24.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/text-unhinted-metrics.xcb.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
@@ -13697,7 +13733,7 @@
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/user-font-color.image16.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/user-font-color.pdf.ref.png">
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/user-font-color.pdf.xfail.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/user-font-color.ps2.argb32.ref.png">
@@ -13836,6 +13872,18 @@
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/user-font-subpixel.svg.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/user-font-subpixel.xcb-render-0_0.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/user-font-subpixel.xcb-window&amp;.rgb24.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/user-font-subpixel.xcb-window.rgb24.ref.png">
+      <Filter>Resource Files\test\reference</Filter>
+    </Image>
+    <Image Include="../../thirdparty/owemdjee/cairo/test/reference/user-font-subpixel.xcb.ref.png">
       <Filter>Resource Files\test\reference</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/cairo/test/reference/user-font-subpixel.xfail.png">
@@ -14153,9 +14201,6 @@
     <Text Include="../../thirdparty/owemdjee/cairo/README.md">
       <Filter>Misc Files</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/cairo/README.win32">
-      <Filter>Misc Files</Filter>
-    </Text>
     <Text Include="../../thirdparty/owemdjee/cairo/boilerplate/README">
       <Filter>Misc Files\boilerplate</Filter>
     </Text>
@@ -14337,6 +14382,12 @@
       <Filter>Misc Files\test\reference</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/cairo/test/reference/pdf-structure-group.ref.txt">
+      <Filter>Misc Files\test\reference</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/cairo/test/reference/pdf-structure-group2.ref.txt">
+      <Filter>Misc Files\test\reference</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/cairo/test/reference/pdf-structure-group3.ref.txt">
       <Filter>Misc Files\test\reference</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/cairo/test/reference/pdf-structure-multipage-group.ref.txt">

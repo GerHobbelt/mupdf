@@ -483,6 +483,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testzlibtransport.c" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TApplicationException.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TOutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TUuid.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/VirtualProfiling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TAsyncChannel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TAsyncProtocolProcessor.cpp" />
@@ -502,7 +503,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TJSONProtocol.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TMultiplexedProtocol.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TProtocol.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TUuidUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/qt/TQIODeviceTransport.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/qt/TQTcpServer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TConnectedClient.cpp" />
@@ -568,6 +568,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TServerSocketTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TServerTransportTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TSocketInterruptTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TUuidTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TUuidTestBoost.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TUuidTestBoostNoDirective.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/Thrift5272.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/ThriftTest_extras.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/ThrifttReadCheckTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/ToStringTest.cpp" />
@@ -707,6 +711,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TOutput.h" />
     <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TProcessor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TToString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TUuid.h" />
     <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/Thrift.h" />
     <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TAsyncBufferProcessor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TAsyncChannel.h" />
@@ -743,7 +748,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TProtocolTap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TProtocolTypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TSet.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TUuidUtils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TVirtualProtocol.h" />
     <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/qt/TQIODeviceTransport.h" />
     <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/qt/TQTcpServer.h" />
@@ -915,7 +919,6 @@
     <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/README.md" />
     <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/coding_standards.md" />
-    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/compiler.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/thriftl.ll" />
     <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/thrifty.yy" />
@@ -973,9 +976,7 @@
     <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/Makefile" />
     <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/README.md" />
     <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/client/ReadMe.txt" />
-    <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/client/client.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/server/ReadMe.txt" />
-    <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/server/server.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/thriftme.bat" />
     <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/thriftme.sh" />
     <Text Include="../../thirdparty/owemdjee/thrift/contrib/vagrant/centos-6.5/README.md" />
@@ -1047,8 +1048,6 @@
     <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/README.md" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/coding_standards.md" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/libthrift.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/libthriftnb.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TBinaryProtocol.tcc" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TCompactProtocol.tcc" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/qt/CMakeLists.txt" />
@@ -1095,15 +1094,9 @@
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.WinHTTP.pas" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.pas" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/ConsoleHelper.pas" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/Performance/DataFactory.pas" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/Performance/PerfTests.pas" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/TestClient.pas" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/TestConstants.pas" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/TestServer.pas" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/TestServerEvents.pas" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/client.dpr" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/codegen/README.md" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/codegen/run-Pascal-Codegen-Tests.bat.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/codegen/run-Pascal-Codegen-Tests.ps1" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/keywords/ReservedKeywords.dpr" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/maketest.sh" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/multiplexed/Multiplex.Client.Main.pas" />
@@ -1120,6 +1113,14 @@
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/skip/README.md" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/skip/skiptest_version1.dpr" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/skip/skiptest_version2.dpr" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/testsuite/TestConstants.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/testsuite/client/Performance/DataFactory.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/testsuite/client/Performance/PerfTests.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/testsuite/client/TestClient.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/testsuite/client/TestLogger.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/testsuite/client/UnitTests.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/testsuite/server/TestServer.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/testsuite/server/TestServerEvents.pas" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/typeregistry/Test.EnumToString.pas" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/typeregistry/Test.TypeRegistry.pas" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/typeregistry/TestTypeRegistry.dpr" />
@@ -1603,10 +1604,14 @@
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Directory.Build.props" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Compile.Tests/GlobalSuppressions.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Compile.Tests/Thrift.Compile.net6/Impl/Thrift5253/MyService.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Compile.Tests/Thrift.Compile.net6/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Compile.Tests/Thrift.Compile.net8/Impl/Thrift5253/MyService.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Compile.Tests/Thrift.Compile.net8/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Compile.Tests/Thrift.Compile.netstd2/Impl/Thrift5253/MyService.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Compile.Tests/Thrift.Compile.netstd2/Properties/AssemblyInfo.cs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.IntegrationTests/Protocols/ProtocolsOperationsTests.cs" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.PublicInterfaces.Compile.Tests/GlobalSuppressions.cs" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.PublicInterfaces.Compile.Tests/Impl/Thrift5253/MyService.cs" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.PublicInterfaces.Compile.Tests/Properties/AssemblyInfo.cs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/Collections/TCollectionsTests.cs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/Collections/THashSetTests.cs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/DataModel/DeepCopy.cs" />
@@ -2019,6 +2024,7 @@
     <Text Include="../../thirdparty/owemdjee/thrift/test/py/TestServer.py" />
     <Text Include="../../thirdparty/owemdjee/thrift/test/py/TestSocket.py" />
     <Text Include="../../thirdparty/owemdjee/thrift/test/py/TestSyntax.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/TestTypes.py" />
     <Text Include="../../thirdparty/owemdjee/thrift/test/py/explicit_module/EnumSerializationTest.py" />
     <Text Include="../../thirdparty/owemdjee/thrift/test/py/explicit_module/runtest.sh" />
     <Text Include="../../thirdparty/owemdjee/thrift/test/py/generate.cmake" />

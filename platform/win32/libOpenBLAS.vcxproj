@@ -260,6 +260,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/benchmark/max.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/benchmark/min.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/benchmark/nrm2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/benchmark/omatcopy.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/benchmark/potrf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/benchmark/rot.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/benchmark/rotm.c" />
@@ -402,6 +403,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/level3/gemm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/level3/gemm3m.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/level3/gemm3m_level3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/level3/gemm_batch_thread.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/level3/gemm_thread_m.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/level3/gemm_thread_mn.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/level3/gemm_thread_n.c" />
@@ -438,12 +440,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/blas_server_callback.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/blas_server_omp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/blas_server_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/detect_riscv64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/divtable.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/dynamic.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/dynamic_arm64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/dynamic_loongarch64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/dynamic_mips64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/dynamic_power.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/dynamic_riscv64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/dynamic_zarch.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/init.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/driver/others/lamc3.c" />
@@ -476,6 +480,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/interface/gbmv.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/interface/geadd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/interface/gemm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/interface/gemm_batch.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/interface/gemmt.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/interface/gemv.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/interface/ger.c" />
@@ -631,6 +636,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/daxpy_thunderx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/ddot_thunderx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dgemm_kernel_4x4_cortexa53.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dgemm_small_kernel_nn_sve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dgemm_small_kernel_nt_sve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dgemm_small_kernel_tn_sve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dgemm_small_kernel_tt_sve.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dot.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dot_kernel_asimd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dot_kernel_sve.c" />
@@ -639,8 +648,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/dznrm2_thunderx2t99_fast.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/gemm_ncopy_complex_sve_v1x4.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/gemm_ncopy_sve_v1x8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/gemm_small_kernel_permit_sve.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/gemm_tcopy_complex_sve_v1x4.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/gemm_tcopy_sve_v1x8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/gemv_n_sve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/gemv_t_sve.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/iamax_thunderx2t99.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/izamax_thunderx2t99.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/sasum_thunderx2t99.c" />
@@ -652,6 +664,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/sbgemm_tcopy_4_neoversen2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/sbgemm_tcopy_8_neoversen2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/scnrm2_thunderx2t99.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/sgemm_small_kernel_nn_sve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/sgemm_small_kernel_nt_sve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/sgemm_small_kernel_tn_sve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/sgemm_small_kernel_tt_sve.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/symm_lcopy_sve.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/symm_ucopy_sve.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/trmm_lncopy_sve_v1.c" />
@@ -923,7 +939,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/generic/ztrsm_utcopy_2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/generic/ztrsm_utcopy_4.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/generic/ztrsm_utcopy_8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_small_matrix_permit.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/gemm_ncopy_6.prefx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/somatcopy_cn_lasx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/somatcopy_ct_lasx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/somatcopy_rn_lasx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/somatcopy_rt_lasx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/trsm_kernel_LN_UNROLLN6.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/trsm_kernel_LT_UNROLLN6.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/trsm_kernel_RN_UNROLLN6.c" />
@@ -1052,6 +1073,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/ccopy_power10.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/cdot.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/cdot_microk_power10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/cgemm_kernel_power10.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/cgemv_n.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/cgemv_t.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/copy_microk_power10.c" />
@@ -1094,6 +1116,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/dscal_microk_power8.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/dswap.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/dswap_microk_power8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/gemm_common.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/gemm_small_kernel_permit_power10.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/icamax.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/icamin.c" />
@@ -1115,6 +1138,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemm_ncopy_8_power10.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemm_tcopy_16_power10.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemm_tcopy_8_power10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_common_power10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_n_power10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_n_vsx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_t.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_t_power10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/sbgemv_t_vsx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/scopy.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/scopy_microk_power8.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/scopy_power10.c" />
@@ -1156,6 +1187,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/zcopy_power10.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/zdot.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/zdot_microk_power8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/zgemm_kernel_power10.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/zgemv_n_4.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/zgemv_n_power10.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/power/zgemv_t_4.c" />
@@ -1457,6 +1489,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/x86_64/dtrsm_kernel_LN_bulldozer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/x86_64/dtrsm_kernel_RN_haswell.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/x86_64/dtrsm_kernel_RT_bulldozer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/x86_64/omatcopy_ct.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/x86_64/omatcopy_rt.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/x86_64/sasum.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/kernel/x86_64/sasum_microk_haswell-2.c" />
@@ -6906,6 +6939,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/utest/test_extensions/utest_main2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/utest/test_extensions/xerbla.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/utest/test_fork.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/utest/test_gemv.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/utest/test_ismin.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/utest/test_kernel_regress.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/utest/test_min.c" />
@@ -7271,6 +7305,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/KERNEL.NEOVERSEN1" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/KERNEL.NEOVERSEN2" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/KERNEL.NEOVERSEV1" />
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/KERNEL.NEOVERSEV2" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/KERNEL.THUNDERX" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/KERNEL.THUNDERX2T99" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/arm64/KERNEL.THUNDERX3T110" />
@@ -7410,8 +7445,8 @@
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/ia64/ztrsm_kernel_LT.S" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/ia64/ztrsm_kernel_RT.S" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/KERNEL" />
-    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/KERNEL.LOONGSON2K1000" />
-    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/KERNEL.LOONGSON3R5" />
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/KERNEL.LA264" />
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/KERNEL.LA464" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/Makefile" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/amax.S" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/amax_lasx.S" />
@@ -7481,6 +7516,10 @@
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_ncopy_4.S" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_ncopy_4_lsx.S" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_ncopy_8_lsx.S" />
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_small_kernel_nn_lasx.S" />
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_small_kernel_nt_lasx.S" />
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_small_kernel_tn_lasx.S" />
+    <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_small_kernel_tt_lasx.S" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_tcopy_16.S" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_tcopy_4.S" />
     <Text Include="../../thirdparty/owemdjee/OpenBLAS/kernel/loongarch64/dgemm_tcopy_4_lsx.S" />

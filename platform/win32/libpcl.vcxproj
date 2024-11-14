@@ -675,7 +675,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcl/gpu/segmentation/src/extract_clusters.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/gpu/surface/src/convex_hull.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/gpu/surface/test/test_pseudo_convex_hull.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/pcl/gpu/utils/src/repacks.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/io/src/ascii_io.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/io/src/auto_io.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/io/src/compression.cpp" />
@@ -841,6 +840,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcl/sample_consensus/src/sac_model_registration.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/sample_consensus/src/sac_model_sphere.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/sample_consensus/src/sac_model_stick.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcl/sample_consensus/src/sac_model_torus.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/search/src/brute_force.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/search/src/kdtree.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/search/src/octree.cpp" />
@@ -1052,6 +1052,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/search/test_organized.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/search/test_organized_index.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/search/test_search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcl/test/segmentation/test_concave_prism.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/segmentation/test_non_linear.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/segmentation/test_random_walker.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/segmentation/test_segmentation.cpp" />
@@ -1717,6 +1718,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/gpu/containers/include/pcl/gpu/containers/device_memory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/gpu/containers/include/pcl/gpu/containers/impl/device_array.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/gpu/containers/include/pcl/gpu/containers/impl/device_memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/gpu/containers/include/pcl/gpu/containers/impl/repacks.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/gpu/containers/include/pcl/gpu/containers/impl/texture_binder.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/gpu/containers/include/pcl/gpu/containers/initialization.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/gpu/containers/include/pcl/gpu/containers/kernel_containers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/gpu/features/include/pcl/gpu/features/device/eigen.hpp" />
@@ -2240,6 +2243,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/sample_consensus/include/pcl/sample_consensus/impl/sac_model_registration_2d.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/sample_consensus/include/pcl/sample_consensus/impl/sac_model_sphere.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/sample_consensus/include/pcl/sample_consensus/impl/sac_model_stick.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/sample_consensus/include/pcl/sample_consensus/impl/sac_model_torus.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/sample_consensus/include/pcl/sample_consensus/lmeds.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/sample_consensus/include/pcl/sample_consensus/method_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/sample_consensus/include/pcl/sample_consensus/mlesac.h" />
@@ -2268,6 +2272,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/sample_consensus/include/pcl/sample_consensus/sac_model_registration_2d.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/sample_consensus/include/pcl/sample_consensus/sac_model_sphere.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/sample_consensus/include/pcl/sample_consensus/sac_model_stick.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/sample_consensus/include/pcl/sample_consensus/sac_model_torus.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/search/include/pcl/search/brute_force.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/search/include/pcl/search/flann_search.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/search/include/pcl/search/impl/brute_force.hpp" />
@@ -2832,14 +2837,11 @@
     <Text Include="../../thirdparty/owemdjee/pcl/apps/point_cloud_editor/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/pcl/apps/point_cloud_editor/resources/pceditor.icns" />
     <Text Include="../../thirdparty/owemdjee/pcl/benchmarks/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/pcl/cmake/Modules/AdditionalBoostVersions.cmake" />
     <Text Include="../../thirdparty/owemdjee/pcl/cmake/Modules/FindClangFormat.cmake" />
     <Text Include="../../thirdparty/owemdjee/pcl/cmake/Modules/FindDSSDK.cmake" />
     <Text Include="../../thirdparty/owemdjee/pcl/cmake/Modules/FindEnsenso.cmake" />
     <Text Include="../../thirdparty/owemdjee/pcl/cmake/Modules/FindFLANN.cmake" />
-    <Text Include="../../thirdparty/owemdjee/pcl/cmake/Modules/FindGLEW.cmake" />
     <Text Include="../../thirdparty/owemdjee/pcl/cmake/Modules/FindGTestSource.cmake" />
-    <Text Include="../../thirdparty/owemdjee/pcl/cmake/Modules/FindOpenMP.cmake" />
     <Text Include="../../thirdparty/owemdjee/pcl/cmake/Modules/FindOpenNI.cmake" />
     <Text Include="../../thirdparty/owemdjee/pcl/cmake/Modules/FindOpenNI2.cmake" />
     <Text Include="../../thirdparty/owemdjee/pcl/cmake/Modules/FindPcap.cmake" />

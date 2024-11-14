@@ -233,6 +233,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/ada_grad_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/ada_sqrt_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/adam_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/agemoea_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/aug_lagrangian_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/bigbatch_sgd_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/callbacks_test.cpp" />
@@ -303,6 +304,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/adam/nadam_update.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/adam/nadamax_update.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/adam/optimisticadam_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/agemoea/agemoea.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/agemoea/agemoea_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/aug_lagrangian/aug_lagrangian.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/aug_lagrangian/aug_lagrangian_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/aug_lagrangian/aug_lagrangian_function_impl.hpp" />
@@ -421,6 +424,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/cross_in_tray_function_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/drop_wave_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/drop_wave_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/dtlz/dtlz1_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/dtlz/dtlz2_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/dtlz/dtlz3_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/dtlz/dtlz4_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/dtlz/dtlz5_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/dtlz/dtlz6_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/dtlz/dtlz7_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/easom_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/easom_function_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/eggholder_function.hpp" />
@@ -441,6 +451,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/levy_function_n13_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/logistic_regression_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/logistic_regression_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/maf/maf1_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/maf/maf2_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/maf/maf3_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/maf/maf4_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/maf/maf5_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/maf/maf6_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/matyas_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/matyas_function_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/mc_cormick_function.hpp" />
@@ -535,6 +551,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/any.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/arma_traits.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/indicators/epsilon.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/indicators/igd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/indicators/igd_plus.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/wn_grad/wn_grad.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/wn_grad/wn_grad_impl.hpp" />

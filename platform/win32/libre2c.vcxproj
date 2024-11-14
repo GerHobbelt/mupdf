@@ -509,9 +509,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/lib/lex.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/lib/parse.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/lib/test_helper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/src/default_syntax_c.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/src/default_syntax_go.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/src/default_syntax_rust.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/src/msg/help.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/src/msg/ver_to_vernum.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/src/options/parse_opts.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/src/options/syntax_lexer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/src/options/syntax_parser.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/src/parse/lex.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/src/parse/lex_conf.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2c/bootstrap/src/parse/parser.cc" />
@@ -613,6 +618,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/re2c/src/nfa/re_to_nfa.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2c/src/options/opt.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2c/src/options/symtab.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/re2c/src/options/syntax.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2c/src/parse/ast.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2c/src/parse/input.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2c/src/regexp/ast_to_re.cc" />
@@ -1941,6 +1947,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/re2c/benchmarks/common/strings_uri.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2c/benchmarks/submatch_dfa_aot/src/common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2c/bootstrap/lib/parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/re2c/bootstrap/src/options/syntax_parser.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2c/bootstrap/src/parse/lex.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2c/bootstrap/src/parse/parser.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2c/examples/c/headers/lexer/state.h" />
@@ -1994,6 +2001,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/re2c/src/nfa/nfa.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2c/src/options/opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2c/src/options/symtab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/re2c/src/options/syntax.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2c/src/parse/ast.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2c/src/parse/input.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2c/src/regexp/regexp.h" />
@@ -2232,9 +2240,11 @@
     <Text Include="../../thirdparty/owemdjee/re2c/build/rst2man.py" />
     <Text Include="../../thirdparty/owemdjee/re2c/build/rst2txt.py" />
     <Text Include="../../thirdparty/owemdjee/re2c/build/split_man.py" />
+    <Text Include="../../thirdparty/owemdjee/re2c/build/stx2cpp.py" />
     <Text Include="../../thirdparty/owemdjee/re2c/cmake/Re2cAutotoolsHelpers.cmake" />
     <Text Include="../../thirdparty/owemdjee/re2c/cmake/Re2cBootstrapLexer.cmake" />
     <Text Include="../../thirdparty/owemdjee/re2c/cmake/Re2cBootstrapParser.cmake" />
+    <Text Include="../../thirdparty/owemdjee/re2c/cmake/Re2cBootstrapSyntax.cmake" />
     <Text Include="../../thirdparty/owemdjee/re2c/cmake/Re2cBuildType.cmake" />
     <Text Include="../../thirdparty/owemdjee/re2c/cmake/Re2cCompilerFlags.cmake" />
     <Text Include="../../thirdparty/owemdjee/re2c/cmake/Re2cGenDocs.cmake" />
@@ -2318,6 +2328,9 @@
     <Text Include="../../thirdparty/owemdjee/re2c/examples/rust/submatch/01_stags_fill.rs" />
     <Text Include="../../thirdparty/owemdjee/re2c/examples/rust/submatch/02_mtags.rs" />
     <Text Include="../../thirdparty/owemdjee/re2c/examples/rust/submatch/03_posix.rs" />
+    <Text Include="../../thirdparty/owemdjee/re2c/include/syntax/c" />
+    <Text Include="../../thirdparty/owemdjee/re2c/include/syntax/go" />
+    <Text Include="../../thirdparty/owemdjee/re2c/include/syntax/rust" />
     <Text Include="../../thirdparty/owemdjee/re2c/libre2c_old/CHANGES" />
     <Text Include="../../thirdparty/owemdjee/re2c/libre2c_old/COPYING" />
     <Text Include="../../thirdparty/owemdjee/re2c/libre2c_old/Doxyfile" />

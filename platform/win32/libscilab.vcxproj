@@ -631,6 +631,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/sci_gateway/cpp/sci_format.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/sci_gateway/cpp/sci_funcprot.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/sci_gateway/cpp/sci_funptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/sci_gateway/cpp/sci_getdeprecated.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/sci_gateway/cpp/sci_getmd5.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/sci_gateway/cpp/sci_getmemory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/sci_gateway/cpp/sci_getmodules.cpp" />
@@ -716,6 +717,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/cpp/backtrace_print.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/cpp/banner.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/cpp/demangle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/cpp/getdeprecated.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/cpp/getfunctionsname.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/cpp/getmacrosname.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/cpp/getvariablesname.cpp" />
@@ -731,7 +733,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/cpp/setformat.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/cpp/setlines.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/cpp/storeCommand.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/cpp/tasks.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/cpp/with_module.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/nonreg_tests/bug_7974.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/coverage/sci_gateway/cpp/coverage_gw.cpp" />
@@ -1020,6 +1021,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_tanh.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_tril.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_triu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_vander.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_zeros.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/c/DllmainElementary_functions.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/c/abs.c" />
@@ -1078,6 +1080,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/cpp/min.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/cpp/prod.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/cpp/sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/cpp/vander.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/slatec/common_f2c.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects/sci_gateway/cpp/sci_doubleExclam_invoke_.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects/sci_gateway/cpp/sci_invoke_lu.cpp" />
@@ -1220,7 +1223,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/sci_gateway/c/sci_copyfile.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/sci_gateway/c/sci_fprintfMat.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/sci_gateway/c/sci_fscanfMat.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/sci_gateway/c/sci_getURL.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/sci_gateway/c/sci_movefile.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/sci_gateway/c/sci_pwd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/sci_gateway/c/sci_tempname.c" />
@@ -3746,6 +3748,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/exit_status.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/freeArrayOfString.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/getcommandlineargs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/getdeprecated.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/getfunctionsname.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/getmacrosname.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/getmaxMALLOC.h" />
@@ -3788,7 +3791,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/storeCommand.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/suspendProcess.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/syncexec.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/tasks.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/timer.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/transposeMatrix.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/includes/win_mem_alloc.h" />
@@ -4049,6 +4051,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/cpp/min.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/cpp/prod.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/cpp/sum.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/cpp/vander.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects/includes/ExternalObjects.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects/includes/ExternalObjectsFunction.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects/includes/OptionsHelper.hxx" />
@@ -6332,6 +6335,7 @@
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_pack.xml_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_percente.xml_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_percentk.xml_1.png" />
+    <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_polyfit.xml_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_prod.xml_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_prod.xml_2.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_prod.xml_3.png" />
@@ -6381,6 +6385,8 @@
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_sundials_sensitivity_ode.xml_2.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_sundials_sensitivity_ode.xml_3.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_sysdiag.xml_1.png" />
+    <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_vander.xml_1.png" />
+    <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_vander.xml_2.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_xcorr.xml_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_xcorr.xml_2.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_xcov.xml_1.png" />
@@ -7240,6 +7246,7 @@
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/uiimport_format1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/uiimport_format2.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/uiimport_info.png" />
+    <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/uiimport_info2.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/unwrap_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/unwrap_2D.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/utilities-system-monitor.png" />
@@ -7414,6 +7421,7 @@
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/help/images/uiimport_format1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/help/images/uiimport_format2.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/help/images/uiimport_info.png" />
+    <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/help/images/uiimport_info2.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/images/icons/16x16/mimetypes/array_up.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/images/icons/16x16/mimetypes/boolean.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/images/icons/16x16/mimetypes/cell.png" />
@@ -8227,16 +8235,10 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/Makefile.incl.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/README.md" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/Version.incl" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/Visual-Studio-settings/ant-all/ant-all.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/Visual-Studio-settings/f2c.props" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/Visual-Studio-settings/f2c.targets" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/Visual-Studio-settings/giws-all/giws-all.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/Visual-Studio-settings/rename-vc-files.props" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/Visual-Studio-settings/rename-vc-files.targets" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/Visual-Studio-settings/rename-vc-files/rename-vc-files.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/Visual-Studio-settings/swig-all/swig-all.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/Visual-Studio-settings/test-all/test-all.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/Visual-Studio-settings/test-level/test-level.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/aclocal.m4" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/bin/Atlas.spec" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/bin/bin.iss" />
@@ -8304,7 +8306,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/etc/logging.properties.vc" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/etc/modules.xml.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/etc/modules.xml.vc" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/libs/GetWindowsVersion/GetWindowsVersion.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/libs/libs.iss" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/m4/ax_cxx_compile_stdcxx.m4" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/m4/backtrace.m4" />
@@ -8359,8 +8360,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/action_binding/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/action_binding/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/action_binding/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/action_binding/sci_gateway/cpp/action_binding_gw.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/action_binding/src/c/action_binding.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/action_binding/src/c/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/action_binding/src/java/org/scilab/modules/action_binding/InterpreterManagement.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/action_binding/src/java/org/scilab/modules/action_binding/InterpreterManagementJNI.java" />
@@ -8371,7 +8370,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/api_scilab/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/api_scilab/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/api_scilab/api_scilab.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/api_scilab/api_scilab.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/api_scilab/api_scilab_header.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/api_scilab/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/api_scilab/elementary_functions_f_Import.def" />
@@ -8441,7 +8439,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/arnoldi/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/arnoldi/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/arnoldi/arnoldi.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/arnoldi/arnoldi.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/arnoldi/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/arnoldi/license.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/arnoldi/locales/ca_ES.po" />
@@ -8462,7 +8459,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/ast.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/ast.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/console_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/coverage_Import.def" />
@@ -8611,8 +8607,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/boolean/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/boolean/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/boolean/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/boolean/src/c/boolean.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/boolean/src/cpp/boolean_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/boolean/tests/nonreg_tests/bug_10904.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/boolean/tests/nonreg_tests/bug_14553.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/boolean/tests/nonreg_tests/bug_2799.dia.ref" />
@@ -8726,7 +8720,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/c/Linpack_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/c/Polynomials_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/c/Slicot_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/c/cacsd.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/c/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/fortran/Core_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/fortran/Differential_equations_f_Import.def" />
@@ -8740,7 +8733,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/fortran/arl2.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/fortran/arl2a.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/fortran/cacsd_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/fortran/cacsd_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/fortran/calsca.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/fortran/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/fortran/deg1l2.f" />
@@ -8887,7 +8879,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/slicot/select.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/slicot/slicot_f/elementary_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/slicot/slicot_f/linpack_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/slicot/slicot_f/slicot_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/slicot/ssxmc.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/src/slicot/tb01wd.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/tests/nonreg_tests/bug_10370.dia.ref" />
@@ -8988,13 +8979,8 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/call_scilab.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/call_scilab.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/call_scilab_export.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/basicExamples/readwriteboolean_vc/readwriteboolean.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/basicExamples/readwritecomplexmatrix_vc/readwritecomplexmatrix.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/basicExamples/readwritewmatrix_vc/readwritematrix.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/basicExamples/readwritewtring_vc/readwritestring.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/call_scilab/NET/C#/cs_example/Properties/AssemblyInfo.cs" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/call_scilab/NET/C#/cs_example/cs_example.cs" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/call_scilab/NET/C#/dotnetsci/Properties/AssemblyInfo.cs" />
@@ -9006,7 +8992,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/call_scilab/NET/powershell/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/call_scilab/c/LabWindow/example.prj" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/call_scilab/c/LabWindow/readme.txt" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/call_scilab/c/visual_studio/CallSciVC.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/call_scilab/cpp/common/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/call_scilab/fortran/callsci.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/call_scilab/examples/call_scilab/fortran/matz.f" />
@@ -9044,7 +9029,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/commons/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/commons/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/commons/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/commons/src/c/commons.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/commons/src/c/commons_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/commons/src/c/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/commons/src/java/org/scilab/modules/commons/CommonFileUtils.java" />
@@ -9092,12 +9076,10 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/c/completion.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/c/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/java/org/scilab/modules/completion/AbstractSciCompletionWindow.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/java/org/scilab/modules/completion/Completion.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/java/org/scilab/modules/completion/CompletionJNI.java" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/nocompletion/nocompletion.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/tests/nonreg_tests/bug_10982.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/tests/nonreg_tests/bug_12393.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/tests/nonreg_tests/bug_3051.dia.ref" />
@@ -9153,8 +9135,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/sci_gateway/cpp/console_gw.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/src/c/console.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/src/c/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/src/java/org/scilab/modules/console/AdvCLIManagement.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/src/java/org/scilab/modules/console/AdvCLIManagementJNI.java" />
@@ -9203,7 +9183,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/src/java/org/scilab/modules/console/utils/ScilabLaTeXViewer.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/src/java/org/scilab/modules/console/utils/ScilabSpecialTextUtilities.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/src/noconsole/core_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/src/noconsole/noconsole.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/tests/nonreg_tests/bug_10379.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/tests/nonreg_tests/bug_12566.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/console/tests/nonreg_tests/bug_13226.dia.ref" />
@@ -9273,8 +9252,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/sci_gateway/cpp/core_gw.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/c/core.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/c/core_export.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/c/functions_manager_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/cpp/hash/LICENSE.txt" />
@@ -9283,7 +9260,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/fortran/backspaceinter.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/fortran/clunit.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/fortran/console_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/fortran/core_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/fortran/elementary_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/fortran/expsum.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/src/fortran/fileio_Import.def" />
@@ -9482,7 +9458,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/segfault_mgmt_2.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/segfault_mgmt_3.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/shortcutBinaryOperator.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/trycatch.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/type.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/typename.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/typeof.dia.ref" />
@@ -9491,7 +9466,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/coverage/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/coverage/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/coverage/coverage.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/coverage/coverage.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/coverage/data/mod_style.css" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/coverage/data/module.js" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/coverage/data/scilab_code.css" />
@@ -9523,7 +9497,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/data_structures/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/data_structures/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/data_structures/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/data_structures/src/c/data_structures.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/data_structures/tests/nonreg_tests/bug_10830.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/data_structures/tests/nonreg_tests/bug_11076.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/data_structures/tests/nonreg_tests/bug_11227.dia.ref" />
@@ -9687,8 +9660,8 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/sci_gateway/differential_equations_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/sci_gateway/differential_equations_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/sci_gateway/fortran/Ex-bvode.f" />
+    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/sci_gateway/fortran/Ex-daskr.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/sci_gateway/fortran/Ex-dasrt.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/sci_gateway/fortran/Ex-dassl.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/sci_gateway/fortran/Ex-impl.f" />
@@ -9696,7 +9669,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/sci_gateway/fortran/Ex-int3d.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/sci_gateway/fortran/Ex-intg.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/c/differential_equations.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/c/differential_equations_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/c/elementary_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/fortran/Elementary_functions_f_Import.def" />
@@ -9713,7 +9685,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/fortran/ddassl.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/fortran/dgbsl.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/fortran/differential_equations_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/fortran/differential_equations_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/fortran/dqags.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/fortran/dqagse.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/fortran/dqelg.f" />
@@ -9768,7 +9739,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/patched_sundials/NOTICE" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/patched_sundials/README.md" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/patched_sundials/include/sundials/sundials_config.in" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/patched_sundials/patched_sundials.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/patched_sundials/src/arkode/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/patched_sundials/src/arkode/NOTICE" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/src/patched_sundials/src/arkode/README.md" />
@@ -9859,9 +9829,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/dynamic_link/macros/utils/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/dynamic_link/macros/windows/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/dynamic_link/macros/windows/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/dynamic_link/sci_gateway/cpp/dynamic_link_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/dynamic_link/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/dynamic_link/src/c/dynamic_link.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/dynamic_link/src/scripts/Makedll.incl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/dynamic_link/src/scripts/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/dynamic_link/src/scripts/Makefile.in" />
@@ -10041,13 +10009,11 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/elem_func_gw/elem_func_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/elem_func_gw/elementary_functions_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/elem_func_gw/elementary_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/c/cacsd_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/c/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/c/eispack_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/c/elementary_functions.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/c/elementary_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/c/linpack_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/arcosh.f" />
@@ -10093,11 +10059,9 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/dwpowe.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/dwrdiv.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/eispack/balbak.f" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/eispack/eispack_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/eispack/hqror2.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/eispack_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/elementary_functions_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/elementary_functions_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/entier.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/exch.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/franck.f" />
@@ -10128,7 +10092,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/linpack/dqrsm.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/linpack/hhdml.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/linpack/icopy.f" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/linpack/linpack_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/linpack/pade.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/linpack/util.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/linpack/wgeco.f" />
@@ -10200,7 +10163,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/slatec/initds.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/slatec/j4save.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/slatec/pchim.f" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/slatec/slatec_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/slatec/xercnt.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/slatec/xermsg.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/src/fortran/slatec/xerprn.f" />
@@ -10475,7 +10437,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects/external_objects.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects/external_objects.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects/license.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects/locales/cs_CZ.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects/locales/de_DE.po" />
@@ -10499,7 +10460,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects_java/examples/com/foo/IWindow.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects_java/examples/com/foo/RectangularWindow.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects_java/external_objects_java.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects_java/external_objects_java.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects_java/license.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects_java/locales/cs_CZ.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/external_objects_java/locales/de_DE.po" />
@@ -10565,7 +10525,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/fftw.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/fftw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/license.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/locales/ca_ES.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/locales/cs_CZ.po" />
@@ -10582,7 +10541,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/src/nofftw/nofftw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/tests/nonreg_tests/bug_10807.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/tests/nonreg_tests/bug_13866.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fftw/tests/nonreg_tests/bug_5081.dia.ref" />
@@ -10606,7 +10564,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/core_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/fileio.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/fileio.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/directory/CHAPTER" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/path_filename/CHAPTER" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/fr_FR/directory/CHAPTER" />
@@ -10634,7 +10591,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/preferences_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/sci_gateway/cpp/fileio_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/tests/nonreg_tests/bug_10055.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/tests/nonreg_tests/bug_10056.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/tests/nonreg_tests/bug_1023.dia.ref" />
@@ -10870,8 +10826,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions/sci_gateway/cpp/functions_gw.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions/scripts/buildmacros/BuildMacros.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions/scripts/buildmacros/Makefile" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions/scripts/buildmacros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions/tests/nonreg_tests/bug_10195.dia.ref" />
@@ -10918,7 +10872,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions_manager/ReadMe.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions_manager/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions_manager/functions_manager.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions_manager/functions_manager.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions_manager/locales/de_DE.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions_manager/locales/fr_FR.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/functions_manager/locales/it_IT.po" />
@@ -10993,7 +10946,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graph/src/java/org/scilab/modules/graph/utils/StyleMap.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graph/src/java/org/scilab/modules/graph/view/ScilabGraphView.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graph/src/java/org/scilab/modules/graph/view/SupportedLabelType.java" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graph/tests/java/graph-JAVA-tests.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graph/tests/java/org/scilab/tests/modules/graph/utils/ScilabGraphUtilsTest.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graph/tests/java/org/scilab/tests/modules/graph/utils/ScilabInterpreterManagementTest.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graph/tests/java/org/scilab/tests/modules/graph/utils/SignalTest.java" />
@@ -11002,7 +10954,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/graphic_export.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/graphic_export.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/license.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/locales/ca_ES.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/locales/cs_CZ.po" />
@@ -11027,7 +10978,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/src/java/org/scilab/modules/graphic_export/Utils.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/src/java/org/scilab/modules/graphic_export/convertToPPM/ImageEncoder.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/src/java/org/scilab/modules/graphic_export/convertToPPM/PPMEncoder.java" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/src/nographic_export/nographic_export.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/tests/nonreg_tests/bug_10637.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/tests/nonreg_tests/bug_11115.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_export/tests/nonreg_tests/bug_11136.dia.ref" />
@@ -11079,7 +11029,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/c/graphic_objects.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/java/org/scilab/modules/graphic_objects/CallGraphicController.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/java/org/scilab/modules/graphic_objects/CallXmlLoader.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/java/org/scilab/modules/graphic_objects/DataLoader.java" />
@@ -11191,7 +11140,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/java/org/scilab/modules/graphic_objects/xmlloader/XmlLoader.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/java/org/scilab/modules/graphic_objects/xmlloader/XmlSaver.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/java/org/scilab/modules/graphic_objects/xmlloader/XmlTools.java" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/nographic_objects/nographic_objects.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/scripts/genPropertiesName.ps1" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/scripts/genPropertiesName.sh" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/scripts/propertiesMap.properties" />
@@ -11213,7 +11161,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/demos/fec/fec.info" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/elementary_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/graphics.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/graphics.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/help/en_US/color_management/CHAPTER" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/help/en_US/color_management/colormaps/CHAPTER" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/help/en_US/datatips/CHAPTER" />
@@ -11250,7 +11197,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/nographics/nographics.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tcl/ged/Arc.tcl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tcl/ged/Axes.tcl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tcl/ged/Axis.tcl" />
@@ -11674,7 +11620,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/src/c/gui.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/src/java/org/scilab/modules/gui/ScilabTermination.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/src/java/org/scilab/modules/gui/ScilabTerminationJNI.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/src/java/org/scilab/modules/gui/SwingView.java" />
@@ -12021,7 +11966,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/src/java/org/scilab/modules/gui/window/ScilabWindowBridge.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/src/java/org/scilab/modules/gui/window/SimpleWindow.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/src/java/org/scilab/modules/gui/window/Window.java" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/src/nogui/nogui.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/tests/nonreg_tests/bug_10343.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/tests/nonreg_tests/bug_10841.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/tests/nonreg_tests/bug_11069.dia.ref" />
@@ -12140,7 +12084,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/src/c/hdf5.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/tests/nonreg_tests/bug_11954.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/tests/nonreg_tests/bug_13689.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/tests/nonreg_tests/bug_13689.h5" />
@@ -12179,7 +12122,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/tests/unit_tests/h5ls.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/tests/unit_tests/h5mount.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/tests/unit_tests/h5mv.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/tests/unit_tests/h5open.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/tests/unit_tests/h5read.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/tests/unit_tests/h5readattr.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/hdf5/tests/unit_tests/h5rm.dia.ref" />
@@ -12232,10 +12174,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/schema/extendedStyle.xsl" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/BuildHelp.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/CheckHelp/CheckHelp.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/c/helptools.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/java/jflex/c.jflex" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/java/jflex/function.jflex" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/java/jflex/java.jflex" />
@@ -12287,7 +12226,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/java/org/scilab/modules/helptools/scilab/ScilabCodeServer.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/java/org/scilab/modules/helptools/scilab/ScilabLexer.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/java/org/scilab/modules/helptools/source/ScilabSourceBrowser.java" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/javadoc/javadoc.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/script/8859_to_utf8.pl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/script/check_xml.pl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/src/script/check_xml_dir.pl" />
@@ -12346,7 +12284,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_browser/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_browser/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_browser/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_browser/src/c/history_browser.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_browser/src/java/org/scilab/modules/history_browser/CommandHistory.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_browser/src/java/org/scilab/modules/history_browser/CommandHistoryMessages.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_browser/src/java/org/scilab/modules/history_browser/CommandHistoryMouseListener.java" />
@@ -12361,7 +12298,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_browser/src/java/org/scilab/modules/history_browser/actions/EvaluateAction.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_browser/src/java/org/scilab/modules/history_browser/actions/HelpAction.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_browser/src/java/org/scilab/modules/history_browser/actions/PrefsAction.java" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_browser/src/nohistory_browser/nohistory_browser.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/etc/XConfiguration-history.xsl" />
@@ -12382,11 +12318,9 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/sci_gateway/cpp/history_manager_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/src/c/History_browser_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/src/c/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/src/c/fileio_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/src/c/history_manager.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/src/c/jvm_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/src/java/org/scilab/modules/history_manager/HistoryManagement.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/history_manager/src/java/org/scilab/modules/history_manager/HistoryManagementJNI.java" />
@@ -12416,8 +12350,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/integer/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/integer/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/integer/src/c/Polynomials_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/integer/src/c/integer.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/integer/src/cpp/integer_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/integer/tests/nonreg_tests/bug_10782.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/integer/tests/nonreg_tests/bug_10814.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/integer/tests/nonreg_tests/bug_12778.dia.ref" />
@@ -12468,7 +12400,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/src/c/interpolation.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/src/c/interpolation_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/src/c/slatec_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/src/fortran/constinterp.h.f" />
@@ -12476,7 +12407,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/src/fortran/cshep2d.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/src/fortran/dspfit.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/src/fortran/elementary_functions_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/src/fortran/interpolation_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/src/fortran/mesh2b.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/src/fortran/slatec_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/interpolation/src/fortran/somespline.f" />
@@ -12510,9 +12440,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/io/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/io/src/c/Scilab_Windows_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/io/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/io/src/c/io.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/io/src/cpp/core_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/io/src/cpp/io_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/io/tests/nonreg_tests/bug_10606.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/io/tests/nonreg_tests/bug_10946.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/io/tests/nonreg_tests/bug_11324.dia.ref" />
@@ -12560,7 +12488,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/io/tests/unit_tests/setgetenv2.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/io/tests/unit_tests/write.unix.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/io/tests/unit_tests/write.win.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/javasci/Javasci.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/javasci/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/javasci/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/javasci/TODO" />
@@ -12578,7 +12505,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/javasci/src/java/org/scilab/modules/javasci/Scilab.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/javasci/src/java/org/scilab/modules/javasci/ScilabVariablesJavasci.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/javasci/src/java/org/scilab/modules/javasci/package.html" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/javasci/tests/java/javasci-JAVA-tests.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/javasci/tests/java/org/scilab/tests/modules/javasci/testBug10801.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/javasci/tests/java/org/scilab/tests/modules/javasci/testBug4211.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/javasci/tests/java/org/scilab/tests/modules/javasci/testBug6651.java" />
@@ -12601,7 +12527,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/jvm.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/libjvm.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/libjvm_export.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/license.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/locales/ca_ES.po" />
@@ -12624,7 +12549,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/src/java/org/scilab/modules/jvm/LibraryPath.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/src/java/org/scilab/modules/jvm/LoadClassPath.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/src/java/org/scilab/modules/jvm/ScilabClassLoader.java" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/src/nojvm/nojvm.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/src/nojvm/nolibjvm_export.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/string_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/jvm/tests/nonreg_tests/bug_3607.dia.ref" />
@@ -12687,17 +12611,14 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/sci_gateway/cpp/linear_algebra_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/src/c/Core_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/src/c/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/src/c/elementary_functions_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/src/c/linear_algebra.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/src/c/linear_algebra_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/src/c/slicot_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/src/fortran/DGELSY1.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/src/fortran/ZGELSY1.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/src/fortran/find.f" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/src/fortran/linear_algebra_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/nonreg_tests/bug_10178.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/nonreg_tests/bug_10281.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/nonreg_tests/bug_10519.dia.ref" />
@@ -12729,7 +12650,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/nonreg_tests/bug_4311.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/nonreg_tests/bug_4405.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/nonreg_tests/bug_4425.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/nonreg_tests/bug_4759.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/nonreg_tests/bug_5017.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/nonreg_tests/bug_545.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/nonreg_tests/bug_6477.dia.ref" />
@@ -12753,7 +12673,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/unit_tests/leftmatrixdiv.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/unit_tests/lsq.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/unit_tests/lu.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/unit_tests/norm.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/unit_tests/qr.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/unit_tests/rdiv.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/linear_algebra/tests/unit_tests/schur.dia.ref" />
@@ -12779,7 +12698,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/localization.iss" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/sci_gateway/cpp/localization_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/src/ast_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/src/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/src/fileio_Import.def" />
@@ -12790,7 +12708,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/src/java/org/scilab/modules/localization/MessagesJNI.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/src/java/org/scilab/modules/localization/WindowsDefaultLanguage.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/src/java/org/scilab/modules/localization/WindowsDefaultLanguageJNI.java" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/src/localization.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/src/localization_export.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/src/perl/check_po_files.pl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/localization/tests/nonreg_tests/bug_13986.dia.ref" />
@@ -13298,8 +13215,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/matio.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/matio.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/sci_gateway/cpp/matio_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/sparse_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/nonreg_tests/bug_11035.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/nonreg_tests/bug_12168.dia.ref" />
@@ -13314,13 +13229,11 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/nonreg_tests/bug_5462.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/nonreg_tests/bug_5466.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/nonreg_tests/bug_7862.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/nonreg_tests/bug_8783.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/nonreg_tests/bug_8828.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/nonreg_tests/bug_9354.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/unit_tests/loadmatfile.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/unit_tests/matfile2sci.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/unit_tests/matfile_close.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/unit_tests/matfile_listvar.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/unit_tests/matfile_open.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/unit_tests/matfile_varreadnext.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/matio/tests/unit_tests/matfile_varwrite.dia.ref" />
@@ -13363,10 +13276,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mexlib/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mexlib/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mexlib/mexlib.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mexlib/src/libmat/libmat.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mexlib/src/libmex/Core_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mexlib/src/libmex/libmex.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mexlib/src/libmx/libmx.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mexlib/tests/nonreg_tests/bug_5292.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mexlib/tests/nonreg_tests/bug_614.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mexlib/tests/unit_tests/mexAtExit.dia.ref" />
@@ -13492,7 +13402,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mpi/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mpi/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mpi/mpi.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mpi/mpi.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mpi/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/mpi/sci_gateway/mpi" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/Makefile.am" />
@@ -13568,7 +13477,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/sci_gateway/fortran/Ex-optim.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/src/c/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/src/c/core_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/src/c/optimization.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/src/c/optimization_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/src/c/sparse_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/src/fortran/Elementary_functions_Import.def" />
@@ -13643,7 +13551,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/src/fortran/n1qn3a.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/src/fortran/nlis0.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/src/fortran/nlis2.f" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/src/fortran/optimization_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/src/fortran/proj.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/src/fortran/ql0001.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/optimization/src/fortran/qnbd.f" />
@@ -13830,11 +13737,9 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/output_stream.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/sci_gateway/cpp/output_stream_gw/output_stream_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/c/Fileio_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/c/ast_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/c/output_stream.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/c/output_stream_export.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/fortran/Elementary_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/fortran/Polynomials_f_Import.def" />
@@ -13852,7 +13757,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/fortran/formatnumber.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/fortran/lspdsp.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/fortran/output_stream_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/fortran/output_stream_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/fortran/strdsp.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/fortran/wmdsp.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/src/fortran/wspdsp.f" />
@@ -13910,6 +13814,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/tests/nonreg_tests/bug_9277.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/tests/nonreg_tests/bug_9833.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/tests/nonreg_tests/bug_9957.dia.ref" />
+    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/tests/nonreg_tests/issue_17268.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/tests/unit_tests/basout.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/tests/unit_tests/diary.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/output_stream/tests/unit_tests/diary.encoding.dia.ref" />
@@ -14011,7 +13916,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parallel/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parallel/parallel.iss" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parallel/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parallel/src/c/parallel.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parallel/tests/nonreg_tests/bug_12243.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parallel/tests/unit_tests/parallel_concurrency.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parallel/tests/unit_tests/parallel_run.dia.ref" />
@@ -14036,7 +13940,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parameters/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parameters/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parameters/parameters.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parameters/parameters.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parameters/tests/nonreg_tests/bug_6774.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parameters/tests/nonreg_tests/bug_9394.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/parameters/tests/nonreg_tests/bug_9395.dia.ref" />
@@ -14069,7 +13972,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/polynomials.iss" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/src/c/Elementary_functions_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/src/c/polynomials.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/src/c/polynomials_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/src/fortran/Elementary_functions_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/src/fortran/Elementary_functions_f_Import.def" />
@@ -14110,7 +14012,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/src/fortran/nextk.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/src/fortran/output_stream_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/src/fortran/polynomials_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/src/fortran/polynomials_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/src/fortran/quad.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/src/fortran/quadit.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/src/fortran/quadsd.f" />
@@ -14176,7 +14077,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/preferences.iss" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/src/c/preferences.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/src/java/org/scilab/modules/preferences/Component/Button.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/src/java/org/scilab/modules/preferences/Component/Checkbox.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/src/java/org/scilab/modules/preferences/Component/Color.java" />
@@ -14217,7 +14117,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/src/java/org/scilab/modules/preferences/XSentinel.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/src/java/org/scilab/modules/preferences/XUpdateVisitor.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/src/java/org/scilab/modules/preferences/XWizardManager.java" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/src/java/preferences-JAVA.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/src/xslt/XCommon-toolbars.xsl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/src/xslt/XCommon.xsl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/src/xslt/XConfiguration.xsl" />
@@ -14248,7 +14147,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/randlib.iss" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/src/c/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/src/c/elementary_functions_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/src/c/randlib.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/src/c/randlib_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/src/fortran/Output_stream_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/src/fortran/genchi.f" />
@@ -14266,10 +14164,8 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/src/fortran/linpack_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/src/fortran/phrtsd.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/src/fortran/randlib_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/src/fortran/randlib_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/src/fortran/setgmn.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/src/fortran/snorm.f" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/src/norandlib/norandlib.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/tests/nonreg_tests/bug_12606.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/tests/nonreg_tests/bug_13976.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/randlib/tests/nonreg_tests/bug_14057.dia.ref" />
@@ -14309,7 +14205,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/renderer.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/renderer.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/src/java/org/scilab/modules/renderer/CallRenderer.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/src/java/org/scilab/modules/renderer/JoGLView/AxisDrawer.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/src/java/org/scilab/modules/renderer/JoGLView/DataManager.java" />
@@ -14418,13 +14313,10 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/c/Scicos_Export.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/c/Scicos_blocks-cli_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/c/Scicos_blocks_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/c/cli/scicos-cli.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/c/cli/scicos-cli_Export.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/c/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/c/differential_equations_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/c/elementary_functions_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/c/noscicos/noscicos.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/c/scicos.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/c/scicos_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/fortran/Output_stream_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/fortran/Scicos_Import.def" />
@@ -14433,10 +14325,8 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/fortran/ftree2.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/fortran/ftree3.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/fortran/ftree4.f" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/fortran/scicos_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/fortran/scifunc.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/fortran/sctree.f" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/modelica_compiler/Modelicac.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/modelica_compiler/README.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/modelica_compiler/ReadMe-Windows.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/modelica_compiler/bipartiteGraph.ml" />
@@ -14471,7 +14361,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/translator/translation/libraryManager.ml" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/translator/translation/translator.ml" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/translator/translation/versiondate.ml" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/translator/translator.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/xml2modelica/linenum.mll" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/xml2modelica/modelicaCodeGenerator.ml" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/xml2modelica/stringLexer.ml" />
@@ -14480,7 +14369,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/xml2modelica/xMLLexer.ml" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/xml2modelica/xMLParser.ml" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/xml2modelica/xMLTree.ml" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/xml2modelica/xml2modelica.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/tcl/MIHM.tcl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/tests/unit_tests/buildouttb.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/tests/unit_tests/color.dia.ref" />
@@ -14550,12 +14438,10 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/c/Scicos_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/c/Slicot_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/c/String_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/c/cli/scicos_blocks-cli.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/c/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/c/elementary_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/c/polynomials_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/c/scicos-cli_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/c/scicos_blocks.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/Core_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/Elementary_functions_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/Elementary_functions_f_Import.def" />
@@ -14565,7 +14451,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/Scicos_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/String_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/cli/scicos_blocks-cli_f.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/cli/scicos_blocks-cli_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/csslti.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/cstblk.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/delay.f" />
@@ -14612,7 +14497,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/samphold.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/sawtth.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/sciblk.f" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/scicos_blocks_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/selblk.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/sinblk.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos_blocks/src/fortran/sqrblk.f" />
@@ -14664,7 +14548,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scinotes/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scinotes/scinotes.iss" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scinotes/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scinotes/src/c/scinotes.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scinotes/src/java/jflex/function.jflex" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scinotes/src/java/jflex/indentation.jflex" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/scinotes/src/java/jflex/matchingblock.jflex" />
@@ -14985,9 +14868,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/sci_gateway/cpp/Elementary_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/sci_gateway/cpp/signal_processing_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/sci_gateway/cpp/signal_processing_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/signal_processing.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/src/c/signal_processing.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/src/c/signal_processing_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/src/fortran/Elementary_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/src/fortran/Ex-corr.f" />
@@ -15040,7 +14921,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/src/fortran/romeg.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/src/fortran/rpem.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/src/fortran/signal_processing_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/src/fortran/signal_processing_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/src/fortran/sn.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/src/fortran/snell.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/signal_processing/src/fortran/syredi.f" />
@@ -15117,7 +14997,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/slint/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/slint/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/slint/slint.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/slint/slint.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/slint/tests/unit_tests/slint.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/Makefile.in" />
@@ -15138,8 +15017,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/sound.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/sound.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/src/nosound/nosound.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/tests/nonreg_tests/bug_141.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/tests/nonreg_tests/bug_1926.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/tests/nonreg_tests/bug_467.dia.ref" />
@@ -15184,14 +15061,12 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/sci_gateway/cpp/sparse_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/sci_gateway/cpp/sparse_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/sparse.iss" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/ColPack/AUTHORS" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/ColPack/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/ColPack/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/ColPack/README.md" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/c/sparse.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/fortran/Elementary_functions_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/fortran/Elementary_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/fortran/blkfc1.f" />
@@ -15201,7 +15076,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/fortran/inpnv.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/fortran/isort1.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/fortran/ordmmd.f" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/fortran/sparse_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/fortran/spreshape.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/fortran/spt.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/sparse/src/fortran/symfct.f" />
@@ -15267,7 +15141,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/c/dcd_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/c/elementary_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/c/slatec_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/c/special_functions.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/c/special_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/fortran/dbesig.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/fortran/dbesjg.f" />
@@ -15276,7 +15149,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/fortran/elementary_functions_f_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/fortran/psi.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/fortran/slatec_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/fortran/special_functions_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/fortran/zbesig.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/fortran/zbesjg.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/special_functions/src/fortran/zbeskg.f" />
@@ -15329,8 +15201,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/spreadsheet.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/spreadsheet.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/src/nospreadsheet/nospreadsheet.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/tests/nonreg_tests/bug_1.csv" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/tests/nonreg_tests/bug_1.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/tests/nonreg_tests/bug_10556.dia.ref" />
@@ -15381,6 +15251,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/tests/nonreg_tests/issue_13284.csv" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/tests/nonreg_tests/issue_13284.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/tests/nonreg_tests/issue_14216.xls" />
+    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/tests/nonreg_tests/issue_17254.csv" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/tests/nonreg_tests/ticket_245.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/tests/nonreg_tests/ticket_275.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/spreadsheet/tests/nonreg_tests/ticket_281.dia.ref" />
@@ -15491,8 +15362,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/sci_gateway/cpp/statistics_gw.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/src/c/statistics.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/src/dcdflib/README" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/src/dcdflib/algdiv.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/src/dcdflib/alngam.f" />
@@ -15532,7 +15401,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/src/dcdflib/cumt.f" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/src/dcdflib/dcd_f/Core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/src/dcdflib/dcd_f/Output_stream_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/src/dcdflib/dcd_f/dcd_f2c.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/src/dcdflib/dcd_f/elementary_functions_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/src/dcdflib/dcd_f/statistics_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/src/dcdflib/devlpl.f" />
@@ -15641,9 +15509,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/sci_gateway/cpp/string_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/src/c/string.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/string.iss" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/benchmarks/ascii_code.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/benchmarks/ascii_text.txt" />
@@ -15822,7 +15688,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/tclsci/tcl/utils/Combobox.tcl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/tclsci/tcl/utils/Notebook.tcl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/tclsci/tclsci.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/tclsci/tclsci.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/tclsci/tests/nonreg_tests/bug_1321.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/tclsci/tests/nonreg_tests/bug_1566.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/tclsci/tests/nonreg_tests/bug_3022.dia.ref" />
@@ -15836,7 +15701,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/threads/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/threads/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/threads/threads.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/threads/threads.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/core_Import.def" />
@@ -15856,7 +15720,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/sci_gateway/cpp/time_gw.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/tests/nonreg_tests/bug_10576.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/tests/nonreg_tests/bug_10577.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/tests/nonreg_tests/bug_1249.dia.ref" />
@@ -15879,7 +15742,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/tests/unit_tests/isLeapYear.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/tests/unit_tests/timer.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/time.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/time.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/time/time_export.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/types/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/types/Makefile.in" />
@@ -15928,9 +15790,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/types/tests/java/org/scilab/tests/modules/types/testScilabGraph.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/types/tests/java/org/scilab/tests/modules/types/testSerialization.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/types/tests/java/org/scilab/tests/modules/types/testTypes.java" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/types/tests/java/types-JAVA-tests.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/types/types.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/types/typesjni/typesjni.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/etc/XConfiguration-variables.xsl" />
@@ -15950,7 +15810,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/src/c/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/src/c/ui_data.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/src/java/org/scilab/modules/ui_data/BrowseVar.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/src/java/org/scilab/modules/ui_data/EditVar.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/src/java/org/scilab/modules/ui_data/FileBrowser.java" />
@@ -16097,7 +15956,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/src/java/org/scilab/modules/ui_data/variableeditor/renderers/ScilabStringRenderer.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/src/java/org/scilab/modules/ui_data/variableeditor/undo/CellsUndoManager.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/src/java/org/scilab/modules/ui_data/variableeditor/undo/CellsUndoableEdit.java" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/src/noui_data/noui_data.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/tests/nonreg_tests/bug_8628.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/tests/unit_tests/editvar_errors.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ui_data/ui_data.iss" />
@@ -16122,8 +15980,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/umfpack/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/umfpack/macros/cleanmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/umfpack/src/c/Sparse_f_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/umfpack/src/c/umfpack.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/umfpack/src/noumfpack/noumfpack.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/umfpack/tests/nonreg_tests/bug_10626.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/umfpack/tests/nonreg_tests/bug_5016.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/umfpack/tests/nonreg_tests/bug_7754.dia.ref" />
@@ -16155,9 +16011,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/tests/nonreg_tests/issue_17094.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/tests/nonreg_tests/ticket_495.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/tests/unit_tests/url_split.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/webtools.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/webtools.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/webtools.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/license.txt" />
@@ -16176,17 +16030,11 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/src/c/CScilex/CScilex.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/src/c/Call_scilab_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/src/c/WScilex/WScilex-cli.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/src/c/WScilex/WScilex.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/src/c/core_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/src/c/scilab_windows/Gui_Import.def" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/src/c/scilab_windows/core_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/src/c/scilab_windows/scilab_windows.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/src/c/scilab_windows_Import.def" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/src/c/windows_tools.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/src/nowindows_tools/nowindows_tools.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/tests/nonreg_tests/bug_12062.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/tests/nonreg_tests/bug_13620.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/tests/nonreg_tests/bug_4584.dia.ref" />
@@ -16546,7 +16394,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/locales/zh_TW.po" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/macros/buildmacros.bat" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/macros/cleanmacros.bat" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/c/xcos.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/java/org/scilab/modules/xcos/BrowserView.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/java/org/scilab/modules/xcos/Controller.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/java/org/scilab/modules/xcos/JavaController.java" />
@@ -16826,7 +16673,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/tests/java/org/scilab/tests/modules/xcos/port/output/ExplicitOutputPortTest.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/tests/java/org/scilab/tests/modules/xcos/port/output/ImplicitOutputPortTest.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/tests/java/org/scilab/tests/modules/xcos/utils/FileTypeTest.java" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/tests/java/xcos-JAVA-tests.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/tests/nonreg_tests/batch_simulation.zcos" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/tests/nonreg_tests/bug_10434.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/tests/nonreg_tests/bug_10697.dia.ref" />
@@ -17331,7 +17177,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xml/tests/unit_tests/xmlWrite.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xml/tests/unit_tests/xmlXPath.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xml/xml.iss" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xml/xml.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/scilab-lib-doc.properties.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/scilab-lib-doc.properties.vc" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/scilab-lib.properties.in" />
@@ -17339,8 +17184,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/scilab.pc.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/scilab.properties.in" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/scilab.properties.vc" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/tools/Dumpexts/Dumpexts.vcxproj.filters" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/tools/SetupAtlas/SetupAtlas.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/tools/api_scilab_trad/Bool_Matrix_Alloc.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/tools/api_scilab_trad/Bool_Matrix_Create.txt" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/tools/api_scilab_trad/Bool_Matrix_Get.txt" />
@@ -17416,7 +17259,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/tools/innosetup/zh_TW.isl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/tools/innosetup/zh_TW_scilab.isl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/tools/localization/dispatchLocalizationFile.sh" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/tools/localization/generatePoFile.vcxproj.filters" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/tools/localization/pocheck.pl" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/tools/localization/updateLocalizationModule.sh" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/tools/tools.iss" />
@@ -17984,6 +17826,7 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/help/en_US/types/boolean.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/help/en_US/types/functions.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/help/en_US/types/hypermatrices.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/help/en_US/types/lambda.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/help/en_US/types/library.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/help/en_US/types/matrices.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/help/en_US/types/rational.xml" />
@@ -18499,6 +18342,9 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/help/en_US/dae.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/help/en_US/dae_root.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/help/en_US/daeoptions.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/help/en_US/daskr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/help/en_US/dasrt.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/help/en_US/dassl.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/help/en_US/diff.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/help/en_US/impl.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/differential_equations/help/en_US/int2d.xml" />
@@ -18664,6 +18510,7 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/squarewave.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/testmatrix.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/toeplitz.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/vander.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/zeros.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/exponential/exp.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/exponential/expm.xml" />
@@ -19433,7 +19280,7 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/file_system/newest.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/fprintfMat.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/fscanfMat.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/getURL.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/getdeprecated.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/getmd5.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/hash.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/io.xml" />
@@ -19467,7 +19314,6 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/path_filename/is_absolute_path.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/path_filename/pathconvert.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/path_filename/pathsep.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/path_filename/splitURL.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/path_filename/tempname.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/save_format.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/en_US/scanf.xml" />
@@ -19500,7 +19346,6 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/file_system/newest.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/fprintfMat.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/fscanfMat.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/getURL.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/getmd5.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/io.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/listvarinfile.xml" />
@@ -19530,7 +19375,6 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/path_filename/is_absolute_path.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/path_filename/pathconvert.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/path_filename/pathsep.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/path_filename/splitURL.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/path_filename/tempname.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/save_format.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ja_JP/scanf.xml" />
@@ -19562,7 +19406,6 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/file_system/newest.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/fprintfMat.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/fscanfMat.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/getURL.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/getmd5.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/hash.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/io.xml" />
@@ -19596,7 +19439,6 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/path_filename/is_absolute_path.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/path_filename/pathconvert.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/path_filename/pathsep.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/path_filename/splitURL.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/path_filename/tempname.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/save_format.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/fileio/help/ru_RU/scanf.xml" />
@@ -21787,6 +21629,7 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/help/ru_RU/poly.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/polynomials/help/ru_RU/varn.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/prebuildjava/build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/prebuildjava/ivy.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/build.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/etc/XConfiguration-preference.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/preferences/etc/XConfiguration.xml" />
@@ -22002,7 +21845,6 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/help/en_US/mu2lin.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/help/en_US/playsnd.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/help/en_US/savewave.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/help/en_US/sound.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/help/en_US/wavread.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/help/en_US/wavwrite.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/help/fr_FR/beep.xml" />
@@ -22014,7 +21856,6 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/help/ja_JP/loadwave.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/help/ja_JP/mu2lin.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/help/ja_JP/savewave.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/help/ja_JP/sound.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/help/ja_JP/wavread.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/help/ja_JP/wavwrite.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/sound/sci_gateway/sound_gateway.xml" />
@@ -22266,6 +22107,8 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/en_US/7_nan_missing_data/thrownan.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/en_US/8_hypothesis_testing/ftest.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/en_US/8_hypothesis_testing/ftuneq.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/en_US/polyfit.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/en_US/polyval.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/fr_FR/1_cdf/cdfbet.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/fr_FR/1_cdf/cdfbin.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/fr_FR/1_cdf/cdfchi.xml" />
