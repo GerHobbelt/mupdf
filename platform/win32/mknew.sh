@@ -1466,6 +1466,10 @@ units-cpp
 opencv_3rdparty
 cgal
 oniguruma
+hwinfo
+libMultiRobotPlanning
+cppuprofile
+sys_info
 
 EOT
 ) | grep -e "$FILTER"

@@ -15,7 +15,7 @@
     <Filter Include="Header Files\cpp-terminal">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\cpp-terminal\platforms">
+    <Filter Include="Header Files\cpp-terminal\private">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\examples">
@@ -27,7 +27,7 @@
     <Filter Include="Misc Files\cpp-terminal">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\cpp-terminal\platforms">
+    <Filter Include="Misc Files\cpp-terminal\private">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\docs">
@@ -57,7 +57,7 @@
     <Filter Include="Source Files\cpp-terminal">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\cpp-terminal\platforms">
+    <Filter Include="Source Files\cpp-terminal\private">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\examples">
@@ -89,6 +89,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/iostream.cpp">
       <Filter>Source Files\cpp-terminal</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/iostream_initializer.cpp">
+      <Filter>Source Files\cpp-terminal</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/key.cpp">
       <Filter>Source Files\cpp-terminal</Filter>
     </ClCompile>
@@ -98,47 +101,56 @@
     <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/options.cpp">
       <Filter>Source Files\cpp-terminal</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/blocking_queue.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/blocking_queue.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/exception.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/conversion.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/platform_args.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/env.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/platform_conversion.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/exception.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/platform_cursor.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/file.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/platform_env.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/file_initializer.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/platform_file.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/input.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/platform_input.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/priv_args.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/platform_screen.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/priv_cursor.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/platform_sigwinch.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/priv_screen.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/platform_terminal.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/priv_terminal_impl.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/platform_terminfo.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/return_code.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/platform_tty.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/signals.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/unicode.cpp">
-      <Filter>Source Files\cpp-terminal\platforms</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/sigwinch.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/terminfo.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/tty.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/unicode.cpp">
+      <Filter>Source Files\cpp-terminal\private</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/prompt.cpp">
       <Filter>Source Files\cpp-terminal</Filter>
@@ -153,6 +165,12 @@
       <Filter>Source Files\cpp-terminal</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/terminal.cpp">
+      <Filter>Source Files\cpp-terminal</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/terminal_impl.cpp">
+      <Filter>Source Files\cpp-terminal</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/terminal_initializer.cpp">
       <Filter>Source Files\cpp-terminal</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/window.cpp">
@@ -209,7 +227,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/prompt_simple.cpp">
       <Filter>Source Files\examples</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/slow_events.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/signal.cpp">
       <Filter>Source Files\examples</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/styles.cpp">
@@ -230,19 +248,19 @@
     <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/tests/file.test.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/tests/iostream.test.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/tests/key.test.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/tests/key.test.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/tests/options.test.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/tests/screen.test.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/tests/test_terminal.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/tests/unicode.test.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/tests/unicode.test.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/tests/version.test.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/args.hpp">
@@ -272,6 +290,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/iostream.hpp">
       <Filter>Header Files\cpp-terminal</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/iostream_initializer.hpp">
+      <Filter>Header Files\cpp-terminal</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/key.hpp">
       <Filter>Header Files\cpp-terminal</Filter>
     </ClInclude>
@@ -281,37 +302,49 @@
     <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/options.hpp">
       <Filter>Header Files\cpp-terminal</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/blocking_queue.hpp">
-      <Filter>Header Files\cpp-terminal\platforms</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/blocking_queue.hpp">
+      <Filter>Header Files\cpp-terminal\private</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/conversion.hpp">
-      <Filter>Header Files\cpp-terminal\platforms</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/conversion.hpp">
+      <Filter>Header Files\cpp-terminal\private</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/env.hpp">
-      <Filter>Header Files\cpp-terminal\platforms</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/env.hpp">
+      <Filter>Header Files\cpp-terminal\private</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/exception.hpp">
-      <Filter>Header Files\cpp-terminal\platforms</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/exception.hpp">
+      <Filter>Header Files\cpp-terminal\private</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/file.hpp">
-      <Filter>Header Files\cpp-terminal\platforms</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/file.hpp">
+      <Filter>Header Files\cpp-terminal\private</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/input.hpp">
-      <Filter>Header Files\cpp-terminal\platforms</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/file_initializer.hpp">
+      <Filter>Header Files\cpp-terminal\private</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/macros.hpp">
-      <Filter>Header Files\cpp-terminal\platforms</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/input.hpp">
+      <Filter>Header Files\cpp-terminal\private</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/sigwinch.hpp">
-      <Filter>Header Files\cpp-terminal\platforms</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/macros.hpp">
+      <Filter>Header Files\cpp-terminal\private</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/unicode.hpp">
-      <Filter>Header Files\cpp-terminal\platforms</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/return_code.hpp">
+      <Filter>Header Files\cpp-terminal\private</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/signals.hpp">
+      <Filter>Header Files\cpp-terminal\private</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/sigwinch.hpp">
+      <Filter>Header Files\cpp-terminal\private</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/unicode.hpp">
+      <Filter>Header Files\cpp-terminal\private</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/prompt.hpp">
       <Filter>Header Files\cpp-terminal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/screen.hpp">
+      <Filter>Header Files\cpp-terminal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/size.hpp">
       <Filter>Header Files\cpp-terminal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/stream.hpp">
@@ -321,6 +354,12 @@
       <Filter>Header Files\cpp-terminal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/terminal.hpp">
+      <Filter>Header Files\cpp-terminal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/terminal_impl.hpp">
+      <Filter>Header Files\cpp-terminal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/terminal_initializer.hpp">
       <Filter>Header Files\cpp-terminal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/terminfo.hpp">
@@ -365,11 +404,14 @@
     <Text Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/CMakeLists.txt">
       <Filter>Misc Files\cpp-terminal</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/CMakeLists.txt">
-      <Filter>Misc Files\cpp-terminal\platforms</Filter>
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/CMakeLists.txt">
+      <Filter>Misc Files\cpp-terminal\private</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/version.cpp.in">
-      <Filter>Misc Files\cpp-terminal</Filter>
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/README.md">
+      <Filter>Misc Files\cpp-terminal\private</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/private/version.cpp.in">
+      <Filter>Misc Files\cpp-terminal\private</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/cpp-terminal/docs/CMakeLists.txt">
       <Filter>Misc Files\docs</Filter>
