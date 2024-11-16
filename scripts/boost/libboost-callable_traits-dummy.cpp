@@ -1,1 +1,37 @@
-x
+
+#include <boost/callable_traits.hpp>
+#include <boost/callable_traits/add_member_const.hpp>
+#include <boost/callable_traits/add_member_cv.hpp>
+#include <boost/callable_traits/add_member_lvalue_reference.hpp>
+#include <boost/callable_traits/add_member_rvalue_reference.hpp>
+#include <boost/callable_traits/add_member_volatile.hpp>
+#include <boost/callable_traits/add_noexcept.hpp>
+#include <boost/callable_traits/add_transaction_safe.hpp>
+#include <boost/callable_traits/add_varargs.hpp>
+#include <boost/callable_traits/apply_member_pointer.hpp>
+#include <boost/callable_traits/apply_return.hpp>
+#include <boost/callable_traits/args.hpp>
+#include <boost/callable_traits/class_of.hpp>
+#include <boost/callable_traits/function_type.hpp>
+#include <boost/callable_traits/has_member_qualifiers.hpp>
+#include <boost/callable_traits/has_varargs.hpp>
+#include <boost/callable_traits/has_void_return.hpp>
+#include <boost/callable_traits/is_const_member.hpp>
+#include <boost/callable_traits/is_cv_member.hpp>
+#include <boost/callable_traits/is_invocable.hpp>
+#include <boost/callable_traits/is_lvalue_reference_member.hpp>
+#include <boost/callable_traits/is_noexcept.hpp>
+#include <boost/callable_traits/is_reference_member.hpp>
+#include <boost/callable_traits/is_rvalue_reference_member.hpp>
+#include <boost/callable_traits/is_transaction_safe.hpp>
+#include <boost/callable_traits/is_volatile_member.hpp>
+#include <boost/callable_traits/qualified_class_of.hpp>
+#include <boost/callable_traits/remove_member_const.hpp>
+#include <boost/callable_traits/remove_member_cv.hpp>
+#include <boost/callable_traits/remove_member_reference.hpp>
+#include <boost/callable_traits/remove_member_volatile.hpp>
+#include <boost/callable_traits/remove_noexcept.hpp>
+#include <boost/callable_traits/remove_transaction_safe.hpp>
+#include <boost/callable_traits/remove_varargs.hpp>
+#include <boost/callable_traits/return_type.hpp>
+

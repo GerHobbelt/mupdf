@@ -1,1 +1,3 @@
-x
+
+#include <boost/scope_exit.hpp>
+

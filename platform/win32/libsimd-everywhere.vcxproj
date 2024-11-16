@@ -1,0 +1,1563 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF6E0C97}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_EVERYWHERE;SIMD_EVERYWHERE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_EVERYWHERE;SIMD_EVERYWHERE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_EVERYWHERE;SIMD_EVERYWHERE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_EVERYWHERE;SIMD_EVERYWHERE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_EVERYWHERE;SIMD_EVERYWHERE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_EVERYWHERE;SIMD_EVERYWHERE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_EVERYWHERE;SIMD_EVERYWHERE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_EVERYWHERE;SIMD_EVERYWHERE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_EVERYWHERE;SIMD_EVERYWHERE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_EVERYWHERE;SIMD_EVERYWHERE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_EVERYWHERE;SIMD_EVERYWHERE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_EVERYWHERE;SIMD_EVERYWHERE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/aba.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/abal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/abal_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/abd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/abdl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/abdl_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/abs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/add.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/addhn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/addhn_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/addl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/addl_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/addlv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/addv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/addw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/addw_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/aes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/and.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/bcax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/bic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/bsl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cadd_rot270.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cadd_rot90.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cagt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/calt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ceq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ceqz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cgez.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cgt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cgtz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/clez.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/clt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cltz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/clz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cmla.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cmla_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cmla_rot180.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cmla_rot180_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cmla_rot270.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cmla_rot270_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cmla_rot90.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cmla_rot90_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/combine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/copy_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/crc32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cvt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cvt_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cvtm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cvtn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/cvtp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/div.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/dot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/dot_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/dup_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/dup_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/eor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/fma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/fma_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/fma_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/fmlal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/fmlsl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/fms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/fms_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/fms_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/get_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/get_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/get_low.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/hadd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/hsub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld1_dup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld1_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld1_x2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld1_x3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld1_x4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld1q_x2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld1q_x3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld1q_x4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld2_dup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld2_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld3_dup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld3_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld4_dup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/ld4_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/max.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/maxnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/maxnmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/maxv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/min.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/minnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/minnmv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/minv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mla.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mla_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mla_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mlal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mlal_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mlal_high_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mlal_high_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mlal_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mlal_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mls_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mls_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mlsl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mlsl_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mlsl_high_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mlsl_high_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mlsl_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mlsl_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mmlaq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/movl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/movl_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/movn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/movn_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mul_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mul_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mull_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mull_high_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mull_high_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mull_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mull_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mulx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mulx_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mulx_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/mvn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/neg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/orn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/orr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/padal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/padd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/paddl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/pmax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/pmaxnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/pmin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/pminnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qabs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qadd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmlal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmlal_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmlal_high_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmlal_high_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmlal_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmlal_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmlsl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmlsl_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmlsl_high_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmlsl_high_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmlsl_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmlsl_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmulh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmulh_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmulh_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmull_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmull_high_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmull_high_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmull_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qdmull_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qmovn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qmovn_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qmovun.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qmovun_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qneg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qrdmlah.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qrdmlah_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qrdmlsh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qrdmlsh_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qrdmulh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qrdmulh_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qrdmulh_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qrshl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qrshrn_high_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qrshrn_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qrshrun_high_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qrshrun_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qshl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qshl_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qshlu_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qshrn_high_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qshrn_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qshrun_high_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qshrun_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qsub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qtbl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/qtbx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/raddhn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/raddhn_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rbit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/recpe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/recps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/recpx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/reinterpret.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rev16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rev32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rev64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rhadd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rnd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rnd32x.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rnd32z.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rnd64x.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rnd64z.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rnda.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rndi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rndm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rndn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rndp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rndx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rshl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rshr_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rshrn_high_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rshrn_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rsqrte.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rsqrts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rsra_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rsubhn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/rsubhn_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/run-tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/set_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/sha1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/sha256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/sha512.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/shl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/shl_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/shll_high_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/shll_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/shr_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/shrn_high_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/shrn_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/skel-single.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/skel-triple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/skel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/sli_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/sm3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/sm4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/sqadd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/sqrt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/sra_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/sri_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/st1_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/st1_x2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/st1_x3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/st1_x4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/st1q_x2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/st1q_x3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/st1q_x4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/st2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/st2_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/st3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/st3_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/st4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/st4_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/subhn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/subhn_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/subl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/subl_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/subw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/subw_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/sudot_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/tbl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/tbx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/trn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/trn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/trn2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/tst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/uqadd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/usdot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/usdot_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/uzp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/uzp1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/uzp2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/xar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/zip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/zip1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/neon/zip2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/run-tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/sve/add.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/sve/and.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/sve/cmplt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/sve/dup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/sve/qadd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/sve/run-tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/sve/sel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/arm/sve/sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/common/common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/mips/msa/add_a.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/mips/msa/adds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/mips/msa/adds_a.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/mips/msa/addv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/mips/msa/addvi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/mips/msa/and.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/mips/msa/andi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/mips/msa/ld.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/mips/msa/madd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/mips/msa/run-tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/mips/msa/st.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/mips/msa/subv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/mips/run-tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/run-tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/relaxed-simd/laneselect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/relaxed-simd/madd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/relaxed-simd/max.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/relaxed-simd/min.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/relaxed-simd/nmadd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/relaxed-simd/run-tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/relaxed-simd/swizzle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/relaxed-simd/trunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/run-tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/abs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/add.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/add_sat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/all_true.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/and.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/andnot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/any_true.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/avgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/bitmask.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/bitselect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/ceil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/const.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/convert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/demote.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/div.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/dot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/eq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/extadd_pairwise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/extend_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/extend_low.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/extmul_high.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/extmul_low.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/extract_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/floor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/ge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/gt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/le.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/load_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/load_splat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/load_zero.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/lt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/make.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/max.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/min.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/mul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/narrow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/ne.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/nearest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/neg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/not.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/or.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/pmax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/pmin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/popcnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/promote.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/q15mulr_sat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/replace_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/run-tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/shl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/shr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/shuffle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/splat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/sqrt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/store_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/sub_sat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/swizzle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/trunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/trunc_sat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/xor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/aes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/2intersect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/4dpwssd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/4dpwssds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/abs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/add.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/adds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/and.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/andnot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/avg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/bitshuffle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/blend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/broadcast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/cast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/cmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/cmpeq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/cmpge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/cmpgt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/cmple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/cmplt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/cmpneq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/conflict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/copysign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/cvt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/cvts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/cvtt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/cvtus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/dbsad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/div.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/dpbf16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/dpbusd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/dpbusds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/dpwssd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/dpwssds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/expand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/extract.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/fixupimm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/fixupimm_round.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/flushsubnormal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/fmadd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/fmsub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/fnmadd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/fnmsub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/fpclass.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/gather.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/insert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/kand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/knot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/kshift.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/kxor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/loadu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/lzcnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/madd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/maddubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/max.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/min.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/mov.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/mov_mask.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/movm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/mul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/mulhi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/mulhrs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/mullo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/multishift.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/negate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/or.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/packs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/packus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/permutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/permutex2var.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/permutexvar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/popcnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/range.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/range_round.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/rcp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/reduce.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/rol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/rolv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/ror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/rorv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/round.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/roundscale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/roundscale_round.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/run-tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/sad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/scalef.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/set1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/set4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/setone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/setr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/setr4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/setzero.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/shldv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/shuffle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/skel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/sll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/slli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/sllv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/sqrt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/sra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/srai.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/srav.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/srl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/srli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/srlv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/store.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/storeu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/subs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/ternarylogic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/testn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/unpackhi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/unpacklo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/xor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/xorsign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/clmul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/f16c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/fma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/gfni.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/mmx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/run-tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/skel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/sse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/sse4.1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/sse4.2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/svml.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/xop.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/aba.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/abal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/abal_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/abd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/abdl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/abdl_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/abs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/add.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/addhn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/addhn_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/addl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/addl_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/addlv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/addv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/addw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/addw_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/aes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/and.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/bcax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/bic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/bsl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cadd_rot270.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cadd_rot90.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cagt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/calt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ceq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ceqz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cgez.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cgt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cgtz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/clez.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/clt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cltz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/clz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cmla.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cmla_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cmla_rot180.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cmla_rot180_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cmla_rot270.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cmla_rot270_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cmla_rot90.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cmla_rot90_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cnt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/combine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/copy_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/crc32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/create.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cvt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cvt_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cvtm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cvtn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/cvtp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/div.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/dot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/dot_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/dup_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/dup_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/eor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/fma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/fma_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/fma_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/fmlal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/fmlsl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/fms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/fms_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/fms_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/get_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/get_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/get_low.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/hadd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/hsub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld1_dup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld1_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld1_x2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld1_x3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld1_x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld1q_x2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld1q_x3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld1q_x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld2_dup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld2_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld3_dup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld3_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld4_dup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/ld4_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/max.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/maxnm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/maxnmv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/maxv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/min.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/minnm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/minnmv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/minv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mla.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mla_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mla_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mlal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mlal_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mlal_high_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mlal_high_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mlal_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mlal_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mls_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mls_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mlsl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mlsl_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mlsl_high_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mlsl_high_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mlsl_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mlsl_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mmlaq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/movl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/movl_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/movn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/movn_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mul.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mul_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mul_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mull.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mull_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mull_high_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mull_high_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mull_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mull_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mulx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mulx_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mulx_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/mvn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/neg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/orn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/orr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/padal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/padd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/paddl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/pmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/pmaxnm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/pmin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/pminnm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qabs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qadd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmlal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmlal_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmlal_high_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmlal_high_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmlal_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmlal_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmlsl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmlsl_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmlsl_high_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmlsl_high_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmlsl_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmlsl_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmulh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmulh_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmulh_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmull.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmull_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmull_high_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmull_high_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmull_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qdmull_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qmovn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qmovn_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qmovun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qmovun_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qneg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qrdmlah.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qrdmlah_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qrdmlsh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qrdmlsh_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qrdmulh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qrdmulh_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qrdmulh_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qrshl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qrshrn_high_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qrshrn_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qrshrun_high_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qrshrun_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qshl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qshl_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qshlu_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qshrn_high_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qshrn_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qshrun_high_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qshrun_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qsub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qtbl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/qtbx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/raddhn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/raddhn_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rbit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/recpe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/recps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/recpx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/reinterpret.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rev16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rev32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rev64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rhadd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rnd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rnd32x.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rnd32z.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rnd64x.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rnd64z.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rnda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rndi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rndm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rndn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rndp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rndx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rshl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rshr_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rshrn_high_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rshrn_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rsqrte.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rsqrts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rsra_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rsubhn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/rsubhn_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/set_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/sha1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/sha256.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/sha512.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/shl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/shl_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/shll_high_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/shll_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/shr_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/shrn_high_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/shrn_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/sli_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/sm3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/sm4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/sqadd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/sqrt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/sra_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/sri_n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st1_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st1_x2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st1_x3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st1_x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st1q_x2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st1q_x3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st1q_x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st2_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st3_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/st4_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/sub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/subhn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/subhn_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/subl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/subl_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/subw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/subw_high.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/sudot_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/tbl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/tbx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/trn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/trn1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/trn2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/tst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/uqadd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/usdot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/usdot_lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/uzp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/uzp1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/uzp2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/xar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/zip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/zip1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/neon/zip2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/add.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/and.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/cmplt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/cnt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/dup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/ld1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/ptest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/ptrue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/qadd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/reinterpret.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/sel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/st1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/sub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/arm/sve/whilelt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/debug-trap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/hedley.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/mips/msa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/mips/msa/add_a.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/mips/msa/adds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/mips/msa/adds_a.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/mips/msa/addv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/mips/msa/addvi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/mips/msa/and.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/mips/msa/andi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/mips/msa/ld.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/mips/msa/madd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/mips/msa/st.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/mips/msa/subv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/mips/msa/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/simde-aes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/simde-align.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/simde-arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/simde-bf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/simde-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/simde-complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/simde-constify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/simde-detect-clang.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/simde-diagnostic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/simde-f16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/simde-features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/simde-math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/wasm/relaxed-simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/wasm/simd128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/aes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/2intersect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/4dpwssd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/4dpwssds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/abs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/add.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/adds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/and.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/andnot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/avg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/bitshuffle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/blend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/broadcast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/cmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/cmpeq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/cmpge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/cmpgt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/cmple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/cmplt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/cmpneq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/compress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/conflict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/copysign.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/cvt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/cvts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/cvtt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/cvtus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/dbsad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/div.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/dpbf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/dpbusd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/dpbusds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/dpwssd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/dpwssds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/expand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/extract.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/fixupimm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/fixupimm_round.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/flushsubnormal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/fmadd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/fmsub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/fnmadd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/fnmsub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/fpclass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/gather.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/insert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/kand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/knot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/kshift.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/kxor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/load.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/loadu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/lzcnt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/madd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/maddubs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/max.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/min.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/mov.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/mov_mask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/movm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/mul.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/mulhi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/mulhrs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/mullo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/multishift.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/negate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/or.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/packs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/packus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/permutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/permutex2var.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/permutexvar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/popcnt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/range_round.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/rcp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/reduce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/rol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/rolv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/ror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/rorv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/round.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/roundscale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/roundscale_round.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/sad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/scalef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/set1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/set4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/setone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/setr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/setr4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/setzero.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/shldv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/shuffle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/sll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/slli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/sllv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/sqrt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/sra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/srai.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/srav.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/srl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/srli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/srlv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/storeu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/sub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/subs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/ternarylogic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/testn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/unpackhi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/unpacklo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/xor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/xorsign.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/clmul.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/f16c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/fma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/gfni.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/mmx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/sse3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/sse4.1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/sse4.2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/ssse3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/svml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/xop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/arm/declare-suites.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/arm/neon/run-tests-neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/arm/neon/run-tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/arm/neon/test-neon-footer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/arm/neon/test-neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/arm/run-tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/arm/sve/run-tests-neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/arm/sve/run-tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/arm/sve/test-sve-footer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/arm/sve/test-sve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/arm/test-arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/declare-suites.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/docker/Dockerfile.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/mips/declare-suites.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/mips/msa/run-tests-msa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/mips/msa/run-tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/mips/msa/test-msa-footer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/mips/msa/test-msa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/mips/run-tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/run-tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/wasm/declare-suites.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/wasm/relaxed-simd/run-tests-wasm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/wasm/relaxed-simd/run-tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/wasm/relaxed-simd/test-relaxed-simd-footer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/wasm/relaxed-simd/test-relaxed-simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/wasm/run-tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/run-tests-wasm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/run-tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/test-simd128-footer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/wasm/simd128/test-simd128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/wasm/test-simd128-footer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/wasm/test-simd128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/x86/avx512/run-tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/x86/avx512/test-avx512-footer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/x86/avx512/test-avx512.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/x86/run-tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/x86/test-avx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/x86/test-mmx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/x86/test-sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/x86/test-sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/x86/test-x86-footer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/test/x86/test-x86.h" />
+    <Text Include="../../thirdparty/owemdjee/simde/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/simde/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/simde/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simde/amalgamate.py" />
+    <Text Include="../../thirdparty/owemdjee/simde/codecov.yml" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/bin/arch2gcc.sh" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/bin/simde-check-all.sh" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/bin/simde-reset-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64+sve-clang-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64+sve-clang-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64+sve-clang-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64+sve-clang-13.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64+sve-clang-14.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64+sve-clang-15.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64+sve-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64+sve-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64+sve-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-13-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-13.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-14-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-14.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-15-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-15-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-15.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-16-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-17-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-18-no-extras-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-6.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-7.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-8.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-9.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-gcc-11-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-gcc-11-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-gcc-12-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-gcc-12-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-gcc-13-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-gcc-14-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-gcc-14-no-extras-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-gcc-7.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-gcc-8.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-gcc-9.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-clang-15-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-clang-16-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-clang-17-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-gcc-11-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-gcc-12-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-gcc-12-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-gcc-13-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-gcc-14-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armhf-gcc-11-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armhf-gcc-12-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-13.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-14.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-15-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-15.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-16-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-17-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-6.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-gcc-12-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-gcc-13-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-gcc-14-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-gcc-8.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8+mve-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8+mve-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8+mve-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-clang-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-clang-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-clang-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-clang-13.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-clang-14.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-clang-15.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-clang-6.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-clang-8.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-clang-9.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-gcc-12-32bit-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-gcc-13-32bit-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-gcc-14-32bit-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv8-gcc-9.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-11-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-13.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-14.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-15.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-16.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-17.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-3.9.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-4.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-5.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-6.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-7.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-8.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/clang-9.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/emscripten32-relaxed.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/emscripten32.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/emscripten64-relaxed.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/emscripten64.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-10-fast-math.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-11-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-11-fast-math.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-12-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-12-fast-math.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-12-native.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-5.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-6.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-7.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-8.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/gcc-9.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-all-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-all-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-all-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-all-gcc-9.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-clang-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-clang-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-clang-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-clang-13.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-clang-14.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-clang-15.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-10-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-11-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-11-qemu.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-12-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-14.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-9.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-qemu.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/icc.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/icx.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-clang-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-clang-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-clang-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-clang-13.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-clang-14.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-clang-15.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-clang-7.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-clang-8.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-clang-9.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-gcc-8.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-icc.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-icx.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongarch64-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongarch64-gcc-13-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongarch64-gcc-13.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongarch64-gcc-14-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongson-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongson-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongson-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongson-gcc-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongson-gcc.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el+msa-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el+msa-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el+msa-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-clang-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-clang-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-clang-13.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-clang-14.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-clang-15.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-clang-16-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-clang-16.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-clang-17-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-gcc-12-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-gcc-13-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/mips64el-gcc-14-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power8-clang-9.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power8-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power9-clang-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power9-clang-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power9-clang-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power9-clang-13.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power9-clang-14.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power9-clang-15-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power9-clang-15.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power9-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power9-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power9-gcc-12-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power9-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power9-gcc-13-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/power9-gcc-14-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-clang-14.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-clang-15-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-clang-15.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-clang-16-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-clang-17-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-gcc-10-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-gcc-11-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-gcc-12-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64+rvv_vlen128_elen64-clang-17-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64+rvv_vlen128_elen64-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64+rvv_vlen128_elen64_zvfh-clang-17-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64+rvv_vlen128_elen64_zvfh-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64+rvv_vlen256_elen64-clang-17-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64+rvv_vlen256_elen64-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64+rvv_vlen256_elen64_zvfh-clang-17-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64+rvv_vlen256_elen64_zvfh-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64+rvv_vlen512_elen64-clang-17-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64+rvv_vlen512_elen64-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64+rvv_vlen512_elen64_zvfh-clang-17-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64+rvv_vlen512_elen64_zvfh-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-13.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-14.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-15-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-15.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-16-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-16.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-17-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-17.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-9.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-gcc-12-O3-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-gcc-12-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-gcc-13-O3-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-gcc-13-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-gcc-14-O3-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-gcc-14-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-13.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-14.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-15-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-15.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-16-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-17-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-gcc-11-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-gcc-12-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-gcc-12-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-gcc-13-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-gcc-14-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-gcc-8.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-gcc-9.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/sleef-gcc-10.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/sleef-gcc-11.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/sleef-gcc-12.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/simde-dev.sh" />
+    <Text Include="../../thirdparty/owemdjee/simde/meson_options.txt" />
+    <Text Include="../../thirdparty/owemdjee/simde/netlify-disable.toml" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/arm/neon/modify_c.txt" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/arm64cl.txt" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/check-flags.sh" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/cmake/AddCompilerFlags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/cmake/ExtraWarningFlags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/docker/Dockerfile.Ubuntu1404" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/docker/Dockerfile.Ubuntu1604" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/docker/Dockerfile.Ubuntu1804" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/docker/Dockerfile.arm64" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/docker/Dockerfile.arm7" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/docker/Dockerfile.mipsel" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/docker/Dockerfile.ppc64el" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/docker/Dockerfile.qemu5.s390x" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/docker/Dockerfile.s390x" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/download-iig.sh" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/download-sde.sh" />
+    <Text Include="../../thirdparty/owemdjee/simde/test/native-aliases.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

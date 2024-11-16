@@ -295,6 +295,9 @@ const projectMap = {
 
 	"protobuf_compiler": "protobuf",
 	"libprotobuf_conformance": "protobuf",
+
+	"reactpp": "cpp.react",
+	"simd-everywhere": "simde",
 };
 
 testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname_alt}`;

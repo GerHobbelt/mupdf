@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7ED998}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREACTIVEPLUSPLUS;REACTIVEPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREACTIVEPLUSPLUS;REACTIVEPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREACTIVEPLUSPLUS;REACTIVEPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREACTIVEPLUSPLUS;REACTIVEPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREACTIVEPLUSPLUS;REACTIVEPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREACTIVEPLUSPLUS;REACTIVEPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREACTIVEPLUSPLUS;REACTIVEPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREACTIVEPLUSPLUS;REACTIVEPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREACTIVEPLUSPLUS;REACTIVEPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREACTIVEPLUSPLUS;REACTIVEPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREACTIVEPLUSPLUS;REACTIVEPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREACTIVEPLUSPLUS;REACTIVEPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/benchmarks/benchmarks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/basic/basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/as_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/combine_latest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/concat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/connect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/create.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/debounce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/defer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/delay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/distinct_until_changed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/first.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/from.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/group_by.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/interval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/just.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/last.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/merge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/multicast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/observe_on.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/readme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/ref_count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/repeat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/retry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/retry_when.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/start_with.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/subscribe_on.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/switch_on_next.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/take.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/take_last.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/take_until.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/take_while.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/throttle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/timeout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/window_toggle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/with_latest_from.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/linesfrombytes/linesfrombytes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/long_chain/long_chain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/sfml/snake/canvas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/sfml/snake/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/sfml/snake/snake.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/two_async_streams/two_async_streams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppgrpc/communication/client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppgrpc/communication/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppgrpc/doxygen/client_reactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppgrpc/doxygen/server_reactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppqt/basic/basic_rppqt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppqt/doxygen/from_signal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppqt/doxygen/qt_readme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_combine_latest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_concat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_connectable_observable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_debounce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_defer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_delay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_disposables.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_distinct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_distinct_until_changed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_element_at.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_finally.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_first.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_flat_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_from.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_group_by.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_interval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_last.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_merge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_observables.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_observers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_on_error_resume_next.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_repeat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_retry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_retry_when.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_start_with.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_subjects.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_subscribe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_subscribe_on.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_switch_on_next.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_take.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_take_last.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_take_until.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_take_while.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_tap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_throttle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_timeout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_window_toggle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_with_latest_from.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rpp/test_zip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rppasio/test_rppasio_scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rppgrpc/test_async_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rppgrpc/test_async_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rppqt/test_from_signal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/rppqt/test_main_thread_scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/utils/doctest_main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/sfml/snake/canvas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/sfml/snake/snake.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/sfml/snake/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppasio/rppasio/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppasio/rppasio/rppasio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppasio/rppasio/schedulers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppasio/rppasio/schedulers/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppasio/rppasio/schedulers/strand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppgrpc/rppgrpc/client_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppgrpc/rppgrpc/details/base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppgrpc/rppgrpc/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppgrpc/rppgrpc/rppgrpc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppgrpc/rppgrpc/server_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppgrpc/rppgrpc/utils/exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppqt/rppqt/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppqt/rppqt/rppqt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppqt/rppqt/schedulers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppqt/rppqt/schedulers/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppqt/rppqt/schedulers/main_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppqt/rppqt/sources.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppqt/rppqt/sources/from_signal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppqt/rppqt/sources/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppqt/rppqt/utils/exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/defs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/disposables.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/disposables/callback_disposable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/disposables/composite_disposable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/disposables/details/base_disposable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/disposables/details/container.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/disposables/disposable_wrapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/disposables/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/disposables/interface_composite_disposable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/disposables/interface_disposable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/disposables/refcount_disposable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/memory_model.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observables.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observables/blocking_observable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observables/connectable_observable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observables/details/chain_strategy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observables/details/disposables_strategy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observables/dynamic_observable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observables/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observables/grouped_observable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observables/observable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observables/variant_observable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observers/details/disposables_strategy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observers/details/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observers/dynamic_observer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observers/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observers/lambda_observer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observers/mock_observer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/observers/observer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/as_blocking.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/combine_latest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/concat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/debounce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/delay.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/details/combining_strategy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/details/forwarding_subject.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/details/strategy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/distinct.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/distinct_until_changed.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/element_at.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/finally.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/first.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/flat_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/group_by.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/last.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/merge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/multicast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/observe_on.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/on_error_resume_next.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/publish.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/ref_count.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/repeat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/retry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/retry_when.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/skip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/start_with.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/subscribe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/subscribe_on.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/switch_on_next.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/take.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/take_last.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/take_until.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/take_while.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/tap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/throttle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/timeout.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/window.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/window_toggle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/with_latest_from.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/operators/zip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/rpp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/schedulers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/schedulers/computational.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/schedulers/current_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/schedulers/details/queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/schedulers/details/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/schedulers/details/worker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/schedulers/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/schedulers/immediate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/schedulers/new_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/schedulers/run_loop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/schedulers/test_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/schedulers/thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/sources.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/sources/concat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/sources/create.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/sources/defer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/sources/empty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/sources/error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/sources/from.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/sources/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/sources/interval.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/sources/just.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/sources/never.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/sources/timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/subjects.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/subjects/behavior_subject.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/subjects/details/subject_on_subscribe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/subjects/details/subject_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/subjects/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/subjects/publish_subject.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/subjects/replay_subject.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/utils/constraints.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/utils/exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/utils/function_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/utils/functors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/utils/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/rpp/utils/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/utils/copy_count_tracker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/utils/disposable_observable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/utils/rpp_trompeloil.hpp" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/BUILDING.md" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/HACKING.md" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/ci/find_longest_symbols.py" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/ci/generate_marbles.py" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/ci/process_benchmark_data.py" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/cmake/conan_provider.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/cmake/coverage.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/cmake/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/cmake/dev-mode.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/cmake/install-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/cmake/install-rules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/cmake/lint-targets.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/cmake/lint.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/cmake/prelude.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/cmake/project-is-top-level.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/cmake/spell-targets.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/cmake/spell.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/cmake/variables.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/docs/custom.css" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/docs/header.html" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/docs/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/sonar-project.properties" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/basic/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/doxygen/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/linesfrombytes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/long_chain/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/package/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/sfml/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/sfml/snake/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rpp/two_async_streams/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppgrpc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppgrpc/communication/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppgrpc/doxygen/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppqt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppqt/basic/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppqt/doxygen/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/examples/rppqt/package/CMakeListst.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppasio/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppgrpc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/extensions/rppqt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/rpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ReactivePlusPlus/src/tests/utils/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/ReactivePlusPlus/DoxygenLayout.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,1 +1,45 @@
-x
+
+#include <boost/flyweight.hpp>
+#include <boost/flyweight/assoc_container_factory.hpp>
+#include <boost/flyweight/assoc_container_factory_fwd.hpp>
+#include <boost/flyweight/concurrent_factory.hpp>
+#include <boost/flyweight/concurrent_factory_fwd.hpp>
+#include <boost/flyweight/detail/archive_constructed.hpp>
+#include <boost/flyweight/detail/default_value_policy.hpp>
+#include <boost/flyweight/detail/dyn_perfect_fwd.hpp>
+#include <boost/flyweight/detail/flyweight_core.hpp>
+#include <boost/flyweight/detail/is_placeholder_expr.hpp>
+#include <boost/flyweight/detail/nested_xxx_if_not_ph.hpp>
+#include <boost/flyweight/detail/not_placeholder_expr.hpp>
+#include <boost/flyweight/detail/perfect_fwd.hpp>
+#include <boost/flyweight/detail/pp_perfect_fwd.hpp>
+#include <boost/flyweight/detail/recursive_lw_mutex.hpp>
+#include <boost/flyweight/detail/serialization_helper.hpp>
+#include <boost/flyweight/detail/value_tag.hpp>
+#include <boost/flyweight/factory_tag.hpp>
+#include <boost/flyweight/flyweight.hpp>
+#include <boost/flyweight/flyweight_fwd.hpp>
+#include <boost/flyweight/hashed_factory.hpp>
+#include <boost/flyweight/hashed_factory_fwd.hpp>
+#include <boost/flyweight/holder_tag.hpp>
+#include <boost/flyweight/intermodule_holder.hpp>
+#include <boost/flyweight/intermodule_holder_fwd.hpp>
+#include <boost/flyweight/key_value.hpp>
+#include <boost/flyweight/key_value_fwd.hpp>
+#include <boost/flyweight/locking_tag.hpp>
+#include <boost/flyweight/no_locking.hpp>
+#include <boost/flyweight/no_locking_fwd.hpp>
+#include <boost/flyweight/no_tracking.hpp>
+#include <boost/flyweight/no_tracking_fwd.hpp>
+#include <boost/flyweight/refcounted.hpp>
+#include <boost/flyweight/refcounted_fwd.hpp>
+#include <boost/flyweight/serialize.hpp>
+#include <boost/flyweight/set_factory.hpp>
+#include <boost/flyweight/set_factory_fwd.hpp>
+#include <boost/flyweight/simple_locking.hpp>
+#include <boost/flyweight/simple_locking_fwd.hpp>
+#include <boost/flyweight/static_holder.hpp>
+#include <boost/flyweight/static_holder_fwd.hpp>
+#include <boost/flyweight/tag.hpp>
+#include <boost/flyweight/tracking_tag.hpp>
+

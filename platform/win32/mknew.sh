@@ -1470,6 +1470,12 @@ hwinfo
 libMultiRobotPlanning
 cppuprofile
 sys_info
+uuid_v4
+reactpp
+ReactivePlusPlus
+simd-everywhere
+libcds
+sml
 
 EOT
 ) | grep -e "$FILTER"

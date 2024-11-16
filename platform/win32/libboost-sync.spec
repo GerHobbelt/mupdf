@@ -7,4 +7,4 @@ also-ignore:
 	benchmark/
 	
 sources:
-    ../../scripts/boost/libboost-sort-dummy.cpp
+    ../../scripts/boost/libboost-sync-dummy.cpp

@@ -1,1 +1,43 @@
-x
+
+#include <boost/pfr.hpp>
+#include <boost/pfr/config.hpp>
+#include <boost/pfr/core.hpp>
+#include <boost/pfr/core_name.hpp>
+#include <boost/pfr/detail/config.hpp>
+#include <boost/pfr/detail/core.hpp>
+#include <boost/pfr/detail/core14_classic.hpp>
+#include <boost/pfr/detail/core14_loophole.hpp>
+#include <boost/pfr/detail/core17.hpp>
+#include <boost/pfr/detail/core17_generated.hpp>
+#include <boost/pfr/detail/core_name.hpp>
+#include <boost/pfr/detail/core_name14_disabled.hpp>
+#include <boost/pfr/detail/core_name20_static.hpp>
+#include <boost/pfr/detail/detectors.hpp>
+#include <boost/pfr/detail/fake_object.hpp>
+#include <boost/pfr/detail/fields_count.hpp>
+#include <boost/pfr/detail/for_each_field.hpp>
+#include <boost/pfr/detail/for_each_field_impl.hpp>
+#include <boost/pfr/detail/functional.hpp>
+#include <boost/pfr/detail/io.hpp>
+#include <boost/pfr/detail/make_flat_tuple_of_references.hpp>
+#include <boost/pfr/detail/make_integer_sequence.hpp>
+#include <boost/pfr/detail/offset_based_getter.hpp>
+#include <boost/pfr/detail/possible_reflectable.hpp>
+#include <boost/pfr/detail/rvalue_t.hpp>
+#include <boost/pfr/detail/sequence_tuple.hpp>
+#include <boost/pfr/detail/size_array.hpp>
+#include <boost/pfr/detail/size_t_.hpp>
+#include <boost/pfr/detail/stdarray.hpp>
+#include <boost/pfr/detail/stdtuple.hpp>
+#include <boost/pfr/detail/tie_from_structure_tuple.hpp>
+#include <boost/pfr/detail/unsafe_declval.hpp>
+#include <boost/pfr/functions_for.hpp>
+#include <boost/pfr/functors.hpp>
+#include <boost/pfr/io.hpp>
+#include <boost/pfr/io_fields.hpp>
+#include <boost/pfr/ops.hpp>
+#include <boost/pfr/ops_fields.hpp>
+#include <boost/pfr/traits.hpp>
+#include <boost/pfr/traits_fwd.hpp>
+#include <boost/pfr/tuple_size.hpp>
+

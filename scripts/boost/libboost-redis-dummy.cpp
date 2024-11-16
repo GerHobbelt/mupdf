@@ -1,1 +1,31 @@
-x
+
+#include <boost/redis.hpp>
+#include <boost/redis/adapter/adapt.hpp>
+#include <boost/redis/adapter/detail/adapters.hpp>
+#include <boost/redis/adapter/detail/response_traits.hpp>
+#include <boost/redis/adapter/detail/result_traits.hpp>
+#include <boost/redis/adapter/ignore.hpp>
+#include <boost/redis/adapter/result.hpp>
+#include <boost/redis/config.hpp>
+#include <boost/redis/connection.hpp>
+#include <boost/redis/detail/connection_base.hpp>
+#include <boost/redis/detail/connector.hpp>
+#include <boost/redis/detail/handshaker.hpp>
+#include <boost/redis/detail/health_checker.hpp>
+#include <boost/redis/detail/helper.hpp>
+#include <boost/redis/detail/resolver.hpp>
+#include <boost/redis/detail/runner.hpp>
+#include <boost/redis/detail/write.hpp>
+#include <boost/redis/error.hpp>
+#include <boost/redis/ignore.hpp>
+#include <boost/redis/logger.hpp>
+#include <boost/redis/operation.hpp>
+#include <boost/redis/request.hpp>
+#include <boost/redis/resp3/node.hpp>
+#include <boost/redis/resp3/parser.hpp>
+#include <boost/redis/resp3/serialization.hpp>
+#include <boost/redis/resp3/type.hpp>
+#include <boost/redis/response.hpp>
+#include <boost/redis/src.hpp>
+#include <boost/redis/usage.hpp>
+

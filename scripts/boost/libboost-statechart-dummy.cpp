@@ -3,6 +3,15 @@
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/deep_history.hpp>
 #include <boost/statechart/deferral.hpp>
+#include <boost/statechart/detail/avoid_unused_warning.hpp>
+#include <boost/statechart/detail/constructor.hpp>
+#include <boost/statechart/detail/counted_base.hpp>
+#include <boost/statechart/detail/leaf_state.hpp>
+#include <boost/statechart/detail/memory.hpp>
+#include <boost/statechart/detail/node_state.hpp>
+#include <boost/statechart/detail/reaction_dispatcher.hpp>
+#include <boost/statechart/detail/rtti_policy.hpp>
+#include <boost/statechart/detail/state_base.hpp>
 #include <boost/statechart/event.hpp>
 #include <boost/statechart/event_base.hpp>
 #include <boost/statechart/event_processor.hpp>
@@ -20,3 +29,4 @@
 #include <boost/statechart/state_machine.hpp>
 #include <boost/statechart/termination.hpp>
 #include <boost/statechart/transition.hpp>
+

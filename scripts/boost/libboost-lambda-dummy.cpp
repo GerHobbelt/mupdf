@@ -1,1 +1,35 @@
-x
+
+#include <boost/lambda/algorithm.hpp>
+#include <boost/lambda/bind.hpp>
+#include <boost/lambda/casts.hpp>
+#include <boost/lambda/closures.hpp>
+#include <boost/lambda/construct.hpp>
+#include <boost/lambda/control_structures.hpp>
+#include <boost/lambda/core.hpp>
+#include <boost/lambda/detail/actions.hpp>
+#include <boost/lambda/detail/arity_code.hpp>
+#include <boost/lambda/detail/bind_functions.hpp>
+#include <boost/lambda/detail/control_constructs_common.hpp>
+#include <boost/lambda/detail/function_adaptors.hpp>
+#include <boost/lambda/detail/is_instance_of.hpp>
+#include <boost/lambda/detail/lambda_config.hpp>
+#include <boost/lambda/detail/lambda_functor_base.hpp>
+#include <boost/lambda/detail/lambda_functors.hpp>
+#include <boost/lambda/detail/lambda_fwd.hpp>
+#include <boost/lambda/detail/lambda_traits.hpp>
+#include <boost/lambda/detail/member_ptr.hpp>
+#include <boost/lambda/detail/operator_actions.hpp>
+#include <boost/lambda/detail/operator_lambda_func_base.hpp>
+#include <boost/lambda/detail/operator_return_type_traits.hpp>
+#include <boost/lambda/detail/operators.hpp>
+#include <boost/lambda/detail/ret.hpp>
+#include <boost/lambda/detail/return_type_traits.hpp>
+#include <boost/lambda/detail/select_functions.hpp>
+#include <boost/lambda/detail/suppress_unused.hpp>
+#include <boost/lambda/exceptions.hpp>
+#include <boost/lambda/if.hpp>
+#include <boost/lambda/lambda.hpp>
+#include <boost/lambda/loops.hpp>
+#include <boost/lambda/numeric.hpp>
+#include <boost/lambda/switch.hpp>
+

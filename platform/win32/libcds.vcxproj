@@ -1,0 +1,1323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF015065}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDS;CDS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDS;CDS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDS;CDS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDS;CDS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDS;CDS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDS;CDS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDS;CDS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDS;CDS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDS;CDS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDS;CDS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDS;CDS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDS;CDS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/src/dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/src/dllmain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/src/hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/src/hp_thread_local.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/src/init.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/src/thread_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/src/topology_hpux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/src/topology_linux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/src/topology_osx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/src/urcu_gp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/src/urcu_sh.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/framework/city.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/framework/config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/framework/ellen_bintree_update_desc_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/framework/stress_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/freelist/put_get.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/freelist/put_get_single.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/del3/map_del3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/del3/map_del3_bronsonavltree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/del3/map_del3_cuckoo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/del3/map_del3_ellentree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/del3/map_del3_feldman_hashmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/del3/map_del3_michael.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/del3/map_del3_skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/del3/map_del3_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/delodd/map_delodd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/delodd/map_delodd_bronsonavltree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/delodd/map_delodd_cuckoo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/delodd/map_delodd_ellentree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/delodd/map_delodd_feldman_hashmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/delodd/map_delodd_michael.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/delodd/map_delodd_skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/delodd/map_delodd_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/find_string/map_find_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/find_string/map_find_string_bronsonavltree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/find_string/map_find_string_cuckoo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/find_string/map_find_string_ellentree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/find_string/map_find_string_feldman_hashset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/find_string/map_find_string_michael.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/find_string/map_find_string_skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/find_string/map_find_string_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/find_string/map_find_string_std.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/find_string/map_find_string_striped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_func/map_insdel_func.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_func/map_insdel_func_bronsonavltree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_func/map_insdel_func_cuckoo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_func/map_insdel_func_ellentree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_func/map_insdel_func_feldman_hashset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_func/map_insdel_func_michael.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_func/map_insdel_func_skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_func/map_insdel_func_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_func/map_insdel_func_striped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_item_int/map_insdel_item_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_item_int/map_insdel_item_int_bronsonavltree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_item_int/map_insdel_item_int_cuckoo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_item_int/map_insdel_item_int_ellentree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_item_int/map_insdel_item_int_feldman_hashset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_item_int/map_insdel_item_int_michael.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_item_int/map_insdel_item_int_skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_item_int/map_insdel_item_int_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_item_int/map_insdel_item_int_striped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_string/map_insdel_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_string/map_insdel_string_bronsonavltree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_string/map_insdel_string_cuckoo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_string/map_insdel_string_ellentree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_string/map_insdel_string_feldman_hashset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_string/map_insdel_string_michael.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_string/map_insdel_string_skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_string/map_insdel_string_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_string/map_insdel_string_std.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_string/map_insdel_string_striped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_bronsonavltree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_cuckoo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_ellentree_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_ellentree_rcu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_feldman_hashset_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_feldman_hashset_rcu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_michael_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_michael_rcu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_skip_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_skip_rcu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_split_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_split_rcu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_std.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind_striped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/iter_erase/map_iter_erase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/iter_erase/map_iter_erase_feldman_hashmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/iter_erase/map_iter_erase_michael.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/iter_erase/map_iter_erase_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/minmax/map_minmax.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/minmax/map_minmax_bronsonavltree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/minmax/map_minmax_ellentree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/map/minmax/map_minmax_skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/pqueue/pop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/pqueue/push.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/pqueue/push_pop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/queue/bounded_queue_fulness.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/queue/intrusive_push_pop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/queue/pop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/queue/push.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/queue/push_pop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/queue/random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/queue/spsc_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/queue/spsc_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/del3/set_del3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/del3/set_del3_cuckoo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/del3/set_del3_ellentree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/del3/set_del3_feldman_hashset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/del3/set_del3_michael.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/del3/set_del3_skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/del3/set_del3_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/delodd/set_delodd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/delodd/set_delodd_cuckoo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/delodd/set_delodd_ellentree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/delodd/set_delodd_feldman_hashset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/delodd/set_delodd_michael.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/delodd/set_delodd_skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/delodd/set_delodd_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind_cuckoo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind_ellentree_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind_ellentree_rcu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind_feldman_hashset_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind_feldman_hashset_rcu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind_michael_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind_michael_rcu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind_skip_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind_skip_rcu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind_split_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind_split_rcu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind_std.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind_striped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_func/set_insdel_func.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_func/set_insdel_func_cuckoo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_func/set_insdel_func_ellentree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_func/set_insdel_func_feldman_hashset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_func/set_insdel_func_michael.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_func/set_insdel_func_skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_func/set_insdel_func_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_func/set_insdel_func_striped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_string/set_insdel_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_string/set_insdel_string_cuckoo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_string/set_insdel_string_ellentree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_string/set_insdel_string_feldman_hashset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_string/set_insdel_string_michael.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_string/set_insdel_string_skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_string/set_insdel_string_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_string/set_insdel_string_std.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_string/set_insdel_string_striped.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/iter_erase/set_iter_erase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/iter_erase/set_iter_erase_feldman_hashset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/iter_erase/set_iter_erase_michael.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/iter_erase/set_iter_erase_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/iteration/set_iteration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/iteration/set_iteration_feldman_hashset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/iteration/set_iteration_michael.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/set/iteration/set_iteration_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/stack/intrusive_push_pop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/stack/intrusive_push_pop_fcstack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/stack/push.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/stress/stack/push_pop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/deque/fcdeque.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_iterable_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_iterable_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_lazy_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_lazy_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_lazy_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_lazy_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_lazy_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_lazy_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_lazy_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_michael_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_michael_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_michael_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_michael_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_michael_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_michael_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/intrusive_michael_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_feldman_hashset_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_feldman_hashset_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_feldman_hashset_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_feldman_hashset_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_feldman_hashset_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_feldman_hashset_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_iterable_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_iterable_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_lazy_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_lazy_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_lazy_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_lazy_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_lazy_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_lazy_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_lazy_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_michael_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_michael_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_michael_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_michael_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_michael_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_michael_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_michael_michael_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_skiplist_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_skiplist_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_skiplist_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_skiplist_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_skiplist_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_skiplist_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_skiplist_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_iterable_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_iterable_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_lazy_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_lazy_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_lazy_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_lazy_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_lazy_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_lazy_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_lazy_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_michael_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_michael_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_michael_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_michael_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_michael_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_michael_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/intrusive_split_michael_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/iterable_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/iterable_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_iterable_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_iterable_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_lazy_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_lazy_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_lazy_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_lazy_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_lazy_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_lazy_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_lazy_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_michael_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_michael_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_michael_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_michael_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_michael_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_michael_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/kv_michael_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/lazy_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/lazy_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/lazy_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/lazy_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/lazy_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/lazy_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/lazy_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/michael_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/michael_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/michael_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/michael_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/michael_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/michael_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/list/michael_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/feldman_hashmap_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/feldman_hashmap_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/feldman_hashset_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/feldman_hashset_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/feldman_hashset_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/feldman_hashset_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_iterable_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_iterable_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_lazy_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_lazy_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_lazy_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_lazy_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_lazy_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_lazy_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_lazy_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_michael_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_michael_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_michael_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_michael_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_michael_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_michael_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/michael_michael_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/skiplist_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/skiplist_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/skiplist_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/skiplist_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/skiplist_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/skiplist_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/skiplist_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_iterable_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_iterable_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_lazy_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_lazy_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_lazy_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_lazy_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_lazy_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_lazy_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_lazy_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_michael_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_michael_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_michael_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_michael_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_michael_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_michael_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/map/split_michael_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/misc/asan_errors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/misc/bit_reversal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/misc/bitop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/misc/cxx11_atomic_class.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/misc/cxx11_atomic_func.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/misc/find_option.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/misc/hash_tuple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/misc/permutation_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/misc/split_bitstring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/pqueue/fcpqueue_boost_stable_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/pqueue/fcpqueue_deque.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/pqueue/fcpqueue_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/pqueue/intrusive_mspqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/pqueue/mspqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/basket_queue_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/basket_queue_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/fcqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/intrusive_basket_queue_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/intrusive_basket_queue_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/intrusive_fcqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/intrusive_moirqueue_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/intrusive_moirqueue_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/intrusive_msqueue_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/intrusive_msqueue_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/intrusive_optqueue_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/intrusive_optqueue_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/intrusive_segmented_queue_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/intrusive_segmented_queue_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/intrusive_vyukov_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/moirqueue_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/moirqueue_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/msqueue_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/msqueue_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/optimistic_queue_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/optimistic_queue_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/rwqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/segmented_queue_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/segmented_queue_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/vyukov_mpmc_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/queue/weak_ringbuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/feldman_hashset_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/feldman_hashset_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/feldman_hashset_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/feldman_hashset_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/feldman_hashset_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/feldman_hashset_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_iterable_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_iterable_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_lazy_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_lazy_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_lazy_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_lazy_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_lazy_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_lazy_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_lazy_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_michael_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_michael_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_michael_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_michael_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_michael_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_michael_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/michael_michael_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/skiplist_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/skiplist_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/skiplist_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/skiplist_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/skiplist_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/skiplist_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/skiplist_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_iterable_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_iterable_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_lazy_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_lazy_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_lazy_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_lazy_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_lazy_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_lazy_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_lazy_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_michael_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_michael_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_michael_nogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_michael_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_michael_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_michael_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/set/split_michael_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/stack/fcstack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/stack/intrusive_fcstack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/stack/intrusive_treiber_stack_custom_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/stack/intrusive_treiber_stack_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/stack/intrusive_treiber_stack_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/stack/treiber_stack_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/stack/treiber_stack_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-map/cuckoo_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-map/map_boost_flat_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-map/map_boost_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-map/map_boost_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-map/map_boost_slist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-map/map_boost_unordered_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-map/map_std_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-map/map_std_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-map/map_std_unordered_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/cuckoo_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/intrusive_boost_avl_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/intrusive_boost_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/intrusive_boost_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/intrusive_boost_sg_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/intrusive_boost_slist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/intrusive_boost_splay_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/intrusive_boost_treap_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/intrusive_boost_unordered_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/intrusive_cuckoo_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/set_boost_flatset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/set_boost_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/set_boost_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/set_boost_slist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/set_boost_stable_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/set_boost_unordered_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/set_boost_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/set_std_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/set_std_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/set_std_unordered_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/set_std_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/bronson_avltree_map_ptr_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/bronson_avltree_map_ptr_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/bronson_avltree_map_ptr_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/bronson_avltree_map_ptr_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/bronson_avltree_map_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/bronson_avltree_map_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/bronson_avltree_map_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/bronson_avltree_map_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/ellen_bintree_map_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/ellen_bintree_map_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/ellen_bintree_map_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/ellen_bintree_map_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/ellen_bintree_map_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/ellen_bintree_map_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/ellen_bintree_set_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/ellen_bintree_set_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/ellen_bintree_set_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/ellen_bintree_set_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/ellen_bintree_set_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/ellen_bintree_set_rcu_shb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/ellen_bintree_update_desc_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/intrusive_ellenbintree_dhp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/intrusive_ellenbintree_hp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/intrusive_ellenbintree_rcu_gpb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/intrusive_ellenbintree_rcu_gpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/intrusive_ellenbintree_rcu_gpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcds/test/unit/tree/intrusive_ellenbintree_rcu_shb.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/backoff_strategy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/bit_reversal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/bitop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/elimination.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/elimination_opt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/elimination_tls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/flat_combining.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/flat_combining/defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/flat_combining/kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/flat_combining/wait_strategy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/int_algo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/algo/split_bitstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/backoff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/bitop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/clang/defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/cxx11_atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/feature_tsan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/amd64/backoff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/amd64/bitop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/amd64/cxx11_atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/arm7/backoff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/arm8/backoff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/compiler_barriers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/compiler_macro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/ia64/backoff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/ia64/bitop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/ia64/cxx11_atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/ppc64/backoff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/ppc64/bitop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/sparc/backoff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/sparc/bitop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/sparc/cxx11_atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/x86/backoff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/x86/bitop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/x86/cxx11_atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/gcc/x86/cxx11_atomic32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/icl/compiler_barriers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/icl/defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/vc/amd64/backoff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/vc/amd64/bitop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/vc/amd64/cxx11_atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/vc/compiler_barriers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/vc/defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/vc/x86/backoff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/vc/x86/bitop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/compiler/vc/x86/cxx11_atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/basket_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/bronson_avltree_map_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/cuckoo_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/cuckoo_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/bronson_avltree_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/cuckoo_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/ellen_bintree_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/feldman_hashmap_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/feldman_hashset_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/guarded_ptr_cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/iterable_list_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/lazy_list_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/make_iterable_kvlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/make_iterable_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/make_lazy_kvlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/make_lazy_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/make_michael_kvlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/make_michael_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/make_skip_list_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/make_skip_list_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/make_split_list_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/make_split_list_set_iterable_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/make_split_list_set_lazy_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/make_split_list_set_michael_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/michael_list_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/michael_map_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/michael_set_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/skip_list_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/details/split_list_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/ellen_bintree_map_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/ellen_bintree_map_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/ellen_bintree_map_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/ellen_bintree_set_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/ellen_bintree_set_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/ellen_bintree_set_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/fcdeque.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/fcpriority_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/fcqueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/fcstack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/feldman_hashmap_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/feldman_hashmap_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/feldman_hashmap_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/feldman_hashset_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/feldman_hashset_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/feldman_hashset_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/impl/bronson_avltree_map_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/impl/ellen_bintree_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/impl/ellen_bintree_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/impl/feldman_hashmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/impl/feldman_hashset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/impl/iterable_kvlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/impl/iterable_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/impl/lazy_kvlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/impl/lazy_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/impl/michael_kvlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/impl/michael_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/impl/skip_list_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/impl/skip_list_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/iterable_kvlist_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/iterable_kvlist_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/iterable_list_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/iterable_list_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/lazy_kvlist_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/lazy_kvlist_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/lazy_kvlist_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/lazy_kvlist_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/lazy_list_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/lazy_list_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/lazy_list_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/lazy_list_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_kvlist_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_kvlist_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_kvlist_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_kvlist_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_list_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_list_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_list_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_list_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_map_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_map_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_set_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/michael_set_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/moir_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/mspriority_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/msqueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/optimistic_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/rwqueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/segmented_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/skip_list_map_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/skip_list_map_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/skip_list_map_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/skip_list_map_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/skip_list_set_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/skip_list_set_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/skip_list_set_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/skip_list_set_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/split_list_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/split_list_map_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/split_list_map_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/split_list_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/split_list_set_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/split_list_set_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_map/boost_flat_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_map/boost_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_map/boost_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_map/boost_slist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_map/boost_unordered_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_map/std_hash_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_map/std_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_map/std_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_set/adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_set/boost_flat_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_set/boost_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_set/boost_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_set/boost_slist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_set/boost_stable_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_set/boost_unordered_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_set/boost_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_set/std_hash_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_set/std_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_set/std_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/striped_set/std_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/treiber_stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/vyukov_mpmc_cycle_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/container/weak_ringbuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/aligned_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/aligned_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/binary_functor_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/bit_reverse_counter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/bitop_generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/bounded_container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/is_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/make_const_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/marked_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/size_t_cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/throw_exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/details/type_padding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/gc/default_gc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/gc/details/hp_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/gc/details/retired_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/gc/dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/gc/hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/gc/hp_membar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/gc/nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/basket_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/cuckoo_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/details/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/details/ellen_bintree_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/details/feldman_hashset_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/details/iterable_list_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/details/lazy_list_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/details/michael_list_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/details/michael_set_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/details/node_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/details/raw_ptr_disposer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/details/single_link_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/details/skip_list_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/details/split_list_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/ellen_bintree_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/ellen_bintree_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/ellen_bintree_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/fcqueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/fcstack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/feldman_hashset_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/feldman_hashset_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/feldman_hashset_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/free_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/free_list_cached.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/free_list_selector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/free_list_tagged.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/impl/ellen_bintree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/impl/feldman_hashset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/impl/iterable_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/impl/lazy_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/impl/michael_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/impl/skip_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/iterable_list_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/iterable_list_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/lazy_list_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/lazy_list_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/lazy_list_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/lazy_list_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/michael_list_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/michael_list_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/michael_list_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/michael_list_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/michael_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/michael_set_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/michael_set_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/moir_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/mspriority_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/msqueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/optimistic_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/segmented_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/skip_list_dhp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/skip_list_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/skip_list_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/skip_list_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/split_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/split_list_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/split_list_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/striped_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/striped_set/adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/striped_set/boost_avl_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/striped_set/boost_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/striped_set/boost_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/striped_set/boost_sg_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/striped_set/boost_slist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/striped_set/boost_splay_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/striped_set/boost_treap_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/striped_set/boost_unordered_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/striped_set/resizing_policy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/striped_set/striping_policy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/treiber_stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/intrusive/vyukov_mpmc_cycle_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/lock/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/lock/spinlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/memory/pool_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/memory/vyukov_queue_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/opt/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/opt/compare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/opt/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/opt/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/opt/permutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/opt/value_cleaner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/aix/alloc_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/aix/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/aix/topology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/alloc_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/details/fake_topology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/free_bsd/alloc_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/free_bsd/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/free_bsd/topology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/hpux/alloc_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/hpux/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/hpux/topology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/libc/alloc_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/linux/alloc_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/linux/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/linux/topology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/osx/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/osx/topology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/posix/alloc_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/posix/fake_topology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/posix/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/posix/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/sunos/alloc_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/sunos/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/sunos/topology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/topology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/win/alloc_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/win/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/win/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/os/win/topology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/sync/injecting_monitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/sync/lock_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/sync/monitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/sync/pool_monitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/sync/spinlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/threading/details/_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/threading/details/auto_detect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/threading/details/cxx11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/threading/details/cxx11_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/threading/details/gcc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/threading/details/gcc_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/threading/details/msvc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/threading/details/msvc_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/threading/details/pthread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/threading/details/pthread_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/threading/details/wintls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/threading/details/wintls_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/threading/model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/details/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/details/check_deadlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/details/gp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/details/gp_decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/details/gpb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/details/gpi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/details/gpt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/details/sh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/details/sh_decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/details/sig_buffered.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/dispose_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/exempt_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/general_buffered.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/general_instant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/general_threaded.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/raw_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/urcu/signal_buffered.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/user_setup/allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/user_setup/cache_line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/user_setup/threading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/cds/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/check_size.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/city.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/citycrc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/ext_byteswap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/ext_gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/fc_hevy_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/fixture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/hash_func.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stat_bronson_avltree_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stat_cuckoo_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stat_dhp_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stat_ellenbintree_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stat_feldman_hashset_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stat_flat_combining_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stat_hp_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stat_iterable_list_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stat_lazy_list_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stat_michael_list_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stat_skiplist_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stat_splitlist_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stat_sync_monitor_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/stress_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/include/cds_test/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/framework/city.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/framework/citycrc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/framework/ellen_bintree_update_desc_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/lock/win32_lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/del3/map_del3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/delodd/map_delodd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/find_string/map_find_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_func/map_insdel_func.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_item_int/map_insdel_item_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_string/map_insdel_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/map_insdelfind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/iter_erase/map_iter_erase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/map_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/map_type_bronson_avltree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/map_type_cuckoo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/map_type_ellen_bintree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/map_type_feldman_hashmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/map_type_iterable_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/map_type_lazy_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/map_type_michael.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/map_type_michael_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/map_type_skip_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/map_type_split_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/map_type_std.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/map_type_striped.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/map/minmax/map_minmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/pqueue/item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/pqueue/pqueue_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/queue/intrusive_queue_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/queue/print_stat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/queue/queue_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/queue/std_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/del3/set_del3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/delodd/set_delodd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/set_insdelfind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_func/set_insdel_func.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_string/set_insdel_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/iter_erase/set_iter_erase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/iteration/set_iteration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/set_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/set_type_cuckoo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/set_type_ellen_bintree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/set_type_feldman_hashset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/set_type_iterable_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/set_type_lazy_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/set_type_michael.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/set_type_michael_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/set_type_skip_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/set_type_split_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/set_type_std.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/set/set_type_striped.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/stack/intrusive_stack_push_pop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/stack/intrusive_stack_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/stress/stack/stack_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/test_intrusive_iterable_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/test_intrusive_iterable_list_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/test_intrusive_lazy_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/test_intrusive_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/test_intrusive_list_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/test_intrusive_list_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/test_intrusive_list_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/test_intrusive_michael_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_feldman_hashset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_feldman_hashset_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_feldman_hashset_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_michael_iterable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_michael_iterable_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_michael_lazy_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_michael_michael_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_set_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_set_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_set_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_skiplist_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_split_iterable_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_split_iterable_set_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_split_lazy_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/test_intrusive_split_michael_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_iterable_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_iterable_list_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_kv_iterable_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_kv_iterable_list_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_kv_lazy_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_kv_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_kv_list_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_kv_list_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_kv_list_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_kv_michael_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_lazy_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_list_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_list_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_list_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/list/test_michael_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/skiplist_hp_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_feldman_hashmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_feldman_hashmap_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_feldman_hashmap_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_map_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_map_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_map_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_map_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_michael_iterable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_michael_iterable_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_michael_lazy_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_michael_michael_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_skiplist_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_skiplist_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_split_lazy_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/map/test_split_michael_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/misc/cxx11_convert_memory_order.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/pqueue/test_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/pqueue/test_fcpqueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/queue/test_bounded_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/queue/test_generic_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/queue/test_intrusive_bounded_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/queue/test_intrusive_msqueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/queue/test_intrusive_segmented_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/queue/test_segmented_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/skiplist_hp_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_feldman_hashset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_feldman_hashset_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_feldman_hashset_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_michael_iterable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_michael_iterable_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_michael_lazy_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_michael_michael_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_ordered_set_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_set_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_set_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_set_nogc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_set_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_skiplist_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_split_iterable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_split_iterable_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_split_lazy_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/set/test_split_michael_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/stack/test_intrusive_treiber_stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/stack/test_treiber_stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/striped-map/test_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/striped-map/test_map_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/striped-map/test_striped_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/test_intrusive_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/test_intrusive_striped_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/test_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/test_striped_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_bronson_avltree_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_bronson_avltree_map_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_ellen_bintree_map_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_ellen_bintree_set_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_ellen_bintree_update_desc_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_intrusive_ellen_bintree_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_intrusive_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_intrusive_tree_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_intrusive_tree_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_tree_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_tree_map_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_tree_map_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_tree_map_rcu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_tree_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_tree_set_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcds/test/unit/tree/test_tree_set_rcu.h" />
+    <Image Include="../../thirdparty/owemdjee/libcds/doxygen/image/feldman_hashset.png" />
+    <Text Include="../../thirdparty/owemdjee/libcds/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libcds/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/VASEx-CI-2/cds-libs" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/VASEx-CI-2/ci-build" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/VASEx-CI-2/ci-env" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/VASEx-CI/cds-libs" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/VASEx-CI/ci-build" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/VASEx-CI/ci-env" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/cmake-gen" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/gen-all" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/travis-ci/install.sh" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/travis-ci/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/AmdEpyc79-clang10-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/AmdEpyc79-clang9-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/AmdEpyc79-gcc10-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/AmdEpyc79-gcc8-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/AmdEpyc79-gcc9-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/AmdEpyc82-clang8-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/AmdEpyc82-gcc10-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/AmdEpyc82-gcc8-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/GCCFarm110-ppc64-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/GCCFarm112-ppc64-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/GCCFarm112-ppc64_gcc6-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/GCCFarm113-arm64-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/GCCFarm114-arm64-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/Xeon72-gcc6-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/Xeon72-gcc7-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/Xeon74-gcc6-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/CI/vasex/Xeon74-gcc7-rel" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/cmake/TargetArch.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/cmake/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/cmake/post_install_script.sh" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/cmake/post_uninstall_script.sh" />
+    <Text Include="../../thirdparty/owemdjee/libcds/build/cmake/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/libcds/conanfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/doxygen/cds.doxy" />
+    <Text Include="../../thirdparty/owemdjee/libcds/doxygen/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/libcds/doxygen/index.html" />
+    <Text Include="../../thirdparty/owemdjee/libcds/projects/Win/build-msbuild.cmd" />
+    <Text Include="../../thirdparty/owemdjee/libcds/projects/Win/build-vc14.cmd" />
+    <Text Include="../../thirdparty/owemdjee/libcds/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/data/split.pl" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/data/test-debug-gccfarm.conf" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/data/test-debug.conf" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/data/test-express-gccfarm.conf" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/data/test-express-x86.conf" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/data/test-express.conf" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/data/test-gccfarm.conf" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/data/test.conf" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/data/text.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/freelist/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/map/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/map/del3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/map/delodd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/map/find_string/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_func/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_item_int/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdel_string/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/map/insdelfind/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/map/iter_erase/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/map/minmax/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/pqueue/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/queue/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/set/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/set/del3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/set/delodd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_find/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_func/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/set/insdel_string/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/set/iter_erase/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/set/iteration/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/stress/stack/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/deque/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-list/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/intrusive-set/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/list/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/map/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/misc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/pqueue/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/queue/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/set/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/stack/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/striped-map/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/striped-set/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/test/unit/tree/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcds/thanks" />
+    <Text Include="../../thirdparty/owemdjee/libcds/tools/brush_cds.pl" />
+    <Text Include="../../thirdparty/owemdjee/libcds/tools/make_distrib.bat" />
+    <Text Include="../../thirdparty/owemdjee/libcds/tools/make_distrib.pl" />
+    <Text Include="../../thirdparty/owemdjee/libcds/tools/make_docs.bat" />
+    <Text Include="../../thirdparty/owemdjee/libcds/tools/tsan-suppression" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
