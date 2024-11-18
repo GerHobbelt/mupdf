@@ -755,6 +755,7 @@ if (/\/owemdjee\/boost\b/.test(include_paths) || /\/scripts\/boost\b/.test(inclu
     ../../thirdparty/owemdjee/boost/libs/outcome/include
     ../../thirdparty/owemdjee/boost/libs/parameter/include
     ../../thirdparty/owemdjee/boost/libs/parameter_python/include
+    ../../thirdparty/owemdjee/boost/libs/parser/include	
     ../../thirdparty/owemdjee/boost/libs/pfr/include
     ../../thirdparty/owemdjee/boost/libs/phoenix/include
     ../../thirdparty/owemdjee/boost/libs/poly_collection/include

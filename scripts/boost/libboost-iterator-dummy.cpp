@@ -1,15 +1,10 @@
 
-#include <boost/function_output_iterator.hpp>
+//#include <boost/function_output_iterator.hpp>
+#include <boost/shared_container_iterator.hpp>
 #include <boost/generator_iterator.hpp>
 #include <boost/indirect_reference.hpp>
 #include <boost/iterator/advance.hpp>
 #include <boost/iterator/counting_iterator.hpp>
-#include <boost/iterator/detail/any_conversion_eater.hpp>
-#include <boost/iterator/detail/config_def.hpp>
-#include <boost/iterator/detail/config_undef.hpp>
-#include <boost/iterator/detail/enable_if.hpp>
-#include <boost/iterator/detail/facade_iterator_category.hpp>
-#include <boost/iterator/detail/minimum_category.hpp>
 #include <boost/iterator/distance.hpp>
 #include <boost/iterator/filter_iterator.hpp>
 #include <boost/iterator/function_input_iterator.hpp>
@@ -33,9 +28,5 @@
 #include <boost/iterator/zip_iterator.hpp>
 #include <boost/iterator_adaptors.hpp>
 #include <boost/next_prior.hpp>
-#include <boost/pending/detail/int_iterator.hpp>
-#include <boost/pending/iterator_adaptors.hpp>
-#include <boost/pending/iterator_tests.hpp>
 #include <boost/pointee.hpp>
-#include <boost/shared_container_iterator.hpp>
 

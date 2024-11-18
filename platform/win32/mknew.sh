@@ -1476,6 +1476,9 @@ ReactivePlusPlus
 simd-everywhere
 libcds
 sml
+libRAW
+rawspeed
+libuuid
 
 EOT
 ) | grep -e "$FILTER"

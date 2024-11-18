@@ -1,5 +1,6 @@
 
-#include <boost/parameter/aux_/python/invoker.hpp>
-#include <boost/parameter/aux_/python/invoker_iterate.hpp>
+#if __has_include(<pyconfig.h>)
+
 #include <boost/parameter/python.hpp>
 
+#endif

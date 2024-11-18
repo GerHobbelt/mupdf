@@ -16,10 +16,6 @@
 #include <boost/graph/distributed/dehne_gotz_min_spanning_tree.hpp>
 #include <boost/graph/distributed/delta_stepping_shortest_paths.hpp>
 #include <boost/graph/distributed/depth_first_search.hpp>
-#include <boost/graph/distributed/detail/dijkstra_shortest_paths.hpp>
-#include <boost/graph/distributed/detail/filtered_queue.hpp>
-#include <boost/graph/distributed/detail/remote_update_set.hpp>
-#include <boost/graph/distributed/detail/tag_allocator.hpp>
 #include <boost/graph/distributed/dijkstra_shortest_paths.hpp>
 #include <boost/graph/distributed/distributed_graph_utility.hpp>
 #include <boost/graph/distributed/eager_dijkstra_shortest_paths.hpp>
@@ -45,9 +41,6 @@
 #include <boost/graph/parallel/algorithm.hpp>
 #include <boost/graph/parallel/basic_reduce.hpp>
 #include <boost/graph/parallel/container_traits.hpp>
-#include <boost/graph/parallel/detail/inplace_all_to_all.hpp>
-#include <boost/graph/parallel/detail/property_holders.hpp>
-#include <boost/graph/parallel/detail/untracked_pair.hpp>
 #include <boost/graph/parallel/distribution.hpp>
 #include <boost/graph/parallel/process_group.hpp>
 #include <boost/graph/parallel/properties.hpp>

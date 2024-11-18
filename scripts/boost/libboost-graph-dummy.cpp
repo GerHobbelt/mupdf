@@ -1,5 +1,4 @@
 
-#include <boost/detail/algorithm.hpp>
 #include <boost/graph/adj_list_serialize.hpp>
 #include <boost/graph/adjacency_iterator.hpp>
 #include <boost/graph/adjacency_list.hpp>
@@ -31,44 +30,16 @@
 #include <boost/graph/dag_shortest_paths.hpp>
 #include <boost/graph/degree_centrality.hpp>
 #include <boost/graph/depth_first_search.hpp>
-#include <boost/graph/detail/adj_list_edge_iterator.hpp>
-#include <boost/graph/detail/adjacency_list.hpp>
-#include <boost/graph/detail/array_binary_tree.hpp>
-#include <boost/graph/detail/augment.hpp>
-#include <boost/graph/detail/compressed_sparse_row_struct.hpp>
-#include <boost/graph/detail/connected_components.hpp>
-#include <boost/graph/detail/d_ary_heap.hpp>
-#include <boost/graph/detail/edge.hpp>
-#include <boost/graph/detail/empty_header.hpp>
-#include <boost/graph/detail/geodesic.hpp>
-#include <boost/graph/detail/histogram_sort.hpp>
-#include <boost/graph/detail/incidence_iterator.hpp>
-#include <boost/graph/detail/incremental_components.hpp>
-#include <boost/graph/detail/index.hpp>
-#include <boost/graph/detail/indexed_properties.hpp>
-#include <boost/graph/detail/is_distributed_selector.hpp>
-#include <boost/graph/detail/labeled_graph_traits.hpp>
-#include <boost/graph/detail/list_base.hpp>
-#include <boost/graph/detail/mpi_include.hpp>
-#include <boost/graph/detail/permutation.hpp>
-#include <boost/graph/detail/read_graphviz_new.hpp>
-#include <boost/graph/detail/read_graphviz_spirit.hpp>
-#include <boost/graph/detail/self_avoiding_walk.hpp>
-#include <boost/graph/detail/set_adaptor.hpp>
-#include <boost/graph/detail/shadow_iterator.hpp>
-#include <boost/graph/detail/sparse_ordering.hpp>
 #include <boost/graph/dijkstra_shortest_paths.hpp>
 #include <boost/graph/dijkstra_shortest_paths_no_color_map.hpp>
 #include <boost/graph/dimacs.hpp>
 #include <boost/graph/directed_graph.hpp>
-#include <boost/graph/dll_import_export.hpp>
 #include <boost/graph/dominator_tree.hpp>
 #include <boost/graph/eccentricity.hpp>
 #include <boost/graph/edge_coloring.hpp>
 #include <boost/graph/edge_connectivity.hpp>
 #include <boost/graph/edge_list.hpp>
 #include <boost/graph/edmonds_karp_max_flow.hpp>
-#include <boost/graph/edmunds_karp_max_flow.hpp>
 #include <boost/graph/erdos_renyi_generator.hpp>
 #include <boost/graph/exception.hpp>
 #include <boost/graph/exterior_property.hpp>
@@ -102,7 +73,11 @@
 #include <boost/graph/king_ordering.hpp>
 #include <boost/graph/kruskal_min_spanning_tree.hpp>
 #include <boost/graph/labeled_graph.hpp>
+
+#if __has_include(<LEDA/graph/graph.h>)
 #include <boost/graph/leda_graph.hpp>
+#endif
+
 #include <boost/graph/lookup_edge.hpp>
 #include <boost/graph/loop_erased_random_walk.hpp>
 #include <boost/graph/make_biconnected_planar.hpp>
@@ -125,11 +100,6 @@
 #include <boost/graph/overloading.hpp>
 #include <boost/graph/page_rank.hpp>
 #include <boost/graph/planar_canonical_ordering.hpp>
-#include <boost/graph/planar_detail/add_edge_visitors.hpp>
-#include <boost/graph/planar_detail/boyer_myrvold_impl.hpp>
-#include <boost/graph/planar_detail/bucket_sort.hpp>
-#include <boost/graph/planar_detail/face_handles.hpp>
-#include <boost/graph/planar_detail/face_iterators.hpp>
 #include <boost/graph/planar_face_traversal.hpp>
 #include <boost/graph/plod_generator.hpp>
 #include <boost/graph/point_traits.hpp>
@@ -157,7 +127,11 @@
 #include <boost/graph/smallest_last_ordering.hpp>
 #include <boost/graph/ssca_graph_generator.hpp>
 #include <boost/graph/st_connected.hpp>
+
+#if __has_include(<gb_graph.h>)
 #include <boost/graph/stanford_graph.hpp>
+#endif
+
 #include <boost/graph/stoer_wagner_min_cut.hpp>
 #include <boost/graph/strong_components.hpp>
 #include <boost/graph/subgraph.hpp>
@@ -180,20 +154,4 @@
 #include <boost/graph/visitors.hpp>
 #include <boost/graph/wavefront.hpp>
 #include <boost/graph/write_dimacs.hpp>
-#include <boost/pending/bucket_sorter.hpp>
-#include <boost/pending/container_traits.hpp>
-#include <boost/pending/detail/disjoint_sets.hpp>
-#include <boost/pending/detail/property.hpp>
-#include <boost/pending/disjoint_sets.hpp>
-#include <boost/pending/fenced_priority_queue.hpp>
-#include <boost/pending/fibonacci_heap.hpp>
-#include <boost/pending/indirect_cmp.hpp>
-#include <boost/pending/is_heap.hpp>
-#include <boost/pending/mutable_heap.hpp>
-#include <boost/pending/mutable_queue.hpp>
-#include <boost/pending/property.hpp>
-#include <boost/pending/property_serialize.hpp>
-#include <boost/pending/queue.hpp>
-#include <boost/pending/relaxed_heap.hpp>
-#include <boost/pending/stringtok.hpp>
 

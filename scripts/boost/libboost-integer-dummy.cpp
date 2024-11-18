@@ -9,7 +9,4 @@
 #include <boost/integer/mod_inverse.hpp>
 #include <boost/integer/static_log2.hpp>
 #include <boost/integer/static_min_max.hpp>
-#include <boost/integer_fwd.hpp>
 #include <boost/integer_traits.hpp>
-#include <boost/pending/integer_log2.hpp>
-

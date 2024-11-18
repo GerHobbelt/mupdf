@@ -8,3 +8,6 @@ also-ignore:
 	matlab_mex_example.cpp
 	vigra_with_dip.cpp
 	
+	/src/
+	
+	

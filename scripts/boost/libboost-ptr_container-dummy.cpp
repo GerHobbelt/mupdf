@@ -1,20 +1,5 @@
 
 #include <boost/ptr_container/clone_allocator.hpp>
-#include <boost/ptr_container/detail/associative_ptr_container.hpp>
-#include <boost/ptr_container/detail/default_deleter.hpp>
-#include <boost/ptr_container/detail/is_convertible.hpp>
-#include <boost/ptr_container/detail/map_iterator.hpp>
-#include <boost/ptr_container/detail/meta_functions.hpp>
-#include <boost/ptr_container/detail/move.hpp>
-#include <boost/ptr_container/detail/ptr_container_disable_deprecated.hpp>
-#include <boost/ptr_container/detail/reversible_ptr_container.hpp>
-#include <boost/ptr_container/detail/scoped_deleter.hpp>
-#include <boost/ptr_container/detail/serialize_ptr_map_adapter.hpp>
-#include <boost/ptr_container/detail/serialize_reversible_cont.hpp>
-#include <boost/ptr_container/detail/serialize_xml_names.hpp>
-#include <boost/ptr_container/detail/static_move_ptr.hpp>
-#include <boost/ptr_container/detail/throw_exception.hpp>
-#include <boost/ptr_container/detail/void_ptr_iterator.hpp>
 #include <boost/ptr_container/exception.hpp>
 #include <boost/ptr_container/indirect_fun.hpp>
 #include <boost/ptr_container/nullable.hpp>

@@ -1,10 +1,4 @@
 
-#include <boost/sort/block_indirect_sort/blk_detail/backbone.hpp>
-#include <boost/sort/block_indirect_sort/blk_detail/block.hpp>
-#include <boost/sort/block_indirect_sort/blk_detail/constants.hpp>
-#include <boost/sort/block_indirect_sort/blk_detail/merge_blocks.hpp>
-#include <boost/sort/block_indirect_sort/blk_detail/move_blocks.hpp>
-#include <boost/sort/block_indirect_sort/blk_detail/parallel_sort.hpp>
 #include <boost/sort/block_indirect_sort/block_indirect_sort.hpp>
 #include <boost/sort/common/deque_cnc.hpp>
 #include <boost/sort/common/file_vector.hpp>
@@ -21,13 +15,6 @@
 #include <boost/sort/common/spinlock.hpp>
 #include <boost/sort/common/stack_cnc.hpp>
 #include <boost/sort/common/time_measure.hpp>
-#include <boost/sort/common/util/algorithm.hpp>
-#include <boost/sort/common/util/atomic.hpp>
-#include <boost/sort/common/util/circular_buffer.hpp>
-#include <boost/sort/common/util/insert.hpp>
-#include <boost/sort/common/util/merge.hpp>
-#include <boost/sort/common/util/search.hpp>
-#include <boost/sort/common/util/traits.hpp>
 #include <boost/sort/flat_stable_sort/flat_stable_sort.hpp>
 #include <boost/sort/insert_sort/insert_sort.hpp>
 #include <boost/sort/parallel_stable_sort/parallel_stable_sort.hpp>
@@ -35,11 +22,6 @@
 #include <boost/sort/sample_sort/sample_sort.hpp>
 #include <boost/sort/sort.hpp>
 #include <boost/sort/spinsort/spinsort.hpp>
-#include <boost/sort/spreadsort/detail/constants.hpp>
-#include <boost/sort/spreadsort/detail/float_sort.hpp>
-#include <boost/sort/spreadsort/detail/integer_sort.hpp>
-#include <boost/sort/spreadsort/detail/spreadsort_common.hpp>
-#include <boost/sort/spreadsort/detail/string_sort.hpp>
 #include <boost/sort/spreadsort/float_sort.hpp>
 #include <boost/sort/spreadsort/integer_sort.hpp>
 #include <boost/sort/spreadsort/spreadsort.hpp>

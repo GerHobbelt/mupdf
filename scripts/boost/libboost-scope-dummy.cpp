@@ -1,21 +1,5 @@
 
 #include <boost/scope/defer.hpp>
-#include <boost/scope/detail/compact_storage.hpp>
-#include <boost/scope/detail/config.hpp>
-#include <boost/scope/detail/footer.hpp>
-#include <boost/scope/detail/header.hpp>
-#include <boost/scope/detail/is_nonnull_default_constructible.hpp>
-#include <boost/scope/detail/is_not_like.hpp>
-#include <boost/scope/detail/move_or_copy_assign_ref.hpp>
-#include <boost/scope/detail/move_or_copy_construct_ref.hpp>
-#include <boost/scope/detail/type_traits/conjunction.hpp>
-#include <boost/scope/detail/type_traits/disjunction.hpp>
-#include <boost/scope/detail/type_traits/is_final.hpp>
-#include <boost/scope/detail/type_traits/is_invocable.hpp>
-#include <boost/scope/detail/type_traits/is_nothrow_invocable.hpp>
-#include <boost/scope/detail/type_traits/is_nothrow_swappable.hpp>
-#include <boost/scope/detail/type_traits/is_swappable.hpp>
-#include <boost/scope/detail/type_traits/negation.hpp>
 #include <boost/scope/error_code_checker.hpp>
 #include <boost/scope/exception_checker.hpp>
 #include <boost/scope/fd_deleter.hpp>
@@ -25,5 +9,4 @@
 #include <boost/scope/scope_success.hpp>
 #include <boost/scope/unique_fd.hpp>
 #include <boost/scope/unique_resource.hpp>
-#include <boost/scope/unique_resource_fwd.hpp>
 

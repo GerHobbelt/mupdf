@@ -7,15 +7,6 @@
 #include <boost/qvm/deduce_quat.hpp>
 #include <boost/qvm/deduce_scalar.hpp>
 #include <boost/qvm/deduce_vec.hpp>
-#include <boost/qvm/detail/cofactor_impl.hpp>
-#include <boost/qvm/detail/determinant_impl.hpp>
-#include <boost/qvm/detail/mat_assign.hpp>
-#include <boost/qvm/detail/quat_assign.hpp>
-#include <boost/qvm/detail/remove_const.hpp>
-#include <boost/qvm/detail/swizzle_traits.hpp>
-#include <boost/qvm/detail/transp_impl.hpp>
-#include <boost/qvm/detail/vec_assign.hpp>
-#include <boost/qvm/detail/vec_register_impl.hpp>
 #include <boost/qvm/enable_if.hpp>
 #include <boost/qvm/error.hpp>
 #include <boost/qvm/is_scalar.hpp>
@@ -67,6 +58,5 @@
 #include <boost/qvm/vec_traits.hpp>
 #include <boost/qvm/vec_traits_array.hpp>
 #include <boost/qvm/vec_traits_defaults.hpp>
-#include <boost/qvm/vec_traits_gnuc.hpp>
 #include <boost/qvm_lite.hpp>
 
