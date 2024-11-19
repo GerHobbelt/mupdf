@@ -380,7 +380,7 @@ static int ambig_parse_one_command_from_set(const char* source, const struct cmd
 	memcpy(cmd, source, arg1_start);
 	cmd[arg1_start] = 0;
 
-	// heuristic: do not attempt to match single-character commands: a command particle must at least be size 2:
+	// heuristic: do not attempt to match single-character commands (a command particle must at least be size 2) *unless* the command character is an unambiguous *prefix*:
 	if (arg1_start > 1)
 	{
 		for (size_t i = 0; i < command_count1; i++)
@@ -427,10 +427,43 @@ static int ambig_parse_one_command_from_set(const char* source, const struct cmd
 			}
 		}
 	}
+	else if (arg1_start == 1)
+	{
+		for (size_t i = 0; i < command_count1; i++)
+		{
+			struct cmd_info el = commands1[i];
+
+			if (el.cmd[0] == cmd[0])
+			{
+				// score!
+				struct hit_info record = {
+					el,
+					0
+				};
+				hits[hit_count++] = record;
+			}
+		}
+
+		for (size_t i = 0; i < command_count2; i++)
+		{
+			struct cmd_info el = commands2[i];
+
+			if (el.cmd[0] == cmd[0])
+			{
+				// score!
+				struct hit_info record = {
+					el,
+					0
+				};
+				hits[hit_count++] = record;
+			}
+		}
+	}
+
 
 	int rv = -4242;
 
-	// did we get an unambguous hit?
+	// did we get an unambiguous hit?
 	if (hit_count == 1)
 	{
 			int argc_count;
@@ -624,7 +657,7 @@ static int display_cmd_help(int mode)
 
 	if (mode > 0)
 	{
-		fprintf(stderr, "\n\nType 'q', 'x' or Ctrl-C at the prompt to quit.\n");
+		fprintf(stderr, "\n\nType 'q', 'x' or Ctrl-C at the prompt to quit. Type '?' to get a list of available commands.\n");
 	}
 	else
 	{
