@@ -1,0 +1,1548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF022261}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFREEIMAGE;FREEIMAGE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFREEIMAGE;FREEIMAGE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFREEIMAGE;FREEIMAGE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFREEIMAGE;FREEIMAGE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFREEIMAGE;FREEIMAGE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFREEIMAGE;FREEIMAGE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFREEIMAGE;FREEIMAGE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFREEIMAGE;FREEIMAGE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFREEIMAGE;FREEIMAGE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFREEIMAGE;FREEIMAGE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFREEIMAGE;FREEIMAGE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFREEIMAGE;FREEIMAGE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Examples/Generic/BatchLoad.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Examples/Generic/CloneMultiPage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Examples/Generic/CreateAlpha.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Examples/Generic/FIFImportExport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Examples/Generic/FIIO_Mem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Examples/Generic/LoadFromHandle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Examples/Generic/LoadFromMemory-classified.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Examples/Generic/LoadFromMemory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Examples/Generic/ShowMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Examples/Linux/linux-gtk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Examples/Linux/linux-svgalib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Examples/OpenGL/TextureManager/TextureManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Examples/Plugin/PluginCradle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/DeprecationManager/Deprecated.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/DeprecationManager/DeprecationMgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/BitmapAccess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/CacheFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/ColorLookup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/Conversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/Conversion16_555.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/Conversion16_565.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/Conversion24.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/Conversion32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/Conversion4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/Conversion8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/ConversionFloat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/ConversionRGB16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/ConversionRGBA16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/ConversionRGBAF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/ConversionRGBF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/ConversionType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/ConversionUINT16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/FreeImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/FreeImageC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/FreeImageIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/GetType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/Halftoning.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/J2KHelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/LFPQuantizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/MNGHelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/MemoryIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/MultiPage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/NNQuantizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PSDParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PixelAccess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/Plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginBMP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginCUT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginDDS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginEXR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginG3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginGIF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginHDR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginICO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginIFF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginJ2K.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginJNG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginJP2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginJPEG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginJXR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginKOALA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginMNG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginPCD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginPCX.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginPFM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginPICT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginPNG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginPNM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginPSD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginRAS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginRAW.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginSGI.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginTARGA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginTIFF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginWBMP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginWebP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginXBM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PluginXPM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/TIFFLogLuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/ToneMapping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/WuQuantizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/ZLibInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/tmoColorConvert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/tmoDrago03.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/tmoFattal02.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/tmoReinhard05.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/BSplineRotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/Background.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/Channels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/ClassicRotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/Colors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/CopyPaste.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/Display.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/Flip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/JPEGTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/MultigridPoissonSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/Rescale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/Resize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/ansi2knr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/cdjpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/cjpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/ckconfig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/djpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jaricom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jcapimin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jcapistd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jcarith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jccoefct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jccolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jcdctmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jchuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jcinit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jcmainct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jcmarker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jcmaster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jcomapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jcparam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jcprepct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jcsample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jctrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdapimin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdapistd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdarith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdatadst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdatasrc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdcoefct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdcolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jddctmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdhuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdinput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdmainct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdmarker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdmaster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdmerge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdpostct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdsample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdtrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jfdctflt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jfdctfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jfdctint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jidctflt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jidctfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jidctint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jmemansi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jmemdos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jmemmac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jmemmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jmemname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jmemnobs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jpegtran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jquant1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jquant2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/rdbmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/rdcolmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/rdgif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/rdjpgcom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/rdppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/rdrle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/rdswitch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/rdtarga.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/transupp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/wrbmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/wrgif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/wrjpgcom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/wrppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/wrrle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/wrtarga.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/decode/JXRTranscode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/decode/decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/decode/postprocess.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/decode/segdec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/decode/strInvTransform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/decode/strPredQuantDec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/decode/strdec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/decode/strdec_x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/encode/encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/encode/segenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/encode/strFwdTransform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/encode/strPredQuantEnc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/encode/strenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/encode/strenc_x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/sys/adapthuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/sys/image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/sys/perfTimerANSI.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/sys/strPredQuant.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/sys/strTransform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/sys/strcodec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/jxrgluelib/JXRGlue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/jxrgluelib/JXRGlueJxr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/jxrgluelib/JXRGluePFC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/jxrgluelib/JXRMeta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/bio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/cidx_manager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/cio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/dwt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/function_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/invert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/j2k.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/jp2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/mct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/mqc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/openjpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/opj_clock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/phix_manager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/pi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/ppix_manager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/t1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/t1_generate_luts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/t2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/tcd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/tgt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/thix_manager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/tpix_manager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngget.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngpread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngrio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngrtran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngrutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngtrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngwio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngwtran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngwutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/dcraw/dcraw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/internal/aahd_demosaic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/internal/dcb_demosaicing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/internal/dcraw_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/internal/dcraw_fileio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/internal/demosaic_packs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/internal/dht_demosaic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/internal/libraw_x3f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/internal/wf_filtering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/src/libraw_c_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/src/libraw_cxx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/src/libraw_datastream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/src/libraw_fuji_compressed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/src/libraw_xtrans_compressed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/mkg3states.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/mkspans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_aux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_close.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_codec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_dir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_dirinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_dirread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_dirwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_dumpmode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_extension.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_fax3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_fax3sm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_flush.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_getimage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_jbig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_jpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_jpeg_12.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_luv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_lzma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_lzw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_next.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_ojpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_packbits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_pixarlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_predict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_stream.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_strip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_swab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_thunder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_tile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_unix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_vms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_warning.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_wince.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_zip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_zstd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/alpha_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/buffer_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/dec.alpha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/dec.buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/dec.frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/dec.idec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/dec.io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/dec.quant.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/dec.tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/dec.vp8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/dec.vp8l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/dec.webp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/frame_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/idec_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/io_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/quant_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/tree_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/vp8_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/vp8l_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/webp_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/demux/anim_decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/demux/demux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/demux/demux.demux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/alpha_processing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/alpha_processing_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/alpha_processing_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/alpha_processing_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/alpha_processing_sse41.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/cost.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/cost_mips32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/cost_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/cost_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/cpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dec_clip_tables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dec_mips32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dec_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dec_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dec_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dec_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dec_sse41.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.alpha_processing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.alpha_processing_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.alpha_processing_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.argb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.argb_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.argb_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.cost.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.cost_mips32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.cost_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.cost_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.cpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.dec_clip_tables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.dec_mips32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.dec_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.dec_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.dec_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.enc_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.enc_mips32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.enc_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.enc_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.enc_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.filters.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.filters_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.filters_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.lossless.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.lossless_mips32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.lossless_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.lossless_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.lossless_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.rescaler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.rescaler_mips32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.rescaler_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.upsampling.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.upsampling_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.upsampling_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.upsampling_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.yuv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.yuv_mips32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.yuv_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.yuv_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/enc_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/enc_mips32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/enc_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/enc_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/enc_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/enc_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/enc_sse41.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/filters.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/filters_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/filters_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/filters_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/filters_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless_enc_mips32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless_enc_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless_enc_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless_enc_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless_enc_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless_enc_sse41.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/rescaler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/rescaler_mips32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/rescaler_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/rescaler_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/rescaler_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/rescaler_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/ssim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/ssim_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/upsampling.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/upsampling_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/upsampling_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/upsampling_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/upsampling_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/upsampling_sse41.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/yuv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/yuv_mips32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/yuv_mips_dsp_r2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/yuv_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/yuv_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/yuv_sse41.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/alpha_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/analysis_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/backward_references_cost_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/backward_references_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/config_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/cost_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.alpha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.analysis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.backward_references.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.cost.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.histogram.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.iterator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.near_lossless.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.picture.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.picture_csp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.picture_psnr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.picture_rescale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.picture_tools.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.quant.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.syntax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.token.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.vp8l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/enc.webpenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/filter_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/frame_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/histogram_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/iterator_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/near_lossless_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/picture_csp_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/picture_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/picture_psnr_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/picture_rescale_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/picture_tools_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/predictor_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/quant_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/syntax_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/token_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/tree_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/vp8l_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/webp_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/mux/anim_encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/mux/mux.anim_encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/mux/mux.muxedit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/mux/mux.muxinternal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/mux/mux.muxread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/mux/muxedit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/mux/muxinternal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/mux/muxread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/bit_reader_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/bit_writer_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/color_cache_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/filters_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/huffman_encode_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/huffman_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/quant_levels_dec_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/quant_levels_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/random_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/rescaler_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/thread_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.bit_reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.bit_writer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.color_cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.filters.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.huffman.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.huffman_encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.quant_levels.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.quant_levels_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.random.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.rescaler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/Metadata/Exif.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/Metadata/FIRational.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/Metadata/FreeImageTag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/Metadata/IPTC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/Metadata/TagConversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/Metadata/TagLib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/Metadata/XTIFF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Half/eLut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Half/half.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Half/toFloat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Iex/IexBaseExc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Iex/IexThrowErrnoExc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IexMath/IexMathFloatExc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IexMath/IexMathFpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfAcesFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfB44Compressor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfBoxAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfCRgbaFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfChannelList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfChannelListAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfChromaticities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfChromaticitiesAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfCompositeDeepScanLine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfCompressionAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfCompressor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfConvert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepCompositing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepFrameBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepImageStateAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepScanLineInputFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepScanLineInputPart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepScanLineOutputFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepScanLineOutputPart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepTiledInputFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepTiledInputPart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepTiledOutputFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepTiledOutputPart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDoubleAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDwaCompressor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfEnvmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfEnvmapAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfFastHuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfFloatAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfFloatVectorAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfFrameBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfFramesPerSecond.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfGenericInputFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfGenericOutputFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfHeader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfHuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfInputFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfInputPart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfInputPartData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfIntAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfKeyCode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfKeyCodeAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfLineOrderAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfLut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfMatrixAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfMisc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfMultiPartInputFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfMultiPartOutputFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfMultiView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfOpaqueAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfOutputFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfOutputPart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfOutputPartData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfPartType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfPizCompressor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfPreviewImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfPreviewImageAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfPxr24Compressor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfRational.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfRationalAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfRgbaFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfRgbaYca.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfRle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfRleCompressor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfScanLineInputFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfStandardAttributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfStdIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfStringAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfStringVectorAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfSystemSpecific.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTestFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfThreading.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTileDescriptionAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTileOffsets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTiledInputFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTiledInputPart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTiledMisc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTiledOutputFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTiledOutputPart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTiledRgbaFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTimeCode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTimeCodeAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfVecAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfVersion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfWav.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfZip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfZipCompressor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/b44ExpLogTable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/dwaLookups.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadMutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadMutexPosix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadMutexWin32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadPool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadPosix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadSemaphore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadSemaphorePosix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadSemaphorePosixCompat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadSemaphoreWin32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadWin32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathBox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathColorAlgo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathFun.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathMatrixAlgo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathRandom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathShear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathVec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/adler32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/crc32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/deflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/gzclose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/gzlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/gzread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/gzwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/infback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/inffast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/inflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/inftrees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/trees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/uncompr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/zutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/TestAPI/MainTestSuite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/TestAPI/testChannels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/TestAPI/testHeaderOnly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/TestAPI/testImageType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/TestAPI/testJPEG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/TestAPI/testMPage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/TestAPI/testMPageMemory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/TestAPI/testMPageStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/TestAPI/testMemIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/TestAPI/testPlugins.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/TestAPI/testThumbnail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/TestAPI/testTools.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/TestAPI/testWrappedBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cpp/FreeImageIO/AssemblyInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cpp/FreeImageIO/FreeImageIO.Net.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cpp/FreeImageIO/Stdafx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/src/FreeImagePlus.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/src/fipImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/src/fipMemoryIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/src/fipMetadataFind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/src/fipMultiPage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/src/fipTag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/src/fipWinImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/test/fipTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/test/fipTestMPage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/test/fipTestMPageMemory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/test/fipTestMPageStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/test/fipTestMemIO.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Examples/Generic/FIIO_Mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Examples/OpenGL/TextureManager/TextureManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Examples/Plugin/PluginCradle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/CacheFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/DeprecationManager/DeprecationMgr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/J2KHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/FreeImage/PSDParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/Filters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/FreeImageToolkit/Resize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/cderror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/cdjpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jdct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jinclude.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jmemsys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jmorecfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jpegint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jpeglib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/transupp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/common/include/guiddef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/common/include/wmsal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/common/include/wmspecstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/common/include/wmspecstrings_adt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/common/include/wmspecstrings_strict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/common/include/wmspecstrings_undef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/decode/decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/encode/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/sys/ansi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/sys/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/sys/perfTimer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/sys/strTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/sys/strcodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/sys/windowsmediaphoto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/sys/xplatform_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/image/x86/x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/jxrgluelib/JXRGlue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/jxrgluelib/JXRMeta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/bio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/cidx_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/cio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/dwt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/function_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/indexbox_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/invert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/j2k.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/jp2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/mct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/mqc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/openjpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/opj_clock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/opj_codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/opj_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/opj_config_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/opj_includes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/opj_intmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/opj_inttypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/opj_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/opj_stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/pi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/t1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/t1_luts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/t2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/tcd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/tgt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngdebug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pnginfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pnglibconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngpriv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/pngstruct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/internal/defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/internal/libraw_internal_funcs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/internal/var_defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/libraw/libraw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/libraw/libraw_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/libraw/libraw_const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/libraw/libraw_datastream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/libraw/libraw_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/libraw/libraw_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/libraw/libraw_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/t4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_config.vc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_config.wince.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_dir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_fax3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_predict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tiff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tiffconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tiffconf.vc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tiffconf.wince.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tiffio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tiffio.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tiffiop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tiffvers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/uvcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/alphai.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/alphai_dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/common_dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/decode_vp8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/vp8_dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/vp8i.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/vp8i_dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/vp8li.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/vp8li_dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/webpi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dec/webpi_dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/common_sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/common_sse41.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/dsp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/lossless_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/mips_macro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/msa_macro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/yuv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/dsp/yuv_tables_sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/backward_references.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/backward_references_enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/cost.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/cost_enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/histogram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/histogram_enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/vp8enci.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/vp8i_enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/vp8li.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/enc/vp8li_enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/mux/animi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/mux/muxi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/bit_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/bit_reader_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/bit_reader_inl_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/bit_reader_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/bit_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/bit_writer_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/color_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/color_cache_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/endian_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/endian_inl_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/filters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/filters_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/huffman.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/huffman_encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/huffman_encode_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/huffman_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/quant_levels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/quant_levels_dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/quant_levels_dec_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/quant_levels_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/random_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/rescaler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/rescaler_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/thread_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/utils/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/webp/decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/webp/demux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/webp/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/webp/format_constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/webp/mux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/webp/mux_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/webp/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/MapIntrospector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/Metadata/FIRational.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/Metadata/FreeImageTag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Half/eLut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Half/half.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Half/halfExport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Half/halfFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Half/halfLimits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Half/toFloat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Iex/Iex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Iex/IexBaseExc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Iex/IexErrnoExc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Iex/IexExport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Iex/IexForward.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Iex/IexMacros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Iex/IexMathExc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Iex/IexNamespace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Iex/IexThrowErrnoExc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IexMath/IexMathFloatExc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IexMath/IexMathFpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IexMath/IexMathIeeeExc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmBaseConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfAcesFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfAutoArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfB44Compressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfBoxAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfCRgbaFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfChannelList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfChannelListAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfCheckedArithmetic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfChromaticities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfChromaticitiesAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfCompositeDeepScanLine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfCompression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfCompressionAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfCompressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfConvert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepCompositing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepFrameBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepImageState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepImageStateAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepScanLineInputFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepScanLineInputPart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepScanLineOutputFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepScanLineOutputPart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepTiledInputFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepTiledInputPart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepTiledOutputFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDeepTiledOutputPart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDoubleAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDwaCompressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfDwaCompressorSimd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfEnvmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfEnvmapAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfExport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfFastHuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfFloatAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfFloatVectorAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfForward.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfFrameBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfFramesPerSecond.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfGenericInputFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfGenericOutputFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfHeader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfHuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfInputFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfInputPart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfInputPartData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfInputStreamMutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfInt64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfIntAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfKeyCode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfKeyCodeAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfLineOrder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfLineOrderAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfLut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfMatrixAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfMisc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfMultiPartInputFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfMultiPartOutputFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfMultiView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfName.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfNamespace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfOpaqueAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfOptimizedPixelReading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfOutputFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfOutputPart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfOutputPartData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfOutputStreamMutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfPartHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfPartType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfPixelType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfPizCompressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfPreviewImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfPreviewImageAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfPxr24Compressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfRational.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfRationalAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfRgba.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfRgbaFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfRgbaYca.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfRle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfRleCompressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfScanLineInputFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfSimd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfStandardAttributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfStdIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfStringAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfStringVectorAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfSystemSpecific.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTestFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfThreading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTileDescription.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTileDescriptionAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTileOffsets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTiledInputFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTiledInputPart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTiledMisc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTiledOutputFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTiledOutputPart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTiledRgbaFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTimeCode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfTimeCodeAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfVecAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfVersion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfWav.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfXdr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfZip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/ImfZipCompressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/b44ExpLogTable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmImf/dwaLookups.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadExport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadForward.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadMutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadNamespace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadPool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/IlmThread/IlmThreadSemaphore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathBox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathBoxAlgo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathColor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathColorAlgo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathEuler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathExc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathExport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathForward.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathFrame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathFrustum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathFrustumTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathFun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathGL.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathGLU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathHalfLimits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathInt64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathInterval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathLimits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathLine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathLineAlgo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathMath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathMatrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathMatrixAlgo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathNamespace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathPlane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathPlatform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathQuat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathRandom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathRoots.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathShear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathSphere.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathVec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Imath/ImathVecAlgo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/OpenEXRConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/Plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/Quantizers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/ToneMapping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/Utilities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/crc32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/deflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/gzguts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/inffast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/inffixed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/inflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/inftrees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/trees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/zconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/zlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/zutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/TestAPI/TestSuite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/src/Version.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cpp/FreeImageIO/FreeImageIO.Net.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cpp/FreeImageIO/Stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cpp/FreeImageIO/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/FreeImagePlus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/test/fipTest.h" />
+    <Image Include="../../thirdparty/owemdjee/freeimage/TestAPI/exif.jpg" />
+    <Image Include="../../thirdparty/owemdjee/freeimage/TestAPI/sample.png" />
+    <Image Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/demo/ImagePreview/Tiger.jpg" />
+    <Image Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cpp/FreeImageIO/app.ico" />
+    <Image Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 01 - Loading and saving/Sample.jpg" />
+    <Image Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 05 - Working with pixels/Sample.jpg" />
+    <Image Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 06 - Converting/Sample.jpg" />
+    <Image Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 07 - ICC Profiles/Sample.jpg" />
+    <Image Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 08 - Creating a plugin/Sample.jpg" />
+    <Image Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/doc/freeimage.png" />
+    <Image Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/doc/freeimagedoc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/test/test.jpg" />
+    <NASM Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jmemdosa.asm" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/freeimage/FreeImage.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cpp/FreeImageIO/app.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/FreeImagePlus.rc" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Examples/Linux/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Examples/OpenGL/TextureManager/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Makefile.cygwin" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Makefile.mingw" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Makefile.osx" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Makefile.solaris" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Makefile.srcs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/README.iphone" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/README.linux" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/README.md" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/README.minGW" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/README.osx" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/README.solaris" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/README" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/coderules.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/filelist.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/install.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/jconfig.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/libjpeg.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/structure.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/usage.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibJPEG/wizard.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/LICENCE" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibJXR/README" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/README" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibOpenJPEG/THANKS" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/ANNOUNCE" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/CHANGES" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/README" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/TODO" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/configure" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/libpng-manual.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/libpng.3" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/libpngpf.3" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibPNG/png.5" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/COPYRIGHT" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/Changelog.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/DEVELOPER-NOTES" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/LICENSE.CDDL" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/LICENSE.LGPL" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/README" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/README.DNGSDK.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/README.RawSpeed.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/README.demosaic-packs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/dcraw/dcraw.1.html" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibRawLite/internal/preprocess.pl" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_config.h-vms" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_config.h.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tif_config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tiffconf.h-vms" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tiffconf.h.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tiffconf.h.in" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibTIFF4/tiffvers.h.in" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/PATENTS" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/README" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/README.mux" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/LibWebP/src/file_rename.bat" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/ilmbase/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/ilmbase/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/ilmbase/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/ilmbase/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/ilmbase/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/ilmbase/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/ilmbase/README" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/ilmbase/README.CVS" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/ilmbase/README.OSX" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/ilmbase/README.git" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/ilmbase/README.namespacing" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/ilmbase/README.win32" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/openexr/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/openexr/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/openexr/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/openexr/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/openexr/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/openexr/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/openexr/PATENTS" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/openexr/README" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/openexr/README.CVS" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/openexr/README.OSX" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/openexr/README.git" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/openexr/README.namespacing" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/OpenEXR/Copyrights/openexr/README.win32" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/FAQ" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/INDEX" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/README" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/configure" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/zconf.h.in" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Source/ZLib/zlib.3" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/TestAPI/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/TestAPI/exif.jxr" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Whatsnew.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/WhatsNew_Delphi.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/_clean.bat" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/demo/ImagePreview/ImagePreview.dpr" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/demo/ImagePreview/ImagePreview.res" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/demo/ImagePreview/MainFrm.pas" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/demo/ImagePreview/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/demo/MultiBitmap/MultiBitmap.dpr" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/demo/MultiBitmap/MultiBitmap.res" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/demo/MultiBitmap/mbMainForm.pas" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/demo/TargaUnit/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/demo/TargaUnit/TargaImage.pas" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/demo/WinBitmap/MainDemo.dpr" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/demo/WinBitmap/MainDemo.res" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/demo/WinBitmap/MainForm.pas" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/license.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/src/FreeBitmap.pas" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/src/FreeImage.pas" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/Delphi/src/FreeUtils.pas" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cpp/FreeImageIO/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Content.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Doc/SHFB.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/FreeImageBitmap.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/FreeImageEngine.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/FreeImagePlugin.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/FreeImageStreamIO.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/GifInformation.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/ImageMetadata.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/LocalPlugin.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/MemoryArray.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/MetadataModel.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/MetadataModels.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/MetadataTag.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/Palette.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/PluginRepository.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/Scanline.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Classes/StreamWrapper.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Delegates.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/DisposalMethodType.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_COLOR_CHANNEL.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_COLOR_DEPTH.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_COLOR_OPTIONS.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_COLOR_TYPE.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_COMPARE_FLAGS.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_DITHER.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_FILTER.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_FORMAT.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_JPEG_OPERATION.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_LOAD_FLAGS.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_MDMODEL.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_MDTYPE.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_METADATA_COPY.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_QUANTIZE.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_SAVE_FLAGS.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_TMO.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/FREE_IMAGE_TYPE.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/ICC_FLAGS.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Enumerations/MD_SEARCH_FLAGS.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/FreeImageStaticImports.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/FreeImageWrapper.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/BITMAP.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/BITMAPINFO.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/BITMAPINFOHEADER.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FI16RGB555.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FI16RGB565.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FI1BIT.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FI4BIT.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FIBITMAP.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FICOMPLEX.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FIICCPROFILE.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FIMEMORY.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FIMETADATA.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FIMULTIBITMAP.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FIRGB16.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FIRGBA16.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FIRGBAF.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FIRGBF.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FIRational.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FITAG.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FIURational.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/FreeImageIO.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/Plugin.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/RGBQUAD.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/RGBTRIPLE.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/Structs/fi_handle.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Library/build.bat" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 01 - Loading and saving/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 01 - Loading and saving/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 02 - Multipaged bitmaps/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 02 - Multipaged bitmaps/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 02 - Multipaged bitmaps/multipaged.tif" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 03 - Allocating/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 03 - Allocating/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 04 - Getting bitmap informations/MainForm.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 04 - Getting bitmap informations/MainForm.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 04 - Getting bitmap informations/MainForm.resx" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 04 - Getting bitmap informations/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 05 - Working with pixels/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 05 - Working with pixels/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 05 - Working with pixels/Sample.tif" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 06 - Converting/MainForm.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 06 - Converting/MainForm.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 06 - Converting/MainForm.resx" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 06 - Converting/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 07 - ICC Profiles/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 07 - ICC Profiles/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 08 - Creating a plugin/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 08 - Creating a plugin/SampleForm.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 08 - Creating a plugin/SampleForm.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 08 - Creating a plugin/SampleForm.resx" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 08 - Creating a plugin/SerializationPlugin.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 09 - Working with streams/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 09 - Working with streams/SampleForm.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 09 - Working with streams/SampleForm.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 09 - Working with streams/SampleForm.resx" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 10 - Metadata/MainForm.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 10 - Metadata/MainForm.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 10 - Metadata/MainForm.resx" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 10 - Metadata/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 11 - Using the FreeImageBitmap class/MainForm.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 11 - Using the FreeImageBitmap class/MainForm.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 11 - Using the FreeImageBitmap class/MainForm.resx" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 11 - Using the FreeImageBitmap class/MetaDataFrame.Designer.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 11 - Using the FreeImageBitmap class/MetaDataFrame.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 11 - Using the FreeImageBitmap class/MetaDataFrame.resx" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Samples/Sample 11 - Using the FreeImageBitmap class/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/SourceFileMerger/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/SourceFileMerger/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/UnitTest/FreeImage.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/UnitTest/ImageManager.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/UnitTest/NUnit.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/UnitTest/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/UnitTest/UnitTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/Whats_New.NET.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImage.NET/cs/clean.bat" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/WhatsNew_FIP.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/clean.bat" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/doc/FreeImagePlus.dox" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/doc/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/doc/index.html" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/FreeImagePlus/test/test.tif" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/VB6/awk_script/genbas.sh" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/VB6/awk_script/genbasfuncs.awk" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/VB6/awk_script/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/VB6/mfreeimage/MFreeImage.bas" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/VB6/mfreeimage/WhatsNew_VB.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/VB6/modFreeImage.bas" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/VB6/src/MFreeImage.bas" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/Wrapper/VB6/src/WhatsNew_VB.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/clean.bat" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/clean.sh" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/fipMakefile.srcs" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/genfipsrclist.sh" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/gensrclist.sh" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/license-fi.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/license-gplv2.txt" />
+    <Text Include="../../thirdparty/owemdjee/freeimage/license-gplv3.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

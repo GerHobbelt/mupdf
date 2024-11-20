@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF752956}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVPP;VPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVPP;VPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVPP;VPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVPP;VPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVPP;VPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVPP;VPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVPP;VPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVPP;VPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVPP;VPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVPP;VPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVPP;VPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVPP;VPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/box2d_filter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/boxNd_iterator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/box_5x5_filter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/box_5x5_filter2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/box_filter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/distance_transform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/fast_detector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/fill.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/for_fast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/image_add.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/image_add2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/image_iterations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/image_iterator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/integral_images.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/iteration_on_domains.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/lbp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/liie.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/parallel_for.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/patch_malloc_vs_static.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/benchmarks/pyrlk_opencv_comparison.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/evaluation/semi_dense_optical_flow/KITTI.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/examples/box_filter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/examples/fast_detector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/examples/hough_extruder_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/examples/image_view.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/examples/keypoint_matching.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/examples/optical_flow.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/examples/tutorial.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/examples/video_extruder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/examples/video_extruder_javascript/cpp/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/examples/video_extruder_paint.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/block_wise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/border.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/boxNd_iterator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/box_nbh2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/cast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/colorspace_conversions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/descriptor_matcher.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/fill.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/image2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/image3d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/imageNd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/imageNd_iterator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/lbp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/liie.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/opencv_bridge.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/pixel_wise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/pyramid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/pyrlk.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/sandbox.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/sum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/tuple_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/vpp/tests/window.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/benchmarks/fast_count.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/benchmarks/get_time.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/evaluation/semi_dense_optical_flow/symbols.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/evaluation/utils/kitti.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/examples/hough_extruder_example.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/examples/symbols.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/examples/video_extruder_javascript/cpp/symbols.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/descriptor_matcher.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/descriptor_matcher/bruteforce_matcher.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/descriptor_matcher/dispatch.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/descriptor_matcher/distances.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/descriptor_matcher/global_search.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/descriptor_matcher/grid_index.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/descriptor_matcher/index.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/descriptor_matcher/index1d.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/descriptor_matcher/index1d.old.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/descriptor_matcher/local_index1d_sad_descriptor_matcher.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/descriptor_matcher/local_search.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/distance_transforms/distance_transforms.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/epipolar_geometry.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/fast_detector/fast.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/fast_detector/fast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/filters/scharr.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/lbp/lbp_distance.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/lbp/lbp_transform.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/fast_dht.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/fast_dht/cordic.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/fast_dht/dense_one_to_one_hough.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/fast_dht/dense_one_to_one_hough.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/fast_dht/fast_hough.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/fast_dht/fast_hough.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/hough_extruder.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/hough_extruder/draw_line_hough.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/hough_extruder/draw_trajectories_hough.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/hough_extruder/feature_matching_hough.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/hough_extruder/feature_matching_hough.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/hough_extruder/paint.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/hough_extruder/track.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/hough_extruder/track.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/hough_extruder/unscented_kalman_filter.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/hough_extruder/unscented_kalman_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/miscellanous.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/miscellanous/define.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/miscellanous/lookup_tables.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/miscellanous/operations.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/sfm.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/sfm/plucker.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/sfm/structure_from_motion.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/sfm/structure_from_motion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/sfm/vanishing_point.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/symbols.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/lucas_kanade.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/lucas_kanade/lucas_kanade.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/optical_flow.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/optical_flow/dense_optical_flow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/optical_flow/epipolar_match.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/optical_flow/gradient_descent.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/optical_flow/propagation.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/optical_flow/semi_dense_optical_flow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/optical_flow/sparse_optical_flow.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/pyrlk/lk.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/pyrlk/pyrlk_match.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/slam/triangulate.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/symbols.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/video_extruder.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/video_extruder/optical_flow_experiments.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/video_extruder/video_extruder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/block_wise.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/box2d.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/boxNd.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/boxNd_iterator.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/boxNd_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/cast_to_float.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/clone.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/colorspace_conversions.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/const.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/copy.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/dige.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/fill.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/image2d.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/image3d.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/imageNd.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/imageNd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/imageNd_iterator.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/keypoint_container.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/keypoint_container.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/keypoint_trajectory.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/liie.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/make_array.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/patch.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/pixel_wise.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/pixel_wise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/pyramid.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/relative_accessor.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/sum.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/symbol_definitions.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/symbols.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/tuple_utils.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/vector.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/window.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/core/zero.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/draw/draw.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/draw/draw_trajectories.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/draw/rgb_colors.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/draw/square.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/draw/symbols.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/utils/opencv_bridge.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/utils/opencv_utils.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/utils/profiler.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/vpp/vpp/vpp.hh" />
+    <Text Include="../../thirdparty/owemdjee/vpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vpp/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/vpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/vpp/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vpp/benchmarks/fast_detector_draw_speedup.py" />
+    <Text Include="../../thirdparty/owemdjee/vpp/benchmarks/fast_detector_draw_speedup_1d.py" />
+    <Text Include="../../thirdparty/owemdjee/vpp/evaluation/semi_dense_optical_flow/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vpp/evaluation/semi_dense_optical_flow/display.py" />
+    <Text Include="../../thirdparty/owemdjee/vpp/evaluation/semi_dense_optical_flow/pareto_KITTI.py" />
+    <Text Include="../../thirdparty/owemdjee/vpp/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vpp/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/vpp/examples/video_extruder_javascript/cpp/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/vpp/examples/video_extruder_javascript/gumwrapper.min.js" />
+    <Text Include="../../thirdparty/owemdjee/vpp/examples/video_extruder_javascript/test.html" />
+    <Text Include="../../thirdparty/owemdjee/vpp/examples/video_extruder_javascript/test.js" />
+    <Text Include="../../thirdparty/owemdjee/vpp/install.sh" />
+    <Text Include="../../thirdparty/owemdjee/vpp/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/vpp/vpp/algorithms/line_tracker_4_sfm/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/vpp/vpp/core/coding_style" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

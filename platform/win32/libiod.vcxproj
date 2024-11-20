@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF14AFCF}</ProjectGuid>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFC0F0E8}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -113,7 +113,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUUID;UUID_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIOD;IOD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -123,14 +123,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libuuid/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUUID;UUID_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIOD;IOD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUUID;UUID_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIOD;IOD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libuuid/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -141,7 +141,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUUID;UUID_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIOD;IOD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -149,15 +149,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libuuid/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUUID;UUID_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIOD;IOD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUUID;UUID_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIOD;IOD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libuuid/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -168,7 +168,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUUID;UUID_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIOD;IOD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -178,14 +178,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libuuid/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUUID;UUID_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIOD;IOD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUUID;UUID_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIOD;IOD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libuuid/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -196,7 +196,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUUID;UUID_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIOD;IOD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -204,15 +204,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libuuid/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUUID;UUID_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIOD;IOD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUUID;UUID_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIOD;IOD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/libuuid/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -225,42 +225,65 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/clear.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/compare.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/copy.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/gen_uuid.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/gen_uuid_nt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/isnull.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/pack.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/parse.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/randutils.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/test_uuid.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/unpack.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/unparse.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/uuid_time.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libuuid/uuidgen.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/libuuid/all-io.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libuuid/c.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libuuid/randutils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libuuid/uuid.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libuuid/uuidP.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libuuid/uuidd.h" />
-    <ResourceCompile Include="../../thirdparty/owemdjee/libuuid/uuidd.rc" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/COPYING" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/configure.ac" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/uuid.3.in" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/uuid.pc.in" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/uuid_clear.3.in" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/uuid_compare.3.in" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/uuid_copy.3.in" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/uuid_generate.3.in" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/uuid_is_null.3.in" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/uuid_parse.3.in" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/uuid_time.3.in" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/uuid_unparse.3.in" />
-    <Text Include="../../thirdparty/owemdjee/libuuid/uuidgen.1.in" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/aos_view.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/apply.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/array_view.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/bind_method.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/callable_traits.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/core.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/deep_merge.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/di.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/foreach.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/iod_query_sql.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/iod_query_stl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/json.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/linq.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/options.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/parse_command_line.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/readme.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/tuple.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tests/variable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iod/tools/iod_generate_symbols.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/aos_view.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/apply.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/array_view.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/bind_method.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/callable_traits.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/di.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/foreach.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/grammar.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/json.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/json_unicode.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/linq.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/linq_aggregators.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/linq_evaluate.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/number_symbol_definitions.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/options.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/parse_command_line.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/pow_10.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/sio.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/sio_utils.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/stringview.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/symbol.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/symbol_definitions.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/symbols.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/tags.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/timer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/tuple_utils.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/type_list_utils.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/typelist.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/iod/utils.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/iod/tests/symbols.hh" />
+    <Text Include="../../thirdparty/owemdjee/iod/CMake/iod-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/iod/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iod/IodConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/iod/IodConfigVersion.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/iod/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/iod/README.md" />
+    <Text Include="../../thirdparty/owemdjee/iod/dependency_injection.md" />
+    <Text Include="../../thirdparty/owemdjee/iod/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iod/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iod/tools/generate_symbol_definitions.sh" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

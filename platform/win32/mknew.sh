@@ -1480,6 +1480,10 @@ libRAW
 rawspeed
 libuuid
 libultrahdr
+iod
+avir
+freeimage
+vpp
 
 EOT
 ) | grep -e "$FILTER"
