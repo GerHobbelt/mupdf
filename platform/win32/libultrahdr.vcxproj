@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF4BEF3A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBULTRAHDR;ULTRAHDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBULTRAHDR;ULTRAHDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBULTRAHDR;ULTRAHDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBULTRAHDR;ULTRAHDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBULTRAHDR;ULTRAHDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBULTRAHDR;ULTRAHDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBULTRAHDR;ULTRAHDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBULTRAHDR;ULTRAHDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBULTRAHDR;ULTRAHDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBULTRAHDR;ULTRAHDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBULTRAHDR;ULTRAHDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBULTRAHDR;ULTRAHDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/benchmark/benchmark_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/examples/ultrahdr_app.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/java/jni/ultrahdr-jni.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/dsp/arm/editorhelper_neon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/dsp/arm/gainmapmath_neon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/editorhelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/gainmapmath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/gainmapmetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/gpu/applygainmap_gl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/gpu/editorhelper_gl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/gpu/uhdr_gl_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/icc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/jpegdecoderhelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/jpegencoderhelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/jpegr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/jpegrutils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/multipictureformat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/lib/src/ultrahdr_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/tests/editorhelper_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/tests/gainmapmath_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/tests/gainmapmetadata_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/tests/icchelper_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/tests/jpegdecoderhelper_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/tests/jpegencoderhelper_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libultrahdr/tests/jpegr_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/java/jni/com_google_media_codecs_ultrahdr_UltraHDRCommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/java/jni/com_google_media_codecs_ultrahdr_UltraHDRDecoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/java/jni/com_google_media_codecs_ultrahdr_UltraHDREncoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/lib/include/ultrahdr/dsp/arm/mem_neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/lib/include/ultrahdr/editorhelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/lib/include/ultrahdr/gainmapmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/lib/include/ultrahdr/gainmapmetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/lib/include/ultrahdr/icc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/lib/include/ultrahdr/jpegdecoderhelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/lib/include/ultrahdr/jpegencoderhelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/lib/include/ultrahdr/jpegr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/lib/include/ultrahdr/jpegrutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/lib/include/ultrahdr/multipictureformat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/lib/include/ultrahdr/ultrahdr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/lib/include/ultrahdr/ultrahdrcommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libultrahdr/ultrahdr_api.h" />
+    <Image Include="../../thirdparty/owemdjee/libultrahdr/docs/jpegr_format.png" />
+    <Image Include="../../thirdparty/owemdjee/libultrahdr/tests/data/jpeg_image.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libultrahdr/tests/data/minnie-320x240-rgb.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libultrahdr/tests/data/minnie-320x240-y.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libultrahdr/tests/data/minnie-320x240-yuv-icc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libultrahdr/tests/data/minnie-320x240-yuv.jpg" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/DESCRIPTION" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/adobe-hdr-gain-map-license/NOTICE" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/cmake/FindEGL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/cmake/FindOpenGLES3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/cmake/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/cmake/libuhdr.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/cmake/package.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/cmake/toolchains/aarch64-linux-gnu.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/cmake/toolchains/android.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/cmake/toolchains/arm-linux-gnueabihf.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/cmake/toolchains/loong64-linux-gnu.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/cmake/toolchains/riscv32-linux-gnu.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/cmake/toolchains/riscv64-linux-gnu.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/docs/building.md" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/docs/code-of-conduct.md" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/docs/contributing.md" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/examples/metadata.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/java/UltraHdrApp.java" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/java/com/google/media/codecs/ultrahdr/UltraHDRCommon.java" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/java/com/google/media/codecs/ultrahdr/UltraHDRDecoder.java" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/java/com/google/media/codecs/ultrahdr/UltraHDREncoder.java" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/java/metadata.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/tests/data/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/tests/data/minnie-318x240.yu12" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/tests/data/minnie-320x240.y" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/tests/data/minnie-320x240.yu12" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/tests/data/raw_p010_image.p010" />
+    <Text Include="../../thirdparty/owemdjee/libultrahdr/tests/data/raw_yuv420_image.yuv420" />
+    <Xml Include="../../thirdparty/owemdjee/libultrahdr/benchmark/AndroidTest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libultrahdr/benchmark/DynamicConfig.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libultrahdr/tests/AndroidTest.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

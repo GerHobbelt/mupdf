@@ -1479,6 +1479,7 @@ sml
 libRAW
 rawspeed
 libuuid
+libultrahdr
 
 EOT
 ) | grep -e "$FILTER"

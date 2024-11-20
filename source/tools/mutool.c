@@ -80,6 +80,7 @@
 #include "../../thirdparty/gumbo-parser/src/gumbo.h"
 #include "../../thirdparty/owemdjee/gumbo-libxml/gumbo_libxml.h"
 #include "../../thirdparty/owemdjee/tidy-html5/console/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/cpuinfo/tools/monolithic_examples.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -725,6 +726,16 @@ static struct tool_spec {
 
 #if defined(MUTOOL_EX)
 	{ {.fa = brotli_main }, "brotli", "brotli tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = cpuinfo_auxv_dump_main }, "cpuinfo_auxv_dump", "cpuinfo_auxv_dump tool" },
+	{ {.fa = cpuinfo_cache_info_main }, "cpuinfo_cache_info", "cpuinfo_cache_info tool" },
+	{ {.fa = cpuinfo_cpu_info_main }, "cpuinfo_cpu_info", "cpuinfo_cpu_info tool" },
+	{ {.fa = cpuinfo_cpuid_dump_main }, "cpuinfo_cpuid_dump", "cpuinfo_cpuid_dump tool" },
+	{ {.fa = cpuinfo_dump_main }, "cpuinfo_dump", "cpuinfo_dump tool" },
+	{ {.fa = cpuinfo_gnu_dump_main }, "cpuinfo_gnu_dump", "cpuinfo_gnu_dump tool" },
+	{ {.fa = cpuinfo_isa_info_main }, "cpuinfo_isa_info", "cpuinfo_isa_info tool" },
 #endif
 
 #if defined(MUTOOL_EX)
