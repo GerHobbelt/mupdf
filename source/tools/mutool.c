@@ -81,6 +81,8 @@
 #include "../../thirdparty/owemdjee/gumbo-libxml/gumbo_libxml.h"
 #include "../../thirdparty/owemdjee/tidy-html5/console/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/cpuinfo/tools/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/libdeflate/programs/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/OpenEXR/src/bin/monolithic_examples.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -726,6 +728,41 @@ static struct tool_spec {
 
 #if defined(MUTOOL_EX)
 	{ {.fa = brotli_main }, "brotli", "brotli tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = deflate_benchmark_main }, "deflate_benchmark", "deflate_benchmark tool" },
+	{ {.fa = deflate_checksum_main }, "deflate_checksum", "deflate_checksum tool" },
+	{ {.fa = deflate_gzip_main }, "deflate_gzip", "deflate_gzip tool" },
+	{ {.fa = deflate_test_checksums_main }, "deflate_test_checksums", "deflate_test_checksums tool" },
+	{ {.fa = deflate_test_custom_malloc_main }, "deflate_test_custom_malloc", "deflate_test_custom_malloc tool" },
+	{ {.fa = deflate_test_incomplete_codes_main }, "deflate_test_incomplete_codes", "deflate_test_incomplete_codes tool" },
+	{ {.fa = deflate_test_invalid_streams_main }, "deflate_test_invalid_streams", "deflate_test_invalid_streams tool" },
+	{ {.fa = deflate_test_litrunlen_overflow_main }, "deflate_test_litrunlen_overflow", "deflate_test_litrunlen_overflow tool" },
+	{ {.fa = deflate_test_overread_main }, "deflate_test_overread", "deflate_test_overread tool" },
+	{ {.fa = deflate_test_slow_decompression_main }, "deflate_test_slow_decompression", "deflate_test_slow_decompression tool" },
+	{ {.fa = deflate_test_trailing_byte_main }, "deflate_test_trailing_byte", "deflate_test_trailing_byte tool" },
+	{ {.f = deflate_gen_crc32_multipliers_main }, "deflate_gen_crc32_multipliers", "deflate_gen_crc32_multipliers tool" },
+	{ {.f = deflate_gen_crc32_tables_main }, "deflate_gen_crc32_tables", "deflate_gen_crc32_tables tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.f = OpenEXR_b44ExpLogTable_tool_main }, "EXR_b44ExpLogTable_tool", "OpenEXR_b44ExpLogTable_tool tool" },
+	{ {.fa = OpenEXR_deepIdSelect_example_main }, "EXR_deepIdSelect_example", "OpenEXR_deepIdSelect_example tool" },
+	{ {.fa = OpenEXR_deepId_example_main }, "EXR_deepId_example", "OpenEXR_deepId_example tool" },
+	{ {.fa = OpenEXR_examples_main }, "EXR_examples", "OpenEXR_examples tool" },
+	{ {.fa = OpenEXR_exr2aces_main }, "EXR_exr2aces", "OpenEXR_exr2aces tool" },
+	{ {.fa = OpenEXR_exrcheck_main }, "EXR_exrcheck", "OpenEXR_exrcheck tool" },
+	{ {.fa = OpenEXR_exrenvmap_main }, "EXR_exrenvmap", "OpenEXR_exrenvmap tool" },
+	{ {.fa = OpenEXR_exrheader_main }, "EXR_exrheader", "OpenEXR_exrheader tool" },
+	{ {.fa = OpenEXR_exrinfo_main }, "EXR_exrinfo", "OpenEXR_exrinfo tool" },
+	{ {.fa = OpenEXR_exrmakepreview_main }, "EXR_exrmakepreview", "OpenEXR_exrmakepreview tool" },
+	{ {.fa = OpenEXR_exrmaketiled_main }, "EXR_exrmaketiled", "OpenEXR_exrmaketiled tool" },
+	{ {.fa = OpenEXR_exrmanifest_main }, "EXR_exrmanifest", "OpenEXR_exrmanifest tool" },
+	{ {.fa = OpenEXR_exrmetrics_main }, "EXR_exrmetrics", "OpenEXR_exrmetrics tool" },
+	{ {.fa = OpenEXR_exrmultipart_main }, "EXR_exrmultipart", "OpenEXR_exrmultipart tool" },
+	{ {.fa = OpenEXR_exrmultiview_main }, "EXR_exrmultiview", "OpenEXR_exrmultiview tool" },
+	{ {.fa = OpenEXR_exrstdattr_main }, "EXR_exrstdattr", "OpenEXR_exrstdattr tool" },
 #endif
 
 #if defined(MUTOOL_EX)
