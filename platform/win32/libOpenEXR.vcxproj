@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -76,7 +76,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -123,14 +123,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;../../thirdparty/owemdjee/libdeflate;../../thirdparty/owemdjee/openexr/src/bin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_SILENCE_CXX23_DENORM_DEPRECATION_WARNING;BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -149,15 +149,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;../../thirdparty/owemdjee/libdeflate;../../thirdparty/owemdjee/openexr/src/bin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_SILENCE_CXX23_DENORM_DEPRECATION_WARNING;BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -178,14 +178,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;../../thirdparty/owemdjee/libdeflate;../../thirdparty/owemdjee/openexr/src/bin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_SILENCE_CXX23_DENORM_DEPRECATION_WARNING;BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -204,15 +204,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;../../thirdparty/owemdjee/libdeflate;../../thirdparty/owemdjee/openexr/src/bin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_SILENCE_CXX23_DENORM_DEPRECATION_WARNING;BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENEXR;OPENEXR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -225,32 +225,30 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/DtexToExr.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxDeepUtils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exr2aces/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrcheck/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exr2aces/exr2aces-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrcheck/exrcheck-main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap/EnvmapImage.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap/blurImage.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap/exrenvmap-main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap/makeCubeMap.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap/makeLatLongMap.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap/readInputImage.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap/resizeImage.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrheader/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrinfo/main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmakepreview/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrheader/exrheader-main.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\OpenEXR\src\bin\exrinfo\exrinfo-main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmakepreview/exrmakepreview-main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmakepreview/makePreview.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmaketiled/Image.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmaketiled/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmaketiled/exrmaketiled-main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmaketiled/makeTiled.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmanifest/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmanifest/exrmanifest-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmetrics/exrmetrics-main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmetrics/exrmetrics.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmetrics/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultipart/exrmultipart.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultiview/Image.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultiview/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultiview/exrmultiview-Image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultiview/exrmultiview-main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrmultiview/makeMultiView.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrstdattr/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrstdattr/exrstdattr-main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/examples/deepExamples.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/examples/deepTiledExamples.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/examples/deepidexample.cpp" />
@@ -259,7 +257,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/examples/generalInterfaceExamples.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/examples/generalInterfaceTiledExamples.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/examples/lowLevelIoExamples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/examples/main.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\OpenEXR\src\examples\examples-main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/examples/multipartExamples.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/examples/previewImageExamples.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/examples/rgbaInterfaceExamples.cpp" />
@@ -419,13 +417,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil/ImfImageIO.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil/ImfImageLevel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil/ImfSampleCountChannel.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxBaseDeepHelper.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxDeepOutPixel.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxDeepOutRow.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxDeepUtils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxFourChanDeepRgba.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxOneChanDeepAlpha.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/PxOneChanDeepOpacity.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap/EnvmapImage.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap/blurImage.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap/makeCubeMap.h" />
@@ -657,14 +648,6 @@
     <Text Include="../../thirdparty/owemdjee/OpenEXR/CODE_OF_CONDUCT.md" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/CONTRIBUTORS.md" />
-    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/AUTHORS" />
-    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/ChangeLog" />
-    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/README" />
-    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/bootstrap" />
-    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/configure.ac" />
-    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/m4/compilelinkrun.m4" />
-    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/m4/path.pkgconfig.m4" />
-    <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/DtexToExr/m4/threads.m4" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/NuGet/OpenEXR-msvc-x64-build.nuget.bat" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/NuGet/OpenEXR-msvc-x64.nuspec" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/Contrib/NuGet/OpenEXR-msvc-x64.targets" />
@@ -732,8 +715,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil/README" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

@@ -4,3 +4,6 @@ also-ignore:
 	/src/ImathTest/
 	/website/
 	
+	/src/pybind11/
+
+	

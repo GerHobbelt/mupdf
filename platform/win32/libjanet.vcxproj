@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF21AA71}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJANET;JANET_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJANET;JANET_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJANET;JANET_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJANET;JANET_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJANET;JANET_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJANET;JANET_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJANET;JANET_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJANET;JANET_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJANET;JANET_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJANET;JANET_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJANET;JANET_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJANET;JANET_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/janet/examples/ffi/so.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/examples/numarray/numarray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/boot/array_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/boot/boot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/boot/buffer_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/boot/number_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/boot/system_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/boot/table_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/abstract.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/asm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/bytecode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/capi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/cfuns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/compile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/corelib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/emit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/ev.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/ffi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/fiber.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/filewatch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/gc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/inttypes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/marsh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/net.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/os.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/peg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/pp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/regalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/run.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/specials.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/strtod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/struct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/symcache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/tuple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/value.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/vm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/core/wrap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/src/mainclient/shell.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/test/amalg/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/janet/tools/symcharsgen.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/janet/src/boot/tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/janet/src/conf/janetconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/janet/src/core/compile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/janet/src/core/emit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/janet/src/core/features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/janet/src/core/fiber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/janet/src/core/gc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/janet/src/core/regalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/janet/src/core/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/janet/src/core/symcache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/janet/src/core/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/janet/src/core/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/janet/src/include/janet.h" />
+    <Image Include="../../thirdparty/owemdjee/janet/assets/icon.ico" />
+    <Image Include="../../thirdparty/owemdjee/janet/assets/janet-big.png" />
+    <Image Include="../../thirdparty/owemdjee/janet/assets/janet-w200.png" />
+    <Image Include="../../thirdparty/owemdjee/janet/tools/msi/JanetDialog.png" />
+    <Image Include="../../thirdparty/owemdjee/janet/tools/msi/JanetTopBanner.png" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/janet/janet_win.rc" />
+    <Text Include="../../thirdparty/owemdjee/janet/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/janet/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/janet/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/janet/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/janet/README.md" />
+    <Text Include="../../thirdparty/owemdjee/janet/assets/icon_svg.svg" />
+    <Text Include="../../thirdparty/owemdjee/janet/build_win.bat" />
+    <Text Include="../../thirdparty/owemdjee/janet/examples/jitfn/hello.bin" />
+    <Text Include="../../thirdparty/owemdjee/janet/examples/jitfn/hello.nasm" />
+    <Text Include="../../thirdparty/owemdjee/janet/janet.1" />
+    <Text Include="../../thirdparty/owemdjee/janet/meson_options.txt" />
+    <Text Include="../../thirdparty/owemdjee/janet/tools/afl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/janet/tools/afl/aggregate_cases.sh" />
+    <Text Include="../../thirdparty/owemdjee/janet/tools/format.sh" />
+    <Text Include="../../thirdparty/owemdjee/janet/tools/msi/LICENSE.rtf" />
+    <Text Include="../../thirdparty/owemdjee/janet/tools/msi/janet.wxs" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

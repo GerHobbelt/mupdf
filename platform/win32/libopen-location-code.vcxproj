@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF7ADF2}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_LOCATION_CODE;OPEN_LOCATION_CODE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_LOCATION_CODE;OPEN_LOCATION_CODE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_LOCATION_CODE;OPEN_LOCATION_CODE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_LOCATION_CODE;OPEN_LOCATION_CODE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_LOCATION_CODE;OPEN_LOCATION_CODE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_LOCATION_CODE;OPEN_LOCATION_CODE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_LOCATION_CODE;OPEN_LOCATION_CODE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_LOCATION_CODE;OPEN_LOCATION_CODE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_LOCATION_CODE;OPEN_LOCATION_CODE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_LOCATION_CODE;OPEN_LOCATION_CODE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_LOCATION_CODE;OPEN_LOCATION_CODE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_LOCATION_CODE;OPEN_LOCATION_CODE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/open-location-code/c/benchmark/bm-c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/open-location-code/c/benchmark/bm-cpp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/open-location-code/c/benchmark/shared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/open-location-code/c/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/open-location-code/c/openlocationcode_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/open-location-code/c/src/olc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/open-location-code/cpp/codearea.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/open-location-code/cpp/openlocationcode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/open-location-code/cpp/openlocationcode_example.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/open-location-code/cpp/openlocationcode_test.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/open-location-code/c/src/olc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/open-location-code/c/src/olc_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/open-location-code/cpp/codearea.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/open-location-code/cpp/openlocationcode.h" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/Documentation/images/code_areas.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/Documentation/images/geohash36_grid.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/Documentation/images/olc_10_character.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/Documentation/images/olc_11_grid.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/Documentation/images/openpostcode_grid.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-hdpi/ic_action_maps_navigation.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-hdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-hdpi/map_center.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-hdpi/welcome_image.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-ldpi/map_center.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-mdpi/ic_action_maps_navigation.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-mdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-mdpi/map_center.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-xhdpi/ic_action_maps_navigation.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-xhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-xhdpi/map_center.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-xhdpi/welcome_image.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-xxhdpi/ic_action_maps_navigation.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-xxhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-xxhdpi/map_center.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-xxhdpi/welcome_image.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-xxxhdpi/ic_action_maps_navigation.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-xxxhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable-xxxhdpi/map_center.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-d2bravo/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-d2bravo_titanium/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge1030/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge1030bontrager/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge130/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge520plus/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge820/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge_1000/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge_520/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-epix/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenix3/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenix3_hr/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenix5/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenix5plus/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenix5s/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenix5x/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenixchronos/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr235/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr630/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr645/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr645m/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr735xt/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr920xt/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr935/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-oregon7xx/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-rino7xx/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-vivoactive/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-vivoactive3/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-vivoactive3m/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-vivoactive_hr/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-vivoactive_hr/resources-fenix3_hr/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources/launcher_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/tile_server/gridserver/testdata/21_1098232_1362659.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/tile_server/gridserver/testdata/21_1098232_1362659_geodetic.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/tile_server/gridserver/testdata/5_17_19.png" />
+    <Image Include="../../thirdparty/owemdjee/open-location-code/tile_server/gridserver/testdata/5_17_19_white_zoom_2.png" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/External_Implementations.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/Reference/App_Developers.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/Reference/Field_Collection_Data_Practices.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/Reference/GIS_Software.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/Reference/Plus_Code_Users.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/Reference/Using_Spreadsheets.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/Reference/comparison.adoc" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/Reference/plus.codes_Website_API.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/Specification/API.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/Specification/Naming_Guidelines.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/Specification/Short_Code_Guidance.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/Specification/olc_definition.adoc" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/Documentation/Specification/specification.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/FAQ.txt" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/TESTING.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/WORKSPACE" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/libs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/code/CodeContract.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/code/CodePresenter.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/code/CodeView.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/code/OpenLocationCodeUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/current/GoogleApiModule.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/current/LocationProvider.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/current/LocationProviderFactoryComponent.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/current/LocationUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/direction/Direction.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/direction/DirectionContract.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/direction/DirectionPresenter.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/direction/DirectionUtil.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/direction/DirectionView.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/localities/Locality.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/main/MainActivity.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/main/MainFragment.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/main/MainPresenter.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/main/WelcomeActivity.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/map/MapContract.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/map/MapPresenter.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/map/MyMapView.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/search/AutoCompleteEditor.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/search/SearchContract.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/search/SearchPresenter.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/java/com/openlocationcode/android/search/SearchView.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/gradlew" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/android_demo/openlocationcode_android.iml" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/c/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/c/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/c/benchmark/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/c/clang_check.sh" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/cpp/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/cpp/clang_check.sh" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/dart/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/dart/checks.sh" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/dart/pubspec.yaml" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/go/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/java/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/java/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/java/src/main/java/com/google/openlocationcode/OpenLocationCode.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/java/src/test/java/com/google/openlocationcode/BenchmarkTest.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/java/src/test/java/com/google/openlocationcode/DecodingTest.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/java/src/test/java/com/google/openlocationcode/EncodingTest.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/java/src/test/java/com/google/openlocationcode/PrecisionTest.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/java/src/test/java/com/google/openlocationcode/RecoverTest.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/java/src/test/java/com/google/openlocationcode/ShorteningTest.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/java/src/test/java/com/google/openlocationcode/TestUtils.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/java/src/test/java/com/google/openlocationcode/UtilsTest.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/java/src/test/java/com/google/openlocationcode/ValidityTest.java" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/checks.sh" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/closure/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/closure/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/closure/openlocationcode.js" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/closure/openlocationcode_test.js" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/contrib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/contrib/olc_grid_overlay.js" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/contrib/olc_grid_overlay.min.js" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/examples/example1.html" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/examples/example2.html" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/examples/example3.html" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/examples/examples.css" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/examples/examples.js" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/gulpfile.js" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/package.json" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/src/openlocationcode.js" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/src/openlocationcode.min.js" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/test/jasmine-tests.js" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/js/test/karma.config.js" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/package.json" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/plpgsql/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/plpgsql/pluscode_functions.sql" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/plpgsql/tests_script_l.sql" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/python/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/python/format_check.sh" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/python/openlocationcode/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/python/openlocationcode/openlocationcode.py" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/python/openlocationcode_test.py" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/ruby/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/ruby/open-location-code.gemspec" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/ruby/rubocop.yml" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/rust/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/rust/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/rust/src/codearea.rs" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/rust/src/consts.rs" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/rust/src/interface.rs" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/rust/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/rust/src/private.rs" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/rust/tests/all_test.rs" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/rust/tests/csv_reader.rs" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/test_data/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/test_data/decoding.csv" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/test_data/encoding.csv" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/test_data/shortCodeTests.csv" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/test_data/validityTests.csv" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/tile_server/README.md" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/tile_server/example.html" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/tile_server/gridserver/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/tile_server/gridserver/testdata/21_1098232_1362659.json" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/tile_server/gridserver/testdata/21_1098232_1362659_geodetic.json" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/tile_server/gridserver/testdata/5_17_19.json" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/tile_server/gridserver/testdata/5_17_19_geodetic.json" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/tile_server/gridserver/testdata/5_17_19_zoom_2.json" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/visualbasic/OpenLocationCode.bas" />
+    <Text Include="../../thirdparty/owemdjee/open-location-code/visualbasic/README.md" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable/map_satellite_button.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable/rounded_layout.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/drawable/search_button.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/layout/code.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/layout/direction.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/layout/main_act.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/layout/main_frag.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/layout/my_map.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/layout/search.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/layout/welcome.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/menu/share_menu.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/values-pt/strings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/values/colors.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/values/dimens.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/values/strings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/android_demo/android/src/main/res/values/styles.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/manifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-d2bravo/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-d2bravo_titanium/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge1030/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge1030bontrager/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge130/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge520plus/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge820/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge_1000/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-edge_520/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-epix/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenix3/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenix3_hr/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenix5/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenix5plus/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenix5s/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenix5x/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fenixchronos/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr235/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr630/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr645/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr645m/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr735xt/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr920xt/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-fr935/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-oregon7xx/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-rino7xx/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-vivoactive/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-vivoactive3/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-vivoactive3m/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-vivoactive_hr/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources-vivoactive_hr/resources-fenix3_hr/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources/drawables.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources/layouts.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/garmin/PlusCodeDatafield/resources/strings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/open-location-code/java/pom.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

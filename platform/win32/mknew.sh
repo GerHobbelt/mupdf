@@ -1484,6 +1484,20 @@ iod
 avir
 freeimage
 vpp
+detox
+rankselect
+vqf
+libcron
+open-location-code
+janet
+janet-sh
+immer
+lager
+ewig
+tarray
+spork
+janet-sqlite3
+dcmtk
 
 EOT
 ) | grep -e "$FILTER"

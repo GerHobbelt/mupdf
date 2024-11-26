@@ -90,7 +90,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4266;4574;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdclatest</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -123,14 +123,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>OIIO_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/giflib-turbo;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_SILENCE_CXX23_DENORM_DEPRECATION_WARNING;OIIO_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/giflib-turbo;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -149,15 +149,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>OIIO_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/giflib-turbo;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_SILENCE_CXX23_DENORM_DEPRECATION_WARNING;OIIO_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/giflib-turbo;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -178,14 +178,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>OIIO_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/giflib-turbo;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_SILENCE_CXX23_DENORM_DEPRECATION_WARNING;OIIO_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/giflib-turbo;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -204,15 +204,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>OIIO_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/giflib-turbo;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_SILENCE_CXX23_DENORM_DEPRECATION_WARNING;OIIO_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/giflib-turbo;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
