@@ -1,3 +1,7 @@
 #! /bin/bash
 
-find ../.. -type f > filelist.lst
+pushd "$( dirname "$0" )"
+
+find ../.. -type f > filelist.lst  &
+
+popd

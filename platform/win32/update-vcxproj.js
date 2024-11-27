@@ -923,6 +923,61 @@ if (/\/owemdjee\/opencv\b/.test(include_paths) || /\/scripts\/OpenCV\b/.test(inc
     .replace(/\s+/g, '');
 }
 
+// patch: when there's a single /DCMTK/ reference in there, get the whole damn bunch:
+if (/\/owemdjee\/dcmtk\b/.test(include_paths) || /\/scripts\/dcmtk\b/.test(include_paths)) {
+    include_paths = `${include_paths}
+	../../scripts/dcmtk/include
+	../../thirdparty/owemdjee/dcmtk/dcmdata/include
+	../../thirdparty/owemdjee/dcmtk/dcmect/include
+	../../thirdparty/owemdjee/dcmtk/dcmfg/include
+	../../thirdparty/owemdjee/dcmtk/dcmimage/include
+	../../thirdparty/owemdjee/dcmtk/dcmimgle/include
+	../../thirdparty/owemdjee/dcmtk/dcmiod/include
+	../../thirdparty/owemdjee/dcmtk/dcmjpeg/include
+	../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12
+	../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16
+	../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8
+	../../thirdparty/owemdjee/dcmtk/dcmjpls/include
+	../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls
+	../../thirdparty/owemdjee/dcmtk/dcmnet/include
+	../../thirdparty/owemdjee/dcmtk/dcmpmap/include
+	../../thirdparty/owemdjee/dcmtk/dcmpstat/include
+	../../thirdparty/owemdjee/dcmtk/dcmqrdb/include
+	../../thirdparty/owemdjee/dcmtk/dcmrt/include
+	../../thirdparty/owemdjee/dcmtk/dcmseg/include
+	../../thirdparty/owemdjee/dcmtk/dcmsign/include
+	../../thirdparty/owemdjee/dcmtk/dcmsr/include
+	../../thirdparty/owemdjee/dcmtk/dcmtls/include
+	../../thirdparty/owemdjee/dcmtk/dcmtract/include
+	../../thirdparty/owemdjee/dcmtk/dcmwlm/include
+	../../thirdparty/owemdjee/dcmtk/oficonv/include
+	../../thirdparty/owemdjee/dcmtk/oficonv/libsrc
+	../../thirdparty/owemdjee/dcmtk/oflog/include
+	../../thirdparty/owemdjee/dcmtk/ofstd/include
+	../../thirdparty/owemdjee/dcmtk/dcmapps/include
+    `.replace(/\n/g, ';')
+    .replace(/\s+/g, '');
+}
+
+// patch: when there's a single /OpenEXR/ reference in there, get the whole damn bunch:
+if (/\/owemdjee\/OpenEXR\b/.test(include_paths) || /\/scripts\/OpenEXR\b/.test(include_paths)) {
+    include_paths = `${include_paths}
+	../../scripts/Imath
+	../../scripts/OpenEXR/include
+	../../thirdparty/owemdjee/Imath/src/Imath
+	../../thirdparty/owemdjee/OpenEXR/src/bin
+	../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap
+	../../thirdparty/owemdjee/OpenEXR/src/lib/Iex
+	../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread
+	../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR
+	../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore
+	../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil
+    `.replace(/\n/g, ';')
+    .replace(/\s+/g, '');
+}
+
+
+
 //patch: when we have googletest/include --> we also required: ../../thirdparty/owemdjee/abseil-cpp --> requires: ../../thirdparty/owemdjee/re2
 if (/\/googletest\//.test(include_paths)) {
     include_paths = `${include_paths}
