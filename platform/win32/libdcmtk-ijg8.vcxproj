@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BB7455BD-618C-4762-966D-5A0921E6F96F}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDCMTK;DCMTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../scripts/zlib;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/zlib;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/libtiff/libtiff;../../thirdparty/libpng;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/fnmatch/include;../../scripts/libtiff;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDCMTK;DCMTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDCMTK;DCMTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../scripts/zlib;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/zlib;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/libtiff/libtiff;../../thirdparty/libpng;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/fnmatch/include;../../scripts/libtiff;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDCMTK;DCMTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../scripts/zlib;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/zlib;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/libtiff/libtiff;../../thirdparty/libpng;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/fnmatch/include;../../scripts/libtiff;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDCMTK;DCMTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDCMTK;DCMTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../scripts/zlib;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/zlib;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/libtiff/libtiff;../../thirdparty/libpng;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/fnmatch/include;../../scripts/libtiff;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDCMTK;DCMTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../scripts/zlib;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/zlib;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/libtiff/libtiff;../../thirdparty/libpng;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/fnmatch/include;../../scripts/libtiff;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDCMTK;DCMTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDCMTK;DCMTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../scripts/zlib;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/zlib;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/libtiff/libtiff;../../thirdparty/libpng;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/fnmatch/include;../../scripts/libtiff;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDCMTK;DCMTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../scripts/zlib;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/zlib;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/libtiff/libtiff;../../thirdparty/libpng;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/fnmatch/include;../../scripts/libtiff;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDCMTK;DCMTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDCMTK;DCMTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../scripts/zlib;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/zlib;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/libtiff/libtiff;../../thirdparty/libpng;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/fnmatch/include;../../scripts/libtiff;../../thirdparty/owemdjee/fnmatch/src/mem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcapimin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcapistd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcarith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jccoefct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jccolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcdctmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcdiffct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jchuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcinit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jclhuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jclossls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jclossy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcmainct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcmarker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcmaster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcodec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcomapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcparam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcphuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcpred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcprepct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcsample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcscale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jcshuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jctrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdapimin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdapistd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdarith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdatadst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdatasrc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdcoefct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdcolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jddctmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jddiffct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdhuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdinput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdlhuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdlossls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdlossy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdmainct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdmarker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdmaster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdmerge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdphuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdpostct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdpred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdsample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdscale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdshuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdtrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jfdctflt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jfdctfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jfdctint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jidctflt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jidctfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jidctint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jidctred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jmemmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jmemnobs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jquant1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jquant2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jutils.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jchuff8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jconfig8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdct8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jdhuff8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jerror8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jinclude8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jlossls8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jlossy8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jmemsys8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jmorecfg8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jpegint8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jpeglib8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/jversion8.h" />
+    <Text Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8/Makefile.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>

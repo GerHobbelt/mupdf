@@ -1,6 +1,6 @@
-// Copyright 2008-present Contributors to the OpenImageIO project.
-// SPDX-License-Identifier: BSD-3-Clause
-// https://github.com/OpenImageIO/oiio/blob/master/LICENSE.md
+// Copyright Contributors to the OpenImageIO project.
+// SPDX-License-Identifier: Apache-2.0
+// https://github.com/AcademySoftwareFoundation/OpenImageIO
 
 
 #ifndef OPENIMAGEIO_VERSION_H
@@ -39,15 +39,18 @@
 // prior release.
 //
 // Note that these designations only apply to released branches. Changes
-// in the main development branch ("master") do not make any compatibility
+// in the main development branch ("main") do not make any compatibility
 // guarantees at all.
 //
-// version 2.3.5.0
 #define OIIO_VERSION_MAJOR 2
-#define OIIO_VERSION_MINOR 3
-#define OIIO_VERSION_PATCH 5
+#define OIIO_VERSION_MINOR 6
+#define OIIO_VERSION_PATCH 3
 #define OIIO_VERSION_TWEAK 0
 #define OIIO_VERSION_RELEASE_TYPE 		.dev-GHo
+
+// Preprocessor utility: stringize
+#define OIIO_STRINGIZE_HELPER(a) #a
+#define OIIO_STRINGIZE(a) OIIO_STRINGIZE_HELPER(a)
 
 // Construct a single integer version number from major, minor, patch.
 // Example of its use:
@@ -74,24 +77,53 @@
 // We also define the old name for backwards compatibility purposes.
 #define OPENIMAGEIO_VERSION OIIO_VERSION
 
-// Magic macros to make OIIO_VERSION_STRING that looks like "1.2.3"
-#define OIIO_MAKE_VERSION_STRING2(a,b,c,d) #a "." #b "." #c #d
-#define OIIO_MAKE_VERSION_STRING(a,b,c,d) OIIO_MAKE_VERSION_STRING2(a,b,c,d)
+// Magic macros to make OIIO_VERSION_STRING that looks like "1.2.3.0"
+#define OIIO_MAKE_VERSION_STRING2(a,b,c,d,e) #a "." #b "." #c "." #d #e
+#define OIIO_MAKE_VERSION_STRING(a,b,c,d,e) OIIO_MAKE_VERSION_STRING2(a,b,c,d,e)
 #define OIIO_VERSION_STRING \
     OIIO_MAKE_VERSION_STRING(OIIO_VERSION_MAJOR, \
                              OIIO_VERSION_MINOR, OIIO_VERSION_PATCH, \
-                             OIIO_VERSION_RELEASE_TYPE)
+                             OIIO_VERSION_TWEAK, OIIO_VERSION_RELEASE_TYPE)
 #define OIIO_INTRO_STRING "OpenImageIO " OIIO_VERSION_STRING " http://www.openimageio.org"
 
+// Only major.minor.patch.tweak, omit any release type
+#define OIIO_VERSION_STRING_MMPT \
+    OIIO_MAKE_VERSION_STRING(OIIO_VERSION_MAJOR, \
+                             OIIO_VERSION_MINOR, OIIO_VERSION_PATCH, \
+                             OIIO_VERSION_TWEAK, "")
+
+// OIIO_DISABLE_DEPRECATED encodes the version for which any declarations that
+// were deprecated as of that version may be hidden from view of software
+// including the OIIO headers.  For example, if a downstream project says
+//
+//     #define OIIO_DISABLE_DEPRECATED OIIO_MAKE_VERSION(2,2,0)
+//
+// before including any OpenImageIO header, then we will do our best to make
+// it a compile-time error if they try to use anything that was deprecated
+// in or before version 2.2.0. This is viewed as equivalent to the downstream
+// package considering their minimum OIIO to be 2.2 and they want to be sure
+// they aren't using any features that are slated for deprecation. The
+// default, 0, will not try to hide any deprecated features.
+//
+// To clarify, if version 2.2 is the first to deprecate a certain definition,
+// then it is considered good practice to guard it like this:
+//
+//     #if OIIO_DISABLE_DEPRECATED < OIIO_MAKE_VERSION(2,2,0)
+//        ... deprecated definition here ...
+//     #endif
+//
+#ifndef OIIO_DISABLE_DEPRECATED
+#    define OIIO_DISABLE_DEPRECATED 0
+#endif
 
 // Establish the name spaces
-namespace OIIO_v2_3_5 { }
-namespace OIIO = OIIO_v2_3_5;
+namespace OIIO_v2 { }
+namespace OIIO = OIIO_v2;
 
 // Macros to use in each file to enter and exit the right name spaces.
-#define OIIO_NAMESPACE OIIO_v2_3_5
-#define OIIO_NAMESPACE_STRING "OIIO_v2.3.5"
-#define OIIO_NAMESPACE_BEGIN namespace OIIO_v2_3_5 {
+#define OIIO_NAMESPACE OIIO_v2
+#define OIIO_NAMESPACE_STRING "OIIO_v2"
+#define OIIO_NAMESPACE_BEGIN namespace OIIO_v2 {
 #define OIIO_NAMESPACE_END }
 #define OIIO_NAMESPACE_USING using namespace OIIO;
 
@@ -134,8 +166,11 @@ namespace OIIO = OIIO_v2_3_5;
 ///     (OIIO 2.2).
 /// Version 24 Added a PIMPL pointers to ImageInput and ImageOutput and
 ///     removed some unnecessary fields that were exposed.
+/// Version 25 added the thumbnail retrieval and set. (OIIO 2.3)
+/// Version 26 deprecated the old stateful ImageInput::read_* methods.
+///     (OIIO 2.6.3/3.0)
 
-#define OIIO_PLUGIN_VERSION 24
+#define OIIO_PLUGIN_VERSION 26
 
 #define OIIO_PLUGIN_NAMESPACE_BEGIN OIIO_NAMESPACE_BEGIN
 #define OIIO_PLUGIN_NAMESPACE_END OIIO_NAMESPACE_END
@@ -148,18 +183,25 @@ namespace OIIO = OIIO_v2_3_5;
 #define OIIO_PLUGIN_EXPORTS_END }
 #endif
 
-// Which CPP standard (11, 14, etc.) was this copy of OIIO *built* with?
-#define OIIO_BUILD_CPP 17
+// Which version of Imath is used in the OIIO API?
+#define OIIO_USING_IMATH_VERSION_MAJOR IMATH_VERSION_MAJOR
+#define OIIO_USING_IMATH_VERSION_MINOR IMATH_VERSION_MINOR
+
+// Which CPP standard (17, 20, etc.) was this copy of OIIO *built* with?
+#define OIIO_BUILD_CPP 20
 
 // DEPRECATED(2.1): old macros separately giving compatibility.
-#define OIIO_BUILD_CPP11 (17 >= 11)
-#define OIIO_BUILD_CPP14 (17 >= 14)
-#define OIIO_BUILD_CPP17 (17 >= 17)
-#define OIIO_BUILD_CPP20 (17 >= 20)
+#define OIIO_BUILD_CPP11 (20 >= 11)
+#define OIIO_BUILD_CPP14 (20 >= 14)
+#define OIIO_BUILD_CPP17 (20 >= 17)
+#define OIIO_BUILD_CPP20 (20 >= 20)
 
 
 // Was the project built with TBB support?
 #define OIIO_TBB   1  // HAVE_LIBTBB=1 (oneTBB repo from Intel)
 
+
+
+#define OIIO_FFMPEG_VERSION "7.0"
 
 #endif  /* defined(OPENIMAGEIO_VERSION_H) */
