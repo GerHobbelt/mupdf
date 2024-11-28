@@ -1498,6 +1498,11 @@ tarray
 spork
 janet-sqlite3
 dcmtk
+RTree
+tindicators
+libTsetlinMachine
+grid_map
+SDLP
 
 EOT
 ) | grep -e "$FILTER"
@@ -1575,6 +1580,7 @@ Algo_Ds_Notes
 modern-cpp-template
 googletest-ci-cpp-template
 signal-slot-benchmarks
+spatial_index_benchmark
 
 EOT
 ) | grep -e "$FILTER"

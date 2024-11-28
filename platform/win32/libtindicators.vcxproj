@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBA6275}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINDICATORS;TINDICATORS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINDICATORS;TINDICATORS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINDICATORS;TINDICATORS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINDICATORS;TINDICATORS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINDICATORS;TINDICATORS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINDICATORS;TINDICATORS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINDICATORS;TINDICATORS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINDICATORS;TINDICATORS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINDICATORS;TINDICATORS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINDICATORS;TINDICATORS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINDICATORS;TINDICATORS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTINDICATORS;TINDICATORS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/benchmark.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/abands.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/alma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/ce.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/cmf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/copp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/dc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/fi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/ikhts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/kc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/kst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/mama.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/pbands.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/pc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/pfe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/posc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/rmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/rmta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/rvi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/smi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/tsi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/beta/vwap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/candles.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/cli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/abands.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/abs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/acos.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/ad.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/add.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/adosc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/adx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/adxr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/ahma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/ao.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/apo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/aroon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/aroonosc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/arsi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/asin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/atan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/atr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/atr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/avgprice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/bbands.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/bf2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/bf3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/bop.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/cci.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/ce.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/ceil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/cmf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/cmi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/cmo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/copp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/corr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/cos.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/cosh.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/crossany.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/crossover.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/cvi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/decay.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/dema.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/di.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/div.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/dm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/dpo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/dwma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/dx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/edcf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/edecay.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/ehma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/ema.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/emsd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/emv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/er.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/evwma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/exp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/fi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/fisher.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/floor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/fosc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/frama.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/gap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/gf1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/gf2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/gf3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/gf4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/hd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/hf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/hfema.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/hfsma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/hma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/hurst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/hwma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/ichi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/idwma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/kama.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/kc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/kst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/kvo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/lag.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/lf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/linreg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/linregintercept.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/linregslope.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/lma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/ln.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/log10.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/macd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/mama.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/marketfi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/mass.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/max.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/md.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/medprice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/mesastoch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/mfi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/mgdyn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/mhlma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/min.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/mom.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/msw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/mul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/natr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/nvi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/obv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/pbands.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/pc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/pfe.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/posc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/ppo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/psar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/pvi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/pvt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/pwma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/qstick.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/rema.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/rmf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/rmi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/rmta.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/roc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/rocr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/roof.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/round.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/rsi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/rvi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/shift.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/shmma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/sin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/sinh.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/sma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/sma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/smi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/sqrt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/ssmooth.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/stddev.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/stderr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/stoch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/stochrsi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/sub.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/sum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/swma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/t3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/tan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/tanh.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/tema.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/todeg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/torad.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/tr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/trima.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/trix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/trunc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/tsf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/tsi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/typprice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/ultosc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/var.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/vhf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/vi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/vidya.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/volatility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/vosc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/vwap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/vwma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/wad.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/wcprice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/wilders.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/willf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/willr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/wma.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/indicators/zlema.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/pst_indicators/pst_indicators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/pst_indicators/pst_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/sample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/sample_pst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/smoke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/templates/candles.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/templates/indicators.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/tests/benchmark2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/tests/smoke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/tiamalgamation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/utils/buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tindicators/utils/testing.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/candles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/indicators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/indicators/dx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/indicators/simple1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/indicators/simple2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/indicators/trend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/indicators/truerange.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/pst_indicators/pst_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/pst_indicators/pst_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/pst_indicators/pti_rsi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/pst_indicators/pti_sma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/templates/candles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/templates/indicators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/utils/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/utils/localbuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/utils/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/utils/minmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/utils/ringbuf.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tindicators/utils/testing.h" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/azure-pipelines.yml" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/bindings/lean/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/bindings/lean/build/tindicators-lean.targets" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/bindings/lean/generate-bindings.py" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/bindings/lean/packages.config" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/bindings/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/bindings/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/bindings/python/tindicators/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/bindings/python/tindicators/impl.py" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/bindings/python/tindicators/test_.py" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/bindings/python/tox.ini" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/build.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/codegen.py" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/doc.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/docsgen.py" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/indicators.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/templates/amal.txt" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/tests/candles.txt" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/tests/extra.txt" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/tests/smoke-testcases/atoz.txt" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/tests/smoke-testcases/extra.txt" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/tests/smoke-testcases/untest.txt" />
+    <Text Include="../../thirdparty/owemdjee/tindicators/version.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

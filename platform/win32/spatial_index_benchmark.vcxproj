@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{00811970-1151-4F64-BC9D-219078B1F3AA}</ProjectGuid>
+    <ProjectGuid>{00811970-815B-4F64-BC9D-21907898A203}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -46,20 +46,20 @@
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -72,7 +72,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -106,19 +106,19 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_CURL;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SPATIAL_INDEX_BENCHMARK;SPATIAL_INDEX_BENCHMARK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
       <Profile>true</Profile>
@@ -127,7 +127,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -136,15 +136,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_CURL;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SPATIAL_INDEX_BENCHMARK;SPATIAL_INDEX_BENCHMARK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
       <Profile>true</Profile>
@@ -153,15 +153,15 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_CURL;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SPATIAL_INDEX_BENCHMARK;SPATIAL_INDEX_BENCHMARK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -169,14 +169,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -186,8 +186,8 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_CURL;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SPATIAL_INDEX_BENCHMARK;SPATIAL_INDEX_BENCHMARK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -195,20 +195,16 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\source\tools\mutool.c" />
-    <ClCompile Include="..\..\source\tools\mutool_ex.c" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="cryptlib.vcxproj">
       <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
@@ -216,101 +212,11 @@
     <ProjectReference Include="libarchive.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
     </ProjectReference>
-    <ProjectReference Include="libbf.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff45d7d4}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libbf_tests.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7494b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libbibutils.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff09284b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libbrotli_tools.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7428ffd7760d}</Project>
-    </ProjectReference>
     <ProjectReference Include="libbzip2_alt.vcxproj">
       <Project>{4a3e6970-9110-46f5-bd12-b73218cca406}</Project>
     </ProjectReference>
-    <ProjectReference Include="libchaos.vcxproj">
-      <Project>{6769b987-26e9-4cb8-81fe-715d9e5ce4d9}</Project>
-    </ProjectReference>
     <ProjectReference Include="libcpp-terminal.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff2367fa}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libcpptoml.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff904167}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libcpuinfo.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff24f32d}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libcrow_examples.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-8518fff84e35}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libcsv2.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff214747}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libdcmtk-ijg12.vcxproj">
-      <Project>{95c34c54-bdf8-43a3-b2d6-8eaa2f2fecaf}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libdcmtk-ijg16.vcxproj">
-      <Project>{42d99bf1-5672-4f65-a338-5c7c6bcc4983}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libdcmtk-ijg8.vcxproj">
-      <Project>{bb7455bd-618c-4762-966d-5a0921e6f96f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libdcmtk-jpeg.vcxproj">
-      <Project>{4226aa20-ed49-4403-955e-329c1645f50d}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libdcmtk-jpls.vcxproj">
-      <Project>{1d1fdae5-cb6f-492f-bd47-566af7b916c1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libdcmtk.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff69091f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libdeflate.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff726764}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libdirent.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff47ce6b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libedit-distance.vcxproj">
-      <Project>{6881e75c-9a4f-4bae-8bf8-44dc4e2dca8c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libexpat.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff83ffca}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libfilesystem.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff38a587}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libfontconfig.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff69837f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libfph-table.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffc3a9ef}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libgbenchmark.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff6fa4e9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libgetopt.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518110e57b1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libglfw.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff878bbf}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libglob.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff518d62}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libgumbo-libxml.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff28ced2}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libgumbo-parser_examples.vcxproj">
-      <Project>{f69bff26-21a8-4a22-bc20-888f1e3a1979}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libgumbo-query.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff51b60c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libhalf.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff968a9c}</Project>
     </ProjectReference>
     <ProjectReference Include="libhighway.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
@@ -321,89 +227,11 @@
     <ProjectReference Include="libicu.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff6b65d}</Project>
     </ProjectReference>
-    <ProjectReference Include="libImath.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffbba437}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libjbig2enc.vcxproj">
-      <Project>{83ac0bda-89b9-4703-a77d-8049ac3a0d04}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libjpeginfo.vcxproj">
-      <Project>{e74f29fa-f143-4adc-b92c-6af1a8e4a403}</Project>
-    </ProjectReference>
-    <ProjectReference Include="liblcms2_tests.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-1589571fcc89}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libleptonica-test-prep.vcxproj">
-      <Project>{5c7e17ff-c529-46b8-b358-de27b8efe464}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libleptonica_tools.vcxproj">
-      <Project>{ca0bda38-89b9-4703-a77d-8049acf23027}</Project>
-    </ProjectReference>
     <ProjectReference Include="libnanosvg.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-751bff971987}</Project>
     </ProjectReference>
-    <ProjectReference Include="libopencv-core.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff8062fc}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libopencv-highgui.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffdcb969}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libopencv-imgcodecs.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffa6c777}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libopencv-imgproc.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff77fea3}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libOpenEXR.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff4a0867}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libpcre.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518f174b2ba}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libplf_nanotimer.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffe7ea82}</Project>
-    </ProjectReference>
     <ProjectReference Include="libpthread-win32.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libpthread-win32_tests.vcxproj">
-      <Project>{1a5821d4-5d56-455b-9b16-3bd0fbee75d6}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libqjscalc.vcxproj">
-      <Project>{64726826-d4bd-4a18-91c8-7b4905af7bc7}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libqjsrepl.vcxproj">
-      <Project>{684bac1d-1fb3-4cc5-adaa-4a4b6721badb}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libqjsrunner.vcxproj">
-      <Project>{eb6b45ed-1f50-43a8-91ff-046a7203c46e}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libQuickJS-C++-Wrapper.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff361594}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libQuickJS-C++-Wrapper2.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff9f13e5}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libQuickJS_examples.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57b3}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libQuickJS_tests.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57b2}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libreplxx.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518f0fe817a}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libreplxx_examples.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518111e817a}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libspdlog.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff35655c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libspdlog_benchmark.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff35633c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
     </ProjectReference>
     <ProjectReference Include="libsqlite_tools.vcxproj">
       <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
@@ -411,32 +239,8 @@
     <ProjectReference Include="libsystem_override.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
     </ProjectReference>
-    <ProjectReference Include="libtesslinesplit.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffa952e8}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libtidyhtml.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff919f18}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libtvision.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff5340c1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libuchardet.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff0ed130}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libxsimd.vcxproj">
-      <Project>{45d2c855-d670-463c-bab2-1c9d012e3f7b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libxslt.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffce99e8}</Project>
-    </ProjectReference>
     <ProjectReference Include="libxz.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa34896}</Project>
-    </ProjectReference>
-    <ProjectReference Include="lib_nas_lockfile.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
-    </ProjectReference>
-    <ProjectReference Include="linenoise.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffac1208}</Project>
     </ProjectReference>
     <ProjectReference Include="MuPDFLib_static.vcxproj">
       <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
@@ -531,6 +335,9 @@
     <ProjectReference Include="libresources.vcxproj">
       <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
     </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
     <ProjectReference Include="libsvgcharter.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
     </ProjectReference>
@@ -561,17 +368,58 @@
     <ProjectReference Include="libzstd.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
     </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
     <ProjectReference Include="png-pmt-tools-lib.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
-    </ProjectReference>
-    <ProjectReference Include="tesseract_ocr_test.vcxproj">
-      <Project>{3644e12d-d934-41fd-bf7e-83745aaf4bc1}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/spatial_index_benchmark/benchmark_boost_geometry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/spatial_index_benchmark/benchmark_spatialindex.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/spatial_index_benchmark/high_resolution_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/spatial_index_benchmark/spatial_index_benchmark.hpp" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_load_blk_vs_balancing.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_load_itr_vs_blk.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_load_itr_vs_blk_bgi.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_load_itr_vs_blk_lsi.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_query_blk_vs_balancing.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_query_itr_vs_blk.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_query_itr_vs_blk_bgi.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_query_itr_vs_blk_lsi.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/2/benchmark_rtree_load_blk_vs_balancing.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/2/benchmark_rtree_load_itr_vs_blk.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/2/benchmark_rtree_load_itr_vs_blk_bgi.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/2/benchmark_rtree_load_itr_vs_blk_lsi.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/2/benchmark_rtree_query_blk_vs_balancing.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/2/benchmark_rtree_query_itr_vs_blk.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/2/benchmark_rtree_query_itr_vs_blk_bgi.png" />
+    <Image Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/2/benchmark_rtree_query_itr_vs_blk_lsi.png" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/README.md" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/bin/ci/before_install.sh" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/bin/ci/common.sh" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/bin/ci/script.sh" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/configure.bat" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/configure.sh" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/results.txt" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/README.md" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_load_blk_vs_balancing.svg" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_load_itr_vs_blk.svg" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_load_itr_vs_blk_bgi.svg" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_load_itr_vs_blk_lsi.svg" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_query_blk_vs_balancing.svg" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/results/1/benchmark_rtree_query_itr_vs_blk.svg" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/run_benchmark.bat" />
+    <Text Include="../../thirdparty/owemdjee/spatial_index_benchmark/run_benchmark.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

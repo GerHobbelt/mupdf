@@ -82,7 +82,9 @@
 #include "../../thirdparty/owemdjee/tidy-html5/console/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/cpuinfo/tools/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libdeflate/programs/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/half/include/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/OpenEXR/src/bin/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/dcmtk/dcmapps/include/monolithic_examples.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -728,6 +730,95 @@ static struct tool_spec {
 
 #if defined(MUTOOL_EX)
 	{ {.fa = brotli_main }, "brotli", "brotli tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = dcmtk_cda2dcm_main }, "dcmtk_cda2dcm", "dcmtk_cda2dcm tool" },
+	{ {.fa = dcmtk_dcm2cda_main }, "dcmtk_dcm2cda", "dcmtk_dcm2cda tool" },
+	{ {.fa = dcmtk_dcm2img_main }, "dcmtk_dcm2img", "dcmtk_dcm2img tool" },
+	{ {.fa = dcmtk_dcm2json_main }, "dcmtk_dcm2json", "dcmtk_dcm2json tool" },
+	{ {.fa = dcmtk_dcm2pdf_main }, "dcmtk_dcm2pdf", "dcmtk_dcm2pdf tool" },
+	{ {.fa = dcmtk_dcm2pnm_main }, "dcmtk_dcm2pnm", "dcmtk_dcm2pnm tool" },
+	{ {.fa = dcmtk_dcm2xml_main }, "dcmtk_dcm2xml", "dcmtk_dcm2xml tool" },
+	{ {.fa = dcmtk_dcmcjpeg_main }, "dcmtk_dcmcjpeg", "dcmtk_dcmcjpeg tool" },
+	{ {.fa = dcmtk_dcmcjpls_main }, "dcmtk_dcmcjpls", "dcmtk_dcmcjpls tool" },
+	{ {.fa = dcmtk_dcmconv_main }, "dcmtk_dcmconv", "dcmtk_dcmconv tool" },
+	{ {.fa = dcmtk_dcmcrle_main }, "dcmtk_dcmcrle", "dcmtk_dcmcrle tool" },
+	{ {.fa = dcmtk_dcmdata_tests_main }, "dcmtk_dcmdata_tests", "dcmtk_dcmdata_tests tool" },
+	{ {.fa = dcmtk_dcmdjpeg_main }, "dcmtk_dcmdjpeg", "dcmtk_dcmdjpeg tool" },
+	{ {.fa = dcmtk_dcmdjpls_main }, "dcmtk_dcmdjpls", "dcmtk_dcmdjpls tool" },
+	{ {.fa = dcmtk_dcmdrle_main }, "dcmtk_dcmdrle", "dcmtk_dcmdrle tool" },
+	{ {.fa = dcmtk_dcmdspfn_main }, "dcmtk_dcmdspfn", "dcmtk_dcmdspfn tool" },
+	{ {.fa = dcmtk_dcmdump_main }, "dcmtk_dcmdump", "dcmtk_dcmdump tool" },
+	{ {.fa = dcmtk_dcmect_tests_main }, "dcmtk_dcmect_tests", "dcmtk_dcmect_tests tool" },
+	{ {.fa = dcmtk_dcmfg_tests_main }, "dcmtk_dcmfg_tests", "dcmtk_dcmfg_tests tool" },
+	{ {.fa = dcmtk_dcmftest_main }, "dcmtk_dcmftest", "dcmtk_dcmftest tool" },
+	{ {.fa = dcmtk_dcmgpdir_main }, "dcmtk_dcmgpdir", "dcmtk_dcmgpdir tool" },
+	{ {.fa = dcmtk_dcmicmp_main }, "dcmtk_dcmicmp", "dcmtk_dcmicmp tool" },
+	{ {.fa = dcmtk_dcmiod_tests_main }, "dcmtk_dcmiod_tests", "dcmtk_dcmiod_tests tool" },
+	{ {.fa = dcmtk_dcmj2pnm_main }, "dcmtk_dcmj2pnm", "dcmtk_dcmj2pnm tool" },
+	{ {.fa = dcmtk_dcml2pnm_main }, "dcmtk_dcml2pnm", "dcmtk_dcml2pnm tool" },
+	{ {.fa = dcmtk_dcmmkcrv_main }, "dcmtk_dcmmkcrv", "dcmtk_dcmmkcrv tool" },
+	{ {.fa = dcmtk_dcmmkdir_main }, "dcmtk_dcmmkdir", "dcmtk_dcmmkdir tool" },
+	{ {.fa = dcmtk_dcmmklut_main }, "dcmtk_dcmmklut", "dcmtk_dcmmklut tool" },
+	{ {.fa = dcmtk_dcmnet_tests_main }, "dcmtk_dcmnet_tests", "dcmtk_dcmnet_tests tool" },
+	{ {.fa = dcmtk_dcmodify_main }, "dcmtk_dcmodify", "dcmtk_dcmodify tool" },
+	{ {.fa = dcmtk_dcmp2pgm_main }, "dcmtk_dcmp2pgm", "dcmtk_dcmp2pgm tool" },
+	{ {.fa = dcmtk_dcmprscp_main }, "dcmtk_dcmprscp", "dcmtk_dcmprscp tool" },
+	{ {.fa = dcmtk_dcmprscu_main }, "dcmtk_dcmprscu", "dcmtk_dcmprscu tool" },
+	{ {.fa = dcmtk_dcmpschk_main }, "dcmtk_dcmpschk", "dcmtk_dcmpschk tool" },
+	{ {.fa = dcmtk_dcmpsmk_main }, "dcmtk_dcmpsmk", "dcmtk_dcmpsmk tool" },
+	{ {.fa = dcmtk_dcmpsprt_main }, "dcmtk_dcmpsprt", "dcmtk_dcmpsprt tool" },
+	{ {.fa = dcmtk_dcmpsrcv_main }, "dcmtk_dcmpsrcv", "dcmtk_dcmpsrcv tool" },
+	{ {.fa = dcmtk_dcmpssnd_main }, "dcmtk_dcmpssnd", "dcmtk_dcmpssnd tool" },
+	{ {.fa = dcmtk_dcmqridx_main }, "dcmtk_dcmqridx", "dcmtk_dcmqridx tool" },
+	{ {.fa = dcmtk_dcmqrscp_main }, "dcmtk_dcmqrscp", "dcmtk_dcmqrscp tool" },
+	{ {.fa = dcmtk_dcmqrti_main }, "dcmtk_dcmqrti", "dcmtk_dcmqrti tool" },
+	{ {.fa = dcmtk_dcmquant_main }, "dcmtk_dcmquant", "dcmtk_dcmquant tool" },
+	{ {.fa = dcmtk_dcmrecv_main }, "dcmtk_dcmrecv", "dcmtk_dcmrecv tool" },
+	{ {.fa = dcmtk_dcmrt_tests_main }, "dcmtk_dcmrt_tests", "dcmtk_dcmrt_tests tool" },
+	{ {.fa = dcmtk_dcmscale_main }, "dcmtk_dcmscale", "dcmtk_dcmscale tool" },
+	{ {.fa = dcmtk_dcmseg_tests_main }, "dcmtk_dcmseg_tests", "dcmtk_dcmseg_tests tool" },
+	{ {.fa = dcmtk_dcmsend_main }, "dcmtk_dcmsend", "dcmtk_dcmsend tool" },
+	{ {.fa = dcmtk_dcmsign_main }, "dcmtk_dcmsign", "dcmtk_dcmsign tool" },
+	{ {.fa = dcmtk_dcmsign_main }, "dcmtk_dcmsign", "dcmtk_dcmsign tool" },
+	{ {.fa = dcmtk_dcmsr_tests_main }, "dcmtk_dcmsr_tests", "dcmtk_dcmsr_tests tool" },
+	{ {.fa = dcmtk_dcmtls_tests_main }, "dcmtk_dcmtls_tests", "dcmtk_dcmtls_tests tool" },
+	{ {.fa = dcmtk_dcod2lum_main }, "dcmtk_dcod2lum", "dcmtk_dcod2lum tool" },
+	{ {.fa = dcmtk_dconvlum_main }, "dcmtk_dconvlum", "dcmtk_dconvlum tool" },
+	{ {.fa = dcmtk_drtdump_main }, "dcmtk_drtdump", "dcmtk_drtdump tool" },
+	{ {.f = dcmtk_drttest_main }, "dcmtk_drttest", "dcmtk_drttest tool" },
+	{ {.fa = dcmtk_dsr2html_main }, "dcmtk_dsr2html", "dcmtk_dsr2html tool" },
+	{ {.fa = dcmtk_dsr2xml_main }, "dcmtk_dsr2xml", "dcmtk_dsr2xml tool" },
+	{ {.fa = dcmtk_dsrdump_main }, "dcmtk_dsrdump", "dcmtk_dsrdump tool" },
+	{ {.fa = dcmtk_dump2dcm_main }, "dcmtk_dump2dcm", "dcmtk_dump2dcm tool" },
+	{ {.fa = dcmtk_echoscu_main }, "dcmtk_echoscu", "dcmtk_echoscu tool" },
+	{ {.fa = dcmtk_findscu_main }, "dcmtk_findscu", "dcmtk_findscu tool" },
+	{ {.fa = dcmtk_getscu_main }, "dcmtk_getscu", "dcmtk_getscu tool" },
+	{ {.fa = dcmtk_img2dcm_main }, "dcmtk_img2dcm", "dcmtk_img2dcm tool" },
+	{ {.fa = dcmtk_mkdeftag_main }, "dcmtk_mkdeftag", "dcmtk_mkdeftag tool" },
+	{ {.fa = dcmtk_mkdictbi_main }, "dcmtk_mkdictbi", "dcmtk_mkdictbi tool" },
+	{ {.fa = dcmtk_mkreport_main }, "dcmtk_mkreport", "dcmtk_mkreport tool" },
+	{ {.fa = dcmtk_movescu_main }, "dcmtk_movescu", "dcmtk_movescu tool" },
+	{ {.fa = dcmtk_msgserv_main }, "dcmtk_msgserv", "dcmtk_msgserv tool" },
+	{ {.fa = dcmtk_oficonv_tests_main }, "dcmtk_oficonv_tests", "dcmtk_oficonv_tests tool" },
+	{ {.fa = dcmtk_ofstd_tests_main }, "dcmtk_ofstd_tests", "dcmtk_ofstd_tests tool" },
+	{ {.fa = dcmtk_pdf2dcm_main }, "dcmtk_pdf2dcm", "dcmtk_pdf2dcm tool" },
+	{ {.fa = dcmtk_stl2dcm_main }, "dcmtk_stl2dcm", "dcmtk_stl2dcm tool" },
+	{ {.fa = dcmtk_storescp_main }, "dcmtk_storescp", "dcmtk_storescp tool" },
+	{ {.fa = dcmtk_storescu_main }, "dcmtk_storescu", "dcmtk_storescu tool" },
+	{ {.fa = dcmtk_termscu_main }, "dcmtk_termscu", "dcmtk_termscu tool" },
+	{ {.fa = dcmtk_wlmscpfs_main }, "dcmtk_wlmscpfs", "dcmtk_wlmscpfs tool" },
+	{ {.fa = dcmtk_wltest_main }, "dcmtk_wltest", "dcmtk_wltest tool" },
+	{ {.fa = dcmtk_xml2dcm_main }, "dcmtk_xml2dcm", "dcmtk_xml2dcm tool" },
+	{ {.fa = dcmtk_xml2dsr_main }, "dcmtk_xml2dsr", "dcmtk_xml2dsr tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = half_test11_main }, "half_test11", "half_test11 test" },
+	{ {.f = half_test03_main }, "half_test03", "half_test03 test" },
+	{ {.f = half_test03b_main }, "half_test03b", "half_test03b test" },
+	{ {.f = half_performance_test_main }, "half_performance_test", "half performance test tool" },
 #endif
 
 #if defined(MUTOOL_EX)
