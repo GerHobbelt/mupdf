@@ -4,3 +4,7 @@ directories:
 
 also-ignore:
 	/config/tests/
+	
+	/libijg8/
+	/libijg12/
+	/libijg16/

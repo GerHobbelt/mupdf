@@ -9,3 +9,8 @@ also-ignore:
 	/dcmjpeg/
 	/dcmjpls/
 	
+    # csmapper sources:
+	/oficonv/apps/csm
+
+    # anything but mkesdb sources:
+	/oficonv/apps/mke
