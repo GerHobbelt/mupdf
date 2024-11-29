@@ -1503,6 +1503,7 @@ tindicators
 libTsetlinMachine
 grid_map
 SDLP
+iqa
 
 EOT
 ) | grep -e "$FILTER"
