@@ -1504,6 +1504,32 @@ libTsetlinMachine
 grid_map
 SDLP
 iqa
+DarkThumbs
+bit7z
+OpenCL-CLHPP
+gemmlowp
+sod
+quile
+GALGO-2.0
+optframe
+openGA
+CDT
+delaunator-cpp
+poly2tri
+depth_clustering
+adaptive_clustering
+PointCloudSegmentation
+dbscan_kdtree
+TrianglePP
+corosync
+agglomerative-hierarchical-clustering
+clustercat
+mcl
+cimfomfa
+html5-parser
+galib
+mixbench
+OpenCL-Wrapper
 
 EOT
 ) | grep -e "$FILTER"
@@ -1559,6 +1585,7 @@ qpdf
 radamsa
 ragel
 remake
+coolreader
 
 # sdcc
 
@@ -1651,6 +1678,7 @@ wordfreq
 wordfrequency
 cmake_examples
 html-parser-test-corpus
+OpenCL-Guide
 
 EOT
 ) | grep -e "$FILTER"

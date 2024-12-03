@@ -1,0 +1,919 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFAD21E9}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDT;CDT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDT;CDT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDT;CDT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDT;CDT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDT;CDT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDT;CDT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDT;CDT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDT;CDT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDT;CDT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDT;CDT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDT;CDT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCDT;CDT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/CDT/CDT/src/CDT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CDT/CDT/tests/cdt.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CDT/visualizer/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/CDT/CDT/extras/InitializeWithGrid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CDT/CDT/extras/VerifyTopology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CDT/CDT/include/CDT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CDT/CDT/include/CDT.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/CDT/CDT/include/CDTUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CDT/CDT/include/CDTUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/CDT/CDT/include/KDTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CDT/CDT/include/LocatorKDTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CDT/CDT/include/Triangulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CDT/CDT/include/Triangulation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/CDT/CDT/include/portable_nth_element.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/CDT/CDT/include/predicates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CDT/CDT/include/remove_at.hpp" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/favicon/android-chrome-192x192.png" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/favicon/android-chrome-512x512.png" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/favicon/apple-touch-icon.png" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/favicon/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/images/A.png" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/images/Bean.png" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/images/CDT_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/images/Guitar.png" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/images/Guitar_no_holes.png" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/images/LakeSuperior.png" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/images/Overlapping_boundaries.png" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/images/Sweden.png" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/images/corner-cases.png" />
+    <Image Include="../../thirdparty/owemdjee/CDT/docs/images/show-case.png" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/conan_basic_setup.cmake" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/154_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/154_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/154_3.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Capital A__conforming_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging2__conforming_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/HangingIntersection__f64_auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Hanging__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/Letter u__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/OnEdge__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ProblematicCase1__conforming_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/cdt__conforming_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/corner cases__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/corner cases__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/corner cases__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/corner cases__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/corner cases__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/corner cases__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/corner cases__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/corner cases__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/crossing-edges__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/crossing-edges__conforming_auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/ditch__conforming_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/dont_flip_constraint_when_resolving_intersection__f64_as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/double-hanging__conforming_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/gh_issue__conforming_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__conforming_f32_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__conforming_f64_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f32_auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/guitar no box__f64_auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/island__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-142-double-hanging-edge__conforming_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-148-crossing-edges__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-148-crossing-edges__conforming_auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f32_auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-full-boundary-overlap__f64_auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-hole-overlaps-bondary__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f32_auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps-conform-to-edge__f64_auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__conforming_f32_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__conforming_f64_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f32_auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-42-multiple-boundary-overlaps__f64_auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/issue-65-wrong-edges__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/kidney__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints2__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f32_auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/overlapping constraints__f64_auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/points_on_constraint_edge__conforming_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/regression_issue_38_wrong_hull_small__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/square with crack__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/test_data_small__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging-flipped__conforming_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/triple-hanging__conforming_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__as-provided_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__as-provided_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__as-provided_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__as-provided_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__as-provided_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__as-provided_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__as-provided_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__as-provided_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__auto_ignore_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__auto_ignore_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__auto_ignore_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__auto_resolve_all.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__auto_resolve_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__auto_resolve_outer.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__auto_resolve_super.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/expected/unit square__conforming_auto_ignore_auto.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/Capital A.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/Constrained Sweden.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/Hanging.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/Hanging2.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/HangingIntersection.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/Letter u.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/OnEdge.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/ProblematicCase1.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/cdt.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/corner cases.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/crossing-edges.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/debug2.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/ditch.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/dont_flip_constraint_when_resolving_intersection.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/double-hanging.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/gh_issue.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/guitar no box.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/hanging3.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/island.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/issue-142-double-hanging-edge.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/issue-148-crossing-edges.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/issue-42-full-boundary-overlap.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/issue-42-hole-overlaps-bondary.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/issue-42-multiple-boundary-overlaps-conform-to-edge.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/issue-42-multiple-boundary-overlaps.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/issue-65-wrong-edges.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/kidney.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/overlapping constraints.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/overlapping constraints2.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/points_on_constraint_edge.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/regression_issue_38_wrong_hull_small.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/square with crack.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/test_data_small.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/triple-hanging-flipped.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/triple-hanging.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/CDT/tests/inputs/unit square.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/CDT/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/custom.css" />
+    <Text Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/doxygen-awesome/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/doxygen-awesome/doxygen-awesome-darkmode-toggle.js" />
+    <Text Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/doxygen-awesome/doxygen-awesome-fragment-copy-button.js" />
+    <Text Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/doxygen-awesome/doxygen-awesome-paragraph-link.js" />
+    <Text Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/doxygen-awesome/doxygen-awesome-sidebar-only-darkmode-toggle.css" />
+    <Text Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/doxygen-awesome/doxygen-awesome-sidebar-only.css" />
+    <Text Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/doxygen-awesome/doxygen-awesome.css" />
+    <Text Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/favicon/site.webmanifest" />
+    <Text Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/header.html" />
+    <Text Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/logo.svg" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/Capital A.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/Constrained Sweden.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/Hanging.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/Hanging2.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/HangingIntersection.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/LakeSuperior.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/Letter u.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/OnEdge.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/OnEdge2.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/Orange County.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/ProblematicCase1.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/Sweden with constraints.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/Sweden with duplicate points.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/Sweden.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/cdt.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/cdt_duplicates.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/corner cases.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/crossing-edges.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/ditch.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/duplicates.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/gh_issue.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/guitar no box.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/guitar.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/island.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/issue-42-full-boundary-overlap-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/issue-42-full-boundary-overlap.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/issue-42-hole-overlaps-bondary.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/issue-42-multiple-boundary-overlaps-conform-to-edge.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/issue-42-multiple-boundary-overlaps.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/issue-65-wrong-edges.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/kidney.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/overlapping constraints.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/overlapping constraints2.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/points_on_constraint_edge.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/regression_issue_38_wrong_hull.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/regression_issue_38_wrong_hull_small.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/square with crack.txt" />
+    <Text Include="../../thirdparty/owemdjee/CDT/visualizer/data/unit square.txt" />
+    <Xml Include="../../thirdparty/owemdjee/CDT/docs/doxygen-custom/DoxygenLayout.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

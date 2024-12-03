@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF4A7323}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCL;MCL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCL;MCL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCL;MCL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCL;MCL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCL;MCL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCL;MCL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCL;MCL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCL;MCL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCL;MCL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCL;MCL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCL;MCL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMCL;MCL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/clew/cat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/clew/claw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/clew/clm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/clew/scan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/gryphon/path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/impala/app.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/impala/compose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/impala/edge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/impala/iface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/impala/io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/impala/ivp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/impala/matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/impala/pval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/impala/stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/impala/tab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/impala/vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/mcl/alg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/mcl/dpsd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/mcl/expand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/mcl/inflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/mcl/interpret.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/mcl/proc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/mcl/procinit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/mcl/transform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clmadjust.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clmclose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clmdag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clmdist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clmframe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clmimac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clminfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clminfo2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clmmate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clmmeet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clmoptics.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clmorder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clmps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/clmresidue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shcl/report.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmcl/mcl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmcl/mclcm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmcx/glob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmcx/mcxi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmcx/ops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmcx/stack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmcx/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmcxquery/mcxquery.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxalter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxarray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxassemble.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxclcf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxcollect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxconvert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxdiameter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxdump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxerdos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxfp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxload.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxmetric.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxminusmeet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxmm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxquery.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxrand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxsubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxtest2.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/clew/cat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/clew/claw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/clew/clm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/clew/scan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/gryphon/path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/impala/app.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/impala/compose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/impala/edge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/impala/iface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/impala/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/impala/ivp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/impala/ivptypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/impala/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/impala/pval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/impala/stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/impala/tab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/impala/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/impala/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/mcl/alg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/mcl/dpsd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/mcl/expand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/mcl/inflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/mcl/interpret.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/mcl/proc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/mcl/procinit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/mcl/transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clmadjust.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clmclose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clmdist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clmimac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clminfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clminfo2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clmmate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clmmeet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clmoptics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clmorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clmps.defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clmps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/clmresidue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shcl/report.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmcx/glob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmcx/ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmcx/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmcx/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmx/mcx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxalter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxclcf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxcollect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxconvert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxdiameter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxerdos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxfp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxquery.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mcl/src/shmx/mcxtab.h" />
+    <Image Include="../../thirdparty/owemdjee/mcl/img/fa_1024.png" />
+    <Image Include="../../thirdparty/owemdjee/mcl/img/fa_400.png" />
+    <Image Include="../../thirdparty/owemdjee/mcl/img/fa_600.png" />
+    <Image Include="../../thirdparty/owemdjee/mcl/img/fa_header_800_200.png" />
+    <Image Include="../../thirdparty/owemdjee/mcl/img/fa_large.png" />
+    <Image Include="../../thirdparty/owemdjee/mcl/img/small.png" />
+    <Text Include="../../thirdparty/owemdjee/mcl/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/mcl/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/mcl/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/mcl/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/mcl/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/mcl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/mcl/README" />
+    <Text Include="../../thirdparty/owemdjee/mcl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mcl/THANKS" />
+    <Text Include="../../thirdparty/owemdjee/mcl/TODO" />
+    <Text Include="../../thirdparty/owemdjee/mcl/TODO_BUILD" />
+    <Text Include="../../thirdparty/owemdjee/mcl/acinclude.m4" />
+    <Text Include="../../thirdparty/owemdjee/mcl/autofoo/compile" />
+    <Text Include="../../thirdparty/owemdjee/mcl/autofoo/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/mcl/autofoo/depcomp" />
+    <Text Include="../../thirdparty/owemdjee/mcl/autofoo/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/autofoo/missing" />
+    <Text Include="../../thirdparty/owemdjee/mcl/autofoo/mkinstalldirs" />
+    <Text Include="../../thirdparty/owemdjee/mcl/configure.ac.in" />
+    <Text Include="../../thirdparty/owemdjee/mcl/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/doc/mclmcl.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcl/graphs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/graphs/T" />
+    <Text Include="../../thirdparty/owemdjee/mcl/graphs/Tx" />
+    <Text Include="../../thirdparty/owemdjee/mcl/graphs/Txy" />
+    <Text Include="../../thirdparty/owemdjee/mcl/graphs/Ty" />
+    <Text Include="../../thirdparty/owemdjee/mcl/graphs/falkner.coords" />
+    <Text Include="../../thirdparty/owemdjee/mcl/graphs/friends" />
+    <Text Include="../../thirdparty/owemdjee/mcl/graphs/make-falkner.pl" />
+    <Text Include="../../thirdparty/owemdjee/mcl/graphs/rcltiny.cls1" />
+    <Text Include="../../thirdparty/owemdjee/mcl/graphs/rcltiny.cls2" />
+    <Text Include="../../thirdparty/owemdjee/mcl/graphs/rcltiny.cls3" />
+    <Text Include="../../thirdparty/owemdjee/mcl/img/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/img/fa.ps" />
+    <Text Include="../../thirdparty/owemdjee/mcl/img/falkner-bidi.ps" />
+    <Text Include="../../thirdparty/owemdjee/mcl/img/falkner.ps" />
+    <Text Include="../../thirdparty/owemdjee/mcl/img/small.ps" />
+    <Text Include="../../thirdparty/owemdjee/mcl/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/include/include.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/install-mcl-22-282.sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/install-this-mcl.sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/rcl-dot-resmap.pl" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/rcl-example.sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/rcl-qc.in" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/rcl-qm.R" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/rcl-relevel.pl.in" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/rcl-select.pl.in" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/rcl.in" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/rcldo.pl.in" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/shed/dot-rcl-basic.pl" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/shed/dot-rcl-mergetree.pl" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/shed/dot-rcl-restree.pl" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/shed/dot-rcl-truetree.pl" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/shed/rcl-compare-trees.pl" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/shed/vid-rcl-img.sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/shed/vid-rcl-link.pl" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/shed/vid-rcl-make.sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/snippets.txt" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/srt2cls.sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/rcl/srt2tab.sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/scripts/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/scripts/TODO" />
+    <Text Include="../../thirdparty/owemdjee/mcl/scripts/clsdiam.sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/scripts/clxdo" />
+    <Text Include="../../thirdparty/owemdjee/mcl/scripts/clxdo.in" />
+    <Text Include="../../thirdparty/owemdjee/mcl/scripts/docme" />
+    <Text Include="../../thirdparty/owemdjee/mcl/scripts/mcxplotlines.R" />
+    <Text Include="../../thirdparty/owemdjee/mcl/scripts/minimcl" />
+    <Text Include="../../thirdparty/owemdjee/mcl/scripts/packed-example.sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/scripts/packed-example2.sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/scripts/ucl-simple.sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/shed/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/shed/bootstrap" />
+    <Text Include="../../thirdparty/owemdjee/mcl/shed/buildit" />
+    <Text Include="../../thirdparty/owemdjee/mcl/shed/builditboot" />
+    <Text Include="../../thirdparty/owemdjee/mcl/shed/builditclean" />
+    <Text Include="../../thirdparty/owemdjee/mcl/shed/buildrelease" />
+    <Text Include="../../thirdparty/owemdjee/mcl/shed/make" />
+    <Text Include="../../thirdparty/owemdjee/mcl/shed/setversion" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/README" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/clew/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/gryphon/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/impala/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/mcl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shcl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shcl/clmps.defs" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shcl/mclgraga" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shcl/mclgrep" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shcl/mclpipeline" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shmcl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shmcx/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shmcx/TODO" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shmcxquery/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shmcxquery/TODO" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shmx/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shmx/README" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shmx/TODO" />
+    <Text Include="../../thirdparty/owemdjee/mcl/src/shmx/fake" />
+    <Text Include="../../thirdparty/owemdjee/mcl/testing/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/testing/blast/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/testing/blast/blastfile" />
+    <Text Include="../../thirdparty/owemdjee/mcl/testing/blast/blastfile9" />
+    <Text Include="../../thirdparty/owemdjee/mcl/testing/setops/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/testing/setops/set-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/testing/stream/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mcl/testing/stream/abc-pairs.pl" />
+    <Text Include="../../thirdparty/owemdjee/mcl/testing/stream/abc-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/mcl/testing/stream/abc.pl" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

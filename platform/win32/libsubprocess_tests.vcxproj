@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF27C32D}</ProjectGuid>
+    <ProjectGuid>{32D19383-E495-4C7F-9617-83EC68EC404D}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -76,7 +76,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,10 +110,10 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -123,14 +123,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest;../../scripts/subprocess;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;_CXXTEST_HAVE_EH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../scripts/subprocess;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest;../../scripts/subprocess;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../scripts/subprocess;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -141,7 +141,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -149,15 +149,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest;../../scripts/subprocess;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;_CXXTEST_HAVE_EH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../scripts/subprocess;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest;../../scripts/subprocess;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../scripts/subprocess;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -168,7 +168,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -178,14 +178,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest;../../scripts/subprocess;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;_CXXTEST_HAVE_EH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../scripts/subprocess;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest;../../scripts/subprocess;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../scripts/subprocess;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -196,7 +196,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -204,15 +204,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest;../../scripts/subprocess;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;_CXXTEST_HAVE_EH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../scripts/subprocess;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSUBPROCESS;SUBPROCESS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest;../../scripts/subprocess;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/subprocess/src/cpp;../../scripts/subprocess;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -225,12 +225,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ProjectReference Include="libsubprocess.vcxproj">
-      <Project>{88bfac3f-ac9e-4ef4-b4fa-ff2d26709ce7}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/monolithic_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/subprocess/test/basic_test.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/subprocess/test/monolithic_examples.h" />
     <Image Include="../../thirdparty/owemdjee/subprocess/docs/PipeVar_8hpp__dep__incl.png" />
     <Image Include="../../thirdparty/owemdjee/subprocess/docs/PipeVar_8hpp__incl.png" />
@@ -579,10 +574,12 @@
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/utf8__to__utf16_8hpp.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/utf8__to__utf16_8hpp_source.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/subprocess.teaspec" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies.teaspec" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/test/test_config.h.in" />
     <Text Include="../../thirdparty/owemdjee/subprocess/toolchain-x86_64-w64-mingw32.cmake" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

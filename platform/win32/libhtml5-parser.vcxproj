@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFC4BB89}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHTML5_PARSER;HTML5_PARSER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHTML5_PARSER;HTML5_PARSER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHTML5_PARSER;HTML5_PARSER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHTML5_PARSER;HTML5_PARSER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHTML5_PARSER;HTML5_PARSER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHTML5_PARSER;HTML5_PARSER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHTML5_PARSER;HTML5_PARSER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHTML5_PARSER;HTML5_PARSER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHTML5_PARSER;HTML5_PARSER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHTML5_PARSER;HTML5_PARSER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHTML5_PARSER;HTML5_PARSER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHTML5_PARSER;HTML5_PARSER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/attribute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/char_ref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/gumbo_edit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/string_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/string_piece.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/svg_attrs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/svg_tags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/tag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/tokenizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/gumbo/vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/mem-leak-check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/src/as-libxml.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/src/as-python-tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/src/python-wrapper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/html5-parser/test.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/attribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/char_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/gumbo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/gumbo_edit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/insertion_mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/replacement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/string_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/string_piece.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/tag_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/tag_perf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/tag_sizes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/tag_strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/token_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/tokenizer_states.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/gumbo/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/src/as-libxml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/src/as-python-tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/src/attr_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/src/attr_perf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/src/attr_sizes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/src/attr_strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/src/data-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/html5-parser/src/stack.h" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/=template.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/benchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/genattrs.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/genencodings.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/gentags.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/gumbo/char_ref.rl" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/gumbo/svg_attrs.gperf" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/gumbo/svg_tags.gperf" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/gumbo/tag.in" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/publish.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/run_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/src/html5_parser/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/src/html5_parser/dom.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/src/html5_parser/encoding_names.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/src/html5_parser/encoding_parser.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/src/html5_parser/soup.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/src/html5_parser/stdlib_etree.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/test/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/test/adapt.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/test/basic.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/test/html5lib_adapter.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/test/malformed.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/test/namespace.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/test/soup.py" />
+    <Text Include="../../thirdparty/owemdjee/html5-parser/unix_build.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

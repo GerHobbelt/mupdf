@@ -1,0 +1,1500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBDC447}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTFRAME;OPTFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTFRAME;OPTFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTFRAME;OPTFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTFRAME;OPTFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTFRAME;OPTFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTFRAME;OPTFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTFRAME;OPTFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTFRAME;OPTFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTFRAME;OPTFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTFRAME;OPTFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTFRAME;OPTFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTFRAME;OPTFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/DeltaMoveRotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/DeltaMoveSwapCenter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/DeltaMoveSwapCorner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/DeltaMoveSwapRotateCenter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/DeltaMoveSwapSide.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/Evaluator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/InitialSolutionGreedy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/InitialSolutionRandom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/NSSeqRotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/NSSeqSwapCenter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/NSSeqSwapCorner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/NSSeqSwapRotateCenter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/NSSeqSwapSide.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/ProblemCommand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/ProblemInstance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/src/mainEternityII.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/FCore-BRKGA/mainTSP-brkga.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/FCore-Examples/src/mainTSP-fcore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/FCore-Examples/src/mainTSP-fxcore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/FCore-Examples/tests/tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/FCore-PSO/mainPSO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/FCore-VRP/mainVRP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/FCore-bTSP/src/mainBTSP-fcore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/FCore-bTSP/tests/tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/HFM/src/mainHFM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/HFM/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/src/mainHFMVRP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/ConstructiveGreedy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/ConstructiveRandom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/Evaluator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/NSSeqBitFlip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/ProblemInstance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/mainKP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP2/mainKP2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/Crossover.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/Evaluator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/InitialPopulation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/Mutation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/ProblemInstance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/KP2/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MITSP/src/mainMImpTSP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MITSP/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MODM/src/ADSManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MODM/src/ConstructiveBasicGreedyRandomized.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MODM/src/Evaluator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MODM/src/EvaluatorRobustness.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MODM/src/NSSeqADD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MODM/src/NSSeqARProduct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MODM/src/NSSeqInvert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MODM/src/NSSeqSWAP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MODM/src/NSSeqSWAPInter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MODM/src/ProblemCommand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MODM/src/ProblemInstance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MODM/src/mainMODM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/MODM/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/mainOPM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/OPM/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/ConstructiveRandom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/Evaluator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/NSSwap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/ProblemCommand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/ProblemInstance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/mainOptHScheduling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/Evaluator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/InitialSolutionGreedy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/InitialSolutionRandom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/InitialSolutionRandomGreedy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/NSSeqSWAP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/ProblemInstance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/cidade.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/mainPMedCap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/ConstructiveGreedyHalfSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/ConstructiveGreedySum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/ConstructiveRandom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/ConstructiveRandomGreedy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Evaluator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/NSSeqShift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/NSSeqSwap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/ProblemCommand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/ProblemInstance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/mainPN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/PN/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/ParallelTSP/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/ParallelTSP/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/mainSVRPDSP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/Solver-KP/src/solver_kp01_generic/mainSolverKP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/Solver-KP/src/solver_kp01_generic/solver_kp01_generic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/ConstructiveBestInsertion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/DeltaMoveTSP2Opt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/DeltaMoveTSPOrOptk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/Evaluator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/NSEnumShift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/NSEnumSwap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/NearestNeighborConstructive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/ProblemCommand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/ProblemInstance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/RandomInitialSolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/mainTSP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/ConstructiveBestInsertion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/ConstructiveNearestNeighbor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/ConstructiveRandom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/Evaluator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/ProblemCommand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/ProblemInstance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/tests/Example.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/bin/RepTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/00_SimpleBuild/src/OptFCore_load.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/01_QuickstartWelcome/src/mytest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/mainKP-fcore-ex-base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/mainKP-fcore-ex-part1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/mainKP-fcore-ex-part2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/mainKP-fcore-ex-part3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/mainKP-fcore-ex-part4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/mainKP-fcore-ex-part5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/mainKP-fcore-ex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/mainTSP-fcore-brkga-part1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/mainTSP-fcore-brkga-part2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/mainTSP-fcore-brkga-part3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/mainTSP-fcore-brkga-part4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/mainTSP-fcore-brkga.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/mainTSP-fcore-ils-part1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/mainTSP-fcore-ils-part2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/mainTSP-fcore-ils-part3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/mainTSP-fcore-ils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/05_Advanced_TSP_checkmodule/main_checkmodule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/demo/06_Advanced_OptFCoreLib/mainlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Exact/setpart/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/MRITest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/MaPIEx01.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/MaPIEx02.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/MaPIFSEx01.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/MaPIFSEx02.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/MaPIFSEx03.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/MaPIWordCounter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/MapMPEx01.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/MapMPEx02.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/MapMPWordCounter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/RandomInt/MaPIRandomInt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/RandomInt/MapMPRandomInt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/RandomInt/SeqRandomInt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/SeqEx01.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/SeqEx02.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/SeqWordCounter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/util/Scanner++/Scanner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Scanner++/legacy/Scanner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/include/OptFrame/printable/printable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/src/OptFrameLib/OptFrameLib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/AltFrame-bench/NSTest.bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/AltFrame.bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/FCore.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/FCore.bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/OptFCore-bench/FNSSeq.bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/OptFCore-test/FMove.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/OptFCore-test/Generator.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/OptFrame.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/all.Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/concept-test/Pair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/lazy-idea/lazy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/test-install-OptFCore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/optframe/tests/test-install-OptFrame.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/DeltaMoveRotate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/DeltaMoveSwapCenter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/DeltaMoveSwapCorner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/DeltaMoveSwapRotateCenter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/DeltaMoveSwapSide.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/EternityII.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/Evaluation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/Evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/InitialSolutionGreedy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/InitialSolutionRandom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/NSSeqRotate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/NSSeqSwapCenter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/NSSeqSwapCorner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/NSSeqSwapRotateCenter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/NSSeqSwapSide.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/Piece.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/ProblemCommand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/ProblemInstance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/Representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/Solution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/FCore-Examples/libs/catch2/catch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/FCore-Examples/src/TSP-fcore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/FCore-Examples/src/TSP-fxcore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/FCore-bTSP/libs/catch2/catch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/EFP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/ConstructiveRandom.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/ConstructiveRandomACF.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/EFPESContinous.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/Evaluation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/Evaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/ForecastClass.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/HFM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/HFMESContinous.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/HFMParams.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/MultiEvaluatorHFM.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/NS/NSSeqHFMAddSingleInput.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/NS/NSSeqHFMChangeSingleInput.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/NS/NSSeqHFMModifyRules.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/NS/NSSeqHFMRemoveSingleInput.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/NS/NSSeqHFMVAlpha.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/OptimalLinearRegression.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/ProblemInstance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/ProblemInstanceWithScanner.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/ProblemParameters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/ProblemReadParameters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/Representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/Solution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/TreatForecasts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/Util/autocorr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/Util/autocorr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/Util/lregress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/Util/lregress.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/Util/treatREDD.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/AETwoVariables.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/CIF_WCCI.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/EEGLearning.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/GAPSO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/HFModel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/MokokoWind.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/REW2016_REED.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/hosseinData.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/jamesTaylor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/loadMain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/microGrid.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/microGridOnline.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/mokoko.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/musicGen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/priceMain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/rainMain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/readMP3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/selfUseMode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/smartStorage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/stockMarket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFM/include/HFM/mainForecastingCodes/usingNonDominatedModels.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/ADS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/ADSManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/ConstructiveSavings.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/ConstructiveSavingsRandomized.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/DeltaStructure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Evaluation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Evaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/HFMVRP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Neighborhoods/Inter/DeltaIteratorVRPShift10.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Neighborhoods/Inter/DeltaIteratorVRPSwap1_1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Neighborhoods/Inter/DeltaMoveVRPCross.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Neighborhoods/Inter/DeltaMoveVRPShift10.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Neighborhoods/Inter/DeltaMoveVRPSwap1_1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Neighborhoods/Intra/DeltaIteratorVRP2Opt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Neighborhoods/Intra/DeltaIteratorVRPExchange.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Neighborhoods/Intra/DeltaIteratorVRPOrOpt1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Neighborhoods/Intra/DeltaIteratorVRPOrOpt2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Neighborhoods/Intra/DeltaMoveVRP2Opt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Neighborhoods/Intra/DeltaMoveVRPExchange.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Neighborhoods/Intra/DeltaMoveVRPOrOpt1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Neighborhoods/Intra/DeltaMoveVRPOrOpt2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/ProblemInstance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/Solution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/ConstructiveGreedy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/ConstructiveRandom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/Evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/KP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/NSSeqBitFlip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/ProblemInstance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/Representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP/src/Solution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/Crossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/Evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/InitialPopulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/Mutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/ProblemInstance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/Representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/ADS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/ADSManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/ConstructiveBasicGreedyRandomized.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/DeltaStructure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/Evaluation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/Evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/EvaluatorRobustness.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/MODM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/NSSeqADD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/NSSeqARProduct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/NSSeqInvert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/NSSeqSWAP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/NSSeqSWAPInter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/ProblemCommand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/ProblemInstance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/Representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/MODM/include/MODM/Solution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/OPM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/Evaluation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/Evaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/InitialSolutionGreedyRandomized.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/NSEnumLD.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/NSEnumNT.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/NSEnumPO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/NSEnumSS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/NSEnumST.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/NSEnumTO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/NSEnumTP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/NSEnumTT.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/OPMSolutionCheck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/ProblemInstance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/RandomInitialSolution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/Representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OPM/src/Solution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/ConstructiveRandom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/Evaluation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/Evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/NSSwap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/OptHScheduling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/ProblemCommand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/ProblemInstance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/Representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/src/Solution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/Evaluation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/Evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/InitialSolutionGreedy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/InitialSolutionRandom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/InitialSolutionRandomGreedy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/NSSeqSWAP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/PMedCap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/PPCAPCheckSolution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/ProblemInstance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/Representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/Solution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/cidade.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/ConstructiveGreedyHalfSum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/ConstructiveGreedySum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/ConstructiveRandom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/ConstructiveRandomGreedy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/DeltaStructure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/Evaluation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/Evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/NSSeqShift.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/NSSeqSwap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/PN.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/ProblemCommand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/ProblemInstance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/Representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/PN/include/PN/Solution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/ADS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/ConstructiveGRandTSPOptimalGLO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/ConstructiveGRandTSPOptimalSEQ.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/ConstructiveRandom.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/ConstructiveTSPOptimal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/Delta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/DeltaMove2Opt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/DeltaMove3Opt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/DeltaMoveOrOptk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/DeltaMoveSwap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/Evaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/MySolution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/ProblemInstance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/Representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/SVRPDSP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/S_KnapsackEvaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/S_TSPEvaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/cgtype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/Solver-KP/libs/nlohmann/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/Solver-KP/src/solver_kp01_generic/solver_kp01.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/Solver-KP/src/solver_kp01_generic/solver_kp01_generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/ConstructiveBestInsertion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/DeltaMoveTSP2Opt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/DeltaMoveTSPOrOptk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/Evaluation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/Evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/NSEnumShift.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/NSEnumSwap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/NearestNeighborConstructive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/PerturbationTSP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/ProblemCommand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/ProblemInstance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/RandomInitialSolution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/Representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/Solution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/TSP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/TSP2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/ConstructiveBestInsertion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/ConstructiveNearestNeighbor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/ConstructiveRandom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/CrossoverOX.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/CrossoverPMX.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/Evaluation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/Evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/ProblemCommand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/ProblemInstance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/Representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/Solution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/KP-fcore-ex-base-old.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/KP-fcore-ex-part1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/KP-fcore-ex-part2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/KP-fcore-ex-part3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/KP-fcore-ex-part4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/KP-fcore-ex-part5-fcore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/KP-fcore-ex-part5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/KP-fcore-ex-part6.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/KP-fcore-ex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/TSP-fcore-part1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/TSP-fcore-part2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/TSP-fcore-part3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/TSP-fcore-part4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/TSP-fcore-part5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/TSP-fcore-part6.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/TSP-fcore-part7.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/TSP-fcore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/04_Advanced_TSP_fxcore/TSP-fxcore-nsseq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/05_Advanced_TSP_checkmodule/TSP-fcore-applyupdate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/05_Advanced_TSP_checkmodule/TSP-fcore-part5-applyupdate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/05_Advanced_TSP_checkmodule/TSP-fcore-part5-cost.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/05_Advanced_TSP_checkmodule/TSP-fcore-part5-moveclass.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/demo/05_Advanced_TSP_checkmodule/TSP-fcore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/EA/FGeneralCrossover.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/EA/RK/FConstructiveRK.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/EA/RK/FDecoderEvalRK.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/EA/RK/FDecoderNoEvaluationRK.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/EA/RK/FDecoderOpRK.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/EA/RK/FDecoderRK.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FConstructive.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FCore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FDirection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FEvaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FMove.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FMultiEvaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FNS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FNSEnum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FNSSeq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FxConstructive.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FxCore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FxEvaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FxMove.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FxNS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FxNSEnum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FxNSSeq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FxRNSEnum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/FxRNSSeq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFCore/coro/Generator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame-Core-Examples/FCore-KP/KP-fcore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame-Core-Examples/FCore-bTSP/BTSP-fcore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/BasicPareto.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Component.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Concepts/BaseConcepts.ctest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Concepts/BaseConcepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Concepts/MyConcepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Constructive.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Direction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Domain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Evaluation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Evaluation.test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Evaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Exact/setpart/SetPart.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/Decoder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/Moves/MoveMultiRoute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/Moves/MovePairFirst.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/Moves/MovePairSecond.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/Moves/MoveTSPOr1Opt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/Moves/MoveVVShiftk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/Moves/MoveVVShiftkIntra.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/Moves/MoveVVSwapIntra.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/Moves/MoveVVSwapk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/Moves/MoveVVSwapkIntra.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/Moves/MovekRoute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSBlockIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSEnumVVShiftk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSEnumVVShiftkIntra.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSEnumVVSwapk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSEnumVVSwapkIntra.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSIterators/IteratorNSSeqMultiRoute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSIterators/IteratorNSSeqPairFirst.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSIterators/IteratorNSSeqPairSecond.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSIterators/IteratorNSSeqTSPOr1Opt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSIterators/IteratorNSSeqkRoute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSIterators/IteratorVVSwapIntra.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSSeqMultiRouteAdapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSSeqPairFirstAdapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSSeqPairSecondAdapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSSeqRouteShift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSSeqRouteSwap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSSeqTSPOr1Opt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSSeqVVSwapIntra.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSSeqkRouteAdapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NSVector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/NeighborhoodExploration.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/RandGenDummy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Experimental/VShuffle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/GeneralEvaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/GlobalSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/ADSManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/CloneConstructive.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/ConstructiveToInitialSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/EPopulation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/ExtendedMultiObjSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/InitialMultiESolution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/InitialMultiSolution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/MultiESolution.ctest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/MultiESolution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/MultiEvaluation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/MultiMove.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/MultiObjValue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/MultiSolution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/Population.ctest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/Population.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/PopulationBasedMultiObjSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/Solution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/Solutions/CloneSolution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/Solutions/CopySolution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/Solutions/ESolution.ctest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/Solutions/ESolution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/VEPopulation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/VEPopulation.test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Helper/WLxEvaluation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/CompareLocalSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/BasicGeneticAlgorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/BinarySelection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/Crossover.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/DecoderNSGAII.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/EA.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/ESContinuous.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/Election.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/Elitism.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/GeneralCrossover.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/GeneticAlgorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/Mutation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/NGES.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/NSGAII.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/PSO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/RK/BRKGA.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/RK/BasicDecoderRandomKeys.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/RK/BasicInitialEPopulationRK.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/RK/ConstructiveRK.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/RK/DecoderRandomKeys.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/RK/DecoderRandomKeysNoEvaluation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/RK/InitialEPopulationRK.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/RK/RK.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/RK/RKGA.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EA/Selection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/Empty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EmptyMultiObjSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/EmptySingleObjSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/GRASP/BasicGRASP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/GRASP/GRASP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/GRASP/GRASP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/GRASP/GRASPFamily.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/GRASP/GRConstructive.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/Heuristics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/BasicILSPerturbation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/BasicIteratedLocalSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/ILS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/ILSLPerturbation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/Intensification.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/IntensifiedIteratedLocalSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/IntensifiedIteratedLocalSearchLevels.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/IteratedLocalSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/IteratedLocalSearchLevels.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/MO/BasicMOILS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/MO/BasicMOILSPerturbation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/MO/MOILS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/MO/MOILSLPerturbation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/MO/MOILSLevels.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/ILS/MO/MultiObjILS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/LocalSearches/BestImprovement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/LocalSearches/BestImprovementLOS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/LocalSearches/CircularSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/LocalSearches/FirstImprovement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/LocalSearches/FirstImprovementSlow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/LocalSearches/HillClimbing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/LocalSearches/LateAcceptanceHillClimbing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/LocalSearches/MultiImprovement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/LocalSearches/MultiRandomSelection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/LocalSearches/RandomDescentMethod.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/LocalSearches/VND.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/LocalSearches/VariableNeighborhoodDescent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/LocalSearches/VariableNeighborhoodDescentUpdateADS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MOLocalSearches/GPLS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MOLocalSearches/MOBestImprovement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MOLocalSearches/MORandomImprovement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MultiObjective/BiObjNonDominatedSort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MultiObjective/ClassicNSGAII.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MultiObjective/DecoderPopulationMultiObjSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MultiObjective/DiversityManagement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MultiObjective/ExtMOSSelection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MultiObjective/FitnessAssignment.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MultiObjective/MOElitism.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MultiObjective/MOPopulationManagement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MultiObjective/MOSExtIndividual.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MultiObjective/MOSIndividual.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MultiObjective/MOSSelection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MultiObjective/NonDominatedSort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/MultiStart.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/NSearch/FirstImprovingNeighbor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/PathRelinking.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/SA/BasicSimulatedAnnealing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/SA/GeometricSimulatedAnnealing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/SA/HelperSA.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/SA/SA.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/SA/SimulatedAnnealingAC.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/SimpleLocalSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/SingleObjSearchToLocalSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/TS/BasicTabuSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/TS/TS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/TS/TabuSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/VNS/BasicVNS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/VNS/GeneralVNS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/VNS/RandVNS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/VNS/ReducedVNS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/VNS/VNS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Heuristics/VNS/VariableNeighborhoodSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Action.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Command.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/CommandCreateCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/CommandCreateLocalCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/CommandCreateRawCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/CommandExistsCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/CommandRenameCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/CommandUnitTestCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ComponentActionCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ComponentBuildCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ComponentBuilderOfComponent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ComponentCastCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ComponentCheckCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ComponentClearCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ComponentCreateListCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ComponentDropCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ComponentListBuildersCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ComponentListCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ComponentListFromPopulationCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ComponentNullCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ComponentToStringCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/CreateNumericListCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/EmpiricalCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/FileEchoCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/FilePrintCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/FilePrintlnCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/FileToListCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ForCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ForEachCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/FunctionCreateRawCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/IfElseCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ListAddCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ListPushBackCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ListRemoveCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ListSilentDefineCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ListSortCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/OperatorAssignCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ParallelInitServersCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/Plot2AxisCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/PlotViewCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/ProblemCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/RandGenIntervalCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/RandGenNumberCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/RandGenSetSeedCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemAssertCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemCallCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemChDirCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemDefineCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemDictionaryCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemEchoCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemErrorCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemHelpCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemPauseCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemPreprocessCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemPrintCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemPrintlnCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemReadCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemRequireCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemRunCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemRunParallelCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemSilentDefineCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemUndefineCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemUnsafeDefineCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemUsageCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/SystemUseCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/TestCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/TestLocalSearchCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/TryCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Commands/WhileCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/ComponentBuilder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/ComponentHelper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/ComponentMultiBuilder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/ListAppendFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/ListDefinitionFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/ListElementFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/ListLengthFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/ListWordsFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/MathRoundFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/MathTruncFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/OperatorAbsFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/OperatorCompareFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/OperatorComputeFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/OperatorInFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/OperatorLogicFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/OperatorSCompareFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsANOVAFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsArgMaxFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsArgMinFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsAvgFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsFriedmanNoBlockTestFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsFriedmanTestFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsMannUTestFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsMaxFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsMedFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsMinFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsPairedTTestFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsSampleStdDevFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsShapiroTestFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsStdDevFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsStudentTTestFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsSumFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/StatisticsWilcoxonTestFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/SystemDefinedFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/SystemDefinitionFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/SystemInputFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/SystemPOpenFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/SystemTimeFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/TextConcatFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/TextDefinitionFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Functions/TextNextFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/HeuristicFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Interactive.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/Loader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/OptFrameList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/PreprocessFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Hyper/TestCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/ICompare.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/IEvaluation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/IEvaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/ILoop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/IPopulational.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/ISolution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/ITrajectory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/InitialPareto.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/InitialPopulation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/InitialSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/LocalSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/MOLocalSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/MSLocalSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/MSSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Move.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/MoveCost.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/MultiDirection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/MultiEvaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/MultiMoveCost.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/MultiObjSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/MultiObjectiveEvaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/NS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/NSEnum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/NSEnumIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/NSFind.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/NSIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/NSSeq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/MaPI/MaPI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/MaPI/fsmapreduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/MaPI/mapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/MaPI/mapreduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/MaPI/reducer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/MaPI/serializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/MapMP/MapMP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/MapMP/mapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/MapMP/mapreduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/MapMP/reducer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/SeqMR/SeqMR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/SeqMR/mapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/SeqMR/mapreduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/SeqMR/reducer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/mri/mapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/mri/mapreduce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/mri/mri.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/mri/printable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/mri/reducer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/util/Scanner++/File.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/util/Scanner++/Scanner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/util/Timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/OptFrameMapReduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/Parallel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Pareto.ctest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Pareto.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/ParetoDominance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/ParetoDominanceStrict.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/ParetoDominanceWeak.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/ParetoManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/RandGen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Scanner++/Scanner.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Scanner++/legacy/File.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Scanner++/legacy/Scanner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/SearchOutput.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/SearchStatus.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/SemStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/SingleObjSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/SingleObjSearchHelper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/SingleObjValue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/StopCriteria.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/BuildCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/CheckCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/Graph/FloydWarshall.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/Graph/Graph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/Graph/GraphMap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/Graph/GraphMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/KahanSummation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/MOMetrics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/Matrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/MultiNS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/BaseSolutionTSP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/Moves/MoveNSSeqUnion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/Moves/MoveTSP2Opt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/Moves/MoveTSPOrOptk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/Moves/MoveTSPSwap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/Moves/MoveVectorShift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/NSEnumVectorShift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/NSIterators/IteratorNSSeqUnion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/NSIterators/IteratorTSP2Opt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/NSIterators/IteratorTSPOrOptk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/NSIterators/IteratorTSPSwap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/NSSeqTSP2Opt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/NSSeqTSPOrOpt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/NSSeqTSPOrOptk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/NSSeqTSPSwap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/NSSeqUnionAdapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/VRP/Inter/NSSeqVRPCross.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/VRP/Inter/NSSeqVRPShift10.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/VRP/Inter/NSSeqVRPShift20.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/VRP/Inter/NSSeqVRPSwap1_1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/VRP/Inter/NSSeqVRPSwap2_1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/VRP/Inter/NSSeqVRPSwap2_2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/VRP/Intra/NSSeqVRP2Opt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/VRP/Intra/NSSeqVRPExchange.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/VRP/Intra/NSSeqVRPOrOpt1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/VRP/Intra/NSSeqVRPOrOpt2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/PackTypes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/RandGenMersenneTwister.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/Runnable/Runnable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/ScalarEvaluator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/TestCommand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/nnptr/nnshared.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/opview/optional_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrame/printable/printable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrameLib/FCoreLibSolution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrameLib/LibCTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/include/OptFrameLib/OptFrameLib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/libs/catch2/catch_old_v2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/Move.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/MoveModel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/NS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/NSEnum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/NSFind.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/NSIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/NSSeq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/NSSeqBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/NSSeqTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/async_auto_reset_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/async_generator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/async_latch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/async_manual_reset_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/async_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/async_scope.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/awaitable_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/broken_promise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/cancellation_registration.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/cancellation_source.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/cancellation_token.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/any.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/get_awaiter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/is_awaiter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/lightweight_manual_reset_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/manual_lifetime.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/remove_rvalue_reference.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/sync_wait_task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/unwrap_reference.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/void_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/when_all_counter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/when_all_ready_awaitable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/when_all_task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/win32.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/detail/win32_overlapped_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/file_buffering_mode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/file_open_mode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/file_read_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/file_share_mode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/file_write_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/fmap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/generator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/inline_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/io_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/is_awaitable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/multi_producer_sequencer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/ip_address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/ip_endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/ipv4_address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/ipv4_endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/ipv6_address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/ipv6_endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/socket_accept_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/socket_connect_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/socket_disconnect_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/socket_recv_from_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/socket_recv_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/socket_send_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/net/socket_send_to_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/on_scope_exit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/operation_cancelled.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/read_only_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/read_write_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/readable_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/recursive_generator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/resume_on.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/round_robin_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/schedule_on.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/sequence_barrier.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/sequence_range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/sequence_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/shared_task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/single_consumer_async_auto_reset_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/single_consumer_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/single_producer_sequencer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/static_thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/sync_wait.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/when_all.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/when_all_ready.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/writable_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/cppcoro/write_only_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/tl/function_ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Helper-test/MultiESolution.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Heuristics-test/BRKGA.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Heuristics-test/BasicTabuSearch.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Heuristics-test/HeuristicsAll.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Heuristics-test/MultiObjective-test/BiObjNonDominatedSort.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Heuristics-test/MultiObjective-test/NonDominatedSort.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Hyper-test/HeuristicFactory.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Matrix.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/ParetoDominance.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/RandGen.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Util-test/NSAdapter/VRP/Inter/NSSeqVRPCross.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Util-test/NSAdapter/VRP/Inter/NSSeqVRPShift10.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Util-test/NSAdapter/VRP/Inter/NSSeqVRPSwap1_1.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Util-test/NSAdapter/VRP/Intra/NSSeqVRP2Opt.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Util-test/NSAdapter/VRP/Intra/NSSeqVRPExchange.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Util-test/NSAdapter/VRP/Intra/NSSeqVRPOrOpt1.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Util-test/NSAdapter/VRP/Intra/NSSeqVRPOrOpt2.Test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/optframe/tests/OptFrame-test/Util-test/Util.Test.hpp" />
+    <Image Include="../../thirdparty/owemdjee/optframe/docs/source/optframe-cut.png" />
+    <Image Include="../../thirdparty/owemdjee/optframe/docs/source/optframe.png" />
+    <Text Include="../../thirdparty/owemdjee/optframe/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/optframe/BUILD.bzl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/COPYING.LESSERv3" />
+    <Text Include="../../thirdparty/owemdjee/optframe/CPPLINT.cfg" />
+    <Text Include="../../thirdparty/owemdjee/optframe/DEVEL.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/cxxdeps.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/etii-definitions.opt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/include/EtII/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/pieces_set_2/pieces_03x03.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/pieces_set_2/pieces_05x05.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/pieces_set_2/pieces_10x10.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/pieces_set_2/pieces_16x16.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/pieces_set_2/pieces_20x20.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/EternityII/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-BRKGA/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-BRKGA/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-BRKGA/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-BRKGA/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-Examples/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-Examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-Examples/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-Examples/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-Examples/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-Examples/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-Examples/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-PSO/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-PSO/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-PSO/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-PSO/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-VRP/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-VRP/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-VRP/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-VRP/instance.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-VRP/instance10.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-VRP/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-bTSP/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-bTSP/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-bTSP/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-bTSP/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-bTSP/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-bTSP/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/FCore-bTSP/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFM/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFM/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFM/Instance/stockData/stockData" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFM/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFM/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFM/cxxdeps.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFM/makeGFP.mk" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFM/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFM/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/WORKSPACE" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/cxxdeps.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/include/HFMVRP/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/readMe_VitorNCoelho_EJOR_HFMVRP_Code" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/HFMVRP/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/KP/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/KP/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/KP/instance-4.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/KP/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/KP/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/KP2/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/instances/f1_l-d_kp_10_269" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/instances/f1_l-d_kp_10_269.opt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/instances/f2_l-d_kp_20_878" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/instances/f2_l-d_kp_20_878.opt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/instances/knapPI_1_100_1000_1" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/KP2/src/instances/knapPI_1_100_1000_1.opt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/KP2/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/MITSP/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/MITSP/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/MITSP/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/MITSP/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/MITSP/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/MODM/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/MODM/cxxdeps.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/MODM/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/MODM/src/NSSeqARcpp" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/MODM/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/OPM/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/OPM/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/cxxdeps.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/OptHS/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/cxxdeps.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/InstancesLorena/SJC1" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/InstancesLorena/SJC2" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/InstancesLorena/SJC3" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/InstancesLorena/SJC3b" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/InstancesLorena/SJC4a" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/InstancesLorena/SJC4b" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/src/InstancesLorena/website" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PMedCap/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/cxxdeps.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/execPN.opt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/makefilePN" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/15/15_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/15/15_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/15/15_3.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/15/15_4.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/15/15_5.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/35/35_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/35/35_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/35/35_3.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/35/35_4.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/35/35_5.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/55/55_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/55/55_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/55/55_3.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/55/55_4.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/55/55_5.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/75/75_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/75/75_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/75/75_3.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/75/75_4.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/75/75_5.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/95/95_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/95/95_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/95/95_3.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/95/95_4.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/95/95_5.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/src/Instances/inst.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/PN/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/ParallelTSP/README" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/ParallelTSP/example.opt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/ParallelTSP/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/ParallelTSP/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/all-instances-2013/016_B_half.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/all-instances-2013/016_B_one.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/all-instances-2013/016_B_p_two.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/all-instances-2013/016_B_two.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/src/all-instances-2013/diff.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/SVRPDSP/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/Solver-KP/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/Solver-KP/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/Solver-KP/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/Solver-KP/default_kp01.json" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/Solver-KP/knapsack.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/Solver-KP/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/CPPLINT.cfg" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/berlin52.mtx" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/cxxdeps.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/src/berlin52.mtx" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/tsp-definitions.opt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/tsplib/berlin52.opt.tour" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/tsplib/berlin52.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP/tsplib/miniberlin52-10.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/tsplib/berlin52.opt.tour" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/src/tsplib/berlin52.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/TSP2/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/clean_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/make_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/Examples/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/HISTORY.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/optframe/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/MyProjects/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/OPTCONCEPTS.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/WORKSPACE" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/MCT.java" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/java-mct.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/mct/Constructive.tpl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/mct/ConstructiveCpp.tpl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/mct/Evaluator.tpl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/mct/EvaluatorCpp.tpl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/mct/NSSeq.tpl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/mct/NSSeqCpp.tpl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/mct/ProblemInstance.tpl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/mct/ProblemInstanceCpp.tpl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/mct/RepTest.tpl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/mct/Representation.tpl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/mct/main.tpl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/mct/makefile.tpl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/mct/makefile_base.tpl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bin/optframe-mct.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/bumpver.toml" />
+    <Text Include="../../thirdparty/owemdjee/optframe/cmake/OptFrameConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/00_SimpleBuild/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/00_SimpleBuild/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/00_SimpleBuild/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/00_SimpleBuild/README.header.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/00_SimpleBuild/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/00_SimpleBuild/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/00_SimpleBuild/cxxdeps.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/00_SimpleBuild/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/01_QuickstartWelcome/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/01_QuickstartWelcome/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/01_QuickstartWelcome/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/01_QuickstartWelcome/README.header.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/01_QuickstartWelcome/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/01_QuickstartWelcome/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/01_QuickstartWelcome/cxxdeps.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/01_QuickstartWelcome/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/README.header.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/join.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/knapsack-example.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/02_QuickstartKP_SA/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/README.header.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/join.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/03_QuickstartTSP_VNS_BRKGA/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/05_Advanced_TSP_checkmodule/README.header.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/05_Advanced_TSP_checkmodule/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/05_Advanced_TSP_checkmodule/join.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/05_Advanced_TSP_checkmodule/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/06_Advanced_OptFCoreLib/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/06_Advanced_OptFCoreLib/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/README.bazel.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/README.info.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/demo/clean_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/_figs/Knapsack.pdf" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/_figs/Knapsack.svg" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/advanced.rst" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/advanced_checkmodule.rst" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/concepts.rst" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/debugging.rst" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/fcore.rst" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/heuristics.rst" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/heuristics_simulated_annealing.rst" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/install.rst" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/intro.rst" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/license.rst" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/quickstart.rst" />
+    <Text Include="../../thirdparty/owemdjee/optframe/docs/source/quickstart_continued.rst" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFCore/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFCore/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame-Core-Examples/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame-Core-Examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Exact/setpart/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/MaPI/TODO" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/README" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/README" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/RandomInt/logs-seq" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/doc" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/examples/mct.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/util/Scanner++/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/util/Scanner++/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Parallel/MapReduce++/util/Scanner++/README" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Scanner++/legacy/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Scanner++/legacy/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Scanner++/legacy/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Scanner++/legacy/README" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/NSAdapter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/Runnable/Main.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/Util/Runnable/Makefile.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrame/printable/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/include/OptFrameLib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/install.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/libs/erenon_bazel_clang_tidy/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/optframe/libs/erenon_bazel_clang_tidy/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/optframe/libs/erenon_bazel_clang_tidy/WORKSPACE" />
+    <Text Include="../../thirdparty/owemdjee/optframe/libs/erenon_bazel_clang_tidy/clang_tidy/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/optframe/libs/erenon_bazel_clang_tidy/clang_tidy/clang_tidy.bzl" />
+    <Text Include="../../thirdparty/owemdjee/optframe/libs/erenon_bazel_clang_tidy/clang_tidy/run_clang_tidy.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/libs/gcc-10-install/INSTRUCTIONS.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/README.md" />
+    <Text Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/appAltFrame" />
+    <Text Include="../../thirdparty/owemdjee/optframe/tests/AltFrame/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/tests/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/optframe/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/tests/build/fcore_test_install" />
+    <Text Include="../../thirdparty/owemdjee/optframe/tests/build/optframe_test_install" />
+    <Text Include="../../thirdparty/owemdjee/optframe/tests/get_gbenchmark.sh" />
+    <Text Include="../../thirdparty/owemdjee/optframe/tests/lazy-idea/makefile" />
+    <Text Include="../../thirdparty/owemdjee/optframe/tests/test-examples.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

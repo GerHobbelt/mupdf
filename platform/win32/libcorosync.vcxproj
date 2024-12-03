@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF3BEDDE}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOROSYNC;COROSYNC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOROSYNC;COROSYNC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOROSYNC;COROSYNC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOROSYNC;COROSYNC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOROSYNC;COROSYNC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOROSYNC;COROSYNC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOROSYNC;COROSYNC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOROSYNC;COROSYNC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOROSYNC;COROSYNC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOROSYNC;COROSYNC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOROSYNC;COROSYNC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOROSYNC;COROSYNC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/common_lib/error_conversion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/apidef.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/cfg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/cmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/coroparse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/cpg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/icmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/ipc_glue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/logconfig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/logsys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/mon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/pload.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/quorum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/schedwrk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/service.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/sync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/timer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/totemconfig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/totemip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/totemknet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/totemnet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/totempg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/totemsrp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/totemudp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/totemudpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/votequorum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/vsf_quorum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/vsf_ykd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/exec/wd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/lib/cfg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/lib/cmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/lib/cpg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/lib/quorum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/lib/sam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/lib/votequorum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/cpgbench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/cpgbenchzc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/cpgbound.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/cpghum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/cpgverify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/stress_cpgcontext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/stress_cpgfdget.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/stress_cpgzc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/testcfg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/testcpg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/testcpg2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/testcpgzc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/testparse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/testquorum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/testquorummodel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/testsam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/testtimer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/testvotequorum1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/testvotequorum2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/test/testzcgc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/tools/corosync-cfgtool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/tools/corosync-cmapctl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/tools/corosync-cpgtool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/tools/corosync-keygen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/tools/corosync-notifyd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/tools/corosync-quorumtool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/tools/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/vqsim/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/vqsim/vq_object.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/vqsim/vqmain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/corosync/vqsim/vqsim_vq_engine.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/apidef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/cs_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/fsm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/ipcs_stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/logconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/quorum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/schedwrk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/sync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/totemconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/totemknet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/totemnet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/totemsrp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/totemudp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/totemudpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/votequorum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/vsf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/exec/vsf_ykd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/cfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/cmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/coroapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/corodefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/corotypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/cpg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/hdb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/icmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/ipc_cfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/ipc_cmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/ipc_cpg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/ipc_quorum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/ipc_votequorum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/logsys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/mar_gen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/quorum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/sam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/sq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/swab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/totem/totem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/totem/totemip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/totem/totempg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/totem/totemstats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/include/corosync/votequorum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/lib/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/tools/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/corosync/vqsim/vqsim.h" />
+    <Text Include="../../thirdparty/owemdjee/corosync/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/corosync/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/corosync/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/corosync/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/README.recovery" />
+    <Text Include="../../thirdparty/owemdjee/corosync/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/Cargo.toml.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/README.md" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/build.rs.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/src/cfg.rs" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/src/cmap.rs" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/src/cpg.rs" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/src/quorum.rs" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/src/sys/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/src/votequorum.rs" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/tests/Cargo.toml.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/tests/build.rs.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/tests/src/bin/cfg-test.rs" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/tests/src/bin/cmap-test.rs" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/tests/src/bin/cpg-test.rs" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/tests/src/bin/quorum-test.rs" />
+    <Text Include="../../thirdparty/owemdjee/corosync/bindings/rust/tests/src/bin/votequorum-test.rs" />
+    <Text Include="../../thirdparty/owemdjee/corosync/build-aux/git-version-gen" />
+    <Text Include="../../thirdparty/owemdjee/corosync/build-aux/gitlog-to-changelog" />
+    <Text Include="../../thirdparty/owemdjee/corosync/build-aux/release.mk" />
+    <Text Include="../../thirdparty/owemdjee/corosync/build-aux/rust-regen.sh" />
+    <Text Include="../../thirdparty/owemdjee/corosync/build-aux/rust.mk" />
+    <Text Include="../../thirdparty/owemdjee/corosync/common_lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/conf/COROSYNC-MIB.txt" />
+    <Text Include="../../thirdparty/owemdjee/corosync/conf/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/conf/corosync-signals.conf" />
+    <Text Include="../../thirdparty/owemdjee/corosync/conf/logrotate/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/conf/logrotate/corosync-copytruncate.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/conf/logrotate/corosync-reopen.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/conf/xml2conf.xsl" />
+    <Text Include="../../thirdparty/owemdjee/corosync/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/corosync/corosync.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/exec/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/init/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/init/corosync-notifyd.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/init/corosync-notifyd.service.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/init/corosync.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/init/corosync.service.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/lib/libcfg.versions" />
+    <Text Include="../../thirdparty/owemdjee/corosync/lib/libcmap.versions" />
+    <Text Include="../../thirdparty/owemdjee/corosync/lib/libcpg.versions" />
+    <Text Include="../../thirdparty/owemdjee/corosync/lib/libquorum.versions" />
+    <Text Include="../../thirdparty/owemdjee/corosync/lib/libsam.versions" />
+    <Text Include="../../thirdparty/owemdjee/corosync/lib/libvotequorum.versions" />
+    <Text Include="../../thirdparty/owemdjee/corosync/loc" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_context_get.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_context_set.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_dec.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_delete.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_dispatch.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_fd_get.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_finalize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_get.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_inc.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_initialize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_initialize_map.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_iter_finalize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_iter_init.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_iter_next.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_keys.7" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_overview.3" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_set.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_track_add.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cmap_track_delete.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/corosync-blackbox.8" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/corosync-cfgtool.8" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/corosync-cmapctl.8" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/corosync-cpgtool.8" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/corosync-keygen.8" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/corosync-notifyd.8" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/corosync-quorumtool.8" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/corosync-vqsim.8" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/corosync-xmlproc.8" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/corosync.8" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/corosync.conf.5" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/corosync.xml.5" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/corosync_overview.7" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_context_get.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_context_set.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_dispatch.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_fd_get.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_finalize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_initialize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_iteration_finalize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_iteration_initialize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_iteration_next.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_join.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_leave.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_local_get.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_mcast_joined.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_membership_get.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_model_initialize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_overview.3" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_zcb_alloc.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_zcb_free.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/cpg_zcb_mcast_joined.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/index.html" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/ipc_common.sh.errors" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/quorum_context_get.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/quorum_context_set.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/quorum_dispatch.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/quorum_fd_get.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/quorum_finalize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/quorum_getquorate.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/quorum_initialize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/quorum_model_initialize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/quorum_overview.3" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/quorum_trackstart.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/quorum_trackstop.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/sam_data_getsize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/sam_data_restore.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/sam_data_store.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/sam_finalize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/sam_hc_callback_register.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/sam_hc_send.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/sam_initialize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/sam_mark_failed.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/sam_overview.3" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/sam_register.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/sam_start.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/sam_stop.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/sam_warn_signal_set.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum.5" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_context_get.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_context_set.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_dispatch.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_fd_get.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_finalize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_getinfo.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_initialize.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_overview.3" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_qdevice_master_wins.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_qdevice_poll.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_qdevice_register.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_qdevice_unregister.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_qdevice_update.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_setexpected.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_setvotes.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_trackstart.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/man/votequorum_trackstop.3.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/pkgconfig/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/pkgconfig/corosync.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/pkgconfig/libtemplate.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/corosync/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/test/ploadstart.sh" />
+    <Text Include="../../thirdparty/owemdjee/corosync/test/scripts/spam" />
+    <Text Include="../../thirdparty/owemdjee/corosync/test/scripts/spam2" />
+    <Text Include="../../thirdparty/owemdjee/corosync/test/testmake.sh" />
+    <Text Include="../../thirdparty/owemdjee/corosync/tools/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/corosync/tools/corosync-blackbox.sh" />
+    <Text Include="../../thirdparty/owemdjee/corosync/tools/corosync-xmlproc.sh" />
+    <Text Include="../../thirdparty/owemdjee/corosync/vqsim/Makefile.am" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF153C11}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUILE;QUILE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUILE;QUILE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUILE;QUILE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUILE;QUILE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUILE;QUILE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUILE;QUILE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUILE;QUILE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUILE;QUILE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUILE;QUILE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUILE;QUILE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUILE;QUILE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUILE;QUILE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/Gaussian_mutation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/QUILE_LOG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/binary_chromosome.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/callable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/cart2polar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/cart2spher.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/chain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/contains.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/cube.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/domain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/fitness_db.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/fn_and.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/fn_or.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/g_binary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/g_floating_point.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/g_integer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/g_permutation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/generations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/genotype.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/genotype_begin_end.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/genotype_cmp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/genotype_constraints.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/genotype_data.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/genotype_random.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/genotype_random_reset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/genotype_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/genotype_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/identity.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/integer_chromosome.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/iota.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/mutation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/permutation_chromosome.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/pi_e_ln2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/population.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/random_N.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/random_U.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/random_engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/random_population.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/range_clamp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/range_contains.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/range_max.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/range_midpoint.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/range_min.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/range_spaceship.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/range_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/recombination.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/selection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/self_adaptive.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/spf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/square.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/static_loop_body.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/stochastic_variation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/success.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/thread_pool_async.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/uniform_domain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/doc/examples/variation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/benchmark/benchmark_1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/benchmark/benchmark_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/benchmark/benchmark_3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/common/pwx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/common/system.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/evenstar/evenstar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/evenstar/src/nanowire.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/example_1/example_1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/example_2/example_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/example_2/time/example_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/mithril/mithril.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/mithril/postprocessing.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/mithril/qe.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/mithril/src/nanotube.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/quile/examples/mithril/tikz.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/quile/examples/common/pwx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quile/examples/common/system.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quile/examples/common/ts_unordered_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quile/examples/evenstar/src/nanowire.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quile/examples/mithril/src/nanotube.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quile/quile/quile.h" />
+    <Image Include="../../thirdparty/owemdjee/quile/logo/doc.png" />
+    <Image Include="../../thirdparty/owemdjee/quile/logo/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/quile/logo/square.png" />
+    <Text Include="../../thirdparty/owemdjee/quile/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/quile/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/quile/README" />
+    <Text Include="../../thirdparty/owemdjee/quile/doc/README" />
+    <Text Include="../../thirdparty/owemdjee/quile/doc/examples/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/quile/doc/examples/trim.sh" />
+    <Text Include="../../thirdparty/owemdjee/quile/examples/benchmark/results.txt" />
+    <Text Include="../../thirdparty/owemdjee/quile/examples/benchmark/results_1.csv" />
+    <Text Include="../../thirdparty/owemdjee/quile/examples/benchmark/results_2.csv" />
+    <Text Include="../../thirdparty/owemdjee/quile/examples/benchmark/results_3.csv" />
+    <Text Include="../../thirdparty/owemdjee/quile/examples/benchmark/results_detailed.txt" />
+    <Text Include="../../thirdparty/owemdjee/quile/examples/evenstar/README" />
+    <Text Include="../../thirdparty/owemdjee/quile/examples/evenstar/calc.sh" />
+    <Text Include="../../thirdparty/owemdjee/quile/examples/example_1/README" />
+    <Text Include="../../thirdparty/owemdjee/quile/examples/example_1/postprocessing.sh" />
+    <Text Include="../../thirdparty/owemdjee/quile/examples/example_2/README" />
+    <Text Include="../../thirdparty/owemdjee/quile/examples/example_2/time/README" />
+    <Text Include="../../thirdparty/owemdjee/quile/examples/example_2/time/job.sh" />
+    <Text Include="../../thirdparty/owemdjee/quile/examples/mithril/README" />
+    <Text Include="../../thirdparty/owemdjee/quile/paper/fig1.pdf" />
+    <Text Include="../../thirdparty/owemdjee/quile/paper/fig2.pdf" />
+    <Text Include="../../thirdparty/owemdjee/quile/paper/paper.md" />
+    <Text Include="../../thirdparty/owemdjee/quile/tutorial/tutorial.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -20,49 +20,49 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
-    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745A12A263}</ProjectGuid>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745ACCFFFD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -70,8 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <NMakeOutput>
-    </NMakeOutput>
+    <NMakeOutput></NMakeOutput>
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
@@ -80,8 +79,7 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeOutput>
-    </NMakeOutput>
+    <NMakeOutput></NMakeOutput>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
@@ -90,8 +88,7 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <NMakeOutput>
-    </NMakeOutput>
+    <NMakeOutput></NMakeOutput>
     <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
@@ -100,8 +97,7 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <NMakeOutput>
-    </NMakeOutput>
+    <NMakeOutput></NMakeOutput>
     <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
@@ -109,7 +105,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -143,16 +139,47 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
   <ItemGroup>
-    <Text Include="../../thirdparty/owemdjee/html-parser-test-corpus/LICENSE" />
-    <Text Include="../../thirdparty/owemdjee/html-parser-test-corpus/README.md" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/cpp_for_opencl.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/executing_programs.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/how_it_compares.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/how_it_works.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/memory_model.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/ndrange.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/online_vs_offline_comp.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/opencl_and_spirv.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/opencl_kernels.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/opencl_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/opencl_to_spirv_tooling.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/platform_model.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/ref_guide_3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenCL-Guide/images/widely_used.jpg" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/LICENSES/CC-BY-4.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/chapters/additional_resources.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/chapters/cmake_build-system_support.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/chapters/cpp_for_opencl.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/chapters/getting_started_linux.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/chapters/getting_started_windows.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/chapters/how_does_opencl_compare.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/chapters/how_does_opencl_work.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/chapters/opencl_3.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/chapters/opencl_programming_model.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/chapters/os_tooling.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/chapters/programming_opencl_kernels.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenCL-Guide/chapters/what_is_opencl.md" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
