@@ -1638,6 +1638,37 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum, fz_navigati
 
 	start = (showtime ? gettime() : 0);
 
+	if (output_file_per_page)
+	{
+		char text_buffer[PATH_MAX];
+
+		bgprint_flush();
+		if (out)
+		{
+			fz_close_output(ctx, out);
+			fz_drop_output(ctx, out);
+			out = NULL;
+		}
+
+		fz_format_output_path(ctx, text_buffer, sizeof text_buffer, output, pagenum);
+		fz_normalize_path(ctx, text_buffer, sizeof text_buffer, text_buffer);
+		fz_sanitize_path(ctx, text_buffer, sizeof text_buffer, text_buffer);
+
+		if (output_format->format == OUT_PDF)
+		{
+#if FZ_ENABLE_PDF
+			pdfout = pdf_create_document(ctx);
+			pdfoutpath = fz_strdup(ctx, text_buffer);
+#else
+			fz_throw(ctx, FZ_ERROR_GENERIC, "PDF output is not supported by this mupdf build.");
+#endif
+		}
+		else
+		{
+			out = fz_new_output_with_path(ctx, text_buffer, 0);
+		}
+	}
+
 	page = fz_load_page(ctx, doc, pagenum - 1);
 
 	if (spots != SPOTS_NONE)
@@ -1736,37 +1767,6 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum, fz_navigati
 			fz_rethrow(ctx);
 		}
 		features = iscolor ? " color" : " grayscale";
-	}
-
-	if (output_file_per_page)
-	{
-		char text_buffer[PATH_MAX];
-
-		bgprint_flush();
-		if (out)
-		{
-			fz_close_output(ctx, out);
-			fz_drop_output(ctx, out);
-			out = NULL;
-		}
-
-		fz_format_output_path(ctx, text_buffer, sizeof text_buffer, output, pagenum);
-		fz_normalize_path(ctx, text_buffer, sizeof text_buffer, text_buffer);
-		fz_sanitize_path(ctx, text_buffer, sizeof text_buffer, text_buffer);
-
-		if (output_format->format == OUT_PDF)
-		{
-#if FZ_ENABLE_PDF
-			pdfout = pdf_create_document(ctx);
-			pdfoutpath = fz_strdup(ctx, text_buffer);
-#else
-			fz_throw(ctx, FZ_ERROR_GENERIC, "PDF output is not supported by this mupdf build.");
-#endif
-		}
-		else
-		{
-			out = fz_new_output_with_path(ctx, text_buffer, 0);
-		}
 	}
 
 	if (bgprint.active)
