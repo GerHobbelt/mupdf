@@ -207,9 +207,14 @@ fz_drop_context(fz_context *ctx)
 	 * clones the context, but it really shouldn't be doing
 	 * that! */
 	if (call_log)
+	{
 		fz_log_activity(ctx, FZ_ACTIVITY_SHUTDOWN, NULL);
+	}
 	if (free_master)
-		ctx->alloc.free(ctx->alloc.user, ctx->master);
+	{
+		ctx->alloc.free_(ctx->alloc.user, ctx->master);
+		ctx->master = NULL;
+	}
 
 #if FZ_ENABLE_PDF    // TODO: this is a rough cut condition; re-check when you need particular (minor) parts of the mupdf library in your application.
 	/* Other finalisation calls go here (in reverse order) */
