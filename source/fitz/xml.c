@@ -26,7 +26,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#if FZ_ENABLE_HTML_ENGINE
 #include <gumbo.h>
+#endif
 
 #define FZ_XML_MAX_DEPTH 152
 
@@ -1268,6 +1270,7 @@ fz_parse_xml(fz_context *ctx, fz_buffer *buf, int preserve_white)
 	return xml;
 }
 
+#if FZ_ENABLE_HTML_ENGINE
 /*
 	Parse the contents of buffer into a tree of XML nodes, using the HTML5 syntax.
 
@@ -1351,10 +1354,12 @@ static void xml_from_gumbo(fz_context *ctx, struct parser *parser, GumboNode *no
 		break;
 	}
 }
+#endif
 
 fz_xml *
 fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf, int dont_throw_on_error)
 {
+#if FZ_ENABLE_HTML_ENGINE
 	struct parser parser;
 	fz_xml *xml = NULL;
 	fz_xml root, *node;
@@ -1455,6 +1460,9 @@ fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf, int dont_throw_on_error
 	}
 
 	return xml;
+#else
+	fz_throw(ctx, FZ_ERROR_GENERIC, "HTML Engine not enabled in this build");
+#endif
 }
 
 fz_xml *fz_xml_find_dfs(fz_xml *item, const char *tag, const char *att, const char *match)
