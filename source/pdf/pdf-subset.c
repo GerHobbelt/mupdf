@@ -174,7 +174,7 @@ font_analysis_Tf(fz_context *ctx, pdf_processor *proc, const char *name, pdf_fon
 	pdf_obj *dict = pdf_dict_gets(ctx, pdf_dict_get(ctx, p->rstack->res, PDF_NAME(Font)), name);
 	pdf_obj *subtype, *fontdesc = NULL;
 	pdf_obj *fontfile = NULL;
-	pdf_obj *key;
+	pdf_obj *key = NULL;
 	int num, gen, i;
 	int is_cidfont = 0;
 	int is_ttf = 0;
