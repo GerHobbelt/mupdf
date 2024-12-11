@@ -935,26 +935,49 @@ pdf_version(fz_context *ctx, pdf_document *doc)
 static void
 pdf_load_version(fz_context *ctx, pdf_document *doc)
 {
-	char buf[32];
+	char buf[1024 + 1];
+	char *s = NULL;
+	size_t i, n;
+	cont int PDF_ID_MINLEN = 5 + 2;  // "%PDF-x.y"; minimal: "%PDF-x"
 
+	/* look for '%PDF' version marker within first kilobyte of file */
 	fz_seek(ctx, doc->file, 0, SEEK_SET);
-	fz_read_line(ctx, doc->file, buf, sizeof buf);
-	if (strlen(buf) < 5 || (memcmp(buf, "%PDF-", 5) != 0 && memcmp(buf, "%FDF-", 5) != 0))
+	n = fz_read(ctx, doc->file, (unsigned char*) buf, sizeof(buf) - 1);
+	if (n < PDF_ID_MINLEN)
+		fz_throw(ctx, FZ_ERROR_FORMAT, "cannot find PDF file version marker: file too small.");
+	buf[n] = 0;		// safe as we have reserved extra space for the sentinel NUL byte!
+	for (i = 0; i < n - PDF_ID_MINLEN; i++)
+	{
+		if (memcmp(&buf[i], "%PDF-", 5) == 0 || memcmp(&buf[i], "%FDF-", 5) == 0)
+		{
+			s = buf + i;
+			break;
+		}
+	}
+	if (!s)
 	{
 		// is this PDF not a PDF but a HTML file? (probably a 404 page which got downloaded incorrectly)
 		int is_bad_download = !!(strstr(buf, "DOCTYPE") && strstr(buf, "html"));
 		if (is_bad_download)
-			fz_throw(ctx, FZ_ERROR_NOT_A_PDF, "cannot recognize version marker: expected '%%PDF-n.n', but reading '%s'. This is very probably a failed download, delivering a HTML page rather than the intended PDF.", buf);
+			fz_throw(ctx, FZ_ERROR_NOT_A_PDF, "cannot recognize version marker: expected '%%PDF-n.n', but reading %q. This is very probably a failed download, delivering a HTML page rather than the intended PDF.", buf);
 		else
-			fz_throw(ctx, FZ_ERROR_FORMAT, "cannot recognize version marker: expected '%%PDF-n.n', but reading '%s'", buf);
+			fz_throw(ctx, FZ_ERROR_FORMAT, "cannot recognize version marker: expected '%%PDF-n.n', but reading %q", buf);
 	}
-	if (buf[1] == 'F')
+
+	if (s[1] == 'F')
 		doc->is_fdf = 1;
 
-	doc->version = 10 * (fz_atof(buf+5) + 0.05f);
-	if (doc->version < 10 || doc->version > 17)
-		if (doc->version != 20)
-			fz_warn(ctx, "unknown PDF version: %d.%d", doc->version / 10, doc->version % 10);
+	doc->version = 10 * (fz_atof(s+5) + 0.05f);
+	if ((doc->version < 10 || doc->version > 17) && doc->version != 20)
+		fz_warn(ctx, "unknown PDF version: %d.%d", doc->version / 10, doc->version % 10);
+
+	if (s != buf)
+	{
+		fz_warn(ctx, "garbage bytes before %%PDF version marker");
+		doc->bias = s - buf;
+	}
+
+	fz_seek(ctx, doc->file, doc->bias, SEEK_SET);
 }
 
 static void
@@ -1516,7 +1539,7 @@ pdf_read_xref(fz_context *ctx, pdf_document *doc, int64_t ofs)
 	pdf_obj *trailer;
 	int c;
 
-	fz_seek(ctx, doc->file, ofs, SEEK_SET);
+	fz_seek(ctx, doc->file, doc->bias + ofs, SEEK_SET);
 
 	while (iswhite(fz_peek_byte(ctx, doc->file)))
 		fz_read_byte(ctx, doc->file);
@@ -2314,7 +2337,7 @@ pdf_obj_read(fz_context *ctx, pdf_document *doc, int64_t *offset, int *nump, pdf
 	pdf_xref_entry *entry;
 
 	numofs = *offset;
-	fz_seek(ctx, doc->file, numofs, SEEK_SET);
+	fz_seek(ctx, doc->file, doc->bias + numofs, SEEK_SET);
 
 	/* We expect to read 'num' here */
 	tok = pdf_lex(ctx, doc->file, buf);
@@ -2550,7 +2573,7 @@ pdf_load_unencrypted_object(fz_context *ctx, pdf_document *doc, int num)
 	x = pdf_get_xref_entry_no_null(ctx, doc, num);
 	if (x->type == 'n')
 	{
-		fz_seek(ctx, doc->file, x->ofs, SEEK_SET);
+		fz_seek(ctx, doc->file, doc->bias + x->ofs, SEEK_SET);
 		return pdf_parse_ind_obj(ctx, doc, doc->file, NULL, NULL, NULL, NULL);
 	}
 	return NULL;
@@ -2584,7 +2607,7 @@ object_updated:
 	}
 	else if (x->type == 'n')
 	{
-		fz_seek(ctx, doc->file, x->ofs, SEEK_SET);
+		fz_seek(ctx, doc->file, doc->bias + x->ofs, SEEK_SET);
 
 		fz_try(ctx)
 		{
@@ -3441,7 +3464,7 @@ pdf_load_hints(fz_context *ctx, pdf_document *doc, int objnum)
 		}
 		/* Skip items 5,6,7 as we don't use them */
 
-		fz_seek(ctx, stream, shared_hint_offset, SEEK_SET);
+		fz_seek(ctx, stream, doc->bias + shared_hint_offset, SEEK_SET);
 
 		/* Read the shared object hints table: Header first */
 		shared_obj_num = fz_read_bits(ctx, stream, 32);
@@ -3561,7 +3584,7 @@ pdf_load_hint_object(fz_context *ctx, pdf_document *doc)
 	int64_t curr_pos;
 
 	curr_pos = fz_tell(ctx, doc->file);
-	fz_seek(ctx, doc->file, doc->hint_object_offset, SEEK_SET);
+	fz_seek(ctx, doc->file, doc->bias + doc->hint_object_offset, SEEK_SET);
 	fz_try(ctx)
 	{
 		while (1)
