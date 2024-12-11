@@ -938,7 +938,7 @@ pdf_load_version(fz_context *ctx, pdf_document *doc)
 	char buf[1024 + 1];
 	char *s = NULL;
 	size_t i, n;
-	cont int PDF_ID_MINLEN = 5 + 2;  // "%PDF-x.y"; minimal: "%PDF-x"
+	const int PDF_ID_MINLEN = 5 + 2;  // "%PDF-x.y"; minimal: "%PDF-x"
 
 	/* look for '%PDF' version marker within first kilobyte of file */
 	fz_seek(ctx, doc->file, 0, SEEK_SET);
