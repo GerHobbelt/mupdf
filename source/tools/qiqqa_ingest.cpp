@@ -1,5 +1,14 @@
 //
+// ingest new/updated documents into the qiqqa database.
+// Also ingests document metadata records; includes bulk loading of these,
+// which makes this look like it's competing with the meta_importer tool:
+// IT IS NOT as the latter is reared towards dealing with our own and a few
+// specific bulk import/export formats that are most useful for backup/restore
+// of your library, while the `ingest` is the wilder nephew which accepts
+// several foreign formats and does some inference when things turn out to
+// need some mapping cleverness before they can be properly digested.
 //
+// Q: When we ingest unsupported/unrecognized file formats, what are we to do?
 //
 
 #include "mupdf/mutool.h"
