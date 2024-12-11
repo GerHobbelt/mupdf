@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#include "context-imp.h"
+
 #include <string.h>
 #ifndef _WIN32
 #include <unistd.h> /* For unlink */
@@ -606,6 +608,9 @@ fz_new_document_of_size(fz_context *ctx, int size)
 {
 	fz_document *doc = fz_calloc(ctx, 1, size);
 	doc->refs = 1;
+
+	fz_log_activity(ctx, FZ_ACTIVITY_NEW_DOC, NULL);
+
 	return doc;
 }
 

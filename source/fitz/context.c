@@ -174,6 +174,9 @@ fz_drop_context(fz_context *ctx)
 {
 	fz_flush_all_std_logging_channels(ctx);
 
+	int free_master = 0;
+	int call_log = 0;
+
 	if (!ctx)
 		return;
 
@@ -186,6 +189,27 @@ fz_drop_context(fz_context *ctx)
 		abort();
 #endif
 	}
+
+	assert(ctx->master);
+	fz_lock(ctx, FZ_LOCK_ALLOC);
+	ctx->master->context_count--;
+	if (ctx->master->context_count == 0)
+	{
+		call_log = 1;
+		if (ctx->master != ctx)
+			free_master = 1;
+	}
+	fz_unlock(ctx, FZ_LOCK_ALLOC);
+
+	/* We call the log with ctx intact, apart from the master
+	 * pointer having had the context_count reduced. The
+	 * only possible problem here is if fz_log_activity
+	 * clones the context, but it really shouldn't be doing
+	 * that! */
+	if (call_log)
+		fz_log_activity(ctx, FZ_ACTIVITY_SHUTDOWN, NULL);
+	if (free_master)
+		ctx->alloc.free(ctx->alloc.user, ctx->master);
 
 #if FZ_ENABLE_PDF    // TODO: this is a rough cut condition; re-check when you need particular (minor) parts of the mupdf library in your application.
 	/* Other finalisation calls go here (in reverse order) */
@@ -211,7 +235,15 @@ fz_drop_context(fz_context *ctx)
 	ASSERT_AND_CONTINUE(ctx->error.top == ctx->error.stack_base);
 
 	/* Free the context itself */
-	ctx->alloc.free_(ctx->alloc.user, ctx);
+	if (ctx->master == ctx && ctx->context_count != 0)
+	{
+		/* Need to delay our freeing until all our children have died. */
+		ctx->master = NULL;
+	}
+	else
+	{
+		ctx->alloc.free_(ctx->alloc.user, ctx);
+	}
 
 	// fixup for when this happens to be the *global context*:
 	if (global_ctx == ctx)
@@ -269,6 +301,10 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 	ctx->user = NULL;
 	ctx->alloc = *alloc;
 	ctx->locks = *locks;
+
+	/* We are our own master! */
+	ctx->master = ctx;
+	ctx->context_count = 1;
 
 	if (global_default_ctx)
 	{
@@ -331,6 +367,11 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 	fz_init_error_context(ctx);
 #if FZ_ENABLE_PDF    // TODO: this is a rough cut condition; re-check when you need particular (minor) parts of the mupdf library in your application.
 	fz_init_aa_context(ctx);
+#endif
+
+	fz_init_random_context(ctx);
+
+#if FZ_ENABLE_PDF    // TODO: this is a rough cut condition; re-check when you need particular (minor) parts of the mupdf library in your application.
 
 	/* Now initialise sections that are shared */
 	fz_try(ctx)
@@ -352,6 +393,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 		return NULL;
 	}
 #endif
+
 	return ctx;
 }
 
@@ -368,6 +410,11 @@ fz_clone_context(fz_context *ctx)
 	new_ctx = (fz_context *)ctx->alloc.malloc_(ctx->alloc.user, sizeof(fz_context)   FZDBG_THIS_POS());
 	if (!new_ctx)
 		return NULL;
+
+	fz_lock(ctx, FZ_LOCK_ALLOC);
+	ctx->master->context_count++;
+	fz_unlock(ctx, FZ_LOCK_ALLOC);
+	new_ctx->master = ctx->master;
 
 	/* First copy old context, including pointers to shared contexts */
 	memcpy(new_ctx, ctx, sizeof (fz_context));
@@ -406,6 +453,23 @@ void *fz_user_context(fz_context *ctx)
 		return NULL;
 
 	return ctx->user;
+}
+
+void fz_register_activity_logger(fz_context *ctx, fz_activity_fn *activity, void *opaque)
+{
+	if (ctx == NULL)
+		return;
+
+	ctx->activity.activity = activity;
+	ctx->activity.opaque = opaque;
+}
+
+void fz_log_activity(fz_context *ctx, fz_activity_reason reason, void *arg)
+{
+	if (ctx == NULL || ctx->activity.activity == NULL)
+		return;
+
+	ctx->activity.activity(ctx, ctx->activity.opaque, reason, arg);
 }
 
 fz_context* fz_get_global_context(void)
