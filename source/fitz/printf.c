@@ -315,7 +315,7 @@ static void fmtquote(struct fmtbuf *out, const char *s, size_t slen, int sq, int
 						fmtputc(out, fz_hex_digits[(c) & 0x0F]);
 					}
 				}
-				if (verbatim)
+				else if (verbatim)
 				{
 					for (i = 0; i < n; ++i)
 						fmtputc(out, (unsigned char)s[i]);
@@ -397,13 +397,88 @@ static void fmtquote_pdf(struct fmtbuf *out, const char *s, int sq, int eq)
 	fmtputc(out, eq);
 }
 
-static void fmtquote_xml(struct fmtbuf *out, const char *s)
+static void fmtquote_xml(struct fmtbuf* out, const char* s, size_t slen, int verbatim)
 {
-	int c, n;
+	int i, n, c;
 	fmtputc(out, '"');
-	while (*s != 0) {
-		n = fz_chartorune(&c, s);
+	while (slen > 0) {
+		n = fz_chartorune(&c, s, slen);
 		switch (c) {
+		default:
+			if (c < 32) {
+				fmtputc(out, '&');
+				fmtputc(out, '#');
+				// (!) decimal coded: &#dd;
+				fmtputc(out, fz_hex_digits[c / 10]);
+				fmtputc(out, fz_hex_digits[c % 10]);
+			}
+			else if (c >= 127) {
+				if (n == 1 && c == Runeerror)
+				{
+					// output \uFFFD + hex-encoded bad char:
+					char buf[10];
+					int l = fz_runetochar(buf, c);
+					for (i = 0; i < l; ++i)
+						fmtputc(out, buf[i]);
+
+					c = (unsigned char)s[0];
+					fmtputc(out, '&');
+					fmtputc(out, '#');
+					fmtputc(out, 'x');
+					// hexadecimal coded: &#xhh;
+					fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c) & 0x0F]);
+				}
+				else if (verbatim)
+				{
+					for (i = 0; i < n; ++i)
+						fmtputc(out, (unsigned char)s[i]);
+				}
+				else if (c < 0x10000)
+				{
+					fmtputc(out, '&');
+					fmtputc(out, '#');
+					fmtputc(out, 'x');
+					// hexadecimal coded: &#xhhhh;
+					fmtputc(out, fz_hex_digits[(c >> 12) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c >> 8) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c) & 0x0F]);
+				}
+				else
+				{
+					fmtputc(out, '&');
+					fmtputc(out, '#');
+					fmtputc(out, 'x');
+					// hexadecimal coded: &#xhhhhhh;
+					fmtputc(out, fz_hex_digits[(c >> 20) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c >> 16) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c >> 12) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c >> 8) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c) & 0x0F]);
+				}
+			}
+			else {
+				fmtputc(out, c);
+			}
+			break;
+#if 0
+		case '\b': fmtputc(out, '\\'); fmtputc(out, 'b'); break;
+		case '\f': fmtputc(out, '\\'); fmtputc(out, 'f'); break;
+		case '\n': fmtputc(out, '\\'); fmtputc(out, 'n'); break;
+		case '\r': fmtputc(out, '\\'); fmtputc(out, 'r'); break;
+		case '\t': fmtputc(out, '\\'); fmtputc(out, 't'); break;
+#endif
+			// See also: https://en.wikipedia.org/wiki/Character_encodings_in_HTML#HTML_character_references
+		case '\'':
+			fmtputc(out, '&');
+			fmtputc(out, 'a');
+			fmtputc(out, 'p');
+			fmtputc(out, 'o');
+			fmtputc(out, 's');
+			fmtputc(out, ';');
+			break;
 		case '"':
 			fmtputc(out, '&');
 			fmtputc(out, 'q');
@@ -431,23 +506,8 @@ static void fmtquote_xml(struct fmtbuf *out, const char *s)
 			fmtputc(out, 't');
 			fmtputc(out, ';');
 			break;
-		default:
-			if (c < 32 || c >= 127) {
-				fmtputc(out, '&');
-				fmtputc(out, '#');
-				if (c > 255)
-				{
-					fmtputc(out, "0123456789ABCDEF"[(c>>12)&15]);
-					fmtputc(out, "0123456789ABCDEF"[(c>>8)&15]);
-				}
-				fmtputc(out, "0123456789ABCDEF"[(c>>4)&15]);
-				fmtputc(out, "0123456789ABCDEF"[(c)&15]);
-				fmtputc(out, ';');
-			}
-			else
-				fmtputc(out, c);
-			break;
 		}
+		slen -= n;
 		s += n;
 	}
 	fmtputc(out, '"');
@@ -1548,12 +1608,25 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					}
 				}
 				break;
-			case '<': /* quoted string for xml */
+			case '<': /* quoted string for XML */
 				{
 					const char* str = va_arg(args, const char*);
-					if (!str) 
+					if (!str)
 						str = "";
-					fmtquote_xml(&out, str);
+					if (p == INT_MAX)
+						p = -1;
+					size_t slen = strnlen(str, p);
+#if 0
+					if (w < 0)
+						w = slen;
+#endif
+					size_t cliplen = (p >= 0 ? p : slen);
+					while (cliplen > slen) {
+						fmtputc(&out, ' ');
+						cliplen--;
+					}
+					// Edge case example:   fz_printf("%.*<", 7, "")
+					fmtquote_xml(&out, str, cliplen, 0);
 				}
 				break;
 			case '(': /* pdf string */
