@@ -1537,6 +1537,7 @@ qoir
 blurhash
 NBLI
 libsodium
+lunasvg
 
 EOT
 ) | grep -e "$FILTER"
