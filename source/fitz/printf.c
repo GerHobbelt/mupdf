@@ -331,14 +331,38 @@ static void fmtquote(struct fmtbuf *out, const char *s, size_t slen, int sq, int
 				}
 				else
 				{
-					fmtputc(out, '\\');
-					fmtputc(out, 'u');
-					fmtputc(out, fz_hex_digits[(c >> 20) & 0x0F]);
-					fmtputc(out, fz_hex_digits[(c >> 16) & 0x0F]);
-					fmtputc(out, fz_hex_digits[(c >> 12) & 0x0F]);
-					fmtputc(out, fz_hex_digits[(c >> 8) & 0x0F]);
-					fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
-					fmtputc(out, fz_hex_digits[(c) & 0x0F]);
+					// See also: 
+					// https://en.wikipedia.org/wiki/Escape_sequences_in_C#Universal_character_names
+					// https://rosettacode.org/wiki/Unescape_a_string
+					if (!no_hex_unicode_only)
+					{
+						fmtputc(out, '\\');
+						fmtputc(out, 'U');
+						fmtputc(out, fz_hex_digits[(c >> 20) & 0x0F]);
+						fmtputc(out, fz_hex_digits[(c >> 16) & 0x0F]);
+						fmtputc(out, fz_hex_digits[(c >> 12) & 0x0F]);
+						fmtputc(out, fz_hex_digits[(c >> 8) & 0x0F]);
+						fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
+					}
+					else
+					{
+						/* Use a surrogate pair */
+						int hi = 0xd800 + ((c - 0x10000) >> 10);
+						int lo = 0xdc00 + ((c - 0x10000) & 0x3ff);
+						fmtputc(out, '\\');
+						fmtputc(out, 'u');
+						fmtputc(out, fz_hex_digits[(hi >> 12) & 0x0F]);
+						fmtputc(out, fz_hex_digits[(hi >> 8) & 0x0F]);
+						fmtputc(out, fz_hex_digits[(hi >> 4) & 0x0F]);
+						fmtputc(out, fz_hex_digits[(hi) & 0x0F]);
+
+						fmtputc(out, '\\');
+						fmtputc(out, 'u');
+						fmtputc(out, fz_hex_digits[(lo >> 12) & 0x0F]);
+						fmtputc(out, fz_hex_digits[(lo >> 8) & 0x0F]);
+						fmtputc(out, fz_hex_digits[(lo >> 4) & 0x0F]);
+						fmtputc(out, fz_hex_digits[(lo) & 0x0F]);
+					}
 				}
 			} else {
 				if (c == sq || c == eq)
@@ -411,6 +435,7 @@ static void fmtquote_xml(struct fmtbuf* out, const char* s, size_t slen, int ver
 				// (!) decimal coded: &#dd;
 				fmtputc(out, fz_hex_digits[c / 10]);
 				fmtputc(out, fz_hex_digits[c % 10]);
+				fmtputc(out, ';');
 			}
 			else if (c >= 127) {
 				if (n == 1 && c == Runeerror)
@@ -428,6 +453,7 @@ static void fmtquote_xml(struct fmtbuf* out, const char* s, size_t slen, int ver
 					// hexadecimal coded: &#xhh;
 					fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
 					fmtputc(out, fz_hex_digits[(c) & 0x0F]);
+					fmtputc(out, ';');
 				}
 				else if (verbatim)
 				{
@@ -444,6 +470,7 @@ static void fmtquote_xml(struct fmtbuf* out, const char* s, size_t slen, int ver
 					fmtputc(out, fz_hex_digits[(c >> 8) & 0x0F]);
 					fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
 					fmtputc(out, fz_hex_digits[(c) & 0x0F]);
+					fmtputc(out, ';');
 				}
 				else
 				{
@@ -457,6 +484,7 @@ static void fmtquote_xml(struct fmtbuf* out, const char* s, size_t slen, int ver
 					fmtputc(out, fz_hex_digits[(c >> 8) & 0x0F]);
 					fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
 					fmtputc(out, fz_hex_digits[(c) & 0x0F]);
+					fmtputc(out, ';');
 				}
 			}
 			else {
