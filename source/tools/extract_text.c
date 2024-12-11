@@ -719,13 +719,14 @@ static void page_to_xml(fz_context* ctx, fz_stext_page *page, int id, FILE* out_
                         size = ch->size;
                         safe_fprintf(out_xml, "<font name=\"%s\" size=\"%g\">\n", font->name, size);
                     }
-                    safe_fprintf(out_xml, "<char quad=\"%g %g %g %g %g %g %g %g\" x=\"%f\" y=\"%g\" color=\"#%06x\" c=\"",
+                    safe_fprintf(out_xml, "<char quad=\"%g %g %g %g %g %g %g %g\" x=\"%f\" y=\"%g\" color=\"#%06x\" alpha=\"#%02x\" c=\"",
                             ch->quad.ul.x, ch->quad.ul.y,
                             ch->quad.ur.x, ch->quad.ur.y,
                             ch->quad.ll.x, ch->quad.ll.y,
                             ch->quad.lr.x, ch->quad.lr.y,
                             ch->origin.x, ch->origin.y,
-                            ch->color);
+														ch->argb & 0xFFFFFF,
+														ch->argb >> 24);
                     switch (ch->c)
                     {
                     case '<': safe_fprintf(out_xml, "&lt;"); break;

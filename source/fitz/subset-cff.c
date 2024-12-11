@@ -129,7 +129,6 @@ typedef struct
 	uint32_t fdselect_len;
 	uint32_t fdarray_index_offset;
 	uint32_t charstring_type;
-	int uses_cidfont_operators;
 
 	uint16_t unpacked_charset_len;
 	uint16_t unpacked_charset_max;
@@ -1859,7 +1858,6 @@ read_top_dict(fz_context *ctx, cff_t *cff, int idx)
 		{
 		case DICT_OP_ROS:
 			cff->is_cidfont = 1;
-			cff->uses_cidfont_operators = 1;
 			break;
 		case DICT_OP_charset:
 			cff->charset_offset = dict_arg_int(ctx, &di, 0);
