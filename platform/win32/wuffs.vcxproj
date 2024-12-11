@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745AE910A7}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput></NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput></NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput></NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput></NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/cbor-to-json/cbor-to-json.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/convert-to-nia/convert-to-nia.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/crc32/crc32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/gifplayer/gifplayer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/imageviewer/imageviewer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/json-to-cbor/json-to-cbor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/jsonfindptrs/jsonfindptrs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/jsonptr/jsonptr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/mzcat/mzcat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/sdl-imageviewer/sdl-imageviewer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/stb-imagedumper/stb-imagedumper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/toy-aux-image/toy-aux-image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/toy-genlib/toy-genlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/example/zcat/zcat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/hello-wuffs-c/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/hello-wuffs-c/naive-parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/hello-wuffs-c/wuffs-base.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/hello-wuffs-c/wuffs-parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/auxiliary/base.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/auxiliary/cbor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/auxiliary/image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/auxiliary/json.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/all-impl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/floatconv-submodule-code.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/floatconv-submodule-data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/intconv-submodule.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/magic-submodule.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/pixconv-submodule-regular.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/pixconv-submodule-x86-avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/pixconv-submodule-ycck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/utf8-submodule.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/internal/cgen/drop-in/stb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/release/c/wuffs-unsupported-snapshot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/release/c/wuffs-v0.2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/release/c/wuffs-v0.3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/release/c/wuffs-v0.4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/script/adler32-standalone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/script/bench-c-deflate-fragmentation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/script/manual-test-parse-number-f64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/script/manual-test-truncated-input.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/script/mmap-ring-buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/script/print-average-pixel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/script/print-image-metadata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/script/print-json-token-debug-format.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/script/process-json-numbers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/script/wuffs-deflate-decoder-decode-huffman.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/snippet/uncompng.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/mimiclib/bzip2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/mimiclib/deflate-gzip-zlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/mimiclib/gif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/mimiclib/jpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/mimiclib/lzma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/mimiclib/openssl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/mimiclib/png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/mimiclib/stb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/mimiclib/webp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/mimiclib/xxhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/adler32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/bmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/bzip2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/cbor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/crc32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/crc64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/deflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/etc2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/gif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/gzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/jpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/lzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/lzma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/lzw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/netpbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/nie.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/qoi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/sha256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/targa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/thumbhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/vp8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/wbmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/webp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/xxhash32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/xxhash64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/xz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/std/zlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wuffs/test/c/testlib/testlib.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/auxiliary/base.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/auxiliary/cbor.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/auxiliary/image.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/auxiliary/json.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/fundamental-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/fundamental-public.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/image-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/image-public.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/io-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/io-public.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/memory-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/memory-public.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/range-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/range-public.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/strconv-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/strconv-public.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/token-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/token-public.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/internal/cgen/drop-in/stb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wuffs/test/data/DCI-P3-D65.icc" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/doc/logo/wuffs-acronym-logo-1536x1024.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/doc/logo/wuffs-logo-1024x724.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/doc/logo/wuffs-logo-2048x1448.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/doc/logo/wuffs-logo-256x181.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/doc/std/image-decoders-call-sequence-diagram.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/3pdata/asset/182.0-original.djpeg.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/3pdata/asset/182.0-original.jpg" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/3pdata/asset/182.0-original.wuffs.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/3pdata/asset/182.1-byte-change.jpg" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/3pdata/asset/182.1-byte-change.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/3pdata/asset/182.2-byte-change.jpg" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/3pdata/asset/182.2-byte-change.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/animated-red-blue.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/background-color.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/empty-palette.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/frame-out-of-bounds.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/metadata-empty.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/metadata-full.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/multiple-graphic-controls.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/multiple-loop-counts.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/no-frames.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/pixel-data-none.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/pixel-data-not-enough.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/pixel-data-too-much-bad-lzw.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/pixel-data-too-much-good-lzw.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/small-frame-interlaced.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/transparent-index.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/zero-width-frame.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-png/apng-skip-idat.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-png/exif.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-png/key-value-pairs.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-thumbhash/1QcSHQRnh493V4dIh4eXh1h4kJUI.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-thumbhash/2IqDBQQnxnj0JoLYdM3f8ahpuDeHiHdwZw.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-thumbhash/2fcZFIB3iId_h3iJh4aIYJ2V8g.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-thumbhash/3OcRJYB4d3h_iIeHeEh3eIhw-j3A.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-thumbhash/3PcNNYSFeXh_d3eld0iHZoZgVwh2.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-thumbhash/HBkSHYSIeHiPiHh8eJd4eTN0EEQG.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-thumbhash/IQgSLYZ6iHePh4h1eFeHh4dwgwg3.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-thumbhash/VggKDYAW6lZvdYd6d2iZh_p4GE_k.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-thumbhash/YJqGPQw7sFlslqhFafSE-Q6oJ1h2iHB2Rw.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-color.bmp" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-color.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-dither.bmp" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-dither.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-dither.no-ancillary.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-dither.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-gray.bmp" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-gray.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-gray.no-ancillary.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-gray.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-nodither.bmp" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-nodither.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-nodither.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/checkerboard.gamma1dot0.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/checkerboard.gamma2dot2.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/gifplayer-muybridge.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/harvesters.bmp" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/harvesters.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/harvesters.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hat.bmp" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hat.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hat.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hibiscus.primitive.bmp" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hibiscus.primitive.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hibiscus.primitive.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hibiscus.regular.bmp" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hibiscus.regular.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hibiscus.regular.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hippopotamus.bmp" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hippopotamus.interlaced.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hippopotamus.interlaced.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hippopotamus.interlaced.truncated.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hippopotamus.interlaced.truncated.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hippopotamus.masked-with-muybridge.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hippopotamus.masked-with-muybridge.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hippopotamus.regular.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hippopotamus.regular.ico" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hippopotamus.regular.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/hippopotamus.regular.truncated.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/mona-lisa.21x32.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/peacock.default.truncated.decoded-by-djpeg.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/peacock.default.truncated.decoded-by-wuffs.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/peacock.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/peacock.progressive.truncated.decoded-by-djpeg.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/peacock.progressive.truncated.decoded-by-wuffs.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/pjw-thumbnail.bmp" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/pjw-thumbnail.gif" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/pjw-thumbnail.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/red-blue-gradient.dcip3d65-no-chrm-no-gama.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/red-blue-gradient.gamma1dot0.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/red-blue-gradient.gamma1dot8.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/red-blue-gradient.gamma2dot2.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/red-blue-gradient.vanilla.png" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/rgb24png.bmp" />
+    <Image Include="../../thirdparty/owemdjee/wuffs/test/data/ridiculously-fast.png" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/BUILD.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/LICENSE-APACHE" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/LICENSE-MIT" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/build-all.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/build-example.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/background.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/benchmarks.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/binary-size.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/changelog.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/getting-started.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/glossary.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/logo/wuffs-logo.svg" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/assertions.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/auto-formatting.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/auxiliary-code.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/base38-and-fourcc.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/bounds-checking.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/coroutines.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/effects.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/enumerated-media-types.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/facts.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/hermeticity.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/initialization.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/interval-arithmetic.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/io-input-output.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/iterate-loops.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/memory-safety.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/pixel-formats.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/pixel-subsampling.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/quirks.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/ranges-and-rects.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/signed-unsigned-integers.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/slices-arrays-and-tables.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/statuses.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/note/tokens.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/related-work.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/roadmap.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/spec/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/spec/nie-related-work.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/spec/nie-spec.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/spec/rac-related-work.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/spec/rac-spec.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/std/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/std/compression-decoders.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/std/hashers.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/std/image-decoders-call-sequence-diagram.svg" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/std/image-decoders-call-sequence.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/std/image-decoders.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/std/metadata.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/wuffs-the-language.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/doc/wuffs-the-library.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/example/gifplayer/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/example/jsonptr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/hello-wuffs-c/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/hello-wuffs-c/parse.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/hello-wuffs-c/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/internal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/internal/cgen/auxiliary/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/internal/cgen/base/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/lang/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/lang/check/axioms.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/lib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/release/c/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/bench-history.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/bench-rust-deflate/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/bench-rust-deflate/src/main.rs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/bench-rust-gif-dot-rs/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/bench-rust-gif-dot-rs/src/main.rs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/bench-rust-gif/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/bench-rust-gif/src/main.rs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/bench-rust-jpeg/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/bench-rust-jpeg/src/main.rs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/bench-rust-png/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/bench-rust-png/src/main.rs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/confirm-matches-djpeg.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/print-mzcat-checksums.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/print-nia-checksums.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/script/run-json-test-suite.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/snippet/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/adler32/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/adler32/common_adler32.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/adler32/common_up_arm_neon.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/adler32/common_up_x86_sse42.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/bmp/decode_bmp.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/bzip2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/bzip2/decode_bzip2.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/bzip2/decode_flush_fast.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/bzip2/decode_flush_slow.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/bzip2/decode_huffman_fast.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/bzip2/decode_huffman_slow.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/cbor/decode_cbor.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/crc32/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/crc32/common_crc32.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/crc32/common_up_arm_crc32.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/crc32/common_up_x86_sse42.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/crc64/common_crc64.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/crc64/common_up_x86_sse42.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/deflate/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/deflate/common_consts.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/deflate/decode_deflate.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/deflate/decode_huffman_bmi2.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/deflate/decode_huffman_fast32.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/deflate/decode_huffman_fast64.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/deflate/decode_huffman_slow.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/etc2/decode_etc2.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/gif/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/gif/common_consts.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/gif/decode_gif.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/gif/decode_lzw.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/gif/decode_quirks.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/gzip/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/gzip/decode_gzip.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/jpeg/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/jpeg/common_consts.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/jpeg/decode_idct_default.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/jpeg/decode_idct_x86_avx2.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/jpeg/decode_jpeg.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/jpeg/decode_load_smooth.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/jpeg/decode_mcu_default.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/jpeg/decode_mcu_progressive_ac_high_bits.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/jpeg/decode_mcu_progressive_ac_low_bit.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/jpeg/decode_mcu_progressive_dc_high_bits.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/jpeg/decode_mcu_progressive_dc_low_bit.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/jpeg/decode_quirks.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/json/common_consts.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/json/decode_json.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/json/decode_quirks.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/lzip/decode_lzip.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/lzma/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/lzma/decode_bitstream_fast.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/lzma/decode_bitstream_slow.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/lzma/decode_lzma.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/lzma/decode_quirks.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/lzw/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/lzw/decode_lzw.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/lzw/decode_quirks.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/netpbm/decode_netpbm.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/nie/decode_nie.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/png/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/png/common_consts.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/png/decode_filter_arm_neon.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/png/decode_filter_fallback.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/png/decode_filter_x86_sse42.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/png/decode_png.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/png/decode_swizzle_default.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/png/decode_swizzle_tricky.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/qoi/decode_qoi.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/sha256/common_sha256.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/targa/decode_targa.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/thumbhash/decode_quirks.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/thumbhash/decode_thumbhash.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/vp8/decode_vp8.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/wbmp/decode_wbmp.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/webp/decode_huffman.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/webp/decode_pixels_slow.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/webp/decode_transform.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/webp/decode_webp.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/xxhash32/common_xxhash32.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/xxhash64/common_xxhash64.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/xz/decode_filter.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/xz/decode_quirks.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/xz/decode_xz.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/zlib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/zlib/decode_quirks.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/std/zlib/decode_zlib.wuffs" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/fetch-blinksuite.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/fetch-bmpsuite.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/fetch-golangsuite.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/fetch-pngsuite.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/fetch-tgasuite.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/fetch-webpsuite.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/fetch-xzsuite.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/mzcat-checksums-of-xzsuite.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/nia-checksums-of-blinksuite.commentary.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/nia-checksums-of-blinksuite.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/nia-checksums-of-bmpsuite.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/nia-checksums-of-golangsuite.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/nia-checksums-of-pngsuite.commentary.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/nia-checksums-of-pngsuite.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/nia-checksums-of-tgasuite.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/3pdata/nia-checksums-of-webpsuite.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/0.bytes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/256.bytes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/256.bytes.bz2" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/abraca.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/abraca.txt.bz2" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/analysis/giflzw-emission-lengths.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/animated-red-blue.apng" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/archive.rar" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/archive.tar" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/archive.tar.bz2" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-bzip2/abraca.txt.bz2" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-bzip2/abraca.txt.bz2.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-bzip2/bad-number-of-sections.bz2" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-bzip2/bad-number-of-sections.bz2.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-bzip2/huffman-258.bz2" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-bzip2/huffman-258.bz2.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-deflate/backref-crosses-blocks.deflate.commentary.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-deflate/backref-crosses-blocks.deflate.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-deflate/degenerate-huffman.deflate.commentary.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-deflate/degenerate-huffman.deflate.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-deflate/distance-32768.deflate.commentary.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-deflate/distance-32768.deflate.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-deflate/distance-code-31.deflate.commentary.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-deflate/distance-code-31.deflate.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-deflate/huffman-primlen-9.deflate.commentary.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-deflate/huffman-primlen-9.deflate.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/background-color.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/empty-palette.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/frame-out-of-bounds.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/metadata-empty.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/metadata-full.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/multiple-graphic-controls.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/multiple-loop-counts.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/no-frames.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/pixel-data-none.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/pixel-data-not-enough.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/pixel-data-too-much-bad-lzw.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/pixel-data-too-much-good-lzw.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/small-frame-interlaced.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/transparent-index.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-gif/zero-width-frame.gif.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-png/apng-skip-idat.png.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-png/exif.png.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/artificial-png/key-value-pairs.png.make-artificial.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/australian-abc-local-stations.json" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/australian-abc-local-stations.tokens" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-color.tiff" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-dither.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-dither.indexes.giflzw" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-gray.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-gray.indexes.giflzw" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-gray.tiff" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-nodither.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/bricks-nodither.indexes.giflzw" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/cbor-rfc-7049-examples.cbor" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/cbor-rfc-7049-examples.sans-comments.json" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/cbor-rfc-7049-examples.tokens" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/cbor-rfc-7049-examples.with-comments.json" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/enwik5" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/file-sizes.json" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/github-tags.json" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/harvesters.tiff" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/hat.tiff" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/hello.sh" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/hibiscus.primitive.svg" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/hibiscus.primitive.tiff" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/hibiscus.regular.tiff" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/hippopotamus.tiff" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/json-quirks.json" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/json-quirks.tokens" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/json-things.cbor" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/json-things.formatted.json" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/json-things.unformatted.json" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/json-things.unformatted.tokens" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/midsummer.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/midsummer.txt.bz2" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-000.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-001.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-002.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-003.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-004.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-005.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-006.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-007.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-008.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-009.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-010.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-011.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-012.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-013.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge-frame-014.indexes" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/muybridge.apng" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/nobel-prizes.json" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/non-ascii/αβ.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/pi.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/pi.txt.bz2" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/pi.txt.giflzw" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/pjw-thumbnail.tiff" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/rfc-6901-json-pointer.json" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/romeo.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/romeo.txt.bz2" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/data/sheep-more.rac" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/mzcat-checksums-of-data.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/test/nia-checksums-of-data.txt" />
+    <Text Include="../../thirdparty/owemdjee/wuffs/wuffs-root-directory.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -401,7 +401,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
       for (const sp of spec.ignores) {
         //if (DEBUG > 2) console.log('??IGNORE??:', {f, f4f, sp, DO_IGNORE: sp.test(f4f)});
         if (sp.test(f4f)) {
-          if (DEBUG > 1) console.log('IGNORE:', {f, f4f, sp});
+          if (DEBUG > 1) console.log('EXPLICITLY IGNORE:', {f, f4f, sp});
           ignoreCount++;
           return false;
         }
@@ -497,14 +497,16 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     case '.sln':
     case '.filters':
 		// these are MSVC project files and should be ignored as source files.
-		if (DEBUG > 1) console.log('IGNORE:', {f, f4f, sp});
+		if (DEBUG > 1) console.log('IGNORE BY (MSVC) EXTENSION:', {f, f4f, sp});
 		ignoreCount++;
 		return false;
 
     default:
 		if (DEBUG > 2) console.error("files.filter:", {f, ext: path.extname(f).toLowerCase(), isSpecial: isSpecialMiscFile(f)})
-        if (!isSpecialMiscFile(f))
+        if (!isSpecialMiscFile(f)) {
+		  if (DEBUG > 1) console.error("MISC. IGNORE:", {f, ext: path.extname(f).toLowerCase()})
           return false;
+	    }
 
         filterDirs.add('Misc Files');
         base = path.dirname(f);

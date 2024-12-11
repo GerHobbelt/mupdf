@@ -798,7 +798,6 @@ mmkv
 MNN
 modbus-esp8266
 ModernCppStarter
-monolith
 morton_filter
 mosquitto
 mozjpeg
@@ -954,7 +953,6 @@ pmemkv
 pmemkv-bench
 png-pmt-tools-lib
 poco
-podofo
 poisson_blend
 polatory
 poplar-trie
@@ -1396,7 +1394,6 @@ rapidhash
 gtl
 dense_hash_map
 Allocator
-EASTL
 stl-allocator
 pool_allocator
 sparse-map
@@ -1530,6 +1527,16 @@ html5-parser
 galib
 mixbench
 OpenCL-Wrapper
+raylib
+jbigkit
+crc32
+zzuf
+fpnge
+thumbhash
+qoir
+blurhash
+NBLI
+libsodium
 
 EOT
 ) | grep -e "$FILTER"
@@ -1549,7 +1556,6 @@ bbe
 bebop
 bin2cpp
 binary_bakery
-calibre
 capnproto
 cryptest
 EtwExplorer
@@ -1560,11 +1566,9 @@ FreeFileSync
 fswatch
 gnuplot
 gperf
-GraphicsMagick
 grok-jpeg2000
 horsejs
 IdGenerator
-ImageMagick
 jbig2enc
 jpegview
 loki
@@ -1609,6 +1613,7 @@ modern-cpp-template
 googletest-ci-cpp-template
 signal-slot-benchmarks
 spatial_index_benchmark
+zzuf
 
 EOT
 ) | grep -e "$FILTER"
@@ -1624,7 +1629,6 @@ archive-hocr-tools
 awesome-c
 Awesome-Document-Image-Rectification
 Awesome-Image-Quality-Assessment
-calibre
 citation-abbreviations
 citation-journals
 citation-styles
@@ -1650,7 +1654,6 @@ MetBrewer
 mupdf_explored
 openexr-images
 PNWColors
-podofo
 preprocess-corpuses
 pyclustering
 Sancho.Panza.on.tesseract.OCR
@@ -1679,6 +1682,8 @@ wordfrequency
 cmake_examples
 html-parser-test-corpus
 OpenCL-Guide
+wuffs
+Image-Compression-Benchmark
 
 EOT
 ) | grep -e "$FILTER"
@@ -1704,7 +1709,6 @@ h2o-server
 json-jansson
 lda-Familia
 libchm_io
-libdjvulibre
 libdjvu_io
 libdtldiff
 libgdiff

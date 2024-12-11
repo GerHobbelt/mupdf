@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF32EE5D}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZZUF;ZZUF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zzuf/msvc;../../thirdparty/owemdjee/zzuf/src/common;../../thirdparty/owemdjee/zzuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZZUF;ZZUF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZZUF;ZZUF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zzuf/msvc;../../thirdparty/owemdjee/zzuf/src/common;../../thirdparty/owemdjee/zzuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZZUF;ZZUF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zzuf/msvc;../../thirdparty/owemdjee/zzuf/src/common;../../thirdparty/owemdjee/zzuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZZUF;ZZUF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZZUF;ZZUF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zzuf/msvc;../../thirdparty/owemdjee/zzuf/src/common;../../thirdparty/owemdjee/zzuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZZUF;ZZUF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zzuf/msvc;../../thirdparty/owemdjee/zzuf/src/common;../../thirdparty/owemdjee/zzuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZZUF;ZZUF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZZUF;ZZUF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zzuf/msvc;../../thirdparty/owemdjee/zzuf/src/common;../../thirdparty/owemdjee/zzuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZZUF;ZZUF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zzuf/msvc;../../thirdparty/owemdjee/zzuf/src/common;../../thirdparty/owemdjee/zzuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZZUF;ZZUF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZZUF;ZZUF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zzuf/msvc;../../thirdparty/owemdjee/zzuf/src/common;../../thirdparty/owemdjee/zzuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/common/fd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/common/random.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/common/ranges.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/lib-fd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/lib-mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/lib-signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/lib-stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/lib-win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/libzzuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/network.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/sys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/myfork.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/opts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/timer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/util/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/util/hex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/util/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/util/regex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/zzat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/src/zzuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/test/bug-div0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/test/bug-memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/test/bug-mmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/test/bug-overflow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/test/zzero.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/test/zznop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zzuf/test/zzone.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/msvc/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/common/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/common/fd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/common/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/common/ranges.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/lib-load.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/libzzuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/network.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/libzzuf/sys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/myfork.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/util/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/util/hex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/util/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/util/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/src/util/regex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zzuf/test/functions.inc" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/TODO" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/bootstrap" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/build-osx" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/build-win32" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/doc/libzzuf.3.in" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/doc/zzat.1.in" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/doc/zzuf.1.in" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/m4/cflags.m4" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/m4/func.m4" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/check-div0" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/check-mmap" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/check-overflow" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/check-source" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/check-utils" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/check-win32" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/check-zzuf-A-autoinc" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/check-zzuf-M-max-memory" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/check-zzuf-m-md5" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/check-zzuf-r-ratio" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/check-zzuf-s-seed" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/file-00" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/file-ff" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/file-random" />
+    <Text Include="../../thirdparty/owemdjee/zzuf/test/file-text" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

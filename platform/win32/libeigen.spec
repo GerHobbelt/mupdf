@@ -10,5 +10,5 @@ also-ignore:
 	test/
 	unsupported/
 
-extra-sources:
+sources:
     ../../scripts/libeigen/dummy.cpp

@@ -50,20 +50,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -76,7 +76,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -393,7 +393,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/webp.imageio/webpinput.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/webp.imageio/webpoutput.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/src/zfile.imageio/zfile.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/oiio/testsuite/cmake-consumer/consumer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-cpp/src/docs-examples-imagebuf.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-cpp/src/docs-examples-imagebufalgo.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-cpp/src/docs-examples-imagecache.cpp" />
@@ -487,6 +486,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/oiio/src/include/OpenImageIO/vecparam.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oiio/src/include/OpenImageIO/version.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oiio/src/include/imageio_pvt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oiio/src/include/monolithic_examples.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oiio/src/jpeg.imageio/jpeg_pvt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oiio/src/libOpenImageIO/bluenoise.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/oiio/src/libOpenImageIO/exif.h" />
@@ -564,6 +564,7 @@
     <Image Include="../../thirdparty/owemdjee/oiio/src/doc/figures/rotate270.jpg" />
     <Image Include="../../thirdparty/owemdjee/oiio/src/doc/figures/rotate45.jpg" />
     <Image Include="../../thirdparty/owemdjee/oiio/src/doc/figures/rotate90.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oiio/src/doc/figures/scale.jpg" />
     <Image Include="../../thirdparty/owemdjee/oiio/src/doc/figures/tahoe-blur.jpg" />
     <Image Include="../../thirdparty/owemdjee/oiio/src/doc/figures/tahoe-ccmatrix.jpg" />
     <Image Include="../../thirdparty/owemdjee/oiio/src/doc/figures/tahoe-gauss.jpg" />
@@ -592,6 +593,7 @@
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/gif/ref/tahoe-tiny.gif" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/src/corrupt-exif-1626.jpg" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/src/corrupt-exif.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/src/corrupt-icc-4551.jpg" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-metadata/src/blender-render.jpg" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/rgbfromtga.png" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/histogram_input.png" />
@@ -624,9 +626,11 @@
     <Text Include="../../thirdparty/owemdjee/oiio/docs/Deprecations-3.0.md" />
     <Text Include="../../thirdparty/owemdjee/oiio/docs/QuickStart.md" />
     <Text Include="../../thirdparty/owemdjee/oiio/docs/ROADMAP.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/Architecture.md" />
     <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/Build_Profiling.md" />
     <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/Changes-skeleton-major.md" />
     <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/Changes-skeleton-patch.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/CodeReview.md" />
     <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/RELEASING.md" />
     <Text Include="../../thirdparty/owemdjee/oiio/sonar-project.properties" />
     <Text Include="../../thirdparty/owemdjee/oiio/src/bmp.imageio/CMakeLists.txt" />
@@ -777,9 +781,6 @@
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/bmp/run.py" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/cineon/ref/out.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/cineon/run.py" />
-    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/cmake-consumer/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/cmake-consumer/ref/out.txt" />
-    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/cmake-consumer/run.py" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/common/checker_with_alpha.exr" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/common/grid-small.exr" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/common/grid.tif" />
@@ -885,6 +886,7 @@
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/iinfo/src/tinydeep.exr" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out-alt.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out-alt2.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out-alt3.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/run.py" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-metadata/ref/out.txt" />
@@ -1575,7 +1577,8 @@
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/zfile/ref/out.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/zfile/run.py" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

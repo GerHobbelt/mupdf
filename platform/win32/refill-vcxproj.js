@@ -299,6 +299,7 @@ const projectMap = {
 	"reactpp": "cpp.react",
 	"simd-everywhere": "simde",
 	"libTsetlinMachine": "pyTsetlinMachine",
+	"uni": "unilib",
 };
 
 testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname_alt}`;
