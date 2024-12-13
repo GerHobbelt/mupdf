@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF196B1}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTHRILL;THRILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTHRILL;THRILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTHRILL;THRILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTHRILL;THRILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTHRILL;THRILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTHRILL;THRILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTHRILL;THRILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTHRILL;THRILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTHRILL;THRILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTHRILL;THRILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTHRILL;THRILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTHRILL;THRILL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/api/generate_numbers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/api/generate_write_binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/api/groupby.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/api/groupby2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/api/groupby_unequal_keys.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/api/merge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/api/read_write_lines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/api/sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/api/string_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/core/duplicates_speedup_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/core/golomb_code_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/data/data_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/hashtable/bench_hashtable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/hashtable/generate_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/hashtable/reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/mem/pool_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/net/net_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/serialization/bench_serialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/benchmarks/serialization/cpp-serializers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/bfs/bfs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/k-means/k-means_run.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/logistic_regression/logistic_regression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/page_rank/page_rank_run.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/page_rank/zipf_graph_gen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/percentiles/percentiles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/select/select_run.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/sleep/sleep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/stochastic_gradient_descent/stochastic_gradient_descent_run.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/dc3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/dc7.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/just_sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/prefix_doubling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/prefix_quadrupling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/rl_bwt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/suffix_sorting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/wavelet_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/wavelet_tree2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/wavelet_tree3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/terasort/terasort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/tpch/tpch_run.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/triangles/triangles_run.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/tutorial/k-means_step1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/tutorial/k-means_step2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/tutorial/k-means_step3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/tutorial/k-means_step4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/tutorial/k-means_step5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/tutorial/k-means_step6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/vfs_tool/vfs_tool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/word_count/line_count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/word_count/random_text_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/word_count/word_count_run.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/word_count/word_count_sequential.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/examples/word_count/word_count_simple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/misc/json2profile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/misc/memprofile2stats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/misc/standalone_profiler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/api/groupby_node_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/api/hyperloglog_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/api/join_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/api/merge_node_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/api/operations_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/api/read_write_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/api/reduce_node_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/api/sort_node_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/api/stage_builder_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/api/zip_node_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/binary_heap_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/concurrent_bounded_queue_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/concurrent_queue_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/function_traits_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/hash_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/json_logger_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/math_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/matrix_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/qsort_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/radix_sort_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/reservoir_sampling_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/stats_counter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/stats_timer_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/thread_barrier_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/timed_counter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/uint_types_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/common/zipf_distribution_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/core/bit_stream_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/core/duplicate_detection_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/core/multiway_merge_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/core/reduce_hash_table_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/core/reduce_post_phase_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/core/reduce_pre_phase_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/data/block_pool_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/data/block_queue_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/data/file_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/data/multiplexer_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/data/serialization_cereal_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/data/serialization_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/examples/k_means_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/examples/page_rank_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/examples/select_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/examples/triangle_count_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/examples/word_count_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/mem/allocator_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/mem/malloc_tracker_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/mem/pool_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/net/binary_builder_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/net/buffer_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/net/mock_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/net/mpi_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/net/tcp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/vfs/bzip2_filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/vfs/gzip_filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/vfs/hdfs3_file_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/vfs/s3_file_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/tests/vfs/sys_file_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/api/context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/api/dia_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/common/hash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/common/json_logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/common/linux_proc_stats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/common/logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/common/porting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/common/profile_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/core/hyperloglog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/data/block.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/data/block_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/data/block_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/data/byte_block.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/data/cat_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/data/file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/data/mix_block_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/data/mix_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/data/multiplexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/data/stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/data/stream_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/data/stream_sink.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/mem/malloc_tracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/mem/manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/mem/pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/net/dispatcher_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/net/flow_control_channel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/net/group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/net/mock/group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/net/mpi/dispatcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/net/mpi/group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/net/tcp/construct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/net/tcp/group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/net/tcp/select_dispatcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/net/tcp/socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/net/tcp/socket_address.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/vfs/bzip2_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/vfs/file_io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/vfs/gzip_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/vfs/hdfs3_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/vfs/s3_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/vfs/sys_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrill/thrill/vfs/temporary_directory.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/benchmarks/data/data_generators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/benchmarks/serialization/data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/bfs/bfs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/k-means/k-means.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/logistic_regression/logistic_regression.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/page_rank/page_rank.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/page_rank/zipf_graph_gen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/select/select.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/stochastic_gradient_descent/stochastic_gradient_descent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/check_sa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/construct_bwt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/construct_lcp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/construct_wt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/dc3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/dc7.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/prefix_doubling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/prefix_quadrupling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/suffix_sorting.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/triangles/triangles.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/word_count/random_text_writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/examples/word_count/word_count.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/frontends/swig_python/thrill_python.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/tests/net/flow_control_test_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/tests/net/group_test_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/action_node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/all_gather.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/all_reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/bernoulli_sample.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/cache.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/collapse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/concat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/concat_to_dia.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/dia.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/dia_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/dia_node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/distribute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/dop_node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/equal_to_dia.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/ex_prefix_sum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/gather.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/generate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/group_by_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/group_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/group_to_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/hyperloglog.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/inner_join.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/max.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/merge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/min.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/prefix_sum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/print.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/read_binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/read_lines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/rebalance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/reduce_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/reduce_to_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/sample.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/source_node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/sum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/union.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/window.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/write_binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/write_lines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/write_lines_one.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/zip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/zip_window.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/api/zip_with_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/aggregate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/atomic_movable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/binary_heap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/concurrent_bounded_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/concurrent_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/defines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/function_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/functional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/hash.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/hypergeometric_distribution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/item_serialization_tools.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/json_logger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/linux_proc_stats.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/logger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/matrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/porting.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/profile_task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/profile_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/qsort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/radix_sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/reservoir_sampling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/ring_buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/sampling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/shared_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/singleton.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/stats_counter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/stats_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/system_exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/thread_barrier.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/timed_counter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/uint_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/common/zipf_distribution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/bit_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/buffered_multiway_merge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/delta_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/duplicate_detection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/golomb_bit_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/hyperloglog.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/location_detection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/multiway_merge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/reduce_bucket_hash_table.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/reduce_by_hash_post_phase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/reduce_by_index_post_phase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/reduce_functional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/reduce_old_probing_hash_table.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/reduce_pre_phase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/reduce_probing_hash_table.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/core/reduce_table.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/block_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/block_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/block_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/block_sink.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/block_writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/byte_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/cat_block_source.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/cat_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/discard_sink.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/dyn_block_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/mix_block_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/mix_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/multiplexer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/multiplexer_header.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/serialization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/serialization_cereal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/serialization_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/stream_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/data/stream_sink.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/mem/aligned_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/mem/allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/mem/allocator_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/mem/malloc_tracker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/mem/manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/mem/pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/buffer_builder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/buffer_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/buffer_ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/collective.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/connection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/dispatcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/dispatcher_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/fixed_buffer_builder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/flow_control_channel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/flow_control_manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/group.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/mock/group.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/mpi/dispatcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/mpi/group.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/tcp/connection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/tcp/construct.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/tcp/group.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/tcp/select.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/tcp/select_dispatcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/tcp/socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/net/tcp/socket_address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/thrill.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/vfs/bzip2_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/vfs/file_io.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/vfs/gzip_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/vfs/hdfs3_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/vfs/s3_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/vfs/simple_glob.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/vfs/sys_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrill/thrill/vfs/temporary_directory.hpp" />
+    <Image Include="../../thirdparty/owemdjee/thrill/doc/images/k-means.png" />
+    <Text Include="../../thirdparty/owemdjee/thrill/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/thrill/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/CPPLINT.cfg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/thrill/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/thrill/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrill/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/benchmarks/api/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/benchmarks/core/golomb_code_benchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/benchmarks/data/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/benchmarks/data/run_data_benchmark.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrill/benchmarks/hashtable/bench_bucket_hashtable.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/benchmarks/hashtable/bench_hashtable.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/benchmarks/hashtable/bench_probing_hashtable.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/benchmarks/hashtable/graph_gen.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/benchmarks/mem/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/benchmarks/net/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/compile.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/api.dox" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/common.dox" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/data.dox" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/byteblock-file.pdf" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/byteblock-file.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/cluster-execution.pdf" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/cluster-execution.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dc7-dataflow.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/AllGather.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/AllReduce.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/ConcatToDIA.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/EqualToDIA.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/ExPrefixSum.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/Filter.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/FlatMap.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/Generate.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/GroupByKey.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/GroupToIndex.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/Map.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/Merge.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/PrefixSum.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/ReadBinary.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/ReadLines.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/ReduceByKey.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/ReduceToIndex.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/Sort.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/Sum.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/Window.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/WriteBinary.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/WriteLines.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/Zip.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/dia_ops/ZipWithIndex.svg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/images/exec-profile.html" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/main.dox" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/mem.dox" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/net.dox" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/start.dox" />
+    <Text Include="../../thirdparty/owemdjee/thrill/doc/style_guide.dox" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/bfs/100.graph" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/bfs/110.graph" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/bfs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/k-means/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/logistic_regression/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/logistic_regression/UNFINISHED" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/page_rank/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/percentiles/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/select/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/sleep/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/stochastic_gradient_descent/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/stochastic_gradient_descent/gen_data.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/suffix_sorting/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/terasort/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/tpch/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/triangles/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/tutorial/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/tutorial/k-means.dox" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/tutorial/k-means_points.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/vfs_tool/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/examples/word_count/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/extlib/libs3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/frontends/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/frontends/swig_python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/frontends/swig_python/RemoteThrill.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/frontends/swig_python/UNFINISHED" />
+    <Text Include="../../thirdparty/owemdjee/thrill/frontends/swig_python/python_rpyc.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/frontends/swig_python/python_rpyc_server.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/frontends/swig_python/python_test.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/misc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/misc/cmake/FindDL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrill/misc/cmake/FindIbVerbs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrill/misc/cmake/FindJeMalloc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrill/misc/cmake/FindLibS3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrill/misc/doxygen/mk-doxygen-travis.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrill/misc/doxygen/style.css" />
+    <Text Include="../../thirdparty/owemdjee/thrill/misc/format/analyze-source.pl" />
+    <Text Include="../../thirdparty/owemdjee/thrill/misc/format/uncrustify.cfg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/misc/json2graphviz.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/misc/standalone_profiler_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/ec2-setup/config.json" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/ec2-setup/instant.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/ec2-setup/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/ec2-setup/spot.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/ec2-setup/submit.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/ec2-setup/terminate.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/ec2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/ec2/config.json" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/ec2/invoke.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/ec2/make_env.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/ec2/terminate_all.py" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/slurm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/slurm/invoke.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/slurm/invoke_msub.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/slurm/map_ib0.awk" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/slurm/slurm_check.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/slurm/slurm_hostlist.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrill/run/ssh/invoke.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrill/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrill/tests/CPPLINT.cfg" />
+    <Text Include="../../thirdparty/owemdjee/thrill/tests/inputs/pagerank.in" />
+    <Text Include="../../thirdparty/owemdjee/thrill/tests/inputs/read_folder/bla1" />
+    <Text Include="../../thirdparty/owemdjee/thrill/tests/inputs/read_folder/bla2" />
+    <Text Include="../../thirdparty/owemdjee/thrill/tests/inputs/read_folder/more_data" />
+    <Text Include="../../thirdparty/owemdjee/thrill/tests/inputs/read_ints/donotread" />
+    <Text Include="../../thirdparty/owemdjee/thrill/tests/inputs/read_ints/read2" />
+    <Text Include="../../thirdparty/owemdjee/thrill/tests/inputs/read_ints/read3.bz2" />
+    <Text Include="../../thirdparty/owemdjee/thrill/tests/inputs/read_ints/read4.bz2" />
+    <Text Include="../../thirdparty/owemdjee/thrill/tests/inputs/test1" />
+    <Text Include="../../thirdparty/owemdjee/thrill/tests/inputs/wordcount.in" />
+    <Text Include="../../thirdparty/owemdjee/thrill/thrill/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/thrill/misc/doxygen/DoxygenLayout.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

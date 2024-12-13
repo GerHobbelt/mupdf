@@ -1538,6 +1538,9 @@ blurhash
 NBLI
 libsodium
 lunasvg
+thrill
+stxxl
+sundials
 
 EOT
 ) | grep -e "$FILTER"

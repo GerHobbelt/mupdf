@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF365679}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTXXL;STXXL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTXXL;STXXL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTXXL;STXXL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTXXL;STXXL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTXXL;STXXL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTXXL;STXXL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTXXL;STXXL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTXXL;STXXL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTXXL;STXXL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTXXL;STXXL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTXXL;STXXL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTXXL;STXXL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/algo/copy_and_sort_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/algo/phonebills.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/algo/phonebills_genlog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/algo/sort_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/applications/skew3-lcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/applications/skew3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/common/cmdline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/copy_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/deque1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/deque2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/map1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/matrix1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/pqueue1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/pqueue2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/queue1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/queue2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/sequence1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/sorter1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/sorter2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/stack1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/stack2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/unordered_map1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/vector1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/vector2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/containers/vector_buf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/examples/stream/stream1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/algo/async_schedule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/common/cmdline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/common/exithandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/common/log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/common/rand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/common/seed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/common/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/common/verbose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/common/version.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/boostfd_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/create_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/disk_queued_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/fileperblock_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/iostats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/linuxaio_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/linuxaio_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/linuxaio_request.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/mem_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/mmap_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/request.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/request_queue_impl_1q.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/request_queue_impl_qwqr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/request_queue_impl_worker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/request_with_state.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/request_with_waiters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/serving_request.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/simdisk_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/syscall_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/ufs_file_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/wbtl_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/wfs_file_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/io/wincall_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/mng/block_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/mng/config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/mng/disk_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/lib/utils/malloc_count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/local/test1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/local/test2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/misc/cmake/TestFileOffsetBits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/misc/cmake/TestWindowsFSeek.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/algo/test_asch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/algo/test_bad_cmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/algo/test_ksort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/algo/test_ksort_all_parameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/algo/test_parallel_sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/algo/test_random_shuffle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/algo/test_scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/algo/test_sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/algo/test_sort_all_parameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/algo/test_stable_ksort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/algo/test_stable_ksort_all_parameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/common/test_binary_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/common/test_cmdline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/common/test_counting_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/common/test_external_shared_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/common/test_globals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/common/test_log2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/common/test_manyunits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/common/test_manyunits2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/common/test_random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/common/test_swap_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/common/test_tuple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/common/test_uint_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/common/test_winner_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/btree/test_btree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/btree/test_btree_const_scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/btree/test_btree_insert_erase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/btree/test_btree_insert_find.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/btree/test_btree_insert_scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/hash_map/test_hash_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/hash_map/test_hash_map_block_cache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/hash_map/test_hash_map_iterators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/hash_map/test_hash_map_reader_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/ppq/benchmark_pqs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/ppq/test_ppq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/ppq/test_ppq_arrays_and_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_deque.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_ext_merger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_ext_merger2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_iterators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_many_stacks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_map_random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_migr_stack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_pqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_queue2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_sequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_sorter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_stack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_vector_buf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_vector_export.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_vector_resize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/containers/test_vector_sizes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/io/test_cancel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/io/test_io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/io/test_io_sizes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/io/test_mmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/io/test_sim_disk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/mng/test_aligned.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/mng/test_block_alloc_strategy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/mng/test_block_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/mng/test_block_manager1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/mng/test_block_manager2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/mng/test_block_scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/mng/test_bmlayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/mng/test_buf_streams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/mng/test_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/mng/test_pool_pair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/mng/test_prefetch_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/mng/test_read_write_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/mng/test_write_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/parallel/bench_multiway_merge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/parallel/test_multiway_merge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/parallel/test_multiway_mergesort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/stream/test_loop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/stream/test_materialize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/stream/test_naive_transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/stream/test_push_sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/stream/test_sorted_runs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/stream/test_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tests/stream/test_stream1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/benchmark_disks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/benchmark_disks_random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/benchmark_files.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/benchmark_pqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/benchmark_sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/benchmarks/benchmark_naive_matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/benchmarks/berkeley_db_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/benchmarks/matrix_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/benchmarks/monotonic_pq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/benchmarks/pq_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/benchmarks/stack_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/benchmarks/tpie_stack_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/create_files.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/extras/benchmark_disk_and_flash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/extras/iobench_scatter_in_place.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/extras/pq_param.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/mallinfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/mlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stxxl/tools/stxxl_tool.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/algo/adaptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/algo/async_schedule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/algo/inmemsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/algo/intksort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/algo/ksort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/algo/losertree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/algo/random_shuffle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/algo/run_cursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/algo/scan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/algo/sort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/algo/sort_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/algo/sort_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/algo/stable_ksort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/addressable_queues.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/aligned_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/binary_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/cmdline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/condition_variable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/counting_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/custom_stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/error_handling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/exithandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/external_shared_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/is_heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/is_sorted.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/new_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/onoff_switch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/rand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/seed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/semaphore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/simple_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/swap_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/tmeta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/uint_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/common/winner_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/compat/hash_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/compat/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/compat/unique_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/btree/btree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/btree/iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/btree/iterator_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/btree/leaf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/btree/node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/btree/node_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/btree/root_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/deque.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/hash_map/block_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/hash_map/hash_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/hash_map/iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/hash_map/iterator_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/hash_map/tuning.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/hash_map/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/matrix_arithmetic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/matrix_low_level.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/pager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/parallel_priority_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/pq_ext_merger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/pq_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/pq_int_merger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/pq_losertree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/pq_mergers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/priority_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/sorter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/unordered_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/containers/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/deprecated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/boostfd_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/completion_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/create_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/disk_queued_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/disk_queues.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/fileperblock_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/iostats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/linuxaio_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/linuxaio_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/linuxaio_request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/mem_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/mmap_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/request_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/request_operations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/request_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/request_queue_impl_1q.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/request_queue_impl_qwqr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/request_queue_impl_worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/request_with_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/request_with_waiters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/serving_request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/simdisk_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/syscall_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/ufs_file_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/wbtl_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/wfs_file_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/io/wincall_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/libstxxl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/adaptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/bid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/block_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/block_alloc_interleaved.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/block_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/block_prefetcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/block_scheduler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/buf_istream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/buf_istream_reverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/buf_ostream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/buf_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/disk_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/prefetch_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/read_write_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/typed_block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/mng/write_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/msvc_compatibility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/namespace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/noncopyable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/parallel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/parallel/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/parallel/compiletime_settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/parallel/equally_split.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/parallel/losertree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/parallel/merge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/parallel/multiseq_selection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/parallel/multiway_merge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/parallel/multiway_mergesort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/parallel/settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/parallel/tags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/parallel/timing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/parallel/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/singleton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/stream/choose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/stream/sort_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/stream/sorted_runs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/stream/stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/stream/unique.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/unused.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/utils/malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/utils/malloc_count.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/utils/stacktrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/verbose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/include/stxxl/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/lib/io/ufs_platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/tests/algo/test_sort_all_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/tests/containers/map_test_handlers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stxxl/tools/benchmarks/app_config.h" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/btree_uml.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/btree_uml_small.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/install_windows_boost_cmake.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/install_windows_boost_msvc10.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/install_windows_cmake.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/install_windows_msvc11.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/layer_diagram.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/layer_diagram_small.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/overlapping_merging.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/overlapping_merging_small.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/overlapping_runformation.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/overlapping_runformation_small.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/pdm.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/pdm_small.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/pipeline_randomgraph.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/pipeline_randomgraph_small.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/san00b_pqueue.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/san00b_pqueue_small.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/simple_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/vector_architecture.png" />
+    <Image Include="../../thirdparty/owemdjee/stxxl/doc/images/vector_architecture_small.png" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/CHANGELOG" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/README" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/TODO" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/coding_style.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/common.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/design.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/doxygen-extra.css" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/faq.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/images/btree_uml.pdf" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/images/layer_diagram.pdf" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/images/layer_diagram.svg" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/images/overlapping_merging.pdf" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/images/overlapping_runformation.pdf" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/images/pdm.svg" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/images/pipeline_randomgraph.pdf" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/images/san00b_pqueue.svg" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/images/simple_logo.svg" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/images/vector_architecture.pdf" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/install.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/introduction.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/mainpage.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/stxxl_tool.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial_deque.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial_map.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial_matrix.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial_pqueue.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial_queue.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial_sequence.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial_sorter.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial_stack.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial_stream.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial_unordered_map.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial_vector.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial_vector_billing.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/doc/tutorial_vector_buf.dox" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/examples/algo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/examples/applications/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/examples/common/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/examples/containers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/examples/stream/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/algorithm" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/aligned_alloc" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/all" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/bits/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/cmdline" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/deque" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/io" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/ksort" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/mallocstats" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/map" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/mng" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/priority_queue" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/queue" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/random" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/random_shuffle" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/request" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/scan" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/sequence" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/sort" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/sorter" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/stable_ksort" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/stack" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/stats" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/stream" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/timer" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/types" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/unordered_map" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/include/stxxl/vector" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/lib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/lib/libstxxl.symbols" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/local/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/analyze-include-dependencies.pl" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/analyze-source.pl" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/cmake/TestLargeFiles.c.cmakein" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/cmake/TestLargeFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/cmake/stxxl-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/cmake/stxxl-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/concat-lines" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/diskbench-avgdat.sh" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/diskbench.mk" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/do-release.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/fileheader.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/floating-average" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/iostat-plot.mk" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/record-load-iostat" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/remove-unless" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/misc/uncrustify.cfg" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tests/algo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tests/common/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tests/containers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tests/containers/btree/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tests/containers/hash_map/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tests/containers/ppq/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tests/io/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tests/mng/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tests/parallel/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tests/stream/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tools/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tools/benchmarks/README" />
+    <Text Include="../../thirdparty/owemdjee/stxxl/tools/extras/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/stxxl/doc/DoxygenLayout.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
