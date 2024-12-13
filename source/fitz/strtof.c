@@ -24,14 +24,8 @@
 
 #include "mupdf/assertions.h"
 #include <errno.h>
+#include <limits.h>
 #include <float.h>
-
-#ifndef INFINITY
-#define INFINITY (DBL_MAX+DBL_MAX)
-#endif
-#ifndef NAN
-#define NAN (INFINITY-INFINITY)
-#endif
 
 /*
    We use "Algorithm D" from "Contributions to a Proposed Standard for Binary

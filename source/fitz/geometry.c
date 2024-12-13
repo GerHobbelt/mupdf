@@ -23,8 +23,8 @@
 #include "mupdf/fitz.h"
 
 #include <math.h>
-#include <float.h>
 #include <limits.h>
+#include <float.h>
 
 #define MAX4(a,b,c,d) fz_max(fz_max(a,b), fz_max(c,d))
 #define MIN4(a,b,c,d) fz_min(fz_min(a,b), fz_min(c,d))
@@ -392,8 +392,12 @@ const fz_irect fz_empty_irect = { FZ_MAX_INF_RECT, FZ_MAX_INF_RECT, FZ_MIN_INF_R
 const fz_irect fz_invalid_irect = { 0, 0, -1, -1 };
 const fz_irect fz_unit_irect = { 0, 0, 1, 1 };
 
-const fz_quad fz_infinite_quad = { { -INFINITY, INFINITY}, {INFINITY, INFINITY}, {-INFINITY, -INFINITY}, {INFINITY, -INFINITY} };
-const fz_quad fz_invalid_quad = { {NAN, NAN}, {NAN, NAN}, {NAN, NAN}, {NAN, NAN} };
+#if !defined(_MSC_VER)
+const fz_quad fz_infinite_quad = { { -INFINITY, INFINITY }, { INFINITY, INFINITY }, { -INFINITY, -INFINITY }, { INFINITY, -INFINITY } };
+// hotfix for MSVC2022 which keeps barfing on the fz_invalid_quad constant definition with: error C2099 : initializer is not a constant
+// --> compile as C++ in separate source file.    !@#$%   :-(
+const fz_quad fz_invalid_quad = { { NAN, NAN }, { NAN, NAN }, { NAN, NAN }, { NAN, NAN } };
+#endif
 
 fz_irect
 fz_irect_from_rect(fz_rect r)

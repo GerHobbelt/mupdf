@@ -26,10 +26,21 @@
 #include "mupdf/fitz/system.h"
 
 #include <math.h>
+#include <limits.h>
+#include <float.h>
+
 #include "mupdf/assertions.h"
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
+#endif
+
+#ifndef INFINITY
+#define INFINITY (DBL_MAX+DBL_MAX)
+#endif
+
+#ifndef NAN
+#define NAN (INFINITY-INFINITY)
 #endif
 
 /**
@@ -105,7 +116,7 @@ int64_t fz_atoi64(const char *s);
 /**
 	Some standard math functions, done as static inlines for speed.
 	People with compilers that do not adequately implement inline
-	may like to reimplement these using macros.
+	may like to re-implement these using macros.
 */
 static inline float fz_abs(float f)
 {
