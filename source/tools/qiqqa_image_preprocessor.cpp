@@ -1,0 +1,2 @@
+
+// (scripted) image preprocessor.

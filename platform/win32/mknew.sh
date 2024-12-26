@@ -1541,6 +1541,31 @@ lunasvg
 thrill
 stxxl
 sundials
+UDDSketch
+prometheus-cpp
+libhashish
+asp
+physfs
+my_basic
+ChaiScript
+daScript
+atlast
+pforth
+gravity
+wren
+io
+racket
+pocketlang
+micropython
+PikaPython
+quirrel
+Rebol3
+squilu
+squirrel
+picol
+ecl
+mrubyc
+mruby
 
 EOT
 ) | grep -e "$FILTER"
@@ -1688,6 +1713,7 @@ html-parser-test-corpus
 OpenCL-Guide
 wuffs
 Image-Compression-Benchmark
+habla-el-babbla
 
 EOT
 ) | grep -e "$FILTER"

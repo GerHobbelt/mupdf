@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF4CE679}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAISCRIPT;CHAISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAISCRIPT;CHAISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAISCRIPT;CHAISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAISCRIPT;CHAISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAISCRIPT;CHAISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAISCRIPT;CHAISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAISCRIPT;CHAISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAISCRIPT;CHAISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAISCRIPT;CHAISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAISCRIPT;CHAISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAISCRIPT;CHAISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHAISCRIPT;CHAISCRIPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/performance_tests/profile_cpp_calls_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/performance_tests/profile_fun_wrappers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/samples/factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/samples/fun_call_performance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/samples/inheritance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/samples/memory_leak_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/samples/test_num_exceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/src/chaiscript_stdlib_module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/src/sanity_checks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/src/sha3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/src/stl_extra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/src/test_module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/static_libs/chaiscript_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/static_libs/chaiscript_stdlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/unittests/boxed_cast_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/unittests/c_linkage_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/unittests/compiled_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/unittests/integer_literal_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/unittests/multifile_test_chai.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/unittests/multifile_test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/unittests/multifile_test_module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/unittests/multithreaded_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/unittests/static_chaiscript.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ChaiScript/unittests/type_info_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/chaiscript.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/chaiscript_basic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/chaiscript_defines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/chaiscript_stdlib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/chaiscript_threading.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/any.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/bad_boxed_cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/bind_first.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/bootstrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/bootstrap_stl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/boxed_cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/boxed_cast_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/boxed_number.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/boxed_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/callable_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/dispatchkit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/dynamic_object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/dynamic_object_detail.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/exception_specification.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/function_call.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/function_call_detail.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/function_params.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/function_signature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/handle_return.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/operators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/proxy_constructors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/proxy_functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/proxy_functions_detail.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/register_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/short_alloc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/type_conversions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/dispatchkit/type_info.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/language/chaiscript_algebraic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/language/chaiscript_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/language/chaiscript_engine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/language/chaiscript_eval.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/language/chaiscript_optimizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/language/chaiscript_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/language/chaiscript_posix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/language/chaiscript_prelude.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/language/chaiscript_prelude_docs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/language/chaiscript_tracer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/language/chaiscript_unknown.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/language/chaiscript_windows.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/utility/fnv1a.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/utility/hash.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/utility/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/utility/json_wrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/utility/quick_flat_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/utility/stack_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/utility/static_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/include/chaiscript/utility/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/src/sha3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/static_libs/chaiscript_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/static_libs/chaiscript_stdlib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/unittests/catch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/unittests/failed_deep_include.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/unittests/file_with_bom.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/unittests/multifile_test_chai.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/unittests/multifile_test_module.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/unittests/multithreaded_work.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/unittests/unit_test.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ChaiScript/unittests/use.inc" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/BUCK" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/DesignGoals.md" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/biicode.conf" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/buckaroo.json" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/cheatsheet.md" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/cmake/Catch.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/cmake/CatchAddTests.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/cmake/ParseAndAddCatchTests.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/contrib/codeanalysis/analyzedata.sh" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/contrib/codeanalysis/codeanalysis.sh" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/contrib/codeanalysis/runcppcheck.sh" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/contrib/cupofchai3.svg" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/contrib/pkgconfig/chaiscript.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/contrib/vim" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/license.txt" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/releasenotes.md" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/samples/BUCK" />
+    <Text Include="../../thirdparty/owemdjee/ChaiScript/supporters.md" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

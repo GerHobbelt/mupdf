@@ -1,5 +1,5 @@
 //
-//
+// tool to extract / produce / validate metadata for the input document.
 //
 
 #include "mupdf/mutool.h"

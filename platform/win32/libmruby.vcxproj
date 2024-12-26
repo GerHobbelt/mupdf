@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB9254B}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBY;MRUBY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBY;MRUBY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBY;MRUBY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBY;MRUBY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBY;MRUBY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBY;MRUBY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBY;MRUBY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBY;MRUBY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBY;MRUBY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBY;MRUBY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBY;MRUBY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBY;MRUBY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/examples/mrbgems/c_and_ruby_extension_example/src/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/examples/mrbgems/c_extension_example/src/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/examples/mrbgems/c_extension_example/test/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/examples/mrbgems/cdata_extension_example/src/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/examples/mrbgems/cdata_extension_example/test/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/examples/mrbgems/mruby-YOUR-bigint/core/bigint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-array-ext/src/array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bigint/core/bigint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/apibreak.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/apilist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/apiprint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/apistring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/cmdbreak.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/cmdmisc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/cmdprint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/cmdrun.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/mrdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-mirb/tools/mirb/mirb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-mrbc/tools/mrbc/mrbc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-mrbc/tools/mrbc/stub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-mruby/tools/mruby/mruby.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-strip/tools/mruby-strip/mruby-strip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-binding/src/binding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-binding/test/binding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-catch/src/catch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-class-ext/src/class.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-cmath/src/cmath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-compiler/core/codegen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-complex/src/complex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-data/src/data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-dir/src/Win/dirent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-dir/src/dir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-dir/test/dirtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-errno/src/errno.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-error/src/exception.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-error/test/exception.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-eval/src/eval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-exit/src/mruby-exit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-fiber/src/fiber.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-fiber/test/fibertest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-hash-ext/src/hash-ext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-io/src/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-io/src/file_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-io/src/io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-io/src/mruby_io_gem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-io/test/mruby_io_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-kernel-ext/src/kernel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-math/src/math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-metaprog/src/metaprog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-method/src/method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-numeric-ext/src/numeric_ext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-object-ext/src/object.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-object-ext/test/object-ext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-objectspace/src/mruby_objectspace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-os-memsize/src/memsize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-pack/src/pack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-print/src/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-proc-binding/src/proc-binding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-proc-binding/test/proc-binding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-proc-ext/src/proc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-proc-ext/test/proc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-random/src/random.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-range-ext/src/range.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-rational/src/rational.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-sleep/src/sleep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-socket/src/socket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-socket/test/sockettest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-sprintf/src/sprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-string-ext/src/string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-struct/src/struct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-symbol-ext/src/symbol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-test-inline-struct/test/inline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-test/driver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-test/vformat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-time/src/time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/allocf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/backtrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/cdump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/class.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/codedump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/enum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/etc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/fmt_fp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/gc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/kernel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/mempool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/numeric.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/numops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/object.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/proc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/range.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/readfloat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/readint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/readnum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/symbol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/variable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/src/vm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mruby/tools/lrama/template/bison/yacc.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mrbconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/boxing_nan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/boxing_no.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/boxing_word.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/compile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/dump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/gc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/irep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/istruct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/khash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/mempool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/numeric.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/opcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/presym.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/presym/disable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/presym/enable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/presym/scanning.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/proc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/re.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/throw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/variable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/include/mruby/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bigint/core/bigint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/apibreak.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/apilist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/apiprint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/apistring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/mrdb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/mrdbconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-debugger/tools/mrdb/mrdberror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-compiler/core/node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-io/include/mruby/ext/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-time/include/mruby/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/src/value_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/tools/lrama/template/bison/_yacc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mruby/tools/lrama/template/bison/yacc.h" />
+    <Image Include="../../thirdparty/owemdjee/mruby/doc/mruby_logo_red_icon.png" />
+    <Text Include="../../thirdparty/owemdjee/mruby/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/mruby/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/mruby/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/mruby/Gemfile" />
+    <Text Include="../../thirdparty/owemdjee/mruby/LEGAL" />
+    <Text Include="../../thirdparty/owemdjee/mruby/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/mruby/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/mruby/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/mruby/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/Rakefile" />
+    <Text Include="../../thirdparty/owemdjee/mruby/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/TODO.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/mruby/benchmark/plot.gpl" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/guides/compile.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/guides/debugger.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/guides/gc-arena-howto.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/guides/hier.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/guides/link.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/guides/memory.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/guides/mrbconf.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/guides/mrbgems.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/guides/symbol.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/internal/boxing.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/internal/opcode.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/limitations.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/mruby3.0.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/mruby3.1.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/mruby3.2.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/doc/mruby3.3.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/mruby/examples/mrbgems/c_and_ruby_extension_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/examples/mrbgems/c_extension_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/examples/mrbgems/cdata_extension_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/examples/mrbgems/mruby-YOUR-bigint/TODO-HINT.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/examples/mrbgems/ruby_extension_example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/minirake" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/default-no-fpu.gembox" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/default-no-stdio.gembox" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/default.gembox" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/full-core.gembox" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/math.gembox" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/metaprog.gembox" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bigint/README-fgmp.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bigint/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-config/mruby-config" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-bin-config/mruby-config.bat" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-compiler/core/keywords" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-compiler/core/lex.def" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-compiler/core/parse.y" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-dir/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-errno/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-errno/src/known_errors.def" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-io/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-method/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-pack/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-set/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-set/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-sleep/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-socket/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-socket/src/const.def" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/mruby-test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/stdlib-ext.gembox" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/stdlib-io.gembox" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mrbgems/stdlib.gembox" />
+    <Text Include="../../thirdparty/owemdjee/mruby/mruby-source.gemspec" />
+    <Text Include="../../thirdparty/owemdjee/mruby/tools/lrama/LEGAL.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/tools/lrama/MIT" />
+    <Text Include="../../thirdparty/owemdjee/mruby/tools/lrama/NEWS.md" />
+    <Text Include="../../thirdparty/owemdjee/mruby/tools/lrama/exe/lrama" />
+    <Text Include="../../thirdparty/owemdjee/mruby/tools/lrama/lib/lrama/grammar/stdlib.y" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

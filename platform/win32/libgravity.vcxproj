@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0CADAE}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGRAVITY;GRAVITY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGRAVITY;GRAVITY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGRAVITY;GRAVITY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGRAVITY;GRAVITY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGRAVITY;GRAVITY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGRAVITY;GRAVITY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGRAVITY;GRAVITY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGRAVITY;GRAVITY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGRAVITY;GRAVITY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGRAVITY;GRAVITY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGRAVITY;GRAVITY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGRAVITY;GRAVITY_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/api/exec_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/api/exec_gravity.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/binding/shared/console.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/examples/GravityCpp/GravityCpp/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/examples/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/gravity_visualstudio/dll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/cli/gravity.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_ast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_codegen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_compiler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_ircode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_lexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_optimizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_semacheck1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_semacheck2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_symboltable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_token.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_visitor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/optionals/gravity_opt_env.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/optionals/gravity_opt_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/optionals/gravity_opt_json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/optionals/gravity_opt_math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/runtime/gravity_core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/runtime/gravity_vm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/shared/gravity_hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/shared/gravity_memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/shared/gravity_value.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/utils/gravity_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/utils/gravity_json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/src/utils/gravity_utils.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/binding/GravityObjC/ObjC/gravity_objc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/binding/shared/console.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/compiler/debug_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_ast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_codegen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_compiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_ircode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_lexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_optimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_semacheck1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_semacheck2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_symboltable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_token.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/compiler/gravity_visitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/optionals/gravity_opt_env.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/optionals/gravity_opt_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/optionals/gravity_opt_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/optionals/gravity_opt_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/optionals/gravity_optionals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/runtime/gravity_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/runtime/gravity_vm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/runtime/gravity_vmmacros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/shared/gravity_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/shared/gravity_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/shared/gravity_delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/shared/gravity_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/shared/gravity_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/shared/gravity_memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/shared/gravity_opcodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/shared/gravity_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/utils/gravity_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/utils/gravity_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/src/utils/gravity_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gravity/test/unittest/test.inc" />
+    <Image Include="../../thirdparty/owemdjee/gravity/docs/assets/images/logo-gravity.png" />
+    <Image Include="../../thirdparty/owemdjee/gravity/docs/assets/images/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/gravity/docs/assets/images/unittest.png" />
+    <Text Include="../../thirdparty/owemdjee/gravity/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gravity/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/gravity/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/gravity/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gravity/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/TODO.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/api/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gravity/binding/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/binding/shared/main.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/_coverpage.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/_navbar.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/_sidebar.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/assets/css/main-min.css" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/assets/css/main.css" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/bool.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/class.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/closure.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/contrib.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/controlflow.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/embedding.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/enum.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/env.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/extending.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/fiber.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/file.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/float.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/func.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/index.html" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/int.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/introspection.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/list.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/loop.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/map.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/math.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/null.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/object.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/operators.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/quickstart.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/range.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/string.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/syntax.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/system.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/types.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/docs/unittest.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/examples/Executing Gravity from C.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/gravity_visualstudio/exports.def" />
+    <Text Include="../../thirdparty/owemdjee/gravity/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gravity/src/cli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gravity/src/optionals/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/disabled/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/disabled/heap.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/disabled/loop1.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/infiniteloop/loop2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/infiniteloop/loop3.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/infiniteloop/loop4.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/infiniteloop/loop5.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/01-syntax/class_declaration.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/01-syntax/empty.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/01-syntax/empty_enum.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/01-syntax/empty_return.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/01-syntax/func_error_params.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/01-syntax/var_in_if.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/01-syntax/var_in_repeat.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/01-syntax/var_in_switch.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/01-syntax/var_in_while.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/02-semantic_step1/class1_redeclared.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/02-semantic_step1/class2_internal_redeclared.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/02-semantic_step1/enum1_redeclared.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/02-semantic_step1/enum2_internal_redeclared.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/02-semantic_step1/function_redeclared.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/02-semantic_step1/local_variables_number.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/02-semantic_step1/var_redeclared.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/class1_access_specifier.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/class2_access_specifier.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/enum1_access_specifier.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/enum2_access_specifier.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/for1_identifier_not_found.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/func1_access_specifier.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/func2_access_specifier.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/func3_identifier_redeclared.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/func4_identifier_redeclared.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/invalid_condition_if.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/invalid_condition_while.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/override_property.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/var1_access_specifier.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/var2_access_specifier.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/03-semantic_step2/var_container.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/assignment1.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/assignment2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/assignment3.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/assignment4.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/class/1.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/class/12.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/class/13.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/class/2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/class/3.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/class/4.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/class/5.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/class/6.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/class/7.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/class/8.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/complex_expression.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/fibonacci.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/file_access.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/keywords/_func.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/list_map/list1.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/list_map/list2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/list_map/map1.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/list_map/map2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/literals.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/multiple_call.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/04-codegen/var_default.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/anon_class_test.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/arg_expression.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/arguments_1.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/arguments_2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/arguments_sum.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/array2string.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/array_of_objects.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/base_class_override.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/base_exec.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/big_list_map.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bind.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bind_func.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bitwise_on_bool.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/break_continue.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/chained_call.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/chained_call2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/chained_call3.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/chained_call4.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/chained_call5.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/check_self_postfix.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/class_byref.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/class_static.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/class_static_nonstatic.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/classes/add_operation_and_function_calls.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/classes/base_object_methods.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/classes/classes_0.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/classes/classes_1.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/classes/classes_2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/classes/test_classes.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/classes/test_declarations.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/closure.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/closure2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/closure3.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/closure_apply.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/closure_args_apply.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/closure_bind.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/closure_bind_2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/closure_gc_test.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/codegen_error.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/comparison.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/computed_properties.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/conversion/conversion_bool.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/conversion/conversion_float.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/conversion/conversion_int.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/conversion/conversion_string.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/core_bind.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/count_args.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/custom_getter_nosetter.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/custom_getter_setter.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/custom_load_storeat.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/default_values.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/disabled/class_container.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/disabled/func_container.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/disabled/module1_redeclared.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/disabled/module2_internal_redeclared.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/disabled/module_access_specifier.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/disabled/module_container.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/disabled/module_declaration.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/division_by_0.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/duplicate_file.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/duplicate_postfix.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/enum_assign.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/enum_remove_by_index_funcgravity.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/enum_static.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/env/env.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/boolean/bool_expressions_0.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/boolean/bool_expressions_1.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/boolean/bool_expressions_3.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/boolean/literal_expression_with_boolean.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/arithmetic_expression_a.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/arithmetic_expression_a_optimized.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/arithmetic_expression_m.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/arithmetic_expression_m_optimized.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/equality_expression.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/equality_expression_optimized.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/expression_2+-3.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/expression_with_+-.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/optimizer_!1.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/optimizer_-3.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/optimizer_DIV.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/optimizer_REM.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/optimizer_SUB.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/optimizer_SUB_negative_value.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/expression/math/sum_between_numbers_and_strings.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/fiber.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/fiber_abort.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/fibers_scheduling.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/fibonacci_class.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/float_literals.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/flow_switch.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/forbidden_exec.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/fragile_class.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/func_call_interpolation.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/func_declaration.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/game_loop.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/include_test.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/init_infinite_loop.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/init_inline_exec.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/init_instance.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/init_optionals.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/instance_clone.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/instance_from_inner_class.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/int_bit.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/ivar_access.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/ivar_load_store.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/ivar_nested_class.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_allocate.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_append.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_assign.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_contains.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_count.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_example.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_filter.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_iterator.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_join.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_map.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_of_classes.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_reduce.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_remove.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_resize.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_reverse.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_reversed.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_sort.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_sorted.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/list_split_2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/literal_method.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/local_200_variables.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/local_class.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/local_enum.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/loops/test_do.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/loops/test_for.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/loops/test_sum.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/loops/test_while.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/loops/while_with_break.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/loops/while_with_continue.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/macros.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/map_access.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/map_count_redeclared.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/map_duplicate_key.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/map_haskey.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/map_iterate.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/map_iterate_nokeys.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/map_iterator.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/math/cbrt.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/math/gcf.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/math/lcm.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/math/log.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/math/xrt.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/math_lerp.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/math_min_max.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/max_list.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/max_mem_block.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/max_recursion.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/memory_test.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/neg_optimization.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/negative_enum.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/nested_class.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/nested_class2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/nested_class3.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/nested_for.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/notobj.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/optimizer_fix.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/outer.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/outer_2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/outer_3.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/outer_class_right_self.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/outer_setter.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/outer_setter_map.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/properties_as_classes.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/radian_degree_conversion.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/random_int.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/random_int_error_args_not_ints.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/random_int_error_no_args.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/random_int_multiple_attempts.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/range_from_to.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/range_sum.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/range_test.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/register_allocation.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/register_protect.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/repeat_limit.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/round.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/run_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/runtime_error.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/runtime_error1.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/runtime_error2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/setter_sideeffect.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/simple_call.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/split_unicode.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/static_init.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/static_init2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/stop_recursion.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/complex_split.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/concatenated_strings.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/count_method.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/for_in.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/index_method.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/index_method_error.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/index_method_notfound.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/lexicographical_order.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/lexicographical_order_with_unicode_tricks.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/loadat.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/loadat_error.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/loop.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/lower_method.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/lower_method_float.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/lower_method_out_of_bounds.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/no-split.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/simple_string.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/split.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/split_runtime_error.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/split_string_to_list.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/storeat.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/storeat_error.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/string_and_other_types.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/string_repeat_method.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/string_repeat_method_error.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/string_to_number_conversion.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/unicode_string.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/upper_lower_method_non_alpha.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/upper_lower_method_simple.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/upper_lower_multiple_args.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/upper_method.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/upper_method_float.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string/upper_method_out_of_bounds.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string_contains.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string_escaped.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string_interpolation.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string_op.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string_trim.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string_unicode_length_bytes.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/string_unicode_loop.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/struct.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/subclass_override.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/super.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/super_class.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/super_class_test.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/superclass_chain.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/superclass_declared_after.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/ternary_operator.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/test_registers_1.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/test_registers_2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/test_registers_3.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/test_registers_4.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/test_registers_in_while.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/undefined.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/undefined2.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/var_expr_self.gravity" />
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/vector.gravity" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

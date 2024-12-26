@@ -1,0 +1,1850 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF19AC69}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUILU;SQUILU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUILU;SQUILU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUILU;SQUILU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUILU;SQUILU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUILU;SQUILU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUILU;SQUILU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUILU;SQUILU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUILU;SQUILU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUILU;SQUILU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUILU;SQUILU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUILU;SQUILU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUILU;SQUILU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-editor/editor.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/HighResolutionTimer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/celibc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/code_mix_prep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/dad_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/dynamic_library.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/fossil-delta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/fpdf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/lua_socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/miniz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/mongoose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/nn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/pdf-font.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/randombytes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_axtls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_base64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_bitvector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_blosc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_decimal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_dns_sd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_fann.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_fastcgi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_ffi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_fltk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_fossil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_fpdf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_freetype.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_fs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_gumbo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_hunspell.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_ipc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_java.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_libclang.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_libcurl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_lmdb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_lpsolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_markdown.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_md_discount.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_miniz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_mix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_mongoose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_mysql.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_nanomsg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_nn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_openssl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_osthreads.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_pack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_parsecsv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_pcre.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_pcre2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_postgresql.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_rs232.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_slave_vm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_snowball.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_spawnx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_sqlite3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_subprocess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_sys.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_tinyxml2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_tre.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_tweetnacl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_unql.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_xml-2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_xml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_zlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_zmq3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sqlite3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sqratimport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/tinyxml2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/tweetnacl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/vogl_miniz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/vogl_miniz_zip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/etc/minimal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/samples/ffi/simple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/sq/sq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/sqstdlib/sqstdaux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/sqstdlib/sqstdblob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/sqstdlib/sqstdio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/sqstdlib/sqstdmath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/sqstdlib/sqstdrex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/sqstdlib/sqstdstream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/sqstdlib/sqstdstring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/sqstdlib/sqstdsystem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/lua-regex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sq_lexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqapi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqbaselib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqclass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqcompiler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqdebug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqfuncstate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqlexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqobject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqstate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqtable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqvm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sublatin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/Csio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/amalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/basename.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/css.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/docheader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/dumptree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/emmatch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/flags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/generate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/github_flavoured.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/html5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/makepage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/markdown.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/markdowncxx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/mkd2html.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/mkdio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/mktags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/pgm_options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/resource.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/setup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/tags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/theme.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/toc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/tools/cols.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/tools/echo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/xml.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/discount/xmlpage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/CMake/posixScandir.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/cairo/Fl_Cairo.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/CodeEditor.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/Fl_Function_Type.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/Fl_Group_Type.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/Fl_Menu_Type.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/Fl_Type.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/Fl_Widget_Type.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/Fl_Window_Type.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/Fluid_Image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/about_panel.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/align_widget.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/alignment_panel.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/code.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/factory.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/file.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/fluid.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/function_panel.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/ide_maketools.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/ide_support.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/ide_visualc.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/ide_xcode.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/luacpp.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/print_panel.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/template_panel.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/test.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/undo.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/fluid/widget_panel.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jaricom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jcapimin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jcapistd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jcarith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jccoefct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jccolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jcdctmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jchuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jcinit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jcmainct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jcmarker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jcmaster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jcomapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jcparam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jcprepct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jcsample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jctrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdapimin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdapistd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdarith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdatadst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdatasrc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdcoefct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdcolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jddctmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdhuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdinput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdmainct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdmarker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdmaster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdmerge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdpostct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdsample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdtrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jfdctflt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jfdctfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jfdctint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jidctflt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jidctfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jidctint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jmemmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jmemnobs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jquant1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jquant2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/misc/doxystar.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngget.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngpread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngrio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngrtran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngrutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngtrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngwio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngwtran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/png/pngwutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Adjuster.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_BMP_Image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Bitmap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Box.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Browser.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Browser_.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Browser_load.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Button.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Chart.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Check_Browser.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Check_Button.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Choice.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Clock.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Color_Chooser.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Copy_Surface.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Counter.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Device.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Dial.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Double_Window.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_File_Browser.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_File_Chooser.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_File_Chooser2.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_File_Icon.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_File_Icon2.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_File_Input.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_GDI_Printer.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_GIF_Image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Gl_Choice.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Gl_Device_Plugin.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Gl_Overlay.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Gl_Window.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Graphics_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Group.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Help_Dialog.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Help_Dialog_Dox.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Help_View-dad.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Help_View.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Help_View0.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Image_Surface.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Input.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Input_.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Input_Choice.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_JPEG_Image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Layouter.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Light_Button.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Menu.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Menu_.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Menu_Bar.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Menu_Button.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Menu_Window.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Menu_add.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Menu_global.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Multi_Label.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Native_File_Chooser.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Native_File_Chooser_FLTK.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Native_File_Chooser_GTK.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Native_File_Chooser_WIN32.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Overlay_Window.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_PNG_Image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_PNM_Image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Pack.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Paged_Device.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Pdf.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Pixmap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Positioner.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Preferences.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Printer.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Progress.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Repeat_Button.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Return_Button.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Roller.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Round_Button.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_SVG_Image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Screen_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Scroll.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Scrollbar.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Shared_Image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Simple_Terminal.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Single_Window.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Slider.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Spinner.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Sys_Menu_Bar.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_System_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Table.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_TableBox.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Table_Row.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Tabs.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Text_Buffer.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Text_Display.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Text_Editor.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Tile.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Tiled_Image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Tooltip.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Tree.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Tree_Item.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Tree_Item_Array.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Tree_Prefs.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Valuator.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Value_Input.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Value_Output.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Value_Slider.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Widget.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_WidgetAssociation.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Widget_Surface.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Window.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Window_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Window_fullscreen.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Window_hotspot.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Window_iconize.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Wizard.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_XBM_Image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_XPM_Image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_abort.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_add_idle.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_arg.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_compose.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_display.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_get_key.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_get_key_mac.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_get_key_win32.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_get_system_colors.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_grab.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_lock.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_own_colormap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_porting.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_visual.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_win32.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_x.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Flv_CStyle.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Flv_List.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Flv_Style.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Flv_Table.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Flve_Check_Button.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Flve_Combo.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/Flve_Input.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/cmap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/default-printer-win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Cocoa/Fl_Cocoa_Screen_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Cocoa/Fl_Cocoa_Window_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Darwin/Fl_Darwin_System_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/GDI/Fl_GDI_Copy_Surface_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/GDI/Fl_GDI_Graphics_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/GDI/Fl_GDI_Graphics_Driver_arci.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/GDI/Fl_GDI_Graphics_Driver_color.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/GDI/Fl_GDI_Graphics_Driver_font.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/GDI/Fl_GDI_Graphics_Driver_image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/GDI/Fl_GDI_Graphics_Driver_line_style.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/GDI/Fl_GDI_Graphics_Driver_rect.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/GDI/Fl_GDI_Graphics_Driver_vertex.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/GDI/Fl_GDI_Image_Surface_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/OpenGL/Fl_OpenGL_Display_Device.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/OpenGL/Fl_OpenGL_Graphics_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/OpenGL/Fl_OpenGL_Graphics_Driver_arci.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/OpenGL/Fl_OpenGL_Graphics_Driver_color.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/OpenGL/Fl_OpenGL_Graphics_Driver_font.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/OpenGL/Fl_OpenGL_Graphics_Driver_image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/OpenGL/Fl_OpenGL_Graphics_Driver_line_style.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/OpenGL/Fl_OpenGL_Graphics_Driver_rect.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/OpenGL/Fl_OpenGL_Graphics_Driver_vertex.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Pico/Fl_Pico_Copy_Surface.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Pico/Fl_Pico_Graphics_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Pico/Fl_Pico_Image_Surface.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Pico/Fl_Pico_Screen_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Pico/Fl_Pico_System_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Pico/Fl_Pico_Window_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoAndroid/Fl_PicoAndroid_Copy_Surface.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoAndroid/Fl_PicoAndroid_Graphics_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoAndroid/Fl_PicoAndroid_Image_Surface.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoAndroid/Fl_PicoAndroid_Screen_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoAndroid/Fl_PicoAndroid_System_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoAndroid/Fl_PicoAndroid_Window_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoSDL/Fl_PicoSDL_Copy_Surface.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoSDL/Fl_PicoSDL_Graphics_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoSDL/Fl_PicoSDL_Image_Surface.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoSDL/Fl_PicoSDL_Screen_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoSDL/Fl_PicoSDL_System_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoSDL/Fl_PicoSDL_Window_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Posix/Fl_Posix_Printer_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Posix/Fl_Posix_System_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PostScript/Fl_PostScript.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PostScript/Fl_PostScript_image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Quartz/Fl_Quartz_Copy_Surface_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Quartz/Fl_Quartz_Graphics_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Quartz/Fl_Quartz_Graphics_Driver_arci.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Quartz/Fl_Quartz_Graphics_Driver_color.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Quartz/Fl_Quartz_Graphics_Driver_font.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Quartz/Fl_Quartz_Graphics_Driver_image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Quartz/Fl_Quartz_Graphics_Driver_line_style.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Quartz/Fl_Quartz_Graphics_Driver_rect.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Quartz/Fl_Quartz_Graphics_Driver_vertex.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Quartz/Fl_Quartz_Image_Surface_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/WinAPI/Fl_WinAPI_Printer_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/WinAPI/Fl_WinAPI_Screen_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/WinAPI/Fl_WinAPI_System_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/WinAPI/Fl_WinAPI_Window_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/X11/Fl_X11_Screen_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/X11/Fl_X11_System_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/X11/Fl_X11_Window_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Xlib/Fl_Xlib_Copy_Surface_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Xlib/Fl_Xlib_Graphics_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Xlib/Fl_Xlib_Graphics_Driver_arci.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Xlib/Fl_Xlib_Graphics_Driver_color.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Xlib/Fl_Xlib_Graphics_Driver_font_x.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Xlib/Fl_Xlib_Graphics_Driver_font_xft.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Xlib/Fl_Xlib_Graphics_Driver_image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Xlib/Fl_Xlib_Graphics_Driver_line_style.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Xlib/Fl_Xlib_Graphics_Driver_rect.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Xlib/Fl_Xlib_Graphics_Driver_vertex.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Xlib/Fl_Xlib_Image_Surface_Driver.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/dump_compose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/filename_absolute.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/filename_expand.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/filename_ext.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/filename_isdir.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/filename_list.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/filename_match.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/filename_setext.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_arc.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_ask.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_boxtype.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_call_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_color.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_cursor.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_curve.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_diamond_box.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_dnd_win32.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_dnd_x.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_draw.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_draw_pixmap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_encoding_latin1.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_encoding_mac_roman.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_engraved_label.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_file_dir.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_font.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_gleam.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_gtk.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_images_core.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_labeltype.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_open_uri.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_oval_box.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_overlay.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_overlay_visual.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_plastic.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_read_image.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_rect.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_round_box.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_rounded_box.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_scroll_area.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_set_font.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_shadow_box.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_shortcut.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_show_colormap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_symbols.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_utf8.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_vertex.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/flstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/forms_bitmap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/forms_compatibility.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/forms_free.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/forms_fselect.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/forms_pixmap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/forms_timer.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/freeglut_geometry.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/freeglut_stroke_mono_roman.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/freeglut_stroke_roman.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/freeglut_teapot.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/gl_draw.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/gl_start.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/glut_compatibility.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/glut_font.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/numericsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/print_panel.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/scandir_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/scandir_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/screen_xywh.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/vsnprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/case.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/fl_wcwidth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/imKStoUCS.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/is_right2left.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/is_spacing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/keysym2Ucs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/8bit_tab_to_h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/cjk_tab_to_h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/gbk_tab_to_h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/mk_wcwidth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/test2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/ucs2fontmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/utf8Input.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/utf8Utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/utf8Wrap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/utils/conv_gen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/utils/convert_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/utils/create_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/utils/euc_tw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/adler32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/crc32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/deflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/gzclose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/gzlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/gzread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/gzwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/infback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/inffast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/inflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/inftrees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/trees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/uncompr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/fltk/zlib/zutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/FDate.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/FSocket.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/FSocket_Posix.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/FSocket_Win32.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Fl_Time.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Fl_Time_Input.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/FluSimpleString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Button.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Chat_Buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Choice_Group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Collapsable_Group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Combo_Box.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Combo_List.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Combo_Tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_DND.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Dual_Progress_Meter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Dual_Slider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_File_Chooser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Float_Input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_GL_Canvas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_GL_Window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Int_Input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Label.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Link_Button.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Progress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Progress_Meter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Return_Button.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Separator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Simple_Group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Spinner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Toggle_Group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Tree_Browser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/Flu_Wrap_Group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/fl_html_label.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/flu_file_chooser_pixmaps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/flu/src/flu_pixmaps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/gumbo/attribute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/gumbo/char_ref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/gumbo/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/gumbo/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/gumbo/string_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/gumbo/string_piece.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/gumbo/tag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/gumbo/tokenizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/gumbo/utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/gumbo/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/gumbo/vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_3dmeasure.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_annotation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_binary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_boolean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_catalog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_destination.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_dict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_doc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_doc_png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_encoder_cns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_encoder_cnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_encoder_jp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_encoder_kr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_encoder_utf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_encrypt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_encryptdict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_exdata.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_ext_gstate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_font.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_font_cid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_font_tt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_font_type1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_fontdef.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_fontdef_base14.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_fontdef_cid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_fontdef_cns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_fontdef_cnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_fontdef_jp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_fontdef_kr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_fontdef_tt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_fontdef_type1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_gstate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_image_ccitt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_image_png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_mmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_name.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_namedict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_objects.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_outline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_page_label.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_page_operator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_pages.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_pdfa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_real.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_streams.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_u3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/libharu/src/hpdf_xref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/librs232/rs232.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/librs232/rs232_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/librs232/rs232_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/minizip/ioapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/minizip/iowin32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/minizip/mztools.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/minizip/unzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/minizip/zip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/basearith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/constants.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/convolute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/crt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/difradix2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/fnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/fourstep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/mpdecimal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/mpsignal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/numbertheory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/sixstep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/mpdecimal/transpose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/aes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/asn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/bigint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/crypto_misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/gen_cert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/hmac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/loader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/openssl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/os_port.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/p12.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/rc4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/rsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/sha1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/sha256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/sha384.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/sha512.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/tls1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/tls1_clnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/tls1_svr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/myaxtls/x509.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/complete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/conn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/datasrc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/delete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/expr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/lempar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/pragma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/query.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/shell.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/stmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/tokenize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/trace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squilu/unql/src/update.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/HighResolutionTimer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/celibc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/dynamic_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/fossil-delta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/fpdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/lua_socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/mongoose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/mpdecimal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/nn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/pdf-font.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/randombytes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sq_sqlite3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sqfltk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sqfs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sqlite3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sqmodule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/sqratimport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/tinyxml2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/tweetnacl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/vogl_miniz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/vogl_miniz_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu-ext/vogl_miniz_zip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/include/sqapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/include/sqconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/include/sqstdaux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/include/sqstdblob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/include/sqstdio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/include/sqstdmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/include/sqstdstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/include/sqstdsystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/include/squirrel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/sqstdlib/sqstdblobimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/sqstdlib/sqstdfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/sqstdlib/sqstdstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/lua-regex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqarray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqclass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqclosure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqcompiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqfuncproto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqfuncstate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqlexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqobject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqopcodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqpcheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqstate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/squserdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/squtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sqvm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/sublatin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/discount/amalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/discount/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/discount/configure.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/discount/cstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/discount/markdown.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/discount/markdowncxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/discount/mkdio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/discount/pgm_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/discount/tags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Enumerations.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Adjuster.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_BMP_Image.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Bitmap.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Box.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Browser.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Browser_.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Cairo.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Cairo_Window.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Chart.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Check_Browser.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Check_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Choice.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Clock.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Color_Chooser.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Copy_Surface.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Counter.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Device.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Dial.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Double_Window.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Export.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_File_Browser.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_File_Chooser.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_File_Icon.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_File_Input.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Fill_Dial.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Fill_Slider.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Float_Input.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_FormsBitmap.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_FormsPixmap.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Free.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_GIF_Image.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Gl_Window.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Gl_Window_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Graphics_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Group.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Help_Dialog.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Help_View-dad.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Help_View.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Hold_Browser.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Hor_Fill_Slider.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Hor_Nice_Slider.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Hor_Slider.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Hor_Value_Slider.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Image.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Image_Surface.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Input.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Input_.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Input_Choice.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Int_Input.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_JPEG_Image.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Layouter.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Light_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Line_Dial.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Menu.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Menu_.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Menu_Bar.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Menu_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Menu_Item.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Menu_Window.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Multi_Browser.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Multi_Label.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Multiline_Input.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Multiline_Output.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Native_File_Chooser.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Nice_Slider.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Object.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Output.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Overlay_Window.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_PNG_Image.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_PNM_Image.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Pack.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Pack2.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Paged_Device.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Pdf.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Pixmap.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Plugin.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Positioner.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_PostScript.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Preferences.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Printer.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Progress.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_RGB_Image.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Radio_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Radio_Light_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Radio_Round_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Rect.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Rectangle.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Repeat_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Return_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Roller.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Round_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Round_Clock.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_SVG_Image.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Screen_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Scroll.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Scrollbar.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Secret_Input.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Select_Browser.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Shared_Image.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Simple_Counter.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Simple_Terminal.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Single_Window.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Slider.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Spinner.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Sys_Menu_Bar.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Sys_Menu_Bar_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_System_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Table.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_TableBox.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Table_Row.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Tabs.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Text_Buffer.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Text_Display.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Text_Editor.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Threads.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Tile.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Tiled_Image.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Timer.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Toggle_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Toggle_Light_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Toggle_Round_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Tooltip.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Tree.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Tree_Item.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Tree_Item_Array.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Tree_Prefs.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Valuator.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Value_Input.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Value_Output.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Value_Slider.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Widget.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_WidgetAssociation.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Widget_Surface.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Window.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Window_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_Wizard.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_XBM_Image.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Fl_XPM_Image.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Flv_CStyle.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Flv_Data_Source.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Flv_List.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Flv_Style.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Flv_Table.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Flve_Check_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Flve_Combo.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/Flve_Input.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/abi-version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/filename.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/fl_ask.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/fl_draw.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/fl_message.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/fl_show_colormap.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/fl_show_input.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/fl_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/fl_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/forms.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/gl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/gl2opengl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/gl_draw.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/glu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/glut.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/mac.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/names.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/platform_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/porting.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/win32.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/FL/x.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/GL/glut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/config-linux-working.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/config-linux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/config-mingw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/CodeEditor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/Fl_Type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/Fl_Widget_Type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/Fluid_Image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/Shortcut_Button.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/about_panel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/alignment_panel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/comments.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/function_panel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/ide_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/luacpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/print_panel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/template_panel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/undo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/fluid/widget_panel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/forms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jdct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jinclude.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jmemsys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jmorecfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jpegint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jpeglib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/mac_endianness.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/nanosvg/altsvgrast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/nanosvg/nanosvg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/png/png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/png/pngconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/png/pngdebug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/png/pnginfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/png/pnglibconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/png/pngpriv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/png/pngstruct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Gl_Choice.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_XColor.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/Xutf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/cgdebug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/config_lib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Cocoa/Fl_Cocoa_Screen_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Cocoa/Fl_Cocoa_Window_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Cocoa/Fl_MacOS_Sys_Menu_Bar_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Darwin/Fl_Darwin_System_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/GDI/Fl_Font.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/GDI/Fl_GDI_Graphics_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/OpenGL/Fl_OpenGL_Display_Device.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/OpenGL/Fl_OpenGL_Graphics_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Pico/Fl_Pico_Graphics_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Pico/Fl_Pico_Screen_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Pico/Fl_Pico_System_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Pico/Fl_Pico_Window_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoAndroid/Fl_PicoAndroid_Graphics_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoAndroid/Fl_PicoAndroid_Screen_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoAndroid/Fl_PicoAndroid_System_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoAndroid/Fl_PicoAndroid_Window_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoSDL/Fl_PicoSDL_Graphics_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoSDL/Fl_PicoSDL_Screen_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoSDL/Fl_PicoSDL_System_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/PicoSDL/Fl_PicoSDL_Window_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Posix/Fl_Posix_System_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Quartz/Fl_Font.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Quartz/Fl_Quartz_Copy_Surface_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Quartz/Fl_Quartz_Graphics_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/WinAPI/Fl_WinAPI_Screen_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/WinAPI/Fl_WinAPI_System_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/WinAPI/Fl_WinAPI_Window_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/X11/Fl_X11_Screen_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/X11/Fl_X11_System_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/X11/Fl_X11_Window_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Xlib/Fl_Font.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/drivers/Xlib/Fl_Xlib_Graphics_Driver.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/fastarrow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_cmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/flstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/freeglut_teapot_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/mediumarrow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/print_panel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/slowarrow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/utf8_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/Ximint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/Xlibint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/headers/case.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/headers/dingbats_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/headers/spacing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/headers/symbol_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/armscii_8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/ascii.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/big5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/big5_emacs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/cp1133.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/cp1251.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/cp1255.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/cp1256.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/cp936ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/gb2312.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/georgian_academy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/georgian_ps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_13.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_14.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_15.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/iso8859_9e.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/jisx0201.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/jisx0208.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/jisx0212.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/koi8_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/koi8_r.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/koi8_u.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/ksc5601.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/mulelao.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/tatar_cyr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/tcvn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/tis620.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/ucs2be.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/viscii.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/zlib/crc32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/zlib/deflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/zlib/gzguts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/zlib/inffast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/zlib/inffixed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/zlib/inflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/zlib/inftrees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/zlib/trees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/zlib/zconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/zlib/zlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/fltk/zlib/zutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/FBase.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/FDate.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/FSocket.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Fl_Time.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Fl_Time_Input.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/FluSimpleString.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/FluVectorClass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Chat_Buffer.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Choice_Group.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Collapsable_Group.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Combo_Box.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Combo_List.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Combo_Tree.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_DND.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Dual_Progress_Meter.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Dual_Slider.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Enumerations.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_File_Chooser.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Float_Input.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_GL_Canvas.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_GL_Window.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Helpers.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Int_Input.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Label.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Link_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Output.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Progress.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Progress_Meter.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Return_Button.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Separator.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Simple_Group.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Spinner.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Toggle_Group.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Tree_Browser.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/Flu_Wrap_Group.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/fl_html_label.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/flu_export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/flu_file_chooser_pixmaps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/FLU/flu_pixmaps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/src/FSocket_Posix.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/flu/src/FSocket_Win32.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/attribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/char_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/gumbo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/insertion_mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/string_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/string_piece.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/tag_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/tag_gperf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/tag_sizes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/tag_strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/token_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/tokenizer_states.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/gumbo/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_3dmeasure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_annotation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_catalog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_conf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_consts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_destination.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_doc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_encrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_encryptdict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_exdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_ext_gstate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_font.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_fontdef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_gstate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_mmgr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_namedict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_objects.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_outline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_page_label.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_pages.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_pdfa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_streams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_u3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/libharu/src/t4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/librs232/rs232.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/librs232/rs232_posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/librs232/rs232_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/minizip/ioapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/minizip/iowin32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/minizip/mztools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/minizip/unzip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/minizip/zip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/basearith.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/convolute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/crt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/difradix2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/fnt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/fourstep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/mpdecimal.32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/mpdecimal.64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/mpdecimal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/mpdecimal32vc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/mpdecimal64vc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/mptest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/mptypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/numbertheory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/sixstep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/typearith.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/umodarith.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/vccompat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/mpdecimal/vcstdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/myaxtls/bigint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/myaxtls/bigint_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/myaxtls/cert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/myaxtls/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/myaxtls/crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/myaxtls/crypto_misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/myaxtls/os_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/myaxtls/os_port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/myaxtls/private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/myaxtls/ssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/myaxtls/tls1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/myaxtls/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/unql/src/parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/unql/src/xjd1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squilu/unql/src/xjd1Int.h" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-editor/dadbiz.ico" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/images/bar.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/images/horSeparator.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/images/huawei-u8150-ideos.jpg" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/images/logoBackground.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/images/siteBackground.jpg" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/images/small-arrow.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/dadbiz_120.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/images/bar.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/images/horSeparator.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/images/logoBackground.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/images/postPic1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/images/postPic2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/images/postPic3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/images/siteBackground.jpg" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/images/small-arrow.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/SquiLu/dadbiz.ico" />
+    <Image Include="../../thirdparty/owemdjee/squilu/fltk/documentation/src/fluid-org.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/fltk/fluid/icons/fluid-128.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/fltk/fluid/icons/fluid-16.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/fltk/fluid/icons/fluid-16i.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/fltk/fluid/icons/fluid-256.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/fltk/fluid/icons/fluid-32.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/fltk/fluid/icons/fluid-32i.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/fltk/fluid/icons/fluid-48.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/fltk/fluid/icons/fluid-64.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/fltk/fluid/icons/fluid.ico" />
+    <Image Include="../../thirdparty/owemdjee/squilu/fltk/misc/MacRoman_utf-8.png" />
+    <Image Include="../../thirdparty/owemdjee/squilu/fltk/misc/cp1252.png" />
+    <NASM Include="../../thirdparty/owemdjee/squilu/mpdecimal/vcdiv64.asm" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/squilu/SquiLu-editor/dadbiz.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/squilu/SquiLu/dadbiz.rc" />
+    <Text Include="../../thirdparty/owemdjee/squilu/README.md" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/gui2nut" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/help.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/index.tpl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/license.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/mk-exe" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/mk-zexe" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/mk-zexe.bat" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/ourbiz-gui.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/pedidos2-gui.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/codemirror-compressed.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/codemirror.css" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/css/styles.css" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/dialogs.css" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/ajax-data-table.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/app-base.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/barchart.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/calendar-chooser.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/css/styles.css" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/dadlib.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/docs.css" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/editor.html" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/entities.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/etnetstrings.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/excanvas.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/gl-chart.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/gl-groups.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/gl-transactions.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/groups.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/index.html" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/jaml.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/length-encoded.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/listsearch.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/main-menu.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/measure-units.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/mk-it.bat" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/mobile.css" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/mobile.html" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/neat.css" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/order-types.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/orders.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/otnetstrings.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/payment-types.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/payments.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/products.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/sales-tax-rates.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/scroll.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/shortcut.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/style.css" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/tap.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/touch-all.bat" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/touch.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/s/ourbiz/warranty-types.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/sqlite3-cc-gui.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu-ourbiz/webappedit.tpl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/COMPILE" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/COPYRIGHT" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/HISTORY" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/Makefile-SquiLu" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/Makefile-SquiLu-OSX" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/Makefile-SquiLu-PI3" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/Makefile-SquiLu-ios" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/Makefile-SquiLu-ios-through-linux" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/Makefile-SquiLu-pi" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/Makefile-SquiLu-wince" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/README" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/do-mk-ios" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/doc/sqstdlib3.pdf" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/doc/squirrel3.pdf" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/mk-aix" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/mk-it" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/samples/binary-tree.lua" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/samples/crash/crash.js" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/samples/crash/do-zzuf" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/samples/crash/do-zzuf-samples" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/samples/crash/gen-failure" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/samples/n-body.lua" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/samples/run-clang-parser" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/samples/spectralnorm.lua" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/samples/test-div-mod.lua" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/samples/test-match.lua" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/samples/test-socket.lua" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/samples/test-sqpage.lua" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/sq/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/sqstdlib/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel.dsw" />
+    <Text Include="../../thirdparty/owemdjee/squilu/SquiLu/squirrel/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/COPYRIGHT" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/CREDITS" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/Plan9/README" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/Plan9/markdown.1" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/Plan9/markdown.2" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/Plan9/markdown.6" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/Plan9/mkfile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/README" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/VERSION" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/blocktags" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/config.cmd" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/config.md" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/configure.sh" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/librarian.sh" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/makepage.1" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/markdown.1" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/markdown.3" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/markdown.7" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/mkd-callbacks.3" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/mkd-extensions.7" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/mkd-functions.3" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/mkd-line.3" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/mkd2html.1" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/mkdio.h.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/tests/chrome.text" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/tests/embedlinks.text" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/tests/functions.sh" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/tests/links.text" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/tests/syntax.text" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/tests/syntax.text.html" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/theme.1" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/tools/checkbits.sh" />
+    <Text Include="../../thirdparty/owemdjee/squilu/discount/version.c.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/ANNOUNCEMENT" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/CHANGES" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/CMake/FLTKConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/CMake/UseFLTK.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/CMake/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/CREDITS" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/DartConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/FL/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/FL/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/FL/README.Xcode" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/README" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/README.Android.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/README.CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/README.Cairo.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/README.MSWindows.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/README.OSX.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/README.Pico.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/README.Unix.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/README.abi-version.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/VERSION" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/abi-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/abi-version.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/cairo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/cairo/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/cairo/makedepend" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/conf2708.sh" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/config.status" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/configh.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/configh.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/configure" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/do-conf" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/do-conf-mingwin32" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/do-conf-win32" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/documentation/Doxybook" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/documentation/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/documentation/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/documentation/README" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/documentation/TODO.doc" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/documentation/fltk.pdf" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/documentation/gcc-ast-overview.pdf" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/documentation/strip_tags" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fltk-config" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fltk-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fltk-config.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fltk.list.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fltk.spec" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fltk.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fltk.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/about_panel.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/about_panel.fl.lua" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/alignment_panel.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/fluid-main-win.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/fluid.app/Contents/PkgInfo" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/fluid.app/Contents/Resources/fluid.icns" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/fluid.geany" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/function_panel.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/icons/fluid-32.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/icons/fluid-96.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/luacpp.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/makedepend" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flAdjuster.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flBox.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flBrowser.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flButton.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flCheckBrowser.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flCheckButton.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flChoice.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flClass.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flClock.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flCode.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flCodeBlock.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flComment.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flCounter.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flData.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flDeclaration.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flDeclarationBlock.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flDial.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flFileBrowser.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flFileInput.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flFunction.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flGroup.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flHelp.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flInput.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flLightButton.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flMenuButton.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flMenubar.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flMenuitem.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flOutput.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flPack.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flProgress.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flRepeatButton.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flReturnButton.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flRoller.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flRoundButton.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flScroll.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flScrollBar.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flSlider.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flSpinner.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flSubmenu.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flTable.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flTabs.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flTextDisplay.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flTextEdit.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flTile.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flTree.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flValueInput.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flValueOutput.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flValueSlider.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flWidgetClass.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flWindow.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/flWizard.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/lock.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/print_color.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/print_gray.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/pixmaps/protected.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/print_panel.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/template_panel.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/test.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/test.fl.lua" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/fluid/widget_panel.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/ide/README.IDE" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/README" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/coderules.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/filelist.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/install.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/jconfig.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/libjpeg.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/makedepend" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/structure.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/usage.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/jpeg/wizard.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/makefiles/Makefile.mingw" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/makefiles/Makefile.os2x" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/makefiles/config.mingw" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/makefiles/config.os2x" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/makefiles/makeinclude.mingw" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/makefiles/makeinclude.mingw31" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/makefiles/makeinclude.os2x" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/makeinclude" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/makeinclude-cross-mingw" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/makeinclude-linux" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/makeinclude-mingw" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/makeinclude.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/makesrcdist" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/misc/MacRoman_utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/misc/README" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/misc/cp1252.html" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/misc/cp1252.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/misc/cp1252_utf-8.html" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/misc/cp1252_utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/misc/iso-8859-1.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/misc/iso-8859-1_utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/mk-linux" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/mk-mingw" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/nanosvg/altsvgrast.diff" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/nanosvg/nanosvg.diff" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/png/ANNOUNCE" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/png/CHANGES" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/png/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/png/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/png/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/png/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/png/README" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/png/TODO" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/png/libpng-manual.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/png/libpng.3" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/png/libpngpf.3" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/png/makedepend" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/png/png.5" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_File_Chooser.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/Fl_Help_Dialog.fl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_cursor_help.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_cursor_nesw.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_cursor_none.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_cursor_nwse.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/fl_cursor_wait.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/makedepend" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/tile.xpm" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/README" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/headers/case_tbl.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/headers/spacing_tbl.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/headers/tbl.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/COPYRIGHT" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/lcUniConv/README" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/ucs2fontmap.c.mini" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/utils/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/utils/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/utils/README" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/utils/case.sh" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/utils/non_spacing.sh" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/src/xutf8/utils/tbl_gen.sh" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/zlib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/zlib/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/zlib/FAQ" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/zlib/INDEX" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/zlib/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/zlib/README" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/zlib/makedepend" />
+    <Text Include="../../thirdparty/owemdjee/squilu/fltk/zlib/zlib.3" />
+    <Text Include="../../thirdparty/owemdjee/squilu/flu/FLU/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/flu/src/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/flu/src/makedepend" />
+    <Text Include="../../thirdparty/owemdjee/squilu/gumbo/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/squilu/gumbo/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/squilu/gumbo/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/gumbo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/squilu/gumbo/char_ref.rl" />
+    <Text Include="../../thirdparty/owemdjee/squilu/gumbo/tag.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/CHANGES" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/README" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/README_cmake" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/build.mk" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/buildconf.sh" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/do-conf" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/include/hpdf_config.h.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/libharu.DevPackage.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/libharu/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/squilu/minizip/MiniZip64_info.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/mpdecimal/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/mpdecimal/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/squilu/mpdecimal/mpdecimal_build_log.html" />
+    <Text Include="../../thirdparty/owemdjee/squilu/myaxtls/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/squilu/myaxtls/axtls_build_log.html" />
+    <Text Include="../../thirdparty/owemdjee/squilu/unql/src/parse.y" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF57EB7A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBYC;MRUBYC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBYC;MRUBYC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBYC;MRUBYC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBYC;MRUBYC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBYC;MRUBYC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBYC;MRUBYC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBYC;MRUBYC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBYC;MRUBYC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBYC;MRUBYC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBYC;MRUBYC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBYC;MRUBYC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMRUBYC;MRUBYC_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/hal/esp32/hal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/hal/posix/hal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/hal/psoc5lp/hal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/hal/rp2040/hal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/hal/stm32/hal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/sample_c/sample_concurrent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/sample_c/sample_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/sample_c/sample_include_bytecode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/sample_c/sample_myclass.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/sample_c/sample_no_scheduler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/sample_c/sample_scheduler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/c_array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/c_hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/c_math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/c_numeric.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/c_object.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/c_range.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/c_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/class.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/console.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/keyvalue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/mrblib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/rrt0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/symbol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/value.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mrubyc/src/vm.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/hal/esp32/hal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/hal/minimal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/hal/pic24/hal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/hal/posix/hal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/hal/psoc5lp/hal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/hal/rp2040/hal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/hal/stm32/hal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/_autogen_builtin_class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/_autogen_builtin_symbol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/_autogen_class_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/_autogen_class_exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/_autogen_class_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/_autogen_class_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/_autogen_class_integer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/_autogen_class_object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/_autogen_class_range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/_autogen_class_rrt0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/_autogen_class_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/_autogen_class_symbol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/_autogen_module_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/c_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/c_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/c_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/c_numeric.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/c_object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/c_range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/c_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/console.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/keyvalue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/load.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/mrubyc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/opcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/rrt0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/symbol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/vm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mrubyc/src/vm_config.h" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/doc/How_to_make_your_own_HAL.md" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/doc/c_KeywordArgument.md" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/doc/compile.md" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/doc/task_class.md" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/doc/test.md" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/mrblib/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/sample_c/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/src/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/src/VERSION" />
+    <Text Include="../../thirdparty/owemdjee/mrubyc/src/hal_selector.mk" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

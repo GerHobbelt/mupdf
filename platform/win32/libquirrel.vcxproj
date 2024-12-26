@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFCE8ED8}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUIRREL;QUIRREL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUIRREL;QUIRREL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUIRREL;QUIRREL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUIRREL;QUIRREL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUIRREL;QUIRREL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUIRREL;QUIRREL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUIRREL;QUIRREL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUIRREL;QUIRREL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUIRREL;QUIRREL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUIRREL;QUIRREL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUIRREL;QUIRREL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUIRREL;QUIRREL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/doc/repl/native.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/etc/minimal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/importParserTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/sq/sq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/sqmodules/path.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/sqmodules/sqmodules.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/sqstdlib/sqstdaux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/sqstdlib/sqstdblob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/sqstdlib/sqstddatetime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/sqstdlib/sqstddebug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/sqstdlib/sqstdio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/sqstdlib/sqstdmath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/sqstdlib/sqstdrex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/sqstdlib/sqstdstream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/sqstdlib/sqstdstring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/sqstdlib/sqstdsystem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/optimizations/closureHoisting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqapi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqastcodegen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqastparser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqbaselib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqbinaryast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqclass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqcompilationcontext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqcompiler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqdebug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqdirect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqfuncstate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqlexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqobject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqoptimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqstate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqstringlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqtable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/sqvm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/static_analyzer/analyzer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/vartrace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/quirrel/squirrel/vartracestub.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/importParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/helpers/keyValueFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/include/sqastio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/include/sqconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/include/sqdirect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/include/sqstdaux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/include/sqstdblob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/include/sqstddatetime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/include/sqstddebug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/include/sqstdio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/include/sqstdmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/include/sqstdstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/include/sqstdsystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/include/squirrel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/internal/sqstringlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqmodules/path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqmodules/sqmodules.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqmodules/sqratLite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat/sqratAllocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat/sqratArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat/sqratClass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat/sqratClassType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat/sqratConst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat/sqratFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat/sqratGlobalMethods.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat/sqratMemberMethods.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat/sqratObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat/sqratScript.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat/sqratTable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat/sqratTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqrat/include/sqrat/sqratUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqstdlib/sqstdblobimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/sqstdlib/sqstdstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/optimizations/closureHoisting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqarray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqast_tree_dump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqastcodegen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqastparser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqastrender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqbinaryast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqclass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqclosure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqcompilationcontext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqcompiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqfuncproto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqfuncstate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqlexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqobject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqopcodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqoptimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqpcheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqstate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/squserdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/squtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/sqvm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/static_analyzer/analyzer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/quirrel/squirrel/vartrace.h" />
+    <Image Include="../../thirdparty/owemdjee/quirrel/doc/repl/static/repl.ico" />
+    <Image Include="../../thirdparty/owemdjee/quirrel/doc/source/_static/nut.ico" />
+    <Image Include="../../thirdparty/owemdjee/quirrel/doc/source/_static/simple_nut.png" />
+    <Image Include="../../thirdparty/owemdjee/quirrel/doc/source/nut.ico" />
+    <Image Include="../../thirdparty/owemdjee/quirrel/doc/source/simple_nut.png" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/COMPILE" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/COPYRIGHT" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/HISTORY" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/README.md" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/repl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/repl/build.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/repl/static/repl-rst.css" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/repl/static/repl.css" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/repl/static/repl.html" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/repl/static/replmain.js" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/_static/custom.css" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/_templates/page.html" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/diff_from_original.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/introduction.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/modules/bindings.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/modules/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/quirrel.py" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/quirrel_pygment_lexer.py" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/api/bytecode_serialization.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/api/calls.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/api/compiler.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/api/debug_interface.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/api/garbage_collector.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/api/object_creation_and_handling.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/api/object_manipulation.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/api/raw_object_handling.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/api/stack_operations.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/api/virtual_machine.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/api_reference.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/build_configuration.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/calling_a_function.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/compiling_a_script.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/creating_a_c_function.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/debug_interface.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/error_conventions.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/memory_management.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/references_from_c.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/runtime_error_handling.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/tables_and_arrays_manipulation.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/the_registry_table.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/the_stack.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/userdata_and_userpointers.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding/vm_initialization.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/embedding_squirrel.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/arrays.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/builtin_functions.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/classes.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/compiler_directives.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/constants_and_enumerations.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/datatypes.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/destructuring_assignment.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/expressions.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/functions.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/generators.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/lexical_structure.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/limitations.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/metamethods.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/statements.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/string_interpolation.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/tables.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/threads.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/reference/language/weak_references.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/repl/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/rfcs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/rfcs/STATUS.md" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/stdlib/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/stdlib/introduction.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/stdlib/stdauxlib.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/stdlib/stdbloblib.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/stdlib/stddatetimelib.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/stdlib/stddebuglib.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/stdlib/stdiolib.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/stdlib/stdmathlib.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/stdlib/stdstringlib.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/doc/source/stdlib/stdsystemlib.rst" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/tests/1.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/tests/10.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/tests/11.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/tests/2.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/tests/3.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/tests/4.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/tests/5.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/tests/6.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/tests/7.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/tests/8.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/tests/9.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/helpers/importParser/tests/run_tests.bat" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/sq/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/sqmodules/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/sqrat/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/sqstdlib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/squirrel-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/squirrel/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/ast/optimizations/closureHoisting/classCrossFunc.opt.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/ast/optimizations/closureHoisting/classSimple.opt.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/ast/optimizations/closureHoisting/constDep.opt.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/ast/optimizations/closureHoisting/deepUnchained.opt.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/ast/optimizations/closureHoisting/externalSymbol.opt.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/ast/optimizations/closureHoisting/implicitChainedFuncs.opt.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/ast/optimizations/closureHoisting/implicitChainedFuncs2.opt.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/ast/optimizations/closureHoisting/manyFuncs.opt.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/ast/optimizations/closureHoisting/recursion1.opt.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/ast/optimizations/closureHoisting/simple.opt.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/ast/optimizations/closureHoisting/simple2.opt.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/1000_local_variables.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/50k_access_member.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/50k_curly_brackets.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/50k_function_calls.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/50k_lambdas.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/50k_nested_tables.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/50k_not.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/50k_paren_brackets.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/50k_square_brackets.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/50r_binop.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/assign_to_expr.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/assign_to_expr2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/assign_to_optional_7.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/base_as_array_assign.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/base_as_array_pp.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/base_pp.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/base_x_pp.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/binding_assign.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/clone_op_allowed.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/clone_op_allowed.nut.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/clone_op_forbiden.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/clone_op_forbiden.nut.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/const_scope_1.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/const_scope_2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/const_scope_3.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/const_scope_4.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/const_scope_5.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/delete_base.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/delete_forbid_pragma.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/delete_forbid_pragma.nut.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/float_overflow.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/float_underflow.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/hex_overflow.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/integer_overflow.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/integer_overflow_2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/integer_overflow_int_max.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/interp_str_hanging_missed_ccurvy.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/interp_str_not_string.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/interp_str_not_string_2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/interp_str_wrong_template.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/invalid_float_1.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/invalid_float_2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/invalid_float_3.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/invalid_string_interp_1.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/leading_zero_1.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/leading_zero_2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/leading_zero_3.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/letAssign.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/many_args_in_function_call.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/need_space_after_float.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/need_space_after_hex.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/need_space_after_int.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/space_sep_name.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/space_sep_name.nut.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/space_sep_name_space.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/space_sep_name_space.nut.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/unfinished_hex.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/var_scope_1.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/var_scope_2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/var_scope_3.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/var_scope_4.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/diagnostics/var_scope_5.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/200_nullc.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/248_instanceof.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/efferct_fropm_call.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/foo.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/forloop_merge.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/function_rt_detect.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/intersected_assignment.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/klass_check.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/logic_ops_paren.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/loop_state.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/nullcheck_ternary.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/param_check.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w190.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w192.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w200.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w200_3wcmp.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w200_arith.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w200_arith_deep.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w200_arith_plus_eq.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w200_special_func_name.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w200_stringconcat.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w203.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w204.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w205-2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w205.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w206.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w206_arith.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w208.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w208_rec.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w209.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w210.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w210_complex.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w210_deep.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w210_def.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w210_nullc.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w211.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w212.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w213.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w214.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w215.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w215_nullc.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w216.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w217_break.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w217_complex.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w217_cond_cont.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w217_continue.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w217_ret.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w217_throw.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w220.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w220_deep.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w221.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w221_delete.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w222.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w222_deep.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w223.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w223_method_is.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w224_then.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w224_while.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w225.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w225_empty_stmt.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w225_switch.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w226.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w227.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w227_external.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w227_fn_with_same_param.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w227_lambdas.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w227_let_init_fun.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w227_table.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w227_varargs.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w228.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w228_2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w228_3.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w228_4.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w228_table.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w228_trivial.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w229.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w231.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w232_cascade.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w232_false.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w232_lambda.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w232_nerge.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w232_not.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w232_ter.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w232_ternary.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w232_true.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w233.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w233_const_key.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w233_deep.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w233_destruct.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w233_inc.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w233_inc_in_for.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w234.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w235.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w236.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w238_idname.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w238_isis.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w238_sqconfig.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w239.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w239_sqconfig.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w240.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w241.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w241_conditional.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w244.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_andnad1.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_andor.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_assert.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_chain.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_complex2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_complex_key.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_complexcond.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_eq_get.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_evaled.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_getfield.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_in.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_in_container.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_not.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_nullc_2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_nullc_3.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_oror.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_oror2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_override.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_relative_pred.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_special_name_func.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_terminated_branch1.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_tyopeof1.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_tyopeof2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_type_func.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w248_while_cond.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w249.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w249_array.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w250.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w251.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w254.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w254_instanceof.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w254_notin.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w255.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w255_2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w256.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w257.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w258.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w258_2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w259.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w260_local_function.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w260_table.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w260_table_sqconfig.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w262.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w263.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w264.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w266.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w267.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w269.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w270.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w271.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w272.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w273.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w274.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w274_2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w275.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w275_all_variants.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w275_complex.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w277.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w277.nut.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w279_1.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w279_2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w280.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w281.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w283.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w284.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w285.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w286.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w286_2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w286_oror_andand.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w287.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w288.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w288_dp_va.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w288_lambdas2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w288_native.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w288_require.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w288_require_indirect.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w289.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w291.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w292.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w293.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w295.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w297.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w301_closure.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w301_closure2.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w302.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w302_dowhile.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w302_loop.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w302_try_catch.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w303_destruct.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w305.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w306.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w308.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w309_require.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w310_require.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testData/static_analyzer/w312_require.diag.txt" />
+    <Text Include="../../thirdparty/owemdjee/quirrel/testRunner.py" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

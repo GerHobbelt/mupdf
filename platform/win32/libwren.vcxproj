@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF9478F9}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWREN;WREN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWREN;WREN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWREN;WREN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWREN;WREN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWREN;WREN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWREN;WREN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWREN;WREN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWREN;WREN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWREN;WREN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWREN;WREN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWREN;WREN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWREN;WREN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/wren/example/embedding/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/src/optional/wren_opt_meta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/src/optional/wren_opt_random.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/src/vm/wren_compiler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/src/vm/wren_core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/src/vm/wren_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/src/vm/wren_primitive.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/src/vm/wren_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/src/vm/wren_value.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/src/vm/wren_vm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/api_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/benchmark.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/call.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/call_calls_foreign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/call_wren_call_root.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/foreign_class.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/get_variable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/lists.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/maps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/new_vm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/reset_stack_after_call_abort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/reset_stack_after_foreign_construct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/resolution.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/slots.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/api/user_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/unit/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/unit/path_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/test/unit/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/wren/try/main.try.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/include/wren.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/include/wren.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/optional/wren_opt_meta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/optional/wren_opt_meta.wren.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/optional/wren_opt_random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/optional/wren_opt_random.wren.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/vm/wren_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/vm/wren_compiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/vm/wren_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/vm/wren_core.wren.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/vm/wren_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/vm/wren_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/vm/wren_opcodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/vm/wren_primitive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/vm/wren_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/vm/wren_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/src/vm/wren_vm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/api_tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/call.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/call_calls_foreign.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/call_wren_call_root.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/foreign_class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/get_variable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/lists.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/maps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/new_vm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/reset_stack_after_call_abort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/reset_stack_after_foreign_construct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/resolution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/slots.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/api/user_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/unit/path_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wren/test/unit/test.h" />
+    <Text Include="../../thirdparty/owemdjee/wren/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/wren/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/wren/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/wren/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/error-handling.txt" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/implicit fields.txt" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/instruction counts.txt" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/notes/import syntax.md" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/notes/re-entrancy.md" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/receiver-less calls 2.txt" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/receiver-less calls.txt" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/rfc/0001-smarter-imports.md" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/blog/0-hello-wren.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/blog/1-0.2.0-and-beyond.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/blog/2-0.3.0-released.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/blog/3-0.4.0-released.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/blog/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/blog/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/classes.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/io/directory.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/io/file-flags.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/io/file.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/io/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/io/stat.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/io/stdin.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/io/stdout.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/io/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/os/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/os/platform.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/os/process.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/os/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/scheduler/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/scheduler/scheduler.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/scheduler/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/timer/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/timer/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/modules/timer/timer.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/cli/usage.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/concurrency.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/contributing.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/control-flow.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/embedding/calling-c-from-wren.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/embedding/calling-wren-from-c.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/embedding/configuring-the-vm.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/embedding/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/embedding/slots-and-handles.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/embedding/storing-c-data.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/embedding/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/error-handling.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/functions.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/getting-started.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/lists.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/maps.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/method-calls.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modularity.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/bool.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/class.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/fiber.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/fn.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/list.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/map.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/null.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/num.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/object.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/range.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/sequence.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/string.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/system.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/core/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/meta/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/meta/meta.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/meta/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/random/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/random/random.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/random/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/modules/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/performance.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/qa.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/static/codejar-linenumbers.js" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/static/codejar.js" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/static/lzstring.min.js" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/static/prism.css" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/static/prism.js" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/static/style.css" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/static/wren.js" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/static/wren.svg" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/static/wren_try.js" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/static/wren_try.wasm" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/syntax.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/try/index.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/try/template.html" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/values.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/doc/site/variables.markdown" />
+    <Text Include="../../thirdparty/owemdjee/wren/projects/make.bsd/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/wren/projects/make.mac/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/wren/projects/make/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/wren/projects/premake/premake5.lua" />
+    <Text Include="../../thirdparty/owemdjee/wren/src/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/binary_trees.lua" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/binary_trees.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/delta_blue.lua.inprogress" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/delta_blue.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/fannkuch.lua" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/fannkuch.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/fib.lua" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/fib.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/for.lua" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/for.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/map_numeric.lua" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/map_numeric.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/map_string.lua" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/map_string.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/method_call.lua" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/method_call.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/test/benchmark/string_equals.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/try/make.emscripten/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/wren/try/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/wren/util/benchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/util/deploy_docs_from_travis.sh" />
+    <Text Include="../../thirdparty/owemdjee/wren/util/generate_amalgamation.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/util/generate_docs.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/util/generate_projects.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/util/metrics.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/util/test.py" />
+    <Text Include="../../thirdparty/owemdjee/wren/util/wren_to_c_string.py" />
+    <Xml Include="../../thirdparty/owemdjee/wren/doc/site/blog/rss.xml" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

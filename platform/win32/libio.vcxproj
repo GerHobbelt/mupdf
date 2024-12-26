@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA393E0}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIO;IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIO;IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIO;IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIO;IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIO;IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIO;IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIO;IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIO;IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIO;IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIO;IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIO;IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIO;IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/symbian/SymbianSockets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/symbian/symbianmain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/IoApp/IoAppSetup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/IoApp/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_callbacks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_cursor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_display.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_ext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_font.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_font_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_gamemode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_geometry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_glutfont_definitions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_joystick.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_menu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_overlay.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_stroke_mono_roman.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_stroke_roman.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_structure.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_teapot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_videoresize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_window.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/BStream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/BStreamTag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/CHash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/Common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/Date.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/Duration.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/DynLib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/Hash_fnv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/Hash_murmur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/Hash_superfast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/List.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/MainArgs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/PointerHash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableGettimeofday.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableSnprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableSorting.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableStrlcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableStrptime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableTruncate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableUsleep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/RandomGen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/Stack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_character.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_format.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_utf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/_new/Directory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/cdecode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/cencode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/simd_cph/test/test_simd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/ucs2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/ucs4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/basekit/source/utf_convert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/coroutine/samples/twoCoroTest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/coroutine/source/Coro.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/coroutine/source/context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/garbagecollector/source/Collector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/garbagecollector/source/CollectorMarker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoBlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoCFunction.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoCall.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoCollector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoCompiler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoCoroutine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoDate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoDebugger.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoDirectory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoDuration.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoDynLib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoError.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoFile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoFile_stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoLexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoList.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoMap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoMessage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoMessage_opShuffle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoMessage_parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoNumber.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoObject.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoObject_flow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoProfiler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoSandbox.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoSeq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoSeq_immutable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoSeq_mutable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoSeq_vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState_callbacks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState_coros.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState_eval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState_exceptions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState_symbols.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoSystem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoTag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoToken.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoWeakLink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/source/PHash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/libs/iovm/tools/io2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/io/tools/source/main.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/extras/IoLanguageKit/IoLanguageKit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/extras/IoTest/IoTest/IoBrowserController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/extras/IoTest/IoTest/IoCLIController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/extras/symbian/SymbianSockets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/extras/symbian/symbianmain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/extras/win32vc2005/IoApp/IoAppSetup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/include/GL/freeglut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/include/GL/freeglut_ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/include/GL/freeglut_std.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/include/GL/glut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/src/freeglut_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/extras/xcode/Io/Io/IoAppDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/extras/xcode/Io/Io/TextDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/BStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/BStreamTag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/Base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/CHash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/CHash_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/Common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/Common_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/Date.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/Duration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/DynLib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/Hash_fnv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/Hash_murmur.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/Hash_superfast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/List.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/List_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/MainArgs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/PointerHash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/PointerHash_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/PointerHash_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableGettimeofday.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableSorting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableStdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableStrlcpy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableStrptime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableTruncate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/PortableUsleep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/RandomGen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/Stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/Stack_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_character.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/UArray_utf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/cdecode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/cencode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/simd_cph/include/simd_cp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/simd_cph/include/simd_cp_arm-iwmmx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/simd_cph/include/simd_cp_emu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/simd_cph/include/simd_cp_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/utf8internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/basekit/source/utf_convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/coroutine/source/386-ucontext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/coroutine/source/Coro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/coroutine/source/amd64-ucontext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/coroutine/source/power-ucontext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/coroutine/source/taskimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/garbagecollector/source/Collector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/garbagecollector/source/CollectorMarker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/garbagecollector/source/CollectorMarker_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/garbagecollector/source/Collector_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoCFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoCall.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoCollector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoCompiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoCoroutine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoDate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoDebugger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoDirectory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoDuration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoDynLib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoError.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoFile_stat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoMessage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoMessage_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoMessage_opShuffle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoMessage_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoNumber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoObject_flow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoObject_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoObject_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoProfiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoSandbox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoSeq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoSeq_immutable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoSeq_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoSeq_mutable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoSeq_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState_callbacks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState_coros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState_eval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState_exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoState_symbols.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoSystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoTag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoTag_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoToken.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoVM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoVMApi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoVersion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/IoWeakLink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/PHash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/PHash_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/io/libs/iovm/source/PHash_struct.h" />
+    <Image Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/SubEthaEdit/Io.mode/Contents/Resources/pole.gif" />
+    <Text Include="../../thirdparty/owemdjee/io/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/README.md" />
+    <Text Include="../../thirdparty/owemdjee/io/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/IoCodingStandards.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/IoGuide.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/IoTutorial.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/docs.css" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/js/browser.js" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/js/jquery.js" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Apple/AppleSensors/AppleSensors/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Apple/AppleSensors/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Apple/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/LibSndFile/LibSndFile/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/LibSndFile/Sound/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/LibSndFile/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/Ogg/OggPacket/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/Ogg/OggPage/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/Ogg/OggStreamState/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/Ogg/OggSyncState/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/Ogg/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/PortAudio/AudioDevice/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/PortAudio/AudioMixer/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/PortAudio/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/SampleRateConverter/SampleRateConverter/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/SampleRateConverter/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/SoundTouch/SoundTouch/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/SoundTouch/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/TagLib/TagLib/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/TagLib/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Audio/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Bridges/CFFI/CFFI/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Bridges/CFFI/CFFIPointer/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Bridges/CFFI/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Bridges/ObjcBridge/ObjcBridge/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Bridges/ObjcBridge/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Bridges/Python/Python/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Bridges/Python/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Bridges/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Compilers/Loki/Linker/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Compilers/Loki/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Compilers/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Compression/LZO/LZO/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Compression/LZO/LZODecoder/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Compression/LZO/LZOEncoder/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Compression/LZO/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Compression/Zlib/Zlib/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Compression/Zlib/ZlibDecoder/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Compression/Zlib/ZlibEncoder/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Compression/Zlib/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Compression/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Concurrency/Thread/Thread/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Concurrency/Thread/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Concurrency/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Block/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/CFunction/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Call/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Collector/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Compiler/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Coroutine/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Date/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Debugger/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Directory/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/DynLib/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Error/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Exception/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/File/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/List/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Map/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Message/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Number/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Object/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Profiler/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Sandbox/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Scheduler/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/Sequence/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/System/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/WeakLink/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Core/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Flux/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/NotificationCenter/Notification/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/NotificationCenter/NotificationCenter/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/NotificationCenter/NotificationListener/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/NotificationCenter/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Range/Range/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/Range/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Core/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/DBI/DBI/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/DBI/DBIConn/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/DBI/DBIRecord/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/DBI/DBIResult/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/DBI/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/Memcached/Memcached/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/Memcached/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/MySQL/MySQL/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/MySQL/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/Obsidian/Obsidian/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/Obsidian/ObsidianClient/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/Obsidian/ObsidianServer/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/Obsidian/PDB/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/Obsidian/PMap/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/Obsidian/PObject/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/Obsidian/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/Postgres/Postgres/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/Postgres/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/QDBM/QDBM/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/QDBM/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/SQLite/SQLite/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/SQLite/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/SQLite3/SQLite3/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/SQLite3/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/SkipDB/SkipDB/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/SkipDB/SkipDBCursor/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/SkipDB/SkipDBM/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/SkipDB/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/SqlDatabase/SqlDatabase/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/SqlDatabase/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/TagDB/TagDB/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/TagDB/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/TokyoCabinet/TokyoCabinet/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/TokyoCabinet/TokyoCabinetCursor/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/TokyoCabinet/TokyoCabinetPrefixCursor/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/TokyoCabinet/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Databases/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Digests/MD5/MD5/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Digests/MD5/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Digests/Oauth/Oauth/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Digests/Oauth/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Digests/SHA1/SHA1/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Digests/SHA1/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Digests/UUID/UUID/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Digests/UUID/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Digests/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Encryption/Blowfish/Blowfish/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Encryption/Blowfish/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Encryption/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Filesystem/AsyncRequest/AsyncRequest/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Filesystem/AsyncRequest/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Filesystem/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Box/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/Cairo/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoContext/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoExtents/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoFontExtents/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoFontFace/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoFontOptions/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoGlyph/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoGradient/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoImageSurface/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoLinearGradient/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoMatrix/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoPath/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoPathElement/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoPattern/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoRadialGradient/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoRectangle/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoScaledFont/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoSolidPattern/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoSurface/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoSurfacePattern/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/CairoTextExtents/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Cairo/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Font/Font/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Font/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/GLFW/GLFW/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/GLFW/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Image/Image/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/Image/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/OpenGL/Box/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/OpenGL/GLApp/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/OpenGL/GLScissor/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/OpenGL/GLU/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/OpenGL/GLUQuadric/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/OpenGL/GLUT/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/OpenGL/OpenGL/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/OpenGL/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Graphics/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Math/BigNum/BigNum/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Math/BigNum/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Math/ContinuedFraction/ContinuedFraction/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Math/ContinuedFraction/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Math/Random/Random/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Math/Random/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Math/Rational/Rational/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Math/Rational/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Math/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Beanstalk/Beanstalk/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Beanstalk/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/CGI/CGI/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/CGI/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/DistributedObjects/DOConnection/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/DistributedObjects/DOProxy/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/DistributedObjects/DOServer/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/DistributedObjects/MDOConnection/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/DistributedObjects/MDOServer/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/DistributedObjects/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/GoogleSearch/GooglePage/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/GoogleSearch/GoogleSearch/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/GoogleSearch/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/HttpClient/HCConnection/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/HttpClient/HCRequest/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/HttpClient/HCResponse/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/HttpClient/HCResponseParser/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/HttpClient/HCUrl/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/HttpClient/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Loudmouth/JID/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Loudmouth/Loudmouth/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Loudmouth/LoudmouthMessage/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Loudmouth/XmppChatMessage/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Loudmouth/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/NetworkAdapter/NetworkAdapter/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/NetworkAdapter/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/SecureSocket/Certificate/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/SecureSocket/SecureClient/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/SecureSocket/SecureServer/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/SecureSocket/SecureSocket/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/SecureSocket/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/DNS/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/DNSQuery/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/DNSServer/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/EvConnection/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/EvRequest/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/Event/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/EventManager/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/Host/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/IPAddress/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/ReadEvent/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/Server/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/SignalEvent/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/Socket/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/TimerEvent/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/URL/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/WriteEvent/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Socket/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Twitter/TwitterAccount/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Twitter/TwitterAccountProfile/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Twitter/TwitterException/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Twitter/TwitterFollowersCursor/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Twitter/TwitterFriendsCursor/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Twitter/TwitterRequest/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Twitter/TwitterResponse/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Twitter/TwitterSearch/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Twitter/TwitterSearchCursor/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Twitter/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Volcano/VolcanoServer/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/Volcano/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Networking/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/Fnmatch/Fnmatch/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/Fnmatch/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/Libxml2/XmlReader/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/Libxml2/XmlWriter/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/Libxml2/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/Regex/Regex/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/Regex/RegexMatch/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/Regex/RegexMatches/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/Regex/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/SGML/SGMLElement/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/SGML/SGMLParser/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/SGML/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/Yajl/YajlGenParser/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/Yajl/YajlParser/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/Yajl/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Parsers/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODEBall/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODEBody/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODEBox/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODEContact/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODEContactJoint/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODEFixed/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODEHinge/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODEHinge2/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODEJoint/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODEJointGroup/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODEMass/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODEPlane/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODESimpleSpace/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/ODEWorld/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/ODE/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Physics/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/Curses/Curses/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/Curses/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/EditLine/EditLine/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/EditLine/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/NullAddon/NullAddon/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/NullAddon/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/ReadLine/ReadLine/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/ReadLine/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/Syslog/Syslog/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/Syslog/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/SystemCall/SystemCall/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/SystemCall/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/User/User/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/User/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Server/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/UserInterface/Clutter/Clutter/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/UserInterface/Clutter/ClutterActor/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/UserInterface/Clutter/ClutterActorBox/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/UserInterface/Clutter/ClutterColor/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/UserInterface/Clutter/ClutterEvent/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/UserInterface/Clutter/ClutterInputDevice/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/UserInterface/Clutter/ClutterShader/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/UserInterface/Clutter/ClutterStage/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/UserInterface/Clutter/ClutterUnits/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/UserInterface/Clutter/ClutterVertex/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/UserInterface/Clutter/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/UserInterface/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Video/AVCodec/AVCodec/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Video/AVCodec/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Video/Theora/TheoraComment/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Video/Theora/TheoraDecodeContext/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Video/Theora/TheoraInfo/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Video/Theora/TheoraSetupInfo/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Video/Theora/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Video/Vorbis/VorbisBlock/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Video/Vorbis/VorbisComment/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Video/Vorbis/VorbisDspState/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Video/Vorbis/VorbisInfo/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Video/Vorbis/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/Video/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/docs.json" />
+    <Text Include="../../thirdparty/owemdjee/io/docs/reference/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/IoLanguageKit/IoLanguageKit.xcodeproj/project.xcworkspace/xcuserdata/steve.xcuserdatad/WorkspaceSettings.xcsettings" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/IoLanguageKit/IoLanguageKit/en.lproj/InfoPlist.strings" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/IoTest/IoTest/en.lproj/Credits.rtf" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/IoTest/IoTest/en.lproj/InfoPlist.strings" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/Emacs/io-mode-old.el" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/Emacs/io-mode.el" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/IntelliJ/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/Io.tmbundle/Preferences/Indent.tmPreferences" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/Io.tmbundle/Preferences/Typing Pattern.tmPreferences" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/JEdit/_ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/Komodo/io-1.2-ko.xpi" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/Scintilla/Io.properties" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/SubEthaEdit/Io.mode/Contents/Resources/English.lproj/InfoPlist.strings" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/SubEthaEdit/SubEthaEdit Io mode read me.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/XCode/Io.pbfilespec" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/XCode/Io.pblangspec" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/XCode/_ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/osx/osx.1" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/osx/osx.xcodeproj/steve.mode1" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/osx/osx.xcodeproj/steve.mode2v3" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/osx/osx.xcodeproj/steve.pbxuser" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/osxvm/osxvm.xcodeproj/steve.mode1" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/osxvm/osxvm.xcodeproj/steve.mode2v3" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/symbian/ABLD.BAT" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/symbian/Bld.inf" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/symbian/io.rss" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/win32vc10/io/iovm/scripts/microsed.js" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/win32vc10/io/iovm/scripts/microxargs.js" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/doc/download.html" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/doc/freeglut.html" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/doc/freeglut_user_interface.html" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/doc/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/doc/progress.html" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/win32vc2005/freeglut-2.2.0/doc/structure.html" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/xcode/Io/Io/en.lproj/Credits.rtf" />
+    <Text Include="../../thirdparty/owemdjee/io/extras/xcode/Io/Io/en.lproj/InfoPlist.strings" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/basekit/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/basekit/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/basekit/depends" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/basekit/source/simd_cph/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/basekit/source/simd_cph/docs/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/basekit/source/simd_cph/simd_cph.readme" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/basekit/source/simd_cph/test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/basekit/source/simd_cph/test/test_simd_emu" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/coroutine/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/coroutine/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/coroutine/depends" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/coroutine/docs/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/coroutine/samples/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/coroutine/source/asm.S" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/garbagecollector/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/garbagecollector/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/garbagecollector/depends" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/garbagecollector/docs/index.html" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/iovm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/iovm/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/iovm/depends" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/iovm/tests/correctness/UnicodeTest-helper/UnicodeTest.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/libs/iovm/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/samples/shootout/mandelbrot-output.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/samples/shootout/sumcol-input.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/samples/shootout/sumcol-output.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/samples/speed/SpeedResults" />
+    <Text Include="../../thirdparty/owemdjee/io/samples/speed/SpeedResults.html" />
+    <Text Include="../../thirdparty/owemdjee/io/samples/speed/speed.py" />
+    <Text Include="../../thirdparty/owemdjee/io/samples/speed/speed.rebol" />
+    <Text Include="../../thirdparty/owemdjee/io/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/io/tools/docker/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/io/tools/docker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/io/tools/docker/buildDockerIo.sh" />
+    <Text Include="../../thirdparty/owemdjee/io/tools/docker/runDockerIo.sh" />
+    <Xml Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/IntelliJ/Io.xml" />
+    <Xml Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/JEdit/io.xml" />
+    <Xml Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/Kate/io.xml" />
+    <Xml Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/SubEthaEdit/Io.mode/Contents/Resources/RegexSymbols.xml" />
+    <Xml Include="../../thirdparty/owemdjee/io/extras/SyntaxHighlighters/SubEthaEdit/Io.mode/Contents/Resources/SyntaxDefinition.xml" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

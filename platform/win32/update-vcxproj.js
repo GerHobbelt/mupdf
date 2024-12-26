@@ -260,7 +260,11 @@ src = src
     return `<Link>${p1}</Link>`;
 })
 .replace(/<ItemDefinitionGroup\s*\/>/g, '')
-.replace(/<Import[^>]+common-project\.props" \/>/g, '')
+//   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+//    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+//   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+.replace(/<Import[^>]+common-project\.props"(?:\s+Label="[^"]+")?\s*\/>/g, '')
+.replace(/<Import[^>]+common-project-ultimate-override\.props"(?:\s+Label="[^"]+")?\s*\/>/g, '')
 .replace(/<ImportGroup\s+Label="PropertySheets"\s*\/>/g, '')
 .replace(/<ImportGroup\s+Label="PropertySheets"[^]*?<\/ImportGroup>/g, '')
 .replace(/<EnableUnitySupport>[^<]*<\/EnableUnitySupport>/g, '')
@@ -558,6 +562,13 @@ src = src
     .replace(/<AdditionalOptions>\/utf-8 %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
     .replace(/<AdditionalOptions>\/Zc:__cplusplus \/utf-8 %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
 
+	// remove <Link> fields which are defined in common-project.props
+    p2 = p2
+    .replace(/<GenerateMapFile>[^]*?<\/GenerateMapFile>/g, '')
+    .replace(/<MapFileName>[^]*?<\/MapFileName>/g, '')
+    .replace(/<MapExports>[^]*?<\/MapExports>/g, '')
+    .replace(/<Profile>[^]*?<\/Profile>/g, '')
+
     return `<ItemDefinitionGroup${p1}>${p2}</ItemDefinitionGroup>`;
 });
 
@@ -596,9 +607,7 @@ src = src
 .replace(/<Import Project="[^>]+Microsoft\.Cpp\.props"\s+\/>/, (m) => {
   return `${m}
 
-  <ImportGroup Label="PropertySheets" >
-    <Import Project="$(SolutionDir)\\common-project.props" Label="SolutionWideSettings" />
-  </ImportGroup>
+  <Import Project="$(SolutionDir)\\common-project.props" Label="SolutionWideSettings" />
 
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
@@ -620,9 +629,9 @@ src = src
 // makes this bunch the ultimate winners, just in case we need it:
 .replace(/[\s\r\n]<\/Project>[\s\r\n]*$/, (m) => {
   return `
-  <ImportGroup Label="PropertySheets" >
-    <Import Project="$(SolutionDir)\\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
-  </ImportGroup>
+
+  <Import Project="$(SolutionDir)\\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+
 ${m}
   `;
 });

@@ -50,20 +50,20 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -111,7 +111,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -145,8 +145,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="Algo_Ds_Notes.vcxproj">
@@ -161,8 +161,17 @@
     <ProjectReference Include="asio_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff23dd14}</Project>
     </ProjectReference>
+    <ProjectReference Include="Awesome-Document-Image-Rectification.vcxproj">
+      <Project>{3644e12d-d934-41fd-bf7e-83745a6e777b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Awesome-Image-Quality-Assessment.vcxproj">
+      <Project>{3644e12d-d934-41fd-bf7e-83745abdc184}</Project>
+    </ProjectReference>
     <ProjectReference Include="base58x_test.vcxproj">
       <Project>{ace48c47-b9f9-460f-8535-08c8d37d78c5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="bibutils.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff55313e}</Project>
     </ProjectReference>
     <ProjectReference Include="bin2cpp.vcxproj">
       <Project>{00811970-815b-4f64-bc9d-2190785a9321}</Project>
@@ -188,6 +197,9 @@
     <ProjectReference Include="civetweb_demo.vcxproj">
       <Project>{ae53abab-185a-4d65-9fb3-ada5ddf39588}</Project>
     </ProjectReference>
+    <ProjectReference Include="civetweb_example.vcxproj">
+      <Project>{da15b2f9-6058-4645-88c7-ebfbc2351b2e}</Project>
+    </ProjectReference>
     <ProjectReference Include="cli11_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff2138bb}</Project>
     </ProjectReference>
@@ -200,11 +212,26 @@
     <ProjectReference Include="cmph-hasher_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518334b99fd}</Project>
     </ProjectReference>
+    <ProjectReference Include="copy_executables_to_solution_basedir.vcxproj">
+      <Project>{c6303e5b-2ffb-4cde-a1d5-141e7552bd4b}</Project>
+    </ProjectReference>
     <ProjectReference Include="cpplocate.vcxproj">
       <Project>{00811970-815b-4f64-bc9d-219078c74995}</Project>
     </ProjectReference>
     <ProjectReference Include="cpplocate_tests.vcxproj">
       <Project>{00811970-815b-4f81-bc9d-219078c74995}</Project>
+    </ProjectReference>
+    <ProjectReference Include="cppzmq.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff81743}</Project>
+    </ProjectReference>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="cuckoo-index.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff75fb3d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="cuckoofilter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff12ef8a}</Project>
     </ProjectReference>
     <ProjectReference Include="curl.vcxproj">
       <Project>{00111979-815b-4f64-bc9d-219078b1f3aa}</Project>
@@ -212,17 +239,29 @@
     <ProjectReference Include="cxxtest_tests.vcxproj">
       <Project>{105f884a-c170-4c30-a810-c7da2146d2b1}</Project>
     </ProjectReference>
+    <ProjectReference Include="DCF-cuckoo-index.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff31d10e}</Project>
+    </ProjectReference>
     <ProjectReference Include="edit-distance.vcxproj">
       <Project>{c6c9ae3e-c524-4c80-b118-3b648ec9c74f}</Project>
     </ProjectReference>
     <ProjectReference Include="edit-distance_tests.vcxproj">
       <Project>{c6c9ae3e-c524-4c80-b118-3b648ee0437e}</Project>
     </ProjectReference>
+    <ProjectReference Include="emphf-hash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff54b6d6}</Project>
+    </ProjectReference>
     <ProjectReference Include="everything-curl.vcxproj">
       <Project>{3644e12d-d934-41fd-bf7e-83745a615f76}</Project>
     </ProjectReference>
+    <ProjectReference Include="exif.vcxproj">
+      <Project>{00811970-815b-4f64-bc9d-219078105a93}</Project>
+    </ProjectReference>
     <ProjectReference Include="expected-lite.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff44898f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="fastBPE.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9596f4}</Project>
     </ProjectReference>
     <ProjectReference Include="filesystem_tests_exception.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-75f8ffbd0356}</Project>
@@ -251,6 +290,27 @@
     <ProjectReference Include="gnuplot.vcxproj">
       <Project>{00811970-815b-4f64-bc9d-2190780711dd}</Project>
     </ProjectReference>
+    <ProjectReference Include="googlelog-unittest.vcxproj">
+      <Project>{90c2d402-786e-4635-ac77-72a3c5cff450}</Project>
+    </ProjectReference>
+    <ProjectReference Include="googlemock-demos.vcxproj">
+      <Project>{5aec615e-db74-4f0d-8d35-089652e42cc3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="googletest-ci-cpp-template.vcxproj">
+      <Project>{00811970-815b-4f64-bc9d-219078a664bf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="googletest-demo-invalid-param-name1.vcxproj">
+      <Project>{9bd8410c-076b-4783-a13f-cd0c197a666d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="googletest-demo-invalid-param-name2.vcxproj">
+      <Project>{09a41323-5ca2-4890-9158-16b8d532fc2e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="googletest-demos.vcxproj">
+      <Project>{258b1715-61f6-4b4a-8f91-b549a0993740}</Project>
+    </ProjectReference>
+    <ProjectReference Include="googletest-samples.vcxproj">
+      <Project>{0ac5d24b-cbcc-4d67-8c89-52dd7756e628}</Project>
+    </ProjectReference>
     <ProjectReference Include="gperf-hash-tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518123fc8ac}</Project>
     </ProjectReference>
@@ -263,8 +323,26 @@
     <ProjectReference Include="Hackers-Delight.vcxproj">
       <Project>{b42ff16a-21bb-433c-9c6d-f2839c135fd8}</Project>
     </ProjectReference>
+    <ProjectReference Include="hedley.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff12fc0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="hmm-scalable.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff468c37}</Project>
+    </ProjectReference>
+    <ProjectReference Include="hmm-stoch.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1e26b7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="hocr-fileformat.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9b28ea}</Project>
+    </ProjectReference>
+    <ProjectReference Include="hocr-spec.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe7fb0f}</Project>
+    </ProjectReference>
     <ProjectReference Include="hocr-tools.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff244ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="hsluv-color-gradient.vcxproj">
+      <Project>{3644e12d-d934-41fd-bf7e-83745a7b12a0}</Project>
     </ProjectReference>
     <ProjectReference Include="html-parser-test-corpus.vcxproj">
       <Project>{3644e12d-d934-41fd-bf7e-83745a12a263}</Project>
@@ -272,8 +350,26 @@
     <ProjectReference Include="html5lib-tests.vcxproj">
       <Project>{3644e12d-d934-41fd-bf7e-83745a2dda05}</Project>
     </ProjectReference>
+    <ProjectReference Include="htmlstreamparser.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff44ffa4}</Project>
+    </ProjectReference>
     <ProjectReference Include="http-parser.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff2547d8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="hunspell-dictionaries.vcxproj">
+      <Project>{3644e12d-d934-41fd-bf7e-83745a031a41}</Project>
+    </ProjectReference>
+    <ProjectReference Include="hunspell-hyphen.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0558f2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="hunspell.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb48b74}</Project>
+    </ProjectReference>
+    <ProjectReference Include="hyperscan.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff562291}</Project>
+    </ProjectReference>
+    <ProjectReference Include="hypertextcpp.vcxproj">
+      <Project>{5e7728b5-9c50-45da-8d25-32cf2d4b3c7e}</Project>
     </ProjectReference>
     <ProjectReference Include="iconv.vcxproj">
       <Project>{4ad88a7c-e39c-4a2d-a092-a65788425941}</Project>
@@ -281,8 +377,23 @@
     <ProjectReference Include="IdGenerator.vcxproj">
       <Project>{00811970-815b-4f64-bc9d-21907828e825}</Project>
     </ProjectReference>
+    <ProjectReference Include="ipa-dict.vcxproj">
+      <Project>{3644e12d-d934-41fd-bf7e-83745af7c615}</Project>
+    </ProjectReference>
+    <ProjectReference Include="jbig2enc.vcxproj">
+      <Project>{00811970-815b-4f64-bc9d-21907869ec1b}</Project>
+    </ProjectReference>
     <ProjectReference Include="jemalloc.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff94c2b6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="jpeginfo.vcxproj">
+      <Project>{e74f29fa-f143-4adc-b92c-6af1a8e4a417}</Project>
+    </ProjectReference>
+    <ProjectReference Include="jpegview.vcxproj">
+      <Project>{00811970-815b-4f64-bc9d-219078e04984}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lda-bigartm.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3aad0}</Project>
     </ProjectReference>
     <ProjectReference Include="leptonica_tools.vcxproj">
       <Project>{ca0bda38-89b9-4703-a77d-8049acf23056}</Project>
@@ -299,11 +410,32 @@
     <ProjectReference Include="libadaptive-radix-tree.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffb26ff4}</Project>
     </ProjectReference>
+    <ProjectReference Include="libadaptiveqf.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaaec4d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libadaptive_clustering.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1eb574}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libagglomerative-hierarchical-clustering.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1bdfe0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libaho-corasick.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa20464}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libahocorasick.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6c6b3d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libaho_corasick.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff478478}</Project>
+    </ProjectReference>
     <ProjectReference Include="libAlgo_Ds_Notes.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff9b16f4}</Project>
     </ProjectReference>
     <ProjectReference Include="libAllocator.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffee2256}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libamd-fftw.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe5864d}</Project>
     </ProjectReference>
     <ProjectReference Include="libApprovalTestsCpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff09d370}</Project>
@@ -329,6 +461,18 @@
     <ProjectReference Include="libargparse_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff256d74}</Project>
     </ProjectReference>
+    <ProjectReference Include="libarmadillo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7a1a29}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarrayfire.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff86ce71}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarrayfire_examples.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcd3aa1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarrayfire_tests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6fad46}</Project>
+    </ProjectReference>
     <ProjectReference Include="libascii.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff4d3d63}</Project>
     </ProjectReference>
@@ -344,8 +488,17 @@
     <ProjectReference Include="libassert_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffab2cb1}</Project>
     </ProjectReference>
+    <ProjectReference Include="libasyncplusplus.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a6780}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libasyncplusplus_examples.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1a2776}</Project>
+    </ProjectReference>
     <ProjectReference Include="libavif.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff7fa2ab}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbaobzi.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff21d026}</Project>
     </ProjectReference>
     <ProjectReference Include="libbase58x.vcxproj">
       <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
@@ -362,11 +515,29 @@
     <ProjectReference Include="libbf_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd7494b}</Project>
     </ProjectReference>
+    <ProjectReference Include="libbhtsne--Barnes-Hut-t-SNE.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff622d18}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBi-Sent2Vec.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb427ed}</Project>
+    </ProjectReference>
     <ProjectReference Include="libbibtool.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff547cd3}</Project>
     </ProjectReference>
     <ProjectReference Include="libbibutils.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff09284b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbinary2strings.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1fa3a7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbinary_search.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff40a10a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbit7z.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffea616d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbitrush-index.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcda03d}</Project>
     </ProjectReference>
     <ProjectReference Include="libbitsery.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0cc246}</Project>
@@ -380,11 +551,275 @@
     <ProjectReference Include="libblaze.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0adc00}</Project>
     </ProjectReference>
+    <ProjectReference Include="libblazingmq.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff300042}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libblitsort.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff6cfe9}</Project>
+    </ProjectReference>
     <ProjectReference Include="libbloom.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd0aed0}</Project>
     </ProjectReference>
     <ProjectReference Include="libbloomfilters.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd84e99}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libblurhash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff95c300}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbolt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd77c42}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-algorithm.vcxproj">
+      <Project>{f911c6a0-bae1-4f8d-ab58-72bb90e77170}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-align.vcxproj">
+      <Project>{8a4a78a7-d7ba-4a92-acd6-7ecda29158ad}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-any.vcxproj">
+      <Project>{414ec500-9a8e-47a6-ac79-994bfcf90428}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-asio.vcxproj">
+      <Project>{cb9c57a0-1149-41a4-b5d2-08ef4ea9229f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-assert.vcxproj">
+      <Project>{1e8d035e-af61-4c85-aaf9-8d23bb710c69}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-assign.vcxproj">
+      <Project>{767e8da3-1484-4d29-82ff-91369d02d8b8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-atomic.vcxproj">
+      <Project>{3c963fcc-aa71-46fe-a233-7cd848d27e72}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-beast.vcxproj">
+      <Project>{ec1993c8-213d-48fa-a1ef-90ee16c3b3cf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-bind.vcxproj">
+      <Project>{1efc7bb5-071c-41e2-9c72-713a8df9639c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-callable_traits.vcxproj">
+      <Project>{5ba44939-af0d-4545-9935-be22f7a3e6ce}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-charconv.vcxproj">
+      <Project>{7a565d5d-ff1d-4220-90ce-fa927e43f9c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-chrono.vcxproj">
+      <Project>{c08e4687-84ee-4d6b-be19-823acecc497e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-circular_buffer.vcxproj">
+      <Project>{ff4c227f-2373-44b1-be83-f3fe961be135}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-config.vcxproj">
+      <Project>{69ee301e-4fb0-4890-95cd-90e5d7ee0bae}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-container.vcxproj">
+      <Project>{5522919e-70cf-4790-9940-05b738eb5341}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-container_hash.vcxproj">
+      <Project>{a72eb0d3-3290-4254-8e66-06bf8d770ee3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-context.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4da6dc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-conversion.vcxproj">
+      <Project>{6f4f6c39-5890-4e84-9012-5b1953a97642}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-convert.vcxproj">
+      <Project>{18493693-d94b-4e97-bc7d-a54e5ebc99c0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-core.vcxproj">
+      <Project>{6ebf325c-fd6c-4415-90e4-538282d39f52}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-crc.vcxproj">
+      <Project>{0f7c4f20-42c9-430e-b1dc-6248501e7827}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-date_time.vcxproj">
+      <Project>{e3dc0958-cac9-4c82-94a8-96559adfb60d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-describe.vcxproj">
+      <Project>{203bf013-8216-4148-b412-7a0b5b770a14}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-detail.vcxproj">
+      <Project>{a43809d1-ea8c-4e2e-85f8-3e48c12ea9ef}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-dynamic_bitset.vcxproj">
+      <Project>{d9c79321-a299-4659-aceb-2aed2b3db51c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-endian.vcxproj">
+      <Project>{7c9e5482-de2e-4f0a-978f-6917c12db484}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-exception.vcxproj">
+      <Project>{9979bf58-2514-47fa-841b-430bec929ba2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-filesystem.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff618867}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-flyweight.vcxproj">
+      <Project>{abda2025-c0ad-47cb-b76e-a857689f6559}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-foreach.vcxproj">
+      <Project>{af20d811-32ba-4a24-903f-667c7a86e28e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-format.vcxproj">
+      <Project>{33932ca2-ee50-464a-b1e8-878ff4aa8b87}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-function.vcxproj">
+      <Project>{4153bb48-cc1e-4fb3-9a0b-8bb95ba40b2e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-functional.vcxproj">
+      <Project>{5641cebd-8685-4602-bb6f-eb67263134e6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-function_types.vcxproj">
+      <Project>{f4d6c9ef-58bc-4f65-aeec-ff5feb904782}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-geometry.vcxproj">
+      <Project>{c0f2bec8-24dc-4747-8cbf-9d375aeca2a3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-gil.vcxproj">
+      <Project>{9b92cc80-6976-4b62-9220-00c746240140}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-hana.vcxproj">
+      <Project>{c496eb86-519a-486f-aad1-622bd43cbed1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-headers.vcxproj">
+      <Project>{bc9902c4-c5d1-4441-80b9-c1a1c37126b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-heap.vcxproj">
+      <Project>{133ba5de-1920-43b2-87bb-b6f527e7eab0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-histogram.vcxproj">
+      <Project>{91124dc2-1c26-4069-af7c-54e45446ef02}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-integer.vcxproj">
+      <Project>{2c84ef37-e923-454c-b33f-b0ab00ca5d4b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-interprocess.vcxproj">
+      <Project>{c550953f-ab26-4815-bbb3-ca02b7b5fe92}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-iostreams.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff91cb96}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-iterator.vcxproj">
+      <Project>{56ac5544-65f4-4f0a-b7d3-46b2c5bc9fb0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-json.vcxproj">
+      <Project>{39de3628-95e7-43a9-a265-7fb60c4a920f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-lambda.vcxproj">
+      <Project>{32746941-36a6-4e48-8872-e3fa64402804}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-lambda2.vcxproj">
+      <Project>{3b0f40dc-537e-4194-bd36-719f3bd501fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-lexical_cast.vcxproj">
+      <Project>{4100af2b-f6dc-47b8-9e34-bb2a44ef0d30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-local_function.vcxproj">
+      <Project>{127eaf4e-5dff-4d46-8117-3a9d4b6244ed}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-lockfree.vcxproj">
+      <Project>{53c6658c-9f47-4999-b61e-f8ff0471fceb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-log.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff21feb9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-math.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6e6c00}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-move.vcxproj">
+      <Project>{8c0a4507-b733-4194-9906-659a62be9c66}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-optional.vcxproj">
+      <Project>{fb4cb77e-36ac-4953-a175-b78f185b46af}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-parameter.vcxproj">
+      <Project>{e45bd370-610d-485f-a15c-88e2e20b9291}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-pool.vcxproj">
+      <Project>{4ab486b5-a595-4eec-9aa2-595ef0fe690f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-predef.vcxproj">
+      <Project>{bc256308-71cd-4b80-88cd-323abc082074}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-preprocessor.vcxproj">
+      <Project>{6999fa9c-7b85-430c-8fd1-ece78ab4eb38}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-process.vcxproj">
+      <Project>{77607cc2-4b31-4ff9-86e8-20af7160d065}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-program_options.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff749f1c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-property_map.vcxproj">
+      <Project>{7ba401c0-ebb7-4348-9e76-e306f6a389d7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-property_map_parallel.vcxproj">
+      <Project>{9c45aac8-c424-4996-a5be-f3893ca42ae1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-property_tree.vcxproj">
+      <Project>{c4f89fbd-c9ba-4c54-89d8-3ded20ab696e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-range.vcxproj">
+      <Project>{a357e56f-8446-4ddb-ac39-c74490f63956}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-ratio.vcxproj">
+      <Project>{f3c64152-a215-415f-ae6a-9eeb3132aca8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-rational.vcxproj">
+      <Project>{53dd7895-b0ba-459a-a5d6-f8ad4b49bb9d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-regex.vcxproj">
+      <Project>{b40c0acb-4f19-444f-a379-91a39598d2e0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-scope.vcxproj">
+      <Project>{6eee5979-19b3-45f0-b638-a8e301385928}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-scope_exit.vcxproj">
+      <Project>{dbb4dde7-c974-4e30-acfb-4ed9d724d2db}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-serialization.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff581464}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-smart_ptr.vcxproj">
+      <Project>{4d8a498b-0986-4c26-9497-7eff440a48f3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-stacktrace.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff59c497}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-static_assert.vcxproj">
+      <Project>{c6828500-eced-4f57-9537-2fc188394544}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-static_string.vcxproj">
+      <Project>{79038b85-e1de-4e0e-9ca8-d3aeca04dfcd}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-stl_interfaces.vcxproj">
+      <Project>{6de59558-e5cc-4219-826b-42e01236e52d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-system.vcxproj">
+      <Project>{1d4433bb-e407-4ad3-a7aa-1d3c6edd131c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-thread.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff69a595}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-throw_exception.vcxproj">
+      <Project>{e1908061-a5e4-43e0-89a0-d97908441e2e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-url.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33650c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-utility.vcxproj">
+      <Project>{edd2c036-ab1e-4371-bf4c-e808005d6799}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-uuid.vcxproj">
+      <Project>{09593951-43b0-483c-a431-cf0a732cf86f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost-xpressive.vcxproj">
+      <Project>{85a33e44-4a9f-49d7-8342-6df8258f778a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff797318}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libboost_examples.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf8705}</Project>
     </ProjectReference>
     <ProjectReference Include="libboringssl.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff831533}</Project>
@@ -398,17 +833,50 @@
     <ProjectReference Include="libbreakpad_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff1f7f9b}</Project>
     </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli_research.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-751812d7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli_tools.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7428ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrown-cluster.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb137b0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrunsli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff813df}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbson.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff5d8016}</Project>
+    </ProjectReference>
     <ProjectReference Include="libbtree.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffaf7303}</Project>
     </ProjectReference>
     <ProjectReference Include="libbustache.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffcf177d}</Project>
     </ProjectReference>
+    <ProjectReference Include="libbutteraugli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcef425}</Project>
+    </ProjectReference>
     <ProjectReference Include="libbxzstr.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff2aa5d2}</Project>
     </ProjectReference>
+    <ProjectReference Include="libbzip2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff616ae4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbzip2_alt.vcxproj">
+      <Project>{4a3e6970-9110-46f5-bd12-b73218cca406}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbzip3.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffc4fe4e}</Project>
+    </ProjectReference>
     <ProjectReference Include="libc4core.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffeb411c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcatboost.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff05be64}</Project>
     </ProjectReference>
     <ProjectReference Include="libcbor.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffb22d7c}</Project>
@@ -425,6 +893,12 @@
     <ProjectReference Include="libccpalette_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-100000000011}</Project>
     </ProjectReference>
+    <ProjectReference Include="libcctz.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd5b0c3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcctz_tests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff5b4c86}</Project>
+    </ProjectReference>
     <ProjectReference Include="libcel-cpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffe83546}</Project>
     </ProjectReference>
@@ -434,14 +908,23 @@
     <ProjectReference Include="libcereal.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff9ffba6}</Project>
     </ProjectReference>
+    <ProjectReference Include="libceres-solver.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffbf50e}</Project>
+    </ProjectReference>
     <ProjectReference Include="libcfgpath.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff651180}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcgal.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffec0e57}</Project>
     </ProjectReference>
     <ProjectReference Include="libchaos.vcxproj">
       <Project>{6769b987-26e9-4cb8-81fe-715d9e5ce4d9}</Project>
     </ProjectReference>
     <ProjectReference Include="libchaos_tests.vcxproj">
       <Project>{6769b987-26e9-4cb8-81fe-715d9e43ecbf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libchardet.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff913276}</Project>
     </ProjectReference>
     <ProjectReference Include="libchewing.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff61808a}</Project>
@@ -451,6 +934,12 @@
     </ProjectReference>
     <ProjectReference Include="libchiaroscuramente.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffc90ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libchibi-scheme.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff41f37d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libCHM.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa97c41}</Project>
     </ProjectReference>
     <ProjectReference Include="libchopshop.vcxproj">
       <Project>{9068f65e-7329-45fe-86c6-4a2d234536f4}</Project>
@@ -463,6 +952,9 @@
     </ProjectReference>
     <ProjectReference Include="libCImg_examples.vcxproj">
       <Project>{75b59c57-c28c-484a-848a-418bddb38ff9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcirclehash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb48032}</Project>
     </ProjectReference>
     <ProjectReference Include="libcJSON.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd48c97}</Project>
@@ -482,14 +974,29 @@
     <ProjectReference Include="libclipp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff9e7b3a}</Project>
     </ProjectReference>
+    <ProjectReference Include="libClipper2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff5f8561}</Project>
+    </ProjectReference>
     <ProjectReference Include="libclipp_examples.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff983822}</Project>
     </ProjectReference>
     <ProjectReference Include="libclp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffb3967d}</Project>
     </ProjectReference>
+    <ProjectReference Include="libcluster.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff0d98e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libclustercat.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1cc42a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libclustering_dim_redux.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6b9443}</Project>
+    </ProjectReference>
     <ProjectReference Include="libCmathtuts.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffb25fc2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcmime.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1d66f4}</Project>
     </ProjectReference>
     <ProjectReference Include="libcnl.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffbaa8df}</Project>
@@ -497,14 +1004,35 @@
     <ProjectReference Include="libcolormap-shaders.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffeb7001}</Project>
     </ProjectReference>
+    <ProjectReference Include="libColorSpace.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff061868}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libColorSpace_tests.vcxproj">
+      <Project>{8dff30d7-854b-4258-bfc1-898ec15b7df8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcompact_enc_det.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffb2e3f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcompact_enc_det_tests.vcxproj">
+      <Project>{d9c05468-d667-4b30-a0fb-6b2fae6f3fbb}</Project>
+    </ProjectReference>
     <ProjectReference Include="libconcat.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8a9a2a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libconcurrencpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff613e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libconcurrentqueue.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff303f4e}</Project>
     </ProjectReference>
     <ProjectReference Include="libconfig-cpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa19ab6}</Project>
     </ProjectReference>
     <ProjectReference Include="libconfig.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff6efbdf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcontinuable.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8007f3}</Project>
     </ProjectReference>
     <ProjectReference Include="libcopp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff5ae86}</Project>
@@ -518,17 +1046,50 @@
     <ProjectReference Include="libcpp-terminal_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8070-7518ff2367fa}</Project>
     </ProjectReference>
+    <ProjectReference Include="libcpp-unicode.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6e226c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcppflow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff3a683c}</Project>
+    </ProjectReference>
     <ProjectReference Include="libcppjieba.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffe6b0b7}</Project>
     </ProjectReference>
+    <ProjectReference Include="libcppsimhash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcaca3c}</Project>
+    </ProjectReference>
     <ProjectReference Include="libcpptoml.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff904167}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcppuprofile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7a213b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcppzmq.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff628af6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcppzmq_tests.vcxproj">
+      <Project>{a60d8944-5a1c-4d29-8970-7518ff628af6}</Project>
     </ProjectReference>
     <ProjectReference Include="libcpr.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff55f506}</Project>
     </ProjectReference>
     <ProjectReference Include="libcpr_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-101000000001}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpuid.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff184c8e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpuinfo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff24f32d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpuinfo_tests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-9528ff24f32d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpu_features.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9dbff1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrc32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb6ebea}</Project>
     </ProjectReference>
     <ProjectReference Include="libcrc32c.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8c8a66}</Project>
@@ -542,6 +1103,9 @@
     <ProjectReference Include="libCRCpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff99d3b2}</Project>
     </ProjectReference>
+    <ProjectReference Include="libCRoaring.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd86c9d}</Project>
+    </ProjectReference>
     <ProjectReference Include="libcrow.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
     </ProjectReference>
@@ -550,6 +1114,9 @@
     </ProjectReference>
     <ProjectReference Include="libcrow_tests.vcxproj">
       <Project>{95ec6a30-7f50-42ba-a31a-780fc01ebc9c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrumsort.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff84a237}</Project>
     </ProjectReference>
     <ProjectReference Include="libcsv-parser.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff500634}</Project>
@@ -566,14 +1133,26 @@
     <ProjectReference Include="libCTCWordBeamSearch.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff90d428}</Project>
     </ProjectReference>
+    <ProjectReference Include="libcuckoo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff225a88}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libCuckoo_Filter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd28d1f}</Project>
+    </ProjectReference>
     <ProjectReference Include="libcurl-impersonate.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff647dc8}</Project>
     </ProjectReference>
     <ProjectReference Include="libcurl.vcxproj">
       <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
     </ProjectReference>
+    <ProjectReference Include="libcurlpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e575d}</Project>
+    </ProjectReference>
     <ProjectReference Include="libcurl_examples.vcxproj">
       <Project>{87ee9da4-de1e-4448-8324-183c98dca500}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libCurvatureFilter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff445975}</Project>
     </ProjectReference>
     <ProjectReference Include="libcvmatio.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd376b5}</Project>
@@ -605,6 +1184,57 @@
     <ProjectReference Include="libcyaml_tests.vcxproj">
       <Project>{dde0dac6-9188-4890-9bfd-cab59a9162d6}</Project>
     </ProjectReference>
+    <ProjectReference Include="libCZMQ.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff77f978}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdablooms.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff71db7b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libDarkThumbs.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0bf567}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdatamash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffbe0a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdate.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff480cec}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdatetimepp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a0431}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdateutils.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa12808}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdbscan.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4b4c46}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdbscan_kdtree.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd6cd1a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdcmtk-iconv-csmapper-app.vcxproj">
+      <Project>{9f85d805-d504-4d94-a33e-a51183137bbb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdcmtk-iconv-esdb-app.vcxproj">
+      <Project>{d8785e20-5ef4-444e-a93f-21b49339a8f9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdcmtk-ijg12.vcxproj">
+      <Project>{95c34c54-bdf8-43a3-b2d6-8eaa2f2fecaf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdcmtk-ijg16.vcxproj">
+      <Project>{42d99bf1-5672-4f65-a338-5c7c6bcc4983}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdcmtk-ijg8.vcxproj">
+      <Project>{bb7455bd-618c-4762-966d-5a0921e6f96f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdcmtk-jpeg.vcxproj">
+      <Project>{4226aa20-ed49-4403-955e-329c1645f50d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdcmtk-jpls.vcxproj">
+      <Project>{1d1fdae5-cb6f-492f-bd47-566af7b916c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdcmtk.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff69091f}</Project>
+    </ProjectReference>
     <ProjectReference Include="libde265.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff71455f}</Project>
     </ProjectReference>
@@ -614,8 +1244,20 @@
     <ProjectReference Include="libdebugbreak_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d23-8970-7518ff0f0f12}</Project>
     </ProjectReference>
+    <ProjectReference Include="libdeflate.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff726764}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdelaunator-cpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd08390}</Project>
+    </ProjectReference>
     <ProjectReference Include="libdelegate.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff239b91}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdense_hash_map.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff4e2e1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdepth_clustering.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0c806a}</Project>
     </ProjectReference>
     <ProjectReference Include="libdesign-patterns-cpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffbb29e7}</Project>
@@ -634,6 +1276,9 @@
     </ProjectReference>
     <ProjectReference Include="libdiffutils.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff6be44e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libDigital-Halftoning.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd55626}</Project>
     </ProjectReference>
     <ProjectReference Include="libdip.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff99629d}</Project>
@@ -659,6 +1304,12 @@
     <ProjectReference Include="libdivide.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff42a30a}</Project>
     </ProjectReference>
+    <ProjectReference Include="libdivsufsort.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff273cb9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdjvu.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffeb9544}</Project>
+    </ProjectReference>
     <ProjectReference Include="libdjvulibre.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff681c69}</Project>
     </ProjectReference>
@@ -671,6 +1322,9 @@
     <ProjectReference Include="libdocxBox.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff305836}</Project>
     </ProjectReference>
+    <ProjectReference Include="libdoh.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff46f8fa}</Project>
+    </ProjectReference>
     <ProjectReference Include="libdoxa.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffbf8d7e}</Project>
     </ProjectReference>
@@ -682,6 +1336,9 @@
     </ProjectReference>
     <ProjectReference Include="libdtl-diff-template-library_tests.vcxproj">
       <Project>{b0f2bb9f-6bf3-4658-9f7c-d02348d3d86c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libduktape.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff1b018}</Project>
     </ProjectReference>
     <ProjectReference Include="libeasyexif.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff4f436}</Project>
@@ -700,6 +1357,9 @@
     </ProjectReference>
     <ProjectReference Include="libedit-distance.vcxproj">
       <Project>{6881e75c-9a4f-4bae-8bf8-44dc4e2dca8c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libefftw.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff34132f}</Project>
     </ProjectReference>
     <ProjectReference Include="libefsw.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffc18000}</Project>
@@ -758,6 +1418,18 @@
     <ProjectReference Include="libeigen_unsupported.vcxproj">
       <Project>{16020c0b-7055-49dd-8b4b-6a51aabc107c}</Project>
     </ProjectReference>
+    <ProjectReference Include="libemhash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff48c79d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libenca.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8d4377}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libenkiTaskScheduler.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa03777}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libepeg.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff13fbb4}</Project>
+    </ProjectReference>
     <ProjectReference Include="libeternaltimestamp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-751811b1257e}</Project>
     </ProjectReference>
@@ -778,6 +1450,9 @@
     </ProjectReference>
     <ProjectReference Include="libevt.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff633281}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libEWAHBoolArray.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4274c9}</Project>
     </ProjectReference>
     <ProjectReference Include="libexif.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff730ed5}</Project>
@@ -806,17 +1481,41 @@
     <ProjectReference Include="libexprtk.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff276c46}</Project>
     </ProjectReference>
+    <ProjectReference Include="libfaiss.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff120cfe}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfalconn.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd2b8e5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfamilia.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb07671}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfann.vcxproj">
+      <Project>{00811970-815b-4f64-bc9d-219078a73c33}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfarmhash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff46a940}</Project>
+    </ProjectReference>
     <ProjectReference Include="libfarver-OKlab.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0010c0}</Project>
     </ProjectReference>
     <ProjectReference Include="libfast-cpp-csv-parser.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffbb115a}</Project>
     </ProjectReference>
+    <ProjectReference Include="libfast-hex.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff853bbb}</Project>
+    </ProjectReference>
     <ProjectReference Include="libfast-kmeans.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff9832f5}</Project>
     </ProjectReference>
+    <ProjectReference Include="libfast-lzma2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff5a5cb8}</Project>
+    </ProjectReference>
     <ProjectReference Include="libfastapprox.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa18033}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libFASTER.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcdf5d5}</Project>
     </ProjectReference>
     <ProjectReference Include="libfastfilter_cpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff2f40c}</Project>
@@ -830,8 +1529,14 @@
     <ProjectReference Include="libfasthashing.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffcfbd7f}</Project>
     </ProjectReference>
+    <ProjectReference Include="libfastops.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6b7041}</Project>
+    </ProjectReference>
     <ProjectReference Include="libfastPRNG.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd97593}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfastrange.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff06aa3}</Project>
     </ProjectReference>
     <ProjectReference Include="libFastString.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff9567b}</Project>
@@ -839,11 +1544,35 @@
     <ProjectReference Include="libfastText.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff96d5c6}</Project>
     </ProjectReference>
+    <ProjectReference Include="libfast_align.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff00d688}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfast_double_parser.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe44203}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfast_float.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6e7b94}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfast_pfor.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7f0ccb}</Project>
+    </ProjectReference>
     <ProjectReference Include="libfatal.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff813c07}</Project>
     </ProjectReference>
     <ProjectReference Include="libfaup.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libffts.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8bfa16}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfftw3.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff685e16}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libFiberTasking.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff410355}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfifo_map.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4663a0}</Project>
     </ProjectReference>
     <ProjectReference Include="libfigcone.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffbc95c8}</Project>
@@ -905,17 +1634,41 @@
     <ProjectReference Include="libFIt-SNE.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff7b25fe}</Project>
     </ProjectReference>
+    <ProjectReference Include="libflann.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4e0456}</Project>
+    </ProjectReference>
     <ProjectReference Include="libflat.hpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffe89fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libflatbuffers.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffbd6a23}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libflatton-offline.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9b5d9f}</Project>
     </ProjectReference>
     <ProjectReference Include="libflat_hash_map.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff409b44}</Project>
     </ProjectReference>
+    <ProjectReference Include="libflip.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffab9969}</Project>
+    </ProjectReference>
     <ProjectReference Include="libfloat_compare.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffedcb3c}</Project>
     </ProjectReference>
+    <ProjectReference Include="libfluent-bit.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff45fd70}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfluxsort.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa6d9f2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libFM-fast-match.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0983b4}</Project>
+    </ProjectReference>
     <ProjectReference Include="libfmath.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffbb37f8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmem.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff004d35}</Project>
     </ProjectReference>
     <ProjectReference Include="libfmt.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
@@ -926,6 +1679,9 @@
     <ProjectReference Include="libfnmatch_tests.vcxproj">
       <Project>{8308101a-8d95-45b4-96b3-e9db45720a63}</Project>
     </ProjectReference>
+    <ProjectReference Include="libfolia.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4e97e2}</Project>
+    </ProjectReference>
     <ProjectReference Include="libfontconfig.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff69837f}</Project>
     </ProjectReference>
@@ -934,6 +1690,12 @@
     </ProjectReference>
     <ProjectReference Include="libfph-table.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffc3a9ef}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfpng.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcded77}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfpnge.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff257f65}</Project>
     </ProjectReference>
     <ProjectReference Include="libfreeglut.vcxproj">
       <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
@@ -950,6 +1712,9 @@
     <ProjectReference Include="libfribidi.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff1eace4}</Project>
     </ProjectReference>
+    <ProjectReference Include="libfsm.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2e1951}</Project>
+    </ProjectReference>
     <ProjectReference Include="libfuzzy-match.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd0b2e1}</Project>
     </ProjectReference>
@@ -961,6 +1726,12 @@
     </ProjectReference>
     <ProjectReference Include="libg3log.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffb440e3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libga.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a5c3d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libGALGO-2.0.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4b3b96}</Project>
     </ProjectReference>
     <ProjectReference Include="libgbenchmark.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff6fa4e9}</Project>
@@ -976,6 +1747,9 @@
     </ProjectReference>
     <ProjectReference Include="libgd_tests.vcxproj">
       <Project>{40aba0ee-34e0-443d-b092-7e725f45bcf0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgegl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd611d0}</Project>
     </ProjectReference>
     <ProjectReference Include="libgencolormap.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff13f161}</Project>
@@ -1001,8 +1775,14 @@
     <ProjectReference Include="libgiflib-turbo.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff998589}</Project>
     </ProjectReference>
+    <ProjectReference Include="libglaze.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e1d1d}</Project>
+    </ProjectReference>
     <ProjectReference Include="libglfw.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff878bbf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libglm.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb3a308}</Project>
     </ProjectReference>
     <ProjectReference Include="libglob.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff518d62}</Project>
@@ -1034,6 +1814,18 @@
     <ProjectReference Include="libGQ-gumbo-css-selectors.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff24a762}</Project>
     </ProjectReference>
+    <ProjectReference Include="libgram_savitzky_golay.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffaae5e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgrid_map.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff043b96}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libguetzli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff657d4b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libguile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff91ecbd}</Project>
+    </ProjectReference>
     <ProjectReference Include="libgumbo-libxml.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff28ced2}</Project>
     </ProjectReference>
@@ -1052,14 +1844,29 @@
     <ProjectReference Include="libgumbo_pp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff6fa005}</Project>
     </ProjectReference>
+    <ProjectReference Include="libhalf.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff968a9c}</Project>
+    </ProjectReference>
     <ProjectReference Include="libharfbuzz.vcxproj">
       <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
     </ProjectReference>
     <ProjectReference Include="libharfbuzz_tests.vcxproj">
       <Project>{5edcf4fd-0291-4fb9-8d96-258957e998c6}</Project>
     </ProjectReference>
+    <ProjectReference Include="libharry.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffdd81d6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libHashMap.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffc265ec}</Project>
+    </ProjectReference>
     <ProjectReference Include="libhashmapbtree.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffdccbb8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhdbscan-cpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff176413}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhdbscan.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff68485c}</Project>
     </ProjectReference>
     <ProjectReference Include="libHDiffPatch.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd46e85}</Project>
@@ -1091,14 +1898,26 @@
     <ProjectReference Include="libhnsw.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff125647}</Project>
     </ProjectReference>
+    <ProjectReference Include="libhog.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff129e7a}</Project>
+    </ProjectReference>
     <ProjectReference Include="libhonggfuzz.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffc6b979}</Project>
     </ProjectReference>
     <ProjectReference Include="libhopscotch-map.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffe50bea}</Project>
     </ProjectReference>
+    <ProjectReference Include="libhorsejs.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2675bd}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhsluv-c.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff901d4d}</Project>
+    </ProjectReference>
     <ProjectReference Include="libhtml2openxml.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff6d581c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhtml5-parser.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffc4bb89}</Project>
     </ProjectReference>
     <ProjectReference Include="libhunspell-dictionaries.vcxproj">
       <Project>{013f13ea-31e4-4346-9bea-6e77d3496569}</Project>
@@ -1108,6 +1927,21 @@
     </ProjectReference>
     <ProjectReference Include="libhunspell.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff6ba14f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhwinfo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8604f9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhyperscan.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff48858f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libiceberghashtable.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcae51c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libiceoryx.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8fdda7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libiceoryx_tests.vcxproj">
+      <Project>{a60d8644-5a1c-4129-8970-7518ff8fdda7}</Project>
     </ProjectReference>
     <ProjectReference Include="libiconv.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff6d43ac}</Project>
@@ -1121,8 +1955,17 @@
     <ProjectReference Include="libicu_tools.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8c51fa}</Project>
     </ProjectReference>
+    <ProjectReference Include="libid3-tagparser.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff77fee}</Project>
+    </ProjectReference>
     <ProjectReference Include="libifopt.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff4a239e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libikd-Tree.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7d2ac0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libImage-Smoothing-Algorithm-Based-on-Gradient-Analysis.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff02ee1d}</Project>
     </ProjectReference>
     <ProjectReference Include="libimagedistance.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff992f89}</Project>
@@ -1157,6 +2000,15 @@
     <ProjectReference Include="libintrinsics.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff7f9cd2}</Project>
     </ProjectReference>
+    <ProjectReference Include="libInversePerspectiveMapping.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8105b6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libiod.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffc0f0e8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libion-c.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffc980fe}</Project>
+    </ProjectReference>
     <ProjectReference Include="libiowow.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff4141f}</Project>
     </ProjectReference>
@@ -1166,23 +2018,68 @@
     <ProjectReference Include="libIpopt.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffdc03ab}</Project>
     </ProjectReference>
+    <ProjectReference Include="libiqa.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffbc40f5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libitcl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffbb3eb8}</Project>
+    </ProjectReference>
     <ProjectReference Include="libivf-hnsw.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd3f2a8}</Project>
     </ProjectReference>
     <ProjectReference Include="libJamSpell.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffb0712e}</Project>
     </ProjectReference>
+    <ProjectReference Include="libjanet-sh.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffeb6503}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjanet-sqlite3.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcaaded}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjanet.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff21aa71}</Project>
+    </ProjectReference>
     <ProjectReference Include="libjansson.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff95a080}</Project>
     </ProjectReference>
+    <ProjectReference Include="libJasPer.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa3f9a5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2enc.vcxproj">
+      <Project>{83ac0bda-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbigkit.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff411ac3}</Project>
+    </ProjectReference>
     <ProjectReference Include="libjemalloc.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff3ef2c8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjimtcl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe237da}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl-benchmark.vcxproj">
+      <Project>{2b59da08-7608-4f60-ae19-c74bc31a3fb9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl-test.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff247735}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
     </ProjectReference>
     <ProjectReference Include="libjpeg.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff64a9f5}</Project>
     </ProjectReference>
     <ProjectReference Include="libjpeg2dct.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff084b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeginfo.vcxproj">
+      <Project>{e74f29fa-f143-4adc-b92c-6af1a8e4a403}</Project>
     </ProjectReference>
     <ProjectReference Include="libjq.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffcd1326}</Project>
@@ -1196,11 +2093,35 @@
     <ProjectReference Include="libjsoncpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff86a72d}</Project>
     </ProjectReference>
+    <ProjectReference Include="libjxl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0955fe}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libk.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8fcb3e}</Project>
+    </ProjectReference>
     <ProjectReference Include="libkalman-cpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa1a852}</Project>
     </ProjectReference>
+    <ProjectReference Include="libkann.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa45d2c}</Project>
+    </ProjectReference>
     <ProjectReference Include="libkdtree.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff49cc2e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libkgraph.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff62f44b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libkissfft.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7a0a6a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libknusperli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9c425c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libkoan.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9b05ed}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libL1Flattening.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff19a1a9}</Project>
     </ProjectReference>
     <ProjectReference Include="liblazycsv.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff308032}</Project>
@@ -1268,6 +2189,9 @@
     <ProjectReference Include="liblmfit.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8caf6d}</Project>
     </ProjectReference>
+    <ProjectReference Include="libLMW-tree.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb050df}</Project>
+    </ProjectReference>
     <ProjectReference Include="liblodepng.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff1d3f64}</Project>
     </ProjectReference>
@@ -1280,6 +2204,18 @@
     <ProjectReference Include="liblolremez.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8f4fe3}</Project>
     </ProjectReference>
+    <ProjectReference Include="liblshbox.vcxproj">
+      <Project>{a802995c-8c80-4151-ae2e-542dddf4c244}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblshbox_tests.vcxproj">
+      <Project>{a802995c-8c80-4151-ae2e-542ddda4d6d8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblunasvg.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92164d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libluple.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff34ea3a}</Project>
+    </ProjectReference>
     <ProjectReference Include="liblz4.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
     </ProjectReference>
@@ -1291,6 +2227,9 @@
     </ProjectReference>
     <ProjectReference Include="liblzma.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff1de71f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmace.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2f1c5d}</Project>
     </ProjectReference>
     <ProjectReference Include="libmagsac.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffcdfc45}</Project>
@@ -1328,6 +2267,9 @@
     <ProjectReference Include="libmdbx.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff072c37}</Project>
     </ProjectReference>
+    <ProjectReference Include="libmegamime.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa82413}</Project>
+    </ProjectReference>
     <ProjectReference Include="libmemory.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffebb8b7}</Project>
     </ProjectReference>
@@ -1340,8 +2282,14 @@
     <ProjectReference Include="libmht-rip.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff29351e}</Project>
     </ProjectReference>
+    <ProjectReference Include="libMicroPather.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6d3ca3}</Project>
+    </ProjectReference>
     <ProjectReference Include="libmimalloc.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff6906e6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmimetic.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb1d69c}</Project>
     </ProjectReference>
     <ProjectReference Include="libminhash_clustering.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff08885}</Project>
@@ -1373,6 +2321,9 @@
     <ProjectReference Include="libmozjpeg.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0c24d5}</Project>
     </ProjectReference>
+    <ProjectReference Include="libMPMCQueue.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8e321d}</Project>
+    </ProjectReference>
     <ProjectReference Include="libmsgpack-c.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa51282}</Project>
     </ProjectReference>
@@ -1391,6 +2342,9 @@
     <ProjectReference Include="libMultipartEncoder.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffdf2a60}</Project>
     </ProjectReference>
+    <ProjectReference Include="libmutable_rank_select.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffefb9b}</Project>
+    </ProjectReference>
     <ProjectReference Include="libnameof.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffaeee1}</Project>
     </ProjectReference>
@@ -1403,14 +2357,38 @@
     <ProjectReference Include="libnanobench.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff6e085e}</Project>
     </ProjectReference>
+    <ProjectReference Include="libnanoflann.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff844ee8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnanoflann_dbscan.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff683676}</Project>
+    </ProjectReference>
     <ProjectReference Include="libnanogui.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffc1bbbd}</Project>
     </ProjectReference>
     <ProjectReference Include="libNanoLog.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff26cc06}</Project>
     </ProjectReference>
+    <ProjectReference Include="libnanosvg.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-751bff971987}</Project>
+    </ProjectReference>
     <ProjectReference Include="libnatspec.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffff5d76}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libNBLI.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff545bd7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnedtries.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff60c7e9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnetpbm.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7223a6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnewlisp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff668ce5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnfft.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff66d7bb}</Project>
     </ProjectReference>
     <ProjectReference Include="libngrams-weighted.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd67234}</Project>
@@ -1424,6 +2402,9 @@
     <ProjectReference Include="libnlopt.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff1b379c}</Project>
     </ProjectReference>
+    <ProjectReference Include="libnms.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb2e243}</Project>
+    </ProjectReference>
     <ProjectReference Include="libnodesoup.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff5a860d}</Project>
     </ProjectReference>
@@ -1433,8 +2414,17 @@
     <ProjectReference Include="libNon-Maximum-Suppression.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd9d1c5}</Project>
     </ProjectReference>
+    <ProjectReference Include="libnotcurses.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb02d52}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnpoi.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa714b1}</Project>
+    </ProjectReference>
     <ProjectReference Include="libnuspell.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffe6d0c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liboauth2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff023f36}</Project>
     </ProjectReference>
     <ProjectReference Include="libobservable.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff5e92a0}</Project>
@@ -1456,6 +2446,24 @@
     </ProjectReference>
     <ProjectReference Include="libopen-vcdiff.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff117f8e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libOpenBLAS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff5ffe07}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libOpenCL-CLHPP.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9aefc2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libOpenCL-CTS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff438a28}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libOpenCL-Headers.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2a21ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libOpenCL-SDK.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff765ff2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libOpenCL-Wrapper.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffab7e5d}</Project>
     </ProjectReference>
     <ProjectReference Include="libOpenColorIO.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff97358e}</Project>
@@ -1544,6 +2552,12 @@
     <ProjectReference Include="libOpenEXR_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff4a0863}</Project>
     </ProjectReference>
+    <ProjectReference Include="libopenGA.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe6f04e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenGA_examples.vcxproj">
+      <Project>{66090579-f2a1-4068-a1f6-c7e11d2f3b60}</Project>
+    </ProjectReference>
     <ProjectReference Include="libOpenImageIO.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff4edc48}</Project>
     </ProjectReference>
@@ -1556,14 +2570,32 @@
     <ProjectReference Include="libOpenSSL.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8657b1}</Project>
     </ProjectReference>
+    <ProjectReference Include="libopentelemetry-cpp-contrib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff62fa9a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopentelemetry-cpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff646843}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liboptframe.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffbdc447}</Project>
+    </ProjectReference>
     <ProjectReference Include="liboptim.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff234050}</Project>
     </ProjectReference>
     <ProjectReference Include="libosquery.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffdbd90f}</Project>
     </ProjectReference>
+    <ProjectReference Include="libowl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd4686f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libOZBCBitmap.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff56e457}</Project>
+    </ProjectReference>
     <ProjectReference Include="libpagerank.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffed1c93}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpalanteer.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffdfa34a}</Project>
     </ProjectReference>
     <ProjectReference Include="libpalmtree.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff97d68}</Project>
@@ -1619,6 +2651,9 @@
     <ProjectReference Include="libpevents.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffede3f1}</Project>
     </ProjectReference>
+    <ProjectReference Include="libPGM-index.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff39d9b3}</Project>
+    </ProjectReference>
     <ProjectReference Include="libpg_similarity.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffed095d}</Project>
     </ProjectReference>
@@ -1630,6 +2665,9 @@
     </ProjectReference>
     <ProjectReference Include="libpicohttpparser.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff916ab}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpico_tree.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0627d5}</Project>
     </ProjectReference>
     <ProjectReference Include="libpillow-resize.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff54ab6b}</Project>
@@ -1643,11 +2681,23 @@
     <ProjectReference Include="libpinyin.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff6b2ab1}</Project>
     </ProjectReference>
+    <ProjectReference Include="libpipeline.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd1dc27}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpipes.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd015f7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpiposort.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff63a2e7}</Project>
+    </ProjectReference>
     <ProjectReference Include="libpisa.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffd879d}</Project>
     </ProjectReference>
     <ProjectReference Include="libpisa_formatter.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8edc83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
     </ProjectReference>
     <ProjectReference Include="libPlatformFolders.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffc18cb0}</Project>
@@ -1660,6 +2710,12 @@
     </ProjectReference>
     <ProjectReference Include="libpng_contribs.vcxproj">
       <Project>{4e43f33a-3587-48c8-911d-a9e3212a8097}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpoco.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff061558}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpoly2tri.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7b6502}</Project>
     </ProjectReference>
     <ProjectReference Include="libpool_allocator.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff3159dd}</Project>
@@ -1703,6 +2759,9 @@
     <ProjectReference Include="libprng_misc.vcxproj">
       <Project>{75e72cc7-ade9-47d4-97e2-ba7f8386dbb2}</Project>
     </ProjectReference>
+    <ProjectReference Include="libprobminhash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff54bb0b}</Project>
+    </ProjectReference>
     <ProjectReference Include="libpromise-hpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff5d0175}</Project>
     </ProjectReference>
@@ -1711,6 +2770,15 @@
     </ProjectReference>
     <ProjectReference Include="libPruningRadixTrie.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff35d905}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libprvhash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8ed255}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpsd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff615c53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpsd_sdk.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e49a}</Project>
     </ProjectReference>
     <ProjectReference Include="libpthread-win32-EH.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8df242}</Project>
@@ -1730,8 +2798,20 @@
     <ProjectReference Include="libpthreadpool.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff115243}</Project>
     </ProjectReference>
+    <ProjectReference Include="libpuffinn.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff3c3f8f}</Project>
+    </ProjectReference>
     <ProjectReference Include="libpylene.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffc701b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libq.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff38e14}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQALSH.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2225c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQALSH_Mem.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9bf865}</Project>
     </ProjectReference>
     <ProjectReference Include="libqHilbert.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffc2f62d}</Project>
@@ -1739,14 +2819,68 @@
     <ProjectReference Include="libqiqqatool.vcxproj">
       <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
     </ProjectReference>
+    <ProjectReference Include="libqjs-opencv.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff71596c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqjs-sqlite3.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd11567}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqjscalc.vcxproj">
+      <Project>{64726826-d4bd-4a18-91c8-7b4905af7bc7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqjsrepl.vcxproj">
+      <Project>{684bac1d-1fb3-4cc5-adaa-4a4b6721badb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqjsrunner.vcxproj">
+      <Project>{eb6b45ed-1f50-43a8-91ff-046a7203c46e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqoa.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffd98cd}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqoi.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50c5cf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqoir.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff585cc6}</Project>
+    </ProjectReference>
     <ProjectReference Include="libqrencode.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0cd30f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqs_parse.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffb5af5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libquadsort.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffab4813}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS-C++-Wrapper.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff361594}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS-C++-Wrapper2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9f13e5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS-C++-Wrapper_tests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff361583}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS_examples.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57b3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS_tests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57b2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libquile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff153c11}</Project>
     </ProjectReference>
     <ProjectReference Include="libradamsa.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff938798}</Project>
     </ProjectReference>
     <ProjectReference Include="libradix_tree.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa33382}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libragel.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe83335}</Project>
     </ProjectReference>
     <ProjectReference Include="libRAKE.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff96cc93}</Project>
@@ -1760,8 +2894,17 @@
     <ProjectReference Include="librandom.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8cd176}</Project>
     </ProjectReference>
+    <ProjectReference Include="libRandomizedRedundantDCTDenoising.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff8ffce}</Project>
+    </ProjectReference>
+    <ProjectReference Include="librankselect.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffb84c1}</Project>
+    </ProjectReference>
     <ProjectReference Include="librapidcsv.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff26fbfc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libRapidFuzz.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffccf33}</Project>
     </ProjectReference>
     <ProjectReference Include="librapidhash.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffe9369}</Project>
@@ -1777,6 +2920,9 @@
     </ProjectReference>
     <ProjectReference Include="librapidyaml.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffe80885}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libRAW.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff374c68}</Project>
     </ProjectReference>
     <ProjectReference Include="libRE-flex.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff48a851}</Project>
@@ -1805,6 +2951,15 @@
     <ProjectReference Include="libreplxx_examples.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518111e817a}</Project>
     </ProjectReference>
+    <ProjectReference Include="libreproc.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff96fe9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="librestc-cpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1301bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="librestclient-cpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe77385}</Project>
+    </ProjectReference>
     <ProjectReference Include="libresult-cpp-tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-6518ff45ecf0}</Project>
     </ProjectReference>
@@ -1814,14 +2969,44 @@
     <ProjectReference Include="libresumable-assert.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff10cf5a}</Project>
     </ProjectReference>
+    <ProjectReference Include="libretinex.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffdd8a80}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libriegeli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff3af12}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libRNGSobol.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9d7ceb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libRoaringBitmap.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a809e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="librobin-hood-hashing.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff51b759}</Project>
+    </ProjectReference>
+    <ProjectReference Include="librobin-map.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb44073}</Project>
+    </ProjectReference>
     <ProjectReference Include="librobotstxt.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff90481e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="librobust-bibtex.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3f7e0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="librollinghashcpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff636039}</Project>
     </ProjectReference>
     <ProjectReference Include="librotate.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffbafc04}</Project>
     </ProjectReference>
     <ProjectReference Include="librotate_detection.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff86e71f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="librs232.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff5552ae}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libRTree.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffeba33c}</Project>
     </ProjectReference>
     <ProjectReference Include="librttr.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff53d0e0}</Project>
@@ -1844,6 +3029,9 @@
     <ProjectReference Include="libsally.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff91c58a}</Project>
     </ProjectReference>
+    <ProjectReference Include="libsbcl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33c189}</Project>
+    </ProjectReference>
     <ProjectReference Include="libscanf.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd0174e}</Project>
     </ProjectReference>
@@ -1865,6 +3053,18 @@
     <ProjectReference Include="libscriptX.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff11452d}</Project>
     </ProjectReference>
+    <ProjectReference Include="libsdhash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff2e2cf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsdsl-lite.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe449bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsent2vec.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffeaff56}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsequential-line-search.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff565919}</Project>
+    </ProjectReference>
     <ProjectReference Include="libserde-cpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8e8c06}</Project>
     </ProjectReference>
@@ -1876,6 +3076,9 @@
     </ProjectReference>
     <ProjectReference Include="libsfun_tests.vcxproj">
       <Project>{6233c044-18cc-4e9f-9ce5-ec8dbd330c7e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsharedhashfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff679e68}</Project>
     </ProjectReference>
     <ProjectReference Include="libSheenBidi.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff95f28a}</Project>
@@ -1891,6 +3094,9 @@
     </ProjectReference>
     <ProjectReference Include="libshmdata.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff94c8e0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libshoco.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1056df}</Project>
     </ProjectReference>
     <ProjectReference Include="libsigcplusplus.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff4ce5cf}</Project>
@@ -1909,6 +3115,9 @@
     </ProjectReference>
     <ProjectReference Include="libsile-typesetter.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff176b05}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsimd-everywhere.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6e0c97}</Project>
     </ProjectReference>
     <ProjectReference Include="libsimd-imgproc.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff573bd4}</Project>
@@ -1934,8 +3143,26 @@
     <ProjectReference Include="libsimhash-cpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff92030d}</Project>
     </ProjectReference>
+    <ProjectReference Include="libsioyek.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0cd820}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libSipHash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa12ded}</Project>
+    </ProjectReference>
     <ProjectReference Include="libskia.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa29ecb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libslot_map.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff17a634}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsmhasher.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff35b922}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsmile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33a7af}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsml.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb221b6}</Project>
     </ProjectReference>
     <ProjectReference Include="libsnappy.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff071977}</Project>
@@ -1945,6 +3172,15 @@
     </ProjectReference>
     <ProjectReference Include="libsnmalloc_tests.vcxproj">
       <Project>{501059e0-da76-453c-9a39-7061dbea7485}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsnowball.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff603884}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsod.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff911e78}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsodium.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb63377}</Project>
     </ProjectReference>
     <ProjectReference Include="libsparse-map.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffd1003}</Project>
@@ -1973,6 +3209,9 @@
     <ProjectReference Include="libspdmon.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa2f8f2}</Project>
     </ProjectReference>
+    <ProjectReference Include="libspherical-k-means.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff058634}</Project>
+    </ProjectReference>
     <ProjectReference Include="libspline.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff808f8b}</Project>
     </ProjectReference>
@@ -1984,6 +3223,66 @@
     </ProjectReference>
     <ProjectReference Include="libspookyhash.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0433c0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libspork.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb41c30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libSPSCQueue.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa360d2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsptag.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8fa769}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsql.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffec8684}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlcipher.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaecf7c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlean.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe5b2cf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqleet.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcc7e76}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlfs.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff93799e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-fts5-snowball.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff28a53c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-stats.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff3c8874}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite.vcxproj">
+      <Project>{7830156c-02ff-4795-9eba-fdc531ac6c4f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite3-compression-encryption-vfs.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffbda901}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libSQLiteCpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2cbde3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libSQLiteHistograms.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff002024}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_fts_tokenizer_chinese_simple.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff86920b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_wrapper.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff72df78}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_zstd_vfs.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffc96684}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlplot-tools.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff36aa29}</Project>
     </ProjectReference>
     <ProjectReference Include="libsse-popcount.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff506ba2}</Project>
@@ -2006,17 +3305,29 @@
     <ProjectReference Include="libstan.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffdfb5c5}</Project>
     </ProjectReference>
+    <ProjectReference Include="libStarSpace.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9d2fb4}</Project>
+    </ProjectReference>
     <ProjectReference Include="libstate-threads.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffac8aed}</Project>
     </ProjectReference>
+    <ProjectReference Include="libstateline.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8ccc04}</Project>
+    </ProjectReference>
     <ProjectReference Include="libstats.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff4a35f4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libstb.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff87c5f1}</Project>
     </ProjectReference>
     <ProjectReference Include="libstdexec.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff3ca511}</Project>
     </ProjectReference>
     <ProjectReference Include="libstemmer.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffc3d48b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libstl-allocator.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2572c0}</Project>
     </ProjectReference>
     <ProjectReference Include="libstringi.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa1d429}</Project>
@@ -2042,11 +3353,23 @@
     <ProjectReference Include="libsubprocess.vcxproj">
       <Project>{88bfac3f-ac9e-4ef4-b4fa-ff2d26709ce7}</Project>
     </ProjectReference>
+    <ProjectReference Include="libsubprocess_examples.vcxproj">
+      <Project>{a1b0b2a2-9b0f-449c-a862-a09846065a0b}</Project>
+    </ProjectReference>
     <ProjectReference Include="libsubprocess_h.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff560070}</Project>
     </ProjectReference>
+    <ProjectReference Include="libsubprocess_stdioblaster.vcxproj">
+      <Project>{3acdddc0-65ae-4ae7-9bd0-d5c351e46baa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsubprocess_tests.vcxproj">
+      <Project>{32d19383-e495-4c7f-9617-83ec68ec404d}</Project>
+    </ProjectReference>
     <ProjectReference Include="libSuiteSparse.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffec15c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsundials.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff697199}</Project>
     </ProjectReference>
     <ProjectReference Include="libSuperString.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff7e3e37}</Project>
@@ -2060,11 +3383,20 @@
     <ProjectReference Include="libswig.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffe9543b}</Project>
     </ProjectReference>
+    <ProjectReference Include="libSymSpell.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff3e28d1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libSymspellCPP.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7d831f}</Project>
+    </ProjectReference>
     <ProjectReference Include="libsystem_override.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
     </ProjectReference>
     <ProjectReference Include="libsystem_override_4_googletests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsys_info.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff68b5eb}</Project>
     </ProjectReference>
     <ProjectReference Include="libSZ.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff9171fd}</Project>
@@ -2072,8 +3404,32 @@
     <ProjectReference Include="libSZ3.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff02799c}</Project>
     </ProjectReference>
+    <ProjectReference Include="libtab.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb770aa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtabulate.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff475535}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtag.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2daf08}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtag_tests.vcxproj">
+      <Project>{a60d8641-5a1c-4d29-8970-7518ff2daf08}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtao-json.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1fc4e8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtcl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffc8b4a0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtclclockmod.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1fe00a}</Project>
+    </ProjectReference>
     <ProjectReference Include="libtcmalloc.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffdeb64e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtcp_pubsub.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffad60e0}</Project>
     </ProjectReference>
     <ProjectReference Include="libtermcolor.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0e0b34}</Project>
@@ -2087,8 +3443,20 @@
     <ProjectReference Include="libtextflowcpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffb422cc}</Project>
     </ProjectReference>
+    <ProjectReference Include="libthirdparty.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-d58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libthrill.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff196b1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libthumbhash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff77ce49}</Project>
+    </ProjectReference>
     <ProjectReference Include="libthunderSVM.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff94eab6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libticpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2c3908}</Project>
     </ProjectReference>
     <ProjectReference Include="libtidyhtml.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff919f18}</Project>
@@ -2104,6 +3472,15 @@
     </ProjectReference>
     <ProjectReference Include="libtiff_tools.vcxproj">
       <Project>{5edcf4fd-0291-4fb9-8d96-5589573c22a7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtindicators.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffba6275}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtink-cc.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0b109e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtink.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff761daa}</Project>
     </ProjectReference>
     <ProjectReference Include="libtinn.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffee31e5}</Project>
@@ -2125,6 +3502,9 @@
     </ProjectReference>
     <ProjectReference Include="libtinyexpr.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinygettext.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff67af02}</Project>
     </ProjectReference>
     <ProjectReference Include="libtinynurbs.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff38e570}</Project>
@@ -2177,14 +3557,29 @@
     <ProjectReference Include="libtweeny.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd2dda9}</Project>
     </ProjectReference>
+    <ProjectReference Include="libu8g2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff146ed3}</Project>
+    </ProjectReference>
     <ProjectReference Include="libu8_to_std_string.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff2c2ae5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libuchardet.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0ed130}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libugrep.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7e3cfe}</Project>
     </ProjectReference>
     <ProjectReference Include="libuint128.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffb1257e}</Project>
     </ProjectReference>
     <ProjectReference Include="libuint128_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff209ad8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libuni-algo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8ebb31}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libuni.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff862d04}</Project>
     </ProjectReference>
     <ProjectReference Include="libunibreak.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffcfb2eb}</Project>
@@ -2194,6 +3589,12 @@
     </ProjectReference>
     <ProjectReference Include="libunits.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff584cc5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libUniversalStacktrace.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff333078}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libUniversalStacktrace_tests.vcxproj">
+      <Project>{7d3fab1c-eefe-4514-bb03-a29a8aeb7bc8}</Project>
     </ProjectReference>
     <ProjectReference Include="libuno-solver.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff5efce7}</Project>
@@ -2206,6 +3607,9 @@
     </ProjectReference>
     <ProjectReference Include="libupskirt.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libURI-Encode-C.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff584213}</Project>
     </ProjectReference>
     <ProjectReference Include="libURL-Detector.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff2a3ae3}</Project>
@@ -2228,6 +3632,12 @@
     <ProjectReference Include="libutfcpp_tests.vcxproj">
       <Project>{a60d8644-5a1c-4129-8970-7518ff0eba51}</Project>
     </ProjectReference>
+    <ProjectReference Include="libuuid.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff14afcf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libuuid_v4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff996f5a}</Project>
+    </ProjectReference>
     <ProjectReference Include="libuv.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa00ee8}</Project>
     </ProjectReference>
@@ -2245,6 +3655,9 @@
     </ProjectReference>
     <ProjectReference Include="libvcopy_tests.vcxproj">
       <Project>{5a7c1b31-1eb5-4f0c-8873-355e5ee2fe16}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libvigra.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff3fd4a0}</Project>
     </ProjectReference>
     <ProjectReference Include="libvips.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff517840}</Project>
@@ -2294,6 +3707,9 @@
     <ProjectReference Include="libwildmatch.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff64363f}</Project>
     </ProjectReference>
+    <ProjectReference Include="libwin-iconv.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff609e53}</Project>
+    </ProjectReference>
     <ProjectReference Include="libwin32-dpi.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff997d8f}</Project>
     </ProjectReference>
@@ -2306,6 +3722,9 @@
     <ProjectReference Include="libWinToast.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff7126da}</Project>
     </ProjectReference>
+    <ProjectReference Include="libwolfsort.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff99abab}</Project>
+    </ProjectReference>
     <ProjectReference Include="libword2vec-GloVe.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffc00728}</Project>
     </ProjectReference>
@@ -2314,6 +3733,12 @@
     </ProjectReference>
     <ProjectReference Include="libworde_butcher.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffee37e6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwyhash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff09f1b2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxbr-standalone.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff39479b}</Project>
     </ProjectReference>
     <ProjectReference Include="libxbrzscale.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff547f6a}</Project>
@@ -2338,6 +3763,9 @@
     </ProjectReference>
     <ProjectReference Include="libXMP-Toolkit.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffcfc263}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libXoshiro-cpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff156f40}</Project>
     </ProjectReference>
     <ProjectReference Include="libxpdf.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff039737}</Project>
@@ -2408,6 +3836,12 @@
     <ProjectReference Include="libzlib_tests.vcxproj">
       <Project>{9e1c227b-23b9-4a37-9b6f-053efd0d7cd4}</Project>
     </ProjectReference>
+    <ProjectReference Include="libzmq.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff258e43}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
     <ProjectReference Include="libzstd.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
     </ProjectReference>
@@ -2426,17 +3860,38 @@
     <ProjectReference Include="libzxing-cpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff017ec4}</Project>
     </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="LightLDA.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1cb198}</Project>
+    </ProjectReference>
     <ProjectReference Include="linenoise.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffac1208}</Project>
     </ProjectReference>
     <ProjectReference Include="linenoise_examples.vcxproj">
       <Project>{e613185f-a62e-4f76-b166-5f20f0f07792}</Project>
     </ProjectReference>
+    <ProjectReference Include="local_adaptive_binarization.vcxproj">
+      <Project>{3644e12d-d934-41fd-bf7e-83745ae0e272}</Project>
+    </ProjectReference>
     <ProjectReference Include="magic_enum.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff84ae1e}</Project>
     </ProjectReference>
     <ProjectReference Include="magic_enum_tests.vcxproj">
       <Project>{36652466-05bf-488f-bace-802132d64068}</Project>
+    </ProjectReference>
+    <ProjectReference Include="map_benchmark.vcxproj">
+      <Project>{00811970-815b-4f64-bc9d-2190789cccd2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="mimetic.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffafd9e3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="monolithic_tmplt_demo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe0dcf5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="morton_filter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4363e5}</Project>
     </ProjectReference>
     <ProjectReference Include="mucrow.vcxproj">
       <Project>{00112979-815b-4f64-bc9d-2190785f5f9a}</Project>
@@ -2458,6 +3913,9 @@
     </ProjectReference>
     <ProjectReference Include="NanoLog.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff77b6cd}</Project>
+    </ProjectReference>
+    <ProjectReference Include="nanosvg.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9719b7}</Project>
     </ProjectReference>
     <ProjectReference Include="ocr-evaluation-tools.vcxproj">
       <Project>{00811970-815b-4f64-bc9d-2190785da4c8}</Project>
@@ -2483,8 +3941,14 @@
     <ProjectReference Include="openssl.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff49cc7b}</Project>
     </ProjectReference>
+    <ProjectReference Include="palmtree.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff54a83b}</Project>
+    </ProjectReference>
     <ProjectReference Include="pcre.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff74b2ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="phf-hash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8e944c}</Project>
     </ProjectReference>
     <ProjectReference Include="pikchr.vcxproj">
       <Project>{00811970-815b-4f64-bc9d-2190785a2eb5}</Project>
@@ -2497,6 +3961,9 @@
     </ProjectReference>
     <ProjectReference Include="portable-memory-mapping.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff62c7e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="pyclustering.vcxproj">
+      <Project>{3644e12d-d934-41fd-bf7e-83745a7591ec}</Project>
     </ProjectReference>
     <ProjectReference Include="qiqqa_tools.vcxproj">
       <Project>{8156c20c-dd56-4200-b4a6-40c056815780}</Project>
@@ -2543,6 +4010,24 @@
     <ProjectReference Include="resumable-assert.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff521a71}</Project>
     </ProjectReference>
+    <ProjectReference Include="sentence-tokenizer.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff51e935}</Project>
+    </ProjectReference>
+    <ProjectReference Include="sentencepiece.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff353a7d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="shoco.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd76f18}</Project>
+    </ProjectReference>
+    <ProjectReference Include="smhasher.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8334dd}</Project>
+    </ProjectReference>
+    <ProjectReference Include="sparsehash.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff085ce}</Project>
+    </ProjectReference>
+    <ProjectReference Include="spatial_index_benchmark.vcxproj">
+      <Project>{00811970-815b-4f64-bc9d-21907898a203}</Project>
+    </ProjectReference>
     <ProjectReference Include="spdlog_example.vcxproj">
       <Project>{641bc0f8-5302-4520-9293-21522802dd37}</Project>
     </ProjectReference>
@@ -2557,6 +4042,15 @@
     </ProjectReference>
     <ProjectReference Include="StringViewTests.vcxproj">
       <Project>{00811970-815b-4f64-bc9d-21907843cb2f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="subprocess.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff27c32d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="sync_nas_filelock.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98f87eaa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="taskflow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff69709f}</Project>
     </ProjectReference>
     <ProjectReference Include="text-wrangler.vcxproj">
       <Project>{00811970-815b-4f64-bc9d-219078b2bc21}</Project>
@@ -2588,6 +4082,9 @@
     <ProjectReference Include="tvision.vcxproj">
       <Project>{a10d8644-5a1c-4d29-8970-7518ff5340c1}</Project>
     </ProjectReference>
+    <ProjectReference Include="ucto.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff350499}</Project>
+    </ProjectReference>
     <ProjectReference Include="unicode-cldr-data.vcxproj">
       <Project>{3644e12d-d934-41fd-bf7e-83745acba0f0}</Project>
     </ProjectReference>
@@ -2612,8 +4109,23 @@
     <ProjectReference Include="visible-url-detector.vcxproj">
       <Project>{00811970-815b-4f64-bc9d-2190788d3d8b}</Project>
     </ProjectReference>
+    <ProjectReference Include="webview.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffea446}</Project>
+    </ProjectReference>
+    <ProjectReference Include="WebView2Browser.vcxproj">
+      <Project>{00811970-815b-4f64-bc9d-219078910d3e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="WebView2Samples.vcxproj">
+      <Project>{00811970-815b-4f64-bc9d-2190784a5f2a}</Project>
+    </ProjectReference>
     <ProjectReference Include="wget.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffe20576}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wordfreq.vcxproj">
+      <Project>{3644e12d-d934-41fd-bf7e-83745aed6430}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wordfrequency.vcxproj">
+      <Project>{3644e12d-d934-41fd-bf7e-83745afccf38}</Project>
     </ProjectReference>
     <ProjectReference Include="xml2_tests.vcxproj">
       <Project>{00112979-815b-4f64-bc9d-219078b10f06}</Project>
@@ -2636,12 +4148,20 @@
     <ProjectReference Include="you-token-to-me.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff5080fb}</Project>
     </ProjectReference>
+    <ProjectReference Include="zmq_examples.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8971-7518ff258e43}</Project>
+    </ProjectReference>
+    <ProjectReference Include="zmq_tests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8973-7518ff258e43}</Project>
+    </ProjectReference>
+    <ProjectReference Include="zmq_tools.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8972-7518ff258e43}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

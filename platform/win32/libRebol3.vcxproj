@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF392261}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREBOL3;REBOL3_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREBOL3;REBOL3_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREBOL3;REBOL3_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREBOL3;REBOL3_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREBOL3;REBOL3_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREBOL3;REBOL3_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREBOL3;REBOL3_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREBOL3;REBOL3_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREBOL3;REBOL3_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREBOL3;REBOL3_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREBOL3;REBOL3_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREBOL3;REBOL3_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/a-constants.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/a-globals.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/a-lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/a-lib2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/a-stubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/b-init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/b-main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/common/constants.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/common/context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/common/dictionary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/common/platform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/common/shared_dictionary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/common/transform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/dec/bit_reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/dec/decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/dec/huffman.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/dec/state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/backward_references.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/backward_references_hq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/bit_cost.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/block_splitter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/brotli_bit_stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/cluster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/command.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/compound_dictionary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/compress_fragment.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/compress_fragment_two_pass.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/dictionary_hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/encoder_dict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/entropy_encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/fast_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/histogram.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/literal_cost.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/metablock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/static_dict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/utf8_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/c-do.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/c-error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/c-frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/c-function.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/c-handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/c-port.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/c-task.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/c-word.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/d-crash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/d-dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/d-print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/deprecated/n-crypt-aes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/deprecated/n-crypt-chacha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/deprecated/n-crypt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/deprecated/u-aes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/deprecated/u-bigint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/deprecated/u-chacha20.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/deprecated/u-dh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/deprecated/u-md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/deprecated/u-poly1305.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/deprecated/u-rsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/deprecated/u-sha1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/deprecated/u-sha2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/deprecated/u-uECC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/f-blocks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/f-deci.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/f-dtoa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/f-enbase.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/f-extension.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/f-int.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/f-math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/f-modify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/f-qsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/f-random.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/f-round.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/f-series.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/f-stubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/l-scan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/l-types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/m-gc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/m-pools.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/m-series.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/aes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/aria.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/asn1parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/asn1write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/bignum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/bignum_core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/camellia.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/ccm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/chacha20.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/chachapoly.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/cipher.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/cipher_wrap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/constant_time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/ctr_drbg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/dhm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/ecdh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/ecdsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/ecp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/ecp_curves.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/entropy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/entropy_poll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/gcm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/hash_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/md.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/md4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/oid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/platform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/platform_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/poly1305.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/ripemd160.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/rsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/rsa_alt_helpers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/sha1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/sha256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/sha3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/sha512.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/n-control.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/n-crypt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/n-data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/n-graphics.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/n-hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/n-image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/n-io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/n-loop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/n-math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/n-oid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/n-sets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/n-strings.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/n-system.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/p-audio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/p-checksum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/p-clipboard.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/p-console.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/p-crypt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/p-dir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/p-dns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/p-event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/p-file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/p-midi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/p-net.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/p-serial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/p-timer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/s-cases.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/s-crc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/s-file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/s-find.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/s-make.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/s-mold.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/s-ops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/s-trim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/s-unicode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-bitset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-block.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-char.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-datatype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-date.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-decimal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-function.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-gob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-integer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-logic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-money.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-object.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-pair.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-port.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-struct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-tuple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-typeset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-utype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/t-word.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-bincode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-bmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-crush.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-dialect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-gif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-iconv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-image-blur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-image-resize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-jpg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-lzma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-lzw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-mbedtls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-png-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-qoi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-rc4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-wav.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-xxhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/core/u-zlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/dev-dns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/dev-net.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/host-args.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/host-device.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/host-ext-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/host-main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/host-stdio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/osx/dev-clipboard.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/osx/dev-midi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/osx/host-image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/posix/dev-event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/posix/dev-file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/posix/dev-serial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/posix/dev-stdio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/posix/host-compositor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/posix/host-event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/posix/host-lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/posix/host-readline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/posix/host-window.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/dev-audio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/dev-clipboard.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/dev-event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/dev-file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/dev-midi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/dev-serial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/dev-stdio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/host-compositor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/host-draw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/host-effect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/host-event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/host-graphics.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/host-image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/host-lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/host-text.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/host-window.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/rpic-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/sys-codecs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/sys-d2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/sys-utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Rebol3/src/tests/extension/test.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/common/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/common/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/common/dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/common/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/common/shared_dictionary_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/common/transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/common/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/dec/bit_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/dec/huffman.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/dec/prefix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/dec/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/backward_references.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/backward_references_hq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/backward_references_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/bit_cost.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/bit_cost_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/block_encoder_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/block_splitter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/block_splitter_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/brotli_bit_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/cluster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/cluster_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/command.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/compound_dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/compress_fragment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/compress_fragment_two_pass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/dictionary_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/encoder_dict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/entropy_encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/entropy_encode_static.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/fast_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/find_match_length.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/hash_composite_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/hash_forgetful_chain_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/hash_longest_match64_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/hash_longest_match_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/hash_longest_match_quickly_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/hash_rolling_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/hash_to_binary_tree_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/histogram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/histogram_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/literal_cost.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/metablock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/metablock_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/prefix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/quality.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/ringbuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/static_dict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/static_dict_lut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/utf8_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/brotli/enc/write_bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/alignment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/bignum_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/bignum_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/bignum_mod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/bn_mul.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/cipher_wrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/constant_time_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/constant_time_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/ctr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/ecdh_misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/ecp_internal_alt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/ecp_invasive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/entropy_poll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/hash_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/md_psa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/md_wrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/rsa_alt_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/rsa_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/brotli/decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/brotli/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/brotli/port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/brotli/shared_dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/brotli/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/bigint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/bigint_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/bigint_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/poly1305/poly1305-donna-32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/poly1305/poly1305-donna-64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/poly1305/poly1305-donna.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/sys-aes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/sys-chacha20.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/sys-dh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/sys-md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/sys-poly1305.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/sys-rsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/sys-sha1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/sys-sha2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/uECC-curve-specific.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/uECC-platform-specific.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/uECC-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/uECC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/deprecated/uECC_vli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/aes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/aria.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/asn1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/asn1write.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/bignum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/build_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/camellia.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/ccm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/chacha20.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/chachapoly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/check_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/cipher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/cmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/config_adjust_legacy_crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/config_adjust_ssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/config_adjust_x509.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/config_psa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/constant_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/ctr_drbg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/des.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/dhm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/ecdh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/ecdsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/ecjpake.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/ecp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/entropy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/gcm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/legacy_or_psa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/mbedtls_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/md.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/md4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/oid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/pk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/platform_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/platform_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/poly1305.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/private_access.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/ripemd160.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/rsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/sha1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/sha256.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/sha3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/sha512.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/mbedtls/threading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/opt-config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/opt-dependencies.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/build_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_builtin_composites.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_builtin_key_derivation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_builtin_primitives.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_driver_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_driver_contexts_composites.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_driver_contexts_key_derivation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_driver_contexts_primitives.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_extra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_legacy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_se_driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_sizes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/psa/crypto_values.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-args.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-compositor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-dtoa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-filereq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-gob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-host.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-net.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-series.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/reb-view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-blur.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-checksum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-crypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-dec-to-char.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-deci-funcs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-deci.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-int-funcs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-jpg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-lzma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-magick.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-net.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-panics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-qoi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-rc4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-scan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-xxhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/include/sys-zlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/os/osx/sys-codecs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/os/osx/sys-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/sys-codecs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/sys-d2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Rebol3/src/os/win32/sys-utils.h" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/make/icon/r3.ico" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/make/icon/r3_128.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/make/icon/r3_16.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/make/icon/r3_24.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/make/icon/r3_256.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/make/icon/r3_32.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/make/icon/r3_48.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/httpd-root/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/animation.gif" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/flower-from-photoshop.jpg" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/flower-tiny.jpg" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/flower.bmp" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/flower.gif" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/flower.jpg" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/flower.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_128.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_16.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_20.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_24.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_30.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_32.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_36.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_40.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_48.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_60.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_64.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_72.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_80.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/ico/icon_96.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/issue-2587.jpg" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/png-from-photoshop.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/r3.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/rbgw.gif" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/rbgw.png" />
+    <Image Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/test.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/Rebol3/make/r3-view.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/Rebol3/make/r3.rc" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/NOTICE" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/README-Carl" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/make/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/make/old-makefiles/makefile" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/make/old-makefiles/makefile.vc" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/make/old-makefiles/makefile_0.4.40.mk" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/make/pre-make.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/make/r3-view.manifest" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/make/r3.manifest" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/make/tools/amalgamate-ext.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/core/mbedtls/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/httpd-root/form.html" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/httpd-root/robots.txt" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/httpd-root/websocket.html" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/quick-test-module.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/run-tests.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-audio.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-checksums.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-compression.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-crypt.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-ecdh.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-extension-blend2d.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-extension-sqlite.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-extension-triangulate.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-httpd.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-issue-2282.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-map.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-midi.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-pingpong-client.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-pingpong-server.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-port-scanner.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-raw-tcp-read.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-safe.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-soundex.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-spotify.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-tls-client.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-tls-server.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-udp-client.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-udp-server.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-user-console.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-view.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/test-wait-for-key.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/_known-issues_.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/aes-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/bbcode-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/bincode-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/bitset-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/call-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/chacha20-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/checksum-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/codecs-test-pdf.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/codecs-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/compare-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/compress-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/conditional-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/copy-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/crash-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/crypt-port-camelia-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/crypt-port-ccm-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/crypt-port-gcm-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/crypt-port-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/crypt-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/csv-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/datatype-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/date-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/decimal-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/delect-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/dh-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/enbase-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/enum-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/error-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/evaluation-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/event-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/extension-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/file-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/MyKey.key" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/bug-load-null.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/dhparam2048.key" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/error.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/flower-from-photoshop.pdf" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/flower-from-xnview.pdf" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/flower.dds" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/hello-1.pdf" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/hello-2.pdf" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/hello-linearized.pdf" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/invalid-decimal.r" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/issue-1677.txt" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/issue-1794.txt" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/issue-2186-UTF16-BE.txt" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/issue-2186-UTF16-LE.txt" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/issue-2186-UTF32-BE.txt" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/issue-2186-UTF32-LE.txt" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/launch-wait.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/launch.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/launched.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/pdf-maker-doc.pdf" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/print-args.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/quickbrown.bin" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/quit-return.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/quit.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/rebol-private-no-pass.key" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/test.aar" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/test.pfx" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/test.tar" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/test1-deflate.swf" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/test2-lzma.swf" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/test3.swf" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/test4-as2btn.swf" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/unset.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/čeština.txt" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/format-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/func-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/gob-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/handle-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/image-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/integer-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/integer-test_.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/issue-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/lexer-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/load-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/make-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/map-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/module-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/mold-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/money-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/object-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/os-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/pair-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/parse-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/percent-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/poly1305-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/port-clipboard-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/port-console-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/port-http-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/port-net-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/port-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/power-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/protect-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/rc4-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/rsa-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/series-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/struct-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/task-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/thru-cache-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/time-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/tuple-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/typeset-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/url-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/vector-test.r3" />
+    <Text Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/word-test.r3" />
+    <Xml Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/test1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Rebol3/src/tests/units/files/test2.xml" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  
