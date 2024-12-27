@@ -2,7 +2,7 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Type cast for the gethostbyname() argument */
-#define GETHOSTBYNAME_ARG_CAST /**/
+#define GETHOSTBYNAME_ARG_CAST   (char *)
 
 /* Define to 1 if you have the <ansidecl.h> header file. */
 /* #undef HAVE_ANSIDECL_H */
@@ -65,7 +65,7 @@
 #define HAVE_GETADDRINFO /**/
 
 /* Define to 1 if you have the `gettimeofday' function. */
-#define HAVE_GETTIMEOFDAY 1
+#undef HAVE_GETTIMEOFDAY 
 
 /* Define to 1 if you have the <ieeefp.h> header file. */
 /* #undef HAVE_IEEEFP_H */
@@ -119,10 +119,10 @@
 #define HAVE_MEMORY_H 1
 
 /* Define to 1 if you have the `mmap' function. */
-#define HAVE_MMAP 1
+#undef HAVE_MMAP 
 
 /* Define to 1 if you have the `munmap' function. */
-#define HAVE_MUNMAP 1
+#undef HAVE_MUNMAP 
 
 /* mmap() is no good without munmap() */
 #if defined(HAVE_MMAP) && !defined(HAVE_MUNMAP)
@@ -142,7 +142,7 @@
 #define HAVE_NETINET_IN_H 1
 
 /* Define to 1 if you have the <poll.h> header file. */
-#define HAVE_POLL_H 1
+#undef HAVE_POLL_H 
 
 /* Define to 1 if you have the `printf' function. */
 #define HAVE_PRINTF 1
@@ -218,7 +218,7 @@
 /* #undef HAVE_SYS_DIR_H */
 
 /* Define to 1 if you have the <sys/mman.h> header file. */
-#define HAVE_SYS_MMAN_H 1
+#undef HAVE_SYS_MMAN_H 
 
 /* Define to 1 if you have the <sys/ndir.h> header file, and it defines `DIR'.
    */
@@ -237,7 +237,7 @@
 #define HAVE_SYS_TIMEB_H 1
 
 /* Define to 1 if you have the <sys/time.h> header file. */
-#define HAVE_SYS_TIME_H 1
+#undef HAVE_SYS_TIME_H 
 
 /* Define to 1 if you have the <sys/types.h> header file. */
 #define HAVE_SYS_TYPES_H 1
@@ -249,7 +249,7 @@
 #define HAVE_TIME_H 1
 
 /* Define to 1 if you have the <unistd.h> header file. */
-#define HAVE_UNISTD_H 1
+#undef HAVE_UNISTD_H 
 
 /* Whether va_copy() is available */
 #define HAVE_VA_COPY 1
@@ -301,7 +301,7 @@
 #define PACKAGE_VERSION ""
 
 /* Type cast for the send() function 2nd arg */
-#define SEND_ARG2_CAST /**/
+#define SEND_ARG2_CAST (char *)
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
@@ -332,3 +332,8 @@
 /* Define to the type of an unsigned integer type of width exactly 32 bits if
    such a type exists and the standard includes do not define it. */
 /* #undef uint32_t */
+
+
+
+
+#define XML_SYSCONFDIR "/etc"

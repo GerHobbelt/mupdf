@@ -34,6 +34,8 @@ extern "C" {
 FZ_DATA const fz_quad fz_infinite_quad = { { -INFINITY, INFINITY }, { INFINITY, INFINITY }, { -INFINITY, -INFINITY }, { INFINITY, -INFINITY } };
 // hotfix for MSVC2022 which keeps barfing on the fz_invalid_quad constant definition with: error C2099 : initializer is not a constant
 // --> compile as C++ in separate source file.    !@#$%   :-(
+//
+// See MSWindows/MSVC's processthreadapi.h for the definition of the offending inline function: __ucrt_int_to_float() which is used in the system macro defining the `NAN` value.
 FZ_DATA const fz_quad fz_invalid_quad = { { NAN, NAN }, { NAN, NAN }, { NAN, NAN }, { NAN, NAN } };
 
 
