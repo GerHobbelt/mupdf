@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF6EFBDF}</ProjectGuid>
+    <ProjectGuid>{23E1AD6F-F782-41A0-A7FB-E68EB6434382}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCONFIG;CONFIG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -223,29 +223,24 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libconfig/lib/grammar.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libconfig/lib/libconfig.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libconfig/lib/libconfig_cpp.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libconfig/lib/libconfigcpp.c++" />
-    <ClCompile Include="../../thirdparty/owemdjee/libconfig/lib/scanctx.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libconfig/lib/scanner.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libconfig/lib/strbuf.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libconfig/lib/strvec.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libconfig/lib/util.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libconfig/lib/wincompat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/contrib/chained/examples/chained_example1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/contrib/chained/examples/chained_example2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/contrib/chained/examples/chained_example3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/contrib/chained/examples/chained_examples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/contrib/copy_setting.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/src/ls-config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/examples/c++/example1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/examples/c++/example2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/examples/c++/example3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/examples/c++/example4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/examples/c/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/examples/c/example2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/examples/c/example3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/examples/c/example4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/tests/tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libconfig/tinytest/tinytest.c" />
     <ClInclude Include="../../thirdparty/owemdjee/libconfig/contrib/chained/libconfig_chained.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libconfig/lib/grammar.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libconfig/lib/libconfig.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libconfig/lib/libconfig.h++" />
-    <ClInclude Include="../../thirdparty/owemdjee/libconfig/lib/libconfig.hh" />
-    <ClInclude Include="../../thirdparty/owemdjee/libconfig/lib/parsectx.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libconfig/lib/scanctx.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libconfig/lib/scanner.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libconfig/lib/strbuf.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libconfig/lib/strvec.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libconfig/lib/util.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libconfig/lib/win32/stdint.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libconfig/lib/wincompat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libconfig/tinytest/tinytest.h" />
     <Text Include="../../thirdparty/owemdjee/libconfig/AUTHORS" />
     <Text Include="../../thirdparty/owemdjee/libconfig/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libconfig/ChangeLog" />
@@ -272,6 +267,42 @@
     <Text Include="../../thirdparty/owemdjee/libconfig/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/libconfig/contrib/README" />
     <Text Include="../../thirdparty/owemdjee/libconfig/contrib/chained/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/chained/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/chained/examples/CreateProjectFiles.bat" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/chained/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/chained/examples/example.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/README" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/changelog" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/compat" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/control" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/copyright" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/files" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/ls-config.1" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/ls-config.install" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/ls-config.substvars" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/ls-config/DEBIAN/control" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/ls-config/DEBIAN/md5sums" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/ls-config/DEBIAN/postinst" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/ls-config/usr/share/doc/ls-config/changelog.gz" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/ls-config/usr/share/doc/ls-config/copyright" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/manpages" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/postinst" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/rules" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/debian/source/format" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/doc/bash.api.txt" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/doc/bin.api.txt" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/doc/changlog.txt" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/doc/errorcodes.txt" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/lslib-core" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/makefile" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/sample/config" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/sample/script" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/src/makefile" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/src/po/en_GB.po" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/src/po/makefile" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/contrib/ls-config/src/po/pl_PL.po" />
     <Text Include="../../thirdparty/owemdjee/libconfig/debian/changelog" />
     <Text Include="../../thirdparty/owemdjee/libconfig/debian/compat" />
     <Text Include="../../thirdparty/owemdjee/libconfig/debian/control" />
@@ -303,14 +334,23 @@
     <Text Include="../../thirdparty/owemdjee/libconfig/docs/libconfig_manual.html" />
     <Text Include="../../thirdparty/owemdjee/libconfig/docs/libconfig_manual.pdf" />
     <Text Include="../../thirdparty/owemdjee/libconfig/docs/test.cfg.txt" />
-    <Text Include="../../thirdparty/owemdjee/libconfig/lib/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libconfig/lib/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/libconfig/lib/grammar.y" />
-    <Text Include="../../thirdparty/owemdjee/libconfig/lib/libconfig++.pc.in" />
-    <Text Include="../../thirdparty/owemdjee/libconfig/lib/libconfig++Config.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/libconfig/lib/libconfig.pc.in" />
-    <Text Include="../../thirdparty/owemdjee/libconfig/lib/libconfigConfig.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/libconfig/lib/scanner.l" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c++/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c++/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c++/example.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c++/invalid.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c/cfg_includes/book1.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c/cfg_includes/book2.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c/cfg_includes/book3.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c/cfg_includes/book4.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c/cfg_includes/cfg_subincludes/extra1.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c/cfg_includes/cfg_subincludes/extra2.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c/cfg_includes/other.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c/example.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/examples/c/example4.cfg" />
     <Text Include="../../thirdparty/owemdjee/libconfig/libconfig.spec.in" />
     <Text Include="../../thirdparty/owemdjee/libconfig/m4/libtool.m4" />
     <Text Include="../../thirdparty/owemdjee/libconfig/m4/ltoptions.m4" />
@@ -318,7 +358,33 @@
     <Text Include="../../thirdparty/owemdjee/libconfig/m4/ltversion.m4" />
     <Text Include="../../thirdparty/owemdjee/libconfig/m4/lt~obsolete.m4" />
     <Text Include="../../thirdparty/owemdjee/libconfig/test.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/bad_input_0.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/bad_input_1.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/binhex.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/input_0.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/input_1.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/input_2.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/input_3.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/input_4.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/input_5.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/input_6.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/more.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/nesting.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/output_0.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/output_1.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/output_2.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/output_3.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/output_4.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/output_5.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/output_6.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/override_setting.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/parse_error_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/parse_error_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tests/testdata/strings.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tinytest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libconfig/tinytest/Makefile.am" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
