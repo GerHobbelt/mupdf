@@ -1430,7 +1430,7 @@ c4core
 docopt.cpp
 PSI
 dablooms
-Cuckoo_Filter
+Cuckoo_Filter_simple
 Containers
 radix_tree
 adaptive-radix-tree
@@ -1566,6 +1566,8 @@ picol
 ecl
 mrubyc
 mruby
+barkeep
+opendtrace
 
 EOT
 ) | grep -e "$FILTER"

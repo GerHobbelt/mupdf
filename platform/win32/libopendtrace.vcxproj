@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF8A4561}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENDTRACE;OPENDTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENDTRACE;OPENDTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENDTRACE;OPENDTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENDTRACE;OPENDTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENDTRACE;OPENDTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENDTRACE;OPENDTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENDTRACE;OPENDTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENDTRACE;OPENDTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENDTRACE;OPENDTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENDTRACE;OPENDTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENDTRACE;OPENDTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENDTRACE;OPENDTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libcmdutils/common/nicenum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/ctf_create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/ctf_decl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/ctf_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/ctf_hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/ctf_labels.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/ctf_lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/ctf_lookup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/ctf_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/ctf_subr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/ctf_types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/ctf_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/aarch64/dt_isadep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/arm/dt_isadep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/drti.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_aggregate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_as.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_buf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_cc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_cg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_consume.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_decl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_dis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_dof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_ident.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_inttab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_link.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_module.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_pcb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_pid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_pq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_pragma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_printf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_proc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_program.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_provider.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_regset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_strtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_subr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_sugar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_work.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_xlator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/i386/dt_isadep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/mips/dt_isadep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/powerpc/dt_isadep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/riscv/dt_isadep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/sparc/dt_isadep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libgen/common/gmatch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libnvpair/libnvpair.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libnvpair/nvpair_alloc_system.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libnvpair/nvpair_json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libuutil/common/uu_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libuutil/common/uu_avl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libuutil/common/uu_dprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libuutil/common/uu_ident.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libuutil/common/uu_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libuutil/common/uu_misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libuutil/common/uu_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libuutil/common/uu_pname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libuutil/common/uu_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/lib/libuutil/common/uu_strtoint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/common/avl/avl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/common/nvpair/opensolaris_fnvpair.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/common/nvpair/opensolaris_nvpair.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/common/nvpair/opensolaris_nvpair_alloc_fixed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/common/unicode/u8_textprep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/kern/opensolaris.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/kern/opensolaris_atomic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/kern/opensolaris_cmn_err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/kern/opensolaris_dtrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/kern/opensolaris_proc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/kern/opensolaris_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/kern/opensolaris_taskq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtmalloc/dtmalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/aarch64/dtrace_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/aarch64/dtrace_subr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/amd64/dtrace_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/amd64/dtrace_subr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/arm/dtrace_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/arm/dtrace_subr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/dtrace_anon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/dtrace_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/dtrace_hacks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/dtrace_ioctl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/dtrace_load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/dtrace_modevent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/dtrace_sysctl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/dtrace_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/dtrace_unload.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/dtrace_vtime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/i386/dtrace_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/i386/dtrace_subr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/mips/dtrace_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/mips/dtrace_subr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/powerpc/dtrace_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/powerpc/dtrace_subr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/riscv/dtrace_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/riscv/dtrace_subr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/x86/dis_tables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/x86/instr_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/aarch64/fbt_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/arm/fbt_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/fbt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/mips/fbt_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/powerpc/fbt_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/riscv/fbt_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/x86/fbt_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/profile/profile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/prototype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/sdt/sdt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/dev/systrace/systrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/aarch64/dtrace/fasttrap_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/arm/dtrace/fasttrap_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/ctf/ctf_mod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/ctf/ctf_subr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/dtrace/dtrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/dtrace/dtrace_xoroshiro128_plus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/dtrace/fasttrap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/os/callb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/os/fm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/os/list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/os/nvpair_alloc_system.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/intel/dtrace/fasttrap_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/mips/dtrace/fasttrap_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/powerpc/dtrace/fasttrap_isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opendtrace/sys/uts/riscv/dtrace/fasttrap_isa.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libcmdutils/libcmdutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/ctf_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/libctf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_as.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_buf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_dof.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_errtags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_ident.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_inttab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_module.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_pcb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_pid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_pq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_printf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_proc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_program.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_regset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_strtab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_xlator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dtrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/compat/freebsd/alloca.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/compat/freebsd/fcntl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/compat/freebsd/libproc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/compat/freebsd/libproc_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/compat/freebsd/stdio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/compat/freebsd/strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/compat/freebsd/unistd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libnvpair/libnvpair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libuutil/common/libuutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libuutil/common/libuutil_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/lib/libuutil/common/libuutil_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/common/util/strtolctype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/acl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/assfail.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/byteorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/callo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/cmn_err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/cpupart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/cpuvar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/cpuvar_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/cred.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/debug_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/dirent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/disp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/dkio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/dnlc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/elf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/feature_tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/freebsd_rwlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/kcondvar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/kidmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/kmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/kobj.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/kstat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/mman.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/mntent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/mnttab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/modctl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/mount.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/nvpair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/objfs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/param.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/pathname.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/pcpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/policy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/proc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/refstr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/rwlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/sdt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/sema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/sid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/sig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/stat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/sunddi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/systeminfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/systm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/uio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/varargs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/vfs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/vm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/vnode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/compat/freebsd/sys/zone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/aarch64/regset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/arm/regset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/dtrace_cddl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/mips/regset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/powerpc/regset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/riscv/regset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/x86/dis_tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/x86/regset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/aarch64/fbt_isa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/arm/fbt_isa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/fbt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/mips/fbt_isa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/powerpc/fbt_isa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/riscv/fbt_isa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/dev/fbt/x86/fbt_isa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/aarch64/sys/fasttrap_isa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/arm/sys/fasttrap_isa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/dtrace/dtrace_xoroshiro128_plus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/acl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/acl_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/asm_linkage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/avl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/avl_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/callb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/ccompile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/cmn_err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/compress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/cpupart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/cpuvar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/cred.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/ctf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/ctf_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/dtrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/dtrace_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/errorq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/extdirent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/fasttrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/fasttrap_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/feature_tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/fm/fs/zfs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/fm/protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/fm/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/idmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/isa_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/list_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/note.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/nvpair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/nvpair_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/procset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/synch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/sysevent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/sysevent/dev.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/sysevent/eventdefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/sysmacros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/taskq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/u8_textprep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/u8_textprep_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/vnode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/sys/zmod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/intel/sys/fasttrap_isa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/mips/sys/fasttrap_isa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/powerpc/sys/fasttrap_isa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opendtrace/sys/uts/riscv/sys/fasttrap_isa.h" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/lib/libctf/common/ctf.5" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_grammar.y" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/dt_lex.l" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/mkerrno.sh" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/mkerrtags.sh" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/mknames.sh" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/common/mksignal.sh" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/i386/regs.d.in" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/lib/libdtrace/i386/regs.sed.in" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/sys/common/atomic/aarch64/opensolaris_atomic.S" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/sys/common/atomic/amd64/opensolaris_atomic.S" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/sys/common/atomic/i386/opensolaris_atomic.S" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/sys/common/atomic/powerpc64/opensolaris_atomic.S" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/sys/common/atomic/sparc64/opensolaris_atomic.S" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/aarch64/dtrace_asm.S" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/amd64/dtrace_asm.S" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/arm/dtrace_asm.S" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/i386/dtrace_asm.S" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/mips/dtrace_asm.S" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/powerpc/dtrace_asm.S" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/sys/dev/dtrace/riscv/dtrace_asm.S" />
+    <Text Include="../../thirdparty/owemdjee/opendtrace/sys/uts/common/Makefile.files" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

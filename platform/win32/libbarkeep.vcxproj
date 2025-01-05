@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFD28D1F}</ProjectGuid>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF3C2E95}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -50,9 +50,7 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
-    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
-  </ImportGroup>
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -113,7 +111,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCUCKOO_FILTER;CUCKOO_FILTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBARKEEP;BARKEEP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -124,11 +122,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCUCKOO_FILTER;CUCKOO_FILTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBARKEEP;BARKEEP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCUCKOO_FILTER;CUCKOO_FILTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBARKEEP;BARKEEP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -141,7 +139,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCUCKOO_FILTER;CUCKOO_FILTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBARKEEP;BARKEEP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -150,12 +148,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCUCKOO_FILTER;CUCKOO_FILTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBARKEEP;BARKEEP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCUCKOO_FILTER;CUCKOO_FILTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBARKEEP;BARKEEP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -168,7 +166,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCUCKOO_FILTER;CUCKOO_FILTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBARKEEP;BARKEEP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -179,11 +177,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCUCKOO_FILTER;CUCKOO_FILTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBARKEEP;BARKEEP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCUCKOO_FILTER;CUCKOO_FILTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBARKEEP;BARKEEP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -196,7 +194,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCUCKOO_FILTER;CUCKOO_FILTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBARKEEP;BARKEEP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -205,12 +203,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCUCKOO_FILTER;CUCKOO_FILTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBARKEEP;BARKEEP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCUCKOO_FILTER;CUCKOO_FILTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBARKEEP;BARKEEP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -225,17 +223,97 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/Cuckoo_Filter/cuckoo_filter.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/Cuckoo_Filter/mozilla-sha1/sha1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/Cuckoo_Filter/nvrom_test.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/Cuckoo_Filter/cuckoo_filter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/Cuckoo_Filter/mozilla-sha1/sha1.h" />
-    <Text Include="../../thirdparty/owemdjee/Cuckoo_Filter/LICENSE" />
-    <Text Include="../../thirdparty/owemdjee/Cuckoo_Filter/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/Cuckoo_Filter/README.md" />
+    <ClCompile Include="../../thirdparty/owemdjee/barkeep/docs/after.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/barkeep/docs/before.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/barkeep/python/barkeep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/barkeep/tests/demo-fmtlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/barkeep/tests/demo-stdfmt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/barkeep/tests/demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/barkeep/tests/test-fmtlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/barkeep/tests/test-stdfmt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/barkeep/tests/test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/barkeep/barkeep/barkeep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/barkeep/tests/testutil.h" />
+    <Image Include="../../thirdparty/owemdjee/barkeep/docs/img/barkeep-logo-black.png" />
+    <Image Include="../../thirdparty/owemdjee/barkeep/docs/img/barkeep-logo-white.png" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/README.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/_sidebar.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/README.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/classbarkeep_1_1_animation_display.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/classbarkeep_1_1_async_displayer.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/classbarkeep_1_1_base_display.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/classbarkeep_1_1_composite_display.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/classbarkeep_1_1_counter_display.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/classbarkeep_1_1_iterable_bar.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/classbarkeep_1_1_iterable_bar_1_1_iterator.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/classbarkeep_1_1_progress_bar_display.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/classbarkeep_1_1_speedometer.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/classbarkeep_1_1_status_display.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/structbarkeep_1_1_animation_config.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/structbarkeep_1_1_atomic_traits.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/structbarkeep_1_1_atomic_traits_3_01std_1_1atomic_3_01_t_01_4_01_4.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/structbarkeep_1_1_bar_parts.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/structbarkeep_1_1_counter_config.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/structbarkeep_1_1_iterable_bar_config.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Classes/structbarkeep_1_1_progress_bar_config.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/api/Namespaces/namespacebarkeep.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/config.json" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/img/C++-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/img/C++-include.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/img/C++-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/img/pip-install.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/img/python-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/img/python-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/index.html" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/make_docs.py" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/anim1-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/anim1-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/anim2-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/anim2-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/bar-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/bar-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/bar-pip-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/bar-pip-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/composite-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/composite-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/counter-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/counter-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/fmt-bar-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/fmt-bar-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/fmt-color-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/fmt-color-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/fmt-counter-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/fmt-counter-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/iter-bar-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/iter-bar-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/notty-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/notty-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/status-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/status-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/three-bars-dark.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/rec/three-bars-light.svg" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/template/class_members_details.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/template/class_members_inherited_tables.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/template/class_members_tables.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/template/details.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/template/footer.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/template/header.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/template/index.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/template/kind_class.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/template/member_details.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/template/nonclass_members_details.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/docs/template/nonclass_members_tables.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/python/tests/conftest.py" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/python/tests/demo.py" />
+    <Text Include="../../thirdparty/owemdjee/barkeep/python/tests/test.py" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
-    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
-  </ImportGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
   
