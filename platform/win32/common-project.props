@@ -13,7 +13,7 @@
 	  
 	  As we *want* to be extremely thorough in applying these overrides (which, themselves, will invoke the standard `::abort()` and `::exit(n)` calls repectively), we apply this override in this applied-to-all-projects MSVC build property file, rather than have our project update/rewrite tool scripts replicate this in every `*.vcxproj` project file we eschew: DRY. Plus special build targets "automagically" receive these generally-applied compiler settings immediately, so that took care of another (rare) human error possibility when constructing specialized builds.
 	  
-	  ----
+	  ============================================================
 	  
 	  Meanwhile, the accompanying code for these function overrides lives in our 'XYZ_override' projects/libraries; the appropriate one is then added to the link/build dependency set of every executable target producing project.
 	  For Linux/other platforms, i.e. non-MSVC targets, a similar approach is done in the applicable CMake/meson/foobar build scripts.
