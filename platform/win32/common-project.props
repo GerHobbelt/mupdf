@@ -4,6 +4,21 @@
     <ClCompile>
       <DisableSpecificWarnings>4774;4711;4295;4152;4200;4355;5246;5267;4866;4868;5220;4582;4583;4435;4619;5029;5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;4102;4146;4189;4245;4334;4389;4457;4458;4456;4459;4701;4702;4706;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>abort=qiqqa_abort_application;exit=qiqqa_exit_application;GHC_DO_NOT_USE_STD_FS;_SILENCE_CXX20_ATOMIC_INIT_DEPRECATION_WARNING;_SILENCE_CXX23_DENORM_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;_CRT_SECURE_NO_DEPRECATE;_CRT_INTERNAL_NONSTDC_NAMES;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <!--
+      abort=qiqqa_abort_application;exit=qiqqa_exit_application
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	  These two defines 'brute force' a global override of the standard abort and exit function calls anywhere in our compiled source tree. We do this, this way, so we are able to catch (i.e. overload of sorts) these application termination calls wherever they may exist in the (open source) libraries we use and thus be able to easily place a debugger breakpoint in any application termination/exit code flow paths to help us diagnose otherwise tough to debug scenarios when thirdparty source code we use in our applications happens to decide to invoke abort() or exit(); the latter is particularly noteworthy and ubiquitous in any source code using the default (= compiler/devenv-provided) `assert()` implementation as-is, thanks to a `#include <cassert>` or `#include <assert.h>` somewhere.
+	  
+	  The alternative we'd have would be to go through all thirdparty source code and kill=replace every spot where exit() or abort() may be invoked in either debug or release builds: while we do code reviews of the source code we use, this particular detail is dealt with more easily, swifter and more thoroughly (machine rule application vs. human error/oversight  opportunity) using these 'non-obvious' system calls overrides.
+	  
+	  As we *want* to be extremely thorough in applying these overrides (which, themselves, will invoke the standard `::abort()` and `::exit(n)` calls repectively), we apply this override in this applied-to-all-projects MSVC build property file, rather than have our project update/rewrite tool scripts replicate this in every `*.vcxproj` project file we eschew: DRY. Plus special build targets "automagically" receive these generally-applied compiler settings immediately, so that took care of another (rare) human error possibility when constructing specialized builds.
+	  
+	  ----
+	  
+	  Meanwhile, the accompanying code for these function overrides lives in our 'XYZ_override' projects/libraries; the appropriate one is then added to the link/build dependency set of every executable target producing project.
+	  For Linux/other platforms, i.e. non-MSVC targets, a similar approach is done in the applicable CMake/meson/foobar build scripts.
+      -->
+      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Midl>
       <PreprocessorDefinitions>GHC_DO_NOT_USE_STD_FS;_SILENCE_CXX20_ATOMIC_INIT_DEPRECATION_WARNING;_SILENCE_CXX23_DENORM_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;_CRT_SECURE_NO_DEPRECATE;_CRT_INTERNAL_NONSTDC_NAMES;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -11,14 +26,14 @@
     <ResourceCompile>
       <PreprocessorDefinitions>GHC_DO_NOT_USE_STD_FS;_SILENCE_CXX20_ATOMIC_INIT_DEPRECATION_WARNING;_SILENCE_CXX23_DENORM_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;_CRT_SECURE_NO_DEPRECATE;_CRT_INTERNAL_NONSTDC_NAMES;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
-	<!--
+    <!--
 ignore these and many like/of them:
 
 33>LINK : warning LNK4286: symbol 'qiqqa_exit_application' defined in 'libsystem_override.lib(assert.obj)' is imported by 'libfmt.lib(fmt.obj)'
 33>LINK : warning LNK4217: symbol 'qiqqa_exit_application' defined in 'libsystem_override.lib(assert.obj)' is imported by 'libzopfli.lib(blocksplitter.obj)' in function 'ZopfliBlockSplit'
 33>LINK : warning LNK4286: symbol 'qiqqa_abort_application' defined in 'libsystem_override.lib(assert.obj)' is imported by 'libicu.lib(rbbi_cache.obj)'
 33>LINK : warning LNK4217: symbol 'qiqqa_abort_application' defined in 'libsystem_override.lib(assert.obj)' is imported by 'libhighway.lib(targets.obj)' in function '"void __cdecl hwy::Abort(char const *,int,char const *,...)" (?Abort@hwy@@YAXPEBDH0ZZ)'
-	-->
+    -->
     <Link>
       <AdditionalOptions>/ignore:4286,4217 %(AdditionalOptions)</AdditionalOptions>
 
@@ -27,6 +42,11 @@ ignore these and many like/of them:
       <MapExports>true</MapExports>
 
       <Profile>true</Profile>
+	  <!--
+	  This one is used to aid call-count et al MSVC profiling sessions. To be removed when we want to produce slightly leaner release builds...
+	  
+	  P.S. it looks like adding/changing/removing this linker setting is only picked up when we RESTART MSVC. Huh?! (I got the impression that the ClCompile settings above were picked up rather more quickly and easily than that.  :-S   As I am of course keeping a very thorough dev log *cough* *cough* when fiddling with those earlier, it may be a case of osmosis of wishful thinking into my cranial factual memory banks: given this year's noises from US wannabe-governmental types, this part wasn't coded in Rust when my parents went about constructing me. *soit.* In case you need a moment of procrastination/schadenfreude: https://pebkac2.fr/aleatoire
+	  -->
     </Link>
   </ItemDefinitionGroup>
 </Project>
