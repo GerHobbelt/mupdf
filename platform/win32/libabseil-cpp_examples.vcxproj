@@ -50,9 +50,7 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
-    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
-  </ImportGroup>
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -494,6 +492,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/numeric/int128_no_intrinsic.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/numeric/internal/bits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/numeric/internal/representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/profiling/benchmark.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/profiling/internal/exponential_biased.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/profiling/internal/periodic_sampler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/profiling/internal/sample_recorder.h" />
@@ -1362,8 +1361,6 @@
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/test_package/conanfile.py" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/vs/Common.props" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
-    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
-  </ImportGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
   

@@ -54,9 +54,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
-    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
-  </ImportGroup>
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -140,9 +138,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AssemblyDebug />
       <SubSystem>Windows</SubSystem>
-      <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
-      <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -175,9 +170,6 @@
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
-      <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
-      <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -209,10 +201,6 @@
       <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Opengl32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <Profile>true</Profile>
-      <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
-      <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -243,10 +231,6 @@
       <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Opengl32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <Profile>true</Profile>
-      <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
-      <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -494,8 +478,6 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" >
-    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
-  </ImportGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
   

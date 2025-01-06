@@ -50,9 +50,7 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
-    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
-  </ImportGroup>
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -2295,16 +2293,21 @@
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/localeIdentifiers/localeDisplayName.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/README.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/schemas/v0/tests.schema.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/bidi.json" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/data-model-errors.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/fallback.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/functions/currency.json" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/functions/date.json" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/functions/datetime.json" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/functions/integer.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/functions/math.json" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/functions/number.json" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/functions/string.json" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/functions/time.json" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/pattern-selection.json" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/syntax-errors.json" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/syntax.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/messageFormat/tests/u-options.json" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/personNameTest/_header.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/personNameTest/_readme.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/common/testData/personNameTest/af.txt" />
@@ -3746,6 +3749,7 @@
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/CodePointEscaper.java" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/CollationMapMaker.java" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/CollationStringByteConverter.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/CollatorHelper.java" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/CompactStringByteConverter.java" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/ComparatorUtilities.java" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/CompletionPercent.java" />
@@ -3835,6 +3839,8 @@
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/MergeLists.java" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/MissingXmlGetter.java" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/MultiComparator.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/NameGetter.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/NameType.java" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/NodeListIterator.java" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/NotificationCategory.java" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-code/src/main/java/org/unicode/cldr/util/Organization.java" />
@@ -6144,6 +6150,7 @@
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/main/yue_Hant.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/main/yue_Hant_CN.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/main/yue_Hant_HK.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/main/yue_Hant_MO.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/main/za.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/main/za_CN.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/main/zgh.xml" />
@@ -6199,6 +6206,7 @@
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/rbnf/fr_BE.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/rbnf/fr_CH.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/rbnf/ga.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/rbnf/gu.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/rbnf/he.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/rbnf/hi.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/common/rbnf/hr.xml" />
@@ -7303,7 +7311,6 @@
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/exemplars/main/rel.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/exemplars/main/res.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/exemplars/main/rhg_Arab.xml" />
-    <Xml Include="../../thirdparty/owemdjee/unicode-cldr/exemplars/main/rna.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/exemplars/main/roo.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/exemplars/main/root.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/exemplars/main/rro.xml" />
@@ -7513,8 +7520,6 @@
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/tools/cldr-rdf/pom.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-cldr/tools/pom.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
-    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
-  </ImportGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
   

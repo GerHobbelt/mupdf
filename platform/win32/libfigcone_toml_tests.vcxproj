@@ -50,20 +50,18 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
-    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
-  </ImportGroup>
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -76,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFIGCONE_TOML;FIGCONE_TOML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -225,6 +223,20 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="libfigcone.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffbc95c8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfigcone_toml.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe22d2b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgoogletest.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7a17e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override_4_googletests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82e}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/figcone_toml/tests/test_datetime.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/figcone_toml/tests/test_nodelistparser.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/figcone_toml/tests/test_nodeparser.cpp" />
@@ -240,21 +252,6 @@
     <Text Include="../../thirdparty/owemdjee/figcone_toml/external/seal_lake" />
     <Text Include="../../thirdparty/owemdjee/figcone_toml/tests/CMakeLists.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="libfigcone.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffbc95c8}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libfigcone_toml.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffe22d2b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libgoogletest.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7a17e}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libsystem_override_4_googletests.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82e}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ImportGroup Label="PropertySheets">
-    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
-  </ImportGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

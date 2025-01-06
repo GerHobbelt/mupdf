@@ -50,9 +50,7 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
-    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
-  </ImportGroup>
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
@@ -12325,15 +12323,22 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/any_model.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/auto_iterator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/base_model.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/begin_no_sanitize.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/callable_wrapper.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/callable_wrapper_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/copyable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/end_no_sanitize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/fixed_variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/fixed_variant_iterator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/function_model.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/functional.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/is_acceptable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/is_closed_collection.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/is_constructible.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/is_equality_comparable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/is_final.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/is_invocable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/is_moveable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/is_nothrow_eq_comparable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/iterator_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/iterator_traits.hpp" />
@@ -12341,15 +12346,20 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/poly_collection.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/segment.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/segment_backend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/segment_map.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/segment_split.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/size_t_map.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/split_segment.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/stride_iterator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/type_info_map.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/type_restitution.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/value_holder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/variant_model.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/exception.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/function_collection.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/function_collection_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/variant_collection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/variant_collection_fwd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/polygon/doc/tutorial/compare_schematics.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/polygon/doc/tutorial/connectivity_database.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/polygon/doc/tutorial/device.hpp" />
@@ -18649,30 +18659,30 @@
     <Image Include="../../thirdparty/owemdjee/boost/libs/phoenix/doc/html/images/tip.png" />
     <Image Include="../../thirdparty/owemdjee/boost/libs/phoenix/doc/html/images/up.png" />
     <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/boost.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_any_clang40_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_any_gcc63_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_any_vs2015_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_any_vs2015_x86.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_base_clang40_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_base_gcc63_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_base_vs2015_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_base_vs2015_x86.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_function_clang40_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_function_gcc63_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_function_vs2015_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_function_vs2015_x86.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_any_clang40_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_any_gcc63_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_any_vs2015_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_any_vs2015_x86.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_base_clang40_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_base_gcc63_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_base_vs2015_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_base_vs2015_x86.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_function_clang40_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_function_gcc63_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_function_vs2015_x64.png" />
-    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_function_vs2015_x86.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_any_clang130_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_any_gcc132_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_any_vs2022_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_base_clang130_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_base_gcc132_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_base_vs2022_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_function_clang130_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_function_gcc132_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_function_vs2022_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_variant_clang130_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_variant_gcc132_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/for_each_variant_vs2022_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_any_clang130_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_any_gcc132_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_any_vs2022_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_base_clang130_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_base_gcc132_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_base_vs2022_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_function_clang130_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_function_gcc132_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_function_vs2022_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_variant_clang130_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_variant_gcc132_x64.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/insert_variant_vs2022_x64.png" />
     <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/poly_collection_iterators.png" />
     <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/ptr_vector.png" />
     <Image Include="../../thirdparty/owemdjee/boost/libs/poly_collection/doc/img/segment_map.png" />
@@ -19503,9 +19513,9 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/assert/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/assert/meta/libraries.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/assign/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/assign/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/assign/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/assign/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/assign/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/assign/doc/email_example.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/assign/doc/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/assign/doc/multi_index_container.html" />
@@ -19531,20 +19541,17 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/beast/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/beast/LICENSE_1_0.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/beast/README.md" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/beast/appveyor.yml" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/beast/azure-pipelines.yml" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/beast/build.jam" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/beast/cmake/toolchains/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/beast/cmake/toolchains/common.cmake" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/beast/cmake/toolchains/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/beast/cmake/toolchains/msvc.cmake" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/beast/doc/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/beast/doc/xsl/custom-overrides.xsl" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/beast/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/beast/meta/libraries.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/beast/tools/build-and-test.sh" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/beast/tools/coverage.sh" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/beast/tools/field.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/beast/tools/get-boost.sh" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/beast/tools/install-dependencies.sh" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/beast/tools/local-travis.sh" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/beast/tools/make_field.sh" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/beast/tools/retry.sh" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/beast/tools/user-config.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/bimap/CMakeLists.txt" />
@@ -19782,10 +19789,10 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/compute/perf/perf.py" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/compute/perf/perfdoc.py" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/concept_check/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/concept_check/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/concept_check/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/concept_check/README.md" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/concept_check/bibliography.htm" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/concept_check/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/concept_check/concept_check.htm" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/concept_check/concept_covering.htm" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/concept_check/creating_concepts.htm" />
@@ -20086,9 +20093,9 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/dll/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/dll/meta/libraries.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/dynamic_bitset/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/dynamic_bitset/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/dynamic_bitset/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/dynamic_bitset/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/dynamic_bitset/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/dynamic_bitset/doc/readme" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/dynamic_bitset/dynamic_bitset.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/dynamic_bitset/index.html" />
@@ -21688,9 +21695,9 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/log/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/log/meta/libraries.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/logic/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/logic/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/logic/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/logic/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/logic/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/logic/doc/Jamfile.v2" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/logic/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/logic/meta/libraries.json" />
@@ -23976,9 +23983,9 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/numeric/doc/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/numeric/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/numeric/interval/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/numeric/interval/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/numeric/interval/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/numeric/interval/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/numeric/interval/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/numeric/interval/doc/checking.htm" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/numeric/interval/doc/comparisons.htm" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/numeric/interval/doc/examples.htm" />
@@ -24857,9 +24864,9 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/polygon/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/polygon/meta/libraries.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/pool/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/pool/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/pool/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/pool/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/pool/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/pool/doc/html/BOOST_POOL_VALIDATE_INTERNALS.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/pool/doc/html/boost/default_user_allocator_malloc_free.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/pool/doc/html/boost/default_user_allocator_new_delete.html" />
@@ -25515,9 +25522,9 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/program_options/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/program_options/meta/libraries.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/property_map/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/property_map/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/property_map/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/property_map/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/property_map/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/property_map/doc/LvaluePropertyMap.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/property_map/doc/ReadWritePropertyMap.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/property_map/doc/ReadablePropertyMap.html" />
@@ -25558,9 +25565,9 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/proto/preprocess/Jamfile.v2" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/proto/preprocess/wave.cfg" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/ptr_container/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/ptr_container/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/ptr_container/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/ptr_container/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/ptr_container/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/ptr_container/doc/associative_ptr_container.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/ptr_container/doc/associative_ptr_container.rst" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/ptr_container/doc/comp.sh" />
@@ -25810,10 +25817,9 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/ratio/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/ratio/meta/libraries.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/rational/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/rational/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/rational/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/rational/README.md" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/rational/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/rational/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/rational/doc/readme" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/rational/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/rational/meta/libraries.json" />
@@ -26158,7 +26164,6 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/smart_ptr/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/smart_ptr/meta/libraries.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/sort/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/sort/Jamfile.v2" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/sort/README.md" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/sort/benchmark/parallel/README.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/sort/benchmark/parallel/runCLANG_benchmark_numbers.sh" />
@@ -26174,6 +26179,7 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/sort/benchmark/single/runGCC_benchmark_numbers.sh" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/sort/benchmark/single/runGCC_benchmark_objects.sh" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/sort/benchmark/single/runGCC_benchmark_strings.sh" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/sort/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/sort/doc/Jamfile.v2" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/sort/doc/doxygen/boost-no-inspect" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/sort/doc/doxygen/html/_2example_2sample_8cpp-example.html" />
@@ -26683,9 +26689,9 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/timer/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/timer/meta/libraries.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/tokenizer/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/tokenizer/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/tokenizer/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/tokenizer/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/tokenizer/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/tokenizer/doc/char_delimiters_separator.htm" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/tokenizer/doc/char_separator.htm" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/tokenizer/doc/escaped_list_separator.htm" />
@@ -26978,10 +26984,12 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/url/doc/antora.yml" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/url/doc/build_antora.sh" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/url/doc/generate-files.mjs" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/url/doc/html/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/url/doc/images/AuthorityDiagram.svg" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/url/doc/images/ClassHierarchy.svg" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/url/doc/images/HelpCard.svg" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/url/doc/images/PartsDiagram.svg" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/url/doc/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/url/doc/lib/cpp-reference.js" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/url/doc/library-detail.adoc" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/url/doc/local-playbook.yml" />
@@ -27759,8 +27767,6 @@
     <Xml Include="../../thirdparty/owemdjee/boost/tools/quickbook/extra/katepart/syntax/boost_hs_std.xml" />
     <Xml Include="../../thirdparty/owemdjee/boost/tools/quickbook/meta/explicit-failures-markup.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
-    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
-  </ImportGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
   

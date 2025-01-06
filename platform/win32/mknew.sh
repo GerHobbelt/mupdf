@@ -1568,6 +1568,7 @@ mrubyc
 mruby
 barkeep
 opendtrace
+tscns
 
 EOT
 ) | grep -e "$FILTER"
@@ -1645,6 +1646,7 @@ googletest-ci-cpp-template
 signal-slot-benchmarks
 spatial_index_benchmark
 zzuf
+logger_benchmarks
 
 EOT
 ) | grep -e "$FILTER"
