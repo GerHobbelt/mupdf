@@ -600,8 +600,12 @@ static struct tool_spec {
 	{ {.fa = jpegturbo_wrjpegcom_main }, "wrjpegcom", "wrjpegcom tool" },
 	{ {.fa = jpegturbo_djpeg_main }, "djpeg", "djpeg tool" },
 	{ {.fa = jpegturbo_cjpeg_main }, "cjpeg", "cjpeg tool" },
+	{ {.fa = jpegturbo_md5sum_main }, "tj_md5sum", "jpeg_turbo's md5sum tool" },
+	{ {.fa = jpegturbo_md5cmp_main }, "tj_md5cmp", "jpeg_turbo's md5cmp tool" },
+	{ {.fa = jpegturbo_tjcomp_main }, "tjcomp", "tjcomp tool" },
+	{ {.fa = jpegturbo_tjdecomp_main }, "tjdecomp", "tjdecomp tool" },
+	{ {.fa = jpegturbo_tjbench_main }, "tjbench", "tjbench tool" },
 	{ {.f = tj_test_intrinsic_bitcount_main }, "test_intrinsic_bitcount", "turbojpeg intrinsic_bitcount test tool" },
-	
 #endif
 
 #if defined(MUTOOL_EX)

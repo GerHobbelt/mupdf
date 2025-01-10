@@ -328,6 +328,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/md5/md5.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/md5/md5cmp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/md5/md5hl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/md5/md5sum.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/rdbmp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/rdcolmap.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/rdgif.c" />
@@ -338,7 +339,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/strtest.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/test_intrinsic_bitcount.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/tjbench.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/tjexample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/tjcomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/tjdecomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/tjtran.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/tjunittest.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/tjutil.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/src/transupp.c" />
@@ -405,7 +408,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/transupp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/src/turbojpeg.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/test1.icc" />
-    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/test2.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/test3.icc" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/win/vc/jconfig.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/win/vc/jconfigint.h" />
     <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/bc_s.png" />
@@ -429,7 +432,7 @@
     <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/tab_hd.png" />
     <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/tab_s.png" />
     <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/turbojpeg/tab_sd.png" />
-    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/big_tree8.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/shira_bird8.bmp" />
     <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/testimgari.jpg" />
     <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/testimgint.jpg" />
     <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/testorig.jpg" />
@@ -522,7 +525,7 @@
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/cmakescripts/cmake_uninstall.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/cmakescripts/testclean.cmake" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/cmakescripts/tjbenchtest.cmake" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/croptest.in" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/cmakescripts/tjexampletest.cmake" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/cjpeg.1" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/coderules.txt" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/doc/djpeg.1" />
@@ -627,11 +630,13 @@
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/src/libjpeg.map.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/src/md5/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/src/turbojpeg-mapfile" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/big_tree8.txt" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/test/croptest.in" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/test/tjbenchtest.in" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/test/tjcomptest.in" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/test/tjdecomptest.in" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/test/tjtrantest.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/test1.icc.txt" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/test2.icc.txt" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/tjbenchtest.in" />
-    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/tjexampletest.in" />
+    <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/test3.icc.txt" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/win/gcc/projectTargets-release.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/win/jpeg.rc.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/win/jpeg62-ro.def" />
