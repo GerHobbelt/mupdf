@@ -511,7 +511,6 @@ klib
 knusperli
 koan
 krabsETW
-krita
 L1Flattening
 lapack
 LBFGS-Lite
@@ -1154,7 +1153,6 @@ subprocess
 subprocess-cpp
 subprocess_h
 SuiteSparse
-sumatrapdf
 SuperString
 swig
 SymSpell
@@ -1569,6 +1567,7 @@ mruby
 barkeep
 opendtrace
 tscns
+politician
 
 EOT
 ) | grep -e "$FILTER"
@@ -1627,7 +1626,6 @@ coolreader
 
 sdcc
 siridb-server
-sumatrapdf
 tempo
 text-wrangler
 thrift
@@ -1647,6 +1645,7 @@ signal-slot-benchmarks
 spatial_index_benchmark
 zzuf
 logger_benchmarks
+politician
 
 EOT
 ) | grep -e "$FILTER"
@@ -1787,6 +1786,11 @@ zotero-translators
 zotero-web-library
 zotero-word-for-windows-integration
 zotero-zotfile
+monolith
+djvulibre
+sumatrapdf
+EASTL
+krita
 
 EOT
 )

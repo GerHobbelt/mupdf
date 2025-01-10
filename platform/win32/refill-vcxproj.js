@@ -300,6 +300,7 @@ const projectMap = {
 	"simd-everywhere": "simde",
 	"libTsetlinMachine": "pyTsetlinMachine",
 	"uni": "unilib",
+	"politician": "the-yabbering-politician",
 };
 
 testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname_alt}`;

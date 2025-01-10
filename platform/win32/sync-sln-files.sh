@@ -11,3 +11,9 @@ node ./sync-sln-files.js 1 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '
 node ./sync-sln-files.js 2 m-dev-list.sln  $( find . -maxdepth 1 -type f -name 'm-dev-*.sln' | grep -v may-matter )
 
 node ./sync-sln-files.js 3 m-dev-list.sln  *failed-ideas*.sln *may-matter*.sln
+
+
+for f in $( find . -maxdepth 1 -type f -name '*.sln' | grep -v failed-ideas ) ; do
+	./add-vcxproj-dependencies-to-sln.sh $f
+	node ./sort-sln-file.js $f 
+ done
