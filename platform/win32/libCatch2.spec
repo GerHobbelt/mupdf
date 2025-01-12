@@ -1,6 +1,7 @@
 
 also-ignore:
+	[Aa]malgamated
 	/examples/
 	/tests/
-	/third_party/
-	
+	/extras/
+

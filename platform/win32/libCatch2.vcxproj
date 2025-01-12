@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCATCH2;CATCH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -121,14 +121,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCATCH2;CATCH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/Catch2/extras;../../thirdparty/owemdjee/Catch2/tests/SelfTest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DO_NOT_USE_WMAIN;BUILD_MONOLITHIC;BUILDING_LIBCATCH2;CATCH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCATCH2;CATCH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/Catch2/extras;../../thirdparty/owemdjee/Catch2/tests/SelfTest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -147,15 +147,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCATCH2;CATCH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/Catch2/extras;../../thirdparty/owemdjee/Catch2/tests/SelfTest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DO_NOT_USE_WMAIN;BUILD_MONOLITHIC;BUILDING_LIBCATCH2;CATCH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCATCH2;CATCH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/Catch2/extras;../../thirdparty/owemdjee/Catch2/tests/SelfTest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -176,14 +176,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCATCH2;CATCH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/Catch2/extras;../../thirdparty/owemdjee/Catch2/tests/SelfTest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DO_NOT_USE_WMAIN;BUILD_MONOLITHIC;BUILDING_LIBCATCH2;CATCH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCATCH2;CATCH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/Catch2/extras;../../thirdparty/owemdjee/Catch2/tests/SelfTest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -202,15 +202,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCATCH2;CATCH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/Catch2/extras;../../thirdparty/owemdjee/Catch2/tests/SelfTest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DO_NOT_USE_WMAIN;BUILD_MONOLITHIC;BUILDING_LIBCATCH2;CATCH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCATCH2;CATCH2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/Catch2/extras;../../thirdparty/owemdjee/Catch2/tests/SelfTest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -223,23 +223,6 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/010-TestCase.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/020-TestCase-1.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/020-TestCase-2.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/030-Asn-Require-Check.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/100-Fix-Section.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/110-Fix-ClassFixture.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/111-Fix-PersistentFixture.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/120-Bdd-ScenarioGivenWhenThen.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/210-Evt-EventListeners.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/231-Cfg-OutputStreams.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/232-Cfg-CustomMain.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/300-Gen-OwnGenerator.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/301-Gen-MapTypeConversion.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/302-Gen-Table.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/310-Gen-VariablesInGenerators.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/examples/311-Gen-CustomCapture.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/extras/catch_amalgamated.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Catch2/src/catch2/benchmark/catch_chronometer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Catch2/src/catch2/benchmark/detail/catch_analyse.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Catch2/src/catch2/benchmark/detail/catch_benchmark_function.cpp" />
@@ -346,96 +329,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/Catch2/src/catch2/reporters/catch_reporter_tap.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Catch2/src/catch2/reporters/catch_reporter_teamcity.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Catch2/src/catch2/reporters/catch_reporter_xml.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X01-PrefixedMacros.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X02-DisabledMacros.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X04-DisabledExceptions-CustomHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X05-DeferredStaticChecks.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X10-FallbackStringifier.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X11-DisableStringification.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X20-AssertionStartingEventGoesBeforeAssertionIsEvaluated.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X21-PartialTestCaseEvents.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X22-BenchmarksInCumulativeReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X23-CasingInReporterNames.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X24-ListenerStdoutCaptureInMultireporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X25-ListenerCanAskForCapturedStdout.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X26-ReporterPreferencesForPassingAssertionsIsRespected.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X27-CapturedStdoutInTestCaseEvents.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X28-ListenersGetEventsBeforeReporters.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X29-CustomArgumentsForReporters.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X30-BazelReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X31-DuplicatedTestCases.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X32-DuplicatedTestCasesDifferentTags.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X33-DuplicatedTestCaseMethods.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X34-DuplicatedTestCaseMethodsDifferentFixtures.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X35-DuplicatedReporterNames.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X36-ReportingCrashWithJunitReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X90-WindowsHeaderInclusion.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X91-AmalgamatedCatch.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X92-NoTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/X93-AllSkipped.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/Algorithms.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/AssertionHandler.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/Clara.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/CmdLine.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/CmdLineHelpers.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/ColourImpl.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/Details.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/FloatingPoint.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/Integer.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/Json.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/Parse.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/PartTracker.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/RandomNumberGeneration.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/Sharding.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/Stream.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/String.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/StringManip.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/Tag.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/TestCaseInfoHasher.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/TestSpec.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/TestSpecParser.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/TextFlow.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/ToString.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/Traits.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/UniquePtr.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/IntrospectiveTests/Xml.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/TestRegistrations.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/TimingTests/Sleep.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/Approx.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/BDD.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/Benchmark.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/Class.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/Compilation.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/Condition.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/Decomposition.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/EnumToString.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/Exception.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/Generators.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/Matchers.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/Message.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/Misc.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/Skip.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/ToStringByte.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/ToStringChrono.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/ToStringGeneral.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/ToStringOptional.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/ToStringPair.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/ToStringTuple.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/ToStringVector.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/ToStringWhich.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/Tricky.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/UsageTests/VariadicMacros.tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/helpers/parse_test_spec.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Catch2/tests/TestScripts/DiscoverTests/register-tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Catch2/tools/misc/coverage-helper.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/Catch2/extras/catch_amalgamated.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/Catch2/src/catch2/benchmark/catch_benchmark.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/Catch2/src/catch2/benchmark/catch_benchmark_all.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/Catch2/src/catch2/benchmark/catch_chronometer.hpp" />
@@ -612,9 +506,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/Catch2/src/catch2/reporters/catch_reporter_teamcity.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/Catch2/src/catch2/reporters/catch_reporter_xml.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/Catch2/src/catch2/reporters/catch_reporters_all.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/helpers/parse_test_spec.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/helpers/range_test_helpers.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/helpers/type_with_lit_0_comparisons.hpp" />
     <Image Include="../../thirdparty/owemdjee/Catch2/data/artwork/catch2-c-logo.png" />
     <Image Include="../../thirdparty/owemdjee/Catch2/data/artwork/catch2-hand-logo.png" />
     <Image Include="../../thirdparty/owemdjee/Catch2/data/artwork/catch2-logo-small-with-background.png" />
@@ -637,7 +528,6 @@
     <Text Include="../../thirdparty/owemdjee/Catch2/MODULE.bazel" />
     <Text Include="../../thirdparty/owemdjee/Catch2/README.md" />
     <Text Include="../../thirdparty/owemdjee/Catch2/SECURITY.md" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/WORKSPACE.bazel" />
     <Text Include="../../thirdparty/owemdjee/Catch2/appveyor.yml" />
     <Text Include="../../thirdparty/owemdjee/Catch2/codecov.yml" />
     <Text Include="../../thirdparty/owemdjee/Catch2/conanfile.py" />
@@ -674,57 +564,10 @@
     <Text Include="../../thirdparty/owemdjee/Catch2/docs/tutorial.md" />
     <Text Include="../../thirdparty/owemdjee/Catch2/docs/usage-tips.md" />
     <Text Include="../../thirdparty/owemdjee/Catch2/docs/why-catch.md" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/examples/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/extras/Catch.cmake" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/extras/CatchAddTests.cmake" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/extras/CatchShardTests.cmake" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/extras/CatchShardTestsImpl.cmake" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/extras/ParseAndAddCatchTests.cmake" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/extras/gdbinit" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/extras/lldbinit" />
     <Text Include="../../thirdparty/owemdjee/Catch2/mdsnippets.json" />
     <Text Include="../../thirdparty/owemdjee/Catch2/meson_options.txt" />
     <Text Include="../../thirdparty/owemdjee/Catch2/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/Catch2/src/catch2/catch_user_config.hpp.in" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/BUILD.bazel" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/ExtraTests/ToDo.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/automake.std.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/automake.sw.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/automake.sw.multi.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/compact.sw.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/compact.sw.multi.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/console.std.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/console.sw.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/console.sw.multi.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/console.swa4.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/default.sw.multi.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/junit.sw.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/junit.sw.multi.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/sonarqube.sw.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/sonarqube.sw.multi.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/tap.sw.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/tap.sw.multi.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/teamcity.sw.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/teamcity.sw.multi.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/xml.sw.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Baselines/xml.sw.multi.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Misc/invalid-test-names.input" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Misc/plain-old-tests.input" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/SelfTest/Misc/special-characters-in-file.input" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/TestScripts/ConfigureTestsCommon.py" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/TestScripts/DiscoverTests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/TestScripts/DiscoverTests/VerifyRegistration.py" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/TestScripts/testBazelReporter.py" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/TestScripts/testBazelSharding.py" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/TestScripts/testConfigureDefaultReporter.py" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/TestScripts/testConfigureDisable.py" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/TestScripts/testConfigureDisableStringification.py" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/TestScripts/testConfigureExperimentalRedirect.py" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/TestScripts/testPartialTestCaseEvent.py" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/TestScripts/testRandomOrder.py" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tests/TestScripts/testSharding.py" />
     <Text Include="../../thirdparty/owemdjee/Catch2/tools/misc/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/Catch2/tools/misc/SelfTest.vcxproj.user" />
     <Text Include="../../thirdparty/owemdjee/Catch2/tools/misc/appveyorBuildConfigurationScript.bat" />
@@ -741,7 +584,6 @@
     <Text Include="../../thirdparty/owemdjee/Catch2/tools/scripts/developBuild.py" />
     <Text Include="../../thirdparty/owemdjee/Catch2/tools/scripts/extractFeaturesFromReleaseNotes.py" />
     <Text Include="../../thirdparty/owemdjee/Catch2/tools/scripts/fixWhitespace.py" />
-    <Text Include="../../thirdparty/owemdjee/Catch2/tools/scripts/generateAmalgamatedFiles.py" />
     <Text Include="../../thirdparty/owemdjee/Catch2/tools/scripts/majorRelease.py" />
     <Text Include="../../thirdparty/owemdjee/Catch2/tools/scripts/minorRelease.py" />
     <Text Include="../../thirdparty/owemdjee/Catch2/tools/scripts/patchRelease.py" />
@@ -752,4 +594,3 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
