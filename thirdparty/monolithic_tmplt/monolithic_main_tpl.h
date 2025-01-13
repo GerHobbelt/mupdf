@@ -304,6 +304,18 @@ static char* readline(const char* prompt)
 
 #define PS1 "> "
 
+static inline void reset_stdio(void) {
+	// the code executed above MAY have been tweaking the stdio channels and set some buffers or other
+	// and we SHOULD return to a default known state for either before writing to stderr and expecting
+	// that to work as assumed.
+	//
+	// ignore any errors that ensue.
+	(void)fflush(stdout);
+	(void)fflush(stderr);
+	(void)setvbuf(stdout, NULL, _IONBF, 0);
+	(void)setvbuf(stdout, NULL, _IOLBF, 1024);
+	(void)setvbuf(stderr, NULL, _IONBF, 0);
+}
 
 static int parse_one_command_from_set(const char* source, const struct cmd_info *commands, size_t command_count)
 {
@@ -343,25 +355,16 @@ static int parse_one_command_from_set(const char* source, const struct cmd_info 
 				rv = el.f.fa(argc_count, argv_list);
 			}
 			catch (const std::exception &ex) {
-				// the code executed above MAY have been tweaking the stdio channels and set some buffers or other
-				// and we SHOULD return to a default known state for either before writing to stderr and expecting
-				// that to work as assumed.
-				fflush(stdout);
-				fflush(stderr);
-				setvbuf(stdout, NULL, _IONBF, 0);
-				setvbuf(stderr, NULL, _IONBF, 0);
-				fprintf(stderr, "\n");
+				reset_stdio();
+				(void)fprintf(stderr, "\n");
 				fprintf(stderr, "--> exception thrown (not caught in application code)\n");
 				fprintf(stderr, "--> error: %s\n", ex.what());
 				rv = 666;
 			}
 			catch (...) {
 				std::exception_ptr ex = std::current_exception(); // capture
-				fflush(stdout);
-				fflush(stderr);
-				setvbuf(stdout, NULL, _IONBF, 0);
-				setvbuf(stderr, NULL, _IONBF, 0);
-				fprintf(stderr, "\n");
+				reset_stdio();
+				(void)fprintf(stderr, "\n");
 				fprintf(stderr, "--> exception thrown (not caught in application code)\n");
 				fprintf(stderr, "--> unknown/unidentified error!\n");
 				rv = 666;
@@ -371,6 +374,7 @@ static int parse_one_command_from_set(const char* source, const struct cmd_info 
 #endif
 			free((void *)argv_list);
 			free(argv_strbuf);
+			reset_stdio();
 			fprintf(stderr, "\n");
 			fprintf(stderr, "--> exit code: %d\n", rv);
 			if (rv == -4242)
