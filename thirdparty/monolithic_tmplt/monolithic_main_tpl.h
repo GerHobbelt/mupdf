@@ -343,11 +343,27 @@ static int parse_one_command_from_set(const char* source, const struct cmd_info 
 				rv = el.f.fa(argc_count, argv_list);
 			}
 			catch (const std::exception &ex) {
-				fprintf(stderr, "\n--> exception thrown (not caught in application code) --> error: %s\n", ex.what());
+				// the code executed above MAY have been tweaking the stdio channels and set some buffers or other
+				// and we SHOULD return to a default known state for either before writing to stderr and expecting
+				// that to work as assumed.
+				fflush(stdout);
+				fflush(stderr);
+				setvbuf(stdout, NULL, _IONBF, 0);
+				setvbuf(stderr, NULL, _IONBF, 0);
+				fprintf(stderr, "\n");
+				fprintf(stderr, "--> exception thrown (not caught in application code)\n");
+				fprintf(stderr, "--> error: %s\n", ex.what());
 				rv = 666;
 			}
 			catch (...) {
-				fprintf(stderr, "\n--> exception thrown (not caught in application code); unidentifiable error.\n");
+				std::exception_ptr ex = std::current_exception(); // capture
+				fflush(stdout);
+				fflush(stderr);
+				setvbuf(stdout, NULL, _IONBF, 0);
+				setvbuf(stderr, NULL, _IONBF, 0);
+				fprintf(stderr, "\n");
+				fprintf(stderr, "--> exception thrown (not caught in application code)\n");
+				fprintf(stderr, "--> unknown/unidentified error!\n");
 				rv = 666;
 			}
 #else
@@ -355,7 +371,8 @@ static int parse_one_command_from_set(const char* source, const struct cmd_info 
 #endif
 			free((void *)argv_list);
 			free(argv_strbuf);
-			fprintf(stderr, "\n--> exit code: %d\n", rv);
+			fprintf(stderr, "\n");
+			fprintf(stderr, "--> exit code: %d\n", rv);
 			if (rv == -4242)
 				rv = 666;
 			return rv;
