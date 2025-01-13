@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{92682752-F312-4F54-8D7F-07514C2A541A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPPTRACE_DEMANGLE_WITH_WINAPI;CPPTRACE_UNWIND_WITH_NOTHING;CPPTRACE_UNWIND_WITH_WINAPI;CPPTRACE_UNWIND_WITH_DBGHELP;CPPTRACE_GET_SYMBOLS_WITH_DBGHELP;CPPTRACE_GET_SYMBOLS_WITH_NOTHING;BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <AdditionalDependencies>DbgHelp.lib;Shlwapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPPTRACE_DEMANGLE_WITH_WINAPI;CPPTRACE_UNWIND_WITH_NOTHING;CPPTRACE_UNWIND_WITH_WINAPI;CPPTRACE_UNWIND_WITH_DBGHELP;CPPTRACE_GET_SYMBOLS_WITH_DBGHELP;CPPTRACE_GET_SYMBOLS_WITH_NOTHING;BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <AdditionalDependencies>DbgHelp.lib;Shlwapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPPTRACE_DEMANGLE_WITH_WINAPI;CPPTRACE_UNWIND_WITH_NOTHING;CPPTRACE_UNWIND_WITH_WINAPI;CPPTRACE_UNWIND_WITH_DBGHELP;CPPTRACE_GET_SYMBOLS_WITH_DBGHELP;CPPTRACE_GET_SYMBOLS_WITH_NOTHING;BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <AdditionalDependencies>DbgHelp.lib;Shlwapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CPPTRACE_DEMANGLE_WITH_WINAPI;CPPTRACE_UNWIND_WITH_NOTHING;CPPTRACE_UNWIND_WITH_WINAPI;CPPTRACE_UNWIND_WITH_DBGHELP;CPPTRACE_GET_SYMBOLS_WITH_DBGHELP;CPPTRACE_GET_SYMBOLS_WITH_NOTHING;BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <AdditionalDependencies>DbgHelp.lib;Shlwapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/benchmarking/unwinding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/add_subdirectory-integration/asi-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/ctrace_demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/fetchcontent-integration/fci-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/findpackage-integration/fpi-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/integration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/signal_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/signal_tracer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/speedtest/speedtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/from_current.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/from_current_z.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/object_trace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/raw_trace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/stacktrace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/traced_exception.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/basic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/cpptrace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/forward.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/from_current.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/io.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/ctrace/ctrace.h" />
+    <Image Include="../../thirdparty/owemdjee/cpptrace/res/demo.png" />
+    <Image Include="../../thirdparty/owemdjee/cpptrace/res/exception.png" />
+    <Image Include="../../thirdparty/owemdjee/cpptrace/res/from_current.png" />
+    <Image Include="../../thirdparty/owemdjee/cpptrace/res/inlining.png" />
+    <Image Include="../../thirdparty/owemdjee/cpptrace/res/snippets.png" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/WORKSPACE" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/benchmarking/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/ci/build-in-all-configs.py" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/ci/dump_msvc_env.ps1" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/ci/setup-prerequisites-mingw.ps1" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/ci/setup-prerequisites-unittest-macos.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/ci/setup-prerequisites-unittest.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/ci/setup-prerequisites.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/ci/speedtest.py" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/ci/test-all-configs.py" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/ci/unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/ci/util.py" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/docs/c-api.md" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/docs/signal-safe-tracing.md" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/sonar-project.properties" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/add_subdirectory-integration/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/expected/linux.libdl.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/expected/linux.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/expected/macos.clang.libdl.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/expected/macos.clang.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/expected/macos.gcc.addr2line.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/expected/macos.gcc.libdl.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/expected/macos.gcc.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/expected/windows.gcc.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/expected/windows.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/fetchcontent-integration/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/findpackage-integration/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/test/speedtest/CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\scripts\cpptrace\monolithic_example.cpp" />
+    <ClInclude Include="../../scripts/cpptrace/include/cpptrace/version.hpp" />
+    <ClInclude Include="../../scripts/cpptrace/monolithic_examples.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libabseil-cpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff3d0c57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpptrace.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff39d5ad}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgbenchmark.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6fa4e9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgoogletest.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7a17e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libre2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff49f979}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override_4_googletests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82e}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

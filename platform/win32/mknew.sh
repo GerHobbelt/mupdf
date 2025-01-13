@@ -1568,6 +1568,7 @@ barkeep
 opendtrace
 tscns
 politician
+cpptrace
 
 EOT
 ) | grep -e "$FILTER"
