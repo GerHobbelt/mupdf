@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9F3FF29A-42D0-4321-8B98-C7AAF0421B3D}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4068;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAWSPEED;RAWSPEED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../thirdparty/owemdjee/rawspeed/bench/librawspeed;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/rawspeed/test/librawspeed;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAWSPEED;RAWSPEED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAWSPEED;RAWSPEED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../thirdparty/owemdjee/rawspeed/bench/librawspeed;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAWSPEED;RAWSPEED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../thirdparty/owemdjee/rawspeed/bench/librawspeed;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/rawspeed/test/librawspeed;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAWSPEED;RAWSPEED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAWSPEED;RAWSPEED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../thirdparty/owemdjee/rawspeed/bench/librawspeed;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAWSPEED;RAWSPEED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../thirdparty/owemdjee/rawspeed/bench/librawspeed;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/rawspeed/test/librawspeed;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAWSPEED;RAWSPEED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAWSPEED;RAWSPEED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../thirdparty/owemdjee/rawspeed/bench/librawspeed;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAWSPEED;RAWSPEED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../thirdparty/owemdjee/rawspeed/bench/librawspeed;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/rawspeed/test/librawspeed;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAWSPEED;RAWSPEED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAWSPEED;RAWSPEED_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../thirdparty/owemdjee/rawspeed/bench/librawspeed;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/adt/BitTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/adt/CoalescingOutputIteratorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/adt/NORangesSetTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/adt/PartitioningOutputIteratorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/adt/PointTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/adt/RangeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/adt/VariableLengthLoadTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/bitstreams/BitSteramerMSBTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/bitstreams/BitStreamerJPEGTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/bitstreams/BitStreamerLSBTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/bitstreams/BitStreamerMSB16Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/bitstreams/BitStreamerMSB32Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/bitstreams/BitVacuumerJPEGTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/bitstreams/BitVacuumerLSBTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/bitstreams/BitVacuumerMSB16Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/bitstreams/BitVacuumerMSB32Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/bitstreams/BitVacuumerMSBTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/codes/HuffmanCodeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/codes/HuffmanTableTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/common/BayerPhaseTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/common/ChecksumFileTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/common/CommonTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/common/CpuidTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/common/SplineTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/io/EndiannessTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/metadata/BlackAreaTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/metadata/CameraMetaDataTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/metadata/CameraSensorInfoTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/metadata/CameraTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/metadata/ColorFilterArrayTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/test/ExceptionsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/test/RawSpeed.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/adt/RangeTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/bitstreams/BitStreamerTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/io/EndiannessTest.h" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/build-type.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/clang-tidy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/cmake-command-wrappers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/compiler-flags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/compiler-versions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/compiler-warnings-clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/compiler-warnings-gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/compiler-warnings.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/debug-info.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/gcc-coverage.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/gcc-gcov.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/gcc-toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/genhtml.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/lcov.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/libc++.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/llvm-cov.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/llvm-opt-report.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/llvm-profdata.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/llvm-toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/sample-based-testing.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/cmake/src-dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/credits.txt" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/data/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/data/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/data/cameras.xsd" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/data/showcameras.xsl" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/docs/CameraSupport.rst" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/docs/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/docs/Doxygen.rst" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/docs/IntegrationTesting.rst" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/docs/ReferenceSampleArchive.rst" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/docs/lnt/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/docs/sphinx-pyexec.py" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/adt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/bitstreams/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/codes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/common/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/io/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/metadata/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rawspeed/test/librawspeed/test/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/rawspeed/data/cameras.xml" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF374C68}</ProjectGuid>
+    <ProjectGuid>{A76D149D-0CE9-41B9-A014-5642F3DEC3D1}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAW;RAW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -121,7 +121,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/LibRaw;../../scripts/lcms2/include;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/LibRaw;../../scripts/lcms2/include;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NO_OPENMP;USE_JPEG;USE_LCMS2;LIBRAW_NODLL;BUILD_MONOLITHIC;BUILDING_LIBRAW;RAW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -147,7 +147,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/LibRaw;../../scripts/lcms2/include;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/LibRaw;../../scripts/lcms2/include;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NO_OPENMP;USE_JPEG;USE_LCMS2;LIBRAW_NODLL;BUILD_MONOLITHIC;BUILDING_LIBRAW;RAW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -176,7 +176,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/LibRaw;../../scripts/lcms2/include;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/LibRaw;../../scripts/lcms2/include;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NO_OPENMP;USE_JPEG;USE_LCMS2;LIBRAW_NODLL;BUILD_MONOLITHIC;BUILDING_LIBRAW;RAW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -202,7 +202,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/LibRaw;../../scripts/lcms2/include;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/LibRaw;../../scripts/lcms2/include;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/rawspeed/src/librawspeed;../../scripts/rawspeed/src;../../thirdparty/owemdjee/rawspeed/src/external;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NO_OPENMP;USE_JPEG;USE_LCMS2;LIBRAW_NODLL;BUILD_MONOLITHIC;BUILDING_LIBRAW;RAW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -223,89 +223,20 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/RawSpeed/rawspeed_xmldata.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/RawSpeed3/rawspeed3_c_api/rawspeed3_capi.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/canon_600.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/crx.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/decoders_dcraw.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/decoders_libraw.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/decoders_libraw_dcrdefs.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/dng.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/fp_dng.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/fuji_compressed.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/generic.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/kodak_decoders.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/load_mfbacks.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/pana8.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/smal.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/sonycc.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/unpack.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decoders/unpack_thumb.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/decompressors/losslessjpeg.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/demosaic/aahd_demosaic.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/demosaic/ahd_demosaic.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/demosaic/dcb_demosaic.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/demosaic/dht_demosaic.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/demosaic/misc_demosaic.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/demosaic/xtrans_demosaic.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/integration/dngsdk_glue.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/integration/rawspeed_glue.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/libraw_c_api.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/libraw_datastream.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/adobepano.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/canon.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/ciff.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/cr3_parser.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/epson.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/exif_gps.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/fuji.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/hasselblad_model.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/identify.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/identify_tools.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/kodak.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/leica.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/makernotes.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/mediumformat.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/minolta.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/misc_parsers.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/nikon.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/normalize_model.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/olympus.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/p1.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/pentax.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/samsung.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/sony.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/metadata/tiff.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/postprocessing/aspect_ratio.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/postprocessing/dcraw_process.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/postprocessing/mem_image.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/postprocessing/postprocessing_aux.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/postprocessing/postprocessing_ph.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/postprocessing/postprocessing_utils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/postprocessing/postprocessing_utils_dcrdefs.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/preprocessing/ext_preprocess.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/preprocessing/preprocessing_ph.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/preprocessing/raw2image.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/preprocessing/subtract_black.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/tables/cameralist.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/tables/colorconst.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/tables/colordata.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/tables/wblists.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/utils/curves.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/utils/decoder_info.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/utils/init_close_utils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/utils/open.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/utils/phaseone_processing.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/utils/read_utils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/utils/thumb_utils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/utils/utils_dcraw.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/utils/utils_libraw.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/write/apply_profile.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/write/file_write.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/write/tiff_writer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/write/write_ph.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/x3f/x3f_parse_process.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libRAW/src/x3f/x3f_utils_patched.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/RawSpeed3/rawspeed3_c_api/rawspeed3_capi_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/samples/4channels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/samples/dcraw_emu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/samples/dcraw_half.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/samples/half_mt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/samples/half_mt_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/samples/mem_image_sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/samples/multirender_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/samples/openbayer_sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/samples/postprocessing_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/samples/raw-identify.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/samples/rawtextdump.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/samples/simple_dcraw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libRAW/samples/unprocessed_raw.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libRAW/RawSpeed3/rawspeed3_c_api/rawspeed3_capi.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libRAW/internal/dcraw_defs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libRAW/internal/dcraw_fileio_defs.h" />
@@ -372,10 +303,9 @@
     <Text Include="../../thirdparty/owemdjee/libRAW/m4/ax_openmp.m4" />
     <Text Include="../../thirdparty/owemdjee/libRAW/mkdist.sh" />
     <Text Include="../../thirdparty/owemdjee/libRAW/rsxml2c.sh" />
+    <Text Include="../../thirdparty/owemdjee/libRAW/samples/Makefile" />
     <Text Include="../../thirdparty/owemdjee/libRAW/shlib-version.sh" />
-    <Text Include="../../thirdparty/owemdjee/libRAW/src/Makefile" />
     <Text Include="../../thirdparty/owemdjee/libRAW/version.sh" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  

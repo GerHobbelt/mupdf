@@ -1525,7 +1525,7 @@ html5-parser
 galib
 mixbench
 OpenCL-Wrapper
-raylib
+ray
 jbigkit
 crc32
 zzuf
@@ -1569,6 +1569,7 @@ opendtrace
 tscns
 politician
 cpptrace
+dunce
 
 EOT
 ) | grep -e "$FILTER"

@@ -3,6 +3,6 @@ also-ignore:
 	/cmake/Modules/
 	/lnt/
 	
-	/bench/
+	/src/
 	/test/
 	

@@ -300,6 +300,7 @@ const projectMap = {
 	"simd-everywhere": "simde",
 	"libTsetlinMachine": "pyTsetlinMachine",
 	"uni": "unilib",
+	"ray": "raylib",
 	"politician": "the-yabbering-politician",
 };
 
