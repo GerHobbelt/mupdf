@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-# collect a list of all source files so we can grep them fast o find a certain file: 
+# collect a list of all source files so we can grep them fast or find a certain file: 
 # this is much faster than using `find`.
 #
 
