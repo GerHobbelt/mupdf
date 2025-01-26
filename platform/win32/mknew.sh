@@ -1648,6 +1648,7 @@ spatial_index_benchmark
 zzuf
 logger_benchmarks
 politician
+win32-fileapi-demo
 
 EOT
 ) | grep -e "$FILTER"
