@@ -236,7 +236,6 @@
     <ClCompile Include="../../thirdparty/curl/lib/base64.c" />
     <ClCompile Include="../../thirdparty/curl/lib/bufq.c" />
     <ClCompile Include="../../thirdparty/curl/lib/bufref.c" />
-    <ClCompile Include="../../thirdparty/curl/lib/c-hyper.c" />
     <ClCompile Include="../../thirdparty/curl/lib/cf-h1-proxy.c" />
     <ClCompile Include="../../thirdparty/curl/lib/cf-h2-proxy.c" />
     <ClCompile Include="../../thirdparty/curl/lib/cf-haproxy.c" />
@@ -397,6 +396,7 @@
     <ClCompile Include="../../thirdparty/curl/lib/vtls/schannel_verify.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vtls/sectransp.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vtls/vtls.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/vtls_scache.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vtls/wolfssl.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vtls/x509asn1.c" />
     <ClCompile Include="../../thirdparty/curl/lib/warnless.c" />
@@ -469,7 +469,6 @@
     <ClInclude Include="../../thirdparty/curl/lib/asyn.h" />
     <ClInclude Include="../../thirdparty/curl/lib/bufq.h" />
     <ClInclude Include="../../thirdparty/curl/lib/bufref.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/c-hyper.h" />
     <ClInclude Include="../../thirdparty/curl/lib/cacert.h" />
     <ClInclude Include="../../thirdparty/curl/lib/cf-h1-proxy.h" />
     <ClInclude Include="../../thirdparty/curl/lib/cf-h2-proxy.h" />
@@ -477,8 +476,6 @@
     <ClInclude Include="../../thirdparty/curl/lib/cf-https-connect.h" />
     <ClInclude Include="../../thirdparty/curl/lib/cf-socket.h" />
     <ClInclude Include="../../thirdparty/curl/lib/cfilters.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/config-amigaos.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/config-dos.h" />
     <ClInclude Include="../../thirdparty/curl/lib/config-freertos.h" />
     <ClInclude Include="../../thirdparty/curl/lib/config-mac.h" />
     <ClInclude Include="../../thirdparty/curl/lib/config-micrium.h" />
@@ -635,6 +632,7 @@
     <ClInclude Include="../../thirdparty/curl/lib/vtls/sectransp.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/vtls.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/vtls_int.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/vtls/vtls_scache.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/wolfssl.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/x509asn1.h" />
     <ClInclude Include="../../thirdparty/curl/lib/warnless.h" />
@@ -1070,13 +1068,13 @@
     <Text Include="../../thirdparty/curl/docs/internals/CONNECTION-FILTERS.md" />
     <Text Include="../../thirdparty/curl/docs/internals/DYNBUF.md" />
     <Text Include="../../thirdparty/curl/docs/internals/HASH.md" />
-    <Text Include="../../thirdparty/curl/docs/internals/HYPER.md" />
     <Text Include="../../thirdparty/curl/docs/internals/LLIST.md" />
     <Text Include="../../thirdparty/curl/docs/internals/MQTT.md" />
     <Text Include="../../thirdparty/curl/docs/internals/NEW-PROTOCOL.md" />
     <Text Include="../../thirdparty/curl/docs/internals/README.md" />
     <Text Include="../../thirdparty/curl/docs/internals/SPLAY.md" />
     <Text Include="../../thirdparty/curl/docs/internals/STRPARSE.md" />
+    <Text Include="../../thirdparty/curl/docs/internals/TLS-SESSIONS.md" />
     <Text Include="../../thirdparty/curl/docs/internals/WEBSOCKET.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/ABI.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/CMakeLists.txt" />
@@ -1600,7 +1598,6 @@
     <Text Include="../../thirdparty/curl/include/curl/Makefile.am" />
     <Text Include="../../thirdparty/curl/lib/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/lib/Makefile.am" />
-    <Text Include="../../thirdparty/curl/lib/Makefile.mk" />
     <Text Include="../../thirdparty/curl/lib/curl_config.h.cmake" />
     <Text Include="../../thirdparty/curl/lib/libcurl.def" />
     <Text Include="../../thirdparty/curl/lib/libcurl.vers.in" />
@@ -1664,6 +1661,7 @@
     <Text Include="../../thirdparty/curl/scripts/installcheck.sh" />
     <Text Include="../../thirdparty/curl/scripts/maketgz" />
     <Text Include="../../thirdparty/curl/scripts/managen" />
+    <Text Include="../../thirdparty/curl/scripts/mdlinkcheck" />
     <Text Include="../../thirdparty/curl/scripts/mk-ca-bundle.pl" />
     <Text Include="../../thirdparty/curl/scripts/mk-unity.pl" />
     <Text Include="../../thirdparty/curl/scripts/nroff2cd" />
@@ -1673,7 +1671,6 @@
     <Text Include="../../thirdparty/curl/scripts/verify-release" />
     <Text Include="../../thirdparty/curl/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/src/Makefile.am" />
-    <Text Include="../../thirdparty/curl/src/Makefile.mk" />
     <Text Include="../../thirdparty/curl/src/mk-file-embed.pl" />
     <Text Include="../../thirdparty/curl/src/mkhelp.pl" />
     <Text Include="../../thirdparty/curl/src/tool_hugehelp.c.cvs" />
