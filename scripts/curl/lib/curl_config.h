@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2022, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -851,7 +851,22 @@
 /* #undef NEED_REENTRANT */
 
 /* cpu-machine-OS */
-#define OS "Windows"
+/* Define cpu-machine-OS */
+#ifndef CURL_OS
+#if defined(_M_IX86) || defined(__i386__) /* x86 (MSVC or gcc) */
+#define CURL_OS "i386-pc-win32"
+#elif defined(_M_X64) || defined(__x86_64__) /* x86_64 (MSVC >=2005 or gcc) */
+#define CURL_OS "x86_64-pc-win32"
+#elif defined(_M_IA64) || defined(__ia64__) /* Itanium */
+#define CURL_OS "ia64-pc-win32"
+#elif defined(_M_ARM_NT) || defined(__arm__) /* ARMv7-Thumb2 (Windows RT) */
+#define CURL_OS "thumbv7a-pc-win32"
+#elif defined(_M_ARM64) || defined(__aarch64__) /* ARM64 (Windows 10) */
+#define CURL_OS "aarch64-pc-win32"
+#else
+#define CURL_OS "unknown-pc-win32"
+#endif
+#endif
 
 /* Name of package */
 /* #undef PACKAGE */
