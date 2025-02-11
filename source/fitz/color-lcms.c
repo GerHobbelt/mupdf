@@ -35,17 +35,10 @@
 #define LCMS_USE_FLOAT 0
 #endif
 
-#ifdef HAVE_LCMS2MT
 #define GLOINIT() cmsContext glo = (cmsContext)ctx->colorspace->icc_instance
-#define GLO glo,
-#define GLO_ glo
+
 #include "lcms2mt.h"
 #include "lcms2mt_plugin.h"
-#else
-#define GLOINIT()	(void)0
-#define GLO
-#include "lcms2.h"
-#endif
 
 static void fz_premultiply_row(fz_context *ctx, int n, int c, int w, unsigned char *s)
 {
@@ -238,7 +231,7 @@ fz_icc_profile *fz_new_icc_profile(fz_context *ctx, unsigned char *data, size_t 
 {
 	GLOINIT();
 	fz_icc_profile *profile;
-	profile = (fz_icc_profile *)cmsOpenProfileFromMem(GLO data, (cmsUInt32Number)size);
+	profile = (fz_icc_profile *)cmsOpenProfileFromMem(glo, data, (cmsUInt32Number)size);
 	if (profile == NULL)
 		fz_throw(ctx, FZ_ERROR_FORMAT, "cmsOpenProfileFromMem failed");
 	return profile;
@@ -249,36 +242,36 @@ int fz_icc_profile_is_lab(fz_context *ctx, fz_icc_profile *profile)
 	GLOINIT();
 	if (profile == NULL)
 		return 0;
-	return (cmsGetColorSpace(GLO profile) == cmsSigLabData);
+	return (cmsGetColorSpace(glo, profile) == cmsSigLabData);
 }
 
 void fz_drop_icc_profile(fz_context *ctx, fz_icc_profile *profile)
 {
 	GLOINIT();
 	if (profile)
-		cmsCloseProfile(GLO profile);
+		cmsCloseProfile(glo, profile);
 }
 
 void fz_icc_profile_name(fz_context *ctx, fz_icc_profile *profile, char *name, size_t size)
 {
 	GLOINIT();
 	cmsMLU *descMLU;
-	descMLU = cmsReadTag(GLO profile, cmsSigProfileDescriptionTag);
+	descMLU = cmsReadTag(glo, profile, cmsSigProfileDescriptionTag);
 	name[0] = 0;
-	cmsMLUgetASCII(GLO descMLU, "en", "US", name, (cmsUInt32Number)size);
+	cmsMLUgetASCII(glo, descMLU, "en", "US", name, (cmsUInt32Number)size);
 }
 
 int fz_icc_profile_components(fz_context *ctx, fz_icc_profile *profile)
 {
 	GLOINIT();
-	return cmsChannelsOf(GLO cmsGetColorSpace(GLO profile));
+	return cmsChannelsOf(glo, cmsGetColorSpace(glo, profile));
 }
 
 void fz_drop_icc_link_imp(fz_context *ctx, fz_storable *storable)
 {
 	GLOINIT();
 	fz_icc_link *link = (fz_icc_link*)storable;
-	cmsDeleteTransform(GLO link->handle);
+	cmsDeleteTransform(glo, link->handle);
 	fz_free(ctx, link);
 }
 
@@ -311,9 +304,9 @@ fz_new_icc_link(fz_context *ctx,
 
 	flags = cmsFLAGS_LOWRESPRECALC;
 
-	src_cs = cmsGetColorSpace(GLO src_pro);
-	src_fmt = COLORSPACE_SH(_cmsLCMScolorSpace(GLO src_cs));
-	src_fmt |= CHANNELS_SH(cmsChannelsOf(GLO src_cs));
+	src_cs = cmsGetColorSpace(glo, src_pro);
+	src_fmt = COLORSPACE_SH(_cmsLCMScolorSpace(glo, src_cs));
+	src_fmt |= CHANNELS_SH(cmsChannelsOf(glo, src_cs));
 	src_fmt |= DOSWAP_SH(src_bgr);
 	src_fmt |= SWAPFIRST_SH(src_bgr && (src_extras > 0));
 #if LCMS_USE_FLOAT
@@ -324,9 +317,9 @@ fz_new_icc_link(fz_context *ctx,
 #endif
 	src_fmt |= EXTRA_SH(src_extras);
 
-	dst_cs = cmsGetColorSpace(GLO dst_pro);
-	dst_fmt = COLORSPACE_SH(_cmsLCMScolorSpace(GLO dst_cs));
-	dst_fmt |= CHANNELS_SH(cmsChannelsOf(GLO dst_cs));
+	dst_cs = cmsGetColorSpace(glo, dst_pro);
+	dst_fmt = COLORSPACE_SH(_cmsLCMScolorSpace(glo, dst_cs));
+	dst_fmt |= CHANNELS_SH(cmsChannelsOf(glo, dst_cs));
 	dst_fmt |= DOSWAP_SH(dst_bgr);
 	dst_fmt |= SWAPFIRST_SH(dst_bgr && (dst_extras > 0));
 #if LCMS_USE_FLOAT
@@ -351,7 +344,7 @@ fz_new_icc_link(fz_context *ctx,
 
 	if (prf_pro == NULL)
 	{
-		transform = cmsCreateTransform(GLO src_pro, src_fmt, dst_pro, dst_fmt, rend.ri, flags);
+		transform = cmsCreateTransform(glo, src_pro, src_fmt, dst_pro, dst_fmt, rend.ri, flags);
 		if (!transform)
 			fz_throw(ctx, FZ_ERROR_LIBRARY, "cmsCreateTransform(%s,%s) failed", src->name, dst->name);
 	}
@@ -359,13 +352,13 @@ fz_new_icc_link(fz_context *ctx,
 	/* LCMS proof creation links don't work properly with the Ghent test files. Handle this in a brutish manner. */
 	else if (src_pro == prf_pro)
 	{
-		transform = cmsCreateTransform(GLO src_pro, src_fmt, dst_pro, dst_fmt, INTENT_RELATIVE_COLORIMETRIC, flags);
+		transform = cmsCreateTransform(glo, src_pro, src_fmt, dst_pro, dst_fmt, INTENT_RELATIVE_COLORIMETRIC, flags);
 		if (!transform)
 			fz_throw(ctx, FZ_ERROR_LIBRARY, "cmsCreateTransform(src=proof,dst) failed");
 	}
 	else if (prf_pro == dst_pro)
 	{
-		transform = cmsCreateTransform(GLO src_pro, src_fmt, prf_pro, dst_fmt, rend.ri, flags);
+		transform = cmsCreateTransform(glo, src_pro, src_fmt, prf_pro, dst_fmt, rend.ri, flags);
 		if (!transform)
 			fz_throw(ctx, FZ_ERROR_LIBRARY, "cmsCreateTransform(src,proof=dst) failed");
 	}
@@ -377,9 +370,9 @@ fz_new_icc_link(fz_context *ctx,
 		cmsUInt32Number prf_fmt;
 		cmsHPROFILE hProfiles[3];
 
-		prf_cs = cmsGetColorSpace(GLO prf_pro);
-		prf_fmt = COLORSPACE_SH(_cmsLCMScolorSpace(GLO prf_cs));
-		prf_fmt |= CHANNELS_SH(cmsChannelsOf(GLO prf_cs));
+		prf_cs = cmsGetColorSpace(glo, prf_pro);
+		prf_fmt = COLORSPACE_SH(_cmsLCMScolorSpace(glo, prf_cs));
+		prf_fmt |= CHANNELS_SH(cmsChannelsOf(glo, prf_cs));
 #if LCMS_USE_FLOAT
 		prf_fmt |= BYTES_SH(format ? 4 : 1);
 		prf_fmt |= FLOAT_SH(format ? 1 : 0);
@@ -387,19 +380,19 @@ fz_new_icc_link(fz_context *ctx,
 		prf_fmt |= BYTES_SH(format ? 2 : 1);
 #endif
 
-		src_to_prf_link = cmsCreateTransform(GLO src_pro, src_fmt, prf_pro, prf_fmt, rend.ri, flags);
+		src_to_prf_link = cmsCreateTransform(glo, src_pro, src_fmt, prf_pro, prf_fmt, rend.ri, flags);
 		if (!src_to_prf_link)
 			fz_throw(ctx, FZ_ERROR_LIBRARY, "cmsCreateTransform(src,proof) failed");
-		src_to_prf_pro = cmsTransform2DeviceLink(GLO src_to_prf_link, 3.4, flags);
-		cmsDeleteTransform(GLO src_to_prf_link);
+		src_to_prf_pro = cmsTransform2DeviceLink(glo, src_to_prf_link, 3.4, flags);
+		cmsDeleteTransform(glo, src_to_prf_link);
 		if (!src_to_prf_pro)
 			fz_throw(ctx, FZ_ERROR_LIBRARY, "cmsTransform2DeviceLink(src,proof) failed");
 
 		hProfiles[0] = src_to_prf_pro;
 		hProfiles[1] = prf_pro;
 		hProfiles[2] = dst_pro;
-		transform = cmsCreateMultiprofileTransform(GLO hProfiles, 3, src_fmt, dst_fmt, INTENT_RELATIVE_COLORIMETRIC, flags);
-		cmsCloseProfile(GLO src_to_prf_pro);
+		transform = cmsCreateMultiprofileTransform(glo, hProfiles, 3, src_fmt, dst_fmt, INTENT_RELATIVE_COLORIMETRIC, flags);
+		cmsCloseProfile(glo, src_to_prf_pro);
 		if (!transform)
 			fz_throw(ctx, FZ_ERROR_LIBRARY, "cmsCreateMultiprofileTransform(src,proof,dst) failed");
 	}
@@ -412,7 +405,7 @@ fz_new_icc_link(fz_context *ctx,
 	}
 	fz_catch(ctx)
 	{
-		cmsDeleteTransform(GLO transform);
+		cmsDeleteTransform(glo, transform);
 		fz_rethrow(ctx);
 	}
 	return link; //-V614
@@ -423,7 +416,7 @@ fz_icc_transform_color(fz_context *ctx, fz_color_converter *cc, const float *src
 {
 	GLOINIT();
 #if LCMS_USE_FLOAT
-	cmsDoTransform(GLO cc->link->handle, src, dst, 1);
+	cmsDoTransform(glo, cc->link->handle, src, dst, 1);
 #else
 	uint16_t s16[FZ_MAX_COLORS];
 	uint16_t d16[FZ_MAX_COLORS];
@@ -441,7 +434,7 @@ fz_icc_transform_color(fz_context *ctx, fz_color_converter *cc, const float *src
 		for (i = 0; i < sn; ++i)
 			s16[i] = src[i] * 65535;
 	}
-	cmsDoTransform(GLO cc->link->handle, s16, d16, 1);
+	cmsDoTransform(glo, cc->link->handle, s16, d16, 1);
 	for (i = 0; i < dn; ++i)
 		dst[i] = d16[i] / 65535.0f;
 #endif
@@ -469,8 +462,8 @@ fz_icc_transform_pixmap(fz_context *ctx, fz_icc_link *link, const fz_pixmap *src
 	cmsUInt32Number src_format, dst_format;
 
 	/* check the channels. */
-	src_format = cmsGetTransformInputFormat(GLO link->handle);
-	dst_format = cmsGetTransformOutputFormat(GLO link->handle);
+	src_format = cmsGetTransformInputFormat(glo, link->handle);
+	dst_format = cmsGetTransformOutputFormat(glo, link->handle);
 	cmm_num_src = T_CHANNELS(src_format);
 	cmm_num_dst = T_CHANNELS(dst_format);
 	cmm_extras = T_EXTRA(src_format);
@@ -501,7 +494,7 @@ fz_icc_transform_pixmap(fz_context *ctx, fz_icc_link *link, const fz_pixmap *src
 			}
 			else
 			{
-				cmsDoTransform(GLO link->handle, buffer, outputpos, sw);
+				cmsDoTransform(glo, link->handle, buffer, outputpos, sw);
 				if (!copy_spots)
 				{
 					/* Copy the alpha by steam */
@@ -530,7 +523,7 @@ fz_icc_transform_pixmap(fz_context *ctx, fz_icc_link *link, const fz_pixmap *src
 	{
 		for (; h > 0; h--)
 		{
-			cmsDoTransform(GLO link->handle, inputpos, outputpos, sw);
+			cmsDoTransform(glo, link->handle, inputpos, outputpos, sw);
 			inputpos += ss;
 			outputpos += ds;
 		}
@@ -586,8 +579,8 @@ fz_measure_colorspace_linearity(fz_context *ctx, fz_colorspace *colorspace)
 		}
 
 		input_pro = colorspace->u.icc.profile;
-		xyz_pro = cmsCreateXYZProfile(GLO_);
-		xform = cmsCreateTransform(GLO
+		xyz_pro = cmsCreateXYZProfile(glo);
+		xform = cmsCreateTransform(glo,
 			input_pro,
 			input_fmt,
 			xyz_pro,
@@ -599,14 +592,14 @@ fz_measure_colorspace_linearity(fz_context *ctx, fz_colorspace *colorspace)
 		{
 			color[0] = color[1] = color[2] = i;
 
-			cmsDoTransform(GLO xform, color, xyz, 1);
+			cmsDoTransform(glo, xform, color, xyz, 1);
 
 			gamma->to_linear[i] = xyz[1] * 4095.0f + 0.5f;
 		}
 
-		cmsDeleteTransform(GLO xform);
+		cmsDeleteTransform(glo, xform);
 
-		xform = cmsCreateTransform(GLO
+		xform = cmsCreateTransform(glo,
 			xyz_pro,
 			TYPE_XYZ_FLT,
 			input_pro,
@@ -621,14 +614,14 @@ fz_measure_colorspace_linearity(fz_context *ctx, fz_colorspace *colorspace)
 			xyz[1] = (i * 1.000000f) / 4095.0f;
 			xyz[2] = (i * 0.825188f) / 4095.0f;
 
-			cmsDoTransform(GLO xform, xyz, color, 1);
+			cmsDoTransform(glo, xform, xyz, color, 1);
 
 			gamma->from_linear[i] = color[0];
 		}
 
-		cmsDeleteTransform(GLO xform);
+		cmsDeleteTransform(glo, xform);
 
-		cmsCloseProfile(GLO xyz_pro);
+		cmsCloseProfile(glo, xyz_pro);
 	}
 	else
 #endif  // FZ_ENABLE_ICC
