@@ -25,6 +25,10 @@
 
 #include "mupdf/fitz.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct fz_color_converter fz_color_converter;
 
 /* Color management engine */
@@ -132,5 +136,9 @@ void fz_measure_colorspace_linearity(fz_context *ctx, fz_colorspace *colorspace)
 #endif
 
 #endif  // BUILDING_MUPDF_MINIMAL_CORE < 2
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
