@@ -488,6 +488,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/oiio/src/jpeg.imageio/jpeg_pvt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oiio/src/libOpenImageIO/bluenoise.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/oiio/src/libOpenImageIO/exif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oiio/src/libOpenImageIO/imagebufalgo_demosaic_prv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oiio/src/libOpenImageIO/kissfft.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/oiio/src/libtexture/imagecache_memory_print.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oiio/src/libtexture/imagecache_memory_pvt.h" />
@@ -589,14 +590,17 @@
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/bmp/src/g01bg2-v5.bmp" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/common/bayer.png" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/gif/ref/tahoe-tiny.gif" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/ico/src/bad1.ico" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/src/corrupt-exif-1626.jpg" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/src/corrupt-exif.jpg" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/src/corrupt-icc-4551.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/src/corrupt-icc-4552.jpg" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-metadata/src/blender-render.jpg" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/rgbfromtga.png" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/histogram_input.png" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/png/ref/test16.png" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/png/src/alphagamma.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/png/src/gimp_gradient.png" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/texture-fill/src/gray.png" />
     <Image Include="../../thirdparty/owemdjee/oiio/testsuite/texture-gray/src/gray.png" />
     <Text Include="../../thirdparty/owemdjee/oiio/ASWF/CLA-corporate.md" />
@@ -630,6 +634,7 @@
     <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/Changes-skeleton-patch.md" />
     <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/CodeReview.md" />
     <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/RELEASING.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/pyproject.toml" />
     <Text Include="../../thirdparty/owemdjee/oiio/sonar-project.properties" />
     <Text Include="../../thirdparty/owemdjee/oiio/src/bmp.imageio/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/src/build-scripts/OpenImageIO.pc.in" />
@@ -885,6 +890,7 @@
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out-alt.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out-alt2.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out-alt3.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out-alt4.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/run.py" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-metadata/ref/out.txt" />
@@ -1009,6 +1015,10 @@
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-fixnan/ref/out.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-fixnan/run.py" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-fixnan/src/bad.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-layers/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-layers/ref/parts.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-layers/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-layers/src/layers.exr" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-maketx/ref/out-macarm.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-maketx/ref/out-rhel7.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-maketx/ref/out-win.txt" />
@@ -1369,6 +1379,8 @@
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/runtest.py" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/sgi/ref/out.txt" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/sgi/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/softimage/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/softimage/run.py" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/CBW8.TGA.tif" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/CCM8.TGA.tif" />
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/CTC16.TGA.tif" />

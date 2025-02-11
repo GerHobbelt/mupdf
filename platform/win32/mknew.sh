@@ -1570,6 +1570,8 @@ tscns
 politician
 cpptrace
 dunce
+imageio-freeimage
+imageio-mupdf
 
 EOT
 ) | grep -e "$FILTER"
@@ -1649,6 +1651,7 @@ zzuf
 logger_benchmarks
 politician
 win32-fileapi-demo
+hashtable-bench
 
 EOT
 ) | grep -e "$FILTER"

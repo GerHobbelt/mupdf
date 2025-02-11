@@ -48,16 +48,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -70,7 +70,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -104,8 +104,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/freetype;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/gumbo-parser/src;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/extract/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/zlib;../../thirdparty/freetype/include;../../thirdparty/mujs;../../thirdparty/harfbuzz/src;../../thirdparty/lcms2/include;../../thirdparty/tesseract/include;../../scripts/tesseract;../../scripts/leptonica/include;../../scripts/zlib;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libarchive;../../thirdparty/owemdjee/libparameters/include;../../thirdparty/owemdjee/libdiagnostics/include;../../thirdparty/owemdjee/libassert/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -123,7 +123,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/freetype;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/gumbo-parser/src;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/extract/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/zlib;../../thirdparty/freetype/include;../../thirdparty/mujs;../../thirdparty/harfbuzz/src;../../thirdparty/lcms2/include;../../thirdparty/tesseract/include;../../scripts/tesseract;../../scripts/leptonica/include;../../scripts/zlib;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libarchive;../../thirdparty/owemdjee/libparameters/include;../../thirdparty/owemdjee/libdiagnostics/include;../../thirdparty/owemdjee/libassert/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/freetype;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/gumbo-parser/src;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/extract/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/zlib;../../thirdparty/freetype/include;../../thirdparty/mujs;../../thirdparty/harfbuzz/src;../../thirdparty/lcms2/include;../../thirdparty/tesseract/include;../../scripts/tesseract;../../scripts/leptonica/include;../../scripts/zlib;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libarchive;../../thirdparty/owemdjee/libparameters/include;../../thirdparty/owemdjee/libdiagnostics/include;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>FZ_ENABLE_OCR=0;HAVE_LIBARCHIVE;LIBARCHIVE_STATIC;LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;HAVE_EXTRACT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -830,4 +830,3 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
