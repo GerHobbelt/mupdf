@@ -93,6 +93,28 @@ size_t fz_strlcpy(char *dst, const char *src, size_t n);
 size_t fz_strlcat(char *dst, const char *src, size_t n);
 
 /**
+	Safe strstr function.
+
+	haystack: Where to look (may be NULL).
+
+	needled: What to look for.
+
+	Returns NULL if unmatched, or pointer to start of match.
+*/
+const char *fz_strstr(const char *haystack, const char *needle);
+
+/**
+	Safe case-insensitive strstr function. (Accepts UTF-8).
+
+	haystack: Where to look (may be NULL).
+
+	needled: What to look for.
+
+	Returns NULL if unmatched, or pointer to start of match.
+*/
+const char *fz_strstrcase(const char *haystack, const char *needle);
+
+/**
 	Copy `src` string to limited-length `dst`. "Safe string copy to limited-length buffer."
 
 	This is similar to regular RTL strncpy() with these differences:
@@ -318,9 +340,15 @@ char *fz_cleanname_strdup(fz_context *ctx, const char *name);
 char *fz_realpath(const char *path, char resolved_path[PATH_MAX]);
 
 /**
-	Case insensitive (ASCII only) string comparison.
+	Case insensitive (UTF8) string comparison.
 */
 int fz_strcasecmp(const char *a, const char *b);
+
+/**
+	Case insensitive (UTF8) string comparison.
+
+	n = maximum number of bytes to read from either a or b.
+*/
 int fz_strncasecmp(const char *a, const char *b, size_t n);
 
 /**
@@ -351,6 +379,7 @@ enum { FZ_UTFMAX = 4 };
 	UTF8 decode a single rune from a sequence of chars.
 
 	rune: Pointer to an int to assign the decoded 'rune' to.
+	(0xFFFD on error).
 
 	str: Pointer to a UTF8 encoded string.
 

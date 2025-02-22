@@ -1575,6 +1575,9 @@ fz_stext_close_device(fz_context *ctx, fz_device *dev)
 
 	if (tdev->opts.flags & FZ_STEXT_SEGMENT)
 		fz_segment_stext_page(ctx, page);
+
+	if (tdev->opts.flags & FZ_STEXT_PARAGRAPH_BREAK)
+		fz_paragraph_break(ctx, page);
 }
 
 static void
@@ -1687,6 +1690,12 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		opts->flags_conf_mask |= FZ_STEXT_SEGMENT;
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_SEGMENT;
+	}
+	if (fz_has_option(ctx, string, "paragraph-break", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_PARAGRAPH_BREAK;
+		if (fz_option_eq(val, "yes"))
+			opts->flags |= FZ_STEXT_PARAGRAPH_BREAK;
 	}
 	if (fz_has_option(ctx, string, "glyph-bbox", &val))
 	{
