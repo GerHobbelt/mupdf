@@ -274,7 +274,7 @@ pdf_flush_tk_group(fz_context *ctx, pdf_run_processor *pr)
 }
 
 static pdf_gstate *
-begin_softmask(fz_context *ctx, pdf_run_processor *pr, softmask_save *save)
+begin_softmask(fz_context *ctx, pdf_run_processor *pr, softmask_save *save, fz_rect bbox)
 {
 	pdf_gstate *gstate = pr->gstate + pr->gtop;
 	pdf_obj *softmask = gstate->softmask;
@@ -314,6 +314,7 @@ begin_softmask(fz_context *ctx, pdf_run_processor *pr, softmask_save *save)
 		mask_bbox = fz_transform_rect(mask_bbox, mask_matrix);
 		mask_bbox = fz_transform_rect(mask_bbox, gstate->softmask_ctm);
 	}
+	mask_bbox = fz_intersect_rect(mask_bbox, bbox);
 	gstate->softmask = NULL;
 	gstate->softmask_cs = NULL;
 	gstate->softmask_resources = NULL;
@@ -384,7 +385,7 @@ pdf_push_tk_group(fz_context *ctx, pdf_run_processor *pr)
 static pdf_gstate *
 pdf_begin_group(fz_context *ctx, pdf_run_processor *pr, fz_rect bbox, softmask_save *softmask, int *pushed)
 {
-	pdf_gstate *gstate = begin_softmask(ctx, pr, softmask);
+	pdf_gstate *gstate = begin_softmask(ctx, pr, softmask, bbox);
 
 	if (pushed)
 		*pushed = 0;
@@ -2251,7 +2252,7 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 
 			fz_rect bbox = fz_transform_rect(xobj_bbox, gstate->ctm);
 
-			gstate = begin_softmask(ctx, pr, &softmask);
+			gstate = begin_softmask(ctx, pr, &softmask, bbox);
 
 			if (isolated)
 				cs = pdf_xobject_colorspace(ctx, xobj);
