@@ -39,6 +39,8 @@ static fz_context* ctx = NULL;
 
 static int x_factor = 0;
 static int y_factor = 0;
+static float margin = 0;
+static int margin_is_percent = 0;
 static int x_dir = 1;
 static int offset = 0;
 
@@ -47,6 +49,7 @@ static int usage(void)
 	fz_info(ctx,
 		"usage: mutool poster [options] input.pdf [output.pdf]\n"
 		"\t-p -\tpassword\n"
+		"\t-m -\tmargin (overlap) between pages (pts, or %%)\n"
 		"\t-x\tx decimation factor\n"
 		"\t-y\ty decimation factor\n"
 		"\t-r\tsplit right-to-left\n"
@@ -115,6 +118,7 @@ static void decimatepages(fz_context *ctx, pdf_document *doc)
 		float w, h;
 		int x, y;
 		int xd, yd, y0, y1;
+		float xmargin, ymargin;
 
 		rotate = pdf_to_int(ctx, pdf_dict_get_inheritable(ctx, page_obj, PDF_NAME(Rotate)));
 		mediabox = pdf_to_rect(ctx, pdf_dict_get_inheritable(ctx, page_obj, PDF_NAME(MediaBox)));
@@ -155,6 +159,9 @@ static void decimatepages(fz_context *ctx, pdf_document *doc)
 		else if (yf == 0)
 			yf = 1;
 
+		xmargin = xf == 1 ? 0 : margin * (margin_is_percent ? .001 * w/xf : 1);
+		ymargin = yf == 1 ? 0 : margin * (margin_is_percent ? .001 * h/yf : 1);
+
 		y0 = (yd > 0) ? 0 : yf-1;
 		y1 = (yd > 0) ? yf : -1;
 		for (y = y0; y != y1; y += yd)
@@ -177,7 +184,7 @@ static void decimatepages(fz_context *ctx, pdf_document *doc)
 				if (x == xf-1)
 					mb.x1 = mediabox.x1;
 				else
-					mb.x1 = mediabox.x0 + (w/xf)*(x+1) + offset;
+					mb.x1 = mediabox.x0 + (w/xf)*(x+1) + xmargin + offset;
 				if (y == 0)
 					mb.y0 = mediabox.y0;
 				else
@@ -185,7 +192,7 @@ static void decimatepages(fz_context *ctx, pdf_document *doc)
 				if (y == yf-1)
 					mb.y1 = mediabox.y1;
 				else
-					mb.y1 = mediabox.y0 + (h/yf)*(y+1) + offset;
+					mb.y1 = mediabox.y0 + (h/yf)*(y+1) + ymargin + offset;
 
 				pdf_dict_put(ctx, newpageobj, PDF_NAME(Parent), pages);
 				pdf_dict_put_rect(ctx, newpageobj, PDF_NAME(MediaBox), mb);
@@ -227,11 +234,12 @@ int pdfposter_main(int argc, const char** argv)
 	offset = 0;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "x:y:o:p:r")) != -1)
+	while ((c = fz_getopt(argc, argv, "m:x:y:o:p:r")) != -1)
 	{
 		switch (c)
 		{
 		case 'p': password = fz_optarg; break;
+		case 'm': margin = atof(fz_optarg); margin_is_percent = (strchr(fz_optarg, '%') != NULL); break;
 		case 'x': x_factor = atoi(fz_optarg); break;
 		case 'y': y_factor = atoi(fz_optarg); break;
 		case 'r': x_dir = -1; break;

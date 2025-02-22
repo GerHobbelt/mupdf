@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -44,6 +44,7 @@ static fz_output* out = NULL;
 static int showbinary = 0;
 static int showdecode = 1;
 static int tight = 0;
+static int repair = 0;
 static int showcolumn = 0;
 static int resolve = 0;
 
@@ -56,7 +57,8 @@ static int usage(void)
 		"\t-e\tleave stream contents in their original form\n"
 		"\t-b\tprint only stream contents, as raw binary data\n"
 		"\t-g\tprint only object, one line per object, suitable for grep\n"
-		"\t-r\tresolve all objects\n"
+		"\t-r\tforce repair before showing any objects\n"
+		"\t-R\tresolve all objects\n"
 		"\tpath: path to an object, starting with either an object number,\n"
 		"\t\t'pages', 'trailer', or a property in the trailer;\n"
 		"\t\tpath elements separated by '.' or '/'. Path elements must be\n"
@@ -658,7 +660,7 @@ int pdfshow_main(int argc, const char** argv)
 	resolve = 0;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "p:o:rbegh")) != -1)
+	while ((c = fz_getopt(argc, argv, "p:o:Rrbegh")) != -1)
 	{
 		switch (c)
 		{
@@ -667,7 +669,8 @@ int pdfshow_main(int argc, const char** argv)
 		case 'b': showbinary = 1; break;
 		case 'e': showdecode = 0; break;
 		case 'g': tight = 1; break;
-		case 'r': resolve = PDF_PRINT_RESOLVE_ALL_INDIRECT; break;
+		case 'r': repair = 1; break;
+		case 'R': resolve = PDF_PRINT_RESOLVE_ALL_INDIRECT; break;
 		default: return usage();
 		}
 	}
@@ -722,6 +725,22 @@ int pdfshow_main(int argc, const char** argv)
 		if (pdf_needs_password(ctx, doc))
 			if (!pdf_authenticate_password(ctx, doc, password))
 				fz_warn(ctx, "cannot authenticate password: %s", filename);
+
+		if (repair)
+		{
+			fz_try(ctx)
+			{
+				pdf_repair_xref(ctx, doc);
+			}
+			fz_catch(ctx)
+			{
+				fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+				fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
+				fz_rethrow_if(ctx, FZ_ERROR_REPAIRED);
+				fz_report_error(ctx);
+			}
+		}
+
 
 		if (fz_optind == argc)
 			showtrailer();
