@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF64363F}</ProjectGuid>
+    <ProjectGuid>{4589BB85-1CB3-4287-BEED-5901A9A5894C}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWILDMATCH;WILDMATCH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -223,63 +223,17 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/base85.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/convert.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/copy.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/ctype.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/dir-iterator.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/dir.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/environment.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/hex-ll.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/hex.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/path-walk.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/path.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/pathspec.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/strbuf.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/strmap.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/strvec.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/tempfile.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/test-run-command.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/test-tool.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/test-wildmatch.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/urlmatch.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/utf8.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/wildmatch (2).c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/wildmatch.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/wildmatch_wrapper.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/base85.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/convert.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/copy.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/dir-iterator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/dir.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/environment.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/hex-ll.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/hex.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/khash.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/monolithic_examples.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/path-walk.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/path.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/pathspec.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/sane-ctype.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/strbuf.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/strmap.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/strvec.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/tempfile.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/test-tool-utils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/test-tool.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/unicode-width.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/urlmatch.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/utf8.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/wildmatch (2).h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/wildmatch.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/wildmatch.hpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/examples/monolithic_examples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/examples/wildmatch-cxx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libwildmatch/tests/test-wildmatch.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libwildmatch/tests/test-wildmatch.h" />
     <Text Include="../../thirdparty/owemdjee/libwildmatch/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libwildmatch/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/libwildmatch/Makefile" />
     <Text Include="../../thirdparty/owemdjee/libwildmatch/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libwildmatch/wildmatch/t3070-wildmatch.sh" />
+    <Text Include="../../thirdparty/owemdjee/libwildmatch/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libwildmatch/tests/sharness.sh" />
+    <Text Include="../../thirdparty/owemdjee/libwildmatch/tests/t3070-wildmatch.sh" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
