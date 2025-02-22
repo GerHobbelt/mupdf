@@ -1486,6 +1486,11 @@ def make_internal_functions( namespace, out_h, out_cpp, refcheck_if, trace_if):
                     if (s_trace)
                     {{
                         std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): "
+                                << "fz_new_context() => " << m_ctx << "\\n";
+                    }}
+                    if (s_trace)
+                    {{
+                        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): "
                                 << " calling fz_register_document_handlers()\\n";
                     }}
                     internal_assert("m_ctx = fz_new_context()" && m_ctx);
@@ -1571,6 +1576,11 @@ def make_internal_functions( namespace, out_h, out_cpp, refcheck_if, trace_if):
                         }}
                         internal_assert(s_state_valid);
                         m_ctx = fz_clone_context(s_state.m_ctx);
+                        if (s_trace)
+                        {{
+                            std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): "
+                                    << "fz_clone_context(" << s_state.m_ctx << ") => " << m_ctx << "\\n";
+                        }}
                         internal_assert("m_ctx = fz_clone_context()" && m_ctx);
                     }}
                     return m_ctx;
@@ -2690,7 +2700,21 @@ def function_name_implies_kept_references( fnname):
             'fz_get_pixmap_from_image',
             ):
         return True
-    for i in ('new', 'create', 'find', 'load', 'open', 'keep', 'read', 'add', 'parse', 'graft', 'copy', 'deep_copy'):
+    for i in (
+            'add',
+            'convert',
+            'copy',
+            'create',
+            'deep_copy',
+            'find',
+            'graft',
+            'keep',
+            'load',
+            'new',
+            'open',
+            'parse',
+            'read',
+            ):
         if fnname.startswith(f'fz_{i}_') or fnname.startswith(f'pdf_{i}_'):
             if state.state_.show_details(fnname):
                 jlib.log('Assuming that {fnname=} returns a kept reference.')

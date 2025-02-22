@@ -400,7 +400,10 @@ enum
 	FZ_STEXT_STRIKEOUT = 1,
 	FZ_STEXT_UNDERLINE = 2,
 	FZ_STEXT_SYNTHETIC = 4,
-	FZ_STEXT_BOLD = 8 /* Either real or 'fake' bold */
+	FZ_STEXT_BOLD = 8, /* Either real or 'fake' bold */
+	FZ_STEXT_FILLED = 16,
+	FZ_STEXT_STROKED = 32,
+	FZ_STEXT_CLIPPED = 64
 };
 
 /**
