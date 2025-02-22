@@ -1201,7 +1201,7 @@ flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, 
 			dev->last.wmode,
 			dev->last.bidi_level,
 			(i == 0) && (dev->opts.flags & FZ_STEXT_PRESERVE_SPANS),
-			flags);
+			dev->last.flags);
 		i++;
 	}
 }
