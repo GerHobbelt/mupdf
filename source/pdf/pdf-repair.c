@@ -331,7 +331,7 @@ static int is_white(int c)
 }
 
 void
-pdf_repair_xref(fz_context *ctx, pdf_document *doc)
+pdf_repair_xref_base(fz_context *ctx, pdf_document *doc)
 {
 	pdf_obj *dict = NULL, *obj = NULL;
 	pdf_obj *length;
