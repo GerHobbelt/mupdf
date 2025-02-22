@@ -184,6 +184,12 @@ typedef struct fz_stext_grid_positions fz_stext_grid_positions;
 	will set the FZ_STEXT_UNICODE_IS_CID bit in the char flags word to
 	indicate that this has happened.
 
+	FZ_STEXT_USE_GID_FOR_UNKNOWN_UNICODE: If this option is set, then
+	in the event that we fail to find a unicode value for a given
+	character, we we instead return its glyph in the unicode field.
+	We will set the FZ_STEXT_UNICODE_IS_GID bit in the char flags word
+	to indicate that this has happened.
+
 	Setting both FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE and
 	FZ_STEXT_USE_GID_FOR_UNKNOWN_UNICODE will give undefined behaviour.
 

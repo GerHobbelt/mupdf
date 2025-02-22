@@ -1073,10 +1073,10 @@ fz_add_stext_char(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, i
 
 		if (replacement)
 		{
-			fz_add_stext_char_imp(ctx, dev, font, *replacement++, glyph, trm, adv, wmode, bidi, force_new_line);
+			fz_add_stext_char_imp(ctx, dev, font, *replacement++, glyph, trm, adv, wmode, bidi, force_new_line, flags);
 			while (*replacement)
 			{
-				fz_add_stext_char_imp(ctx, dev, font, *replacement++, -1, trm, 0, wmode, bidi, 0);
+				fz_add_stext_char_imp(ctx, dev, font, *replacement++, -1, trm, 0, wmode, bidi, 0, flags);
 			}
 			return;
 		}
