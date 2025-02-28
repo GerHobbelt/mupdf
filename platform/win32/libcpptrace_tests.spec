@@ -5,4 +5,5 @@ directories:
 also-ignore:
 	/cmake/
 	/src/
+	/tools/
 	

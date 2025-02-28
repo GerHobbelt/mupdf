@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -235,6 +235,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/src/demangle/demangle_with_nothing.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/src/demangle/demangle_with_winapi.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/src/exceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/src/formatting.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/src/from_current.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/src/options.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/src/platform/dbghelp_syminit_manager.cpp" />
@@ -257,9 +258,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/src/utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/src/utils/fsutils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/src/utils/microfmt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/tools/dwarfdump/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/tools/resolver/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/tools/symbol_tables/main.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/basic.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/cpptrace.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/formatting.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/forward.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/from_current.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/io.hpp" />
@@ -286,6 +291,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/src/utils/common.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/src/utils/error.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/src/utils/microfmt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpptrace/src/utils/optional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpptrace/src/utils/result.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/src/utils/utils.hpp" />
     <Image Include="../../thirdparty/owemdjee/cpptrace/res/demo.png" />
     <Image Include="../../thirdparty/owemdjee/cpptrace/res/exception.png" />
@@ -302,7 +309,7 @@
     <Text Include="../../thirdparty/owemdjee/cpptrace/README.md" />
     <Text Include="../../thirdparty/owemdjee/cpptrace/SECURITY.md" />
     <Text Include="../../thirdparty/owemdjee/cpptrace/WORKSPACE" />
-    <Text Include="../../thirdparty/owemdjee/cpptrace/ci/build-in-all-configs.py" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/ci/build-in-all-remaining-configs.py" />
     <Text Include="../../thirdparty/owemdjee/cpptrace/ci/dump_msvc_env.ps1" />
     <Text Include="../../thirdparty/owemdjee/cpptrace/ci/setup-prerequisites-mingw.ps1" />
     <Text Include="../../thirdparty/owemdjee/cpptrace/ci/setup-prerequisites-unittest-macos.sh" />
@@ -315,6 +322,11 @@
     <Text Include="../../thirdparty/owemdjee/cpptrace/docs/c-api.md" />
     <Text Include="../../thirdparty/owemdjee/cpptrace/docs/signal-safe-tracing.md" />
     <Text Include="../../thirdparty/owemdjee/cpptrace/sonar-project.properties" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/tools/dwarfdump/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/tools/resolver/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpptrace/tools/symbol_tables/CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

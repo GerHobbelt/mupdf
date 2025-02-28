@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF8CDA38}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCELERO;CELERO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCELERO;CELERO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCELERO;CELERO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCELERO;CELERO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCELERO;CELERO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCELERO;CELERO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCELERO;CELERO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCELERO;CELERO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCELERO;CELERO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCELERO;CELERO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCELERO;CELERO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCELERO;CELERO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/DemoFileWrite/DemoFileWrite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/DemoMultithread/DemoMultithread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/DemoSimple/DemoSimple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/DemoSimpleJUnit/DemoSimpleJUnit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/DemoSleep/DemoSleep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/DemoToString/DemoToString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/DemoTransform/DemoTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/ExperimentCompressBools/ExperimentCompressBools.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/ExperimentCostDoNotOptimizeAway/ExperimentCostOfDoNotOptimizeAway.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/ExperimentCostOfPimpl/ExperimentCostOfPimpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/ExperimentCostSharedPtr/ExperimentCostOfSharedPtr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/ExperimentParameterPassing/ExperimentParameterPassing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/ExperimentParticles/ExperimentParticles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/ExperimentSimpleComparison/ExperimentSimpleComparison.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/ExperimentSortingRandomInts/ExperimentSortingRandomInts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/experiments/ExperimentSortingRandomIntsUDM/ExperimentSortingRandomIntsUDM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/Archive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/Benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/Callbacks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/Celero.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/Console.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/Distribution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/Exceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/Executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/Experiment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/ExperimentResult.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/JUnit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/Memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/Print.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/ResultTable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/TestFixture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/TestVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/ThreadTestFixture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/Timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/UserDefinedMeasurementCollector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/src/Utilities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/test/Archive.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/test/Benchmark.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/test/Callbacks.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/test/Celero.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/test/Distribution.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/test/Executor.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/test/Memory.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/test/Statistics.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/test/TestFixture.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/test/TestVector.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/test/Timer.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/test/UserDefinedMeasurementCollector.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/celero/test/Utilities.test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/experiments/ExperimentCostSharedPtr/osg_ref_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/experiments/ExperimentParticles/Particles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Archive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Callbacks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Celero.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/CommandLine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Console.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Distribution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Executor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Experiment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/ExperimentResult.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/FileReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/GenericFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/JUnit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Pimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/PimplImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/ResultTable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/TestFixture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/TestVector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/ThreadLocal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/ThreadTestFixture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/UserDefinedMeasurement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/UserDefinedMeasurementCollector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/UserDefinedMeasurementTemplate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/celero/include/celero/Utilities.h" />
+    <Text Include="../../thirdparty/owemdjee/celero/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/CMakeLists.txt.in" />
+    <Text Include="../../thirdparty/owemdjee/celero/CMakeSettings.json" />
+    <Text Include="../../thirdparty/owemdjee/celero/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/celero/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/celero/ISSUE_TEMPLATE.md" />
+    <Text Include="../../thirdparty/owemdjee/celero/README.md" />
+    <Text Include="../../thirdparty/owemdjee/celero/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/celero/config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/DemoFileWrite/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/DemoMultithread/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/DemoSimple/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/DemoSimpleJUnit/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/DemoSleep/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/DemoToString/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/DemoTransform/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/ExperimentCompressBools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/ExperimentCostDoNotOptimizeAway/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/ExperimentCostOfPimpl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/ExperimentCostSharedPtr/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/ExperimentParameterPassing/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/ExperimentParticles/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/ExperimentSimpleComparison/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/ExperimentSortingRandomInts/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/experiments/ExperimentSortingRandomIntsUDM/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/license.txt" />
+    <Text Include="../../thirdparty/owemdjee/celero/test/CMakeLists.txt" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

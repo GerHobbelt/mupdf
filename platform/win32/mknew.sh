@@ -1571,7 +1571,10 @@ politician
 cpptrace
 dunce
 imageio-freeimage
-imageio-mupdf
+openimageio-mupdf
+small_vectors
+lyra
+celero
 
 EOT
 ) | grep -e "$FILTER"
