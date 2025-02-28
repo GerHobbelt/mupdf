@@ -4,4 +4,8 @@
 # this is much faster than using `find`.
 #
 
-find ../../ -type f -a ! -ipath '*/tmp/*' > filelist.lst
+pushd "$( dirname "$0" )"
+
+find ../../ -type f -a ! -ipath '*/tmp/*' > filelist.lst &
+
+popd
