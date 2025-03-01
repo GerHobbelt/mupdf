@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF94FBF6}</ProjectGuid>
+    <ProjectGuid>{01B0FA72-B595-471C-A43C-B388DA075780}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -31,7 +31,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLYRA;LYRA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -223,21 +223,56 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/combined_parser.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/count_flag.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/doc_commands.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/doc_example1.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/doc_example1_alt.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/doc_example2.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/doc_example2_alt.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/doc_example3.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/doc_example4.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/doc_example5.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/doc_example6.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/doc_groups.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/doc_simple.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/doc_simple_alt.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/option_styles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/examples/monolithic_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/args_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/base_compile_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/cardinality_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/cmdline_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/combined_parser_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/command_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/doc_commands_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/doc_example1_alt_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/doc_example1_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/doc_example2_alt_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/doc_example2_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/doc_example3_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/doc_example4_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/doc_example5_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/doc_example6_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/doc_groups_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/doc_simple_alt_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/doc_simple_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/eval_mode_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/ex_count_flag_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/ex_option_styles_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/flag_parser_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/group_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/hint_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/invalid_parsers_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/issue_49_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/issue_55_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/issue_65_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/issue_70_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/issue_73_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/issue_92_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/lib_use_test/base_exe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/lib_use_test/base_lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/literal_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/main_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/multiple_flags_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/option_styles_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/option_variants_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/optional_arg_help_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/optional_type_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/required_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/single_include_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/single_parser_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/trait_utils_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/unrecognized_opts_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/usage_text_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/value_choices_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/values_run_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lyra/tests/values_short_run_test.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/lyra/data/single_include/lyra/lyra.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/lyra/examples/monolithic_examples.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lyra/include/lyra/arg.hpp" />
@@ -270,6 +305,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/lyra/include/lyra/printer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/lyra/include/lyra/val.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/lyra/include/lyra/version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/lyra/tests/lib_use_test/base_lib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/lyra/tests/main_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/lyra/tests/mini_test.hpp" />
     <Image Include="../../thirdparty/owemdjee/lyra/docs/logo-color-300.png" />
     <Image Include="../../thirdparty/owemdjee/lyra/docs/logo-color.png" />
     <Text Include="../../thirdparty/owemdjee/lyra/CMakeLists.txt" />
@@ -288,9 +326,18 @@
     <Text Include="../../thirdparty/owemdjee/lyra/docs/lyra.adoc" />
     <Text Include="../../thirdparty/owemdjee/lyra/docs/lyra.html" />
     <Text Include="../../thirdparty/owemdjee/lyra/docs/std.css" />
-    <Text Include="../../thirdparty/owemdjee/lyra/examples/build.jam" />
+    <Text Include="../../thirdparty/owemdjee/lyra/tests/build.jam" />
+    <Text Include="../../thirdparty/owemdjee/lyra/tests/lib_use_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lyra/tests/lib_use_test/build.jam" />
     <Text Include="../../thirdparty/owemdjee/lyra/tools/gen_single_include.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="liblyra.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff94fbf6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
