@@ -121,14 +121,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/Lyra/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CPPTRACE_DEMANGLE_WITH_WINAPI;CPPTRACE_UNWIND_WITH_DBGHELP;CPPTRACE_GET_SYMBOLS_WITH_DBGHELP;BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/Lyra/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -138,9 +138,9 @@
     </Bscmake>
     <Link>
       <AdditionalDependencies>DbgHelp.lib;Shlwapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-            <EnableCOMDATFolding>false</EnableCOMDATFolding>
-            <OptimizeReferences>true</OptimizeReferences>
-            <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -153,7 +153,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/Lyra/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CPPTRACE_DEMANGLE_WITH_WINAPI;CPPTRACE_UNWIND_WITH_DBGHELP;CPPTRACE_GET_SYMBOLS_WITH_DBGHELP;BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -161,7 +161,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/Lyra/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -171,9 +171,9 @@
     </Bscmake>
     <Link>
       <AdditionalDependencies>DbgHelp.lib;Shlwapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-            <EnableCOMDATFolding>false</EnableCOMDATFolding>
-            <OptimizeReferences>true</OptimizeReferences>
-            <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -188,14 +188,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/Lyra/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CPPTRACE_DEMANGLE_WITH_WINAPI;CPPTRACE_UNWIND_WITH_DBGHELP;CPPTRACE_GET_SYMBOLS_WITH_DBGHELP;BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/Lyra/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -205,9 +205,9 @@
     </Bscmake>
     <Link>
       <AdditionalDependencies>DbgHelp.lib;Shlwapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-            <EnableCOMDATFolding>false</EnableCOMDATFolding>
-            <OptimizeReferences>true</OptimizeReferences>
-            <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -220,7 +220,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/Lyra/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CPPTRACE_DEMANGLE_WITH_WINAPI;CPPTRACE_UNWIND_WITH_DBGHELP;CPPTRACE_GET_SYMBOLS_WITH_DBGHELP;BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -228,7 +228,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPTRACE;CPPTRACE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cpptrace/src;../../thirdparty/owemdjee/cpptrace/utils;../../scripts/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/Lyra/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -238,9 +238,9 @@
     </Bscmake>
     <Link>
       <AdditionalDependencies>DbgHelp.lib;Shlwapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-            <EnableCOMDATFolding>false</EnableCOMDATFolding>
-            <OptimizeReferences>true</OptimizeReferences>
-            <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
@@ -274,10 +274,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/fetchcontent-integration/fci-main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/findpackage-integration/fpi-main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/integration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/monolithic_example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/signal_demo.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/signal_tracer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/speedtest/speedtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/try_catch_demo.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/internals/general.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/internals/lru_cache.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/internals/optional.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/internals/result.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/internals/string_utils.cpp" />
@@ -290,9 +293,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/tracing/raw_trace.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/tracing/stacktrace.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/tracing/traced_exception.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/tools/dwarfdump/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/tools/resolver/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/tools/symbol_tables/main.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/basic.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/cpptrace.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/exceptions.hpp" />
@@ -300,6 +300,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/forward.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/from_current.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/io.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/monolithic_examples.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/utils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/ctrace/ctrace.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/test/unit/tracing/common.hpp" />
@@ -347,15 +348,9 @@
     <Text Include="../../thirdparty/owemdjee/cpptrace/test/fetchcontent-integration/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cpptrace/test/findpackage-integration/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cpptrace/test/speedtest/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/cpptrace/tools/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/cpptrace/tools/dwarfdump/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/cpptrace/tools/resolver/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/cpptrace/tools/symbol_tables/CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../scripts/cpptrace/monolithic_example.cpp" />
     <ClInclude Include="../../scripts/cpptrace/include/cpptrace/version.hpp" />
-    <ClInclude Include="../../scripts/cpptrace/include/monolithic_examples.h" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

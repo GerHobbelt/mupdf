@@ -57,65 +57,41 @@
     <Filter Include="Misc Files\test\speedtest">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tools">
+    <Filter Include="Resource Files">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tools\dwarfdump">
+    <Filter Include="Resource Files\res">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tools\resolver">
+    <Filter Include="Source Files\benchmarking">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0018}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tools\symbol_tables">
+    <Filter Include="Source Files\test">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0019}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Source Files\test\add_subdirectory-integration">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0020}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\res">
+    <Filter Include="Source Files\test\fetchcontent-integration">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0021}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\benchmarking">
+    <Filter Include="Source Files\test\findpackage-integration">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0022}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test">
+    <Filter Include="Source Files\test\speedtest">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0023}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test\add_subdirectory-integration">
+    <Filter Include="Source Files\test\unit">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0024}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test\fetchcontent-integration">
+    <Filter Include="Source Files\test\unit\internals">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0025}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test\findpackage-integration">
+    <Filter Include="Source Files\test\unit\lib">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0026}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test\speedtest">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0027}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\test\unit">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0028}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\test\unit\internals">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0029}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\test\unit\lib">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0030}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\test\unit\tracing">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0031}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\tools">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0033}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\tools\dwarfdump">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0032}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\tools\resolver">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0034}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\tools\symbol_tables">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0035}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0027}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +116,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/integration.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/monolithic_example.cpp">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/signal_demo.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
@@ -149,7 +128,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/speedtest/speedtest.cpp">
       <Filter>Source Files\test\speedtest</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/try_catch_demo.cpp">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/internals/general.cpp">
+      <Filter>Source Files\test\unit\internals</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/internals/lru_cache.cpp">
       <Filter>Source Files\test\unit\internals</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/internals/optional.cpp">
@@ -188,15 +173,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/cpptrace/test/unit/tracing/traced_exception.cpp">
       <Filter>Source Files\test\unit\tracing</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/tools/dwarfdump/main.cpp">
-      <Filter>Source Files\tools\dwarfdump</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/tools/resolver/main.cpp">
-      <Filter>Source Files\tools\resolver</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cpptrace/tools/symbol_tables/main.cpp">
-      <Filter>Source Files\tools\symbol_tables</Filter>
-    </ClCompile>
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/basic.hpp">
       <Filter>Header Files\include\cpptrace</Filter>
     </ClInclude>
@@ -216,6 +192,9 @@
       <Filter>Header Files\include\cpptrace</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/io.hpp">
+      <Filter>Header Files\include\cpptrace</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/monolithic_examples.h">
       <Filter>Header Files\include\cpptrace</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cpptrace/include/cpptrace/utils.hpp">
@@ -359,36 +338,18 @@
     <Text Include="../../thirdparty/owemdjee/cpptrace/test/speedtest/CMakeLists.txt">
       <Filter>Misc Files\test\speedtest</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/cpptrace/tools/CMakeLists.txt">
-      <Filter>Misc Files\tools</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/cpptrace/tools/dwarfdump/CMakeLists.txt">
-      <Filter>Misc Files\tools\dwarfdump</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/cpptrace/tools/resolver/CMakeLists.txt">
-      <Filter>Misc Files\tools\resolver</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/cpptrace/tools/symbol_tables/CMakeLists.txt">
-      <Filter>Misc Files\tools\symbol_tables</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files\include">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\include\cpptrace">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../scripts/cpptrace/monolithic_example.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClInclude Include="../../scripts/cpptrace/include/cpptrace/version.hpp">
       <Filter>Header Files\include\cpptrace</Filter>
-    </ClInclude>
-    <ClInclude Include="../../scripts/cpptrace/include/monolithic_examples.h">
-      <Filter>Header Files\include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
