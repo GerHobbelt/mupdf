@@ -1,5 +1,7 @@
 /* This file was automatically created from UnicodeData.txt using the genucd.py script. */
 
+#include <stdint.h>
+
 static const int ucd_alpha2[] = {
 0x41,0x5a,
 0x61,0x7a,
@@ -822,7 +824,7 @@ static const int ucd_digit1[] = {
 0x1034a,
 };
 
-static const int ucd_digit_value[] = {
+static const int64_t ucd_digit_value[] = {
 0x30,0,1,
 0x31,1,1,
 0x32,2,1,
