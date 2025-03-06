@@ -1974,10 +1974,10 @@ fz_strstrcase(const char *haystack, const char *needle)
 		int c, d;
 		int nc, nd;
 
-		nd = fz_chartorune(&d, &needle[matchlen]);
+		nd = fz_chartorune_unsafe(&d, &needle[matchlen]);
 		if (d == 0)
 			break;
-		nc = fz_chartorune(&c, haystack);
+		nc = fz_chartorune_unsafe(&c, haystack);
 		if (matchlen == 0)
 			firstlen = nc;
 		haystack += nc;
