@@ -105,7 +105,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -224,23 +224,26 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/fmtlog/bench/bench.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/fmtlog/test/enc_dec_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/fmtlog/test/lib.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/fmtlog/test/link_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/fmtlog/test/log_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/fmtlog/test/multithread_test.cc" />
-    <ClInclude Include="../../thirdparty/owemdjee/fmtlog/fmtlog-inl.h" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmtlog/test/src/enc_dec_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmtlog/test/src/log_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmtlog/test/src/multithread_test.cc" />
     <ClInclude Include="../../thirdparty/owemdjee/fmtlog/fmtlog-tscns.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/fmtlog/fmtlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmtlog/include/fmtlog/fmtlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmtlog/include/fmtlog/internal/fmtlog-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/fmtlog/monolithic_examples.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/fmtlog/test/lib.h" />
     <Text Include="../../thirdparty/owemdjee/fmtlog/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/fmtlog/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/fmtlog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/all/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/fmtlog/bench/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/fmtlog/build.sh" />
-    <Text Include="../../thirdparty/owemdjee/fmtlog/clear.sh" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/cmake/getCPM.cmake" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/cmake/optimization_flags/lto.cmake" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/cmake/optimization_flags/polyhedral.cmake" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/cmake/packages/add_fmt.cmake" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/cmake/packages/add_packageproject.cmake" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/cmake/tools.cmake" />
     <Text Include="../../thirdparty/owemdjee/fmtlog/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/vcpkg.json" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

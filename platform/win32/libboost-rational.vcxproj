@@ -105,7 +105,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -222,6 +222,20 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../scripts/boost/libboost-rational-dummy.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/rational/include/boost/rational.hpp" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/rational/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/rational/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/rational/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/rational/build.jam" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/rational/doc/readme" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/rational/index.html" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/rational/meta/libraries.json" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/rational/rational.html" />
+  </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
   

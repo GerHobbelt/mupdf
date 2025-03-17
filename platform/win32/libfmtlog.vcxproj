@@ -105,7 +105,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -223,16 +223,21 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/fmtlog/fmtlog.cc" />
-    <ClInclude Include="../../thirdparty/owemdjee/fmtlog/fmtlog-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/fmtlog/fmtlog-tscns.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/fmtlog/fmtlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmtlog/include/fmtlog/fmtlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmtlog/include/fmtlog/internal/fmtlog-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/fmtlog/monolithic_examples.h" />
     <Text Include="../../thirdparty/owemdjee/fmtlog/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/fmtlog/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/fmtlog/README.md" />
-    <Text Include="../../thirdparty/owemdjee/fmtlog/build.sh" />
-    <Text Include="../../thirdparty/owemdjee/fmtlog/clear.sh" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/all/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/cmake/getCPM.cmake" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/cmake/optimization_flags/lto.cmake" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/cmake/optimization_flags/polyhedral.cmake" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/cmake/packages/add_fmt.cmake" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/cmake/packages/add_packageproject.cmake" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/cmake/tools.cmake" />
+    <Text Include="../../thirdparty/owemdjee/fmtlog/vcpkg.json" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

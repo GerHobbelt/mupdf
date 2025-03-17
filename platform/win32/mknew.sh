@@ -1575,6 +1575,7 @@ openimageio-mupdf
 small_vectors
 lyra
 celero
+gtest-tap-listener
 
 EOT
 ) | grep -e "$FILTER"
