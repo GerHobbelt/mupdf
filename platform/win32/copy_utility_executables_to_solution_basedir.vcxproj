@@ -22,33 +22,16 @@
     <None Include="../../scripts/copy-to-solution-basedir/Makefile" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\thirdparty\DirScanner\NTFS ADS Viewer\NTFS ADS Viewer.vcxproj">
-      <Project>{28e9e026-5e87-4248-ba0b-07813dcd8db1}</Project>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\thirdparty\DirScanner\NTFS Find hardlinks or regular files\NTFS Find hardlinks or regular files.vcxproj">
-      <Project>{ec989955-8ccb-49b4-891f-8761cf6e2560}</Project>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    <ProjectReference Include="bin2coff.vcxproj">
+      <Project>{bfe316b3-bd90-433a-a20d-c73975f1caa7}</Project>
     </ProjectReference>
     <ProjectReference Include="msvc_sln_cleaner.vcxproj">
       <Project>{00811970-815b-4f64-bc9d-2190785ac929}</Project>
     </ProjectReference>
-    <ProjectReference Include="__build_target-extra.vcxproj">
-      <Project>{99ca7bb8-dca7-450f-ba73-abcb14120d0f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="__build_target_extra_libraries.vcxproj">
-      <Project>{a2bd0caf-40f2-436a-afa8-778eb0a81fe2}</Project>
-    </ProjectReference>
-    <ProjectReference Include="__build_target_mupdf.vcxproj">
-      <Project>{0688fe97-e8b4-4d80-8b8b-d445b349a82d}</Project>
-    </ProjectReference>
-    <ProjectReference Include="__build_target_tesseract.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-101000000002}</Project>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
-    <ProjectGuid>{C6303E5B-2FFB-4CDE-A1D5-141E7552BD4B}</ProjectGuid>
+    <ProjectGuid>{0A8889B7-CF17-4787-BEA1-51EA24DA3DA1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -96,7 +79,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile all PROJDIR=$(ProjectDir)</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile utilities PROJDIR=$(ProjectDir)</NMakeBuildCommandLine>
     <NMakeOutput>
     </NMakeOutput>
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
@@ -105,11 +88,11 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
-    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile forced-rebuild PROJDIR=$(ProjectDir) </NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile clean PROJDIR=$(ProjectDir) </NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile utilities PROJDIR=$(ProjectDir)</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile clean PROJDIR=$(ProjectDir)</NMakeCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile all PROJDIR=$(ProjectDir)</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile utilities PROJDIR=$(ProjectDir)</NMakeBuildCommandLine>
     <NMakeOutput>
     </NMakeOutput>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
@@ -118,11 +101,11 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
-    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile forced-rebuild PROJDIR=$(ProjectDir) </NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile clean PROJDIR=$(ProjectDir) </NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile utilities PROJDIR=$(ProjectDir)</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile clean PROJDIR=$(ProjectDir)</NMakeCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile all PROJDIR=$(ProjectDir)</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile utilities PROJDIR=$(ProjectDir)</NMakeBuildCommandLine>
     <NMakeOutput>
     </NMakeOutput>
     <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
@@ -131,11 +114,11 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
-    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile forced-rebuild PROJDIR=$(ProjectDir) </NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile clean PROJDIR=$(ProjectDir) </NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile utilities PROJDIR=$(ProjectDir)</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile clean PROJDIR=$(ProjectDir)</NMakeCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile all PROJDIR=$(ProjectDir)</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile utilities PROJDIR=$(ProjectDir)</NMakeBuildCommandLine>
     <NMakeOutput>
     </NMakeOutput>
     <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
@@ -144,8 +127,8 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
-    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile forced-rebuild PROJDIR=$(ProjectDir) </NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile clean PROJDIR=$(ProjectDir) </NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile utilities PROJDIR=$(ProjectDir)</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/copy-to-solution-basedir/Makefile clean PROJDIR=$(ProjectDir)</NMakeCleanCommandLine>
   </PropertyGroup>
 <ItemDefinitionGroup>
     <ClCompile>
