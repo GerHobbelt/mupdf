@@ -28,21 +28,21 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  *
  * the version string like "1.2.3"
  */
-#define LIBXML_DOTTED_VERSION "2.13.0"
+#define LIBXML_DOTTED_VERSION "2.15.0"
 
 /**
  * LIBXML_VERSION:
  *
  * the version number: 1.2.3 value is 10203
  */
-#define LIBXML_VERSION 21300
+#define LIBXML_VERSION 21500
 
 /**
  * LIBXML_VERSION_STRING:
  *
  * the version number string, 1.2.3 value is "10203"
  */
-#define LIBXML_VERSION_STRING "21300"
+#define LIBXML_VERSION_STRING "21500"
 
 /**
  * LIBXML_VERSION_EXTRA:
@@ -57,7 +57,7 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  * Macro to check that the libxml version in use is compatible with
  * the version the software has been compiled against
  */
-#define LIBXML_TEST_VERSION() xmlCheckVersion(21300)
+#define LIBXML_TEST_VERSION() xmlCheckVersion(21500)
 
 /**
  * LIBXML_THREAD_ENABLED:
@@ -80,11 +80,9 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
 /**
  * LIBXML_TREE_ENABLED:
  *
- * Whether the DOM like tree manipulation API support is configured in
+ * Always enabled since 2.14.0
  */
-#if 1
 #define LIBXML_TREE_ENABLED
-#endif
 
 /**
  * LIBXML_OUTPUT_ENABLED:
@@ -179,11 +177,9 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
 /**
  * LIBXML_LEGACY_ENABLED:
  *
- * Whether the deprecated APIs are compiled in for compatibility
+ * Removed in 2.14
  */
-#if 1
-#define LIBXML_LEGACY_ENABLED
-#endif
+#undef LIBXML_LEGACY_ENABLED
 
 /**
  * LIBXML_C14N_ENABLED:
@@ -253,7 +249,7 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  *
  * Whether iconv support is available
  */
-#if 0
+#if 1
 #define LIBXML_ICONV_ENABLED
 #endif
 
@@ -262,7 +258,7 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  *
  * Whether icu support is available
  */
-#if 0
+#if 1
 #define LIBXML_ICU_ENABLED
 #endif
 
@@ -271,7 +267,7 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  *
  * Whether ISO-8859-* support is made available in case iconv is not
  */
-#if 1
+#if 0
 #define LIBXML_ISO8859X_ENABLED
 #endif
 
@@ -306,6 +302,7 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  * LIBXML_UNICODE_ENABLED:
  *
  * Whether the Unicode related interfaces are compiled in
+ * Removed in 2.14
  */
 #if 1
 #define LIBXML_UNICODE_ENABLED
@@ -338,6 +335,15 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  */
 #if 0
 #define LIBXML_EXPR_ENABLED
+#endif
+
+/**
+ * LIBXML_RELAXNG_ENABLED:
+ *
+ * Whether the RelaxNG validation interfaces are compiled in
+ */
+#if 1
+#define LIBXML_RELAXNG_ENABLED
 #endif
 
 /**
@@ -379,6 +385,7 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  * Whether the Zlib support is compiled in
  */
 #if 1
+#define LIBXML_ZLIB_NG_ENABLED
 #define LIBXML_ZLIB_ENABLED
 #endif
 
@@ -396,8 +403,10 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  *
  * Whether the Lzma support is compiled in
  */
-#if 0
+#if 1
+#if defined(_MSC_VER) && _MSC_VER >= 1800 // VS2013 or later
 #define LIBXML_LZMA_ENABLED
+#endif
 #endif
 
 
@@ -567,17 +576,24 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  *
  * Macro used to ignore pointer cast warnings that can't be worked around.
  */
+#ifndef XML_IGNORE_FPTR_CAST_WARNINGS
 #define XML_IGNORE_FPTR_CAST_WARNINGS
+#endif
+
 /**
  * LIBXML_POP_WARNINGS:
  *
  * Macro used to restore warnings state.
  */
+#ifndef XML_POP_WARNINGS
 #define XML_POP_WARNINGS
+#endif
+
 #endif /* __GNUC__ */
 
 #define XML_NO_ATTR
 
+#ifndef XML_DECLARE_GLOBAL
 #ifdef LIBXML_THREAD_ENABLED
   #define XML_DECLARE_GLOBAL(name, type, attrs) \
     attrs XMLPUBFUN type *__##name(void);
@@ -585,11 +601,17 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
 #else
   #define XML_DECLARE_GLOBAL(name, type, attrs) \
     attrs XMLPUBVAR type name;
+  #define XML_GLOBAL_MACRO(name) (name)
+#endif
 #endif
 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
+
+
+#include <libxml/xmlexports.h>
+
 #endif
 
 
